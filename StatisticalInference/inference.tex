@@ -93,6 +93,7 @@
 
 \usepackage{mathematics}
 \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 \usepackage{float}
 
 %----------------------------------------------------------------------------------------
@@ -140,7 +141,9 @@
 
 \begin{document}
 
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
 
 %-----------------------------------------------------------------------------------------------------
 %	ÍNDICE
@@ -258,7 +261,7 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
             axis lines=left,
             every axis y label/.style={at=(current axis.above origin),anchor=east},
             every axis x label/.style={at=(current axis.right of origin),anchor=north},
-            height=6cm, width=13cm,
+            height=6cm, width=12cm,
             enlargelimits=false, clip=false, axis on top,
             grid = major,
             legend pos=outer north east
@@ -273,8 +276,8 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
             \addlegendentry{$\alpha = 3, \beta = 2$}
         \end{axis}
     \end{tikzpicture}
-    \label{fig:gamma:alpha}
     \caption{Densidad de la distribución gamma con distintos valores de $\alpha$.}
+    \label{fig:gamma:alpha}
 \end{figure}
 
 \begin{figure}[H]
@@ -290,7 +293,7 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
             axis lines=left,
             every axis y label/.style={at=(current axis.above origin),anchor=east},
             every axis x label/.style={at=(current axis.right of origin),anchor=north},
-            height=6cm, width=13cm,
+            height=6cm, width=12cm,
             enlargelimits=false, clip=false, axis on top,
             grid = major,
             legend pos=outer north east
@@ -305,9 +308,17 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
             \addlegendentry{$\alpha = 2, \beta = 3$}
         \end{axis}
     \end{tikzpicture}
-    \label{fig:gamma:beta}
     \caption{Densidad de la distribución gamma con distintos valores de $\beta$.}
+    \label{fig:gamma:beta}
 \end{figure}
+
+\begin{prop}
+    La función característica de la distribución $Gamma(\alpha, \beta)$ viene dada por $\varphi_X(t) = (\beta - i t)^{-\alpha}$.
+\end{prop}
+\begin{proof}
+    Basta utilizar el cambio de variable $y = (\beta - it) x$ como sigue
+    \[E[e^{itX}] = \frac{\beta^\alpha}{\Gamma(\alpha)} \int_{-\infty}^{\infty} x^{\alpha-1}e^{-(\beta - it) x} dx = \frac{\beta^\alpha}{\Gamma(\alpha) (\beta -it)^\alpha} \int_{-\infty}^{\infty} y^{\alpha-1}e^{-y} dy = \left(\frac{\beta}{\beta -it}\right)^\alpha.\]
+\end{proof}
 
 \subsubsection{Distribución beta}
 
@@ -437,7 +448,7 @@ Un criterio para ver si un estadístico es suficiente viene dado por el teorema 
     \end{proof}
 
 \begin{thebibliography}{99}
-\bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \href{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
+\bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
 \end{thebibliography}
 
 
