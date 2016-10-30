@@ -64,7 +64,7 @@
 % Texto de la cabecera:
 \lhead{\docauthor}                          % Parte izquierda.
 \chead{}                                    % Centro.
-\rhead{\subject \ - \doctitle \ - \docsubtitle}              % Parte derecha.
+\rhead{\subject \ - \doctitle}              % Parte derecha.
 
 % Pie de página del documento. Se ajusta la línea del pie de página.
 \renewcommand\footrule{
@@ -176,6 +176,14 @@ Claramente tenemos que $\int_{-\infty}^{\infty} f(x |a,b) dx = 1$. Además, pode
 
 \subsubsection{Distribución normal}
 
+La distribución normal, también llamada distribución gaussiana, es la distribución más importante de la estadística. Esto se debe a sus numerosas aplicaciones en análisis de poblaciones y al teorema central del límite.
+
+\begin{definition}
+    Sean $\mu \in \mathbb{R}$ y $\sigma^2 > 0$. Definimos la distribución $N(x | \mu, \sigma^2)$ como la distribución que tiene función de densidad
+    \[f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2 / (2\sigma^2)}.\]
+\end{definition}
+
+
 \subsubsection{Distribución gamma}
 
 La famila de distribuciones gamma se encuentra definida sobre el intervalo $[0, \infty)$. En su definición entra en juego la famosa función gamma, de ahí su nombre.
@@ -221,7 +229,7 @@ La famila de distribuciones gamma se encuentra definida sobre el intervalo $[0, 
 \end{proof}
 
 \begin{definition}
-    Sean $\alpha, \beta > 0$. Deinimos la distribución $Gamma(x | \alpha, \beta)$ como la distribución que tiene función de densidad
+    Sean $\alpha, \beta > 0$. Definimos la distribución $Gamma(x | \alpha, \beta)$ como la distribución que tiene función de densidad
     \[f(x | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}.\]
 \end{definition}
 
@@ -312,12 +320,40 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
     \label{fig:gamma:beta}
 \end{figure}
 
-\begin{prop}
-    La función característica de la distribución $Gamma(\alpha, \beta)$ viene dada por $\varphi_X(t) = (\beta - i t)^{-\alpha}$.
+\begin{prop} \label{prop:gamma:cf}
+    La función característica de la distribución $Gamma(x|\alpha, \beta)$ viene dada por $\varphi_X(t) = \left(\frac{\beta}{\beta -it}\right)^\alpha$.
 \end{prop}
 \begin{proof}
-    Basta utilizar el cambio de variable $y = (\beta - it) x$ como sigue
-    \[E[e^{itX}] = \frac{\beta^\alpha}{\Gamma(\alpha)} \int_{-\infty}^{\infty} x^{\alpha-1}e^{-(\beta - it) x} dx = \frac{\beta^\alpha}{\Gamma(\alpha) (\beta -it)^\alpha} \int_{-\infty}^{\infty} y^{\alpha-1}e^{-y} dy = \left(\frac{\beta}{\beta -it}\right)^\alpha.\]
+    Basta utilizar el cambio de variable $g(y) = y / (\beta - it)$ como sigue
+    \[E[e^{itX}] = \frac{\beta^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha-1}e^{-(\beta - it) x} dx = \frac{\beta^\alpha}{\Gamma(\alpha) (\beta -it)^\alpha} \int_{0}^{\infty} y^{\alpha-1}e^{-y} dy = \left(\frac{\beta}{\beta -it}\right)^\alpha.\]
+    Nótese que a pesar de ser una integral de contorno compleja el cambio de variable es válido. En efecto, el cambio de variable es afín y la función a integrar es entera. Por tanto, utilizando el camino cerrado $g([0, \infty]) + [\infty, 0]$ se puede probar que el cambio es válido.
+\end{proof}
+
+\begin{cor}
+    El momento $k$-ésimo de la distribución $Gamma(x|\alpha,\beta)$ es $\alpha (\alpha+1) \ldots (\alpha + k -1) / \beta^k$.
+\end{cor}
+\begin{proof}
+    Tenemos que $i^k E[X^k]= \varphi_X^{(k)}(t) = i^k \alpha (\alpha+1) \ldots (\alpha + k -1) / \beta^k$.
+\end{proof}
+
+\begin{prop}
+    La función generatriz de momentos de la distribución $Gamma(x|\alpha, \beta)$ viene dada por $\varphi_X(t) = \left(\frac{\beta}{\beta - t}\right)^\alpha$.
+\end{prop}
+\begin{proof}
+    La demostración es análoga a la dada en la Proposición \ref{prop:gamma:cf}.
+\end{proof}
+
+\begin{cor}
+    La distribución $Gamma(x|\alpha,\beta)$ tiene media $\alpha / \beta$ y varianza $\alpha / \beta^2$.
+\end{cor}
+
+\begin{prop}
+    Sea $n \ge 1$. Consideremos $X_1, \ldots, X_n$ variables aleatorias independientes tales que $X_j$ sigue una distribución $Gamma(x|\alpha_i, \beta)$. Entonces, $\sum_{i=1}^n X_j$ sigue una distribución $Gamma(x|\sum_{i=1}^n \alpha_i, \beta)$.
+\end{prop}
+\begin{proof}
+    En primer lugar, calculamos la función característica de $\sum_{i=1}^n X_j$ como sigue
+    \[E[e^{i\sum X_j}] = E[\prod e^{iX_j}] = \prod E[e^{iX_j}] = \left(\frac{\beta}{\beta - it}\right)^{\sum \alpha_j},\]
+    donde se ha utilizado que la esperanza del producto de dos variables aleatorias independientes es el producto de las esperanzas. Por último, nótese que la función característica de la variable $\sum X_j$ es la función característica de $Gamma(x|\sum_{i=1}^n \alpha_i, \beta)$. El hecho de que la función característica de una distribución la determina de forma unívoca finaliza la prueba.
 \end{proof}
 
 \subsubsection{Distribución beta}
