@@ -92,6 +92,24 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
+\usepackage{pgfplots}
+\usepackage{float}
+
+%----------------------------------------------------------------------------------------
+%   ENLACES
+%----------------------------------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks   = true,   % Quita las cajas y añade un color al texto.
+    % Tipos de enlaces cuyo color se puede configurar:
+    linkcolor    = [rgb]{0,0.2,0.5},        % Por defecto red
+    anchorcolor  = gray,        % Por defecto black
+    citecolor    = magenta,     % Por defecto green
+    filecolor    = red,         % Por defecto cyan
+    menucolor    = green,       % Por defecto red
+    runcolor     = red,         % Por defecto cyan
+    urlcolor     = cyan        % Por defecto magenta
+}
 
 %-----------------------------------------------------------------------------------------------------
 %	TÍTULO, AUTOR Y OTROS DATOS DEL DOCUMENTO
@@ -144,6 +162,162 @@
 \subsection{Distribuciones discretas}
 
 \subsection{Distribuciones continuas}
+
+\subsubsection{Distribución uniforme}
+
+La distribución uniforme asigna una credibilidad uniforme a todos los puntos de un intervalo $[a,b]$. Esto es, su función de densidad viene dada por
+\[f(x|a,b) = \begin{cases}\frac{1}{b-a} \text{ si } x \in [a,b], \\ 0 \text{ en otro caso.}\end{cases}\]
+Claramente tenemos que $\int_{-\infty}^{\infty} f(x |a,b) dx = 1$. Además, podemos calcular fácilmente sus momentos y, por tanto, también su varianza, como sigue
+\[E[X^j] = \int_a^b \frac{x^j}{b-a} dx = \frac{b^{j+1} - a^{j+1}}{(b-a) (j+1)},\]
+\[Var(X) = E[X^2] - E[X]^2 = \frac{a^2 + ab + b^2}{3} - \frac{(a+b^2)}{4} = \frac{(b-a)^2}{12}.\]
+
+\subsubsection{Distribución normal}
+
+\subsubsection{Distribución gamma}
+
+La famila de distribuciones gamma se encuentra definida sobre el intervalo $[0, \infty)$. En su definición entra en juego la famosa función gamma, de ahí su nombre.
+
+\begin{definition}
+    Se define la función gamma como la aplicación $\Gamma : (0, \infty) \to (0, \infty)$ dada por
+    \[\Gamma(\alpha) = \int_0^\infty t^{\alpha-1}e^{-t}dt.\]
+\end{definition}
+\begin{prop}
+    La función gamma está bien definida.
+\end{prop}
+\begin{proof}
+    Sea $\alpha > 0$. Tenemos que probar que $\int_0^\infty t^{\alpha-1}e^{-t}dt < \infty$. Tomando $b > 0$, escribimos
+    \[\int_0^\infty t^{\alpha-1}e^{-t}dt = \int_0^b t^{\alpha-1}e^{-t}dt + \int_b^\infty t^{\alpha-1}e^{-t}dt.\]
+    Sabemos que la función $t^{\alpha - 1}$ tiene a $t^{\alpha} / \alpha$ como primitiva y, por tanto, es integrable en $[0,b]$. Puesto que $t^{\alpha-1}e^{-t} \le t^{\alpha-1}$, obtenemos que $t^{\alpha-1}e^{-t}$ es integrable en $[0,b]$. Por otro lado tenemos que
+    \[\lim_{t \to \infty} \frac{t^{\alpha-1}e^{-t}}{e^{-t / 2}} = 0.\]
+    Consecuentemente, para cierto $b > 0$ se verifica $t^{\alpha-1}e^{-t} \le e^{-t / 2}$ para todo $t \ge b$. Puesto que $e^{-t / 2}$ es integrable en $[b, \infty)$, deducimos que $t^{\alpha-1}e^{-t}$ también lo es, lo que termina la demostración.
+\end{proof}
+
+\begin{prop}[Propiedades de la función gamma]
+    Sea $\alpha > 0$. Se verifica:
+    \begin{enumerate}
+        \item $\Gamma(1) = 1$;
+	\item $\Gamma(\alpha+1) = \alpha\Gamma(\alpha)$;
+    \item $\Gamma(n+1) = n!$ para cualquier $n \in \mathbb{N}$;
+    \item (Fórmula de reflexión de Euler) si $0 < \alpha < 1$, entonces $\Gamma(\alpha) \Gamma(1- \alpha) = \frac{\pi}{\sin(\alpha \pi)}$;
+    \item $\Gamma(1/2) = \sqrt{\pi}$;
+    \item $\Gamma(\alpha) = \beta^\alpha\int_0^\infty t^{\alpha-1}e^{-\beta t} dt$ para todo $\beta > 0$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \
+    \begin{enumerate}
+        \item Es fácil ver que $\int_{0}^\infty e^{-t} dt = 1$.
+        \item Integrando por partes obtemos
+        \[\Gamma(\alpha+1) = \int_0^{\infty}{t^{\alpha}e^{-t}dt} = \bigg[-e^{-t}t^\alpha\bigg]_0^{\infty} +
+            \int_0^{\infty}{xt^{\alpha-1}e^{-t}dt} = \alpha\int_0^{\infty}{t^{\alpha-1}e^{-t}dt} = \alpha\Gamma(\alpha).\]
+        \item Es consecuencia directa de los apartados a) y b).
+        \item Se obtiene utilizando definiciones alternativas de la función gamma tras extenderla a $\mathbb{C} \setminus \mathbb{Z}^-_0$. Para más información véase \cite{gamma}. No desarrollamos esta demostración pues solo la necesitamos para el siguiente apartado.
+        \item Se obtiene al evaluar la fórmula de reflexión en $\alpha = 1/2$.
+        \item Se obtiene realizando el cambio de variable $t = \beta s$. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Sean $\alpha, \beta > 0$. Deinimos la distribución $Gamma(x | \alpha, \beta)$ como la distribución que tiene función de densidad
+    \[f(x | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}.\]
+\end{definition}
+
+El parámetro $\alpha$ se conoce como parámetro de forma ya que influencia la forma de la distribución, como muestra el siguiente resultado.
+
+\begin{prop}
+    La función de densidad de la distribución $Gamma(\alpha, \beta)$ verifica las siguientes propiedades:
+    \begin{itemize}
+        \item Si $0< \alpha <1$, entonces $f(x | \alpha, \beta)$ es decreciente y $f(x) \to \infty$ para $x \to 0$.
+        \item Si $\alpha = 1$, entonces $f(x | \alpha, \beta)$ es decreciente con $f(0) = 1$.
+        \item Si $\alpha > 1$, entonces $f(x | \alpha, \beta)$ crece en $[0, (\alpha-1) / \beta]$ y decrece en $[(\alpha-1) / \beta,\infty]$.
+        \item Si $0 < \alpha \le 1$, entonces $f(x | \alpha, \beta)$ es convexa.
+        \item Si $1 < \alpha \le 2$, entonces $f(x | \alpha, \beta)$ es cóncava en $[0,(\alpha-1 + \sqrt{\alpha - 1}) / \beta]$ y convexa en $[(\alpha-1 + \sqrt{\alpha - 1}) / \beta, \infty]$.
+        \item Si $2 < \alpha$, entonces $f(x | \alpha, \beta)$ es cóncava en $[(\alpha-1 - \sqrt{\alpha - 1}) / \beta,(\alpha-1 + \sqrt{\alpha - 1}) / \beta]$ y convexa en $[0, (\alpha-1 - \sqrt{\alpha - 1}) / \beta]$ y $[(\alpha-1 + \sqrt{\alpha - 1}) / \beta, \infty]$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+Los resultados se obtienen mediante las herramientas habituales del cálculo. Basta estudiar la derivada primera y la derivada segunda
+\begin{align*}
+f^\prime(x) &= \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-2} e^{-\beta x}[(\alpha - 1) - \beta x]; \\
+f^{\prime \prime}(x) &= \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-3} e^{-\beta x} \left[(\alpha - 1)(\alpha - 2) - 2 \beta (\alpha - 1) x + \beta^2 x^2\right]. \qedhere
+\end{align*}
+\end{proof}
+
+La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribución gamma para distintos valores de $\alpha$.  El parámetro $\beta$ se denomina parámetro de escala debido a su influencia en la escala de la función de densidad. La Figura \ref{fig:gamma:beta} muestra la función de densidad de la distribución gamma para distintos valores de $\beta$.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        declare function={gamma(\z)=
+        2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+        declare function={gammapdf(\x,\k,\theta) = 1/(\theta^\k)*1/(gamma(\k))*\x^(\k-1)*exp(-\x/\theta);}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | \alpha, \beta)$},
+            domain=0.000001:10, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=13cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,cyan!20!black] {gammapdf(x,0.98,2)};
+            \addlegendentry{$\alpha = 0.9, \beta = 2$}
+            \addplot [very thick,cyan!35!black] {gammapdf(x,1,2)};
+            \addlegendentry{$\alpha = 1, \beta = 2$}
+            \addplot [very thick,cyan!60!black] {gammapdf(x,2,2)};
+            \addlegendentry{$\alpha = 2, \beta = 2$}
+            \addplot [very thick,cyan] {gammapdf(x,3,2)};
+            \addlegendentry{$\alpha = 3, \beta = 2$}
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig:gamma:alpha}
+    \caption{Densidad de la distribución gamma con distintos valores de $\alpha$.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        declare function={gamma(\z)=
+        2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+        declare function={gammapdf(\x,\k,\theta) = 1/(\theta^\k)*1/(gamma(\k))*\x^(\k-1)*exp(-\x/\theta);}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | \alpha, \beta)$},
+            domain=0:10, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=13cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,magenta!10!black] {gammapdf(x,2,0.5)};
+            \addlegendentry{$\alpha = 2, \beta = 0.5$}
+            \addplot [very thick,magenta!40!black] {gammapdf(x,2,1)};
+            \addlegendentry{$\alpha = 2, \beta = 1$}
+            \addplot [very thick,magenta!75!black] {gammapdf(x,2,2)};
+            \addlegendentry{$\alpha = 2, \beta = 2$}
+            \addplot [very thick,magenta] {gammapdf(x,2,3)};
+            \addlegendentry{$\alpha = 2, \beta = 3$}
+        \end{axis}
+    \end{tikzpicture}
+    \label{fig:gamma:beta}
+    \caption{Densidad de la distribución gamma con distintos valores de $\beta$.}
+\end{figure}
+
+\subsubsection{Distribución beta}
+
+\subsubsection{Distribución de Cauchy}
+
+\subsubsection{Distribución de Laplace}
+
+\subsubsection{Distribución T de Student}
+
+\subsubsection{Distribución de Dirichlet}
 
 \section{Estimación de parámetros}
 
@@ -261,6 +435,10 @@ Un criterio para ver si un estadístico es suficiente viene dado por el teorema 
         \[\sup_{\eta \in \Omega'} L^*(\eta|x) = \sup_{\eta \in \Omega'} \sup\{L(\theta | x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Omega} L(\theta | x)\]
         Por tanto, la verosimilitud tiene un máximo global si, y solo si, lo tiene la verosimilitud inducida, en cuyo caso la credibilidad de ambos coincide. Si existe un EMV de $\theta$, entonces $L^*(g(\hat{\theta}),x) = L(\hat{\theta} | x)$ por definición. Consecuentemente, $g(\hat{\theta})$ es estimador máximo verosímil de $g(\theta)$.
     \end{proof}
+
+\begin{thebibliography}{99}
+\bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \href{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
+\end{thebibliography}
 
 
 \end{document}
