@@ -170,7 +170,7 @@
 
 La distribución uniforme asigna una credibilidad uniforme a todos los puntos de un intervalo $[a,b]$. Esto es, su función de densidad viene dada por
 \[f(x|a,b) = \begin{cases}\frac{1}{b-a} \text{ si } x \in [a,b], \\ 0 \text{ en otro caso.}\end{cases}\]
-Claramente tenemos que $\int_{-\infty}^{\infty} f(x |a,b) dx = 1$. Además, podemos calcular fácilmente sus momentos y, por tanto, también su varianza, como sigue
+Claramente tenemos que $\int_{-\infty}^{\infty} f(x |a,b) dx = 1$. Además, podemos calcular fácilmente sus momentos como sigue (y, por tanto, también su varianza)
 \[E[X^j] = \int_a^b \frac{x^j}{b-a} dx = \frac{b^{j+1} - a^{j+1}}{(b-a) (j+1)},\]
 \[Var(X) = E[X^2] - E[X]^2 = \frac{a^2 + ab + b^2}{3} - \frac{(a+b^2)}{4} = \frac{(b-a)^2}{12}.\]
 
@@ -180,9 +180,134 @@ La distribución normal, también llamada distribución gaussiana, es la distrib
 
 \begin{definition}
     Sean $\mu \in \mathbb{R}$ y $\sigma^2 > 0$. Definimos la distribución $N(x | \mu, \sigma^2)$ como la distribución que tiene función de densidad
-    \[f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2 / (2\sigma^2)}.\]
+    \[f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2 / (2\sigma^2)}, x \in \mathbb{R}.\]
 \end{definition}
 
+% pgfplot function declaration.
+\pgfmathdeclarefunction{gauss}{3}{
+  \pgfmathparse{1/(#3*sqrt(2*pi))*exp(-((#1-#2)^2)/(2*#3^2))}%
+}
+
+La distribución normal está bien definida como consecuencia del siguiente lema.
+\begin{lem}
+    Sean $\mu \in \mathbb{R}$ y $\sigma > 0$. Tenemos que $\int_{-\infty}^\infty e^{-(x-\mu)^2 / (2\sigma^2)}dx = \sqrt{2\pi}\sigma.$
+\end{lem}
+\begin{proof}
+    En primer lugar, vamos a calcular la integral para $\mu = 0$ y $\sigma = 1$. La demostración consiste en reducir el problema en calcular una integral en dos variables. Para ello, elevamos al cuadrado y obtenemos
+    \[\left(\int_{-\infty}^\infty e^{-x^2 / 2}dx\right)^2 = \left(\int_{-\infty}^\infty e^{-t^2 / 2}dt\right) \left(\int_{-\infty}^\infty e^{-s^2 / 2}ds \right) = \int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(t^2+s^2) / 2} dt ds. \]
+    Resolvemos esta última integral mediante un cambio a polares
+    \[\int_{-\infty}^\infty \int_{-\infty}^\infty e^{-(t^2+s^2) / 2} dt ds = \int_{-\pi}^\pi \left(\int_{0}^\infty \rho e^{-\rho^2 / 2} d\rho \right) d\theta = 2\pi \int_{0}^\infty \rho e^{-\rho^2 / 2} d\rho = 2\pi.\]
+    Por último, utilizamos el cambio de variable $y = (x - \mu) / \sigma$ para obtener
+    \[\int_{-\infty}^\infty e^{-(x-\mu)^2 / (2\sigma^2)}dx = \int_{-\infty}^\infty \sigma e^{-y^2 / 2}dy = \sqrt{2\pi}\sigma. \qedhere\]
+\end{proof}
+
+Nótese que si $X \sim N(x | \mu, \sigma^2)$, entonces $Y = (X - \mu)/\sigma$ sigue una distribución $N(x|0,1)$.
+
+\begin{prop} \label{prop:normal:cf}
+    La función característica de la distribución $N(x|\mu, \sigma^2)$ viene dada por $\varphi_X(t) = e^{it\mu - t^2 \sigma^2 / 2}$.
+\end{prop}
+\begin{proof}
+    En primer lugar, tenemos que
+    \[\varphi_X(t) = E[e^{itX}] = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} e^{itx-(x-\mu)^2 / (2\sigma^2)} dx = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - itx\sigma^2) / (2\sigma^2)} dx.\]
+    Completamos cuadrados como sigue
+    \[(x-\mu)^2 - 2 itx\sigma^2 = (x - (it \sigma^2 + \mu))^2 + t^2 \sigma^4 - 2it\sigma^2 \mu.\]
+    Esto sugiere utilizar el cambio de variable $g(y) = y + it \sigma^2$. Obtenemos
+    \begin{align*}
+        \sqrt{2\pi}\sigma \varphi_X(t) = \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - itx\sigma^2) / (2\sigma^2)} = e^{it\mu - t^2 \sigma^2 / 2} \int_{-\infty}^{\infty} e^{-((x-(it \sigma^2 + \mu))^2 ) / (2\sigma^2)} dx = \\
+        = e^{t^2 \sigma^2 / 2 - it\mu} \int_{-\infty}^{\infty} e^{-(y - \mu)^2 ) / (2\sigma^2)} dy = \sqrt{2\pi}\sigma e^{it\mu - t^2 \sigma^2 / 2},
+    \end{align*}
+    como se quería.
+    Nótese que a pesar de ser una integral de contorno compleja el cambio de variable es válido. En efecto, el cambio de variable es afín y la función a integrar es entera. Por tanto, utilizando el camino cerrado $g([0, \infty]) + [\infty, 0]$ se puede probar que el cambio es válido.
+\end{proof}
+
+Análogamente se puede probar el siguiente resultado.
+
+\begin{prop} \label{prop:normal:gm}
+    La función generatriz de momentos de la distribución $N(x|\mu, \sigma^2)$ viene dada por $\varphi_X(t) = e^{t\mu - t^2 \sigma^2 / 2}$.
+\end{prop}
+
+\begin{cor} \label{cor:normal:rec}
+    Los momentos de la distribución $N(x|\mu,\sigma^2)$ verifican la ecuación recurrente
+    \[E[X^k] = -(k-1)\sigma^2 E[X^{k-2}] + (\mu - t \sigma^2) E[X^{k-1}], \ \  k \ge 2.\]
+\end{cor}
+\begin{proof}
+    Sabemos que $E[X^k] = \varphi_X^{(k)}(t)$. Tenemos $\varphi_X^{(1)}(t) = (\mu - t \sigma^2) \varphi_X(t)$. Consecuentemente,
+    \[\varphi_X^{(2)}(t) = -\sigma^2 \varphi_X(t) + (\mu - t \sigma^2) \varphi_X^{(1)}(t).\]
+    Por inducción se extiende el resultado fácilmente para $k \ge 2$.
+\end{proof}
+
+\begin{cor}
+    Si $X \sim N(x|\mu,\sigma^2)$, entonces $E[X] = \mu$ y $E[X^2] = \sigma^2 + \mu^2$. Consecuentemente, $Var(X) = \sigma^2$. Como consecuencia de este resultado al parámetro $\mu$ se le llama media y al parámetro $\sigma^2$ varianza.
+\end{cor}
+
+Podemos utilizar los dos corolarios anteriores para calcular los momentos de la distribución normal resolviendo una ecuación recurrente de segundo orden. Evidentemente, la fórmula obtenida será bastante larga. Sin embargo, esta ecuación se simplifica en el caso de los momentos centrados, como pone de manifiesto el siguiente resultado, que se puede demostrar fácilmente por inducción a partir del Corolario \ref{cor:normal:rec}.
+
+\begin{cor}
+    Si $X \sim N(x|0,\sigma^2)$, entonces
+    \[E[X^k] = \begin{cases} 0 & \text{ si } k \text{ es impar;} \\ (k-1)!! \sigma^{k} & \text{ si } k \text{ es par;} \end{cases}\]
+    donde $n!!$ denota al doble factorial, definido como el producto de los números desde $1$ hasta $n$ con la misma paridad que $n$.
+\end{cor}
+
+La Figura \ref{fig:normal} muestra la función de densidad de una distribución normal. Podemos ver que la densidad se concentra en torno a la media. De hecho, $P(|X - \mu| \ge 2\sigma) \approx 0.046$. Es más, $P(|X - \mu| \ge 3\sigma) \approx 0.03$.
+
+\begin{figure}[H]
+\hspace*{-11cm}
+\begin{tikzpicture}
+    \begin{axis}[
+            no markers,
+            domain=0:6,
+            samples=100,
+            ymin=0,
+            axis lines*=left,
+            xlabel=$x$,
+            every axis y label/.style={at=(current axis.above origin),anchor=south},
+            every axis x label/.style={at=(current axis.right of origin),anchor=west},
+            height=5cm,
+            width=15cm,
+            xtick=\empty,
+            ytick=\empty,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
+            grid = major,
+            hide y axis
+        ]
+
+\addplot[very thick,cyan!50!black] {gauss(x, 3, 1)};
+
+        \pgfmathsetmacro\valueA{gauss(1,3,1)}
+        \pgfmathsetmacro\valueB{gauss(2,3,1)}
+        \draw [gray] (axis cs:1,0) -- (axis cs:1,\valueA)
+            (axis cs:5,0) -- (axis cs:5,\valueA);
+            \draw [gray] (axis cs:2,0) -- (axis cs:2,\valueB)
+            (axis cs:4,0) -- (axis cs:4,\valueB);
+            \draw [yshift=1.4cm, latex-latex](axis cs:2, 0) -- node [fill=white] {$0.683$} (axis  cs:4, 0);
+            \draw [yshift=0.3cm, latex-latex](axis cs:1, 0) -- node [fill=white] {$0.954$} (axis cs:5, 0);
+
+            \node[below] at (axis cs:1, 0)  {$\mu - 2\sigma$};
+            \node[below] at (axis cs:2, 0)  {$\mu - \sigma$};
+            \node[below] at (axis cs:3, 0)  {$\mu$};
+            \node[below] at (axis cs:4, 0)  {$\mu + \sigma$};
+            \node[below] at (axis cs:5, 0)  {$\mu + 2\sigma$};
+        \end{axis}
+
+\end{tikzpicture}
+\caption{Función de densidad de una distribución normal.}
+\label{fig:normal}
+\end{figure}
+
+\begin{prop}
+    Sean $X_1$ e $Y_2$ dos variables aleatorias independientes que siguen una distribución $N(x|\mu_1,\sigma_1^2)$ y $N(x|\mu_2,\sigma_2^2)$ respectivamente. Entonces $X+Y$ sigue una distribución $N(x|\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)$.
+\end{prop}
+\begin{proof}
+    Basta darse cuenta de que $\varphi_{X+Y}(t) = \varphi_{X}(t)\varphi_{Y}(t) = e^{t(\mu_1 + \mu_2) - t^2 (\sigma_1^2 + \sigma_2^2) / 2}$ es la función característica asociada a la distribución $N(x|\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)$. Recordemos que la función característica determina de forma unívoca a la distribución.
+\end{proof}
+
+El recíproco del resultado anterior también es cierto.
+
+\begin{thm}[Cramer]
+    Sean $X$ e $Y$ dos variables aleatorias independientes. Si $X+Y$ es normal, entonces $X$ e $Y$ son normales.
+\end{thm}
 
 \subsubsection{Distribución gamma}
 
@@ -230,7 +355,7 @@ La famila de distribuciones gamma se encuentra definida sobre el intervalo $[0, 
 
 \begin{definition}
     Sean $\alpha, \beta > 0$. Definimos la distribución $Gamma(x | \alpha, \beta)$ como la distribución que tiene función de densidad
-    \[f(x | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}.\]
+    \[f(x | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}, x > 0.\]
 \end{definition}
 
 El parámetro $\alpha$ se conoce como parámetro de forma ya que influencia la forma de la distribución, como muestra el siguiente resultado.
@@ -270,7 +395,9 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
             every axis y label/.style={at=(current axis.above origin),anchor=east},
             every axis x label/.style={at=(current axis.right of origin),anchor=north},
             height=6cm, width=12cm,
-            enlargelimits=false, clip=false, axis on top,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
             grid = major,
             legend pos=outer north east
         ]
@@ -326,7 +453,7 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
 \begin{proof}
     Basta utilizar el cambio de variable $g(y) = y / (\beta - it)$ como sigue
     \[E[e^{itX}] = \frac{\beta^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha-1}e^{-(\beta - it) x} dx = \frac{\beta^\alpha}{\Gamma(\alpha) (\beta -it)^\alpha} \int_{0}^{\infty} y^{\alpha-1}e^{-y} dy = \left(\frac{\beta}{\beta -it}\right)^\alpha.\]
-    Nótese que a pesar de ser una integral de contorno compleja el cambio de variable es válido. En efecto, el cambio de variable es afín y la función a integrar es entera. Por tanto, utilizando el camino cerrado $g([0, \infty]) + [\infty, 0]$ se puede probar que el cambio es válido.
+    Nótese que a pesar de ser una integral de contorno compleja el cambio de variable afín es válido como se comentó en la Proposición \ref{prop:normal:cf}.
 \end{proof}
 
 \begin{cor}
