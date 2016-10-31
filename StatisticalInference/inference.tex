@@ -213,7 +213,7 @@ Nótese que si $X \sim N(x | \mu, \sigma^2)$, entonces $Y = (X - \mu)/\sigma$ si
     \[(x-\mu)^2 - 2 itx\sigma^2 = (x - (it \sigma^2 + \mu))^2 + t^2 \sigma^4 - 2it\sigma^2 \mu.\]
     Esto sugiere utilizar el cambio de variable $g(y) = y + it \sigma^2$. Obtenemos
     \begin{align*}
-        \sqrt{2\pi}\sigma \varphi_X(t) = \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - itx\sigma^2) / (2\sigma^2)} = e^{it\mu - t^2 \sigma^2 / 2} \int_{-\infty}^{\infty} e^{-((x-(it \sigma^2 + \mu))^2 ) / (2\sigma^2)} dx = \\
+        \sqrt{2\pi}\sigma \varphi_X(t) = \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - itx\sigma^2) / (2\sigma^2)} = e^{it\mu - t^2 \sigma^2 / 2} \int_{-\infty}^{\infty} e^{-((x-(it \sigma^2 + \mu))^2 ) / (2\sigma^2)} dx \\
         = e^{t^2 \sigma^2 / 2 - it\mu} \int_{-\infty}^{\infty} e^{-(y - \mu)^2 ) / (2\sigma^2)} dy = \sqrt{2\pi}\sigma e^{it\mu - t^2 \sigma^2 / 2},
     \end{align*}
     como se quería.
@@ -314,7 +314,7 @@ El recíproco del resultado anterior también es cierto.
 La famila de distribuciones gamma se encuentra definida sobre el intervalo $[0, \infty)$. En su definición entra en juego la famosa función gamma, de ahí su nombre.
 
 \begin{definition}
-    Se define la función gamma como la aplicación $\Gamma : (0, \infty) \to (0, \infty)$ dada por
+    Se define la función gamma como la aplicación $\Gamma: (0, \infty) \to (0, \infty)$ dada por
     \[\Gamma(\alpha) = \int_0^\infty t^{\alpha-1}e^{-t}dt.\]
 \end{definition}
 \begin{prop}
@@ -483,7 +483,172 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
     donde se ha utilizado que la esperanza del producto de dos variables aleatorias independientes es el producto de las esperanzas. Por último, nótese que la función característica de la variable $\sum X_j$ es la función característica de $Gamma(x|\sum_{i=1}^n \alpha_i, \beta)$. El hecho de que la función característica de una distribución la determina de forma unívoca finaliza la prueba.
 \end{proof}
 
+\begin{prop}
+    Sea $X \sim N(x|0,1)$. La variable aleatoria $Y = X^2$ sigue una distribución $Gamma(y,1/2,1/2)$.
+\end{prop}
+\begin{proof}
+    Sean $F$ y $G$ las funciones de distribución de las variables $X$ e $Y$ respectivamente. Tenemos que $G(y) = P(X^2 \le y) = P(- \sqrt{y} \le X \le \sqrt{y}) = F(\sqrt{y}) - F(-\sqrt{y})$. Derivando, obtenemos
+    \[G'(y) = \frac{F'(\sqrt{y}) + F'(-\sqrt{y})}{2\sqrt{y}} = \frac{1}{2\sqrt{y}} \frac{1}{\sqrt{2\pi}} e^{-y^2/2} = \frac{(1/2)^{1/2}}{\Gamma(1/2)} y^{-1/2} e^{-y^2/2}.\]
+    Por último, basta darse cuenta de que $G'(y)$ es la función de densidad de $Gamma(y,1/2,1/2)$.
+\end{proof}
+
 \subsubsection{Distribución beta}
+
+La famila de distribuciones beta se encuentra definida sobre el intervalo $(0, 1)$. En su definición entra en juego la denominada función beta, de ahí su nombre.
+
+\begin{definition}
+    Se define la función beta como la aplicación $\beta : (0, \infty) \times (0, \infty) \to (0, \infty)$ dada por
+    \[\beta(x, y) = \int_0^1 t^{x-1}(1-t)^{y-1}\,dt.\]
+\end{definition}
+\begin{prop} \label{prop:beta-gamma}
+    Para cada $x, y > 0$ se tiene que $\frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)} = \beta(x,y)$. Como consecuencia, la función beta está bien definida.
+\end{prop}
+\begin{proof}
+    En primer lugar escribimos $\Gamma(x)\Gamma(y)$ como una integral doble
+    \begin{equation*}
+        \Gamma(x)\Gamma(y) =\int_{0}^{\infty }\ e^{-u}u^{x-1}\,d u\int_{0}^{\infty }\ e^{-v}v^{y-1}\,d v
+        =\int_{0}^{\infty }\int_{0}^{\infty }\ e^{-u-v}u^{x-1}v^{y-1}\,d u\,d v.
+    \end{equation*}
+    La expresión anterior nos sugiere utilizar el cambio de variable $(u, v) = J(t,s) = (st, (1-t)s)$. Nótese que $|J(t,s)| = s$. Aplicamos el cambio a continuación
+    \begin{gather*}
+        \Gamma(x)\Gamma(y) = \int_{0}^{\infty} \left( \int_{0}^{1}e^{-s}(st)^{x-1}(s(1-t))^{y-1}|J(t,s)|\, d t \right) ds \\
+        = \int_{0}^{\infty }e^{-s}s^{x+y-2}s \left(\int_{0}^{1}t^{x-1}(1-t)^{y-1}\,dt \right) d s =\Gamma(x+y)\beta(x,y)  \qedhere
+    \end{gather*}
+\end{proof}
+
+En la práctica siempre se utiliza la función gamma para evaluar la función beta. Ya podemos definir la distribución beta.
+
+\begin{definition}
+    Sean $p, q > 0$. Definimos la distribución $beta(x | p, q)$ como la distribución que tiene función de densidad
+    \[f(x | p, q) = \frac{1}{\beta(p,q)}x^{p-1}(1-x)^{q-1}, 0 < x < 1.\]
+\end{definition}
+
+Claramente, la función de densidad integra $1$. Esta distribución asigna probabilidad $1$ al intervalo $(0,1)$. Por ello, es útil en modelos de proporciones. Las Figuras \ref{fig:beta:p} y \ref{fig:beta:q} muestran la distribución beta cambiando los valores $p$ y $q$ respectivamente. Podemos observar que las funciones de densidad de $beta(x|p,q)$ y $beta(x|q,p)$ son simétricas respecto del punto $1/2$. Esto se puede demostrar fácilmente a partir de la definición. La Figura \ref{fig:beta:pq} muestra la distribución beta con iguales valores de $p$ y $q$. Vemos que las densidades son simétricas en el eje $x = 1/2$, hecho que también puede demostrarse fácilmente a partir de la definición.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        declare function={gamma(\z)=
+        2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+        declare function={betapdf(\x,\p,\q) = gamma(\p+\q)/(gamma(\p)*gamma(\q)) * \x^(\p-1)*(1-x)^(\q-1);}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | p, q)$},
+            domain=0.05:1, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=12cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,cyan!10!black] {betapdf(x,0.5,2)};
+            \addlegendentry{$p = 0.5, q = 2$}
+            \addplot [very thick,cyan!40!black] {betapdf(x,1,2)};
+            \addlegendentry{$p = 1, q = 2$}
+            \addplot [very thick,cyan!75!black] {betapdf(x,2,2)};
+            \addlegendentry{$p = 2, q = 2$}
+            \addplot [very thick,cyan] {betapdf(x,3,2)};
+            \addlegendentry{$p = 3, q = 2$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Densidad de la distribución beta con distintos valores de $p$.}
+    \label{fig:beta:p}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        declare function={gamma(\z)=
+        2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+        declare function={betapdf(\x,\p,\q) = gamma(\p+\q)/(gamma(\p)*gamma(\q)) * \x^(\p-1)*(1-x)^(\q-1);}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | p, q)$},
+            domain=0:0.95, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=12cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,magenta!10!black] {betapdf(x,2,0.5)};
+            \addlegendentry{$p = 2, q = 0.5$}
+            \addplot [very thick,magenta!40!black] {betapdf(x,2,1)};
+            \addlegendentry{$p = 2, q = 1$}
+            \addplot [very thick,magenta!75!black] {betapdf(x,2,2)};
+            \addlegendentry{$p = 2, q = 2$}
+            \addplot [very thick,magenta] {betapdf(x,2,3)};
+            \addlegendentry{$p = 2, q = 3$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Densidad de la distribución beta con distintos valores de $q$.}
+    \label{fig:beta:q}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        declare function={gamma(\z)=
+        2.506628274631*sqrt(1/\z)+ 0.20888568*(1/\z)^(1.5)+ 0.00870357*(1/\z)^(2.5)- (174.2106599*(1/\z)^(3.5))/25920- (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z;},
+        declare function={betapdf(\x,\p,\q) = gamma(\p+\q)/(gamma(\p)*gamma(\q)) * \x^(\p-1)*(1-x)^(\q-1);}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | p, q)$},
+            domain=0.05:0.95, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=12cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,green!10!black] {betapdf(x,0.5,0.5)};
+            \addlegendentry{$p = 0.5, q = 0.5$}
+            \addplot [very thick,green!40!black] {betapdf(x,1,1)};
+            \addlegendentry{$p = 1, q = 1$}
+            \addplot [very thick,green!75!black] {betapdf(x,2,2)};
+            \addlegendentry{$p = 2, q = 2$}
+            \addplot [very thick,green] {betapdf(x,3,3)};
+            \addlegendentry{$p = 3, q = 3$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Densidad de la distribución beta con $p = q$.}
+    \label{fig:beta:pq}
+\end{figure}
+
+\begin{prop}
+    La función característica de la distribución $beta(x|p,q)$ viene dada por
+    \[\varphi_X(t) = 1 + \sum_{k = 1}^\infty \frac{(it)^k}{k!} \frac{\beta(p+k,q)}{\beta(p,q)}.\]
+\end{prop}
+
+\begin{proof}
+Desarrollamos la función característica utilizando el desarrollo de la exponencial
+\begin{gather*}
+E[e^{itX}] = \frac{1}{\beta(p,q)}\int_0^1 e^{itx} x^{p-1}(1-x)^{q-1} dx = \frac{1}{\beta(p,q)}\int_0^1 \sum_{k = 0}^\infty \frac{(itx)^{k}}{k!} x^{p-1}(1-x)^{q-1} dx \\
+= \frac{1}{\beta(p,q)}\sum_{k = 0}^\infty \frac{(it)^k}{k!} \int_0^1x^{p+k-1}(1-x)^{q-1} dx = \sum_{k = 0}^\infty \frac{(it)^k}{k!} \frac{\beta(p+k,q)}{\beta(p,q)} = 1 + \sum_{k = 1}^\infty \frac{(it)^k}{k!} \frac{\beta(p+k,q)}{\beta(p,q)}. \qedhere
+\end{gather*}
+\end{proof}
+
+\begin{cor} \label{cor:beta:moments}
+    Sea $X \sim beta(x|p,q)$. Entonces, para cada $k \ge 1$ se tiene que
+    \[E[X^k] = \frac{\beta(p+k,q)}{\beta(p,q)}.\]
+\end{cor}
+
+\begin{cor}
+    Sea $X \sim beta(x|p,q)$. Entonces, $E[X] = \frac{p}{p+q}$ y $Var(X) = \frac{pq}{(p+q)^2(p+q+1)}$.
+\end{cor}
+\begin{proof}
+    Por el Corolario \ref{cor:beta:moments} y la Proposición \ref{prop:beta-gamma} tenemos que
+    \[E[X] = \frac{\beta(p+1,q)}{\beta{p,q}} = \frac{\Gamma(p+1)\Gamma(q)}{\Gamma(p+q)} \frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)} = \frac{\Gamma(p+1)}{\Gamma(p)} \frac{\Gamma(p+q)}{\Gamma(p+q+1)} = \frac{p}{p+q}\]
+    y
+    \[E[X^2] = \frac{\beta(p+2,q)}{\beta{p,q}} = \frac{\Gamma(p+2)\Gamma(q)}{\Gamma(p+q+2)} \frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)} = \frac{\Gamma(p+2)}{\Gamma(p)} \frac{\Gamma(p+q)}{\Gamma(p+q+2)} = \frac{p(p+1)}{(p+q)(p+q+1)}.\]
+    Por último, es directo calcular $Var(X) = E[X^2] - E[X]^2$.
+\end{proof}
 
 \subsubsection{Distribución de Cauchy}
 
@@ -550,17 +715,6 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     Por tanto, $E[S^2] = Var(X_i)$ como se quería.
 \end{proof}
 
-\subsection{Estadísticos suficientes}
-
-Intuitivamente, un estadístico es suficiente para el parámetro $\theta$ si utiliza toda la información contenida en la muestra aleatoria con respecto a $\theta$.
-
-Un criterio para ver si un estadístico es suficiente viene dado por el teorema de factorización de Neyman.
-
-\begin{thm}
-    Sea $X_1, X_2, \ldots, X_n$ una muestra de una distribución con una función de densidad de probabilidad $f(x;\theta)$. Se dice que $T(X_1, X_2, \ldots, X_n)$ es un estadístico suficiente de $\theta$ si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
-    \[L(x_1, x_2, \ldots, x_n) = h(t;\theta) g(x_1, x_2, \ldots, x_n).\]
-\end{thm}
-
 \subsection{Método de la máxima verosimilitud de Fisher}
 
     El método de la máxima verosimilitud es la técnica más utilizada para obtener estimadores.
@@ -609,6 +763,46 @@ Un criterio para ver si un estadístico es suficiente viene dado por el teorema 
         \[\sup_{\eta \in \Omega'} L^*(\eta|x) = \sup_{\eta \in \Omega'} \sup\{L(\theta | x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Omega} L(\theta | x)\]
         Por tanto, la verosimilitud tiene un máximo global si, y solo si, lo tiene la verosimilitud inducida, en cuyo caso la credibilidad de ambos coincide. Si existe un EMV de $\theta$, entonces $L^*(g(\hat{\theta}),x) = L(\hat{\theta} | x)$ por definición. Consecuentemente, $g(\hat{\theta})$ es estimador máximo verosímil de $g(\theta)$.
     \end{proof}
+
+
+\subsection{Estadísticos suficientes}
+
+    Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es deducir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta$ que se escoja. Consecuentemente, podemos ignorar esta última parte.
+
+    Intuitivamente, un estadístico $T$ es suficiente para la familia de distribuciones considerada si $T(X)$ nos permite estimar $\theta_0$ tan bien como lo permite toda la muestra $X$. Procedemos a dar la definición matemática.
+
+    \begin{definition}
+        Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente para cada $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $T(X) = t$ y $\theta$ no depende de $\theta$.
+    \end{definition}
+
+    El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
+
+    \begin{thm}
+        Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta)$. Sea $T(X_1, X_2, \ldots, X_n)$ un estadístico. Entonces, $T$ es  suficiente si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
+        \[L(x_1, x_2, \ldots, x_n) = h(t;\theta) g(x_1, x_2, \ldots, x_n),\]
+        donde $t = T(x_1, \ldots, x_n)$ y $g(x_1, x_2, \ldots, x_n)$ no depende de $\theta$.
+    \end{thm}
+
+    Si encontramos un estadístico suficiente, entonces podemos inferir el parámetro $\theta_0$ utilizando solamente la función $h(t;\theta)$. Interesa pues que el codominio del estadístico suficiente sea lo más simple posible. Los estadísticos suficientes son especialmente interesantes al aplicar el método de la máxima verosimilitud.
+
+    \begin{example}[Distribución normal, media desconocida]
+        Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde solamente $\sigma^2$ es conocido ($\theta = \mu$). Es fácil verificar que
+        \[\sum_{i = 1}^n (x_i - \mu)^2 = \sum_{i = 1}^n (x_i - \overline{x})^2 + n (\overline{x} - \mu)^2 = (n-1)S^2 + n(\overline{x} - \mu)^2.\]
+        A partir de la igualdad anterior obtenemos
+        \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-((n-1)S^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)).\]
+        Definimos
+        \[g(x_1, x_2, \ldots, x_n) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(n-1)S^2 / (2\sigma^2)) \text{ y } h(t|\mu) = \exp(n(t - \mu)^2) / (2\sigma^2)).\]
+        Tenemos que $f(x|\theta) = h(\overline{x}|\theta) g(x_1, x_2, \ldots, x_n)$ y, por tanto, $T(x) = \overline{x}$ es suficiente.
+    \end{example}
+
+    \begin{example}[Distribución normal, ambos parámetros son desconocidos]
+        Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde $\mu$ y $\sigma^2$ son desconocidos ($\theta = (\mu, \sigma^2)$).
+        Tenemos que
+        \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n x_i^2 - 2\mu \sum_{i = 1}^n x_i + n \mu^2) / (2\sigma^2)). \]
+        Por tanto, el estadístico $T(X_1, \ldots , X_n) = (\sum_{i = 1}^n X_i^2, \sum_{i = 1}^n X_i)$ es suficiente (tomamos $g(x_1, x_2, \ldots, x_n) = 1$). También podemos desarrollar $f(x|\theta)$ como sigue
+        \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)). \]
+        Consecuentemente, el estadístico $T(X_1, \ldots , X_n) = (\overline{x}, S^2)$ también es suficiente. Nótese que el estadístico $T(X_1, \ldots , X_n) = (X_1, \ldots , X_n)$ es trivialmente suficiente, pero no aporta ninguna información.
+    \end{example}
 
 \begin{thebibliography}{99}
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
