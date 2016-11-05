@@ -34,6 +34,16 @@
 \usepackage{microtype}                  % Mejora la letra final de cara al lector.
 
 %-----------------------------------------------------------------------------------------------------
+%	LICENCIA
+%-----------------------------------------------------------------------------------------------------
+
+\usepackage[
+    type={CC},
+    modifier={by},
+    version={4.0},
+]{doclicense}
+
+%-----------------------------------------------------------------------------------------------------
 %	ESTILO DE PÁGINA
 %-----------------------------------------------------------------------------------------------------
 
@@ -154,6 +164,8 @@
 
 \newpage
 \tableofcontents
+\vspace*{\fill}
+\doclicenseThis
 \newpage
 
 %-----------------------------------------------------------------------------------------------------
@@ -208,13 +220,13 @@ Nótese que si $X \sim N(x | \mu, \sigma^2)$, entonces $Y = (X - \mu)/\sigma$ si
 \end{prop}
 \begin{proof}
     En primer lugar, tenemos que
-    \[\varphi_X(t) = E[e^{itX}] = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} e^{itx-(x-\mu)^2 / (2\sigma^2)} dx = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - itx\sigma^2) / (2\sigma^2)} dx.\]
+    \[\varphi_X(t) = E[e^{itX}] = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} e^{itx-(x-\mu)^2 / (2\sigma^2)} dx = \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - 2itx\sigma^2) / (2\sigma^2)} dx.\]
     Completamos cuadrados como sigue
     \[(x-\mu)^2 - 2 itx\sigma^2 = (x - (it \sigma^2 + \mu))^2 + t^2 \sigma^4 - 2it\sigma^2 \mu.\]
     Esto sugiere utilizar el cambio de variable $g(y) = y + it \sigma^2$. Obtenemos
     \begin{align*}
-        \sqrt{2\pi}\sigma \varphi_X(t) = \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - itx\sigma^2) / (2\sigma^2)} = e^{it\mu - t^2 \sigma^2 / 2} \int_{-\infty}^{\infty} e^{-((x-(it \sigma^2 + \mu))^2 ) / (2\sigma^2)} dx \\
-        = e^{t^2 \sigma^2 / 2 - it\mu} \int_{-\infty}^{\infty} e^{-(y - \mu)^2 ) / (2\sigma^2)} dy = \sqrt{2\pi}\sigma e^{it\mu - t^2 \sigma^2 / 2},
+        \sqrt{2\pi}\sigma \varphi_X(t) = \int_{-\infty}^{\infty} e^{-((x-\mu)^2 - 2itx\sigma^2) / (2\sigma^2)} = e^{it\mu - t^2 \sigma^2 / 2} \int_{-\infty}^{\infty} e^{-((x-(it \sigma^2 + \mu))^2 ) / (2\sigma^2)} dx \\
+        = e^{it\mu - t^2 \sigma^2 / 2} \int_{-\infty}^{\infty} e^{-(y - \mu)^2 ) / (2\sigma^2)} dy = \sqrt{2\pi}\sigma e^{it\mu - t^2 \sigma^2 / 2},
     \end{align*}
     como se quería.
     Nótese que a pesar de ser una integral de contorno compleja el cambio de variable es válido. En efecto, el cambio de variable es afín y la función a integrar es entera. Por tanto, utilizando el camino cerrado $g([0, \infty]) + [\infty, 0]$ se puede probar que el cambio es válido.
@@ -488,7 +500,7 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
 \end{prop}
 \begin{proof}
     Sean $F$ y $G$ las funciones de distribución de las variables $X$ e $Y$ respectivamente. Tenemos que $G(y) = P(X^2 \le y) = P(- \sqrt{y} \le X \le \sqrt{y}) = F(\sqrt{y}) - F(-\sqrt{y})$. Derivando, obtenemos
-    \[G'(y) = \frac{F'(\sqrt{y}) + F'(-\sqrt{y})}{2\sqrt{y}} = \frac{1}{2\sqrt{y}} \frac{1}{\sqrt{2\pi}} e^{-y^2/2} = \frac{(1/2)^{1/2}}{\Gamma(1/2)} y^{-1/2} e^{-y^2/2}.\]
+    \[G'(y) = \frac{F'(\sqrt{y}) + F'(-\sqrt{y})}{2\sqrt{y}} = \frac{1}{\sqrt{y}} \frac{1}{\sqrt{2\pi}} e^{-y/2} = \frac{(1/2)^{1/2}}{\Gamma(1/2)} y^{-1/2} e^{-y/2}.\]
     Por último, basta darse cuenta de que $G'(y)$ es la función de densidad de $Gamma(y,1/2,1/2)$.
 \end{proof}
 
@@ -652,7 +664,97 @@ E[e^{itX}] = \frac{1}{\beta(p,q)}\int_0^1 e^{itx} x^{p-1}(1-x)^{q-1} dx = \frac{
 
 \subsubsection{Distribución de Cauchy}
 
+\begin{definition}
+    Sea $\mu \in \mathbb{R}$ y $\sigma > 0$. Definimos la distribución $Cauchy(x | \mu, \sigma)$ como la distribución que tiene función de densidad
+    \[f(x | \mu, \sigma) = \frac{1}{\sigma \pi} \frac{1}{1+\left(\frac{x-\mu}{\sigma}\right)^2} = \frac{\sigma}{\pi(\sigma^2 + (x-\mu)^2)}, \ x \in \mathbb{R}.\]
+\end{definition}
+
+La distribución está bien definida. En efecto, utilizando el cambio de variable $x = \sigma y - \mu$ obtenemos
+\[\int_{-\infty}^\infty \frac{1}{1+\left(\frac{x-\mu}{\sigma}\right)^2} dx = \int_{-\infty}^\infty \frac{\sigma}{1+y^2} dy = \sigma \pi.\]
+
+\begin{prop}
+    La función característica de la distribución $Cauchy(x|\mu,\sigma)$ viene dada por
+    \[\varphi_X(t) = e^{i\mu t - \sigma |t|}.\]
+\end{prop}
+\begin{proof}
+    En primer lugar, demostramos el resultado para $Cauchy(x|0,1)$. Tenemos que
+    \[\varphi_X(t)  = \frac{1}{\pi}\int_{-\infty}^\infty \frac{e^{itz}}{1+z^2} dz = e^{-|t|},\]
+    donde la última igualdad se explica en \cite{cauchy}. Ahora, si $X \sim Cauchy(x|\mu,\sigma)$, entonces $Y = (X - \mu) / \sigma \sim Cauchy(x|0,1)$ y, por tanto, obtenmos
+    \[\varphi_X(t) = E[e^{itX}] = E[e^{it(\sigma Y+\mu)}] = e^{it\mu} \varphi_Y(\sigma t) = e^{i\mu t - \sigma |t|}. \qedhere\]
+\end{proof}
+
+Nótese que la función característica de la distribución de Cauchy no es diferenciable en $0$. Consecuentemente, esta distribución no tiene momentos de orden mayor o igual que 1.
+
+\begin{prop}
+    Sean $X$ e $Y$ dos variables aleatorias independientes con distribuciones $Cauchy(x|\mu_1, \sigma_1)$ y $Cauchy(x|\mu_2, \sigma_2)$ respectivamente. Entonces, $X+Y \sim Cauchy(x|\mu_1+\mu_2,\sigma_1+\sigma_2)$.
+\end{prop}
+\begin{proof}
+    Nótese que $\varphi_{X+Y}(t) = \varphi_{X}(t)\varphi_{Y}(t) = e^{it(\mu_1+\mu_2) - |t| (\sigma_1+\sigma_2)}$. La prueba finaliza al darse cuenta de que ésta es la función característica de $Cauchy(x|\mu_1+\mu_2,\sigma_1+\sigma_2)$.
+\end{proof}
+
+\begin{figure}[H]
+    \hspace*{-11.2cm}
+    \begin{tikzpicture}[
+            declare function={cauchy(\x,\mu,\sigma) = 1/((\sigma*pi)*(1+((\x-\mu)/\sigma)^2));}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | \mu, \sigma)$},
+            domain=-5:5, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=12cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,cyan!70!black] {cauchy(x,0,1)};
+            \addlegendentry{Cauchy, $\mu = 0, \sigma = 2$}
+            \addplot [very thick,cyan!40!black] {cauchy(x,0,2)};
+            \addlegendentry{Cauchy, $\mu = 0, \sigma = 2$}
+            \addplot [very thick,magenta!75!black] {gauss(x,0,1)};
+            \addlegendentry{Normal, $\mu = 0, \sigma = 1$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Densidad de la distribución de Cauchy comparada con la distribución normal.}
+    \label{fig:cauchy}
+\end{figure}
+
+
 \subsubsection{Distribución de Laplace}
+
+\begin{definition}
+    Sea $\mu \in \mathbb{R}$ y $\sigma > 0$. Definimos la distribución de Laplace, y la denotamos $Laplace(x | \mu, \sigma)$ como la distribución que tiene función de densidad
+    \[f(x | \mu, \sigma) = 2 \sigma e^{-|x - \mu| / \sigma}, \ x \in \mathbb{R}.\]
+\end{definition}
+
+\begin{figure}[H]
+    \hspace*{-11.2cm}
+    \begin{tikzpicture}[
+            declare function={laplace(\x,\mu,\sigma) = exp(-abs(\x-\mu) / \sigma)/(2*\sigma);}
+        ]
+        \begin{axis}[
+            ylabel={$f(x | \mu, \sigma)$},
+            domain=-5:5, samples=100,
+            axis lines=left,
+            every axis y label/.style={at=(current axis.above origin),anchor=east},
+            every axis x label/.style={at=(current axis.right of origin),anchor=north},
+            height=6cm, width=12cm,
+            enlargelimits=false, clip=false, axis on top,
+            grid = major,
+            legend pos=outer north east
+        ]
+            \addplot [very thick,cyan!70!black] {laplace(x,0,1)};
+            \addlegendentry{Laplace, $\mu = 0, q = 1$}
+            \addplot [very thick,cyan!40!black] {laplace(x,0,2)};
+            \addlegendentry{Laplace, $\mu = 0, q = 2$}
+            \addplot [very thick,magenta!80!black] {gauss(x,0,1)};
+            \addlegendentry{Normal, $\mu = 0, q = 1$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Densidad de la distribución beta con distintos valores de $p$.}
+    \label{fig:laplace}
+\end{figure}
 
 \subsubsection{Distribución T de Student}
 
@@ -667,11 +769,6 @@ Supongamos que estamos estudiando un fenómeno aleatorio que sabemos que sigue u
 \end{definition}
 
 En múltiples situaciones encontramos estimadores de calidad de forma natural. Por ejemplo, imaginemos que el parámetro $\theta_0$ se corresponde con la media de la distribución $f(X | \theta_0)$. En tal caso, parece claro que el mejor estimador para $\theta_0$ será la media muestral $\overline{x} = \frac{1}{n}\sum_{i = 1}^n x_i$. Sin embargo, en general no sabemos qué estimador hay que utilizar. Buscamos técnicas que nos proporcionen estimadores que sean razonables. En ocasiones querremos estimar $g(\theta_0)$, donde $g$ es determinada transformación de $\Omega$ en otro espacio más manejable.
-
-Para comprobar cómo de bueno es un estimador podemos definir una función de pérdida $L(\theta,T)$ que indique la pérdida asociada a estimar un parámetro mediante un estimador $T$ si su verdadero valor es $\theta$. A partir de la función de pérdida deinfimos la función de riesgo, que asocia a cada posible valor del parámetro la pérdida media asociada al estimador. La función de riesgo viene dada por
-\[ R^L_T(\theta) = E_\theta [L(\theta,T)].\]
-El estimador óptimo es el que minimiza uniformemente la función de riesgo, esto es, $T$ es estimador óptimo si para cada estimador $T'$ se tiene que
-\[ R^L_T(\theta) \leq R^L_{T'}(\theta) \ \forall \ \theta \in \Omega.\]
 
 \subsection{Método de los momentos}
 
@@ -696,25 +793,6 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 \begin{example}[Distribución binomial]
 \end{example}
 
-\subsection{Estimadores insesgados}
-
-\begin{definition}
-    Se denomina sesgo de un estimador $T$ de $g(\theta)$ a la diferencia entre la esperanza del estimador y el verdadero valor del parámetro a estimar. Diremos que un estimador es insesgado si su sesgo es nulo.
-\end{definition}
-
-\begin{prop}
-    Sea $X_1, \ldots, X_n$ una muestra de alguna población con función de densidad $f(X | \theta_0)$. Definimos la varianza muestral como
-    \[S^2 = \frac{1}{n-1}\sum_{i = 1}^n(X_i - \overline{X})^2.\]
-    Entonces, $S^2$ es un estimador insesgado de la varianza de la distribución.
-\end{prop}
-\begin{proof}
-    Nótese que $\sum_{i = 1}^n(X_i - \overline{X})^2 = \sum_{i = 1}^nX_i^2 - n\overline{X}^2$. Consecuentemente tenemos
-    \[E\left[\sum_{i = 1}^n(X_i - \overline{X})^2\right] = \sum_{i = 1}^nE\left[X_i^2\right] -     nE[\overline{X}^2] = n(E\left[X_i^2\right] - E[\overline{X}^2]).\]
-    Utilizando que $Var(\overline{X}) = Var(X_i) / n$ y $E[\overline{X}] = E[X_i]$ obtenemos
-    \[E[X_i^2] - E[\overline{X}^2] = Var(X_i) + E[X_i]^2 - Var(\overline{X}) - E[\overline{X}]^2 = \frac{n-1}{n} Var(X_i).\]
-    Por tanto, $E[S^2] = Var(X_i)$ como se quería.
-\end{proof}
-
 \subsection{Método de la máxima verosimilitud de Fisher}
 
     El método de la máxima verosimilitud es la técnica más utilizada para obtener estimadores.
@@ -726,14 +804,16 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     Para cada posible valor $\theta$ del parámetro a estimar, la verosimilitud proporciona la credibilidad que se le da a $\theta$ para los datos $x_1, \ldots, x_n$. Buscamos una aproximación $\hat{\theta}$ de $\theta_0$ en base a la muestra obtenida. Parece lógico que si asumimos que los datos son correctos, entonces una buena aproximación será aquella en la que los datos sean coherentes, esto es, la probabilidad de que se den datos similares a la muestra observada debe ser lo más alta posible.
 
     \begin{definition}
-        Para cada elemento $x = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Omega$ como un máximo de $L(\theta | x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
+        Para cada elemento $x = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Omega$ como un máximo global de $L(\theta | x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
     \end{definition}
 
     El estimador máximo verosímil presenta principalmente dos problemas.
     \begin{itemize}
-        \item Cálculo del estimador. Para calcular $\hat{\theta}(X)$ es necesario maximizar una función. Muchas veces esto es complejo incluso para funciones de densidad comunes.
+        \item Cálculo del estimador. Para calcular $\hat{\theta}(X)$ es necesario maximizar una función. Muchas veces esto es complejo incluso para funciones de densidad comunes. Es más, puede suceder que la verosimilitud presente múltiples máximos globales y, por tanto, el estimador máximo verosímil no está bien definido. Necesitaremos condiciones sobre la distribución que nos permitan asegurar la buena definición del estimador máximo verosímil.
         \item Sensibilidad numérica. El valor $\hat{\theta}(x)$ puede cambiar considerablemente para pequeñas variaciones de $x$. Nos preguntamos qué condiciones debe verificar la función de distribución para evitar este comportamiento.
     \end{itemize}
+
+    Para adentrarnos en el estudio de estos problemas necesitaremos teoría general de estimadores. Antes de desarrollarla realizaremos varios ejemplos de cálculo de estimadores máximo verosímiles.
 
     \begin{remark} \label{rem:emv:log}
         Los máximos globales de la función $L(\theta | x)$ se corresponden con los máximos globales de la función $\log L(\theta | x) = \sum_{i = 1}^n \log f(x_i | \theta)$. En múltiples ocasiones es más sencillo maximizar esta última expresión.
@@ -764,49 +844,158 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Por tanto, la verosimilitud tiene un máximo global si, y solo si, lo tiene la verosimilitud inducida, en cuyo caso la credibilidad de ambos coincide. Si existe un EMV de $\theta$, entonces $L^*(g(\hat{\theta}),x) = L(\hat{\theta} | x)$ por definición. Consecuentemente, $g(\hat{\theta})$ es estimador máximo verosímil de $g(\theta)$.
     \end{proof}
 
+    \subsection{Teoría general de estimadores}
 
-\subsection{Estadísticos suficientes}
+    En esta sección introduciremos conceptos y definiciones relacionados con estimadores arbitrarios. El objetivo de esta teoría es dotarnos de herramientas que nos permitan abordar el estudio práctico de estimadores concretos, como el estimador máximo verosímil.
 
-    Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es deducir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta$ que se escoja. Consecuentemente, podemos ignorar esta última parte.
-
-    Intuitivamente, un estadístico $T$ es suficiente para la familia de distribuciones considerada si $T(X)$ nos permite estimar $\theta_0$ tan bien como lo permite toda la muestra $X$. Procedemos a dar la definición matemática.
+    \subsubsection{Score. Hipótesis de regularidad. Función de información de Fischer}
 
     \begin{definition}
-        Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente para cada $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $T(X) = t$ y $\theta$ no depende de $\theta$.
+        Sea $\Omega \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Omega\}$ una familia de funciones de densidad. Sea $X = (X_1, \ldots, X_n)$ una muestra que sigue una distribución con función de densidad $f(X|\theta_0)$. Si la función de verosimilitud para los valores $x = (x_1, \ldots, x_n)$ es diferenciable en $\theta \in \Omega$, entonces definimos el score de $\theta$ como el gradiente de la función verosimilitud en $\theta$ y lo denotamos $S(x; \theta)$.
     \end{definition}
 
-    El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
+    Intuitivamente el score indica la sensibilidad de la verosimilitud en un punto. Nos centraremos en el estudio del score cuando $\Omega$ es un abierto de $\mathbb{R}$. En tal caso
+    \[S(x; \theta) = \frac{\partial}{\partial \theta} \log f(x | \theta) = \frac{\frac{\partial}{\partial \theta} f(x | \theta)}{f(x | \theta)}.\]
+
+    Supongamos que el score de $\theta$ existe para cualesquiera valores de la muestra $x_1, \ldots, x_n$. En tal caso es natural considerar la función $E_{X|\theta}[S(X;\theta)]$, que depende solamente de $\theta$. Si $\theta$ fuese el parámetro a estimar, entonces $E_{X|\theta}[S(X;\theta)]$ mide la sensibilidad media de la verosimilitud en $\theta$.
+
+    \begin{lem} \label{lem:score:esp}
+        Sea $\Omega \subset \mathbb{R}$ un abierto y sea $\{f(X|\theta): \theta \in \Omega\}$ una familia de funciones de densidad que verifican las siguientes condiciones de regularidad:
+        \begin{enumerate}
+            \item Para cualesquiera valores $x=(x_1, \ldots, x_n)$ la función $L(x; \theta)$ es diferenciable para todo $\theta \in \Omega$.
+            \item Se verifica
+            \[\frac{\partial}{\partial \theta}\int_{X} f(x| \theta) dx = \int_{X} \frac{\partial}{\partial \theta} f(x| \theta) dx.\]
+        \end{enumerate}
+        Entonces, $E_{X|\theta}[S(X;\theta)] = 0$.
+    \end{lem}
+    \begin{proof}
+        Tenemos que
+        \[E_{X|\theta}[S(X;\theta)] = \int_{X} \frac{\frac{\partial}{\partial \theta} f(x | \theta)}{f(x | \theta)}  f(x | \theta) dx = \int_{X} \frac{\partial}{\partial \theta} f(x | \theta) dx = \frac{\partial}{\partial \theta} \int_{X} f(x; \theta) dx = \frac{\partial}{\partial \theta} 1 = 0. \qedhere\]
+    \end{proof}
+
+    En el resultado anterior aparecen por primera vez hipótesis de regularidad sobre las distribuciones a estudiar. Nótese que en la práctica normalmente vamos a trabajar con distribuciones que verifiquen estas hipótesi. La hipótesis b) se verifica si la función la derivada de la función de densidad  con respecto a $\theta$ es continua e integramos en un intervalo \cite{leibniz}. Consecuentemente, todas las distribuciones continuas estudiadas, exceptuando la distribución de Laplace, cumplen estas hipótesi de regularidad (su función de densidad es de clase infinito con respecto a $\theta$).
+
+    En lo que sigue habitualmente exigiremos unas hipótesis de regularidad más fuertes, asumiendo que $\Omega \subset \mathbb{R}^m$. En tal caso, se indicará que el resultado es verdad bajo hipótesis de regularidad. Las hipótesis que consideraremos son las siguientes:
+
+    \begin{enumerate}[label=\roman*)]
+        \item Para cualquier muestra $x = (x_1, \ldots, x_n)$, la verosimilitud $f(x | \theta)$ es dos veces derivable en $\Omega$.
+        \item $\frac{\partial^i}{\partial\theta^i} \int_X f(x | \theta) dx = \int_X \frac{\partial^i}{\partial\theta^i} f(x | \theta) dx$ para $i=1,2$.
+        %\item La función $\Psi(\theta) = \mathbb{E}_{\theta_0} \frac{\partial}{\partial \theta} f(x | \theta)$ es continua en $\theta_0$.
+    \end{enumerate}
+
+    Se deja como ejercicio razonar que todas las distribuciones continuas estudiadas, exceptuando la distribuciónd de Laplace, verifican estas hipótesis de regularidad.
+
+    \begin{definition}
+        Sea $\Omega \subset \mathbb{R}$ un abierto y sea $\{f(X|\theta): \theta \in \Omega\}$ una familia de funciones de densidad para la cual siempre existe el score. Dado $\theta \in \Omega$, definimos la función de información de Fischer en $\theta$ como el segundo momento de la variable aleatoria $S(X;\theta)$, donde $X$ sigue una distribución con función de densidad $f(X|\theta)$.  Se denota $\mathcal{I}(\theta) := E_{X|\theta}[S(X;\theta)^2] \ge 0.$
+    \end{definition}
+
+    \begin{lem}
+        Bajo hipótesis de regularidad tenemos que $\mathcal{I}(\theta) = Var_{X|\theta}(S(X;\theta))$
+        \[\mathcal{I}(\theta) = E_{X|\theta} \left[-\frac{\partial^2}{\partial\theta^2} \log f(X;\theta) \right].\]
+    \end{lem}
+    \begin{proof}
+        En primer lugar, podemos escribir
+        \[\frac{\partial^2}{\partial\theta^2} \log f(X|\theta)=\frac{\frac{\partial^2}{\partial\theta^2} f(X|\theta)}{f(X| \theta)}\;-\;\left( \frac{\frac{\partial}{\partial\theta} f(X|\theta)}{f(X| \theta)} \right)^2=\frac{\frac{\partial^2}{\partial\theta^2} f(X|\theta)}{f(X| \theta)}\;-\;\left( \frac{\partial}{\partial\theta} \log f(X|\theta)\right)^2.\]
+        La demostración finaliza al tomar esperanzas en la expresión anterior y darse cuenta de que
+        \[E_{X|\theta}\left[\frac{\frac{\partial^2}{\partial\theta^2} f(X|\theta)}{f(X| \theta)}\right] = \int_X \frac{\partial^2}{\partial\theta^2} f(x | \theta)\, dx = \frac{\partial^2}{\partial\theta^2} \int_X f(x | \theta)\, dx = \frac{\partial^2}{\partial\theta^2} \; 1 = 0. \qedhere\]
+    \end{proof}
+
+    \begin{example}
+        Calculamos la función de información de Fisher para la distribución normal.
+    \end{example}
+
+    \subsubsection{Estimadores insesgados}
+
+    Para comprobar cómo de bueno es un estimador $T$ podemos definir una función de pérdida $L(\theta,T(X))$ que indique la pérdida asociada a estimar un parámetro mediante un estimador $T$ si su verdadero valor es $\theta$. A partir de la función de pérdida deinfimos la función de riesgo, que asocia a cada posible valor del parámetro la pérdida media asociada al estimador. La función de riesgo viene dada por
+    \[ R^L_T(\theta) = E_{X|\theta} [L(\theta,T(X))].\]
+    Un estimador $T$ que ``minimice uniformemente'' la función de riesgo hará mejores estimaciones en media. Con minimizar uniformemente queremos decir que para cada estimador $T'$ se tiene que
+    \[ R^L_T(\theta) \leq R^L_{T'}(\theta) \ \forall \ \theta \in \Omega.\]
+
+    En la siguiente definición introducimos un tipo particular de estimadores que minimizan determinada función de riesgo.
+
+    \begin{definition}
+        Se denomina sesgo de un estimador $T$ de $g(\theta)$ a la diferencia entre la esperanza del estimador y el verdadero valor del parámetro a estimar. Diremos que un estimador es insesgado si para cualquier posible valor del parámetro a estimar su sesgo es nulo.
+    \end{definition}
+
+    Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = \theta - T(X)$. Un estimador insesgado verifica $0 = \theta - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no se comporte como es deseado debido a que la varianza $Var_\theta(T(X))$ sea muy alta.
+
+    El siguiente resultado nos muestra un ejemplo de estimador insesgado.
+
+    \begin{prop}
+        Sea $X_1, \ldots, X_n$ una muestra de alguna población con función de densidad $f(X | \theta_0)$. Definimos la varianza muestral como
+        \[S^2 = \frac{1}{n-1}\sum_{i = 1}^n(X_i - \overline{X})^2.\]
+        Entonces, $S^2$ es un estimador insesgado de la varianza de la distribución.
+    \end{prop}
+    \begin{proof}
+        Nótese que $\sum_{i = 1}^n(X_i - \overline{X})^2 = \sum_{i = 1}^nX_i^2 - n\overline{X}^2$. Consecuentemente tenemos
+        \[E\left[\sum_{i = 1}^n(X_i - \overline{X})^2\right] = \sum_{i = 1}^nE\left[X_i^2\right] -     nE[\overline{X}^2] = n(E\left[X_i^2\right] - E[\overline{X}^2]).\]
+        Utilizando que $Var(\overline{X}) = Var(X_i) / n$ y $E[\overline{X}] = E[X_i]$ obtenemos
+        \[E[X_i^2] - E[\overline{X}^2] = Var(X_i) + E[X_i]^2 - Var(\overline{X}) - E[\overline{X}]^2 = \frac{n-1}{n} Var(X_i).\]
+        Por tanto, $E[S^2] = Var(X_i)$ como se quería.
+    \end{proof}
+
+    \subsubsection{Estadísticos suficientes}
+
+        Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es deducir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta$ que se escoja. Consecuentemente, podemos ignorar esta última parte.
+
+        Intuitivamente, un estadístico $T$ es suficiente para la familia de distribuciones considerada si $T(X)$ nos permite estimar $\theta_0$ tan bien como lo permite toda la muestra $X$. Procedemos a dar la definición matemática.
+
+        \begin{definition}
+            Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente para cada $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $T(X) = t$ y $\theta$ no depende de $\theta$.
+        \end{definition}
+
+        El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
+
+        \begin{thm}
+            Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta)$. Sea $T(X_1, X_2, \ldots, X_n)$ un estadístico. Entonces, $T$ es  suficiente si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
+            \[L(x_1, x_2, \ldots, x_n) = h(t;\theta) g(x_1, x_2, \ldots, x_n),\]
+            donde $t = T(x_1, \ldots, x_n)$ y $g(x_1, x_2, \ldots, x_n)$ no depende de $\theta$.
+        \end{thm}
+
+        Si encontramos un estadístico suficiente, entonces podemos inferir el parámetro $\theta_0$ utilizando solamente la función $h(t;\theta)$. Interesa pues que el codominio del estadístico suficiente sea lo más simple posible. Los estadísticos suficientes son especialmente interesantes al aplicar el método de la máxima verosimilitud.
+
+        \begin{example}[Distribución normal, media desconocida]
+            Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde solamente $\sigma^2$ es conocido ($\theta = \mu$). Es fácil verificar que
+            \[\sum_{i = 1}^n (x_i - \mu)^2 = \sum_{i = 1}^n (x_i - \overline{x})^2 + n (\overline{x} - \mu)^2 = (n-1)S^2 + n(\overline{x} - \mu)^2.\]
+            A partir de la igualdad anterior obtenemos
+            \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-((n-1)S^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)).\]
+            Definimos
+            \[g(x_1, x_2, \ldots, x_n) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(n-1)S^2 / (2\sigma^2)) \text{ y } h(t|\mu) = \exp(n(t - \mu)^2) / (2\sigma^2)).\]
+            Tenemos que $f(x|\theta) = h(\overline{x}|\theta) g(x_1, x_2, \ldots, x_n)$ y, por tanto, $T(x) = \overline{x}$ es suficiente.
+        \end{example}
+
+        \begin{example}[Distribución normal, ambos parámetros son desconocidos]
+            Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde $\mu$ y $\sigma^2$ son desconocidos ($\theta = (\mu, \sigma^2)$).
+            Tenemos que
+            \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n x_i^2 - 2\mu \sum_{i = 1}^n x_i + n \mu^2) / (2\sigma^2)). \]
+            Por tanto, el estadístico $T(X_1, \ldots , X_n) = (\sum_{i = 1}^n X_i^2, \sum_{i = 1}^n X_i)$ es suficiente (tomamos $g(x_1, x_2, \ldots, x_n) = 1$). También podemos desarrollar $f(x|\theta)$ como sigue
+            \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)). \]
+            Consecuentemente, el estadístico $T(X_1, \ldots , X_n) = (\overline{x}, S^2)$ también es suficiente. Nótese que el estadístico $T(X_1, \ldots , X_n) = (X_1, \ldots , X_n)$ es trivialmente suficiente, pero no aporta ninguna información.
+        \end{example}
+
+    \subsection{Estudio teórico del estimador máximo verosímil}
+
+    En este punto nos preguntamos cuándo está bien definido el estimador máximo verosímil. En tal caso nos interesa saber si el método de la máxima verosimilitud obtendrá una mejor aproximación de $\theta_0$ cuanto mayor sea la muestra. Para desarrollar esta cuestión de forma teórica introducimos la siguiente definición.
+
+    \begin{definition}
+        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Omega\}$. Un estimador $T_n$ es consistente si para cualquier $\theta_0 \in \Omega$ se verifica que para toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $T_n(X_1, \ldots, X_n)$ converge en probabilidad a $g(\theta_0)$, donde $g$ es una función fijada de antemano.
+    \end{definition}
 
     \begin{thm}
-        Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta)$. Sea $T(X_1, X_2, \ldots, X_n)$ un estadístico. Entonces, $T$ es  suficiente si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
-        \[L(x_1, x_2, \ldots, x_n) = h(t;\theta) g(x_1, x_2, \ldots, x_n),\]
-        donde $t = T(x_1, \ldots, x_n)$ y $g(x_1, x_2, \ldots, x_n)$ no depende de $\theta$.
+        Bajo las condiciones anteriores se verifican las siguientes afirmaciones:
+        \begin{enumerate}
+            \item Existe $n_0$ tal que para cada $n \ge n_0$ la ecuación en probabilidad $0 =\sum_{i=0}^n \frac{\partial}{\partial \theta} \log f(X_i | \theta)$ tiene solución única. A esta solución se le llama $\hat{\theta}_n(X_1, \ldots, X_n)$. En dicho punto se maximiza la verosimilitud.
+            \item $\hat{\theta}(X_1, \ldots, X_n)$ converge en $P_{\theta_0}$ a $\theta_0$. De hecho, se puede probar que la convergencia es casi segura.
+        \end{enumerate}
     \end{thm}
-
-    Si encontramos un estadístico suficiente, entonces podemos inferir el parámetro $\theta_0$ utilizando solamente la función $h(t;\theta)$. Interesa pues que el codominio del estadístico suficiente sea lo más simple posible. Los estadísticos suficientes son especialmente interesantes al aplicar el método de la máxima verosimilitud.
-
-    \begin{example}[Distribución normal, media desconocida]
-        Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde solamente $\sigma^2$ es conocido ($\theta = \mu$). Es fácil verificar que
-        \[\sum_{i = 1}^n (x_i - \mu)^2 = \sum_{i = 1}^n (x_i - \overline{x})^2 + n (\overline{x} - \mu)^2 = (n-1)S^2 + n(\overline{x} - \mu)^2.\]
-        A partir de la igualdad anterior obtenemos
-        \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-((n-1)S^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)).\]
-        Definimos
-        \[g(x_1, x_2, \ldots, x_n) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(n-1)S^2 / (2\sigma^2)) \text{ y } h(t|\mu) = \exp(n(t - \mu)^2) / (2\sigma^2)).\]
-        Tenemos que $f(x|\theta) = h(\overline{x}|\theta) g(x_1, x_2, \ldots, x_n)$ y, por tanto, $T(x) = \overline{x}$ es suficiente.
-    \end{example}
-
-    \begin{example}[Distribución normal, ambos parámetros son desconocidos]
-        Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde $\mu$ y $\sigma^2$ son desconocidos ($\theta = (\mu, \sigma^2)$).
-        Tenemos que
-        \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n x_i^2 - 2\mu \sum_{i = 1}^n x_i + n \mu^2) / (2\sigma^2)). \]
-        Por tanto, el estadístico $T(X_1, \ldots , X_n) = (\sum_{i = 1}^n X_i^2, \sum_{i = 1}^n X_i)$ es suficiente (tomamos $g(x_1, x_2, \ldots, x_n) = 1$). También podemos desarrollar $f(x|\theta)$ como sigue
-        \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)). \]
-        Consecuentemente, el estadístico $T(X_1, \ldots , X_n) = (\overline{x}, S^2)$ también es suficiente. Nótese que el estadístico $T(X_1, \ldots , X_n) = (X_1, \ldots , X_n)$ es trivialmente suficiente, pero no aporta ninguna información.
-    \end{example}
+    \begin{proof}
+        $0 > -\mathcal{I}(\theta)=\operatorname{E} \left[\left. \frac{\partial^2}{\partial\theta^2} \log f(X;\theta)\right|\theta_0 \right] = \frac{\partial}{\partial\theta} \operatorname{E} \left[\left. \frac{\partial}{\partial\theta} \log f(X;\theta)\right|\theta_0 \right]$
+        es decreciente en un entorno de $\theta_0$.
+    \end{proof}
 
 \begin{thebibliography}{99}
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
+\bibitem{cauchy} Wikipedia, Residue theorem, \url{https://en.wikipedia.org/wiki/Residue_theorem#Example}.
+\bibitem{leibniz} Wikipedia, Leibniz integral rule, \url{https://en.wikipedia.org/wiki/Leibniz_integral_rule}.
 \end{thebibliography}
-
-
 \end{document}
