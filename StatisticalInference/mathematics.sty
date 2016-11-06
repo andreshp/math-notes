@@ -17,45 +17,11 @@
 \newcommand{\definitionWord}{\iflanguage{english}{Definition}{Definición}}
 \newcommand{\theoremWord}{\iflanguage{english}{Theorem}{Teorema}}
 \newcommand{\propositionWord}{\iflanguage{english}{Proposition}{Proposición}}
+\newcommand{\lemmaWord}{\iflanguage{english}{Lemma}{Lema}}
 \newcommand{\corollaryWord}{\iflanguage{english}{Corollary}{Corolario}}
 \newcommand{\conjectureWord}{\iflanguage{english}{Conjecture}{Conjetura}}
 \newcommand{\exampleWord}{\iflanguage{english}{Example}{Ejemplo}}
 \newcommand{\remarkWord}{\iflanguage{english}{Remark}{Comentario}}
-
-%-----------------------------------------------------------------------------------------------------
-%	EXERCISES
-%-----------------------------------------------------------------------------------------------------
-
-\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
-\newcounter{exerciseCounter} % Creates a counter to keep track of the number of problems.
-\setcounter{exerciseCounter}{1}
-
-% Exercise command.
-\newcommand{\exerciseName}{}
-\newenvironment{exercise}[1][\arabic{exerciseCounter}]{
-	\renewcommand{\exerciseName}{\exerciseWord \ #1} % Assign \homeworkProblemName the name of the problem
-	\subsection*{\exerciseName} % Make a section in the document with the custom problem count
-    % Obtain a counter from argument.
-    \IfSubStr{#1}{.}{\StrBehind{#1}{.}[\mycounter]}{\StrBefore{#1 }{ }[\mycounter]}
-    \setcounter{exerciseCounter}{\mycounter}
-    \stepcounter{exerciseCounter} % Increase counter for number of problems
-}{}
-
-% Statement environment.
-% Contains the problem statement.
-\newenvironment{statement}{
-	\textbf{\statementWord:}
-}
-
-% Answer command.
-% The answer is wrapped between rectanbles.
-\newenvironment{answer}{
-	\noindent\framebox[\columnwidth][c]{\begin{minipage}{\columnwidth}\centering\answerWord\end{minipage}}
-
-}
-
-% Add a horizontal rectangle at the end of the answer.
-\AtEndEnvironment{answer}{\ \\\noindent\framebox[\columnwidth][c]{\begin{minipage}{\columnwidth}\end{minipage}}}
 
 %----------------------------------------------------------------------------------------
 %   MATHEMATICS
@@ -102,24 +68,30 @@
 {.5em}               % Espacio tras la cabecera: { } = espacio usal entre palabras, \newline = nueva línea
 {}                   % Especificación de la cabecera (si se deja vaía implica 'normal')
 
-% Teoremas:
+% Theorems:
 \theoremstyle{theorem-style}  % Otras posibilidades: plain (por defecto), definition, remark
-\newtheorem{thm}{\theoremWord}[exerciseCounter]  % [section] indica que el contador se reinicia cada sección
-\renewcommand{\thethm}{\arabic{thm}}
-\newtheorem{cor}[thm]{\corollaryWord} % [theorem] indica que comparte el contador con theorem
-\newtheorem{lem}[thm]{Lema}
+\newtheorem{thm}{\theoremWord}[section]  % [section] indica que el contador se reinicia cada sección
+\renewcommand{\thethm}{\arabic{thm}} % Change numbering display format.
+\newtheorem{cor}[thm]{\corollaryWord} % [thm] indica que comparte el contador con theorem
+\newtheorem{lem}[thm]{\lemmaWord}
 \newtheorem{prop}[thm]{\propositionWord}
+\newtheorem{conjecture}[thm]{\conjectureWord}
 
-% Definiciones, notas, conjeturas
+% Definitions, notes, conjectures
 \theoremstyle{definition-style}
-\newtheorem{definition}{\definitionWord}[exerciseCounter]
-\renewcommand{\thedefinition}{\arabic{definition}}
-\newtheorem{conjecture}{\conjectureWord}[section]
-\newtheorem{remark}{\remarkWord} % * indica que no tiene contador
+\newtheorem{definition}{\definitionWord}[section]
+\renewcommand{\thedefinition}{\arabic{definition}} % Change numbering display format.
+\newtheorem{remark}[thm]{\remarkWord}
 
-% Ejemplos, ejercicios
+% Examples
 \theoremstyle{example-style}
 \newtheorem{example}[thm]{\exampleWord}
+% New example environment with qed symbol. Obtained from:
+% http://tex.stackexchange.com/questions/146151/indicator-at-end-of-theorem
+\newcommand{\exsymbol}{$\triangle$} % Choose the qed symbol.
+\newenvironment{ex}{\begin{example}
+  \renewcommand{\qedsymbol}{\exsymbol}\pushQED{\qed}}
+  {\popQED\end{example}}
 
 % Proof environment.
 % Removes the space after the result.
@@ -139,6 +111,48 @@
 }
 \makeatother
 
+%-----------------------------------------------------------------------------------------------------
+%	EXERCISES
+%-----------------------------------------------------------------------------------------------------
+
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\newcounter{exerciseCounter} % Creates a counter to keep track of the number of problems.
+\setcounter{exerciseCounter}{1}
+
+% Exercise command.
+% It can takes an argument with the exercise number.
+% The exercise number can be a string of the language ([0-9].)*[0-9]. Example: 28, 2.28, 2.2.28...
+\newcommand{\exerciseName}{}
+\newenvironment{exercise}[1][\arabic{exerciseCounter}]{
+	\renewcommand{\exerciseName}{\exerciseWord \ #1} % Assign \exerciseName the name of the exercise.
+	\subsection*{\exerciseName} % Make a section in the document with the custom problem count
+    % Obtain a counter from argument.
+    \IfSubStr{#1}{.}{\StrBehind{#1}{.}[\mycounter]}{\StrBefore{#1 }{ }[\mycounter]}
+    \setcounter{exerciseCounter}{\mycounter}
+    \stepcounter{exerciseCounter} % Increase counter for number of problems
+    \setcounter{thm}{0}
+    \setcounter{definition}{0}
+}{}
+
+% Statement environment.
+% Contains the problem statement.
+\newenvironment{statement}{
+	\textbf{\statementWord:}
+}
+
+% Answer command.
+% The answer is wrapped between rectanbles.
+\newenvironment{answer}{
+	\noindent\framebox[\columnwidth][c]{\begin{minipage}{\columnwidth}\centering\answerWord\end{minipage}}
+
+}
+
+% Add a horizontal rectangle at the end of the answer.
+\AtEndEnvironment{answer}{\ \\\noindent\framebox[\columnwidth][c]{\begin{minipage}{\columnwidth}\end{minipage}}}
+
+%-----------------------------------------------------------------------------------------------------
+%	COMMANDS
+%-----------------------------------------------------------------------------------------------------
 
 % Restriction command
 \newcommand\restrict[1]{\raisebox{-.5ex}{$|$}_{#1}}
