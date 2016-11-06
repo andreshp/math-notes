@@ -778,9 +778,9 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 \begin{equation} \label{eq:sistema-momentos}
     \begin{matrix}
         m_1 = \mu_1(\theta_1, \ldots, \theta_k), \\
-        m_2 = \mu_1(\theta_1, \ldots, \theta_k), \\
+        m_2 = \mu_2(\theta_1, \ldots, \theta_k), \\
         \vdots \\
-        m_k = \mu_1(\theta_1, \ldots, \theta_k). \\
+        m_k = \mu_k(\theta_1, \ldots, \theta_k). \\
     \end{matrix}
 \end{equation}
 
@@ -891,7 +891,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \subsubsection{Score, hipótesis de regularidad y función de información de Fisher}
 
     \begin{definition}
-        Sea $\Omega \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Omega\}$ una familia de funciones de densidad. Sea $X = (X_1, \ldots, X_n)$ una muestra que sigue una distribución con función de densidad $f(X|\theta_0)$. Si la función de verosimilitud para los valores $x = (x_1, \ldots, x_n)$ es diferenciable en $\theta \in \Omega$, entonces definimos el score de $\theta$ como el gradiente de la función verosimilitud en $\theta$ y lo denotamos $S(x; \theta)$.
+        Sea $\Omega \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Omega\}$ una familia de funciones de densidad. Sea $X = (X_1, \ldots, X_n)$ una muestra que sigue una distribución con función de densidad $f(X|\theta_0)$. Si la función de verosimilitud para los valores $x = (x_1, \ldots, x_n)$ es diferenciable en $\theta \in \Omega$, entonces definimos el score de $\theta$ como el gradiente de la función $\log L(x; \theta)$ y lo denotamos $S(x; \theta)$.
     \end{definition}
 
     Intuitivamente el score indica la sensibilidad de la verosimilitud en un punto. Nos centraremos en el estudio del score cuando $\Omega$ es un abierto de $\mathbb{R}$. En tal caso
@@ -1016,7 +1016,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = \theta - T(X)$. Un estimador insesgado verifica $0 = \theta - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no proporcione estimaciones de calidad debido si la varianza $Var_{X|\theta}(T(X))$ es muy alta.
 
-    Claramente, la media muestral es un estimador insesgado de la media de la distribución. El siguiente resultado nos muestra un ejemplo de estimador insesgado.
+    Claramente, la media muestral es un estimador insesgado de la media de la distribución. El siguiente resultado nos muestra otro ejemplo de un estimador insesgado.
 
     \begin{prop}
         Sea $X_1, \ldots, X_n$ una muestra de alguna población con función de densidad $f(X | \theta_0)$. Definimos la varianza muestral como
@@ -1030,6 +1030,8 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         \[E[X_i^2] - E[\overline{X}^2] = Var(X_i) + E[X_i]^2 - Var(\overline{X}) - E[\overline{X}]^2 = \frac{n-1}{n} Var(X_i).\]
         Por tanto, $E[S^2] = Var(X_i)$ como se quería.
     \end{proof}
+
+
 
     \subsection{Estudio teórico del estimador máximo verosímil}
 
