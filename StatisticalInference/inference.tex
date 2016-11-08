@@ -495,13 +495,13 @@ La Figura \ref{fig:gamma:alpha} muestra la función de densidad de la distribuci
     donde se ha utilizado que la esperanza del producto de dos variables aleatorias independientes es el producto de las esperanzas. Por último, nótese que la función característica de la variable $\sum X_j$ es la función característica de $Gamma(x|\sum_{i=1}^n \alpha_i, \beta)$. El hecho de que la función característica de una distribución la determina de forma unívoca finaliza la prueba.
 \end{proof}
 
-\begin{prop}
-    Sea $X \sim N(x|0,1)$. La variable aleatoria $Y = X^2$ sigue una distribución $Gamma(y,1/2,1/2)$.
+\begin{prop} \label{prop:normal-square}
+    Sea $X \sim N(x|0,\sigma^2)$. La variable aleatoria $Y = X^2$ sigue una distribución \\ $Gamma(y,1/2,1/(2\sigma^2))$. En particular, para $\sigma = 1$, $Y = X^2$ sigue una distribución $\chi^2_1$.
 \end{prop}
 \begin{proof}
     Sean $F$ y $G$ las funciones de distribución de las variables $X$ e $Y$ respectivamente. Tenemos que $G(y) = P(X^2 \le y) = P(- \sqrt{y} \le X \le \sqrt{y}) = F(\sqrt{y}) - F(-\sqrt{y})$. Derivando, obtenemos
-    \[G'(y) = \frac{F'(\sqrt{y}) + F'(-\sqrt{y})}{2\sqrt{y}} = \frac{1}{\sqrt{y}} \frac{1}{\sqrt{2\pi}} e^{-y/2} = \frac{(1/2)^{1/2}}{\Gamma(1/2)} y^{-1/2} e^{-y/2}.\]
-    Por último, basta darse cuenta de que $G'(y)$ es la función de densidad de $Gamma(y,1/2,1/2)$.
+    \[G'(y) = \frac{F'(\sqrt{y}) + F'(-\sqrt{y})}{2\sqrt{y}} = \frac{1}{\sqrt{y}} \frac{1}{\sqrt{2\pi}\sigma} e^{-y/(2\sigma^2)} = \frac{(1/(2\sigma^2))^{1/2}}{\Gamma(1/2)} y^{-1/2} e^{-y/(2\sigma^2)}.\]
+    Por último, basta darse cuenta de que $G'(y)$ es la función de densidad de $Gamma(y,1/2,1/(2\sigma^2))$.
 \end{proof}
 
 \subsubsection{Distribución beta}
@@ -1079,7 +1079,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     La cota de Cramer-Rao nos dice que si la información de Ficher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
 
-    \subsubsection{Consistencia de sucesiones de estimadores. }
+    \subsubsection{Consistencia de sucesiones de estimadores}
 
     Nos interesa que los estimadores tiendan al parámetro de la distribución cuando el tamaño de la muestra diverge. En tal caso, podemos mejorar el resultado del estimador recurriendo a una mayor muestra de la población.
 
@@ -1104,8 +1104,21 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     Otra propiedad interesante de un estimador cuando la muestra tiene a infinito es la siguiente.
 
     \begin{definition}
-
+        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Omega\}$. Una sucesión de estimadores $\hat\theta_n$ de $g(\theta)$ es asintóticamente normal para $\theta_0 \in \Omega$ si toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $\sqrt{n}(\hat\theta_n(X_1, \ldots, X_n) - g(\theta_0))$ converge en ley a una distribución $N(X|0,\sigma^2)$ para cierto $\sigma^2 > 0$.
     \end{definition}
+
+    \begin{prop}
+        Todo estimador asintóticamente normal es consistente.
+    \end{prop}
+    \begin{proof}
+        Sea $\hat\theta_n$ un estimador asintóticamente normal de $g(\theta)$. Tenemos que $n (\hat\theta_n - g(\theta))^2$ converge en ley a $Gamma(X|1/2, 1/(2\sigma^2))$ por la Proposición \ref{prop:normal-square}. Sea $F$ la función de distribución de $Gamma(X|1/2, 1/(2\sigma^2))$ y sea $\varepsilon > 0$. Vamos a probar que $P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \to 1$. En efecto, sea $1 \ge \alpha \ge 0$. Tomamos $y$ tal que $F(y) = \alpha$. Tenemos que
+        \[P[n(\hat\theta_n - g(\theta))^2 < y] \to F(y) = \alpha.\]
+        Por tanto, para cada $\delta > 0$ existe $n_0$ tal que $\varepsilon > y /n$ y para cada $n \ge n_0$ tenemos
+        \[P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \ge P[n(\hat\theta_n - g(\theta))^2 < y] \ge \alpha - \delta.\]
+        Deducimos que $\liminf P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \ge \alpha - \delta.$ De la arbitrariedad de $\delta$ y $\alpha$ se deduce el resultado.
+    \end{proof}
+
+    Como es natural, el recíproco del anterior no es cierto.
 
     \subsection{Estudio teórico del estimador máximo verosímil}
 
