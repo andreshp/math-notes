@@ -856,7 +856,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Intuitivamente, un estadístico $T$ es suficiente para la familia de distribuciones considerada si $T(X)$ nos permite estimar $\theta_0$ tan bien como lo permite toda la muestra $X$. Procedemos a dar la definición matemática.
 
         \begin{definition}
-            Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente para cada $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $T(X) = t$ y $\theta$ no depende de $\theta$.
+            Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente si para cada $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $\theta$ y $T(X) = t$ no depende de $\theta$.
         \end{definition}
 
         El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
@@ -985,6 +985,26 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Además, la igualdad se da para todo $\theta \in \Omega$ si, y solo si, $T$ es suficiente.
     \end{lem}
 
+    En lo que sigue necesitaremos el siguiente lema.
+
+    \begin{lem}[Desigualdad de Jenssen]
+        Sean $X$ una variable aleatoria cuya imagen está contenida en un intervalo $I$. Sea $g: I \to \mathbb{R}$ una función.
+        \begin{enumerate}
+            \item Si $g$ es convexa, entonces $E[g(X)] \ge g(E[X])$.
+            \item Si $g$ es cóncava, entonces $E[g(X)] \le g(E[X])$
+        \end{enumerate}
+    \end{lem}
+
+    \begin{prop} \label{prop:desigualdad}
+        Sea $X = (X_1, \ldots, X_n)$ una muestra de $f(X;\theta_0)$. Entonces, para cada $\theta_1 \in \Omega$ se tiene
+        \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_0} \log f(X|\theta_0).\]
+    \end{prop}
+    \begin{proof}
+        Por la desigualdad de Jenssen obtenemos
+        \[E_{X|\theta_0} \log \frac{f(X|\theta_1)}{f(X|\theta_0)} \le \log \int_X \frac{f(X|\theta_1)}{f(X|\theta_0)} f(X|\theta_0) \, dx = \log \int_X f(X|\theta_1) \, dx = 0,\]
+        de donde se deduce el resultado.
+    \end{proof}
+
     Cabe mencionar que la información de Fisher puede definirse cuando $\Omega \subset \mathbb{R}^m$. Incluimos la definición por complitud, aunque no entraremos en ella a fondo.
 
     \begin{definition}
@@ -1059,7 +1079,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     La cota de Cramer-Rao nos dice que si la información de Ficher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
 
-    \subsubsection{Consistencia de sucesiones de estimadores}
+    \subsubsection{Consistencia de sucesiones de estimadores. }
 
     Nos interesa que los estimadores tiendan al parámetro de la distribución cuando el tamaño de la muestra diverge. En tal caso, podemos mejorar el resultado del estimador recurriendo a una mayor muestra de la población.
 
@@ -1081,6 +1101,12 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         La prueba finaliza al recordar que el último término converge a $0$.
     \end{proof}
 
+    Otra propiedad interesante de un estimador cuando la muestra tiene a infinito es la siguiente.
+
+    \begin{definition}
+
+    \end{definition}
+
     \subsection{Estudio teórico del estimador máximo verosímil}
 
     En este punto nos preguntamos cuándo está bien definido el estimador máximo verosímil. En tal caso nos interesa saber si el método de la máxima verosimilitud nos proporciona un estimador consistente. Para ello aplicamos los resultados teóricos vistos en la sección anterior.
@@ -1101,8 +1127,14 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         \end{enumerate}
     \end{thm}
     \begin{proof}
-        $0 > -\mathcal{I}(\theta)=E_{X|\theta}\left[ \frac{\partial^2}{\partial\theta^2} \log f(X;\theta)\right] = \frac{\partial}{\partial\theta} E_{X|\theta} \left[ \frac{\partial}{\partial\theta} \log f(X;\theta) \right]$
-        es decreciente en un entorno de $\theta_0$.
+        Para cualquier muestra $X$ de $f(X|\theta_0)$ tenemos que
+        \[0 > -\mathcal{I}(\theta_0)=E_{X|\theta_0}\left[ \frac{\partial^2}{\partial\theta^2} \log f(X;\theta_0)\right] = \frac{\partial}{\partial\theta} E_{X|\theta_0} \left[ \frac{\partial}{\partial\theta} \log f(X;\theta_0) \right].\]
+        Consecuentemente, $E_{X|\theta_0} \left[ S(X; \theta) \right]$ es decreciente en un entorno de $\theta_0$. Recordemos que $E_{X|\theta_0} \left[ S(X; \theta_0) \right] = 0$ por el Lema \ref{lem:score:esp}. Por tanto, existe $\varepsilon > 0$ tal que
+        \begin{itemize}
+            \item $E_{X|\theta_0} \left[ S(X; \theta) \right] > 0$ para todo $\theta \in (\theta_0 - \varepsilon, \theta_0)$;
+            \item $E_{X|\theta_0} \left[ S(X; \theta) \right] < 0$ para todo $\theta \in (\theta_0, \theta_0 + \varepsilon)$.
+        \end{itemize}
+        Esto implica que $\theta_0$ es un máximo relativo de $E_{X|\theta_0}[\log f(X|\theta)]$.
     \end{proof}
 
 \begin{thebibliography}{99}
