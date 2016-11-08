@@ -935,7 +935,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     En lo que sigue habitualmente exigiremos unas hipótesis de regularidad más fuertes, denominadas hipótesis o condiciones de regularidad de Cramer-Rao. Estas hipótesis son las siguientes:
 
     \begin{enumerate}[label=\roman*)]
-        \item $\Omega \subset \mathbb{R}$,
+        \item $\Omega$ es un abierto de $\mathbb{R}$.
         \item Para cualquier muestra $x = (x_1, \ldots, x_n)$, la verosimilitud $L(x | \theta)$ es dos veces derivable en $\Omega$.
         \item $\frac{\partial^i}{\partial\theta^i} \int_X f(x | \theta) dx = \int_X \frac{\partial^i}{\partial\theta^i} f(x | \theta) dx$ para $i=1,2$.
         \item Para cada $\theta \in \Omega$ se tiene $\mathcal{I}(\theta) < +\infty$.
@@ -1014,7 +1014,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Se denomina sesgo de un estimador $T$ de $g(\theta)$ a la diferencia entre la esperanza del estimador y el verdadero valor del parámetro a estimar. Diremos que un estimador es insesgado si para cualquier posible valor del parámetro a estimar su sesgo es nulo.
     \end{definition}
 
-    Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = \theta - T(X)$. Un estimador insesgado verifica $0 = \theta - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no proporcione estimaciones de calidad debido si la varianza $Var_{X|\theta}(T(X))$ es muy alta.
+    Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = g(\theta) - T(X)$. Un estimador insesgado verifica $0 = g(\theta) - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no proporcione estimaciones de calidad debido si la varianza $Var_{X|\theta}(T(X))$ es muy alta.
 
     Claramente, la media muestral es un estimador insesgado de la media de la distribución. El siguiente resultado nos muestra otro ejemplo de un estimador insesgado.
 
@@ -1031,15 +1031,66 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Por tanto, $E[S^2] = Var(X_i)$ como se quería.
     \end{proof}
 
+    La función de información de Fisher juega un papel importante en el estudio de los estimadores insesgados como muestra el siguiente Teorema.
 
+    \begin{thm}[Cota de Cramer-Rao]
+        Supongamos que se verifican las hipótesis de regularidad de Cramer-Rao. Sea $g: \Omega \to  \mathbb{R}$ de clase 1. Sea $\hat{\theta}$ un estimador insesgado de $g(\theta)$ tal que
+        \[\int_X \left|\hat{\theta}(x) \frac{\partial}{\partial \theta}f(x | \theta)\right| dx < \infty.\]
+        Entonces, para todo $\theta \in \Omega$
+        \[Var_{X|\theta}(\hat{\theta}) \ge \frac{g'(\theta)^2}{\mathcal{I}(\theta)}.\]
+    \end{thm}
+    \begin{proof}
+        Puesto que $\hat{\theta}$ es insesgado tenemos que
+        \[g(\theta) = \int_X \hat{\theta}(x) f(x|\theta)\,dx.\]
+        Podemos derivar respecto de $\theta$ la expresión anterior y utilizar que $\int_X \frac{\partial}{\partial \theta}f(x|\theta) \, dx = 0$, obteniendo
+        \begin{equation}\label{eq:proof-cr}
+        g'(\theta) = \int_X \hat{\theta}(x)\frac{\partial}{\partial \theta}f(x|\theta)\,dx = \int_X \left(\hat{\theta}(x) - g(\theta)\right)\frac{\partial}{\partial \theta}f(x|\theta)\,dx.
+        \end{equation}
+        Aplicamos la desigualdad de Cauchy-Schwarz al miembro de la derecha de \eqref{eq:proof-cr}, obteniendo
+        \[g'(\theta)^2  \le \left( \int \left(\hat\theta(x) - g(\theta)\right)^2 f(x|\theta) \, dx \right) \left(\int \left( \frac{\partial}{\partial\theta} (\log f(x|\theta)) \right)^2 f(x|\theta) \, dx \right) = Var_{X|\theta}(\hat\theta) \, \mathcal{I}(\theta). \qedhere\]
+    \end{proof}
+
+    \begin{cor}
+        Supongamos que se verifican las hipótesis de regularidad de Cramer-Rao. Sea $\hat{\theta}$ un estimador insesgado de $\theta$ tal que
+        \[\int_X \left|\hat{\theta}(x) \frac{\partial}{\partial \theta} f(x | \theta)\right| dx < \infty.\]
+        Entonces, para todo $\theta \in \Omega$
+        \[Var_{X|\theta}(\hat{\theta}) \ge \frac{1}{\mathcal{I}_X(\theta)} = \frac{1}{n\mathcal{I}_{X_i}(\theta)}.\]
+    \end{cor}
+
+    La cota de Cramer-Rao nos dice que si la información de Ficher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
+
+    \subsubsection{Consistencia de sucesiones de estimadores}
+
+    Nos interesa que los estimadores tiendan al parámetro de la distribución cuando el tamaño de la muestra diverge. En tal caso, podemos mejorar el resultado del estimador recurriendo a una mayor muestra de la población.
+
+    \begin{definition}
+        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Omega\}$. Una sucesión de estimadores $\hat\theta_n$ de $g(\theta)$ es consistente para $\theta_0 \in \Omega$ si toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $\hat\theta_n(X_1, \ldots, X_n)$ converge en probabilidad ($P_{\theta_0}$) a $g(\theta_0)$. Si $\hat\theta_n$ es consitente para todo $\theta_0 \in \Omega$, entonces decimos que es consistente.
+    \end{definition}
+
+    \begin{thm}
+        Sea $\hat\theta_n$ una sucesión de estimadores de $g(\theta)$ verificando
+        \begin{enumerate}
+            \item $\lim_{n \to \infty} E_\theta[\hat\theta_n] = \theta$;
+            \item $\lim_{n \to \infty} Var_\theta(\hat\theta_n) = 0$.
+        \end{enumerate}
+        Entonces, $\hat\theta_n$ es consistente para $\theta$.
+    \end{thm}
+    \begin{proof}
+        Sea $\varepsilon > 0$. La desigualdad de Markov nos proporciona
+        \[P_\theta[|\hat\theta_n - \theta| \ge \varepsilon] \le \varepsilon^{-2} E[(\hat\theta_n - \theta)^2] = \varepsilon^{-2}  \left(Var(\hat\theta_n) + (E\hat\theta_n -\theta)^2\right).\]
+        La prueba finaliza al recordar que el último término converge a $0$.
+    \end{proof}
 
     \subsection{Estudio teórico del estimador máximo verosímil}
 
-    En este punto nos preguntamos cuándo está bien definido el estimador máximo verosímil. En tal caso nos interesa saber si el método de la máxima verosimilitud obtendrá una mejor aproximación de $\theta_0$ cuanto mayor sea la muestra. Para desarrollar esta cuestión de forma teórica introducimos la siguiente definición.
+    En este punto nos preguntamos cuándo está bien definido el estimador máximo verosímil. En tal caso nos interesa saber si el método de la máxima verosimilitud nos proporciona un estimador consistente. Para ello aplicamos los resultados teóricos vistos en la sección anterior.
 
-    \begin{definition}
-        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Omega\}$. Un estimador $T_n$ es consistente si para cualquier $\theta_0 \in \Omega$ se verifica que para toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $T_n(X_1, \ldots, X_n)$ converge en probabilidad a $g(\theta_0)$, donde $g$ es una función fijada de antemano.
-    \end{definition}
+    \begin{prop}
+        Si existe un estadístico suficiente $T$ par ala familia de distribuciones $\{f(X|\theta): \theta \in \Omega\}$ y $\hat\theta$ es un estimador máximo verosímil, entonces $\hat\theta$ depende solamente de $T(X)$.
+    \end{prop}
+    \begin{proof}
+        Por el teorema de factorización de estimadores suficientes podemos escribir $f(X|\theta) = h(X) g(T(X), \theta)$. Maximizar $L(x; \theta) = h(x) g(T(x); \theta)$ equivale a maximizar $g(T(x); \theta)$. Por tanto, $\hat\theta$ depende solamente de $T(x)$.
+    \end{proof}
 
     \begin{thm}
         Bajo las hipótesis de regularidad de Cramer-Rao se verifican las siguientes afirmaciones:
@@ -1049,7 +1100,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         \end{enumerate}
     \end{thm}
     \begin{proof}
-        $0 > -\mathcal{I}(\theta)=\operatorname{E} \left[\left. \frac{\partial^2}{\partial\theta^2} \log f(X;\theta)\right|\theta_0 \right] = \frac{\partial}{\partial\theta} \operatorname{E} \left[\left. \frac{\partial}{\partial\theta} \log f(X;\theta)\right|\theta_0 \right]$
+        $0 < -\mathcal{I}(\theta)=E_{X|\theta}\left[ \frac{\partial^2}{\partial\theta^2} \log f(X;\theta)\right] = \frac{\partial}{\partial\theta} \operatorname{E} \left[\left. \frac{\partial}{\partial\theta} \log f(X;\theta)\right|\theta_0 \right]$
         es decreciente en un entorno de $\theta_0$.
     \end{proof}
 
