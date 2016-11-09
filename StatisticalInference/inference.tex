@@ -765,8 +765,10 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 Supongamos que estamos estudiando un fenómeno aleatorio que sabemos que sigue una distribución $f(X | \theta_0)$, donde $\theta_0 \in \Omega$ es un parámetro que no es conocido. Nuestro objetivo es estimar el parámetro $\theta_0$ a partir de una muestra $x_1, \ldots, x_n$. Para ello buscamos una función $T_n$ de manera que podamos decir $\theta_0 \approx T_n(x_1, \ldots, x_n)$.
 
 \begin{definition}
-    Un estimador puntual es una función medible $T_n(X_1, \ldots, X_n)$ que toma valores $\Omega$, donde $\Omega$ es el dominio del parámetro a estimar. Una estimación es la evaluación obtenida por un estimador sobre una muestra $x_1, \ldots, x_n$, esto es, $T_n(x_1, \ldots, x_n)$.
+    Un estimador puntual es una función medible $T_n(X_1, \ldots, X_n)$ que toma valores en $\Omega$, donde $\Omega$ es el dominio del parámetro a estimar. Una estimación es la evaluación obtenida por un estimador sobre una muestra $x_1, \ldots, x_n$, esto es, $T_n(x_1, \ldots, x_n)$.
 \end{definition}
+
+Nótese que la nomenclatura es ambigua. Para nosotros una muestra es una secuencia finita de variables aleatorias independientes e idénticamente distribuidas. Sin embargo, a los valores $x_1, \ldots, x_n$ obtenidos en la práctica también se le denomina muestra. Algunos autores evitan esta abigüedad denominando a $x_1, \ldots, x_n$ realización de la muestra. Nosotros distinguiremos entre ambos casos mediante el uso de mayúsculas para denotar variables aleatorias y el uso de minúsculas para denotar valores concretos.
 
 En múltiples situaciones encontramos estimadores de calidad de forma natural. Por ejemplo, imaginemos que el parámetro $\theta_0$ se corresponde con la media de la distribución $f(X | \theta_0)$. En tal caso, parece claro que el mejor estimador para $\theta_0$ será la media muestral $\overline{x} = \frac{1}{n}\sum_{i = 1}^n x_i$. Sin embargo, en general no sabemos qué estimador hay que utilizar. Buscamos técnicas que nos proporcionen estimadores que sean razonables. En ocasiones querremos estimar $g(\theta_0)$, donde $g$ es determinada transformación de $\Omega$ en otro espacio más manejable.
 
@@ -774,7 +776,7 @@ En múltiples situaciones encontramos estimadores de calidad de forma natural. P
 
 El método de los momentos es, probablemente, el método más antiguo para estimar parámetros. Fue propuesto por Pearson al finales del siglo XIX. En muchos casos los resultados de este método son mejorables. Sin embargo, siempre es un último recurso en el caso de que no podamos aplicar otros métodos.
 
-Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución $f(X |\theta)$ con $\theta \in \Omega$. Suponemos que $\theta = (\theta_1, \ldots, \theta_k)$ con $\theta_i \in \mathbb{R}$. Definimos los momentos de la muestra como $m_j = \frac{1}{n} \sum_{i = 1}^n X_i^j$. En media se debería cumplir que $m_j = E_\theta X^j$ para todo $j$ tal que $E_\theta X^j$ existe. Nótese que $E_\theta X^j = \mu_j(\theta_1, \ldots, \theta_k)$ es una función que depende de $\theta_1, \theta_2, \ldots, \theta_k$. El método de los momentos propone como estimador a una solución del sistema de ecuaciones
+Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución $f(X |\theta)$ con $\theta = (\theta_1, \ldots, \theta_m) \in \Omega \subset \mathbb{R}^m$. Definimos los momentos de la muestra como $m_j = \frac{1}{n} \sum_{i = 1}^n X_i^j$. En media se debería cumplir que $m_j = E_\theta X^j$ para todo $j$ tal que $E_\theta X^j$ existe. Nótese que $E_\theta X^j = \mu_j(\theta_1, \ldots, \theta_m)$ es una función que depende de $\theta_1, \theta_2, \ldots, \theta_k$. El método de los momentos propone como estimador a una solución del sistema de ecuaciones
 \begin{equation} \label{eq:sistema-momentos}
     \begin{matrix}
         m_1 = \mu_1(\theta_1, \ldots, \theta_k), \\
@@ -790,13 +792,9 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     En este caso, los estimadores obtenidos coinciden con nuestra intuición. Este método es más útil cuando no disponemos de un estimador intuitivo.
 \end{ex}
 
-\begin{ex}[Distribución binomial]
-    En proceso...
-\end{ex}
-
 \subsection{Método de la máxima verosimilitud de Fisher}
 
-    El método de la máxima verosimilitud es la técnica más utilizada para obtener estimadores.
+    El método de la máxima verosimilitud es una de las técnicas más utilizada para obtener estimadores de calidad.
 
     \begin{definition}
         Sea $x_1, \ldots, x_n$ una muestra de un fenómeno con función de distribución $f(X | \theta_0)$, donde $\theta_0 \in \Omega$. Se define la función de verosimilitud para cada $\theta \in \Omega$ como $L(\theta | x) = \prod_{i = 1}^n f(x_i| \theta)$.
@@ -840,9 +838,9 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Para cualquier aplicación sobreyectiva $g: \Omega \to \Omega'$ se tiene que $\hat{g}(X) = g(\hat{\theta}(X))$.
     \end{thm}
     \begin{proof}
-        En primer lugar, por la definición de la verosimilitud inducida se tiene que
-        \[\sup_{\eta \in \Omega'} L^*(\eta|x) = \sup_{\eta \in \Omega'} \sup\{L(\theta | x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Omega} L(\theta | x)\]
-        Por tanto, la verosimilitud tiene un máximo global si, y solo si, lo tiene la verosimilitud inducida, en cuyo caso la credibilidad de ambos coincide. Si existe un EMV de $\theta$, entonces $L^*(g(\hat{\theta}),x) = L(\hat{\theta} | x)$ por definición. Consecuentemente, $g(\hat{\theta})$ es estimador máximo verosímil de $g(\theta)$.
+        En primer lugar, la definición de la verosimilitud inducida proporciona
+        \[\sup_{\eta \in \Omega'} L^*(\eta|x) = \sup_{\eta \in \Omega'} \sup\{L(\theta | x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Omega} L(\theta | x).\]
+        Por tanto, si la verosimilitud tiene un máximo global $\hat\theta(x)$, entonces lo tiene la verosimilitud inducida (el recíproco puede no ser cierto) y se alcanza en $g(\hat\theta(x))$.
     \end{proof}
 
     \subsection{Teoría general de estimadores}
@@ -851,12 +849,12 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     \subsubsection{Estadísticos suficientes}
 
-        Sea $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es deducir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta$ que se escoja. Consecuentemente, podemos ignorar esta última parte.
+        Fijemos $\{f(x|\theta): \theta \in \Omega\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es inferir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta_0$. Consecuentemente, podemos ignorar esta última parte.
 
         Intuitivamente, un estadístico $T$ es suficiente para la familia de distribuciones considerada si $T(X)$ nos permite estimar $\theta_0$ tan bien como lo permite toda la muestra $X$. Procedemos a dar la definición matemática.
 
         \begin{definition}
-            Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente si para cada $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $\theta$ y $T(X) = t$ no depende de $\theta$.
+            Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente si para cada $\theta \in \Omega$ y $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $\theta$ y $T(X) = t$ no depende de $\theta$.
         \end{definition}
 
         El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
@@ -962,7 +960,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     El Lema \ref{lem:fisher:2dev} nos permite calcular la información de Fisher de forma más sencilla, como muestra el siguiente ejemplo.
 
     \begin{ex}
-        Calculamos la función de información de Fisher para varias configuraciones de la distribución normal $N(x|\mu, \sigma^2)$.
+        Calculamos la función de información de Fisher de $X \sim N(x|\mu, \sigma^2)$ para varias configuraciones de la distribución normal.
         \begin{itemize}
             \item El parámetro $\sigma^2$ es conocido. Tenemos que $\log f(X|\mu, \sigma^2) = - (X-\mu)^2 / (2\sigma^2) - \log(\sqrt{2\pi}) - \log(\sigma^2)/2$. Consecuentemente, deducimos que \[\frac{\partial^2}{\partial\mu^2} f(X|\mu,\sigma^2) = \frac{-1}{\sigma^2}.\]
             Por tanto, $\mathcal{I}(\mu) = 1 / \sigma^2$.
@@ -1034,7 +1032,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Se denomina sesgo de un estimador $T$ de $g(\theta)$ a la diferencia entre la esperanza del estimador y el verdadero valor del parámetro a estimar. Diremos que un estimador es insesgado si para cualquier posible valor del parámetro a estimar su sesgo es nulo.
     \end{definition}
 
-    Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = g(\theta) - T(X)$. Un estimador insesgado verifica $0 = g(\theta) - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no proporcione estimaciones de calidad debido si la varianza $Var_{X|\theta}(T(X))$ es muy alta.
+    Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = g(\theta) - T(X)$. Un estimador insesgado verifica $0 = g(\theta) - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no proporcione estimaciones de calidad si la varianza $Var_{X|\theta}(T(X))$ es muy alta.
 
     Claramente, la media muestral es un estimador insesgado de la media de la distribución. El siguiente resultado nos muestra otro ejemplo de un estimador insesgado.
 
