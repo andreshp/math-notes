@@ -997,7 +997,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     \begin{prop} \label{prop:desigualdad}
         Sea $X = (X_1, \ldots, X_n)$ una muestra de $f(X;\theta_0)$. Entonces, para cada $\theta_1 \in \Omega$ se tiene
-        \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_0} \log f(X|\theta_0).\]
+        \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_1} \log f(X|\theta_0).\]
     \end{prop}
     \begin{proof}
         Por la desigualdad de Jenssen obtenemos
@@ -1079,6 +1079,10 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     La cota de Cramer-Rao nos dice que si la información de Ficher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
 
+    \begin{definition}
+        Un estimador se dice eficiente si alcanza la cota de Cramer-Rao para todo $\theta \in \Omega$.
+    \end{definition}
+
     \subsubsection{Consistencia de sucesiones de estimadores}
 
     Nos interesa que los estimadores tiendan al parámetro de la distribución cuando el tamaño de la muestra diverge. En tal caso, podemos mejorar el resultado del estimador recurriendo a una mayor muestra de la población.
@@ -1090,14 +1094,14 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \begin{thm}
         Sea $\hat\theta_n$ una sucesión de estimadores de $g(\theta)$ verificando
         \begin{enumerate}
-            \item $\lim_{n \to \infty} E_\theta[\hat\theta_n] = \theta$;
+            \item $\lim_{n \to \infty} E_\theta[\hat\theta_n] = g(\theta)$;
             \item $\lim_{n \to \infty} Var_\theta(\hat\theta_n) = 0$.
         \end{enumerate}
         Entonces, $\hat\theta_n$ es consistente para $\theta$.
     \end{thm}
     \begin{proof}
         Sea $\varepsilon > 0$. La desigualdad de Markov nos proporciona
-        \[P_\theta[|\hat\theta_n - \theta| \ge \varepsilon] \le \varepsilon^{-2} E[(\hat\theta_n - \theta)^2] = \varepsilon^{-2}  \left(Var(\hat\theta_n) + (E\hat\theta_n -\theta)^2\right).\]
+        \[P_\theta[|\hat\theta_n - g(\theta)| \ge \varepsilon] \le \varepsilon^{-2} E[(\hat\theta_n - g(\theta))^2] = \varepsilon^{-2}  \left(Var(\hat\theta_n) + (E\hat\theta_n -g(\theta))^2\right).\]
         La prueba finaliza al recordar que el último término converge a $0$.
     \end{proof}
 
@@ -1111,7 +1115,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         Todo estimador asintóticamente normal es consistente.
     \end{prop}
     \begin{proof}
-        Sea $\hat\theta_n$ un estimador asintóticamente normal de $g(\theta)$. Tenemos que $n (\hat\theta_n - g(\theta))^2$ converge en ley a $Gamma(X|1/2, 1/(2\sigma^2))$ por la Proposición \ref{prop:normal-square}. Sea $F$ la función de distribución de $Gamma(X|1/2, 1/(2\sigma^2))$ y sea $\varepsilon > 0$. Vamos a probar que $P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \to 1$. En efecto, sea $1 \ge \alpha \ge 0$. Tomamos $y$ tal que $F(y) = \alpha$. Tenemos que
+        Sea $\hat\theta_n$ un estimador asintóticamente normal de $g(\theta)$. Tenemos que $n (\hat\theta_n - g(\theta))^2$ converge en ley a $Gamma(X|1/2, 1/(2\sigma^2))$ por la Proposición \ref{prop:normal-square}. Sea $F$ la función de distribución de $Gamma(X|1/2, 1/(2\sigma^2))$ y sea $\varepsilon > 0$. Vamos a probar que $P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \to 1$. En efecto, sea $1 > \alpha \ge 0$. Tomamos $y$ tal que $F(y) = \alpha$. Tenemos que
         \[P[n(\hat\theta_n - g(\theta))^2 < y] \to F(y) = \alpha.\]
         Por tanto, para cada $\delta > 0$ existe $n_0$ tal que $\varepsilon > y /n$ y para cada $n \ge n_0$ tenemos
         \[P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \ge P[n(\hat\theta_n - g(\theta))^2 < y] \ge \alpha - \delta.\]
@@ -1136,7 +1140,6 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         \begin{enumerate}
             \item Existe $n_0$ tal que para cada $n \ge n_0$ la ecuación en probabilidad $0 =\sum_{i=0}^n \frac{\partial}{\partial \theta} \log f(X_i | \theta)$ tiene solución única. A esta solución se le llama $\hat{\theta}_n(X_1, \ldots, X_n)$. En dicho punto se maximiza la verosimilitud.
             \item $\hat{\theta}(X_1, \ldots, X_n)$ es consistente. De hecho, se puede probar que la convergencia a $\theta_0$ es casi segura.
-            \item $\hat{\theta}(X_1, \ldots, X_n)$ es asintóticamente normal.
         \end{enumerate}
     \end{thm}
     \begin{proof}
@@ -1148,6 +1151,26 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
             \item $E_{X|\theta_0} \left[ S(X; \theta) \right] < 0$ para todo $\theta \in (\theta_0, \theta_0 + \varepsilon)$.
         \end{itemize}
         Esto implica que $\theta_0$ es un máximo relativo de $E_{X|\theta_0}[\log f(X|\theta)]$.
+        INCOMPLETO.
+    \end{proof}
+
+    \begin{thm}
+        Bajo hipótesis de regularidad de Cramer-Rao, si $\hat{\theta}(X_1, \ldots, X_n)$ es un estimador máximo verosímil consistente, entonces es asintóticamente normal. Además, la varianza de la distribución normal asociada es $1/\mathcal{I}_{X_1}(\theta_0)$.
+    \end{thm}
+    \begin{proof}
+        Escribimos $L_n(\theta) = \frac{1}{n}\sum_{i = 1}^n \log f(X_i|\theta)$. Tenemos que $L_n'(\hat\theta_n) = 0$. El teorema del valor medio nos proporciona un $\theta_n$ entre $\theta_0$ y $\hat\theta_n$ tal que $0 = L_n'(\hat\theta) = L_n'(\theta_0) + L_n''(\theta_n)(\hat\theta_n - \theta_0)$. Por tanto,
+        \begin{equation} \label{eq:seq-normal}
+            \sqrt{n}(\theta_0 - \hat\theta_n) = \frac{\sqrt{n}L_n'(\theta_0)}{L_n''(\theta_n)}.
+        \end{equation}
+        Por el teorema central del límite tenemos que
+        \[\sqrt{n}L_n'(\theta_0) = \sqrt{n}(L_n'(\theta_0) - E_{\theta_0}[S(X_1; \theta_0)]) \to N(0, \mathcal{I}_{X_1}(\theta_0)),\]
+        donde hemos utilizado que $Var_{\theta_0}(S(X_1; \theta_0)) = \mathcal{I}_{X_1}(\theta_0)$.
+        Estudiamos ahora el denominador de \eqref{eq:seq-normal}. Puesto que $\hat\theta_n$ converge en probabilidad a $\theta_0$ y $\theta_n$ se encuentra entre ambos, tenemos que $\theta_n$ converge en probabilidad a $\theta_0$. Además, la ley uniforme de los grandes números nos garantiza que
+        \[L_n''(\theta) \xrightarrow{P_{\theta_0}} E_{\theta_0}\left[\frac{\partial^2}{\partial \theta^2}f(X_1|\theta)\right],\]
+        siendo la convergencia uniforme en espacios de parámetros compactos. Por tanto, tomando un compacto que contenga una cola de $\theta_n$ obtenemos la mencionada convergencia uniforme. De esta convergencia uniforme se desprende que
+        \[L_n''(\theta_n) \xrightarrow{P_{\theta_0}} E_{\theta_0}\left[\frac{\partial^2}{\partial \theta^2}f(X_1|\theta_0)\right] = \mathcal{I}_{X_1}(\theta_0).\]
+        Hemos obtenido pues
+        \[\sqrt{n}(\theta_0 - \hat\theta_n) = \frac{\sqrt{n}L_n'(\theta_0)}{L_n''(\theta_n)} \rightarrow N(0, \frac{1}{\mathcal{I}_{X_1}(\theta_0)}). \qedhere\]
     \end{proof}
 
 \begin{thebibliography}{99}
