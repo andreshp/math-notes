@@ -524,7 +524,7 @@ La famila de distribuciones beta se encuentra definida sobre el intervalo $(0, 1
     La expresión anterior nos sugiere utilizar el cambio de variable $(u, v) = J(t,s) = (st, (1-t)s)$. Nótese que $|J(t,s)| = s$. Aplicamos el cambio a continuación
     \begin{gather*}
         \Gamma(x)\Gamma(y) = \int_{0}^{\infty} \left( \int_{0}^{1}e^{-s}(st)^{x-1}(s(1-t))^{y-1}|J(t,s)|\, d t \right) ds \\
-        = \int_{0}^{\infty }e^{-s}s^{x+y-2}s \left(\int_{0}^{1}t^{x-1}(1-t)^{y-1}\,dt \right) d s =\Gamma(x+y)\beta(x,y)  \qedhere
+        = \int_{0}^{\infty }e^{-s}s^{x+y-2}s \left(\int_{0}^{1}t^{x-1}(1-t)^{y-1}\,dt \right) d s =\Gamma(x+y)\beta(x,y).  \qedhere
     \end{gather*}
 \end{proof}
 
@@ -709,7 +709,7 @@ Nótese que la función característica de la distribución de Cauchy no es dife
             legend pos=outer north east
         ]
             \addplot [very thick,cyan!70!black] {cauchy(x,0,1)};
-            \addlegendentry{Cauchy, $\mu = 0, \sigma = 2$}
+            \addlegendentry{Cauchy, $\mu = 0, \sigma = 1$}
             \addplot [very thick,cyan!40!black] {cauchy(x,0,2)};
             \addlegendentry{Cauchy, $\mu = 0, \sigma = 2$}
             \addplot [very thick,magenta!75!black] {gauss(x,0,1)};
