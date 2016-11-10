@@ -683,7 +683,7 @@ La distribución está bien definida. En efecto, utilizando el cambio de variabl
     \[\varphi_X(t) = E[e^{itX}] = E[e^{it(\sigma Y+\mu)}] = e^{it\mu} \varphi_Y(\sigma t) = e^{i\mu t - \sigma |t|}. \qedhere\]
 \end{proof}
 
-Nótese que la función característica de la distribución de Cauchy no es diferenciable en $0$. Consecuentemente, esta distribución no tiene momentos de orden mayor o igual que 1.
+Nótese que la función característica de la distribución de Cauchy no es diferenciable en $0$. Consecuentemente, esta distribución no tiene momentos de orden mayor o igual que 1. El recíproco no sería cierto, esto es, existen distribuciones que no tienen esperanza y su función característica es diferenciable en $0$ \cite{char}.
 
 \begin{prop}
     Sean $X$ e $Y$ dos variables aleatorias independientes con distribuciones $Cauchy(x|\mu_1, \sigma_1)$ y $Cauchy(x|\mu_2, \sigma_2)$ respectivamente. Entonces, $X+Y \sim Cauchy(x|\mu_1+\mu_2,\sigma_1+\sigma_2)$.
@@ -1175,5 +1175,6 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
 \bibitem{cauchy} Wikipedia, Residue theorem, \url{https://en.wikipedia.org/wiki/Residue_theorem#Example}.
 \bibitem{leibniz} Wikipedia, Leibniz integral rule, \url{https://en.wikipedia.org/wiki/Leibniz_integral_rule}.
+\bibitem{char} Davide Giraudo, No first moment and differentiable characteristic function, \url{http://math.stackexchange.com/questions/793788/continuous-probability-distribution-with-no-first-moment-but-the-characteristic}
 \end{thebibliography}
 \end{document}
