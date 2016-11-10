@@ -725,7 +725,7 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 
 \begin{definition}
     Sea $\mu \in \mathbb{R}$ y $\sigma > 0$. Definimos la distribución de Laplace, y la denotamos $Laplace(x | \mu, \sigma)$ como la distribución que tiene función de densidad
-    \[f(x | \mu, \sigma) = 2 \sigma e^{-|x - \mu| / \sigma}, \ x \in \mathbb{R}.\]
+    \[f(x | \mu, \sigma) = \frac{1}{2 \sigma} e^{-|x - \mu| / \sigma}, \ x \in \mathbb{R}.\]
 \end{definition}
 
 \begin{figure}[H]
@@ -995,7 +995,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     \begin{prop} \label{prop:desigualdad}
         Sea $X = (X_1, \ldots, X_n)$ una muestra de $f(X;\theta_0)$. Entonces, para cada $\theta_1 \in \Omega$ se tiene
-        \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_1} \log f(X|\theta_0).\]
+        \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_0} \log f(X|\theta_1).\]
     \end{prop}
     \begin{proof}
         Por la desigualdad de Jenssen obtenemos
