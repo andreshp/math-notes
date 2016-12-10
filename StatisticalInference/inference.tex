@@ -11,6 +11,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %-----------------------------------------------------------------------------------------------------
+%	TEX OPTIONS
+%-----------------------------------------------------------------------------------------------------
+
+% !TEX program = pdflatex
+% !TEX option = -shell-escape
+% !TEX language = es
+
+%-----------------------------------------------------------------------------------------------------
 %	INCLUSIÓN DE PAQUETES BÁSICOS
 %-----------------------------------------------------------------------------------------------------
 
@@ -102,8 +110,19 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
+
+%----------------------------------------------------------------------------------------
+%   GRÁFICOS
+%----------------------------------------------------------------------------------------
+
 \usepackage{pgfplots}
+\usepackage{tikz}
+% Load the library
+\usetikzlibrary{external}
+% Enable the library !!!>>> MUST be in the preamble <<<!!!!
+\tikzexternalize
 \pgfplotsset{compat=newest}
+
 \usepackage{float}
 
 %----------------------------------------------------------------------------------------
@@ -207,11 +226,6 @@ La distribución normal, también llamada distribución gaussiana, es la distrib
     \[f(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^2 / (2\sigma^2)}, x \in \mathbb{R}.\]
 \end{definition}
 
-% pgfplot function declaration.
-\pgfmathdeclarefunction{gauss}{3}{
-  \pgfmathparse{1/(#3*sqrt(2*pi))*exp(-((#1-#2)^2)/(2*#3^2))}%
-}
-
 La distribución normal está bien definida como consecuencia del siguiente lema.
 \begin{lem}
     Sean $\mu \in \mathbb{R}$ y $\sigma > 0$. Tenemos que $\int_{-\infty}^\infty e^{-(x-\mu)^2 / (2\sigma^2)}dx = \sqrt{2\pi}\sigma.$
@@ -275,27 +289,29 @@ Podemos utilizar los dos corolarios anteriores para calcular los momentos de la 
 La Figura \ref{fig:normal} muestra la función de densidad de una distribución normal. Podemos ver que la densidad se concentra en torno a la media. De hecho, $P(|X - \mu| \ge 2\sigma) \approx 0.046$. Es más, $P(|X - \mu| \ge 3\sigma) \approx 0.03$.
 
 \begin{figure}[H]
-\hspace*{-11cm}
-\begin{tikzpicture}
-    \begin{axis}[
-            no markers,
-            domain=0:6,
-            samples=100,
-            ymin=0,
-            axis lines*=left,
-            xlabel=$x$,
-            every axis y label/.style={at=(current axis.above origin),anchor=south},
-            every axis x label/.style={at=(current axis.right of origin),anchor=west},
-            height=5cm,
-            width=15cm,
-            xtick=\empty,
-            ytick=\empty,
-            enlargelimits=false,
-            clip=false,
-            axis on top,
-            grid = major,
-            hide y axis
-        ]
+\centering
+\begin{tikzpicture}[
+     declare function={gauss(\x,\mu,\sigma)=1/(\sigma*sqrt(2*pi))*exp(-((\x-\mu)^2)/(2*\sigma^2));}
+    ]
+\begin{axis}[
+    no markers,
+    domain=0:6,
+    samples=100,
+    ymin=0,
+    axis lines*=left,
+    xlabel=$x$,
+    every axis y label/.style={at=(current axis.above origin),anchor=south},
+    every axis x label/.style={at=(current axis.right of origin),anchor=west},
+    height=5cm,
+    width=15cm,
+    xtick=\empty,
+    ytick=\empty,
+    enlargelimits=false,
+    clip=false,
+    axis on top,
+    grid = major,
+    hide y axis
+]
 
 \addplot[very thick,cyan!50!black] {gauss(x, 3, 1)};
 
@@ -313,7 +329,7 @@ La Figura \ref{fig:normal} muestra la función de densidad de una distribución 
             \node[below] at (axis cs:3, 0)  {$\mu$};
             \node[below] at (axis cs:4, 0)  {$\mu + \sigma$};
             \node[below] at (axis cs:5, 0)  {$\mu + 2\sigma$};
-        \end{axis}
+\end{axis}
 
 \end{tikzpicture}
 \caption{Función de densidad de una distribución normal.}
@@ -705,12 +721,11 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 \end{proof}
 
 \begin{figure}[H]
-    \hspace*{-11.2cm}
     \begin{tikzpicture}[
+            declare function={gauss(\x,\mu,\sigma)=1/(\sigma*sqrt(2*pi))*exp(-((\x-\mu)^2)/(2*\sigma^2));},
             declare function={cauchy(\x,\mu,\sigma) = 1/((\sigma*pi)*(1+((\x-\mu)/\sigma)^2));}
         ]
         \begin{axis}[
-            ylabel={$f(x | \mu, \sigma)$},
             domain=-5:5, samples=100,
             axis lines=left,
             every axis y label/.style={at=(current axis.above origin),anchor=east},
@@ -741,18 +756,20 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 \end{definition}
 
 \begin{figure}[H]
-    \hspace*{-23.2cm}
     \begin{tikzpicture}[
-            declare function={laplace(\x,\mu,\sigma) = exp(-abs(\x-\mu) / \sigma)/(2*\sigma);}
+         declare function={gauss(\x,\mu,\sigma)=1/(\sigma*sqrt(2*pi))*exp(-((\x-\mu)^2)/(2*\sigma^2));},
+         declare function={laplace(\x,\mu,\sigma) = exp(-abs(\x-\mu) / \sigma)/(2*\sigma);}
         ]
         \begin{axis}[
-            ylabel={$f(x | \mu, \sigma)$},
-            domain=-5:5, samples=200,
+            domain=-5:5,
+            samples=200,
             axis lines=left,
             every axis y label/.style={at=(current axis.above origin),anchor=east},
             every axis x label/.style={at=(current axis.right of origin),anchor=north},
             height=6cm, width=12cm,
-            enlargelimits=false, clip=false, axis on top,
+            enlargelimits=false,
+            clip=false,
+            axis on top,
             grid = major,
             legend pos=outer north east
         ]
