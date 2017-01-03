@@ -1256,10 +1256,10 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
 Una variable aleatoria se distribuye respecto de una familia exponencial si $ X  \sim   f(x | \theta_1, ... \theta_k) = l(x)  e ^{\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta_1, ..., \theta_k)}$ . Esta función de probabilidad le confiere a las distribuciones de esta familia unas características muy convenientes, que se manifiestan a la hora de calcular, por ejemplo, un estadístico suficiente para una muestra $x_1, ..., x_n$.
 
-Supongamos que en vez de $x$ tenemos un vector$ x = (x_1, ..., x_n)$, entonces 
+Supongamos que en vez de $x$ tenemos un vector$ x = (x_1, ..., x_n)$, entonces
 
 \begin{equation*}
-f(x_1,...,x_n | \theta_1, ... \theta_k) = \prod_{i=1}^{n}l(x_i)  e ^{{\sum^n_{i=1}}{\sum^k_{j=1} \theta_i T_i(x_j)  + n\Psi (\theta_1, ..., \theta_k)}} = \prod_{i=1}^{n}l(x_i)  e ^{{\sum_{i=1}^{n}\theta_i}{\sum^k_{j=1}  T_i(x_j)  + n\Psi (\theta_1, ..., \theta_k)}} 
+f(x_1,...,x_n | \theta_1, ... \theta_k) = \prod_{i=1}^{n}l(x_i)  e ^{{\sum^n_{i=1}}{\sum^k_{j=1} \theta_i T_i(x_j)  + n\Psi (\theta_1, ..., \theta_k)}} = \prod_{i=1}^{n}l(x_i)  e ^{{\sum_{i=1}^{n}\theta_i}{\sum^k_{j=1}  T_i(x_j)  + n\Psi (\theta_1, ..., \theta_k)}}
 \end{equation*}
 
 
@@ -1269,16 +1269,16 @@ A continuación veremos unos ejemplos en los que esto se cumple:
 
 \begin{example}
 	Cualquier distribución de probabilidad siguiendo una distribución $N(x|\mu, \sigma ^2 )$ admite un estadístico suficiente de dimensión dos.
-	
+
 	Este estadístico es $T = (\overline{x}, s^2)$ donde:
 	\begin{equation*}
-	\overline{x} = \frac{1}{n} \sum^n_{i=1} x_i 
+	\overline{x} = \frac{1}{n} \sum^n_{i=1} x_i
 	\end{equation*}
-	
+
 	\begin{equation*}
-	s^2 = \frac{1}{n} \sum^n_{1=i}(x_i - \overline{x})^2
+        s^2 = \frac{1}{n} \sum^n_{1=i}(x_i - \overline{x})^2
 	\end{equation*}
-	
+
 \end{example}
 
 Casi todas las distribuciones que usamos en probabilidad pertenecen a una familia exponencial, aquí una lista de ejemplos:
