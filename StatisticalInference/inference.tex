@@ -120,7 +120,7 @@
 
 \usepackage{pgfplots}
 \usepackage{tikz}
-% Load the library
+% Load the library (Descomentar para SOs distintos de Windows)
 \usetikzlibrary{external}
 % Enable the library !!!>>> MUST be in the preamble <<<!!!!
 \tikzexternalize
@@ -1309,39 +1309,39 @@ En esta sección estudiaremos el modelo de inferencia estadística desde el punt
 
 \subsection{Introducción}
 
-Empecemos recordando uno de los teoremas clásicos de la probabilidad, el teorema de Bayes, que va a ser la base del modelo que queremos establecer. Supongamos que en el espacio de probabilidad \[(\Omega,\mathcal{A},P)\] tenemos la partición de \[\Omega\] dada por los sucesos \[A_1,\dots,A_n\], todos ellos con probabilidad no nula. Y sea \[B\] un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso \[A_i\]. Entonces, podemos obtener la probabilidad de cada $A_i$ condicionada al suceso $B$ de la siguiente forma:
+Empecemos recordando uno de los teoremas clásicos de la probabilidad, el teorema de Bayes, que va a ser la base del modelo que queremos establecer. Supongamos que en el espacio de probabilidad $(\Omega,\mathcal{A},P)$ tenemos la partición de $\Omega$ dada por los sucesos $A_1,\dots,A_n$, todos ellos con probabilidad no nula. Y sea $B$ un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso $A_i$. Entonces, podemos obtener la probabilidad de cada $A_i$ condicionada al suceso $B$ de la siguiente forma:
 
 \begin{equation*}
 	P(A_i|B)=\frac{P(A_i\cap B)}{P(B)}=\frac{P(B|A_i)P(A_i)}{P(B)}
 \end{equation*}
 
-A su vez, la ley de la probabilidad total establece que \[P(B)=\sum_{i=1}^n{P(B|A_i)P(A_i)}\], luego:
+A su vez, la ley de la probabilidad total establece que $P(B)=\sum_{i=1}^n{P(B|A_i)P(A_i)}$, luego:
 
 \begin{equation*}
 	P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_{i=1}^n{P(B|A_i)P(A_i)}}
 \end{equation*}
 
-Donde los valores \[P(B|A_i)\] son conocidos. Los valores $P(A_i)$ son lo que llamaremos probabilidades a priori, mientras que los $P(A_i|B)$ serán las probabilidades a posteriori.
+Donde los valores $P(B|A_i)$ son conocidos. Los valores $P(A_i)$ son lo que llamaremos probabilidades a priori, mientras que los $P(A_i|B)$ serán las probabilidades a posteriori.
 
 La estadística bayesiana sigue esta idea, basándose en la interpretación subjetiva de la probabilidad. Para ello, utiliza la percepción existente, por parte del investigador, como una variable modificadora (distribución a priori) de los datos muestrales, que dan lugar a una distribución (distribución a posteriori), con la que formular inferencias con respecto al parámetro de interés. Pasemos a definir formalmente estas distribuciones:
 
 \begin{definition}
-	Sea \[X_{\sim}=(X_1,\dots,X_n)\] un vector de variables aleatorias de la familia de densidades \[\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \} \]. A una distribución \[\pi(\theta)\] sobre el espacio \[\Theta \] establecida con información previa conocida sobre \[\theta\] se le llama distribución a priori de la variable aleatoria \[\theta\].
+	Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
 	
-	Dada una muestra \[x_{\sim} = x_1,\dots,x_n\] de \[X_{\sim}\], se define la probabilidad a posteriori de \[\theta\] condicionada a la muestra como:
-	
+	Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
+	)
 	\begin{equation*}
 		\pi(\theta|x_{\sim})= \frac{f(x_{\sim}|\theta)\pi(\theta)}{\int_{\Theta}{f(x_{\sim}|\theta)\pi(\theta)d\theta}}
 	\end{equation*}
 \end{definition}
 
-\subsection{Estadística clásica vs Bayesiana}
+\subsection{Estadística clásica vs bayesiana}
 
 Veamos ahora las diferencias entre la inferencia clásica y la bayesiana. En la inferencia clásica destacan las siguientes características:
 
 \begin{itemize}
 	\item El concepto de probabilidad está limitado a aquellos sucesos en los que se pueden definir frecuencias relativas.
-	\item \[\theta\] es un valor fijo, pero desconocido.
+	\item $\theta$ es un valor fijo, pero desconocido.
 	\item Se usa el concepto de intervalo de confianza (AÑADIR SI ESO)
 	\item El método de muestreo es muy importante.
 	\item Se pueden usar estimadores de máxima verosimilitud o estimadores insesgados.
@@ -1351,30 +1351,41 @@ Por su parte, en la inferencia bayesiana destacan:
 
 \begin{itemize}
 	\item Podemos establecer probabilidades previas para cualquier suceso.
-	\item \[\theta\] es una variable que sigue una distribución de probabilidad.
-	\item Se usa el concepto de intervalo de credibilidad para \[\theta\]. (AÑADIR SI ESO)
+	\item $\theta$ es una variable que sigue una distribución de probabilidad.
+	\item Se usa el concepto de intervalo de credibilidad para $\theta$. (AÑADIR SI ESO)
 	\item El método de muestreo no importa; solo importan los datos.
 	\item Se utilizan estimadores diferentes según la utilidad; la estimación es un problema de decisión.
 \end{itemize}
 
-Una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar \[\theta\] es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
+Una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
 
 \subsection{Familias conjugadas}
 
-La principal dificultad que surge en los problemas de inferencia bajo la perspectiva bayesiana es tanto la confianza que se pueda esperar de la distribución a priori como el cálculo de la distribución a posteriori. La primera cuestión es importante ya que la inferencia que se realice posteriormente puede depender de la elección hecha de la distribución inicial, razón por la cual en muchos casos se recurre a distribuciones no informativas, que no imponen unas condiciones muy fuertes sobre el parámetro, o bien se puede aprovechar parte de la información muestral para mejorar la distribución inicial, dando origen a las denominadas distribuciones intrínsecas a priori, de gran auge en la actualidad.
+La principal dificultad que surge en los problemas de inferencia bajo la perspectiva bayesiana es tanto la confianza que se pueda esperar de la distribución a priori como el cálculo de la distribución a posteriori. La primera cuestión es importante ya que la inferencia que se realice posteriormente puede depender de la elección hecha de la distribución inicial, razón por la cual en muchos casos se recurre a distribuciones no informativas, que no imponen unas condiciones muy fuertes sobre el parámetro, o bien se puede aprovechar parte de la información muestral para mejorar la distribución inicial.% dando origen a las denominadas distribuciones intrínsecas a priori, de gran auge en la actualidad.
 
-En cuanto a la segunda opción, el cálculo de la distribución a posteriori no tiene por qué conducir a una distribución tratable y, en ocasiones, hay que
-recurrir a métodos numéricos para poder trabajar con ellas. Centrándonos en esta última parte, interesa considerar familias de distribuciones a priori cuyas distribuciones a posteriori asociadas sean de fácil cálculo. En este sentido surge el concepto de familias a priori conjugadas.
+En cuanto a la segunda opción, el cálculo de la distribución a posteriori no tiene por qué conducir a una distribución tratable y, en ocasiones, hay que recurrir a métodos numéricos para poder trabajar con ellas. Centrándonos en esta última parte, interesa considerar familias de distribuciones a priori cuyas distribuciones a posteriori asociadas sean de fácil cálculo. En este sentido surge el concepto de familias a priori conjugadas.
 
 \begin{definition}
-	Sea \[\mathcal{F} = \{\pi_i(\theta)|i\in I\} \] una familia de distribuciones a priori. \[\mathcal{F}\] se dice que es conjugada respecto de la familia de densidades \[\{f(x|\theta)|\theta\in\Theta\}\], si para cualquier \[\pi(\theta)\in\mathcal{F}\] se verifica que \[f(x|\theta)\pi(\theta)\in\mathcal{F}\].
+	Sea $\mathcal{F} = \{\pi_i(\theta)|i\in I\}$ una familia de distribuciones a priori. $\mathcal{F}$ se dice que es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta)|\theta\in\Theta\}$, si para cualquier $\pi(\theta)\in\mathcal{F}$ y $f(x|\theta)\in \mathcal{P}$ se verifica que $f(x|\theta)\pi(\theta)\propto\Pi(\theta)\in\mathcal{F}$.
+	 
+	Es decir, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
 \end{definition}
 
-Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente, tenemos una integral de una función de la familia \[\mathcal{F}\], que sabemos que integra 1. En la práctica el producto de las distribuciones podría no estar normalizado, pero en tal caso, si la distribución a priori es conjugada, las constantes son las mismas en numerador y denominador, permitiendo reducir de nuevo el cálculo (explicar mejor).
+Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente, tenemos, salvo constantes una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia, como se explica en la siguiente observación.
+
+\begin{remark}
+	Se tienen las siguientes condiciones equivalentes:
+	\begin{enumerate}[label=\roman*]
+		\item $f(x|\theta)\pi(\theta) \propto \Pi(\theta) \in \mathcal{F}$
+		\item $\pi(\theta|x)=\Pi(\theta)\in\mathcal{F}$
+	\end{enumerate}
+	Es decir, una familia $\mathcal{F}$ de distribuciones a priori es conjugada respecto a la familia dada si y solo si las distribuciones a posteriori pertenecen de nuevo a $\mathcal{F}$.
+\end{remark}
 
 Es posible calcular las distribuciones conjugadas para las familias de distribuciones clásicas, obteniendo de nuevo otras distribuciones clásicas.
 
 \begin{prop}
+	$ $ \newline
 	\begin{itemize}
 		\item La familia de distribuciones Beta es una familia de distribuciones conjugada para las distribuciones de Bernouilli, binomiales y binomiales negativas.
 		
@@ -1383,13 +1394,26 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 		\item La familia de distribuciones normales es una familia de distribuciones conjugada para la familia de distribuciones normales con varianza conocida.
 	\end{itemize}
 \end{prop}
-\begin{proof}
-	Próximamente.	
-\end{proof}
 
-\begin{example}
-	Vamos a aplicar lo que hemos visto a la distribución de Poisson.
-\end{example}
+Veamos algún ejemplo de los proporcionados por la proposición anterior.
+
+\begin{ex}
+	Veamos algún ejemplo de los proporcionados por la proposición anterior. Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
+	
+	\[f(x_{\sim}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
+	\[\pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\]
+	
+	\[f(x_{\sim}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
+	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right) \]
+	
+	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$, y para los datos observados, obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum{x_i}$ y $\beta+n$.
+	
+	Notemos que la conjugación nos ha permitido evitar el cálculo de la distribución marginal de $x$. Si optamos por calcularla, obtendríamos:
+	
+	[PROXIMAMENTE]
+	
+	Llegando de nuevo al mismo resultado.
+\end{ex}
 
 
 
