@@ -1446,6 +1446,60 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
     Para $k$ lo suficientemente grande $E[\pi(\theta; x)] \approx \overline{x} / n$, que es el estimador máximo verosímil. Por tanto, cuando $k \to \infty$ obtenemos que $Var(\pi(\theta; x)) \to 0$ y $E[\pi(\theta; x)] \to \theta_0$.
 \end{ex}
 
+\subsection{Convergencia de distribuciones a posteriori}
+
+Nos planteamos en este punto la convergencia de las distribuciones a posteriori cuando el tamaño de las muestras crece.
+
+Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, con una medida de probabilidad $P_{\theta_0}$. Conocemos la familia de distribuciones $\{f(x|\theta)|\theta\in\Theta\}$. Queremos ver, dada una distribución a priori $\pi(\theta)$, si converge la distribución a posteriori $\pi(\theta|X_1,\dots,X_n)$ cuando $n \to \infty$.
+
+\begin{thm}
+	En las condiciones anteriores, se tiene que:
+	
+	\[\pi(\theta|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0\]
+\end{thm}
+
+\begin{proof}
+	En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución marginal no es sencillo. Haremos la prueba para el caso en el que $\Theta$ es discreto.
+	
+	Supongamos por tanto $\Theta = \{\theta_1,\dots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades de cada $\theta_j$ y vendrá dada por $\pi(\theta_j)=p_j$, con $p_j\in[0,1]$ y $\sum_{i=1}^{k}{p_i}=1$, para $j=1,\dots,k$. Podemos suponer también que $t\in\{1,\dots,k\}$ es el índice del parámetro que corresponde al verdadero valor, es decir, $\theta_t$ y $\theta_0$.
+	
+	Consideramos las variables aleatorias i.i.d. $X_1,\dots,X_n$ con distribución $f(x|\theta_t)$ y una muestra $x_1,\dots,x_n$. La distribución a posteriori en este caso discreto vendrá dada, para cada $\theta_i$, por:
+	
+	\[\pi(\theta_i|x_1,\dots,x_n) = \frac{p_i \prod_{j=1}^n{f(x_j|\theta_i)}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{f(x_j|\theta_r)}}}\]
+	
+	Multiplicando numerador y denominador por $\left(\prod_{j=1}^n{f(x_j|\theta_t)}\right)^{-1}$ obtenemos:
+	
+	\begin{equation} \label{eq:tcfd1}
+		\pi(\theta_i|x_1,\dots,x_n) = \frac{p_i \prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{\frac{f(x_j|\theta_r)}{f(x_j|\theta_t)}}}}
+	\end{equation}
+	
+	
+	Estudiemos la convergencia de $\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}$. Si $i=t$, claramente tenemos que el resultado es 1. En caso contrario, tomando logaritmos, obtenemos:
+	
+	\begin{equation} \label{eq:tcfd2}
+	\log{\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} = \sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} = n\left(\frac{1}{n}\sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}\right)
+	\end{equation}
+	
+	Ahora, las variables aleatorias $Z_i \sim \log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}$ son i.i.d, luego por las leyes de los grandes números el término $\frac{1}{n}\sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}$ converge en probabilidad $P_{\theta_t}$ a la esperanza de cualquiera de ellas, $E\left[\log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}\right]$. Además, como consecuencia de la desigualdad de la información (proposición \ref{prop:desigualdad}), dicha esperanza es un valor estrictamente negativo. En consecuencia, a partir de la expresión obtenida en (\ref{eq:tcfd2}), podemos concluir que:
+	
+	\[\log{\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} \xrightarrow[n\to\infty]{P_{\theta_t}} -\infty\]
+	
+	La continuidad del logaritmo nos asegura que $\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}} \xrightarrow[n\to\infty]{P_{\theta_t}} 0$.
+	
+	Finalmente, aplicando lo que acabamos de obtener a (\ref{eq:tcfd1}), concluimos que:
+		
+	\begin{itemize}
+		\item Si $i \ne t$, $\pi(\theta_i|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{0}{p_t+\sum{0}} = 0$
+		\item Si $i = t$, $\pi(\theta_i|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{p_t}{p_t+\sum{0}} = 1$
+	\end{itemize}	
+	
+	Pero esto es equivalente a decir que la distribución a posteriori degenera a $\theta_t$ en probabilidad $P_{\theta_t}$.
+\end{proof}
+
+\begin{remark}
+	Observemos que en la convergencia de la distribución a posteriori no ha influido la distribución a priori escogida. Esto nos indica que cuando el tamaño de la muestra es grande, la distribución que hayamos elegido a priori no va a tener mucha influencia sobre la distribución que utilizaremos para realizar inferencia.
+\end{remark}
+
 \begin{thebibliography}{99}
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
 \bibitem{cauchy} Wikipedia, Residue theorem, \url{https://en.wikipedia.org/wiki/Residue_theorem#Example}.
