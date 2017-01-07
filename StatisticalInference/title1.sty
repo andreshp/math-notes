@@ -28,9 +28,9 @@
 \newcommand{\titlepageauthor}{
 	\begin{flushright}
 		\begin{minipage}{0.4\linewidth}
-			\Large\textbf{\docauthor}
+			\large\textbf{\docauthor}
 
-			\centering \large\docaddress
+			\large{\color{titlepagecolor} \docaddress}
 
 			\centering \large{\color{titlepagecolor}\docemail}
 		\end{minipage}
@@ -113,7 +113,7 @@
 }
 
 % Se crea el comando maketitle asociado al paquete.
-\renewcommand*{\maketitle}{
+\renewcommand*{\maketitle} {
 
 	\begin{titlepage}
 

@@ -83,7 +83,7 @@
 }
 
 % Texto de la cabecera:
-\lhead{\docauthor}                          % Parte izquierda.
+\lhead{A. Herrera, N. Rodríguez, J.L. Suárez}                          % Parte izquierda.
 \chead{}                                    % Centro.
 \rhead{\subject \ - \doctitle}              % Parte derecha.
 
@@ -157,9 +157,9 @@
 % Asignatura.
 \newcommand{\subject}{Inferencia Estadística}
 % Autor.
-\newcommand{\docauthor}{Andrés Herrera Poyatos}
+\newcommand{\docauthor}{Andrés Herrera Poyatos \\ Nuria Rodríguez Barroso \\ Juan Luis Suárez Díaz}
 \newcommand{\docaddress}{Universidad de Granada}
-\newcommand{\docemail}{andreshp9@gmail.com}
+\newcommand{\docemail}{}%andreshp9@gmail.com}
 
 
 %-----------------------------------------------------------------------------------------------------
@@ -901,7 +901,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     En esta sección introduciremos conceptos y definiciones relacionados con estimadores arbitrarios. El objetivo de esta teoría es dotarnos de herramientas que nos permitan abordar el estudio práctico de estimadores concretos, como el estimador máximo verosímil.
 
-    \subsubsection{Estadísticos suficientes}
+    \subsubsection{Estadísticos suficientes} \label{sec:estimacion:tge:sufi}
 
         Fijemos $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es inferir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta_0$. Consecuentemente, podemos ignorar esta última parte.
 
@@ -1253,52 +1253,67 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
 \section{La familia exponencial}
 
+    Una variable aleatoria se distribuye respecto de una \emph{familia exponencial} si su función de distribución es de la forma
+    \begin{equation} \label{eq:exponencial}
+        f(x | \theta) = l(x) \exp\left(\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta)\right),
+    \end{equation}
+    donde $\theta = (\theta_1, \ldots, \theta_k)$ y $h(x) \ge 0$, $\Psi(\theta)$, $t_1(x), \ldots, T_k(x)$ son funciones reales. Las familias exponenciales presentan características matemáticas y estadísticas muy convenientes. El siguiente resultado utiliza estadísticos suficientes, que se introdujeron en la Sección \ref{sec:estimacion:tge:sufi}.
 
-Una variable aleatoria se distribuye respecto de una familia exponencial si $ X  \sim   f(x | \theta_1, ... \theta_k) = l(x)  e ^{\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta_1, ..., \theta_k)}$ . Esta función de probabilidad le confiere a las distribuciones de esta familia unas características muy convenientes, que se manifiestan a la hora de calcular, por ejemplo, un estadístico suficiente para una muestra $x_1, ..., x_n$.
+    \begin{prop} \label{prop:exp:sufi}
+        Sea $\{f(X | \theta): \theta \in \Theta\}$ una familia exponencial y sea una muestra $x = (x_1, \ldots, x_n)$. Entonces, $T(x) = (\sum_{j = 1}^n T_i(x_j))_{j = 1, \ldots, k}$ es un estadístico suficiente de dimensión $k$.
+    \end{prop}
+    \begin{proof}
+        En efecto, utilizando \eqref{eq:exponencial} basta escribir $f(x | \theta)$ como sigue
+        \begin{equation*}
+            f(x | \theta) = \prod_{i=1}^n l(x_i) \exp\left(\sum^n_{i=1}\sum^k_{j=1} \theta_i T_i(x_j)  + n\Psi(\theta)\right) = \prod_{i=1}^{n}l(x_i) \exp\left(\sum_{i=1}^{n}\theta_i \sum^k_{j=1} T_i(x_j)  + n\Psi(\theta)\right). \qedhere
+        \end{equation*}
+    \end{proof}
 
-Supongamos que en vez de $x$ tenemos un vector$ x = (x_1, ..., x_n)$, entonces
+    Nótese que la dimensión del estadístico suficiente encontrado no depende de la muestra. A continuación mostramos algunos ejemplos de familiais exponenciales.
 
-\begin{equation*}
-f(x_1,...,x_n | \theta_1, ... \theta_k) = \prod_{i=1}^{n}l(x_i)  e ^{{\sum^n_{i=1}}{\sum^k_{j=1} \theta_i T_i(x_j)  + n\Psi (\theta_1, ..., \theta_k)}} = \prod_{i=1}^{n}l(x_i)  e ^{{\sum_{i=1}^{n}\theta_i}{\sum^k_{j=1}  T_i(x_j)  + n\Psi (\theta_1, ..., \theta_k)}}
-\end{equation*}
+    \begin{ex}[Distribución binomial] \label{ex:exp:binom}
+        La función masa de probabilidad de una distribución binomial con $n$ fijo puede escribirse como sigue
+        \[f(x|p) = \binom{n}{x} p^x (1-p)^{n-x} = \binom{n}{x} \exp(x\log(p) + (n-x) \log(1-p)) = \binom{n}{x} \exp(x\log(\frac{p}{1-p}) + n \log(1-p)). \]
+        La aplicación  $f(p) = \log(\frac{p}{1-p}) = \log(\frac{1}{1-p} - 1)$ es una biyección de $(0,1)$ a $\mathbb{R}$. En este punto hacemos el cambio de variable $\theta = f(p)$.
+        Hemos obtenido que la distribución binomial es una familia exponencial de parámetro $\theta$ con $h(x) = \binom{n}{x}$, $T_1(x) = x$ y $\Psi(\theta) = n \log(1 - f^{-1}(\theta))$. Según el resultado anterior un estadístico suficiente es $T(x) = (\sum_{j = 1}^n x_i)_{j = 1, \ldots, k}$ y, por tanto, otro estadístico suficiente sería la media muestral, $T(x) = \overline{x}$.
+    \end{ex}
 
+    En el ejemplo anterior hemos tenido que realizar un cambio de variable del espacio paramétrico para poder escribir la distribución de Bernoulli como una familia exponencial. El nuevo espacio paramétrico obtenido es el \emph{espacio paramétrico natural} de la familia. Para evitar trabajar con cambios de variables algunos autores definen las familias exponenciales como aquellas cuya función de desidad se puede escribir de la forma
 
-De donde obtenemos que $U_i(x_1,...,x_n) = \sum^n_{j=1} T_i(x_j)$ es un estadístico suficiente de dimensión k (siempre tendrá dimensión finita aunque la muestra aumente).
+    \begin{equation} \label{eq:exponencial:2}
+        f(x | \theta) = l(x) \exp\left(\sum^k_{i=1} w_i(\theta) T_i(x)  + \Psi(\theta)\right),
+    \end{equation}
+    donde  $h(x) \ge 0$, $\Psi(\theta)$, $w_1(\theta), \ldots, w_k(\theta)$ y $t_1(x), \ldots, T_k(x)$ son funciones reales. En el Ejemplo \ref{ex:exp:binom} se tendría $w_1(p) = \log(\frac{p}{1-p})$ y $\Psi(p) = n \log(1-p)$.
 
-A continuación veremos unos ejemplos en los que esto se cumple:
+    \begin{ex}[Distribución normal] \label{ex:exp:normal}
+        La función de densidad de la distribución normal se puede escribir de la forma
+        \[f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{(x-\mu)^2}{2\sigma^2}\right) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{x^2}{2\sigma^2} + \frac{x\mu}{\sigma^2} - \frac{\mu^2}{2\sigma^2}\right)\]
+        y, por tanto, es una familia exponencial con $h(x) = 1$, $\Psi(\mu, \sigma^2) = -\frac{\mu^2}{2\sigma^2} - \log(\sqrt{2\pi} \sigma)$, $T_1(x) = x$ y $T_2(x) = - x^2 / 2$.
+        El espacio paramétrico natural se corresponde con $(1/\sigma^2, \mu/\sigma^2)$. No obstante, utilizamos el espacio $(\mu, \sigma^2)$ debido a la interpretación estadística de sus parámetros.
 
-\begin{example}
-	Cualquier distribución de probabilidad siguiendo una distribución $N(x|\mu, \sigma ^2 )$ admite un estadístico suficiente de dimensión dos.
+        Como consecuencia de la Proposición \ref{prop:exp:sufi} obtenemos que cualquier variable aleatoria siguiendo una distribución $N(x|\mu, \sigma^2)$ verifica que $T(x) = (\sum x_i, \sum x_i^2)$ es un estadístico suficiente.
+    \end{ex}
 
-	Este estadístico es $T = (\overline{x}, s^2)$ donde:
-	\begin{equation*}
-	\overline{x} = \frac{1}{n} \sum^n_{i=1} x_i
-	\end{equation*}
+    La mayoría de las distribuciones estudiadas hasta el momento forman una familia exponencial. La Tabla \ref{table:exponencial} muestra una lista de ejemplos. No obstante no toda familia de distribuciones es exponencial, como sucede con las distribuciones uniformes.
 
-	\begin{equation*}
-        s^2 = \frac{1}{n} \sum^n_{1=i}(x_i - \overline{x})^2
-	\end{equation*}
-
-\end{example}
-
-Casi todas las distribuciones que usamos en probabilidad pertenecen a una familia exponencial, aquí una lista de ejemplos:
-
-\begin{table}[h!]
-	\begin{center}
-		\begin{tabular}{|l|l|l|}
-			\hline
-			DENSIDAD & NOTACIÓN & SOPORTE\\
-			\hline \hline
-			$\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha - 1}e^{\frac{-x}{\beta}}$ & $ G(x|\alpha,\beta)$ &   $(0,\infty)  $\\ \hline
-			$\frac{1}{\Gamma(\frac{p}{2})2^{\frac{p}{2}}}x^{\frac{p}{2} - 1}e^{\frac{-x}{2}}$ & $\chi^2$ con p grados de libertad  & $(0,\infty)  $ \\ \hline
-			$\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x ^{\alpha - 1}(1-x)^{\beta - 1}$ &  $B(x| \alpha, p)$   &   $(0,1)$   \\ \hline
-			$\binom{n}{x} \theta ^x (1-\theta)^{n-x}$ &  $B(x|\theta, n)$ & ${0,1, ... , n}$   \\ \hline
-			$\frac{e^{-\lambda} \lambda^x}{x!}$ & $P(x|\lambda)$ & ${0,1, ... , n}$   \\ \hline
-		\end{tabular}
-		\label{tabla:1}
-	\end{center}
-\end{table}
-
+    \begin{table}[H]
+    	\begin{center}
+    		\begin{tabular}{|l|l|l|}
+    			\hline
+    			DENSIDAD & NOTACIÓN & SOPORTE\\
+    			\hline \hline
+                $\frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{(x-\mu)^2}{2\sigma^2}\right)$ & $N(x|\mu, \sigma^2)$ & $\mathbb{R}$ \\
+                \hline
+                $\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha - 1}e^{\frac{-x}{\beta}}$ & $ gamma(x|\alpha,\beta)$ &   $(0,\infty)  $\\ \hline
+    			$\frac{1}{\Gamma(\frac{p}{2})2^{\frac{p}{2}}}x^{\frac{p}{2} - 1}e^{\frac{-x}{2}}$ & $\chi^2$ con p grados de libertad  & $(0,\infty)  $ \\ \hline
+    			$\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x ^{\alpha - 1}(1-x)^{\beta - 1}$ &  $beta(x| \alpha, \beta)$   &   $(0,1)$   \\ \hline
+    			$\binom{n}{x} \theta ^x (1-\theta)^{n-x}$ &  $B(x|\theta, n)$ & ${0,1, \ldots , n}$   \\ \hline
+    			$\frac{e^{-\lambda} \lambda^x}{x!}$ & $P(x|\lambda)$ & ${0,1, \ldots , n}$   \\ \hline
+    		\end{tabular}
+    	\end{center}
+        \caption{Ejemplos de familias exponenciales.}
+        \label{table:exponencial}
+    \end{table}
 
 \section{Tests de hipótesis}
 
@@ -1327,7 +1342,7 @@ La estadística bayesiana sigue esta idea, basándose en la interpretación subj
 
 \begin{definition}
 	Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
-	
+
 	Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
 	)
 	\begin{equation*}
@@ -1367,7 +1382,7 @@ En cuanto a la segunda opción, el cálculo de la distribución a posteriori no 
 
 \begin{definition}
 	Sea $\mathcal{F} = \{\pi_i(\theta)|i\in I\}$ una familia de distribuciones a priori. $\mathcal{F}$ se dice que es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta)|\theta\in\Theta\}$, si para cualquier $\pi(\theta)\in\mathcal{F}$ y $f(x|\theta)\in \mathcal{P}$ se verifica que $f(x|\theta)\pi(\theta)\propto\Pi(\theta)\in\mathcal{F}$.
-	 
+
 	Es decir, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
 \end{definition}
 
@@ -1388,9 +1403,9 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 	$ $ \newline
 	\begin{itemize}
 		\item La familia de distribuciones Beta es una familia de distribuciones conjugada para las distribuciones de Bernouilli, binomiales y binomiales negativas.
-		
+
 		\item La familia de distribuciones Gamma es una familia de distribuciones conjugada para las distribuciones de Poisson y (exponenciales (definir)).
-		
+
 		\item La familia de distribuciones normales es una familia de distribuciones conjugada para la familia de distribuciones normales con varianza conocida.
 	\end{itemize}
 \end{prop}
@@ -1399,19 +1414,19 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 \begin{ex}
 	Veamos algún ejemplo de los proporcionados por la proposición anterior. Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
-	
+
 	\[f(x_{\sim}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
 	\[\pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\]
-	
+
 	\[f(x_{\sim}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
 	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right) \]
-	
+
 	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$, y para los datos observados, obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum{x_i}$ y $\beta+n$.
-	
+
 	Notemos que la conjugación nos ha permitido evitar el cálculo de la distribución marginal de $x$. Si optamos por calcularla, obtendríamos:
-	
+
 	[PROXIMAMENTE]
-	
+
 	Llegando de nuevo al mismo resultado.
 \end{ex}
 

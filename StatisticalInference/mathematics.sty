@@ -89,9 +89,9 @@
 % New example environment with qed symbol. Obtained from:
 % http://tex.stackexchange.com/questions/146151/indicator-at-end-of-theorem
 \newcommand{\exsymbol}{$\triangle$} % Choose the qed symbol.
-\newenvironment{ex}{\begin{example}
-  \renewcommand{\qedsymbol}{\exsymbol}\pushQED{\qed}}
-  {\popQED\end{example}}
+\newenvironment{ex}[1][]
+    {\begin{example}[#1]\renewcommand{\qedsymbol}{\exsymbol}\pushQED{\qed}}
+    {\popQED\end{example}}
 
 % Proof environment.
 % Removes the space after the result.
