@@ -1329,23 +1329,37 @@ En la Sección \ref{sec:estimacion} se estudió el problema de estimación de pa
     Sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de distribuciones. Supongamos que un suceso sigue una distribución $f(X|\theta_0)$ con $\theta_0 \in \Theta$. Una hipótesis es una afirmación $\theta_0 \in \Theta_0$, donde $\Theta_0$ es un subconjunto de $\Theta$.
 \end{definition}
 
-El objetivo de los test de hipótesis es, dada una hipótesis, decidir si la hipótesis es verdadera o falsa. Nótese que en el fondo tenemos dos hipótesis distintas, la hipótesis original, llamada hipótesis nula, y su complementaria, llamada hipótesis alternativa. Las denotamos $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_0^c$ respectivamente.
+El objetivo de los test de hipótesis es, dada una hipótesis, decidir si la hipótesis es verdadera o falsa tras observar una muestra. Nótese que en el fondo tenemos dos hipótesis distintas, la hipótesis original, llamada hipótesis nula, y su complementaria, llamada hipótesis alternativa. Las denotamos $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_0^c$ respectivamente.
 
 Esta problemática surge de forma natural en multitud de ciencias e ingenierías. Por ejemplo, supongamos que estamos estudiando cómo afecta un determinado medicamento a la presión sanguínea de los pacientes. Nuestra hipótesis nula es que el medicamento no tiene ningún efecto sobre la presión. Sea $\theta$ la variación media de la presión de los pacientes al tomar el medicamento, este problema podemos representarlo como $H_0: \theta = 0$ y $H_1: \theta \ne 0$. Otro ejemplo puede ser el estudio de la proporción media de piezas defectuosas que fabrica una empresa, que denotamos $\theta$. Sea $\theta_0$ el máximo valor aceptable que puede alcanzar esa proporción. Queremos combrobar si la proporción de piezas defectuosas es menor o igual que $\theta_0$, esto es, $H_0: \theta \le \theta_0$ y $H_1: \theta > \theta_0$. En ambos problemas $\theta$ debe ser el parámetro de una distribución. Habitualmente se utiliza una distribución normal de media $\theta$.
 
-En un test de hipótesis decidimos si la hipótesis es verdadera o falsa tras observar una muestra. Nuestro objetivo es buscar métodos o procedimientos para resolver tests de hipótesis de forma aceptable.
-
 \begin{definition}
-    Un método para tests de hipótesis es una regla que permite dividir el espacio muestral en dos subconjuntos disjuntos, aquellas muestras que aceptan la hipótesis nula y aquellas muestras que aceptan la hipótesis alternativa. Estos conjuntos se denominan región de aceptación y región crítica respectivamente.
+    Un test de hipótesis es una regla que permite dividir el espacio muestral en dos subconjuntos disjuntos, aquellas muestras que aceptan la hipótesis nula y aquellas muestras que aceptan la hipótesis alternativa. Estos conjuntos se denominan región de aceptación y región crítica respectivamente.
 \end{definition}
 
-Habitualmente la región crítica se define en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor. En lo que sigue estudiamos métodos de test de hipótesis que permitan determinar regiones críticas coherentes.
+%Denotemos por $W$ a la región crítica.
+Al realizar un test de hipótesi podemos cometer dos tipos de errores:
+\begin{itemize}
+    \item \textbf{Error de tipo 1.} Rechazar la hipótesis nula cuando es cierta. %La probabilidad de cometerlo es igual a $P_{\theta_0}(W)$.
+    \item \textbf{Error de tipo 2.} Rechazar la hipótesis alternativa cuando es cierta. %La probabilidad de cometerlo es igual a
+\end{itemize}
 
-\subsection{Método de la razón de verosimilitud}
+Habitualmente la región crítica se define en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor. En lo que sigue estudiamos  tests de hipótesis que permitan determinar regiones críticas coherentes.
 
-El método de la razón de la verosimilitud está íntimamente ligado con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
+\subsection{Tests de la razón de verosimilitud}
+
+Los tests de la razón de la verosimilitud está íntimamente ligado con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
 $L(\theta;x_1, \ldots, x_n)$.
 
+\begin{definition}
+    Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
+    \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
+     Un test de la razón de verositud es cualquier test que cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
+\end{definition}
+
+Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
+
+Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);x) / L(\hat{\theta}(x);x)$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
 
 \section{Estadística bayesiana}
 
