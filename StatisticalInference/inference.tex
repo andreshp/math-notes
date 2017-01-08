@@ -814,7 +814,7 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 
 \subsubsection{Distribución de Dirichlet}
 
-\section{Estimación de parámetros}
+\section{Estimación de parámetros} \label{sec:estimacion}
 
 Supongamos que estamos estudiando un fenómeno aleatorio que sabemos que sigue una distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$ es un parámetro que no es conocido. Nuestro objetivo es estimar el parámetro $\theta_0$ a partir de una muestra $x_1, \ldots, x_n$. Para ello buscamos una función $T_n$ de manera que podamos decir $\theta_0 \approx T_n(x_1, \ldots, x_n)$.
 
@@ -1253,11 +1253,17 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
 \section{La familia exponencial}
 
-    Una variable aleatoria se distribuye respecto de una \emph{familia exponencial} si su función de distribución es de la forma
-    \begin{equation} \label{eq:exponencial}
-        f(x | \theta) = l(x) \exp\left(\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta)\right),
-    \end{equation}
-    donde $\theta = (\theta_1, \ldots, \theta_k)$ y $h(x) \ge 0$, $\Psi(\theta)$, $t_1(x), \ldots, T_k(x)$ son funciones reales. Las familias exponenciales presentan características matemáticas y estadísticas muy convenientes. El siguiente resultado utiliza estadísticos suficientes, que se introdujeron en la Sección \ref{sec:estimacion:tge:sufi}.
+    En esta sección estudiamos una amplia familia de distribuciones, denominada la familia exponencial. Veremos que gran parte de las distribuciones que hemos estudiado hasta el momento pertenecen a esta familia.
+
+    \begin{definition}
+        Una variable aleatoria se distribuye respecto de una \emph{familia exponencial} si su función de distribución es de la forma
+        \begin{equation} \label{eq:exponencial}
+            f(x | \theta) = l(x) \exp\left(\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta)\right),
+        \end{equation}
+        donde $\theta = (\theta_1, \ldots, \theta_k)$ y $h(x) \ge 0$, $\Psi(\theta)$, $t_1(x), \ldots, T_k(x)$ son funciones reales.
+    \end{definition}
+
+    Las familias exponenciales presentan características matemáticas y estadísticas muy convenientes. De estas características cabe destacar el siguiente resultado, que utiliza estadísticos suficientes introducidos en la Sección \ref{sec:estimacion:tge:sufi}.
 
     \begin{prop} \label{prop:exp:sufi}
         Sea $\{f(X | \theta): \theta \in \Theta\}$ una familia exponencial y sea una muestra $x = (x_1, \ldots, x_n)$. Entonces, $T(x) = (\sum_{j = 1}^n T_i(x_j))_{j = 1, \ldots, k}$ es un estadístico suficiente de dimensión $k$.
@@ -1275,7 +1281,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         La función masa de probabilidad de una distribución binomial con $n$ fijo puede escribirse como sigue
         \[f(x|p) = \binom{n}{x} p^x (1-p)^{n-x} = \binom{n}{x} \exp(x\log(p) + (n-x) \log(1-p)) = \binom{n}{x} \exp(x\log(\frac{p}{1-p}) + n \log(1-p)). \]
         La aplicación  $f(p) = \log(\frac{p}{1-p}) = \log(\frac{1}{1-p} - 1)$ es una biyección de $(0,1)$ a $\mathbb{R}$. En este punto hacemos el cambio de variable $\theta = f(p)$.
-        Hemos obtenido que la distribución binomial es una familia exponencial de parámetro $\theta$ con $h(x) = \binom{n}{x}$, $T_1(x) = x$ y $\Psi(\theta) = n \log(1 - f^{-1}(\theta))$. Según el resultado anterior un estadístico suficiente es $T(x) = (\sum_{j = 1}^n x_i)_{j = 1, \ldots, k}$ y, por tanto, otro estadístico suficiente sería la media muestral, $T(x) = \overline{x}$.
+        Hemos obtenido que la distribución binomial es una familia exponencial de parámetro $\theta$ con $h(x) = \binom{n}{x}$, $T_1(x) = x$ y $\Psi(\theta) = n \log(1 - f^{-1}(\theta))$. Según la Proposición \ref{prop:exp:sufi} un estadístico suficiente es $T(x) = \sum_{i = 1}^n x_i$ y, por tanto, la media muestral, $T(x) = \overline{x}$, es otro estadístico suficiente.
     \end{ex}
 
     En el ejemplo anterior hemos tenido que realizar un cambio de variable del espacio paramétrico para poder escribir la distribución de Bernoulli como una familia exponencial. El nuevo espacio paramétrico obtenido es el \emph{espacio paramétrico natural} de la familia. Para evitar trabajar con cambios de variables algunos autores definen las familias exponenciales como aquellas cuya función de desidad se puede escribir de la forma
@@ -1289,12 +1295,12 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         La función de densidad de la distribución normal se puede escribir de la forma
         \[f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{(x-\mu)^2}{2\sigma^2}\right) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{x^2}{2\sigma^2} + \frac{x\mu}{\sigma^2} - \frac{\mu^2}{2\sigma^2}\right)\]
         y, por tanto, es una familia exponencial con $h(x) = 1$, $\Psi(\mu, \sigma^2) = -\frac{\mu^2}{2\sigma^2} - \log(\sqrt{2\pi} \sigma)$, $T_1(x) = x$ y $T_2(x) = - x^2 / 2$.
-        El espacio paramétrico natural se corresponde con $(1/\sigma^2, \mu/\sigma^2)$. No obstante, utilizamos el espacio $(\mu, \sigma^2)$ debido a la interpretación estadística de sus parámetros.
+        El espacio paramétrico natural se corresponde con $(1/\sigma^2, \mu/\sigma^2)$. No obstante, utilizamos los parámetros $(\mu, \sigma^2)$ debido a la interpretación estadística de los mismos.
 
         Como consecuencia de la Proposición \ref{prop:exp:sufi} obtenemos que cualquier variable aleatoria siguiendo una distribución $N(x|\mu, \sigma^2)$ verifica que $T(x) = (\sum x_i, \sum x_i^2)$ es un estadístico suficiente.
     \end{ex}
 
-    La mayoría de las distribuciones estudiadas hasta el momento forman una familia exponencial. La Tabla \ref{table:exponencial} muestra una lista de ejemplos. No obstante no toda familia de distribuciones es exponencial, como sucede con las distribuciones uniformes.
+    La mayoría de las distribuciones estudiadas hasta el momento forman una familia exponencial. La Tabla \ref{table:exponencial} muestra una lista de ejemplos. No obstante, no toda familia de distribuciones es exponencial, como sucede con las distribuciones uniformes.
 
     \begin{table}[H]
     	\begin{center}
@@ -1316,6 +1322,29 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \end{table}
 
 \section{Tests de hipótesis}
+
+En la Sección \ref{sec:estimacion} se estudió el problema de estimación de parámetros. En este capítulo se estudiará otro problema clásico de la inferencia, los tests de hipótesis.
+
+\begin{definition}
+    Sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de distribuciones. Supongamos que un suceso sigue una distribución $f(X|\theta_0)$ con $\theta_0 \in \Theta$. Una hipótesis es una afirmación $\theta_0 \in \Theta_0$, donde $\Theta_0$ es un subconjunto de $\Theta$.
+\end{definition}
+
+El objetivo de los test de hipótesis es, dada una hipótesis, decidir si la hipótesis es verdadera o falsa. Nótese que en el fondo tenemos dos hipótesis distintas, la hipótesis original, llamada hipótesis nula, y su complementaria, llamada hipótesis alternativa. Las denotamos $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_0^c$ respectivamente.
+
+Esta problemática surge de forma natural en multitud de ciencias e ingenierías. Por ejemplo, supongamos que estamos estudiando cómo afecta un determinado medicamento a la presión sanguínea de los pacientes. Nuestra hipótesis nula es que el medicamento no tiene ningún efecto sobre la presión. Sea $\theta$ la variación media de la presión de los pacientes al tomar el medicamento, este problema podemos representarlo como $H_0: \theta = 0$ y $H_1: \theta \ne 0$. Otro ejemplo puede ser el estudio de la proporción media de piezas defectuosas que fabrica una empresa, que denotamos $\theta$. Sea $\theta_0$ el máximo valor aceptable que puede alcanzar esa proporción. Queremos combrobar si la proporción de piezas defectuosas es menor o igual que $\theta_0$, esto es, $H_0: \theta \le \theta_0$ y $H_1: \theta > \theta_0$. En ambos problemas $\theta$ debe ser el parámetro de una distribución. Habitualmente se utiliza una distribución normal de media $\theta$.
+
+En un test de hipótesis decidimos si la hipótesis es verdadera o falsa tras observar una muestra. Nuestro objetivo es buscar métodos o procedimientos para resolver tests de hipótesis de forma aceptable.
+
+\begin{definition}
+    Un método para tests de hipótesis es una regla que permite dividir el espacio muestral en dos subconjuntos disjuntos, aquellas muestras que aceptan la hipótesis nula y aquellas muestras que aceptan la hipótesis alternativa. Estos conjuntos se denominan región de aceptación y región crítica respectivamente.
+\end{definition}
+
+Habitualmente la región crítica se define en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor. En lo que sigue estudiamos métodos de test de hipótesis que permitan determinar regiones críticas coherentes.
+
+\subsection{Método de la razón de verosimilitud}
+
+El método de la razón de la verosimilitud está íntimamente ligado con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
+$L(\theta;x_1, \ldots, x_n)$.
 
 
 \section{Estadística bayesiana}
@@ -1454,45 +1483,45 @@ Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distri
 
 \begin{thm}
 	En las condiciones anteriores, se tiene que:
-	
+
 	\[\pi(\theta|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0\]
 \end{thm}
 
 \begin{proof}
 	En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución marginal no es sencillo. Haremos la prueba para el caso en el que $\Theta$ es discreto.
-	
+
 	Supongamos por tanto $\Theta = \{\theta_1,\dots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades de cada $\theta_j$ y vendrá dada por $\pi(\theta_j)=p_j$, con $p_j\in[0,1]$ y $\sum_{i=1}^{k}{p_i}=1$, para $j=1,\dots,k$. Podemos suponer también que $t\in\{1,\dots,k\}$ es el índice del parámetro que corresponde al verdadero valor, es decir, $\theta_t$ y $\theta_0$.
-	
+
 	Consideramos las variables aleatorias i.i.d. $X_1,\dots,X_n$ con distribución $f(x|\theta_t)$ y una muestra $x_1,\dots,x_n$. La distribución a posteriori en este caso discreto vendrá dada, para cada $\theta_i$, por:
-	
+
 	\[\pi(\theta_i|x_1,\dots,x_n) = \frac{p_i \prod_{j=1}^n{f(x_j|\theta_i)}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{f(x_j|\theta_r)}}}\]
-	
+
 	Multiplicando numerador y denominador por $\left(\prod_{j=1}^n{f(x_j|\theta_t)}\right)^{-1}$ obtenemos:
-	
+
 	\begin{equation} \label{eq:tcfd1}
 		\pi(\theta_i|x_1,\dots,x_n) = \frac{p_i \prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{\frac{f(x_j|\theta_r)}{f(x_j|\theta_t)}}}}
 	\end{equation}
-	
-	
+
+
 	Estudiemos la convergencia de $\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}$. Si $i=t$, claramente tenemos que el resultado es 1. En caso contrario, tomando logaritmos, obtenemos:
-	
+
 	\begin{equation} \label{eq:tcfd2}
 	\log{\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} = \sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} = n\left(\frac{1}{n}\sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}\right)
 	\end{equation}
-	
+
 	Ahora, las variables aleatorias $Z_i \sim \log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}$ son i.i.d, luego por las leyes de los grandes números el término $\frac{1}{n}\sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}$ converge en probabilidad $P_{\theta_t}$ a la esperanza de cualquiera de ellas, $E\left[\log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}\right]$. Además, como consecuencia de la desigualdad de la información (proposición \ref{prop:desigualdad}), dicha esperanza es un valor estrictamente negativo. En consecuencia, a partir de la expresión obtenida en (\ref{eq:tcfd2}), podemos concluir que:
-	
+
 	\[\log{\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} \xrightarrow[n\to\infty]{P_{\theta_t}} -\infty\]
-	
+
 	La continuidad del logaritmo nos asegura que $\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}} \xrightarrow[n\to\infty]{P_{\theta_t}} 0$.
-	
+
 	Finalmente, aplicando lo que acabamos de obtener a (\ref{eq:tcfd1}), concluimos que:
-		
+
 	\begin{itemize}
 		\item Si $i \ne t$, $\pi(\theta_i|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{0}{p_t+\sum{0}} = 0$
 		\item Si $i = t$, $\pi(\theta_i|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{p_t}{p_t+\sum{0}} = 1$
-	\end{itemize}	
-	
+	\end{itemize}
+
 	Pero esto es equivalente a decir que la distribución a posteriori degenera a $\theta_t$ en probabilidad $P_{\theta_t}$.
 \end{proof}
 
