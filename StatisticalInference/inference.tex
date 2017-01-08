@@ -1338,17 +1338,48 @@ A su vez, la ley de la probabilidad total establece que $P(B)=\sum_{i=1}^n{P(B|A
 
 Donde los valores $P(B|A_i)$ son conocidos. Los valores $P(A_i)$ son lo que llamaremos probabilidades a priori, mientras que los $P(A_i|B)$ serán las probabilidades a posteriori.
 
-La estadística bayesiana sigue esta idea, basándose en la interpretación subjetiva de la probabilidad. Para ello, utiliza la percepción existente, por parte del investigador, como una variable modificadora (distribución a priori) de los datos muestrales, que dan lugar a una distribución (distribución a posteriori), con la que formular inferencias con respecto al parámetro de interés. Pasemos a definir formalmente estas distribuciones:
+La estadística bayesiana sigue esta idea, basándose en la interpretación subjetiva de la probabilidad. Para ello, utiliza la percepción existente, por parte del investigador, como una variable modificadora (distribución a priori) de los datos muestrales, que dan lugar a una distribución (distribución a posteriori), con la que formular inferencias con respecto al parámetro de interés.
+
+Consideremos un problema de inferencia estadística en el que las observaciones se toman de una variable aleatoria $X$ que sigue una distribución $f(x|\theta)$, con $\theta\in\Theta$. Disponemos de información previa sobre $\theta$, que podemos recoger definiendo una distribución de probabilidad sobre el espacio $\Theta$, la distribución a priori, dando así a $\theta$ el carácter de variable aleatoria, con la peculiaridad de que no es observable. Lo que sí observamos es la variable aleatoria $X$ condicionada al verdadero valor que toma $\theta$, que llamaremos $\theta_0$. Así, el estudio de las observaciones de $X$ aporta información sobre el valor de $\theta$, información que debemos combinar con la distribución a priori para modificarla. El resultado de esta modificación es de nuevo una distribución sobre $\Theta$, que llamaremos la distribución a posteriori de $\theta$, una vez observada la variable aleatoria $X$. Estos son los planteamientos básicos que conforman el enfoque bayesiano de la estadística.
+
+Pasemos a definir formalmente estas distribuciones:
+
+\newcommand{\vx}[1]{\underset{\sim}{#1}}
 
 \begin{definition}
-	Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
+	Sea $X$ una variable aleatoria que sigue una distribución $f(x|\theta)$, con $\theta \in \Theta$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
+	%Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
 
-	Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
-	)
+	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
+	
+	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\vx{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley condicional de $\theta$ dadas las observaciones $\vx{x}$ de $\vx{X}$.
 	\begin{equation*}
-		\pi(\theta|x_{\sim})= \frac{f(x_{\sim}|\theta)\pi(\theta)}{\int_{\Theta}{f(x_{\sim}|\theta)\pi(\theta)d\theta}}
+		\pi(\theta|\vx{x})= \frac{f(\vx{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\vx{x}|\theta)\pi(\theta)d\theta}}
 	\end{equation*}
 \end{definition}
+
+La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
+
+\begin{definition}
+	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\vx{x}=(x_1,\dots,x_n)$, a la ley conjunta de $X_1,\dots,X_n$ se denomina distribución muestral o verosimilitud de la muestra, dado el valor del parámetro $\theta$, a:
+	
+	\[f(\vx{x}|\theta)=\prod_{i=1}^{n}{f(x_i|\theta)}\]
+	
+	La densidad conjunta de $\vx{X}$ y $\theta$ es:
+	
+	\[f(\vx{x},\theta)=f(\vx{x}|\theta)\pi(\theta)\]
+	
+	La densidad marginal de $\vx{X}$ es:
+	
+	\[m(\vx{x}) = \int_{\Theta}{f(\vx{x},\theta)d\theta} = \int_{\Theta}{f(\vx{x}|\theta)\pi(\theta)d\theta}\]
+	
+	En consecuencia, podemos expresar la distribución a posteriori de esta forma:
+	
+	\[\pi(\theta|\vx{x}) = \frac{f(\vx{x},\theta)}{m(\vx{x})}\]
+\end{definition}
+
+Para finalizar esta sección, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
+
 
 \subsection{Estadística clásica vs bayesiana}
 
@@ -1357,7 +1388,7 @@ Veamos ahora las diferencias entre la inferencia clásica y la bayesiana. En la 
 \begin{itemize}
 	\item El concepto de probabilidad está limitado a aquellos sucesos en los que se pueden definir frecuencias relativas.
 	\item $\theta$ es un valor fijo, pero desconocido.
-	\item Se usa el concepto de intervalo de confianza (AÑADIR SI ESO)
+	\item Se usa el concepto de intervalo de confianza.% (AÑADIR SI ESO)
 	\item El método de muestreo es muy importante.
 	\item Se pueden usar estimadores de máxima verosimilitud o estimadores insesgados.
 \end{itemize}
@@ -1367,12 +1398,15 @@ Por su parte, en la inferencia bayesiana destacan:
 \begin{itemize}
 	\item Podemos establecer probabilidades previas para cualquier suceso.
 	\item $\theta$ es una variable que sigue una distribución de probabilidad.
-	\item Se usa el concepto de intervalo de credibilidad para $\theta$. (AÑADIR SI ESO)
+	\item Se usa el concepto de intervalo de credibilidad para $\theta$.% (AÑADIR SI ESO)
 	\item El método de muestreo no importa; solo importan los datos.
 	\item Se utilizan estimadores diferentes según la utilidad; la estimación es un problema de decisión.
 \end{itemize}
 
-Una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
+Uno de los aspectos más criticados de la estadística bayesiana es el grado de subjetividad a la que se expone la inferencia por el hecho de que es el experimentador quien define la distribución a priori. En cualquier caso, en lo que hay coincidencia es en que si hay información sobre $\theta$ esta tiene que ser utilizada en la inferencia.
+
+$ $ \newline
+Como acabamos de decir, una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
 
 \subsection{Familias conjugadas}
 
@@ -1404,7 +1438,7 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 	\begin{itemize}
 		\item La familia de distribuciones Beta es una familia de distribuciones conjugada para las distribuciones de Bernouilli, binomiales y binomiales negativas.
 
-		\item La familia de distribuciones Gamma es una familia de distribuciones conjugada para las distribuciones de Poisson y (exponenciales (definir)).
+		\item La familia de distribuciones Gamma es una familia de distribuciones conjugada para las distribuciones de Poisson.% y (exponenciales (definir)).
 
 		\item La familia de distribuciones normales es una familia de distribuciones conjugada para la familia de distribuciones normales con varianza conocida.
 	\end{itemize}
@@ -1415,10 +1449,10 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 \begin{ex}
 	Veamos algún ejemplo de los proporcionados por la proposición anterior. Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
 
-	\[f(x_{\sim}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
+	\[f(\vx{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
 	\[\pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\]
 
-	\[f(x_{\sim}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
+	\[f(\vx{x}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
 	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right) \]
 
 	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$, y para los datos observados, obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum{x_i}$ y $\beta+n$.
@@ -1446,11 +1480,20 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
     Para $k$ lo suficientemente grande $E[\pi(\theta; x)] \approx \overline{x} / n$, que es el estimador máximo verosímil. Por tanto, cuando $k \to \infty$ obtenemos que $Var(\pi(\theta; x)) \to 0$ y $E[\pi(\theta; x)] \to \theta_0$.
 \end{ex}
 
+Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. Veámoslo con el siguiente ejemplo:
+
+\begin{ex}
+	Poisson.
+\end{ex}
+
 \subsection{Convergencia de distribuciones a posteriori}
 
 Nos planteamos en este punto la convergencia de las distribuciones a posteriori cuando el tamaño de las muestras crece.
 
-Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, con una medida de probabilidad $P_{\theta_0}$. Conocemos la familia de distribuciones $\{f(x|\theta)|\theta\in\Theta\}$. Queremos ver, dada una distribución a priori $\pi(\theta)$, si converge la distribución a posteriori $\pi(\theta|X_1,\dots,X_n)$ cuando $n \to \infty$.
+Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, con una medida de probabilidad $P_{\theta_0}$. Conocemos la familia de distribuciones $\{f(x|\theta)|\theta\in\Theta\}$. Queremos ver, dada una distribución a priori $\pi(\theta)$, si converge la distribución a posteriori $\pi(\theta|X_1,\dots,X_n)$, para las variables i.i.d. $X_1,\dots,X_n \sim f(x|\theta_0)$,  cuando $n \to \infty$.
+
+En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución marginal no es sencillo. Estudiaremos la convergencia de la distribución a posteriori cuando el espacio paramétrico es $\Theta = \{\theta_1,\dots,\theta_k\}$ discreto.
+
 
 \begin{thm}
 	En las condiciones anteriores, se tiene que:
@@ -1459,9 +1502,7 @@ Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distri
 \end{thm}
 
 \begin{proof}
-	En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución marginal no es sencillo. Haremos la prueba para el caso en el que $\Theta$ es discreto.
-	
-	Supongamos por tanto $\Theta = \{\theta_1,\dots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades de cada $\theta_j$ y vendrá dada por $\pi(\theta_j)=p_j$, con $p_j\in[0,1]$ y $\sum_{i=1}^{k}{p_i}=1$, para $j=1,\dots,k$. Podemos suponer también que $t\in\{1,\dots,k\}$ es el índice del parámetro que corresponde al verdadero valor, es decir, $\theta_t$ y $\theta_0$.
+	Supongamos $\Theta = \{\theta_1,\dots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades de cada $\theta_j$ y vendrá dada por $\pi(\theta_j)=p_j$, con $p_j\in[0,1]$ y $\sum_{i=1}^{k}{p_i}=1$, para $j=1,\dots,k$. Podemos suponer también que $t\in\{1,\dots,k\}$ es el índice del parámetro que corresponde al verdadero valor, es decir, $\theta_t = \theta_0$.
 	
 	Consideramos las variables aleatorias i.i.d. $X_1,\dots,X_n$ con distribución $f(x|\theta_t)$ y una muestra $x_1,\dots,x_n$. La distribución a posteriori en este caso discreto vendrá dada, para cada $\theta_i$, por:
 	
