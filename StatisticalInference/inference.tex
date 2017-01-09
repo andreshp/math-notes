@@ -123,7 +123,7 @@
 % Load the library (Descomentar para SOs distintos de Windows)
 \usetikzlibrary{external}
 % Enable the library !!!>>> MUST be in the preamble <<<!!!!
-\tikzexternalize
+%\tikzexternalize
 \pgfplotsset{compat=newest}
 
 \usepackage{float}
@@ -1405,13 +1405,13 @@ En esta sección estudiamos cuáles son los tests más potentes para contrastar 
 
 \subsection{Tests de la razón de verosimilitud}
 
-Los tests de la razón de la verosimilitud están íntimamente ligado con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
+Los tests de la razón de la verosimilitud están íntimamente ligados con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
 $L(\theta;x_1, \ldots, x_n)$.
 
 \begin{definition}
     Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
     \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
-     Un test de la razón de verositud es cualquier test que cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
+     Un test de la razón de verositud es cualquier test cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
 \end{definition}
 
 Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
@@ -1520,7 +1520,7 @@ En cuanto a la segunda opción, el cálculo de la distribución a posteriori no 
 	Es decir, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
 \end{definition}
 
-Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente, tenemos, salvo constantes una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia, como se explica en la siguiente observación.
+Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente tenemos, salvo constantes, una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia, como se explica en la siguiente observación.
 
 \begin{remark}
 	Se tienen las siguientes condiciones equivalentes:
@@ -1547,7 +1547,7 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 \begin{ex}
-	Veamos algún ejemplo de los proporcionados por la proposición anterior. Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
+	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
 
 	\[f(\vx{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
 	\[\pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\]
