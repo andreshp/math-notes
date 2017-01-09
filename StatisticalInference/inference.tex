@@ -1258,9 +1258,9 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \begin{definition}
         Una variable aleatoria se distribuye respecto de una \emph{familia exponencial} si su función de distribución es de la forma
         \begin{equation} \label{eq:exponencial}
-            f(x | \theta) = l(x) \exp\left(\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta)\right),
+            f(x | \theta) = h(x) \exp\left(\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta)\right),
         \end{equation}
-        donde $\theta = (\theta_1, \ldots, \theta_k)$ y $h(x) \ge 0$, $\Psi(\theta)$, $t_1(x), \ldots, T_k(x)$ son funciones reales.
+        donde $\theta = (\theta_1, \ldots, \theta_k)$ y $h(x) \ge 0$, $\Psi(\theta)$, $T_1(x), \ldots, T_k(x)$ son funciones reales.
     \end{definition}
 
     Las familias exponenciales presentan características matemáticas y estadísticas muy convenientes. De estas características cabe destacar el siguiente resultado, que utiliza estadísticos suficientes introducidos en la Sección \ref{sec:estimacion:tge:sufi}.
@@ -1287,7 +1287,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     En el ejemplo anterior hemos tenido que realizar un cambio de variable del espacio paramétrico para poder escribir la distribución de Bernoulli como una familia exponencial. El nuevo espacio paramétrico obtenido es el \emph{espacio paramétrico natural} de la familia. Para evitar trabajar con cambios de variables algunos autores definen las familias exponenciales como aquellas cuya función de desidad se puede escribir de la forma
 
     \begin{equation} \label{eq:exponencial:2}
-        f(x | \theta) = l(x) \exp\left(\sum^k_{i=1} w_i(\theta) T_i(x)  + \Psi(\theta)\right),
+        f(x | \theta) = h(x) \exp\left(\sum^k_{i=1} w_i(\theta) T_i(x)  + \Psi(\theta)\right),
     \end{equation}
     donde  $h(x) \ge 0$, $\Psi(\theta)$, $w_1(\theta), \ldots, w_k(\theta)$ y $t_1(x), \ldots, T_k(x)$ son funciones reales. En el Ejemplo \ref{ex:exp:binom} se tendría $w_1(p) = \log(\frac{p}{1-p})$ y $\Psi(p) = n \log(1-p)$.
 
@@ -1326,26 +1326,29 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 En la Sección \ref{sec:estimacion} se estudió el problema de estimación de parámetros. En este capítulo se estudiará otro problema clásico de la inferencia, los tests de hipótesis.
 
 \begin{definition}
-    Sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de distribuciones. Supongamos que una variable aleatoria sigue una distribución $f(X|\theta)$ con $\theta \in \Theta$. Una hipótesis es una afirmación $\theta \in \Theta_0$, donde $\Theta_0$ es un subconjunto de $\Theta$. Una hipótesis es simple si es de la forma  $\theta \in \{\theta_0\}$ para cierto $\theta_0 \in \Theta$. En tal caso se escribe $\theta = \theta_0$. Si una hipótesis qno es simple, entonces decimos que es compuesta. Ademśa, dos hipótesis $\theta \in \Theta_0$ y $\theta \in \Theta_1$ son excluyentes si $\Theta_0$ y $\Theta_1$ son disjuntos.
+    Sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de distribuciones. Supongamos que una variable aleatoria sigue una distribución $f(X|\theta)$ con $\theta \in \Theta$. Una hipótesis es una afirmación $\theta \in \Theta_0$, donde $\Theta_0$ es un subconjunto de $\Theta$. Una hipótesis es simple si es de la forma  $\theta \in \{\theta_0\}$ para cierto $\theta_0 \in \Theta$. En tal caso se escribe $\theta = \theta_0$. Si una hipótesis no es simple, entonces decimos que es compuesta. Además, dos hipótesis $\theta \in \Theta_0$ y $\theta \in \Theta_1$ son excluyentes si $\Theta_0$ y $\Theta_1$ son disjuntos.
 \end{definition}
 
-El objetivo de los test de hipótesis es, dada dos hipótesis excluyentes, aceptar una de las dos hipótesis como verdadera tras observar una muestra. Esto se denomina contrastar dos hipótesis. Generalmente el tratamiento de las dos hipótesis no es simétrico, esto es, una de las dos hipótesis tiene preferencia sobre la otra y solo será rechazada cuando la evidencia en su contra sea muy clara. Esta hipótesis se llama hipótesis nula, mientras que la otra hipótesis se denomina hipótesis alternativa. Las denotamos $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$ respectivamente (recordemos que $\Theta_0 \cap \Theta_1 = \emptyset$).
+El objetivo de los tests de hipótesis es, dadas dos hipótesis excluyentes, aceptar una de las dos hipótesis como verdadera tras observar una muestra. Esta acción se denomina contrastar dos hipótesis. Generalmente el tratamiento de las dos hipótesis no es simétrico, esto es, una de las dos hipótesis tiene preferencia sobre la otra y solo será rechazada cuando la evidencia en su contra sea muy clara. Esta hipótesis se llama hipótesis nula, mientras que la otra hipótesis se denomina hipótesis alternativa. Las denotamos $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$ respectivamente (recordemos que $\Theta_0 \cap \Theta_1 = \emptyset$).
 
-Esta problemática surge de forma natural en multitud de ciencias e ingenierías. Por ejemplo, supongamos que estamos estudiando cómo afecta un determinado medicamento a la presión sanguínea de los pacientes. Queremos corroborar que el medicamento no tiene ningún efecto sobre la presión, hecho que es nuestra hipótesis nula. Sea $\theta$ la variación media de la presión de los pacientes al tomar el medicamento. Esta situación puede representarse como $H_0: \theta = 0$ y $H_1: \theta \ne 0$. Tras tomar muestras en varios pacientes tendremos que decidir cual de las dos hipótesis aceptamos. Otro ejemplo puede ser el estudio de la proporción media de piezas defectuosas que fabrica una empresa, que denotamos $\theta$. Sea $\theta_0$ el máximo valor aceptable que puede alcanzar esa proporción. Queremos combrobar si la proporción de piezas defectuosas es menor o igual que $\theta_0$,lo que se puede representar mediante las hipótesis $H_0: \theta \le \theta_0$ y $H_1: \theta > \theta_0$. Habitualmente no es factible evaluar cada una de las piezas y, por tanto, tenemos que hacer inferencia a partir de una muestra. En ambos problemas $\theta$ debe ser el parámetro de una distribución. Habitualmente se utiliza una distribución normal de media $\theta$.
+El contraste de hipótesis surge de forma natural en multitud de ciencias e ingenierías. Por ejemplo, supongamos que estamos estudiando cómo afecta un determinado medicamento a la presión sanguínea de los pacientes. Queremos corroborar que el medicamento no tiene ningún efecto sobre la presión, hecho que es nuestra hipótesis nula. Sea $\theta$ la variación media de la presión de los pacientes al tomar el medicamento. Esta situación puede representarse como $H_0: \theta = 0$ y $H_1: \theta \ne 0$. Tras tomar muestras en varios pacientes tendremos que decidir cuál de las dos hipótesis aceptamos. Otro ejemplo puede ser el estudio de la proporción media de piezas defectuosas que fabrica una empresa, que denotamos $\theta$. Sea $\theta_0$ el máximo valor aceptable que puede alcanzar esa proporción. Queremos combrobar si la proporción de piezas defectuosas es menor o igual que $\theta_0$, lo que se puede representar mediante las hipótesis $H_0: \theta \le \theta_0$ y $H_1: \theta > \theta_0$. Habitualmente no es factible propar cada una de las piezas y, por tanto, tenemos que hacer inferencia a partir de una muestra. En ambos problemas $\theta$ debe ser el parámetro de una distribución. Por ejemplo, podríamos utilizar una distribución normal de media $\theta$.
 
 Nótese que en los dos ejemplos anteriores el espacio paramétrico es unión disjunta de $\Theta_0$ y $\Theta_1$. Podemos suponer que siempre se da esta situación. En efecto, el espacio paramétrico siempre se puede restringir a $\Theta_0 \cup \Theta_1$. En este contexto la hipótesis alternativa es la hipótesis complementaria a la hipótesis nula.
 
 \begin{definition}
-    Un test de hipótesis es una regla que permite dividir el espacio muestral en dos subconjuntos disjuntos, aquellas muestras que aceptan la hipótesis nula y aquellas muestras que aceptan la hipótesis alternativa. Estos conjuntos se denominan región de aceptación y región crítica respectivamente.
+    Un test de hipótesis es una regla que permite dividir el espacio muestral en dos subconjuntos medibles disjuntos. Estos conjuntos se corresponden con aquellas muestras que aceptan la hipótesis nula como cierta (región de aceptación) y aquellas muestras que rechazan la hipótesis nula y aceptan la hipótesis alternativa (región crítica).
 \end{definition}
 
 Supondremos que la región crítica se corresponde con la imagen inversa de un boreliano, esto es, es de la forma $X \in R$, donde $X = (X_1, \ldots, X_n)$ es la muestra y $R \in \mathcal{B}^n$. En ocasiones podremos expresar la región crítica en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor.
 
+\subsection{Errores de los tests de hipótesis}
+
+
 Consideremos un test de hipótesis con región crítica $X \in R$. En dicho test podemos cometer dos tipos de errores:
 
 \begin{itemize}
-    \item \textbf{Error de tipo 1.} Rechazar la hipótesis nula cuando es cierta. Si $\theta \in \Theta_0$, entonces la probabilidad de cometerlo es igual a $P_\theta(X \in R)$.
-    \item \textbf{Error de tipo 2.} Rechazar la hipótesis alternativa cuando es cierta. Si $\theta \in \Theta_0$, entonces la probabilidad de cometerlo es igual a $P_\theta(X \in R^c)$.
+    \item \textbf{Error de tipo 1.} Rechazar la hipótesis nula cuando es cierta. Si $\theta \in \Theta_0$, entonces la probabilidad de cometer un error de tipo 1 es $P_\theta(X \in R)$.
+    \item \textbf{Error de tipo 2.} Rechazar la hipótesis alternativa cuando es cierta. Si $\theta \in \Theta_0^c$, entonces la probabilidad de cometer un error de tipo 2 es $P_\theta(X \in R^c)$.
 \end{itemize}
 
 \begin{definition}
@@ -1368,10 +1371,37 @@ Recordemos que la hipótesis nula generalmente tiene preferencia frente a la hip
 Si nos restringimos a estudiar los tests de tamaño $\alpha$, entonces nuestro objetivo se reduce a buscar entre todos estos tests aquel que minimice la probabilidad de cometer un error de tipo 2. Este hecho queda formalizado en la siguiente definición.
 
 \begin{definition}
-    Considérese un test con función potencia $\eta$. Decimos que es el test más potente de tamaño $\alpha$ (o el mejor test de tamaño $\alpha$) si para cualquier otro test de tamaño $\alpha$ con función potencia $\eta'$ se verifica $\eta(\theta) \ge \eta'(\theta)$ para todo $\theta \in \Theta_0^c$.
+    Considérese un test con función potencia $\eta$. Decimos que es un test más potente de tamaño $\alpha$ (resp. de significancia $\alpha$)  si para cualquier otro test de tamaño $\alpha$ (resp. de significancia $\alpha$) con función potencia $\eta'$ se verifica $\eta(\theta) \ge \eta'(\theta)$ para todo $\theta \in \Theta_0^c$.
 \end{definition}
 
-En lo que sigue buscaremos obtener los mejores tests de tamaño $\alpha$ en caso de que sea posible. Cabe decir que en la práctica se utilizan valores de $\alpha$ pequeños, como $0.01$, $0.05$ o $0.1$.
+En lo que sigue buscaremos obtener los tests más potentes de tamaño $\alpha$ en caso de que sea posible. Cabe decir que en la práctica se utilizan valores de $\alpha$ pequeños, como $0.01$, $0.05$ o $0.1$.
+
+\subsection{Tests de Neyman-Pearson}
+
+En esta sección estudiamos cuáles son los tests más potentes para contrastar dos hipótesis simples. Esta cuestión es resuelta por el Lema de Neyman-Pearson. Además, estudiamos si es posible generalizar el resultado para contrastar hipótesis compuestas.
+
+\begin{thm}[Lema de Neyman-Pearson]
+    Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
+    \[C_k = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k\}.\]
+    Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test más potente de significancia $\alpha$. Además, cualquier test más potente de significancia $\alpha$ es de tamaño $\alpha$ y su región crítica difiere de $C_k$ en a lo sumo un subconjunto de probabilidad nula.
+\end{thm}
+\begin{proof}
+    En primer lugar, nótese que el test dado por $C_k$ es de tamaño $\alpha$ ya que $\sup\{ \eta(\theta) : \theta \in \Theta_0\} = \eta(\theta_0) = \alpha$. Consideremos otro test de significancia $\alpha$ cuya función potencia es $\eta'$ y su región crítica es $C'$ y veamos que $\eta'(\theta_1) \le \eta(\theta_1)$. Por distinción de casos es fácil razonar que para cualquier muestra $x$ se verifica
+    \begin{equation} \label{eq:np:desigualdad}
+        (1_{C_k}(x)-1_C(x)) (L(\theta_1; x) - k L(\theta_0; x)) \ge 0,
+    \end{equation}
+    donde $1_A$ denota la función indicadora del conjunto $A$. Integrando la desigualdad \eqref{eq:np:desigualdad} obtenemos
+    \begin{equation} \label{eq:np:desigualdad:2}
+        0 \le \int(1_{C_k}(x)-1_C(x)) (L(\theta_1; x) - k L(\theta_0; x)) \, dx = \eta(\theta_1) - \eta'(\theta_1) - k (\eta(\theta_0) - \eta'(\theta_0)).
+    \end{equation}
+    Aplicando $\eta(\theta_0) - \eta'(\theta_0) = \alpha  - \eta'(\theta_0) \ge 0$ a \eqref{eq:np:desigualdad:2} deducimos que $0 \le \eta(\theta_1) - \eta'(\theta_1)$ como se quería. Por último, si el test de significancia $\alpha$, función potenci $\eta'$ y región crítica $C'$ es más potente, entonces
+\end{proof}
+
+\begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
+    Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Entonces, para cada $\alpha \in [0,1]$ existe $k \in [0,1]$ tal que el test dado por la región crítica
+    \[C_k = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k\}\]
+    es más potente de tamaño $\alpha$. Además, cualquier test más potente de significancia $\alpha$ es de tamaño $\alpha$ y su región crítica difiere de $C_k$ en a lo sumo un subconjunto de probabilidad nula.
+\end{cor}
 
 \subsection{Tests de la razón de verosimilitud}
 
@@ -1387,15 +1417,6 @@ $L(\theta;x_1, \ldots, x_n)$.
 Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
 
 Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);x) / L(\hat{\theta}(x);x)$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
-
-\begin{thm}[Lema de Neyman-Pearson]
-    Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Entonces, el mejor test de tamaño $\alpha$ tiene región crítica de la forma
-    \[\{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge c\}\]
-    para algún $c > 0$.
-\end{thm}
-\begin{proof}
-    Sea  
-\end{proof}
 
 \section{Estadística bayesiana}
 
@@ -1430,7 +1451,7 @@ Pasemos a definir formalmente estas distribuciones:
 	%Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
 
 	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
-	
+
 	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\vx{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley condicional de $\theta$ dadas las observaciones $\vx{x}$ de $\vx{X}$.
 	\begin{equation*}
 		\pi(\theta|\vx{x})= \frac{f(\vx{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\vx{x}|\theta)\pi(\theta)d\theta}}
@@ -1441,19 +1462,19 @@ La distribución a posteriori, como acabamos de indicar, es una distribución co
 
 \begin{definition}
 	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\vx{x}=(x_1,\dots,x_n)$, a la ley conjunta de $X_1,\dots,X_n$ se denomina distribución muestral o verosimilitud de la muestra, dado el valor del parámetro $\theta$, a:
-	
+
 	\[f(\vx{x}|\theta)=\prod_{i=1}^{n}{f(x_i|\theta)}\]
-	
+
 	La densidad conjunta de $\vx{X}$ y $\theta$ es:
-	
+
 	\[f(\vx{x},\theta)=f(\vx{x}|\theta)\pi(\theta)\]
-	
+
 	La densidad marginal de $\vx{X}$ es:
-	
+
 	\[m(\vx{x}) = \int_{\Theta}{f(\vx{x},\theta)d\theta} = \int_{\Theta}{f(\vx{x}|\theta)\pi(\theta)d\theta}\]
-	
+
 	En consecuencia, podemos expresar la distribución a posteriori de esta forma:
-	
+
 	\[\pi(\theta|\vx{x}) = \frac{f(\vx{x},\theta)}{m(\vx{x})}\]
 \end{definition}
 
@@ -1583,7 +1604,7 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 \begin{proof}
 
 	Supongamos $\Theta = \{\theta_1,\dots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades de cada $\theta_j$ y vendrá dada por $\pi(\theta_j)=p_j$, con $p_j\in[0,1]$ y $\sum_{i=1}^{k}{p_i}=1$, para $j=1,\dots,k$. Podemos suponer también que $t\in\{1,\dots,k\}$ es el índice del parámetro que corresponde al verdadero valor, es decir, $\theta_t = \theta_0$.
-	
+
 
 	Consideramos las variables aleatorias i.i.d. $X_1,\dots,X_n$ con distribución $f(x|\theta_t)$ y una muestra $x_1,\dots,x_n$. La distribución a posteriori en este caso discreto vendrá dada, para cada $\theta_i$, por:
 
