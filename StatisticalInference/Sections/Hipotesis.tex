@@ -98,13 +98,13 @@
 
     \subsection{Tests de la razón de verosimilitud}
 
-    Los tests de la razón de la verosimilitud están íntimamente ligado con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
+    Los tests de la razón de la verosimilitud están íntimamente ligados con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
     $L(\theta;x_1, \ldots, x_n)$.
 
     \begin{definition}
         Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
         \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
-         Un test de la razón de verositud es cualquier test que cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
+         Un test de la razón de verositud es cualquier test cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
     \end{definition}
 
     Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.

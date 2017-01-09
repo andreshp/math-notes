@@ -1432,7 +1432,7 @@ En cuanto a la segunda opción, el cálculo de la distribución a posteriori no 
 	Es decir, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
 \end{definition}
 
-Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente, tenemos, salvo constantes una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia, como se explica en la siguiente observación.
+Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente tenemos, salvo constantes, una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia, como se explica en la siguiente observación.
 
 \begin{remark}
 	Se tienen las siguientes condiciones equivalentes:
@@ -1459,7 +1459,7 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 \begin{ex}
-	Veamos algún ejemplo de los proporcionados por la proposición anterior. Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
+	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
 
 	\[f(\vx{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
 	\[\pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\]
@@ -1475,8 +1475,6 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 	Llegando de nuevo al mismo resultado.
 \end{ex}
-
-
 
 
 \begin{definition}
