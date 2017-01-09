@@ -858,13 +858,13 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     El método de la máxima verosimilitud es una de las técnicas más utilizada para obtener estimadores de calidad.
 
     \begin{definition}
-        Sea $x_1, \ldots, x_n$ una muestra de un fenómeno con función de distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$. Se define la función de verosimilitud para cada $\theta \in \Theta$ como $L(\theta | x) = \prod_{i = 1}^n f(x_i| \theta)$.
+        Sea $x_1, \ldots, x_n$ una muestra de un fenómeno con función de distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$. Se define la función de verosimilitud para cada $\theta \in \Theta$ como $L(\theta ; x) = \prod_{i = 1}^n f(x_i| \theta)$.
     \end{definition}
 
     Para cada posible valor $\theta$ del parámetro a estimar, la verosimilitud proporciona la credibilidad que se le da a $\theta$ para los datos $x_1, \ldots, x_n$. Buscamos una aproximación $\hat{\theta}$ de $\theta_0$ en base a la muestra obtenida. Parece lógico que si asumimos que los datos son correctos, entonces una buena aproximación será aquella en la que los datos sean coherentes, esto es, la probabilidad de que se den datos similares a la muestra observada debe ser lo más alta posible.
 
     \begin{definition}
-        Para cada elemento $x = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Theta$ como un máximo global de $L(\theta | x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
+        Para cada elemento $x = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Theta$ como un máximo global de $L(\theta ; x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
     \end{definition}
 
     El estimador máximo verosímil presenta principalmente dos problemas.
@@ -876,20 +876,20 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     Para adentrarnos en el estudio de estos problemas necesitaremos teoría general de estimadores. Antes de desarrollarla realizaremos varios ejemplos de cálculo de estimadores máximo verosímiles.
 
     \begin{remark} \label{rem:emv:log}
-        Los máximos globales de la función $L(\theta | x)$ se corresponden con los máximos globales de la función $\log L(\theta | x) = \sum_{i = 1}^n \log f(x_i | \theta)$. En múltiples ocasiones es más sencillo maximizar esta última expresión.
+        Los máximos globales de la función $L(\theta ; x)$ se corresponden con los máximos globales de la función $\log L(\theta ; x) = \sum_{i = 1}^n \log f(x_i | \theta)$. En múltiples ocasiones es más sencillo maximizar esta última expresión.
     \end{remark}
 
     \begin{ex}[Distribución normal]
         Consideremos una muestra $X_1, \ldots, X_n$ de un fenómeno con distribución $N(\theta,1)$. En primer lugar, calculamos la función de verosimilitud
-        \[L(\theta | x) = \prod_{i = 1}^n \frac{1}{\sqrt{2\pi}} e^{-(x_i - \theta)^2 / 2} = \frac{1}{(2\pi)^{n/2}}e^{-\sum_{i = 1}^n (x_i - \theta)^2 / 2}.\]
-        En virtud del Comentario \ref{rem:emv:log} maximizamos la función $-\sum_{i = 1}^n (x_i - \theta)^2 / 2 - n/2 \log(2\pi)$. Maximizar esta función equivale a minimizar $h(\theta) = \sum_{i = 1}^n (x_i - \theta)^2$. Derivando, obtenemos que $h'(\theta) = 0$ si, y solo si, $\theta = \overline{x}$. Además, es rutinario comprobar que $\overline{x}$ es el mínimo absoluto de $h$. Por tanto, $\overline{x}$ es el máximo absoluto de $L(\theta | x)$. Tenemos pues $\hat{\theta}(x) = \overline{x}$.
+        \[L(\theta ; x) = \prod_{i = 1}^n \frac{1}{\sqrt{2\pi}} e^{-(x_i - \theta)^2 / 2} = \frac{1}{(2\pi)^{n/2}}e^{-\sum_{i = 1}^n (x_i - \theta)^2 / 2}.\]
+        En virtud del Comentario \ref{rem:emv:log} maximizamos la función $-\sum_{i = 1}^n (x_i - \theta)^2 / 2 - n/2 \log(2\pi)$. Maximizar esta función equivale a minimizar $h(\theta) = \sum_{i = 1}^n (x_i - \theta)^2$. Derivando, obtenemos que $h'(\theta) = 0$ si, y solo si, $\theta = \overline{x}$. Además, es rutinario comprobar que $\overline{x}$ es el mínimo absoluto de $h$. Por tanto, $\overline{x}$ es el máximo absoluto de $L(\theta ; x)$. Tenemos pues $\hat{\theta}(x) = \overline{x}$.
     \end{ex}
 
     A continuación pretendemos extender el método de la máxima verosimilitud para estimar $g(\theta)$, donde $g : \Theta \to \Theta'$ sobreyectiva. Si la aplicación $g$ fuese inyectiva, entonces podemos definir de norma natural la verosimilitud de $\eta \in \Theta'$ como $L^*(\eta | x) = L(g^{-1}(\eta) | x)$. Claramente, el valor que maximiza $L^*(\eta | x)$, que denotaremos $\hat{g}(x)$, es $g(\hat{\theta}(x))$. Sin embargo, los casos que presentan relevancia práctica son aquellos en los que $g$ no es inyectiva ya que de esta forma conseguimos reducir la dimensionalidad del espacio de parámetros. Necesitamos extender la definición de verosimilitud para abordar esta problemática.
 
     \begin{definition}
         En el contexto anterior, definimos la verosimilitud inducida por $g$ como
-        \[L^*(\eta|x) = \sup\{L(\theta | x): \theta \in g^{-1}(\eta)\}.\]
+        \[L^*(\eta|x) = \sup\{L(\theta ; x): \theta \in g^{-1}(\eta)\}.\]
         El valor $\hat{g}(x)$ que maximiza $L^*(\eta|x)$ se denomina estimador maximo verosímil de $g(\theta)$.
     \end{definition}
 
@@ -900,7 +900,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \end{thm}
     \begin{proof}
         En primer lugar, la definición de la verosimilitud inducida proporciona
-        \[\sup_{\eta \in \Theta'} L^*(\eta|x) = \sup_{\eta \in \Theta'} \sup\{L(\theta | x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Theta} L(\theta | x).\]
+        \[\sup_{\eta \in \Theta'} L^*(\eta|x) = \sup_{\eta \in \Theta'} \sup\{L(\theta ; x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Theta} L(\theta ; x).\]
         Por tanto, si la verosimilitud tiene un máximo global $\hat\theta(x)$, entonces lo tiene la verosimilitud inducida (el recíproco puede no ser cierto) y se alcanza en $g(\hat\theta(x))$.
     \end{proof}
 
@@ -922,13 +922,15 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
         \begin{thm}
             Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta)$. Sea $T(X_1, X_2, \ldots, X_n)$ un estadístico. Entonces, $T$ es  suficiente si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
-            \[L(x_1, x_2, \ldots, x_n) = h(t;\theta) g(x_1, x_2, \ldots, x_n),\]
+            \[L(\theta; x_1, x_2, \ldots, x_n) = h(t | \theta) g(x_1, x_2, \ldots, x_n),\]
             donde $t = T(x_1, \ldots, x_n)$ y $g(x_1, x_2, \ldots, x_n)$ no depende de $\theta$.
         \end{thm}
 
-        Si encontramos un estadístico suficiente, entonces podemos inferir el parámetro $\theta_0$ utilizando solamente la función $h(t;\theta)$. Interesa pues que el codominio del estadístico suficiente sea lo más simple posible. Los estadísticos suficientes son especialmente interesantes al aplicar el método de la máxima verosimilitud.
+        Nótese que si $T$ es un estadístico suficiente, entonces a falta de una constante $h(t|\theta)$ es la función de densidad de la variable $T(X)$.
 
-        \begin{ex}[Distribución normal, media desconocida]
+        Si encontramos un estadístico suficiente, entonces podemos inferir el parámetro $\theta_0$ utilizando solamente la función $h(t |\theta)$. Interesa pues que el codominio del estadístico suficiente sea lo más simple posible. Los estadísticos suficientes son especialmente interesantes al aplicar el método de la máxima verosimilitud.
+
+        \begin{ex}[Distribución normal, media desconocida] \label{ex:sufi:normal:media}
             Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde solamente $\sigma^2$ es conocido ($\theta = \mu$). Es fácil verificar que
             \[\sum_{i = 1}^n (x_i - \mu)^2 = \sum_{i = 1}^n (x_i - \overline{x})^2 + n (\overline{x} - \mu)^2 = (n-1)S^2 + n(\overline{x} - \mu)^2.\]
             A partir de la igualdad anterior obtenemos

@@ -87,14 +87,31 @@
         En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta  esta pregunta es negativa. En efecto, basta considerar distribuciones discretas ya que no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, con una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas, como muestra el siguiente corolario del Lema de Neyman-Pearson.
 
         \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
-            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
+            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Supóngase además que las funciones de densidades $f(x|\theta_0)$ y $f(x|\theta_1)$ coinciden a lo sumo en un subconjunto de medida nula. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
             \[C_{k_\alpha} = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k_\alpha\}\]
             es más potente de tamaño $\alpha$.
         \end{cor}
         \begin{proof}
-            Gracias al Lema de Neyman-Pearson la prueba se reduce a comprobar que existe $k_\alpha$ tal que $\alpha = P_{\theta_0}(C_k)$.
+            Gracias al Lema de Neyman-Pearson la prueba se reduce a comprobar que existe $k_\alpha$ tal que $\alpha = P_{\theta_0}(C_k)$. En efecto, la continuidad de las funciones de densidad nos asegura que la función $f(x| \theta_1) / f(x| \theta_0)$ es continua. Definimos $\varphi: [0,1] \to [0,1]$ dada por
+            \[\varphi(k) = P_{\theta_0}(\frac{L(\theta_1;X)}{L(\theta_0;X)} \ge k).\]
+            Esta función es continua y verifica $\varphi(0) = 1$ y $\varphi(1) = 0$. El resultado es consecuencia del teorema del valor intermedio aplicado a $\varphi$.
         \end{proof}
 
+        Los tests proporcionados por el lema de Neyman-Pearson se conocen como tests de Neyman-Pearson. A la hora de aplicar este tipo de tests los estadísticos suficientes son de especial ayuda. En efecto, si $T$ es un estadístico suficiente y $h(t | \theta)$ es su función de densidad, entonces
+        \[\frac{L(\theta_1; x)}{L(\theta_0; x)} = \frac{h(T(x) | \theta_1)}{h(T(x) | \theta_0)}.\]
+        Por tanto, podemos calcular la región crítica del test simplemente conociendo el estadístico suficiente y su distribución. Esta observación hace que los cálculos sean más sencillos.
+
+        A continuación estudiamos varios ejemplos de los tests de Neyman-Pearson.
+
+        \begin{ex}[Distribución normal de varianza conocida]
+            Consideramos una variable aleatoria $X \sim N(\mu, \sigma^2)$, donde $\sigma^2$ es conocido. Vamos a contrastar las hipótesis $H_0 : \mu = \mu_0$ y $H_1 : \mu = \mu_1$ con $\mu_1 > \mu_0$. A priori uno intuye que habrá que rechazar $H_0$ cuando se observen valores de $\overline{x}$ más cercanos a $\mu_1$ que a $\mu_0$. Veamos que el test de Neyman-Pearson sigue esta intuición.
+
+            Recordemos que el Ejemplo \ref{ex:sufi:normal:media} se demostró que $\overline{X}$ es un estadístico suficiente de cualquier distribución normal de varianza conocida. Además, obtuvimus que $\overline{X} \sim N(\mu, \sigma^2 / n)$. Esta observación permite calcular la región crítica del test de Neyman-Pearson con facilidad. En efecto,
+            \[\frac{L(\mu_1; x)}{L(\mu_0; x)} = \exp\left(-\frac{(\overline{x} - \mu_1)^2 - (\overline{x} - \mu_0)^2}{2\sigma^2/n}\right) = \exp\left(-\frac{\mu_1^2 - \mu_0^2 + 2\overline{x}(\mu_0-\mu_1)}{2\sigma^2/n}\right).\]
+            Como consecuencia, obtenemos que $L(\mu_1; x) / L(\mu_0; x) \ge k$ si, y solo si,
+            \[\overline{x} \ge \frac{\mu_0+\mu_1}{2} + \frac{\sigma^2 \log k}{n(\mu_1 - \mu_0)} = A_k.\]
+            Dado $\alpha \in [0,1]$ buscamos $k \in [0,1]$ tal que $P_{\mu_0}(\overline{X} \ge A_k) = \alpha$. Esta ecuación podemos resolverla para valores concretos de $\alpha$. Bajo $H_0$ tenemos $\overline{X} \sim N(\mu_0, \sigma^2 / n)$ y, por tanto, sabemos que $A_k = \mu_0 + z_\alpha \sigma / \sqrt{n}$, donde $z_\alpha$ verifica $F(z_\alpha) = \alpha$ para la función de distribución $F$ de $N(0,1)$. Los valores $z_\alpha$ que más se utilizan aparecen habitualmente en las tablas de la distribución normal. También se pueden calcular mediante un ordenador.
+        \end{ex}
 
     \subsection{Tests de la razón de verosimilitud}
 
