@@ -41,6 +41,7 @@
 \usepackage{courier}                    % Fuente Courier.
 \usepackage{microtype}                  % Mejora la letra final de cara al lector.
 
+
 %-----------------------------------------------------------------------------------------------------
 %	LICENCIA
 %-----------------------------------------------------------------------------------------------------
@@ -97,6 +98,12 @@
 \lfoot{}                                                 % Parte izquierda.
 \cfoot{}                                                 % Centro.
 \rfoot{Página\ \thepage\ de\ \protect\pageref{LastPage}} % Parte derecha.
+
+%-----------------------------------------------------------------------------------------------------
+%	Secciones
+%-----------------------------------------------------------------------------------------------------
+
+\newcommand{\importsection}[1]{\input{./Sections/#1}}           % Include sections from sections directory.
 
 %-----------------------------------------------------------------------------------------------------
 %	PORTADA
@@ -1321,102 +1328,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
         \label{table:exponencial}
     \end{table}
 
-\section{Tests de hipótesis}
-
-En la Sección \ref{sec:estimacion} se estudió el problema de estimación de parámetros. En este capítulo se estudiará otro problema clásico de la inferencia, los tests de hipótesis.
-
-\begin{definition}
-    Sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de distribuciones. Supongamos que una variable aleatoria sigue una distribución $f(X|\theta)$ con $\theta \in \Theta$. Una hipótesis es una afirmación $\theta \in \Theta_0$, donde $\Theta_0$ es un subconjunto de $\Theta$. Una hipótesis es simple si es de la forma  $\theta \in \{\theta_0\}$ para cierto $\theta_0 \in \Theta$. En tal caso se escribe $\theta = \theta_0$. Si una hipótesis no es simple, entonces decimos que es compuesta. Además, dos hipótesis $\theta \in \Theta_0$ y $\theta \in \Theta_1$ son excluyentes si $\Theta_0$ y $\Theta_1$ son disjuntos.
-\end{definition}
-
-El objetivo de los tests de hipótesis es, dadas dos hipótesis excluyentes, aceptar una de las dos hipótesis como verdadera tras observar una muestra. Esta acción se denomina contrastar dos hipótesis. Generalmente el tratamiento de las dos hipótesis no es simétrico, esto es, una de las dos hipótesis tiene preferencia sobre la otra y solo será rechazada cuando la evidencia en su contra sea muy clara. Esta hipótesis se llama hipótesis nula, mientras que la otra hipótesis se denomina hipótesis alternativa. Las denotamos $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$ respectivamente (recordemos que $\Theta_0 \cap \Theta_1 = \emptyset$).
-
-El contraste de hipótesis surge de forma natural en multitud de ciencias e ingenierías. Por ejemplo, supongamos que estamos estudiando cómo afecta un determinado medicamento a la presión sanguínea de los pacientes. Queremos corroborar que el medicamento no tiene ningún efecto sobre la presión, hecho que es nuestra hipótesis nula. Sea $\theta$ la variación media de la presión de los pacientes al tomar el medicamento. Esta situación puede representarse como $H_0: \theta = 0$ y $H_1: \theta \ne 0$. Tras tomar muestras en varios pacientes tendremos que decidir cuál de las dos hipótesis aceptamos. Otro ejemplo puede ser el estudio de la proporción media de piezas defectuosas que fabrica una empresa, que denotamos $\theta$. Sea $\theta_0$ el máximo valor aceptable que puede alcanzar esa proporción. Queremos combrobar si la proporción de piezas defectuosas es menor o igual que $\theta_0$, lo que se puede representar mediante las hipótesis $H_0: \theta \le \theta_0$ y $H_1: \theta > \theta_0$. Habitualmente no es factible probar cada una de las piezas y, por tanto, tenemos que hacer inferencia a partir de una muestra. En ambos problemas $\theta$ debe ser el parámetro de una distribución. Por ejemplo, podríamos utilizar una distribución normal de media $\theta$.
-
-Nótese que en los dos ejemplos anteriores el espacio paramétrico es unión disjunta de $\Theta_0$ y $\Theta_1$. Podemos suponer que siempre se da esta situación. En efecto, el espacio paramétrico siempre se puede restringir a $\Theta_0 \cup \Theta_1$. En este contexto la hipótesis alternativa es la hipótesis complementaria a la hipótesis nula.
-
-\begin{definition}
-    Un test de hipótesis es una regla que permite dividir el espacio muestral en dos subconjuntos medibles disjuntos. Estos conjuntos se corresponden con aquellas muestras que aceptan la hipótesis nula como cierta (región de aceptación) y aquellas muestras que rechazan la hipótesis nula y aceptan la hipótesis alternativa (región crítica).
-\end{definition}
-
-Supondremos que la región crítica se corresponde con la imagen inversa de un boreliano, esto es, es de la forma $X \in R$, donde $X = (X_1, \ldots, X_n)$ es la muestra y $R \in \mathcal{B}^n$. En ocasiones podremos expresar la región crítica en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor.
-
-\subsection{Errores de los tests de hipótesis}
-
-
-Consideremos un test de hipótesis con región crítica $X \in R$. En dicho test podemos cometer dos tipos de errores:
-
-\begin{itemize}
-    \item \textbf{Error de tipo 1.} Rechazar la hipótesis nula cuando es cierta. Si $\theta \in \Theta_0$, entonces la probabilidad de cometer un error de tipo 1 es $P_\theta(X \in R)$.
-    \item \textbf{Error de tipo 2.} Rechazar la hipótesis alternativa cuando es cierta. Si $\theta \in \Theta_0^c$, entonces la probabilidad de cometer un error de tipo 2 es $P_\theta(X \in R^c)$.
-\end{itemize}
-
-\begin{definition}
-    En el contexto actual, se define la función de potencia del test de hipótesis como
-    \[\eta(\theta) = P_\theta(X \in R) = \begin{cases} \text{Probabilidad de cometer un error de tipo 1} & \text{ si } \theta \in \Theta_0; \\ \text{1 - Probabilidad de cometer un error de tipo 2} & \text{ si } \theta \in \Theta_0^c. \\ \end{cases}\]
-\end{definition}
-
-Nuestro objetivo es desarrollar tests de hipótesis tales que la probabilidad de cometer errores de tipo 1 y tipo 2 sea lo más pequeña posible para cualquier valor de $\theta$. Esto es, queremos minimizar $\eta$ en $\Theta_0$ y maximizar $\eta$ en $\Theta_0^c$. Por tanto, la función de potencia ideal es aquella que toma el valor $0$ en $\Theta_0$ y el valor $1$ en $\Theta_0^c$. Esta función solo se obtiene en situaciones triviales. Generalmente obtendremos funciones potencia mucho más complejas. Nótese que si reducimos la región crítica de un test entonces disminuye la probabilidad de cometer un error de tipo 1 pero aumenta la probabilidad de cometer un error de tipo 2. Consecuentemente, encontrar una región crítica apropiada no es una tarea sencilla.
-
-Recordemos que la hipótesis nula generalmente tiene preferencia frente a la hipótesis alternativa. Por tanto, el error de tipo 1 es más grave que el error de tipo 2. Para asegurarnos que se respeta esta preferencia podemos buscar tests de hipótesis que garanticen que la probabilidad de cometer un error de tipo 1 es menor que un valor $\alpha$ fijado de antemano.
-
-\begin{definition}
-    Un test de hipótesis es de tamaño $\alpha \in [0,1]$ si $\sup\{\eta(\theta): \theta \in \Theta_0\} = \alpha$.
-\end{definition}
-
-\begin{definition}
-    Un test de hipótesis tiene nivel de significación $\alpha \in [0,1]$ si $\eta(\theta) \le \alpha$ para todo $\theta \in \Theta_0$.
-\end{definition}
-
-Si nos restringimos a estudiar los tests de tamaño $\alpha$, entonces nuestro objetivo se reduce a buscar entre todos estos tests aquel que minimice la probabilidad de cometer un error de tipo 2. Este hecho queda formalizado en la siguiente definición.
-
-\begin{definition}
-    Considérese un test con función potencia $\eta$. Decimos que es un test más potente de tamaño $\alpha$ (resp. de significancia $\alpha$)  si para cualquier otro test de tamaño $\alpha$ (resp. de significancia $\alpha$) con función potencia $\eta'$ se verifica $\eta(\theta) \ge \eta'(\theta)$ para todo $\theta \in \Theta_0^c$.
-\end{definition}
-
-En lo que sigue buscaremos obtener los tests más potentes de tamaño $\alpha$ en caso de que sea posible. Cabe decir que en la práctica se utilizan valores de $\alpha$ pequeños, como $0.01$, $0.05$ o $0.1$.
-
-\subsection{Tests de Neyman-Pearson}
-
-En esta sección estudiamos cuáles son los tests más potentes para contrastar dos hipótesis simples. Esta cuestión es resuelta por el Lema de Neyman-Pearson. Además, estudiamos si es posible generalizar el resultado para contrastar hipótesis compuestas.
-
-\begin{thm}[Lema de Neyman-Pearson]
-    Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
-    \[C_k = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k\}.\]
-    Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test más potente de significancia $\alpha$. Además, cualquier test más potente de significancia $\alpha$ es de tamaño $\alpha$ y su región crítica difiere de $C_k$ en a lo sumo un subconjunto de probabilidad nula.
-\end{thm}
-\begin{proof}
-    En primer lugar, nótese que el test dado por $C_k$ es de tamaño $\alpha$ ya que $\sup\{ \eta(\theta) : \theta \in \Theta_0\} = \eta(\theta_0) = \alpha$. Consideremos otro test de significancia $\alpha$ cuya función potencia es $\eta'$ y su región crítica es $C'$ y veamos que $\eta'(\theta_1) \le \eta(\theta_1)$. Por distinción de casos es fácil razonar que para cualquier muestra $x$ se verifica
-    \begin{equation} \label{eq:np:desigualdad}
-        (1_{C_k}(x)-1_C(x)) (L(\theta_1; x) - k L(\theta_0; x)) \ge 0,
-    \end{equation}
-    donde $1_A$ denota la función indicadora del conjunto $A$. Integrando la desigualdad \eqref{eq:np:desigualdad} obtenemos
-    \begin{equation} \label{eq:np:desigualdad:2}
-        0 \le \int(1_{C_k}(x)-1_C(x)) (L(\theta_1; x) - k L(\theta_0; x)) \, dx = \eta(\theta_1) - \eta'(\theta_1) - k (\eta(\theta_0) - \eta'(\theta_0)).
-    \end{equation}
-    Aplicando $\eta(\theta_0) - \eta'(\theta_0) = \alpha  - \eta'(\theta_0) \ge 0$ a \eqref{eq:np:desigualdad:2} deducimos que $0 \le \eta(\theta_1) - \eta'(\theta_1)$ como se quería. Por último, si el test de significancia $\alpha$, función potenci $\eta'$ y región crítica $C'$ es más potente, entonces
-\end{proof}
-
-\begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
-    Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Entonces, para cada $\alpha \in [0,1]$ existe $k \in [0,1]$ tal que el test dado por la región crítica
-    \[C_k = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k\}\]
-    es más potente de tamaño $\alpha$. Además, cualquier test más potente de significancia $\alpha$ es de tamaño $\alpha$ y su región crítica difiere de $C_k$ en a lo sumo un subconjunto de probabilidad nula.
-\end{cor}
-
-\subsection{Tests de la razón de verosimilitud}
-
-Los tests de la razón de la verosimilitud están íntimamente ligado con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
-$L(\theta;x_1, \ldots, x_n)$.
-
-\begin{definition}
-    Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
-    \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
-     Un test de la razón de verositud es cualquier test que cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
-\end{definition}
-
-Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
-
-Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);x) / L(\hat{\theta}(x);x)$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
+\importsection{Hipotesis.tex}
 
 \section{Estadística bayesiana}
 
@@ -1524,7 +1436,7 @@ Tener una familia de distribuciones conjugadas a priori nos permite simplificar 
 
 \begin{remark}
 	Se tienen las siguientes condiciones equivalentes:
-	\begin{enumerate}[label=\roman*]
+	\begin{enumerate}%[label=\roman)*]
 		\item $f(x|\theta)\pi(\theta) \propto \Pi(\theta) \in \mathcal{F}$
 		\item $\pi(\theta|x)=\Pi(\theta)\in\mathcal{F}$
 	\end{enumerate}
