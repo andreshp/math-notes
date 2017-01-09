@@ -31,82 +31,82 @@
     \subsection{Errores de los tests de hipótesis}
 
 
-    Consideremos un test de hipótesis con región crítica $X \in R$. En dicho test podemos cometer dos tipos de errores:
+        Consideremos un test de hipótesis con región crítica $X \in R$. En dicho test podemos cometer dos tipos de errores:
 
-    \begin{itemize}
-        \item \textbf{Error de tipo 1.} Rechazar la hipótesis nula cuando es cierta. Si $\theta \in \Theta_0$, entonces la probabilidad de cometer un error de tipo 1 es $P_\theta(X \in R)$.
-        \item \textbf{Error de tipo 2.} Rechazar la hipótesis alternativa cuando es cierta. Si $\theta \in \Theta_0^c$, entonces la probabilidad de cometer un error de tipo 2 es $P_\theta(X \in R^c)$.
-    \end{itemize}
+        \begin{itemize}
+            \item \textbf{Error de tipo 1.} Rechazar la hipótesis nula cuando es cierta. Si $\theta \in \Theta_0$, entonces la probabilidad de cometer un error de tipo 1 es $P_\theta(X \in R)$.
+            \item \textbf{Error de tipo 2.} Rechazar la hipótesis alternativa cuando es cierta. Si $\theta \in \Theta_0^c$, entonces la probabilidad de cometer un error de tipo 2 es $P_\theta(X \in R^c)$.
+        \end{itemize}
 
-    \begin{definition}
-        En el contexto actual, se define la función de potencia del test de hipótesis como
-        \[\eta(\theta) = P_\theta(X \in R) = \begin{cases} \text{Probabilidad de cometer un error de tipo 1} & \text{ si } \theta \in \Theta_0; \\ \text{1 - Probabilidad de cometer un error de tipo 2} & \text{ si } \theta \in \Theta_0^c. \\ \end{cases}\]
-    \end{definition}
+        \begin{definition}
+            En el contexto actual, se define la función de potencia del test de hipótesis como
+            \[\eta(\theta) = P_\theta(X \in R) = \begin{cases} \text{Probabilidad de cometer un error de tipo 1} & \text{ si } \theta \in \Theta_0; \\ \text{1 - Probabilidad de cometer un error de tipo 2} & \text{ si } \theta \in \Theta_0^c. \\ \end{cases}\]
+        \end{definition}
 
-    Nuestro objetivo es desarrollar tests de hipótesis tales que la probabilidad de cometer errores de tipo 1 y tipo 2 sea lo más pequeña posible para cualquier valor de $\theta$. Esto es, queremos minimizar $\eta$ en $\Theta_0$ y maximizar $\eta$ en $\Theta_0^c$. Por tanto, la función de potencia ideal es aquella que toma el valor $0$ en $\Theta_0$ y el valor $1$ en $\Theta_0^c$. Esta función solo se obtiene en situaciones triviales. Generalmente obtendremos funciones potencia mucho más complejas. Nótese que si reducimos la región crítica de un test entonces disminuye la probabilidad de cometer un error de tipo 1 pero aumenta la probabilidad de cometer un error de tipo 2. Consecuentemente, encontrar una región crítica apropiada no es una tarea sencilla.
+        Nuestro objetivo es desarrollar tests de hipótesis tales que la probabilidad de cometer errores de tipo 1 y tipo 2 sea lo más pequeña posible para cualquier valor de $\theta$. Esto es, queremos minimizar $\eta$ en $\Theta_0$ y maximizar $\eta$ en $\Theta_0^c$. Por tanto, la función de potencia ideal es aquella que toma el valor $0$ en $\Theta_0$ y el valor $1$ en $\Theta_0^c$. Esta función solo se obtiene en situaciones triviales. Generalmente obtendremos funciones potencia mucho más complejas. Nótese que si reducimos la región crítica de un test entonces disminuye la probabilidad de cometer un error de tipo 1 pero aumenta la probabilidad de cometer un error de tipo 2. Consecuentemente, encontrar una región crítica apropiada no es una tarea sencilla.
 
-    Recordemos que la hipótesis nula generalmente tiene preferencia frente a la hipótesis alternativa. Por tanto, el error de tipo 1 es más grave que el error de tipo 2. Para asegurarnos que se respeta esta preferencia podemos buscar tests de hipótesis que garanticen que la probabilidad de cometer un error de tipo 1 es menor que un valor $\alpha$ fijado de antemano.
+        Recordemos que la hipótesis nula generalmente tiene preferencia frente a la hipótesis alternativa. Por tanto, el error de tipo 1 es más grave que el error de tipo 2. Para asegurarnos que se respeta esta preferencia podemos buscar tests de hipótesis que garanticen que la probabilidad de cometer un error de tipo 1 es menor que un valor $\alpha$ fijado de antemano.
 
-    \begin{definition}
-        Un test de hipótesis es de tamaño $\alpha \in [0,1]$ si $\sup\{\eta(\theta): \theta \in \Theta_0\} = \alpha$.
-    \end{definition}
+        \begin{definition}
+            Un test de hipótesis es de tamaño $\alpha \in [0,1]$ si $\sup\{\eta(\theta): \theta \in \Theta_0\} = \alpha$.
+        \end{definition}
 
-    \begin{definition}
-        Un test de hipótesis tiene nivel de significación $\alpha \in [0,1]$ si $\eta(\theta) \le \alpha$ para todo $\theta \in \Theta_0$.
-    \end{definition}
+        \begin{definition}
+            Un test de hipótesis tiene nivel de significación $\alpha \in [0,1]$ si $\eta(\theta) \le \alpha$ para todo $\theta \in \Theta_0$.
+        \end{definition}
 
-    Si nos restringimos a estudiar los tests de tamaño $\alpha$, entonces nuestro objetivo se reduce a buscar entre todos estos tests aquel que minimice la probabilidad de cometer un error de tipo 2. Este hecho queda formalizado en la siguiente definición.
+        Si nos restringimos a estudiar los tests de tamaño $\alpha$, entonces nuestro objetivo se reduce a buscar entre todos estos tests aquel que minimice la probabilidad de cometer un error de tipo 2. Este hecho queda formalizado en la siguiente definición.
 
-    \begin{definition}
-        Considérese un test con función potencia $\eta$. Decimos que es un test más potente de tamaño $\alpha$ (resp. de nivel de significación $\alpha$)  si para cualquier otro test de tamaño $\alpha$ (resp. de nivel de significación $\alpha$) con función potencia $\eta'$ se verifica $\eta(\theta) \ge \eta'(\theta)$ para todo $\theta \in \Theta_0^c$.
-    \end{definition}
+        \begin{definition}
+            Considérese un test con función potencia $\eta$. Decimos que es un test más potente de tamaño $\alpha$ (resp. de nivel de significación $\alpha$)  si para cualquier otro test de tamaño $\alpha$ (resp. de nivel de significación $\alpha$) con función potencia $\eta'$ se verifica $\eta(\theta) \ge \eta'(\theta)$ para todo $\theta \in \Theta_0^c$.
+        \end{definition}
 
-    En lo que sigue buscaremos obtener los tests más potentes de tamaño $\alpha$ en caso de que sea posible. Cabe decir que en la práctica se utilizan valores de $\alpha$ pequeños, como $0.01$, $0.05$ o $0.1$.
+        En lo que sigue buscaremos obtener los tests más potentes de tamaño $\alpha$ en caso de que sea posible. Cabe decir que en la práctica se utilizan valores de $\alpha$ pequeños, como $0.01$, $0.05$ o $0.1$.
 
     \subsection{Tests de Neyman-Pearson}
 
-    En esta sección estudiamos cuáles son los tests más potentes para contrastar dos hipótesis simples. Esta cuestión es resuelta por el Lema de Neyman-Pearson. Además, estudiamos si es posible generalizar el resultado para contrastar hipótesis compuestas.
+        En esta sección estudiamos cuáles son los tests más potentes para contrastar dos hipótesis simples. Esta cuestión es resuelta por el Lema de Neyman-Pearson. Además, estudiamos si es posible generalizar el resultado para contrastar hipótesis compuestas.
 
-    \begin{thm}[Lema de Neyman-Pearson] \label{thm:np:1}
-        Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
-        \[C_k = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k\}.\]
-        Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test más potente de significación $\alpha$. Además, cualquier test más potente de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} > k\} \subset C' \subset C_k$ salvo un subconjunto de probabilidad nula.
-    \end{thm}
-    \begin{proof}
-        En primer lugar, nótese que el test dado por $C_k$ es de tamaño $\alpha$ ya que $\sup\{ \eta(\theta) : \theta \in \Theta_0\} = \eta(\theta_0) = \alpha$. Consideremos otro test de significación $\alpha$ cuya función potencia es $\eta'$ y su región crítica es $C'$ y veamos que $\eta'(\theta_1) \le \eta(\theta_1)$. Por distinción de casos es fácil razonar que para cualquier muestra $x$ se verifica
-        \begin{equation} \label{eq:np:desigualdad}
-            (1_{C_k}(x)-1_{C'}(x)) (L(\theta_1; x) - k L(\theta_0; x)) \ge 0,
-        \end{equation}
-        donde $1_A$ denota la función indicadora del conjunto $A$. Integrando la desigualdad \eqref{eq:np:desigualdad} obtenemos
-        \begin{equation} \label{eq:np:desigualdad:2}
-            0 \le \int(1_{C_k}(x)-1_{C'}(x)) (L(\theta_1; x) - k L(\theta_0; x)) \, dx = \eta(\theta_1) - \eta'(\theta_1) - k (\eta(\theta_0) - \eta'(\theta_0)).
-        \end{equation}
-        Aplicando $\eta(\theta_0) - \eta'(\theta_0) = \alpha  - \eta'(\theta_0) \ge 0$ a \eqref{eq:np:desigualdad:2} deducimos que $0 \le \eta(\theta_1) - \eta'(\theta_1)$ como se quería. Por último, si un test de significación $\alpha$ con función potencia $\eta'$ y región crítica $C'$ es más potente, entonces $\eta(\theta_1) = \eta'(\theta_1)$ y, por tanto, la desigualdad \eqref{eq:np:desigualdad:2} nos indica que $0 \le -k(eta(\theta_0) - \eta'(\theta_0)) \le 0$, esto es, $\eta'(\theta_0) = \eta(\theta_0) = \alpha$. Puesto que la hipótesis es simple hemos obtenido que el test asociado a $C'$ tiene tamaño $\alpha$. Consecuentemente, en \eqref{eq:np:desigualdad:2} se da la igualdad, cosa que solo puede suceder si la función no negativa a integrar es constantemente 0 salvo en un conjunto de probabiliad nula. La prueba finaliza al darse cuenta de que este hecho equivale a que $\{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} > k\} \subset C' \subset C_k$ salvo en un conjunto de probabilidad nula.
-    \end{proof}
+        \begin{thm}[Lema de Neyman-Pearson] \label{thm:np:1}
+            Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
+            \[C_k = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k\}.\]
+            Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test más potente de significación $\alpha$. Además, cualquier test más potente de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} > k\} \subset C' \subset C_k$ salvo un subconjunto de probabilidad nula.
+        \end{thm}
+        \begin{proof}
+            En primer lugar, nótese que el test dado por $C_k$ es de tamaño $\alpha$ ya que $\sup\{ \eta(\theta) : \theta \in \Theta_0\} = \eta(\theta_0) = \alpha$. Consideremos otro test de significación $\alpha$ cuya función potencia es $\eta'$ y su región crítica es $C'$ y veamos que $\eta'(\theta_1) \le \eta(\theta_1)$. Por distinción de casos es fácil razonar que para cualquier muestra $x$ se verifica
+            \begin{equation} \label{eq:np:desigualdad}
+                (1_{C_k}(x)-1_{C'}(x)) (L(\theta_1; x) - k L(\theta_0; x)) \ge 0,
+            \end{equation}
+            donde $1_A$ denota la función indicadora del conjunto $A$. Integrando la desigualdad \eqref{eq:np:desigualdad} obtenemos
+            \begin{equation} \label{eq:np:desigualdad:2}
+                0 \le \int(1_{C_k}(x)-1_{C'}(x)) (L(\theta_1; x) - k L(\theta_0; x)) \, dx = \eta(\theta_1) - \eta'(\theta_1) - k (\eta(\theta_0) - \eta'(\theta_0)).
+            \end{equation}
+            Aplicando $\eta(\theta_0) - \eta'(\theta_0) = \alpha  - \eta'(\theta_0) \ge 0$ a \eqref{eq:np:desigualdad:2} deducimos que $0 \le \eta(\theta_1) - \eta'(\theta_1)$ como se quería. Por último, si un test de significación $\alpha$ con función potencia $\eta'$ y región crítica $C'$ es más potente, entonces $\eta(\theta_1) = \eta'(\theta_1)$ y, por tanto, la desigualdad \eqref{eq:np:desigualdad:2} nos indica que $0 \le -k(eta(\theta_0) - \eta'(\theta_0)) \le 0$, esto es, $\eta'(\theta_0) = \eta(\theta_0) = \alpha$. Puesto que la hipótesis es simple hemos obtenido que el test asociado a $C'$ tiene tamaño $\alpha$. Consecuentemente, en \eqref{eq:np:desigualdad:2} se da la igualdad, cosa que solo puede suceder si la función no negativa a integrar es constantemente 0 salvo en un conjunto de probabiliad nula. La prueba finaliza al darse cuenta de que este hecho equivale a que $\{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} > k\} \subset C' \subset C_k$ salvo en un conjunto de probabilidad nula.
+        \end{proof}
 
-    En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta  esta pregunta es negativa. En efecto, basta considerar distribuciones discretas ya que no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, con una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas, como muestra el siguiente corolario del Lema de Neyman-Pearson.
+        En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta  esta pregunta es negativa. En efecto, basta considerar distribuciones discretas ya que no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, con una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas, como muestra el siguiente corolario del Lema de Neyman-Pearson.
 
-    \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
-        Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
-        \[C_{k_\alpha} = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k_\alpha\}\]
-        es más potente de tamaño $\alpha$.
-    \end{cor}
-    \begin{proof}
-        Gracias al Lema de Neyman-Pearson la prueba se reduce a comprobar que existe $k_\alpha$ tal que $\alpha = P_{\theta_0}(C_k)$.
-    \end{proof}
+        \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
+            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
+            \[C_{k_\alpha} = \{x: \frac{L(\theta_1;x)}{L(\theta_0;x)} \ge k_\alpha\}\]
+            es más potente de tamaño $\alpha$.
+        \end{cor}
+        \begin{proof}
+            Gracias al Lema de Neyman-Pearson la prueba se reduce a comprobar que existe $k_\alpha$ tal que $\alpha = P_{\theta_0}(C_k)$.
+        \end{proof}
 
 
     \subsection{Tests de la razón de verosimilitud}
 
-    Los tests de la razón de la verosimilitud están íntimamente ligados con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
-    $L(\theta;x_1, \ldots, x_n)$.
+        Los tests de la razón de la verosimilitud están íntimamente ligados con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
+        $L(\theta;x_1, \ldots, x_n)$.
 
-    \begin{definition}
-        Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
-        \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
-         Un test de la razón de verositud es cualquier test cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
-    \end{definition}
+        \begin{definition}
+            Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
+            \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
+             Un test de la razón de verositud es cualquier test cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
+        \end{definition}
 
-    Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
+        Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
 
-    Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);x) / L(\hat{\theta}(x);x)$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
+        Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);x) / L(\hat{\theta}(x);x)$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
