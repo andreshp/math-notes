@@ -85,7 +85,7 @@
 
         En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta a esta pregunta es negativa. En efecto, basta con considerar distribuciones discretas ya que para estas distribuciones no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, en una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas como muestra el siguiente corolario del Lema de Neyman-Pearson.
 
-        \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
+        \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas] \label{cor:np:cont}
             Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desean contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Supongamos además que las funciones de densidad $f(x|\theta_0)$ y $f(x|\theta_1)$ coinciden a lo sumo en un subconjunto de medida nula. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
             \[C_{k_\alpha} = \left\{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k_\alpha\right\}\]
             es UMP de tamaño $\alpha$.
@@ -102,7 +102,7 @@
 
         A continuación estudiamos varios ejemplos de los tests de Neyman-Pearson.
 
-        \begin{ex}[Distribución normal de varianza conocida]
+        \begin{ex}[Distribución normal de varianza conocida] \label{ex:np:1}
             Consideramos una variable aleatoria $X \sim N(\mu, \sigma^2)$, donde $\sigma^2$ es conocido. Vamos a contrastar las hipótesis $H_0 : \mu = \mu_0$ y $H_1 : \mu = \mu_1$ con $\mu_1 > \mu_0$. A priori uno intuye que habrá que rechazar $H_0$ cuando la media muestral $\overline{x}$ se encuentre más cerca de $\mu_1$ que de $\mu_0$. Veamos que el test de Neyman-Pearson sigue esta intuición.
 
             Recordemos que en el Ejemplo \ref{ex:sufi:normal:media} se demostró que la media muestral $\overline{X}$ es un estadístico suficiente de cualquier distribución normal de varianza conocida. Además, obtuvimos que $\overline{X} \sim N(\mu, \sigma^2 / n)$. Esta observación permite calcular la región crítica del test de Neyman-Pearson con facilidad. En efecto,
@@ -116,27 +116,60 @@
             Habitualmente se denota $Z = \sqrt{n} (\overline{X} - \mu_0) / \sigma$. Bajo $H_0$ esta variable sigue la distribución $N(0,1)$. El test que hemos obtenido nos dice que rechazaremos $H_0$ cuando $z = \sqrt{n} (\overline{x} - \mu_0) / \sigma \ge z_\alpha$. Debido al uso del estadístico $Z$ este test se conoce comúnmente como \emph{test Z}. En este caso, $z = 10 \overline{x}$.
         \end{ex}
 
-        En el ejemplo anterior hemos realizado el test para un determinado valor de $\alpha$, obteniendo una regla sencilla para aceptar o rechazar la hipótesis nula. No obstante, algunas muestras tienen más evidencia en su contra que otras. %Si reducimos el valor de significación del tests, entonces aceptaremos muestras con mayor evidencia en contra de la hipótesis nula.
-        Por tanto, es conveniente obtener un indicador de la evidencia que tiene una muestra en contra de la hipótesis nula.
+
+    \subsection{Descripción de un test mediante p-valores}
+
+        En el Ejemplo \ref{ex:np:1} hemos realizado el test para un determinado valor de $\alpha$, obteniendo una desigualdad que nos indica si aceptamos o rechazamos la hipótesis nula en función de la muestra. No obstante, algunas muestras tienen más evidencia en su contra que otras. %Si reducimos el valor de significación del tests, entonces aceptaremos muestras con mayor evidencia en contra de la hipótesis nula.
+        Por tanto, a la hora de realizar un test es conveniente obtener un indicador de la evidencia que tiene una muestra en contra de la hipótesis nula. En este punto entran en juego los p-valores.
 
         \begin{definition}
-            Supongamos que para múltiples valores de $\alpha$ disponemos de un test de hipótesis de nivel de significación $\alpha$. En este contexto el p-valor de una muestra es el supremo de los valores de $\alpha$ para los cuales se rechazaría la hipótesis nula si utilizamos el test de significación $\alpha$.
+            En un contraste de hipótesis un p-valor $p(\utilde{X})$ es un estadístico que verifica $0 \le p(\utilde{x}) \le 1$ para cualquier punto $\utilde{x}$ del espacio muestral. Un p-valor es válido si para cualquier $\theta \in \Theta_0$ y $\alpha \in [0,1]$ se tiene $P_\theta(p(\utilde{X}) \le \alpha) \le \alpha.$
         \end{definition}
 
-        A partir del p-valor de una muestra podemos decidir si la aceptamos o no en función de si elegimos una significación superior o inferior. Algunos usuarios de los tests de hipótesis interpretan el p-valor como la probabilidad de que la hipótesis nula sea falsa para la muestra obtenida. Esto es erróneo y en ningún momento deberíamos utilizar esta interpretación. En la Sección \ref{sec:bayes} estudiaremos tests de hipótesis desde el punto de vista bayesiano. En estos tests sí obtendremos probabilidades de que la hipótesis nula sea cierta o no.
+        A patir de un p-valor válido $p(\utilde{X})$ podemos construir un test con nivel de significación $\alpha$ para cualquier $\alpha \in [0,1]$. Este test rechaza $H_0$ si y solo si $p(\utilde{X}) \le \alpha$.
 
-        \begin{prop} \label{prop:p-valor}
-            Consideramos el contraste de hipótesis dado por $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$. Supongamos que para cada $\alpha$ tenemos un test de tamaño $\alpha$ que rechaza $H_0$ si y solo si $W(\utilde{x}) \ge c_\alpha$, donde $W$ es un estadístico que no depende de $\alpha$ y $c_\alpha$ es una constante que depende $\alpha$. Entonces, el p-valor de una muestra $\utilde{x}$ es
-            \[\sup\{P_\theta(W(\utilde{X}) \ge W(\utilde{x})): \theta \in \Theta_0\}.\]
-        \end{prop}
+        \begin{definition}
+            Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$, y solo si, la región crítica del test con significación $\alpha$ es $p(\utilde{X}) \le \alpha$.
+        \end{definition}
+
+        En un test descrito por un p-valor podemos elegir el valor de $\alpha$ que consideremos apropiado y simplemente compararlo con $p(\utilde{x})$ para saber cuál es el resultado del test. Nótese que valores pequeños de $p(\utilde{X})$ dan evidencia de que $H_1$ es cierta y, por tanto, el p-valor mide la evidencia a favor de la hipótesis nula. Por tanto, realizar un test descrito por un p-valor es más informativo que simplemente elegir entre ``aceptar $H_0$'' o ``rechazar $H_0$''.
+
+        El siguiente resultado nos informa sobre cómo construir un p-valor válido.
+
+        \begin{thm}[{\cite[Teorema 8.3.27]{casella}}] \label{thm:p-valor}
+            Consideramos el contraste de hipótesis dado por $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$. Sea $W(\utilde{X})$ un estadístico. Entonces, la función
+            \[p(\utilde{x}) = \sup\{P_\theta(W(\utilde{X}) \ge W(\utilde{x})): \theta \in \Theta_0\}\]
+            es un p-valor válido.
+        \end{thm}
+        %\begin{proof}
+        %    La prueba se reduce a aplicar la definición de p-valor. En efecto, el p-valor es igual a
+        %    \[\sup\{\alpha: W(\utilde{x}) \ge c_\alpha\} = \sup\{P_\theta(W(\utilde{X}) \ge W(\utilde{x})): \theta \in \Theta_0\}. \qedhere\]
+        %\end{proof}
+
+        La pregunta que uno se hace en este punto es, dado un test que se puede formular para cualquier valor de $\alpha$, cómo obtener un p-valor que lo describa. Esto no va a ser siempre factible ya que habrá regiones críticas que no sepamos o no se puedan escribir de la forma $p(\utilde{X}) \le \alpha$. No obstante, en múltiples casos prácticos sí es posible como muestra el siguiente resultado. %El siguiente resultado proporciona el p-valor de los tests de Neyman-Pearson.
+
+        \begin{thm} \label{thm:p-valor:2}
+            Sea $W(\utilde{X})$ un estadístico. Supongamos que para cada $\alpha \in [0,1]$ disponemos de un test de hipótesis de tamaño $\alpha$ cuya región crítica es $W(\utilde{X}) \ge k_\alpha$ para cierta constante $k_\alpha$. Entonces, el test se puede describir a partir del p-valor
+           \[p(\utilde{x}) = \sup\{P_{\theta}\left(W(\utilde{X}) \ge W(\utilde{x})\right): \theta \in \Theta_0\}.\]
+       \end{thm}
         \begin{proof}
-            La prueba se reduce a aplicar la definición de p-valor. En efecto, el p-valor es igual a
-            \[\sup\{\alpha: W(\utilde{x}) \ge c_\alpha\} = \sup\{P_\theta(W(\utilde{X}) \ge W(\utilde{x})): \theta \in \Theta_0\}. \qedhere\]
+            Nótese que $p(\utilde{x})$ es un p-valor gracias al Teorema \ref{thm:p-valor}. Sea $\alpha \in [0,1]$ y sea $k_\alpha$ como en el enunciado. Tenemos que $p(\utilde{x}) \le \alpha = \sup\{P_{\theta}\left(W(\utilde{X}) \ge k_\alpha)\right): \theta \in \Theta_0\}$ si, y solo si, para cada $\theta \in \Theta_0$ se tiene
+            \[P_{\theta}\left(W(\utilde{X}) \ge W(\utilde{x})\right) \le P_{\theta}\left(W(\utilde{X}) \ge k_\alpha)\right) ,\]
+            esto es, $W(\utilde{x}) \ge k_\alpha$.
         \end{proof}
 
-        Bajo las hipótesis de la Proposición \ref{prop:p-valor} el p-valor puede interpretarse como la probabilidad de observar una muestra que sea tan poco favorable a la hipótesis nula como la muestra que se ha obtenido. Esta interpretación puede tomarse como la definción del p-valor en algunos casos. Por ejemplo, esta definición es válida para los tests de Neyman-Pearson, cuyos p-valores pueden escribirse como sigue
-        \[P_{\theta_0}\left(\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})}\right).\]
+        \begin{cor} \label{cor:p-valor:np}
+            Consideremos un test de Neyman-Pearson con función de densidad continua. Entonces, el test se puede describir a partir del p-valor
+           \[p(\utilde{x}) = P_{\theta_0}\left(\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})}\right).\]
+       \end{cor}
 
+        El p-valor que hemos construido en el Teorema \ref{thm:p-valor:2} otorga a una muestra $\utilde{x}$ evidencia contra la hipótesis nula cuando el valor de $W(\utilde{x})$ es muy alto. El valor obtenido al aplicar este p-valor a una muestra puede interpretarse como la probabilidad de observar una muestra que sea tan poco favorable a la hipótesis nula como ella. Esto es lo que sucede en el Corolario \ref{cor:p-valor:np}, donde el p-valor es efectivamente una probabilidad. Algunos usuarios de los tests de hipótesis interpretan el p-valor como la probabilidad de que la hipótesis nula sea falsa para la muestra obtenida. Esto es erróneo y en ningún momento deberíamos utilizar esta interpretación. En la Sección \ref{sec:bayes} estudiaremos tests de hipótesis desde el punto de vista bayesiano. En estos tests sí obtendremos probabilidades de que la hipótesis nula sea cierta o no.
+
+        \begin{ex}[Continuación del Ejemplo \ref{ex:np:1}]
+            Recordemos que obtuvimos que la región crítica del test Z está determinada por $\overline{X} \ge A_{k_\alpha}$. Por tanto, el Teorema \ref{thm:p-valor:2} nos dice que el p-valor del test es $p(\utilde{x}) = P_{\mu_0}(\overline{X} \ge \overline{x})$. También probamos que podemos describir la región crítica en términos de la variable $Z$. De hecho, $P_{\mu_0}(\overline{X} \ge \overline{x}) = P_{\mu_0}(Z \ge \sqrt{n}(\overline{x} - \mu_0)/\sigma)$, lo que nos permite calcular los p-valores gracias a que $Z \sim N(0,1)$.
+
+            Veamos un ejemplo numérico. Los datos osn los mismos que los del Ejemplo \ref{ex:np:1}. Supongamos que tras observar una muestra con $n = 100$ hemos obtenido $\overline{x} = 0.2$. Entonces, $p(\utilde{x}) = P_{\mu_0}(Z \ge 2) = 1 - F(2) = 1 - 0.9772 = 0.0328$, donde $F$ es la función de distribución de N(0,1). Por tanto, rechazaremos la hipótesis nula para cualquier nivel de significación mayor que $0.0328$.
+        \end{ex}
 
     \subsection{Tests de la razón de verosimilitud}
 
