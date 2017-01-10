@@ -68,44 +68,44 @@
 
         \begin{thm}[Lema de Neyman-Pearson] \label{thm:np:1}
             Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
-            \[C_k = \{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k\}.\]
-            Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test más potente de significación $\alpha$. Además, cualquier test más potente de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{x: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} > k\} \subset C' \subset C_k$ salvo un subconjunto de probabilidad nula.
+            \[C_k = \left\{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k\right\}.\]
+            Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test UMP de significación $\alpha$. Además, cualquier test UMP de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{x: L(\theta_1;\utilde{x}) > k L(\theta_0;\utilde{x})\} \subset C' \subset C_k$ salvo a lo sumo un subconjunto de probabilidad nula.
         \end{thm}
         \begin{proof}
             En primer lugar, nótese que el test dado por $C_k$ es de tamaño $\alpha$ ya que $\sup\{ \eta(\theta) : \theta \in \Theta_0\} = \eta(\theta_0) = \alpha$. Consideremos otro test de significación $\alpha$ cuya función potencia es $\eta'$ y su región crítica es $C'$ y veamos que $\eta'(\theta_1) \le \eta(\theta_1)$. Por distinción de casos es fácil razonar que para cualquier muestra $x$ se verifica
             \begin{equation} \label{eq:np:desigualdad}
-                (1_{C_k}(x)-1_{C'}(x)) (L(\theta_1; x) - k L(\theta_0; x)) \ge 0,
+                (1_{C_k}(\utilde{x})-1_{C'}(\utilde{x})) (L(\theta_1; \utilde{x}) - k L(\theta_0; \utilde{x})) \ge 0,
             \end{equation}
             donde $1_A$ denota la función indicadora del conjunto $A$. Integrando la desigualdad \eqref{eq:np:desigualdad} obtenemos
             \begin{equation} \label{eq:np:desigualdad:2}
-                0 \le \int(1_{C_k}(x)-1_{C'}(x)) (L(\theta_1; x) - k L(\theta_0; x)) \, dx = \eta(\theta_1) - \eta'(\theta_1) - k (\eta(\theta_0) - \eta'(\theta_0)).
+                0 \le \int(1_{C_k}(\utilde{x})-1_{C'}(\utilde{x})) (L(\theta_1; \utilde{x}) - k L(\theta_0; \utilde{x})) \, d\utilde{x} = \eta(\theta_1) - \eta'(\theta_1) - k (\eta(\theta_0) - \eta'(\theta_0)).
             \end{equation}
-            Aplicando $\eta(\theta_0) - \eta'(\theta_0) = \alpha  - \eta'(\theta_0) \ge 0$ a \eqref{eq:np:desigualdad:2} deducimos que $0 \le \eta(\theta_1) - \eta'(\theta_1)$ como se quería. Por último, si un test de significación $\alpha$ con función potencia $\eta'$ y región crítica $C'$ es más potente, entonces $\eta(\theta_1) = \eta'(\theta_1)$ y, por tanto, la desigualdad \eqref{eq:np:desigualdad:2} nos indica que $0 \le -k(eta(\theta_0) - \eta'(\theta_0)) \le 0$, esto es, $\eta'(\theta_0) = \eta(\theta_0) = \alpha$. Puesto que la hipótesis es simple hemos obtenido que el test asociado a $C'$ tiene tamaño $\alpha$. Consecuentemente, en \eqref{eq:np:desigualdad:2} se da la igualdad, cosa que solo puede suceder si la función no negativa a integrar es constantemente 0 salvo en un conjunto de probabiliad nula. La prueba finaliza al darse cuenta de que este hecho equivale a que $\{x: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} > k\} \subset C' \subset C_k$ salvo en un conjunto de probabilidad nula.
+            Aplicando $\eta(\theta_0) - \eta'(\theta_0) = \alpha  - \eta'(\theta_0) \ge 0$ a \eqref{eq:np:desigualdad:2} deducimos que $0 \le \eta(\theta_1) - \eta'(\theta_1)$ como se quería. Por último, si un test de significación $\alpha$ con función potencia $\eta'$ y región crítica $C'$ es UMP, entonces $\eta(\theta_1) = \eta'(\theta_1)$ y, por tanto, la desigualdad \eqref{eq:np:desigualdad:2} nos indica que $0 \le -k(\eta(\theta_0) - \eta'(\theta_0)) \le 0$, esto es, $\eta'(\theta_0) = \eta(\theta_0) = \alpha$. Puesto que la hipótesis es simple hemos obtenido que el test asociado a $C'$ tiene tamaño $\alpha$. Consecuentemente, en \eqref{eq:np:desigualdad:2} se da la igualdad, cosa que solo puede suceder si la función no negativa a integrar es constantemente 0 salvo en un conjunto de probabiliad nula. La prueba finaliza al darse cuenta de que este hecho equivale a que $\{x: L(\theta_1;\utilde{x}) > k L(\theta_0;\utilde{x})\} \subset C' \subset C_k$ salvo en un subconjunto de probabilidad nula.
         \end{proof}
 
-        En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta  esta pregunta es negativa. En efecto, basta considerar distribuciones discretas ya que no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, con una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas, como muestra el siguiente corolario del Lema de Neyman-Pearson.
+        En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta a esta pregunta es negativa. En efecto, basta con considerar distribuciones discretas ya que para estas distribuciones no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, en una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas como muestra el siguiente corolario del Lema de Neyman-Pearson.
 
         \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas]
-            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Supóngase además que las funciones de densidades $f(x|\theta_0)$ y $f(x|\theta_1)$ coinciden a lo sumo en un subconjunto de medida nula. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
-            \[C_{k_\alpha} = \{x: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k_\alpha\}\]
-            es más potente de tamaño $\alpha$.
+            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desean contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Supongamos además que las funciones de densidad $f(x|\theta_0)$ y $f(x|\theta_1)$ coinciden a lo sumo en un subconjunto de medida nula. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
+            \[C_{k_\alpha} = \left\{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k_\alpha\right\}\]
+            es UMP de tamaño $\alpha$.
         \end{cor}
         \begin{proof}
             Gracias al Lema de Neyman-Pearson la prueba se reduce a comprobar que existe $k_\alpha$ tal que $\alpha = P_{\theta_0}(C_k)$. En efecto, la continuidad de las funciones de densidad nos asegura que la función $f(x| \theta_1) / f(x| \theta_0)$ es continua. Definimos $\varphi: [0,1] \to [0,1]$ dada por
-            \[\varphi(k) = P_{\theta_0}(\frac{L(\theta_1;X)}{L(\theta_0;X)} \ge k).\]
+            \[\varphi(k) = P_{\theta_0}(\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge k).\]
             Esta función es continua y verifica $\varphi(0) = 1$ y $\varphi(1) = 0$. El resultado es consecuencia del teorema del valor intermedio aplicado a $\varphi$.
         \end{proof}
 
-        Los tests proporcionados por el lema de Neyman-Pearson se conocen como tests de Neyman-Pearson. A la hora de aplicar este tipo de tests los estadísticos suficientes son de especial ayuda. En efecto, si $T$ es un estadístico suficiente y $h(t | \theta)$ es su función de densidad, entonces
-        \[\frac{L(\theta_1; x)}{L(\theta_0; x)} = \frac{h(T(x) | \theta_1)}{h(T(x) | \theta_0)}.\]
+        Los tests proporcionados por el lema de Neyman-Pearson se conocen como tests de Neyman-Pearson. Los estadísticos suficientes son de especial ayuda al aplicar este tipo de tests. En efecto, si $T$ es un estadístico suficiente y $h(t | \theta)$ es su función de densidad, entonces
+        \[\frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} = \frac{h(T(\utilde{x}) | \theta_1)}{h(T(\utilde{x}) | \theta_0)}.\]
         Por tanto, podemos calcular la región crítica del test simplemente conociendo el estadístico suficiente y su distribución. Esta observación hace que los cálculos sean más sencillos.
 
         A continuación estudiamos varios ejemplos de los tests de Neyman-Pearson.
 
         \begin{ex}[Distribución normal de varianza conocida]
-            Consideramos una variable aleatoria $X \sim N(\mu, \sigma^2)$, donde $\sigma^2$ es conocido. Vamos a contrastar las hipótesis $H_0 : \mu = \mu_0$ y $H_1 : \mu = \mu_1$ con $\mu_1 > \mu_0$. A priori uno intuye que habrá que rechazar $H_0$ cuando se observen valores de $\overline{x}$ más cercanos a $\mu_1$ que a $\mu_0$. Veamos que el test de Neyman-Pearson sigue esta intuición.
+            Consideramos una variable aleatoria $X \sim N(\mu, \sigma^2)$, donde $\sigma^2$ es conocido. Vamos a contrastar las hipótesis $H_0 : \mu = \mu_0$ y $H_1 : \mu = \mu_1$ con $\mu_1 > \mu_0$. A priori uno intuye que habrá que rechazar $H_0$ cuando se observen cuando la media muestral $\overline{x}$ se encuentre más cerca de $\mu_1$ que de $\mu_0$. Veamos que el test de Neyman-Pearson sigue esta intuición.
 
-            Recordemos que el Ejemplo \ref{ex:sufi:normal:media} se demostró que $\overline{X}$ es un estadístico suficiente de cualquier distribución normal de varianza conocida. Además, obtuvimus que $\overline{X} \sim N(\mu, \sigma^2 / n)$. Esta observación permite calcular la región crítica del test de Neyman-Pearson con facilidad. En efecto,
+            Recordemos que en el Ejemplo \ref{ex:sufi:normal:media} se demostró que $\overline{X}$ es un estadístico suficiente de cualquier distribución normal de varianza conocida. Además, obtuvimus que $\overline{X} \sim N(\mu, \sigma^2 / n)$. Esta observación permite calcular la región crítica del test de Neyman-Pearson con facilidad. En efecto,
             \[\frac{L(\mu_1; x)}{L(\mu_0; x)} = \exp\left(-\frac{(\overline{x} - \mu_1)^2 - (\overline{x} - \mu_0)^2}{2\sigma^2/n}\right) = \exp\left(-\frac{\mu_1^2 - \mu_0^2 + 2\overline{x}(\mu_0-\mu_1)}{2\sigma^2/n}\right).\]
             Como consecuencia, obtenemos que $L(\mu_1; x) / L(\mu_0; x) \ge k$ si, y solo si,
             \[\overline{x} \ge \frac{\mu_0+\mu_1}{2} + \frac{\sigma^2 \log k}{n(\mu_1 - \mu_0)} = A_k.\]
@@ -116,7 +116,7 @@
 
         Los tests de la razón de la verosimilitud están íntimamente ligados con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
         $L(\theta;\utilde{x})$.
-        
+
         \begin{definition}
             Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
             \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
