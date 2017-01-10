@@ -1,0 +1,448 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: A. Herrera Poyatos
+% Tittle: Estimación de parámetros
+% Capítulo sobre estimación de parámetros delos apuntes de
+% inferencia estadística.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%!TEX root = ../inference.tex
+%!TEX language = es
+
+\section{Estimación de parámetros} \label{sec:estimacion}
+
+Supongamos que estamos estudiando un fenómeno aleatorio que sabemos que sigue una distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$ es un parámetro que no es conocido. Nuestro objetivo es estimar el parámetro $\theta_0$ a partir de una muestra $x_1, \ldots, x_n$. Para ello buscamos una función $T_n$ de manera que podamos decir $\theta_0 \approx T_n(x_1, \ldots, x_n)$.
+
+\begin{definition}
+    Un estimador puntual es una función medible $T_n(X_1, \ldots, X_n)$ que toma valores en $\Theta$, donde $\Theta$ es el dominio del parámetro a estimar. Una estimación es la evaluación obtenida por un estimador sobre una muestra $x_1, \ldots, x_n$, esto es, $T_n(x_1, \ldots, x_n)$.
+\end{definition}
+
+Nótese que la nomenclatura es ambigua. Para nosotros una muestra es una secuencia finita de variables aleatorias independientes e idénticamente distribuidas. Sin embargo, a los valores $x_1, \ldots, x_n$ obtenidos en la práctica también se le denomina muestra. Algunos autores evitan esta abigüedad denominando a $x_1, \ldots, x_n$ realización de la muestra. Nosotros distinguiremos entre ambos casos mediante el uso de mayúsculas para denotar variables aleatorias y el uso de minúsculas para denotar valores concretos.
+
+En múltiples situaciones encontramos estimadores de calidad de forma natural. Por ejemplo, imaginemos que el parámetro $\theta_0$ se corresponde con la media de la distribución $f(X | \theta_0)$. En tal caso, parece claro que el mejor estimador para $\theta_0$ será la media muestral $\overline{x} = \frac{1}{n}\sum_{i = 1}^n x_i$. Sin embargo, en general no sabemos qué estimador hay que utilizar. Buscamos técnicas que nos proporcionen estimadores que sean razonables. En ocasiones querremos estimar $g(\theta_0)$, donde $g$ es determinada transformación de $\Theta$ en otro espacio más manejable.
+
+\subsection{Método de los momentos}
+
+El método de los momentos es, probablemente, el método más antiguo para estimar parámetros. Fue propuesto por Pearson al finales del siglo XIX. En muchos casos los resultados de este método son mejorables. Sin embargo, siempre es un último recurso en el caso de que no podamos aplicar otros métodos.
+
+Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución $f(X |\theta)$ con $\theta = (\theta_1, \ldots, \theta_m) \in \Theta \subset \mathbb{R}^m$. Definimos los momentos de la muestra como $m_j = \frac{1}{n} \sum_{i = 1}^n X_i^j$. En media se debería cumplir que $m_j = E_\theta X^j$ para todo $j$ tal que $E_\theta X^j$ existe. Nótese que $E_\theta X^j = \mu_j(\theta_1, \ldots, \theta_m)$ es una función que depende de $\theta_1, \theta_2, \ldots, \theta_k$. El método de los momentos propone como estimador a una solución del sistema de ecuaciones
+\begin{equation} \label{eq:sistema-momentos}
+    \begin{matrix}
+        m_1 = \mu_1(\theta_1, \ldots, \theta_k), \\
+        m_2 = \mu_2(\theta_1, \ldots, \theta_k), \\
+        \vdots \\
+        m_k = \mu_k(\theta_1, \ldots, \theta_k). \\
+    \end{matrix}
+\end{equation}
+
+\begin{ex}[Distribución normal]
+    Supongamos que $X_1, \ldots, X_n$ son muestras de una distribución normal $N(\theta, \sigma^2)$. En el contexto anterior, los parámetros a estimar son $\theta_1 = \theta, \theta_2 = \sigma^2$. En este caso el sistema \eqref{eq:sistema-momentos} viene dado por las ecuaciones $\overline{X} = \theta$ y $m_2 = \theta^2 + \sigma^2$. La solución claramente es $\theta = \overline{X}$ y
+    \[\sigma^2 = \frac{1}{n} \sum_{i = 1}^n X_i^2 - \overline{X}^2 = \frac{1}{n} \sum_{i = 1}^n (X_i - \overline{X})^2.\]
+    En este caso, los estimadores obtenidos coinciden con nuestra intuición. Este método es más útil cuando no disponemos de un estimador intuitivo.
+\end{ex}
+
+\subsection{Método de la máxima verosimilitud de Fisher}
+
+    El método de la máxima verosimilitud es una de las técnicas más utilizada para obtener estimadores de calidad.
+
+    \begin{definition}
+        Sea $x_1, \ldots, x_n$ una muestra de un fenómeno con función de distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$. Se define la función de verosimilitud para cada $\theta \in \Theta$ como $L(\theta ; x) = \prod_{i = 1}^n f(x_i| \theta)$.
+    \end{definition}
+
+    Para cada posible valor $\theta$ del parámetro a estimar, la verosimilitud proporciona la credibilidad que se le da a $\theta$ para los datos $x_1, \ldots, x_n$. Buscamos una aproximación $\hat{\theta}$ de $\theta_0$ en base a la muestra obtenida. Parece lógico que si asumimos que los datos son correctos, entonces una buena aproximación será aquella en la que los datos sean coherentes, esto es, la probabilidad de que se den datos similares a la muestra observada debe ser lo más alta posible.
+
+    \begin{definition}
+        Para cada elemento $x = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Theta$ como un máximo global de $L(\theta ; x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
+    \end{definition}
+
+    El estimador máximo verosímil presenta principalmente dos problemas.
+    \begin{itemize}
+        \item Cálculo del estimador. Para calcular $\hat{\theta}(X)$ es necesario maximizar una función. Muchas veces esto es complejo incluso para funciones de densidad comunes. Es más, puede suceder que la verosimilitud presente múltiples máximos globales y, por tanto, el estimador máximo verosímil no está bien definido. Necesitaremos condiciones sobre la distribución que nos permitan asegurar la buena definición del estimador máximo verosímil.
+        \item Sensibilidad numérica. El valor $\hat{\theta}(x)$ puede cambiar considerablemente para pequeñas variaciones de $x$. Nos preguntamos qué condiciones debe verificar la función de distribución para evitar este comportamiento.
+    \end{itemize}
+
+    Para adentrarnos en el estudio de estos problemas necesitaremos teoría general de estimadores. Antes de desarrollarla realizaremos varios ejemplos de cálculo de estimadores máximo verosímiles.
+
+    \begin{remark} \label{rem:emv:log}
+        Los máximos globales de la función $L(\theta ; x)$ se corresponden con los máximos globales de la función $\log L(\theta ; x) = \sum_{i = 1}^n \log f(x_i | \theta)$. En múltiples ocasiones es más sencillo maximizar esta última expresión.
+    \end{remark}
+
+    \begin{ex}[Distribución normal]
+        Consideremos una muestra $X_1, \ldots, X_n$ de un fenómeno con distribución $N(\theta,1)$. En primer lugar, calculamos la función de verosimilitud
+        \[L(\theta ; x) = \prod_{i = 1}^n \frac{1}{\sqrt{2\pi}} e^{-(x_i - \theta)^2 / 2} = \frac{1}{(2\pi)^{n/2}}e^{-\sum_{i = 1}^n (x_i - \theta)^2 / 2}.\]
+        En virtud del Comentario \ref{rem:emv:log} maximizamos la función $-\sum_{i = 1}^n (x_i - \theta)^2 / 2 - n/2 \log(2\pi)$. Maximizar esta función equivale a minimizar $h(\theta) = \sum_{i = 1}^n (x_i - \theta)^2$. Derivando, obtenemos que $h'(\theta) = 0$ si, y solo si, $\theta = \overline{x}$. Además, es rutinario comprobar que $\overline{x}$ es el mínimo absoluto de $h$. Por tanto, $\overline{x}$ es el máximo absoluto de $L(\theta ; x)$. Tenemos pues $\hat{\theta}(x) = \overline{x}$.
+    \end{ex}
+
+    A continuación pretendemos extender el método de la máxima verosimilitud para estimar $g(\theta)$, donde $g : \Theta \to \Theta'$ sobreyectiva. Si la aplicación $g$ fuese inyectiva, entonces podemos definir de norma natural la verosimilitud de $\eta \in \Theta'$ como $L^*(\eta | x) = L(g^{-1}(\eta) | x)$. Claramente, el valor que maximiza $L^*(\eta | x)$, que denotaremos $\hat{g}(x)$, es $g(\hat{\theta}(x))$. Sin embargo, los casos que presentan relevancia práctica son aquellos en los que $g$ no es inyectiva ya que de esta forma conseguimos reducir la dimensionalidad del espacio de parámetros. Necesitamos extender la definición de verosimilitud para abordar esta problemática.
+
+    \begin{definition}
+        En el contexto anterior, definimos la verosimilitud inducida por $g$ como
+        \[L^*(\eta|x) = \sup\{L(\theta ; x): \theta \in g^{-1}(\eta)\}.\]
+        El valor $\hat{g}(x)$ que maximiza $L^*(\eta|x)$ se denomina estimador maximo verosímil de $g(\theta)$.
+    \end{definition}
+
+    La definición anterior es artificial en el sentido de que se realiza con el fin de poder mantener la propiedad de invarianza del estimador máximo verosímil, que se recoge en el siguiente teorema.
+
+    \begin{thm}[Invarianza de Zehna]
+        Para cualquier aplicación sobreyectiva $g: \Theta \to \Theta'$ se tiene que $\hat{g}(X) = g(\hat{\theta}(X))$.
+    \end{thm}
+    \begin{proof}
+        En primer lugar, la definición de la verosimilitud inducida proporciona
+        \[\sup_{\eta \in \Theta'} L^*(\eta|x) = \sup_{\eta \in \Theta'} \sup\{L(\theta ; x): \theta \in g^{-1}(\eta)\} = \sup_{\theta \in \Theta} L(\theta ; x).\]
+        Por tanto, si la verosimilitud tiene un máximo global $\hat\theta(x)$, entonces lo tiene la verosimilitud inducida (el recíproco puede no ser cierto) y se alcanza en $g(\hat\theta(x))$.
+    \end{proof}
+
+    \subsection{Teoría general de estimadores}
+
+    En esta sección introduciremos conceptos y definiciones relacionados con estimadores arbitrarios. El objetivo de esta teoría es dotarnos de herramientas que nos permitan abordar el estudio práctico de estimadores concretos, como el estimador máximo verosímil.
+
+    \subsubsection{Estadísticos suficientes} \label{sec:estimacion:tge:sufi}
+
+        Fijemos $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta_0)$. Nuestro objetivo es inferir el parámetro $\theta_0$ a partir de la muestra. El concepto de estadístico suficiente nos permitirá separar la información contenida en $X$ en dos partes. Una parte contiene toda la información útil sobre $\theta_0$ mientras que la otra parte no dependerá del parámetro $\theta_0$. Consecuentemente, podemos ignorar esta última parte.
+
+        Intuitivamente, un estadístico $T$ es suficiente para la familia de distribuciones considerada si $T(X)$ nos permite estimar $\theta_0$ tan bien como lo permite toda la muestra $X$. Procedemos a dar la definición matemática.
+
+        \begin{definition}
+            Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente si para cada $\theta \in \Theta$ y $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $\theta$ y $T(X) = t$ no depende de $\theta$.
+        \end{definition}
+
+        El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
+
+        \begin{thm}
+            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta)$. Sea $T(X_1, X_2, \ldots, X_n)$ un estadístico. Entonces, $T$ es  suficiente si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
+            \[L(\theta; x_1, x_2, \ldots, x_n) = h(t | \theta) g(x_1, x_2, \ldots, x_n),\]
+            donde $t = T(x_1, \ldots, x_n)$ y $g(x_1, x_2, \ldots, x_n)$ no depende de $\theta$.
+        \end{thm}
+
+        Nótese que si $T$ es un estadístico suficiente, entonces a falta de una constante $h(t|\theta)$ es la función de densidad de la variable $T(X)$.
+
+        Si encontramos un estadístico suficiente, entonces podemos inferir el parámetro $\theta_0$ utilizando solamente la función $h(t |\theta)$. Interesa pues que el codominio del estadístico suficiente sea lo más simple posible. Los estadísticos suficientes son especialmente interesantes al aplicar el método de la máxima verosimilitud.
+
+        \begin{ex}[Distribución normal, media desconocida] \label{ex:sufi:normal:media}
+            Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde solamente $\sigma^2$ es conocido ($\theta = \mu$). Es fácil verificar que
+            \[\sum_{i = 1}^n (x_i - \mu)^2 = \sum_{i = 1}^n (x_i - \overline{x})^2 + n (\overline{x} - \mu)^2 = (n-1)S^2 + n(\overline{x} - \mu)^2.\]
+            A partir de la igualdad anterior obtenemos
+            \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-((n-1)S^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)).\]
+            Definimos
+            \[g(x_1, x_2, \ldots, x_n) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(n-1)S^2 / (2\sigma^2)) \text{ y } h(t|\mu) = \exp(n(t - \mu)^2) / (2\sigma^2)).\]
+            Tenemos que $f(x|\theta) = h(\overline{x}|\theta) g(x_1, x_2, \ldots, x_n)$ y, por tanto, $T(x) = \overline{x}$ es suficiente.
+        \end{ex}
+
+        \begin{ex}[Distribución normal, ambos parámetros son desconocidos]
+            Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde $\mu$ y $\sigma^2$ son desconocidos ($\theta = (\mu, \sigma^2)$).
+            Tenemos que
+            \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n x_i^2 - 2\mu \sum_{i = 1}^n x_i + n \mu^2) / (2\sigma^2)). \]
+            Por tanto, el estadístico $T(X_1, \ldots , X_n) = (\sum_{i = 1}^n X_i^2, \sum_{i = 1}^n X_i)$ es suficiente (tomamos $g(x_1, x_2, \ldots, x_n) = 1$). También podemos desarrollar $f(x|\theta)$ como sigue
+            \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu)^2) / (2\sigma^2)). \]
+            Consecuentemente, el estadístico $T(X_1, \ldots , X_n) = (\overline{x}, S^2)$ también es suficiente. Nótese que el estadístico $T(X_1, \ldots , X_n) = (X_1, \ldots , X_n)$ es trivialmente suficiente, pero no aporta ninguna información.
+        \end{ex}
+
+    \subsubsection{Score, hipótesis de regularidad y función de información de Fisher}
+
+    \begin{definition}
+        Sea $\Theta \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de funciones de densidad. Sea $X = (X_1, \ldots, X_n)$ una muestra que sigue una distribución con función de densidad $f(X|\theta_0)$. Si la función de verosimilitud para los valores $x = (x_1, \ldots, x_n)$ es diferenciable en $\theta \in \Theta$, entonces definimos el score de $\theta$ como el gradiente de la función $\log L(x; \theta)$ y lo denotamos $S(x; \theta)$.
+    \end{definition}
+
+    Intuitivamente el score indica la sensibilidad de la verosimilitud en un punto. Nos centraremos en el estudio del score cuando $\Theta$ es un abierto de $\mathbb{R}$. En tal caso
+    \[S(x; \theta) = \frac{\partial}{\partial \theta} \log f(x | \theta) = \frac{\frac{\partial}{\partial \theta} f(x | \theta)}{f(x | \theta)}.\]
+
+    Supongamos que el score de $\theta$ existe para cualesquiera valores de la muestra $x_1, \ldots, x_n$. En tal caso es natural considerar la función $E_{X|\theta}[S(X;\theta)]$, que depende solamente de $\theta$. Si $\theta$ fuese el parámetro a estimar, entonces $E_{X|\theta}[S(X;\theta)]$ mide la sensibilidad media de la verosimilitud en $\theta$.
+
+    \begin{lem} \label{lem:score:esp}
+        Sea $\Theta \subset \mathbb{R}$ un abierto y sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de funciones de densidad que verifican las siguientes condiciones de regularidad:
+        \begin{enumerate}
+            \item Para cualesquier muestra $x=(x_1, \ldots, x_n)$ la función $L(x; \theta)$ es diferenciable para todo $\theta \in \Theta$.
+            \item Se verifica
+            \[\frac{\partial}{\partial \theta}\int_{X} f(x| \theta) dx = \int_{X} \frac{\partial}{\partial \theta} f(x| \theta) dx.\]
+        \end{enumerate}
+        Entonces, $E_{X|\theta}[S(X;\theta)] = 0$.
+    \end{lem}
+    \begin{proof}
+        Tenemos que
+        \[E_{X|\theta}[S(X;\theta)] = \int_{X} \frac{\frac{\partial}{\partial \theta} f(x | \theta)}{f(x | \theta)}  f(x | \theta) dx = \int_{X} \frac{\partial}{\partial \theta} f(x | \theta) dx = \frac{\partial}{\partial \theta} \int_{X} f(x; \theta) dx = \frac{\partial}{\partial \theta} 1 = 0. \qedhere\]
+    \end{proof}
+
+    En el resultado anterior aparecen por primera vez hipótesis de regularidad sobre las distribuciones a estudiar. Nótese que en la práctica normalmente vamos a trabajar con distribuciones que satisfagan estas hipótesis. La hipótesis b) se verifica si la derivada de la verosimilitud es continua \cite{leibniz}. Consecuentemente, todas las distribuciones continuas estudiadas, exceptuando la distribución de Laplace, cumplen estas hipótesis de regularidad (su función de densidad es de clase infinito con respecto a $\theta$).
+
+    \begin{definition}
+        Sea $\Theta \subset \mathbb{R}$ un abierto y sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de funciones de densidad para la cual siempre existe el score. Dado $\theta \in \Theta$, definimos la función de información de Fisher en $\theta$ como el segundo momento de la variable aleatoria $S(X;\theta)$, donde $X = (X_1, \ldots, X_n)$ es una muestra de la distribución con función de densidad $f(X|\theta)$. Se denota $\mathcal{I}(\theta) := E_{X|\theta}[S(X;\theta)^2] \ge 0.$
+    \end{definition}
+
+    Si en determinado contexto no está clara la muestra $X$ para la cual calculamos la información de Fisher, entonces la denotamos $\mathcal{I}_X$ o $\mathcal{I}^X$.
+
+    El siguiente resultado nos permite explicar por qué se define de esta forma la información de Fisher.
+
+    \begin{cor}
+        Bajo las hipótesis de regularidad del Lema \ref{lem:score:esp}, tenemos que  $\mathcal{I}(\theta) = Var_{X|\theta}(S(X;\theta))$.
+    \end{cor}
+    \begin{proof}
+        Nótese que $Var_{X|\theta}(S(X;\theta)) = \mathcal{I}(\theta) - E_{X|\theta}[S(X; \theta)]^2$. El Lema \ref{lem:score:esp} nos indica que $E_{X|\theta}[S(X; \theta)] = 0$.
+    \end{proof}
+
+    Como consecuencia, la información de Fisher nos informa de cómo varía la sensibilidad de la verosimilitud en $\theta$. Si la información de Fisher es pequeña, entonces la sensibilidad de la verosimilitud en $\theta$ no depende prácticamente de la muestra utilizada y, por tanto, siempre será cercana a cero. Si por el contrario la información de Fisher es muy grande, entonces la sensibilidad de la verosimilitud en $\theta$ varía mucho en función de la muestra con la que se trabaje. Si utilizamos el estimador máximo verosímil, entonces estamos maximizando el logaritmo de la verosimilitud. Buscamos pues aquellos $\theta$ que sean extremos relativos de $\log L(x; \theta)$ y, por tanto, verifiquen $S(x; \theta) = 0$. Consecuentemente, nos interesa que $\mathcal{I}(\theta)$ sea grande para todo $\theta$ ya que de esta forma podremos discriminar aquellos $\theta$ que tengan score no nulo (no son extremos relativos de $\log L(x; \theta)$). Si en determinado $\theta$ la información de Fisher es muy pequeña, obtendremos que $\theta$ es un candidato a estimador máximo verosímil para casi cualquier muestra, incluso para muestras poco probables bajo ese parámetro, lo cual dificulta el correcto cómputo del estimador.
+
+    En lo que sigue habitualmente exigiremos unas hipótesis de regularidad más fuertes, denominadas hipótesis o condiciones de regularidad de Cramer-Rao. Estas hipótesis son las siguientes:
+
+    \begin{enumerate}[label=\roman*)]
+        \item $\Theta$ es un abierto de $\mathbb{R}$.
+        \item Para cualquier muestra $x = (x_1, \ldots, x_n)$, la verosimilitud $L(x | \theta)$ es dos veces derivable en $\Theta$.
+        \item $\frac{\partial^i}{\partial\theta^i} \int_X f(x | \theta) dx = \int_X \frac{\partial^i}{\partial\theta^i} f(x | \theta) dx$ para $i=1,2$.
+        \item Para cada $\theta \in \Theta$ se tiene $0 < \mathcal{I}(\theta) < +\infty$.
+        %\item La función $\Psi(\theta) = \mathbb{E}_{\theta_0} \frac{\partial}{\partial \theta} f(x | \theta)$ es continua en $\theta_0$.
+    \end{enumerate}
+
+    Todas las distribuciones continuas estudiadas, exceptuando la distribuciónd de Laplace, verifican estas hipótesis de regularidad.
+
+    El siguiente lema profundiza en nuestro entendimiento de la función de información de Fisher.
+
+    \begin{lem} \label{lem:fisher:2dev}
+        Bajo hipótesis de regularidad de Cramer-Rao tenemos que
+        \[\mathcal{I}(\theta) = E_{X|\theta} \left[-\frac{\partial^2}{\partial\theta^2} \log f(X;\theta) \right].\]
+    \end{lem}
+    \begin{proof}
+        En primer lugar, podemos escribir
+        \[\frac{\partial^2}{\partial\theta^2} \log f(X|\theta)=\frac{\frac{\partial^2}{\partial\theta^2} f(X|\theta)}{f(X| \theta)}\;-\;\left( \frac{\frac{\partial}{\partial\theta} f(X|\theta)}{f(X| \theta)} \right)^2=\frac{\frac{\partial^2}{\partial\theta^2} f(X|\theta)}{f(X| \theta)}\;-\;\left( \frac{\partial}{\partial\theta} \log f(X|\theta)\right)^2.\]
+        La demostración finaliza al tomar esperanzas en la expresión anterior y darse cuenta de que
+        \[E_{X|\theta}\left[\frac{\frac{\partial^2}{\partial\theta^2} f(X|\theta)}{f(X| \theta)}\right] = \int_X \frac{\partial^2}{\partial\theta^2} f(x | \theta)\, dx = \frac{\partial^2}{\partial\theta^2} \int_X f(x | \theta)\, dx = \frac{\partial^2}{\partial\theta^2} \; 1 = 0. \qedhere\]
+    \end{proof}
+
+    Como consecuencia, la información de Fisher también indica cuál es la curvatura media de la función $\log L(x; \theta)$, que como vemos, en media es negativa ($\mathcal{I}(\theta) \ge 0$). Para calcular el estimador máximo verosímil intentamos maximizar $\log L(x; \theta)$. Si la función de información de Fisher es habitualmente grande, entonces en media tendremos máximos relativos muy claros.
+
+    El Lema \ref{lem:fisher:2dev} nos permite calcular la información de Fisher de forma más sencilla, como muestran los siguientes ejemplos.
+
+    \begin{ex} \label{ex:fisher:binom}
+        Calculamos la función de información de Fisher de $X \sim B(x | n, \theta)$ donde $n$ es conocido. Recordemos que $\log f(X | n, \theta) = \log \binom{n}{X} + X \log \theta + (n - X) \log (1 - \theta)$. Derivando dos veces respecto de $\theta$ obtenemos
+        \[\frac{\partial^2}{\partial \theta^2} f(X | n, \theta) = \frac{-X}{\theta^2} + \frac{-(n-X)}{(1 - \theta)^2}.\]
+        Por tanto, la función de información de Fisher responde a
+        \[\mathcal{I}_X(\theta) =  E_{X|\theta} \left[\frac{X}{\theta^2} + \frac{(n-X)}{(1 - \theta)^2}\right] = n \left(\frac{1}{\theta} + \frac{1}{1 - \theta}\right) = \frac{n}{\theta (1 - \theta)}. \qedhere\]
+    \end{ex}
+
+    \begin{ex}
+        Calculamos la función de información de Fisher de $X \sim N(x|\mu, \sigma^2)$ para varias configuraciones de la distribución normal.
+        \begin{itemize}
+            \item El parámetro $\sigma^2$ es conocido. Tenemos que $\log f(X|\mu, \sigma^2) = - (X-\mu)^2 / (2\sigma^2) - \log(\sqrt{2\pi}) - \log(\sigma^2)/2$. Consecuentemente, deducimos que \[\frac{\partial^2}{\partial\mu^2} f(X|\mu,\sigma^2) = \frac{-1}{\sigma^2}.\]
+            Por tanto, $\mathcal{I}(\mu) = 1 / \sigma^2$.
+            \item El parámetro $\mu$ es conocido. Obtenemos que
+            \[\frac{\partial^2}{\partial(\sigma^2)^2} f(X|\mu,\sigma^2) = -\frac{(X-\mu)^2}{\sigma^6} + \frac{1}{2\sigma^4}.\]
+            Por tanto, podemos calcular $\mathcal{I}(\sigma^2)$ utilizando que $E[(X-\mu)^2] = Var(X) = \sigma^2$. Obtenemos que
+            \[\mathcal{I}(\sigma^2) = E_{X|\sigma^2}[\frac{(X-\mu)^2}{\sigma^6} - \frac{1}{2\sigma^4}] = \frac{1}{\sigma^6} Var((X-\mu)^2) - \frac{1}{2\sigma^4} = \frac{1}{2\sigma^4}. \qedhere\]
+        \end{itemize}
+    \end{ex}
+
+    \begin{remark}
+        Bajo hipótesis de regularidad de Cramer-Rao, si $X=(X_1, \ldots, X_n)$ es una muestra de $f(X|\theta)$, entonces tenemos que
+        \[\frac{\partial^2}{\partial \theta^2}\log(f(X;\theta)) = \frac{\partial^2}{\partial \theta^2} \left(\sum_{i = 1}^n \log(f(X_i;\theta))\right) = \sum_{i = 1}^n \frac{\partial^2}{\partial \theta^2}\log(f(X_i;\theta)).\]
+        Consecuentemente, $\mathcal{I}^{X_1, \ldots, X_n}(\theta) = \sum_{i = 1}^n \mathcal{I}^{X_i}(\theta) = n \mathcal{I}^{X_i}(\theta)$.
+    \end{remark}
+
+    \begin{lem}
+        Bajo hipótesis de regularidad de Cramer-Rao, sea $T(X_1, \ldots, X_n)$ un estadístico tal que su ditribución inducida también verifica las hipótesis de regularidad de Cramer-Rao. Entonces, para cualquier $\theta \in \Theta$ se tiene
+        \[\mathcal{I}_{T(X)}(\theta) \le \mathcal{I}_{X}(\theta).\]
+        Además, la igualdad se da para todo $\theta \in \Theta$ si, y solo si, $T$ es suficiente.
+    \end{lem}
+
+    En lo que sigue necesitaremos el siguiente lema.
+
+    \begin{lem}[Desigualdad de Jenssen]
+        Sean $X$ una variable aleatoria cuya imagen está contenida en un intervalo $I$. Sea $g: I \to \mathbb{R}$ una función.
+        \begin{enumerate}
+            \item Si $g$ es convexa, entonces $E[g(X)] \ge g(E[X])$.
+            \item Si $g$ es cóncava, entonces $E[g(X)] \le g(E[X])$
+        \end{enumerate}
+    \end{lem}
+
+    \begin{prop} \label{prop:desigualdad}
+        Sea $X = (X_1, \ldots, X_n)$ una muestra de $f(X;\theta_0)$. Entonces, para cada $\theta_1 \in \Theta$ se tiene
+        \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_0} \log f(X|\theta_1).\]
+    \end{prop}
+    \begin{proof}
+        Por la desigualdad de Jenssen obtenemos
+        \[E_{X|\theta_0} \log \frac{f(X|\theta_1)}{f(X|\theta_0)} \le \log \int_X \frac{f(X|\theta_1)}{f(X|\theta_0)} f(X|\theta_0) \, dx = \log \int_X f(X|\theta_1) \, dx = 0,\]
+        de donde se deduce el resultado.
+    \end{proof}
+
+    Cabe mencionar que la información de Fisher puede definirse cuando $\Theta \subset \mathbb{R}^m$. Incluimos la definición por complitud, aunque no entraremos en ella a fondo.
+
+    \begin{definition}
+        Sea $\Theta \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de funciones de densidad para la cual siempre existe el score. Dado $\theta \in \Theta$, definimos la función de información de Fisher en $\theta$ como
+        \[{\left(\mathcal{I} \left(\theta \right) \right)}_{i, j} = E_{X|\theta} \left[
+          \left(\frac{\partial}{\partial\theta_i} \log f(X;\theta)\right)
+          \left(\frac{\partial}{\partial\theta_j} \log f(X;\theta)\right)\right], \ 1 \le i,j \le m,\]
+        donde $X = (X_1, \ldots, X_n)$ es una muestra de la distribución con función de densidad $f(X|\theta)$.
+    \end{definition}
+
+    Bajo determinadas hipótesis de regularidad se puede probar que para cada $1 \le i, j \le n$ se verifica
+
+    \[{\left(\mathcal{I} \left(\theta \right) \right)}_{i, j} =
+      -E_{X|\theta}\left[\frac{\partial^2}{\partial\theta_i \, \partial\theta_j} \log f(X;\theta)
+    \right].\]
+
+    \begin{ex}
+        Calculamos la función de información de Fisher de una variable aleatoria $X$ que siga una distribución $Beta(x | p, q)$, donde $\theta = (p, q)$. Recordemos que
+        \begin{equation} \label{eq:log-beta}
+            \log f(x | p, q) = (p-1) \log x + (q-1) \log (1-x) - \log \beta(p, q).
+        \end{equation}
+        Recordemos que $\beta(p,q) = \Gamma(p) \Gamma(q) / \Gamma(p+q)$. Habitualmente al cociente $\Gamma'(p)/\Gamma(p)$ se le llama función digamma y se denota $\psi(p)$. Las derivadas parciales de \eqref{eq:log-beta} son las siguientes:
+        \begin{enumerate}
+            \item $\frac{\partial}{\partial p} \log f(x | p, q) = \log x + \psi(p+q) - \psi(p).$
+            \item $\frac{\partial}{\partial q} \log f(x | p, q) = \log(1-x) + \psi(p+q) - \psi(q).$
+            \item $\frac{\partial^2}{\partial p^2} \log f(x | p, q) = \psi'(p+q) - \psi'(p).$
+            \item $\frac{\partial^2}{\partial q^2} \log f(x | p, q) = \psi'(p+q) - \psi'(q).$
+            \item $\frac{\partial^2}{\partial p\partial q} \log f(x | p, q) = \psi'(p+q).$
+        \end{enumerate}
+
+        Nótese que las derivadas obtenidas no dependen de $x$ y, por tanto, al tomar esperanzas obtenemos las mismas derivadas. Consecuentemente, la función de información de Fisher de $X$ viene dada por
+        \[\mathcal{I}_X(p, q) = - \left(\begin{matrix} \psi'(p+q) - \psi'(p) & \psi'(p+q) \\ \psi'(p+q) & \psi'(p+q) - \psi'(q) \end{matrix}\right). \qedhere\]
+
+    \end{ex}
+
+    \subsubsection{Estimadores insesgados}
+
+    Para comprobar cómo de bueno es un estimador $T$ podemos definir una función de pérdida $L(\theta,T(X))$ que indique la pérdida asociada a estimar un parámetro mediante $T$ si su verdadero valor es $\theta$. A partir de la función de pérdida definimos la función de riesgo, que asocia a cada posible valor del parámetro la pérdida media producida por el estimador. La función de riesgo viene dada por
+    \[ R^L_T(\theta) = E_{X|\theta} [L(\theta,T(X))].\]
+    Un estimador $T$ que ``minimice uniformemente'' la función de riesgo hará mejores estimaciones en media. Con minimizar uniformemente queremos decir que para cada estimador $T'$ se tiene que
+    \[ R^L_T(\theta) \leq R^L_{T'}(\theta) \ \forall \ \theta \in \Theta.\]
+
+    En esta sección introducimos un tipo particular de estimadores que minimizan determinada función de riesgo.
+
+    \begin{definition}
+        Se denomina sesgo de un estimador $T$ de $g(\theta)$ a la diferencia entre la esperanza del estimador y el verdadero valor del parámetro a estimar. Diremos que un estimador es insesgado si para cualquier posible valor del parámetro a estimar su sesgo es nulo.
+    \end{definition}
+
+    Nótese que el sesgo de un estimador es la función de riesgo asociada a la pérdida $L(\theta,T(X)) = g(\theta) - T(X)$. Un estimador insesgado verifica $0 = g(\theta) - E_{X|\theta} T(X)$ y, por tanto, minimiza uniformemente la función de riesgo. Aunque esta propiedad puede parecer a priori interesante, puede suceder que en la práctica el estimador insesgado no proporcione estimaciones de calidad si la varianza $Var_{X|\theta}(T(X))$ es muy alta.
+
+    Claramente, la media muestral es un estimador insesgado de la media de la distribución. El siguiente resultado nos muestra otro ejemplo de un estimador insesgado.
+
+    \begin{prop}
+        Sea $X_1, \ldots, X_n$ una muestra de alguna población con función de densidad $f(X | \theta_0)$. Definimos la varianza muestral como
+        \[S^2 = \frac{1}{n-1}\sum_{i = 1}^n(X_i - \overline{X})^2.\]
+        Entonces, $S^2$ es un estimador insesgado de la varianza de la distribución.
+    \end{prop}
+    \begin{proof}
+        Nótese que $\sum_{i = 1}^n(X_i - \overline{X})^2 = \sum_{i = 1}^nX_i^2 - n\overline{X}^2$. Consecuentemente tenemos
+        \[E\left[\sum_{i = 1}^n(X_i - \overline{X})^2\right] = \sum_{i = 1}^nE\left[X_i^2\right] -     nE[\overline{X}^2] = n(E\left[X_i^2\right] - E[\overline{X}^2]).\]
+        Utilizando que $Var(\overline{X}) = Var(X_i) / n$ y $E[\overline{X}] = E[X_i]$ obtenemos
+        \[E[X_i^2] - E[\overline{X}^2] = Var(X_i) + E[X_i]^2 - Var(\overline{X}) - E[\overline{X}]^2 = \frac{n-1}{n} Var(X_i).\]
+        Por tanto, $E[S^2] = Var(X_i)$ como se quería.
+    \end{proof}
+
+    La función de información de Fisher juega un papel importante en el estudio de los estimadores insesgados como muestra el siguiente Teorema.
+
+    \begin{thm}[Cota de Cramer-Rao]
+        Supongamos que se verifican las hipótesis de regularidad de Cramer-Rao. Sea $g: \Theta \to  \mathbb{R}$ de clase 1. Sea $\hat{\theta}$ un estimador insesgado de $g(\theta)$ tal que
+        \[\int_X \left|\hat{\theta}(x) \frac{\partial}{\partial \theta}f(x | \theta)\right| dx < \infty.\]
+        Entonces, para todo $\theta \in \Theta$
+        \[Var_{X|\theta}(\hat{\theta}) \ge \frac{g'(\theta)^2}{\mathcal{I}(\theta)}.\]
+    \end{thm}
+    \begin{proof}
+        Puesto que $\hat{\theta}$ es insesgado tenemos que
+        \[g(\theta) = \int_X \hat{\theta}(x) f(x|\theta)\,dx.\]
+        Podemos derivar respecto de $\theta$ la expresión anterior y utilizar que $\int_X \frac{\partial}{\partial \theta}f(x|\theta) \, dx = 0$, obteniendo
+        \begin{equation}\label{eq:proof-cr}
+        g'(\theta) = \int_X \hat{\theta}(x)\frac{\partial}{\partial \theta}f(x|\theta)\,dx = \int_X \left(\hat{\theta}(x) - g(\theta)\right)\frac{\partial}{\partial \theta}f(x|\theta)\,dx.
+        \end{equation}
+        Aplicamos la desigualdad de Cauchy-Schwarz al miembro de la derecha de \eqref{eq:proof-cr}, obteniendo
+        \[g'(\theta)^2  \le \left( \int \left(\hat\theta(x) - g(\theta)\right)^2 f(x|\theta) \, dx \right) \left(\int \left( \frac{\partial}{\partial\theta} (\log f(x|\theta)) \right)^2 f(x|\theta) \, dx \right) = Var_{X|\theta}(\hat\theta) \, \mathcal{I}(\theta). \qedhere\]
+    \end{proof}
+
+    \begin{cor}
+        Supongamos que se verifican las hipótesis de regularidad de Cramer-Rao. Sea $\hat{\theta}$ un estimador insesgado de $\theta$ tal que
+        \[\int_X \left|\hat{\theta}(x) \frac{\partial}{\partial \theta} f(x | \theta)\right| dx < \infty.\]
+        Entonces, para todo $\theta \in \Theta$
+        \[Var_{X|\theta}(\hat{\theta}) \ge \frac{1}{\mathcal{I}_X(\theta)} = \frac{1}{n\mathcal{I}_{X_i}(\theta)}.\]
+    \end{cor}
+
+    La cota de Cramer-Rao nos dice que si la información de Ficher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
+
+    \begin{definition}
+        Un estimador se dice eficiente si alcanza la cota de Cramer-Rao para todo $\theta \in \Theta$.
+    \end{definition}
+
+    \subsubsection{Consistencia de sucesiones de estimadores}
+
+    Nos interesa que los estimadores tiendan al parámetro de la distribución cuando el tamaño de la muestra diverge. En tal caso, podemos mejorar el resultado del estimador recurriendo a una mayor muestra de la población.
+
+    \begin{definition}
+        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Theta\}$. Una sucesión de estimadores $\hat\theta_n$ de $g(\theta)$ es consistente para $\theta_0 \in \Theta$ si toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $\hat\theta_n(X_1, \ldots, X_n)$ converge en probabilidad ($P_{\theta_0}$) a $g(\theta_0)$. Si $\hat\theta_n$ es consitente para todo $\theta_0 \in \Theta$, entonces decimos que es consistente.
+    \end{definition}
+
+    \begin{thm}
+        Sea $\hat\theta_n$ una sucesión de estimadores de $g(\theta)$ verificando
+        \begin{enumerate}
+            \item $\lim_{n \to \infty} E_\theta[\hat\theta_n] = g(\theta)$;
+            \item $\lim_{n \to \infty} Var_\theta(\hat\theta_n) = 0$.
+        \end{enumerate}
+        Entonces, $\hat\theta_n$ es consistente para $\theta$.
+    \end{thm}
+    \begin{proof}
+        Sea $\varepsilon > 0$. La desigualdad de Markov nos proporciona
+        \[P_\theta[|\hat\theta_n - g(\theta)| \ge \varepsilon] \le \varepsilon^{-2} E[(\hat\theta_n - g(\theta))^2] = \varepsilon^{-2}  \left(Var(\hat\theta_n) + (E\hat\theta_n -g(\theta))^2\right).\]
+        La prueba finaliza al recordar que el último término converge a $0$.
+    \end{proof}
+
+    Otra propiedad interesante de un estimador cuando la muestra tiene a infinito es la siguiente.
+
+    \begin{definition}
+        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Theta\}$. Una sucesión de estimadores $\hat\theta_n$ de $g(\theta)$ es asintóticamente normal para $\theta_0 \in \Theta$ si toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $\sqrt{n}(\hat\theta_n(X_1, \ldots, X_n) - g(\theta_0))$ converge en ley a una distribución $N(X|0,\sigma^2)$ para cierto $\sigma^2 > 0$.
+    \end{definition}
+
+    \begin{prop}
+        Todo estimador asintóticamente normal es consistente.
+    \end{prop}
+    \begin{proof}
+        Sea $\hat\theta_n$ un estimador asintóticamente normal de $g(\theta)$. Tenemos que $n (\hat\theta_n - g(\theta))^2$ converge en ley a $Gamma(X|1/2, 1/(2\sigma^2))$ por la Proposición \ref{prop:normal-square}. Sea $F$ la función de distribución de $Gamma(X|1/2, 1/(2\sigma^2))$ y sea $\varepsilon > 0$. Vamos a probar que $P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \to 1$. En efecto, sea $1 > \alpha \ge 0$. Tomamos $y$ tal que $F(y) = \alpha$. Tenemos que
+        \[P[n(\hat\theta_n - g(\theta))^2 < y] \to F(y) = \alpha.\]
+        Por tanto, para cada $\delta > 0$ existe $n_0$ tal que $\varepsilon > y /n$ y para cada $n \ge n_0$ tenemos
+        \[P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \ge P[n(\hat\theta_n - g(\theta))^2 < y] \ge \alpha - \delta.\]
+        Deducimos que $\liminf P[(\hat\theta_n - g(\theta))^2 < \varepsilon] \ge \alpha - \delta.$ De la arbitrariedad de $\delta$ y $\alpha$ se deduce el resultado.
+    \end{proof}
+
+    Como es natural, el recíproco del anterior no es cierto.
+
+    \subsection{Estudio teórico del estimador máximo verosímil}
+
+    En este punto nos preguntamos cuándo está bien definido el estimador máximo verosímil. En tal caso nos interesa saber si el método de la máxima verosimilitud nos proporciona un estimador consistente. Para ello aplicamos los resultados teóricos vistos en la sección anterior.
+
+    \begin{prop}
+        Si existe un estadístico suficiente $T$ par ala familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$ y $\hat\theta$ es un estimador máximo verosímil, entonces $\hat\theta$ depende solamente de $T(X)$.
+    \end{prop}
+    \begin{proof}
+        Por el teorema de factorización de estimadores suficientes podemos escribir $f(X|\theta) = h(X) g(T(X), \theta)$. Maximizar $L(x; \theta) = h(x) g(T(x); \theta)$ equivale a maximizar $g(T(x); \theta)$. Por tanto, $\hat\theta$ depende solamente de $T(x)$.
+    \end{proof}
+
+    \begin{thm}
+        Bajo las hipótesis de regularidad de Cramer-Rao se verifican las siguientes afirmaciones:
+        \begin{enumerate}
+            \item Existe $n_0$ tal que para cada $n \ge n_0$ la ecuación en probabilidad $0 =\sum_{i=0}^n \frac{\partial}{\partial \theta} \log f(X_i | \theta)$ tiene solución única. A esta solución se le llama $\hat{\theta}_n(X_1, \ldots, X_n)$. En dicho punto se maximiza la verosimilitud.
+            \item $\hat{\theta}(X_1, \ldots, X_n)$ es consistente. De hecho, se puede probar que la convergencia a $\theta_0$ es casi segura.
+        \end{enumerate}
+    \end{thm}
+    \begin{proof}
+        Para cualquier muestra $X$ de $f(X|\theta_0)$ tenemos que
+        \[0 > -\mathcal{I}(\theta_0)=E_{X|\theta_0}\left[ \frac{\partial^2}{\partial\theta^2} \log f(X;\theta_0)\right] = \frac{\partial}{\partial\theta} E_{X|\theta_0} \left[ \frac{\partial}{\partial\theta} \log f(X;\theta_0) \right].\]
+        Consecuentemente, $E_{X|\theta_0} \left[ S(X; \theta) \right]$ es decreciente en un entorno de $\theta_0$. Recordemos que $E_{X|\theta_0} \left[ S(X; \theta_0) \right] = 0$ por el Lema \ref{lem:score:esp}. Por tanto, existe $\varepsilon > 0$ tal que
+        \begin{itemize}
+            \item $E_{X|\theta_0} \left[ S(X; \theta) \right] > 0$ para todo $\theta \in (\theta_0 - \varepsilon, \theta_0)$;
+            \item $E_{X|\theta_0} \left[ S(X; \theta) \right] < 0$ para todo $\theta \in (\theta_0, \theta_0 + \varepsilon)$.
+        \end{itemize}
+        Esto implica que $\theta_0$ es un máximo relativo de $E_{X|\theta_0}[\log f(X|\theta)]$.
+        INCOMPLETO.
+    \end{proof}
+
+    \begin{thm}
+        Bajo hipótesis de regularidad de Cramer-Rao, si $\hat{\theta}(X_1, \ldots, X_n)$ es un estimador máximo verosímil consistente, entonces es asintóticamente normal. Además, la varianza de la distribución normal asociada es $1/\mathcal{I}_{X_1}(\theta_0)$.
+    \end{thm}
+    \begin{proof}
+        Escribimos $L_n(\theta) = \frac{1}{n}\sum_{i = 1}^n \log f(X_i|\theta)$. Tenemos que $L_n'(\hat\theta_n) = 0$. El teorema del valor medio nos proporciona un $\theta_n$ entre $\theta_0$ y $\hat\theta_n$ tal que $0 = L_n'(\hat\theta) = L_n'(\theta_0) + L_n''(\theta_n)(\hat\theta_n - \theta_0)$. Por tanto,
+        \begin{equation} \label{eq:seq-normal}
+            \sqrt{n}(\theta_0 - \hat\theta_n) = \frac{\sqrt{n}L_n'(\theta_0)}{L_n''(\theta_n)}.
+        \end{equation}
+        Por el teorema central del límite tenemos que
+        \[\sqrt{n}L_n'(\theta_0) = \sqrt{n}(L_n'(\theta_0) - E_{\theta_0}[S(X_1; \theta_0)]) \to N(0, \mathcal{I}_{X_1}(\theta_0)),\]
+        donde hemos utilizado que $Var_{\theta_0}(S(X_1; \theta_0)) = \mathcal{I}_{X_1}(\theta_0)$.
+        Estudiamos ahora el denominador de \eqref{eq:seq-normal}. Puesto que $\hat\theta_n$ converge en probabilidad a $\theta_0$ y $\theta_n$ se encuentra entre ambos, tenemos que $\theta_n$ converge en probabilidad a $\theta_0$. Además, la ley uniforme de los grandes números nos garantiza que
+        \[L_n''(\theta) \xrightarrow{P_{\theta_0}} E_{\theta_0}\left[\frac{\partial^2}{\partial \theta^2}f(X_1|\theta)\right],\]
+        siendo la convergencia uniforme en espacios de parámetros compactos. Por tanto, tomando un compacto que contenga una cola de $\theta_n$ obtenemos la mencionada convergencia uniforme. De esta convergencia uniforme se desprende que
+        \[L_n''(\theta_n) \xrightarrow{P_{\theta_0}} E_{\theta_0}\left[\frac{\partial^2}{\partial \theta^2}f(X_1|\theta_0)\right] = - \mathcal{I}_{X_1}(\theta_0).\]
+        Hemos obtenido pues
+        \[\sqrt{n}(\theta_0 - \hat\theta_n) = \frac{\sqrt{n}L_n'(\theta_0)}{L_n''(\theta_n)} \rightarrow N(0, \frac{1}{\mathcal{I}_{X_1}(\theta_0)}). \qedhere\]
+    \end{proof}
