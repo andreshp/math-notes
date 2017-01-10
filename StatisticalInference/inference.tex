@@ -1494,7 +1494,17 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. Veámoslo con el siguiente ejemplo:
 
 \begin{ex}
-	Poisson.
+	Cálculo de marginales en una distribución de Poisson con $ f(x_i|\lambda) = \frac{e^{-\lambda} \lambda ^{x_i}}{x_i!}, \lambda > 0 $ y $ x_i = 0,1,2, ... $
+	\\En primer lugar calculamos la distribución a priori de Jeffreys $\Pi^y (\theta) = I_X(\theta)^{\frac{1}{2}} $. Por tanto, para nuestra función de distribución  $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} $, pero para que sea una distribución de probabilidad tendremos que normalizarla, para ello hacemos $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} c $, ahora bien, esta función no se puede normalizar dado que $\int_{0}^{\infty} c \lambda^\frac{1}{2} d\lambda = \infty $  
+	
+	No estoy segura de por qué pero esto se puede hacer. De todas formas, podemos calcular la distribución a posteriori, para ello consideramos $f(x|  \lambda) =  \frac{e^{-\lambda} \lambda ^{\sum{x_i}}} {\prod{x_i!}}  , x = (x_1, x_2, ...) $.
+	
+	Podemos calcular la distribución marginal de x, $f(x) = \frac{c}{\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left [ y = n \lambda , dy = nd\lambda \right ]  = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}}\Gamma(\sum{x_i} + \frac{1}{2}) $
+	
+	Como, $f(x) != \prod f(x_i)$, concluimos que las variables no son incondicionalmente independientes si no condicionalmente independientes.
+	
+	Podemos observar que la distribución marginal de x está indeterminada por $c$. A pesar de ello, podemos calcular la distribución a posteriori de la siguiente forma:
+	$f(\lambda, x) = \frac{ \frac{c e^{-n \lambda} \lambda{\sum{x_i} - \frac{1}{2}} }{x_1! x_2! ... x_n!} }{\frac{c}{x_1! ... x_n!} \frac{1}{n \sum{x_i} + \frac{1}{2} \Gamma(\sum{x_i} + \frac{1}{2})}} = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}$
 \end{ex}
 
 \subsection{Convergencia de distribuciones a posteriori}
