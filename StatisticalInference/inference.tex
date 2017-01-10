@@ -126,6 +126,7 @@
 $\hfil\displaystyle{#1}\hfil$\crcr\noalign{\kern1pt\nointerlineskip}
 $\hfil\widetilde{}\hfil$\crcr\noalign{\kern-5pt\nointerlineskip}}}}}
 
+\usepackage{comment}
 
 %----------------------------------------------------------------------------------------
 %   GRÁFICOS
@@ -323,6 +324,8 @@ Podemos utilizar los dos corolarios anteriores para calcular los momentos de la 
     \[E[X^k] = \begin{cases} 0 & \text{ si } k \text{ es impar;} \\ (k-1)!! \sigma^{k} & \text{ si } k \text{ es par;} \end{cases}\]
     donde $n!!$ denota al doble factorial, definido como el producto de los números desde $1$ hasta $n$ con la misma paridad que $n$.
 \end{cor}
+
+\begin{comment}
 
 La Figura \ref{fig:normal} muestra la función de densidad de una distribución normal. Podemos ver que la densidad se concentra en torno a la media. De hecho, $P(|X - \mu| \ge 2\sigma) \approx 0.046$. Es más, $P(|X - \mu| \ge 3\sigma) \approx 0.03$.
 
@@ -823,17 +826,19 @@ Nótese que la función característica de la distribución de Cauchy no es dife
     \label{fig:laplace}
 \end{figure}
 
+\end{comment}
+
 \subsubsection{Distribución T de Student}
 
 \subsubsection{Distribución de Dirichlet}
-		La distribución de Dirichlet es la generalización en multivariable de la distribución Beta. Comúnmente, se utilizan las funciones de Dirichlet como funciones a priori en estadística Bayesiana. Definimos la distribución de Dirichlet de orden $n \geq 2$ con parámetros $\alpha_1, ..., \alpha_n$ tiene una función de densidad de probabilidad 
-		
+		La distribución de Dirichlet es la generalización en multivariable de la distribución Beta. Comúnmente, se utilizan las funciones de Dirichlet como funciones a priori en estadística Bayesiana. Definimos la distribución de Dirichlet de orden $n \geq 2$ con parámetros $\alpha_1, ..., \alpha_n$ tiene una función de densidad de probabilidad
+
 		\begin{equation*}
-		f(x_1, .. x_n|\alpha_1, ...,\alpha_n) = \frac{\Gamma(\alpha_1 + ... + \alpha_n)}{\Gamma(\alpha_1) + ... + \Gamma(\alpha_n)} \prod_{i=1}^{n} {x_i ^ {\alpha_i - 1}} 
+		f(x_1, .. x_n|\alpha_1, ...,\alpha_n) = \frac{\Gamma(\alpha_1 + ... + \alpha_n)}{\Gamma(\alpha_1) + ... + \Gamma(\alpha_n)} \prod_{i=1}^{n} {x_i ^ {\alpha_i - 1}}
 		\end{equation*}
-		
+
 		definida en el simplex abierto de (n-1) dimensiones definido por:
-		
+
 		\begin{equation*}
 		x_1, ... , x_n > 0
 		\end{equation*}
@@ -843,11 +848,11 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 		\begin{equation*}
 		x_n =  1 - x_1 - ... - x_{n-1}
 		\end{equation*}
-		
+
 		\begin{thm}
 			Sea $X = (X_1, ... , X_k) \sim Dirichlet(X|\alpha_1, ... , \alpha_k, \alpha_{k+1}) $ se tiene que para cualquier $k_1 < k$  se verifica que $X' =  (X_1, ... , X_{k_1}) \sim D(X'|\alpha_1, ... , \alpha_{k_1}, \alpha_{k_1 + 1}^{*}) $ con  $\alpha_{k+1}^{*} =\sum_{j=1}^{k_1} {\alpha_{j}}$
 		\end{thm}
-		
+
 		\begin{proof}
 			Pendiente
 		\end{proof}
@@ -925,7 +930,7 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 
 \importsection{Hipotesis.tex}
 
-\section{Estadística bayesiana}
+\section{Estadística bayesiana} \label{sec:bayes}
 
 En esta sección estudiaremos el modelo de inferencia estadística desde el punto de vista bayesiano.
 
@@ -1099,10 +1104,10 @@ Notemos que la distribución de Jeffreys podría ser impropia, es decir, no inte
 \end{ex}
 
 \subsection{Convergencia de distribuciones a posteriori}
-La distribución de Dirichlet es la generalización en multivariable de la distribución Beta. Comúnmente, se utilizan las funciones de Dirichlet como funciones a priori en estadística Bayesiana. Definimos la distribución de Dirichlet de orden $n \geq 2$ con parámetros $\alpha_1, ..., \alpha_n$ tiene una función de densidad de probabilidad 
+La distribución de Dirichlet es la generalización en multivariable de la distribución Beta. Comúnmente, se utilizan las funciones de Dirichlet como funciones a priori en estadística Bayesiana. Definimos la distribución de Dirichlet de orden $n \geq 2$ con parámetros $\alpha_1, ..., \alpha_n$ tiene una función de densidad de probabilidad
 
 \begin{equation*}
-f(x_1, .. x_n|\alpha_1, ...,\alpha_n) = \frac{\Gamma(\alpha_1 + ... + \alpha_n)}{\Gamma(\alpha_1) + ... + \Gamma(\alpha_n)} \prod_{i=1}^{n} {x_i ^ {\alpha_i - 1}} 
+f(x_1, .. x_n|\alpha_1, ...,\alpha_n) = \frac{\Gamma(\alpha_1 + ... + \alpha_n)}{\Gamma(\alpha_1) + ... + \Gamma(\alpha_n)} \prod_{i=1}^{n} {x_i ^ {\alpha_i - 1}}
 \end{equation*}
 
 definida en el simplex abierto de (n-1) dimensiones definido por:
@@ -1117,9 +1122,9 @@ x_1 + ... + x_{n-1} < 1
 x_n =  1 - x_1 - ... - x_{n-1}
 \end{equation*}
 
-\begin{theorem}
+\begin{thm}
 	Sea $X = (X_1, ... , X_k) \sim Dirichlet(X|\alpha_1, ... , \alpha_k, \alpha_{k+1}) $ se tiene que para cualquier $k_1 < k$  se verifica que $X' =  (X_1, ... , X_{k_1}) \sim D(X'|\alpha_1, ... , \alpha_{k_1}, \alpha_{k_1 + 1}^{*}) $ con  $\alpha_{k+1}^{*} =\sum_{j=1}^{k_1} {\alpha_{j}}$
-\end{theorem}
+\end{thm}
 
 \begin{proof}
 	Pendiente
