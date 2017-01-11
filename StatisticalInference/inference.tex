@@ -244,6 +244,18 @@ Considérese un experimento de Bernoulli con probabilidad $\theta \in [0,1]$. Re
     Una variable aleatoria sigue una distribución binomial con parámetros $n \in \mathbb{N}$ y $\theta \in [0,1]$  si su función masa de probabilidad viene dada por $f(x|n,\theta) = \binom{n}{x} \theta^x (1-\theta)^{n-x}$. En tal caso se denota $X \sim B(x|n,\theta)$.
 \end{definition}
 
+\section{Distribución multinomial}
+
+\begin{definition}
+La distribución multinomial se puede ver como una generalización de la distribución binomial para variables politómicas (variables discretas con más de dos categorías). 
+\\Supongamos que se realizan $n$ ensayos independientes que dan lugar a $k$ resultados distintos $X = (X_1, ... X_k)$  con probabilidades $\theta_1, ... , \theta_k$ respectivamente, donde $\theta_1+... + \theta_k = 1$. Entonces, la función de probabilidad para dicha variable multinomial sería:
+
+\[
+f(X|\theta_1, ... , \theta_k) = \frac{n!}{X_1! X_2! ... X_k!} \theta^{X_1} \theta^{X_2} ... \theta^{X_k} 
+\]   
+
+\end{definition}
+
 \subsection{Distribuciones continuas}
 
 En esta sección se desarrollan varias de las distribuciones continuas más importantes de la estadística.
