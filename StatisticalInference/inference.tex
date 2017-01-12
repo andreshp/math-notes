@@ -1095,15 +1095,15 @@ Notemos que la distribución de Jeffreys podría ser impropia, es decir, no inte
 	
 	Pasemos a calcular la distribución a priori. Consideramos una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}$. La distribución conjunta es
 	
-	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i}}e^{-n\lambda}\lambda^{sum{x_i}-\frac{1}{2}}.\]
+	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}.\]
 	
 	Y la distribución marginal de $x$ es
 	
-	\[f(x) = \frac{c}{\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}\Gamma(\sum{x_i} + \frac{1}{2}).\]
+	\[f(\utilde{x}) = \frac{c}{\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}\Gamma(\sum{x_i} + \frac{1}{2})}.\]
 		
 	Podemos comprobar que ambas distribuciones están indeterminadas por $c$, y aun así podemos obtener la distirbución a priori,
 		
-	\[\pi(\lambda|\utilde{x}) = \frac{ \frac{c}{\prod{x_i}}e^{-n\lambda}\lambda^{sum{x_i}-\frac{1}{2}} }{ \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}\Gamma(\sum{x_i} + \frac{1}{2}) } = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}. \]
+	\[\pi(\lambda|\utilde{x}) = \frac{ \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}} }{ \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}\Gamma(\sum{x_i} + \frac{1}{2}) }} = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}. \]
 			
 		Hemos visto por tanto que una distribución a priori impropia también nos permite realizar inferencias. Un último detalle que podemos observar es que $f(\utilde{x}) \ne \prod{f(x_i)}$. Esta es otra de las diferencias entre la estadística clásica y la bayesiana. En la bayesiana no se sigue la hipótesis de que los datos sean incondicionalmente independientes, si no que se supone que los datos son condicionalmente independientes respecto a $\lambda$ (o $\theta$ en general), que es lo que se asume al calcular las verosimilitudes.
 			
