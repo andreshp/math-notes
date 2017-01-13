@@ -244,6 +244,19 @@ Considérese un experimento de Bernoulli con probabilidad $\theta \in [0,1]$. Re
     Una variable aleatoria sigue una distribución binomial con parámetros $n \in \mathbb{N}$ y $\theta \in [0,1]$  si su función masa de probabilidad viene dada por $f(x|n,\theta) = \binom{n}{x} \theta^x (1-\theta)^{n-x}$. En tal caso se denota $X \sim B(x|n,\theta)$.
 \end{definition}
 
+\subsubsection{Distribución multinomial}
+
+\begin{definition}
+	La distribución multinomial se puede ver como una generalización de la distribución binomial para variables politómicas (variables discretas con más de dos categorías). 
+	\\Supongamos que se realizan $n$ ensayos independientes que dan lugar a $k$ resultados distintos $X = (X_1, ... X_k)$  con probabilidades $\theta_1, ... , \theta_k$ respectivamente, donde $\theta_1+... + \theta_k = 1$. Entonces, la función de probabilidad para dicha variable multinomial sería:
+	
+	\[
+	f(X|\theta_1, ... , \theta_k) = \frac{n!}{X_1! X_2! ... X_k!} \theta^{X_1} \theta^{X_2} ... \theta^{X_k} 
+	\]   
+	
+\end{definition}
+
+
 \subsection{Distribuciones continuas}
 
 En esta sección se desarrollan varias de las distribuciones continuas más importantes de la estadística.
@@ -937,6 +950,8 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 \pagebreak
 \importsection{Hipotesis.tex}
 
+\pagebreak
+
 \section{Estadística bayesiana} \label{sec:bayes}
 
 En esta sección estudiaremos el modelo de inferencia estadística desde el punto de vista bayesiano.
@@ -1192,6 +1207,32 @@ obteniendo finalmente una distribución a posteriori también normal, luego la f
 Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. Veámoslo con el siguiente ejemplo:
 
 \begin{ex}
+	
+	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación (según el procedimiento de clase ¿?) normalizamos la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
+	
+	Pasemos a calcular la distribución a priori. Consideramos una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}$. La distribución conjunta es
+
+	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}.\]
+
+	Y la distribución marginal de $x$ es
+	
+	\[f(\utilde{x}) = \frac{c}{\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  =\] 
+
+	\[ = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}).\]
+	
+	Podemos comprobar que ambas distribuciones están indeterminadas por $c$, y aun así podemos obtener la distirbución a priori,
+	
+	\[\pi(\lambda|\utilde{x}) = \frac{ \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}} }{\frac{c}{\prod{x_i!}} \frac{1}{n ^{\sum{x_i} + \frac{1}{2}}}\Gamma(\sum{x_i} + \frac{1}{2}) } = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}. \]
+		
+		Hemos visto por tanto que una distribución a priori impropia también nos permite realizar inferencias. Un último detalle que podemos observar es que $f(\utilde{x}) \ne \prod{f(x_i)}$. Esta es otra de las diferencias entre la estadística clásica y la bayesiana. En la bayesiana no se sigue la hipótesis de que los datos sean incondicionalmente independientes, si no que se supone que los datos son condicionalmente independientes respecto a $\lambda$ (o $\theta$ en general), que es lo que se asume al calcular las verosimilitudes.
+
+\end{ex}
+
+
+\begin{comment}
+
+
+\begin{ex}
 	Cálculo de marginales en una distribución de Poisson con $ f(x_i|\lambda) = \frac{e^{-\lambda} \lambda ^{x_i}}{x_i!}, \lambda > 0 $ y $ x_i = 0,1,2, ... $
 	\\En primer lugar calculamos la distribución a priori de Jeffreys $\Pi^y (\theta) = I_X(\theta)^{\frac{1}{2}} $. Por tanto, para nuestra función de distribución  $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} $, pero para que sea una distribución de probabilidad tendremos que normalizarla, para ello hacemos $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} c $, ahora bien, esta función no se puede normalizar dado que $\int_{0}^{\infty} c \lambda^\frac{1}{2} d\lambda = \infty $
 
@@ -1204,8 +1245,9 @@ Notemos que la distribución de Jeffreys podría ser impropia, es decir, no inte
 	Podemos observar que la distribución marginal de x está indeterminada por $c$. A pesar de ello, podemos calcular la distribución a posteriori de la siguiente forma:
 	$f(\lambda, x) = \frac{ \frac{c e^{-n \lambda} \lambda{\sum{x_i} - \frac{1}{2}} }{x_1! x_2! ... x_n!} }{\frac{c}{x_1! ... x_n!} \frac{1}{n \sum{x_i} + \frac{1}{2} \Gamma(\sum{x_i} + \frac{1}{2})}} = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}$
 \end{ex}
+\end{comment}
 
-\subsection{Convergencia de distribuciones a posteriori}
+
 La distribución de Dirichlet es la generalización en multivariable de la distribución Beta. Comúnmente, se utilizan las funciones de Dirichlet como funciones a priori en estadística Bayesiana. Definimos la distribución de Dirichlet de orden $n \geq 2$ con parámetros $\alpha_1, ..., \alpha_n$ tiene una función de densidad de probabilidad
 
 \begin{equation*}
@@ -1231,6 +1273,9 @@ x_n =  1 - x_1 - ... - x_{n-1}
 \begin{proof}
 	Pendiente
 \end{proof}
+
+\subsection{Convergencia de distribuciones a posteriori}
+
 Nos planteamos en este punto la convergencia de las distribuciones a posteriori cuando el tamaño de las muestras crece.
 
 Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, con una medida de probabilidad $P_{\theta_0}$. Conocemos la familia de distribuciones $\{f(x|\theta)|\theta\in\Theta\}$. Queremos ver, dada una distribución a priori $\pi(\theta)$, si converge la distribución a posteriori $\pi(\theta|X_1,\dots,X_n)$, para las variables i.i.d. $X_1,\dots,X_n \sim f(x|\theta_0)$,  cuando $n \to \infty$.
@@ -1239,9 +1284,9 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 
 
 \begin{thm}
-	En las condiciones anteriores, se tiene que:
+	En las condiciones anteriores, se tiene que
 
-	\[\pi(\theta|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0\]
+	\[\pi(\theta|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0.\]
 \end{thm}
 
 \begin{proof}
@@ -1286,6 +1331,8 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 	Observemos que en la convergencia de la distribución a posteriori no ha influido la distribución a priori escogida. Esto nos indica que cuando el tamaño de la muestra es grande, la distribución que hayamos elegido a priori no va a tener mucha influencia sobre la distribución que utilizaremos para realizar inferencia.
 \end{remark}
 
+
+\pagebreak
 \begin{thebibliography}{99}
 \bibitem{casella} Statistical Inference, G. Casella, R. L. Berger, segunda edicón (2002), Duxbury Advanced Series.
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
