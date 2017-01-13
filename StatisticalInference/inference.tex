@@ -1058,6 +1058,8 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 		\item La familia de distribuciones Gamma es una familia de distribuciones conjugada para las distribuciones de Poisson.% y (exponenciales (definir)).
 
 		\item La familia de distribuciones normales es una familia de distribuciones conjugada para la familia de distribuciones normales con varianza conocida.
+		
+		\item La familia de distribuciones de Dirichlet es una familia de distribuciones conjugada para la familia de distribuciones multinomiales.
 	\end{itemize}
 \end{prop}
 
@@ -1080,6 +1082,29 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 	Llegando de nuevo al mismo resultado.
 \end{ex}
+
+\begin{ex}
+
+	Consideremos ahora una distribución multinomial dada por la función masa de probabilidad
+	
+	\[f(x_1,\dots,x_{k}|\theta_1,\dots,\theta_{k}) = \frac{n!}{x_1!\dots x_k!}\theta_1^{x_1}\dots \theta_k^{x_k},\]
+	
+	con $\sum_{i=1}^{k}{x_i} = n$, $0 < \theta_i < 1$ y $\sum_{i=1}^{k}{\theta_i}=1$.
+	
+	Llamamos $\theta = (\theta_1,\dots,\theta_k)$. Elegimos como distribución a priori la distribución de Dirichlet de parámetros $\alpha_1,\dots,\alpha_k$, $\pi(\theta) \propto \frac{\Gamma(\alpha_1+\dots+\alpha_k)}{\Gamma(\alpha_1)\dots\Gamma(\alpha_k)}\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}$.
+	
+	Entonces, dada una muestra $\utilde{x}=(x_1,\dots,x_k)$, se tiene
+	
+	\[f(\theta|\utilde{x}) \propto \pi(\theta)f(\utilde{x}|\theta) 
+	\propto \left(\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}\right)\left(\prod_{i=1}^{k}{\theta_i^{x_i}}\right)\]
+	
+	\[ = \prod_{i=1}^{k}{\theta_i^{x_i+\alpha_i-1}} \propto Dirichlet(\theta|\alpha_1+x_1,\dots,\alpha_k+x_k), \]
+	
+	obteniendo de nuevo una nueva distribución de Dirichlet a posteriori.
+	
+\end{ex}
+
+\subsection{Distribuciones objetivas. Distribución de Jeffreys}
 
 \begin{definition}
     Sea $\{f(x | \theta): \theta \in \Theta \}$ una familia de distribuciones con parámetro $\theta \in \Theta$. La distribución a priori de Jeffreys se define como $\pi^{J}(\theta) \propto \sqrt{\mathcal{I}_X(\theta)}$.
