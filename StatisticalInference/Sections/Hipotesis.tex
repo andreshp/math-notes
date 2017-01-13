@@ -26,7 +26,7 @@
         Consideremos una muestra aleatoria simple $\utilde{X} = (X_1, \dots, X_n)$ de $X$. Un test de hipótesis es una regla que permite dividir el espacio muestral de $\utilde{X}$ en dos subconjuntos medibles disjuntos. Estos conjuntos se corresponden con aquellas muestras que aceptan la hipótesis nula como cierta (región de aceptación) y aquellas muestras que rechazan la hipótesis nula y aceptan la hipótesis alternativa (región crítica).
     \end{definition}
 
-    Supondremos que la región crítica se corresponde con la imagen inversa de un boreliano, esto es, es de la forma $\utilde{X} \in R$ con $R \in \mathcal{B}^n$. En ocasiones podremos expresar la región crítica en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor.
+    De aquí en adelante supondremos que $n$ está fijado de antemano. Además, supondremos que la región crítica se corresponde con la imagen inversa de un boreliano, esto es, es de la forma $\utilde{X} \in R$ con $R \in \mathcal{B}^n$ ya que el resto de casos no tiene interés práctico. En ocasiones podremos expresar la región crítica en términos de un estadístico $T(X_1, \ldots, X_n)$. Por ejemplo, este estadístico puede ser la media de la muestra y la región crítica aquellas muestras con media mayor que un determinado valor.
 
     \subsection{Errores de los tests de hipótesis}
 
@@ -69,7 +69,7 @@
         \begin{thm}[Lema de Neyman-Pearson] \label{thm:np:1}
             Supóngase que se desea co   ntrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
             \[C_k = \left\{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k\right\}.\]
-            Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test UMP de significación $\alpha$. Además, cualquier test UMP de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{x: L(\theta_1;\utilde{x}) > k L(\theta_0;\utilde{x})\} \subset C' \subset C_k$ salvo a lo sumo un subconjunto de probabilidad nula.
+            Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test UMP de significación $\alpha$. Además, cualquier test UMP de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{\utilde{x}: L(\theta_1;\utilde{x}) > k L(\theta_0;\utilde{x})\} \subset C' \subset C_k$ salvo a lo sumo un subconjunto de probabilidad nula.
         \end{thm}
         \begin{proof}
             En primer lugar, nótese que el test dado por $C_k$ es de tamaño $\alpha$ ya que $\sup\{ \eta(\theta) : \theta \in \Theta_0\} = \eta(\theta_0) = \alpha$. Consideremos otro test de significación $\alpha$ cuya función potencia es $\eta'$ y su región crítica es $C'$ y veamos que $\eta'(\theta_1) \le \eta(\theta_1)$. Por distinción de casos es fácil razonar que para cualquier muestra $x$ se verifica
@@ -173,21 +173,22 @@
 
     \subsection{Tests de la razón de verosimilitud}
 
-        Los tests de la razón de la verosimilitud están íntimamente ligados con los estimadores máximo verosímiles como veremos a continuación. Fijemos una familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$. Sea $X$ una variable aleatoria que sigue una distribución con función de densidad $f(X | \theta_0)$. Dada una muestra $x = (x_1, \ldots, x_n)$, recordemos que la verosimilitud se define como la función
-        $L(\theta;\utilde{x})$.
+        En esta sección estudiamos los tests de la razón de la verosimilitud, que están íntimamente ligados con los estimadores máximo verosímiles. Además, veremos que en el caso de hipótesis simples estos tests coinciden con el test de Neyman-Pearson.
 
         \begin{definition}
-            Considérese una hipótesis $H_0 : \theta_0 \in \Theta_0$. El ratio de verosimilitud de $H_0$ para la muestra $x$ es
-            \[\lambda(x) = \frac{\sup\{L(\theta; x): \theta \in \Theta_0\}}{\sup\{L(\theta; x): \theta \in \Theta\}}. \]
-             Un test de la razón de verositud es cualquier test cuya región crítica sea de la forma $\{x : \lambda(x) \le c\}$, donde $0 \le c \le 1$.
+            Considérese una hipótesis $H : \theta \in \Theta_0$. El ratio de verosimilitud de $H$ para la muestra $\utilde{x}$ es
+            \[\lambda(\utilde{x}) = \frac{\sup\{L(\theta;\utilde{x}): \theta \in \Theta_0\}}{\sup\{L(\theta;\utilde{x}): \theta \in \Theta\}}. \]
+            Fijado un contraste de hipótesis, $H_0 : \theta \in \Theta_0$ y $H_1 : \theta \in \Theta_1$, un test de la razón de verosimilitud es cualquier test cuya región crítica sea de la forma $\{\utilde{x} : \lambda(\utilde{x}) \le c\}$, donde $0 \le c \le 1$.
         \end{definition}
 
-        Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
+        Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(\utilde{x})$ se corresponden con la máxima probabilidad posible de la muestra $\utilde{x}$ si variamos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(\utilde{x}) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
 
-        Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);\utilde{x}) / L(\hat{\theta}(x);\utilde{x})$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
+        Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(\utilde{x}) = L(\hat{\theta_0}(x);\utilde{x}) / L(\hat{\theta}(x);\utilde{x})$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipótesis $H_0: \theta = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
 
         \begin{ex}[Distribución normal con $\mu$ y $\sigma^2$ desconocidos]
-            Consideramos una variable $X \sim N(\mu, \sigma^2)$ con $\mu$ y $\sigma^2$ desconocidos y buscamos contrastar las hipótesis $H_0: \mu = \mu_0$ y $H_1: \mu \ne \mu_0$.  
+            Consideramos una variable $X \sim N(\mu, \sigma^2)$ con $\mu$ y $\sigma^2$ desconocidos y buscamos contrastar las hipótesis $H_0: \mu = \mu_0$ y $H_1: \mu \ne \mu_0$ aplicando el test de la razón de verosimilitud. Esto es, el parámetro es $\theta = (\mu, \sigma^2)$, $\Theta = \mathbb{R}\times\mathbb{R}^+$ y $\Theta_0 = \{0\}\times\mathbb{R}^+$. Tenemos que calcular $\lambda(\utilde{x})$ para cualquier muestra $\utilde{x}$. Recordemos que en el Ejemplo \ref{ex:sufi:normal:2} se demostró que la función de verosimilitud en este contexto responde a
+            \[L(\mu, \sigma; \utilde{x}) = (2 \pi \sigma^2)^{-n/2} \exp\left(\frac{-1}{2 \sigma^2} \sum_{i = 1}^n (x_i - \mu)^2\right) = (2 \pi \sigma^2)^{-n/2} \exp\left(\frac{-1}{2 \sigma^2} ((n-1)S^2 + n(\overline{x}-\mu))\right),\]
+            donde $S^2$ es la varianza muestral. En primer lugar calculamos  $\sup\{L(\theta; x): \theta \in \Theta_0\}$. El
 
 
         \end{ex}
