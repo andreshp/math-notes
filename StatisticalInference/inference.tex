@@ -1109,6 +1109,76 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 	
 \end{ex}
 
+\begin{ex}
+	
+Consideremos $X \sim \mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocido. Tenemos la función de densidad (condicionada únicamente a $\mu$)
+
+\[f(x|\mu) = (2\pi\sigma^2)^{-1/2}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.\]
+
+Y dada una muestra $\utilde{x}=(x_1,\dots,x_n)$,
+
+\[f(\utilde{x}|\mu) = (2\pi\sigma^2)^{-n/2}e^{-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}}}\]
+
+Elegimos una distribución a priori $\mu \sim \mathcal{N}(\eta,\tau^2)$, es decir,
+
+\[\pi(\mu) = (2\pi\tau^2)^{-1/2} e^{-\frac{(\mu-\eta)^2}{2\tau^2}}\]
+
+Calculamos la distribución conjunta.
+
+\[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}-\frac{(\mu-\eta)^2}{2\tau^2}}\right)}\]
+
+Llamamos $\overline{x}=\frac{1}{n}\sum{x_i}$ y $s^2 = \frac{1}{n}\sum{(x_i-\overline{x})^2}$. Notemos que ninguna de las dos expresiones depende de $\mu$.
+
+Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} = \sum{(x_i-\overline{x})^2}+2(\overline{x}-\mu)\sum{(x_i-\overline{x})} + \sum{(\overline{x}-\mu)^2} = ns^2 + 0 + n(\overline{x}-\mu)^2$, tenemos
+
+\[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\frac{n}{2\sigma^2}[s^2+(\overline{x}-\mu)^2]-\frac{(\mu-\eta)^2}{2\tau^2}\right)}\]
+\[= 
+\exp{\left(-\frac{ns^2}{2\sigma^2}\right)}\exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}
+\propto
+ \exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}.\]
+ 
+ Ahora, desarrollamos la expresión $n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2$. Podemos separarla según los sumandos que dependan o no de $\mu$. A continuación, dividimos la exponencial en dos partes, una con los sumandos independientes de $\mu$ y otra con los dependientes. La expresión resultante es
+ 
+ \[f(\utilde{x}|\mu)\pi(\mu) \propto
+ \exp{\left(-\frac{n\overline{x}^2\tau^2+\sigma^2\eta^2}{2\sigma^2\tau^2}\right)}
+ \exp{\left(-\frac{\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)}{2\sigma^2\tau^2}\right)}\]
+ \[\propto
+ \exp{\left(-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]\right)}
+ \]
+ 
+ Ahora ajustamos cuadrados sobre el exponente. Procedemos como sigue:
+ 
+ \[-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]
+ =
+ -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu^2-2\mu\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]
+ \]
+ \[=
+ -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu^2-2\mu\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}+\left(\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right)^2\right] + \frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left(\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right)^2
+ \]
+ \[=
+  -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2 + \frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}.
+ \]
+
+Volviendo a la distribución conjunta,
+
+\[f(\utilde{x}|\mu)\pi(\mu) \propto 
+\exp{\left(\frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}\right)}
+\exp{\left(-\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2\right)}
+\]
+\[ \propto
+\exp{\left(-\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2\right)}
+=
+\exp{\left(\frac{\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2}{2\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}}\right)}
+\]
+\[
+\propto \mathcal{N}\left(\mu|\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2},\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}\right),
+\]
+
+obteniendo finalmente una distribución a posteriori también normal, luego la familia normal es conjugada.
+
+\end{ex}
+
+
 \subsection{Distribuciones objetivas. Distribución de Jeffreys}
 
 \begin{definition}
