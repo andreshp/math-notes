@@ -185,10 +185,28 @@
 
         Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(\utilde{x}) = L(\hat{\theta_0}(x);\utilde{x}) / L(\hat{\theta}(x);\utilde{x})$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipótesis $H_0: \theta = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
 
-        \begin{ex}[Distribución normal con $\mu$ y $\sigma^2$ desconocidos]
-            Consideramos una variable $X \sim N(\mu, \sigma^2)$ con $\mu$ y $\sigma^2$ desconocidos y buscamos contrastar las hipótesis $H_0: \mu = \mu_0$ y $H_1: \mu \ne \mu_0$ aplicando el test de la razón de verosimilitud. Esto es, el parámetro es $\theta = (\mu, \sigma^2)$, $\Theta = \mathbb{R}\times\mathbb{R}^+$ y $\Theta_0 = \{0\}\times\mathbb{R}^+$. Tenemos que calcular $\lambda(\utilde{x})$ para cualquier muestra $\utilde{x}$. Recordemos que en el Ejemplo \ref{ex:sufi:normal:2} se demostró que la función de verosimilitud en este contexto responde a
+        \begin{ex}[\textbf{Test t de Student} -- distribución normal con $\mu$ y $\sigma^2$ desconocidos]
+            Consideramos una variable $X \sim N(\mu, \sigma^2)$ con $\mu$ y $\sigma^2$ desconocidos y buscamos contrastar las hipótesis $H_0: \mu = \mu_0$ y $H_1: \mu \ne \mu_0$ aplicando el test de la razón de verosimilitud. Esto es, el parámetro es $\theta = (\mu, \sigma^2)$, $\Theta = \mathbb{R}\times\mathbb{R}^+$ y $\Theta_0 = \{0\}\times\mathbb{R}^+$. Este test se denomina test t de Student.
+
+            Tenemos que calcular $\lambda(\utilde{x})$ para cualquier muestra $\utilde{x}$. Recordemos que en el Ejemplo \ref{ex:sufi:normal:2} se demostró que la función de verosimilitud en este contexto responde a
             \[L(\mu, \sigma; \utilde{x}) = (2 \pi \sigma^2)^{-n/2} \exp\left(\frac{-1}{2 \sigma^2} \sum_{i = 1}^n (x_i - \mu)^2\right) = (2 \pi \sigma^2)^{-n/2} \exp\left(\frac{-1}{2 \sigma^2} ((n-1)S^2 + n(\overline{x}-\mu))\right),\]
-            donde $S^2$ es la varianza muestral. En primer lugar calculamos  $\sup\{L(\theta; x): \theta \in \Theta_0\}$. El
-
-
+            donde $S^2$ es la varianza muestral. En primer lugar calculamos
+            \[\lambda_0(\utilde{x}) = \sup\{L(\theta;\utilde{x}): \theta \in \Theta_0\} = \sup\{L(\mu_0, \sigma^2;\utilde{x}): \sigma^2 \in \mathbb{R}^+\}.\]
+            Es fácil ver que el estimador máximo verosímil de la varianza de una normal con media conocida $\mu_0$ es $\hat{\sigma}_0^2(\utilde{x}) = \frac{1}{n}\sum_{i = 1}^n (x_i - \mu_0)^2$. Por tanto, obtenemos
+            \[\lambda_0(\utilde{x}) = L(\mu_0, \hat{\sigma}_0^2; \utilde{x}) = (2 \pi \hat{\sigma}_0^2)^{-n/2} \exp(-n / 2).\]
+            Por otro lado, en el caso de una normal con media y varianza desconocida el estimador máximo verosímil $\hat{\theta} = (\hat{\mu}, \hat{\sigma}^2)$ viene dado por $\hat{\mu}(\utilde{x}) = \overline{x}$ y $\hat{\sigma}^2(\utilde{x}) = \frac{1}{n}\sum_{i = 1}^n (x_i - \overline{x})^2 = (n-1)S^2/n$. Por tanto, obtenemos
+            \[\lambda_1(\utilde{x}) = \sup\{L(\theta;\utilde{x}): \theta \in \Theta\} = (2 \pi \hat{\sigma}^2)^{-n/2} \exp(-n / 2).\]
+            El ratio de verosimilitud de $H_0$ es
+            \begin{equation} \label{eq:lrt:normal}
+            \begin{split}
+            \lambda(\utilde{x}) = \frac{\lambda_0(\utilde{x})}{\lambda_1(\utilde{x})} = \left(\frac{\hat{\sigma}_0^2}{\hat{\sigma}^2}\right)^{-n/2} = \left(\frac{\frac{1}{n}\sum_{i = 1}^n (x_i - \mu_0)^2}{(n-1)S^2/n}\right)^{-n/2} = \\ \left(\frac{\sum_{i = 1}^n (x_i - \overline{x})^2 + n(\overline{x} - \mu_0)^2}{(n-1)S^2}\right)^{-n/2} =
+            \left(1 + \frac{t^2}{n-1}\right)^{-n/2},
+            \end{split}
+            \end{equation}
+            donde $t = \sqrt{n}(\overline{x} - \mu_0) / S$. Recordemos en este punto que bajo $H_0$ la variable $T = \sqrt{n}(\overline{X} - \mu_0) / S$ sigue una distribución t de Student con $n-1$ grados de libertad. A partir de \eqref{eq:lrt:normal} nótese que $\lambda)$ es decreciente respecto de $|t|$. Por tanto, el test de la razón de verosimilitud tiene como región crítica
+            \[\frac{\sqrt{n}(\overline{X} - \mu_0)}{S} \ge b\]
+            para cierta constante $b \in [0,1]$. La región crítica no depende de $\sigma^2$. Por tanto, tenemos que $\eta(\theta) = P_{\mu_0}(T > b)$ para todo $\theta \in \Theta_0$. Consecuentemente el tamaño del test es $\sup\{\eta(\theta): \theta \in \Theta_0\} = P_{\mu_0}(T \ge b)$. En la práctica determinamos $b$ de manera que el tamaño del test sea igual a $\alpha$. Para ello utilizamos la función de distribución de la distribución t de Student con $n-1$ grados de libertad.
+            % Ejemplo de Ingeniería de Servidores
+            Por último, cabe hablar del p-valor del test t de Student. Utilzando el Teorema \ref{thm:p-valor:2} obtenmos que el p-valor viene dado por
+            \[p(\utilde{x}) = P_{\mu_0}\left(\frac{\sqrt{n}(\overline{X} - \mu_0)}{S} \ge t\right). \qedhere\]
         \end{ex}
