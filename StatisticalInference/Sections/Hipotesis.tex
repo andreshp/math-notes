@@ -160,7 +160,7 @@
 
         \begin{cor} \label{cor:p-valor:np}
             Consideremos un test de Neyman-Pearson con función de densidad continua. Entonces, el test se puede describir a partir del p-valor
-           \[p(\utilde{x}) = P_{\theta_0}\left(\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})}\right).\]
+           \[p(\utilde{x}) = P_{\theta_0}\left(\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})}\right).  \]
        \end{cor}
 
         El p-valor que hemos construido en el Teorema \ref{thm:p-valor:2} otorga a una muestra $\utilde{x}$ evidencia contra la hipótesis nula cuando el valor de $W(\utilde{x})$ es muy alto. El valor obtenido al aplicar este p-valor a una muestra puede interpretarse como la probabilidad de observar una muestra que sea tan poco favorable a la hipótesis nula como ella. Esto es lo que sucede en el Corolario \ref{cor:p-valor:np}, donde el p-valor es efectivamente una probabilidad. Algunos usuarios de los tests de hipótesis interpretan el p-valor como la probabilidad de que la hipótesis nula sea falsa para la muestra obtenida. Esto es erróneo y en ningún momento deberíamos utilizar esta interpretación. En la Sección \ref{sec:bayes} estudiaremos tests de hipótesis desde el punto de vista bayesiano. En estos tests sí obtendremos probabilidades de que la hipótesis nula sea cierta o no.
@@ -185,3 +185,9 @@
         Para motivar la definición de este tipo de test, supongamos que estamos trabajando con distribuciones discretas. En tal caso, tanto el numerador como el denominador de $\lambda(x)$ se corresponden con la máxima probabilidad posible de la muestra $x$ si variaos $\theta$ en $\Theta_0$ y $\Theta$ respectivamente. Si el cociente de ambos valores es pequeño ($\lambda(x) \le c$), entonces es razonable rechazar la hipótesis nula puesto que hay elementos de $\Theta_0^c$ para los cuales la muestra es más probable.
 
         Supongamos ahora que existen los estimadores máximo verosímiles de $\theta_0$ en $\Theta_0$ y $\Theta$. Denotamos a estos estimadores $\hat{\theta_0}(x)$ y $\hat{\theta}(x)$ respectivamente. Entonces, $\lambda(x) = L(\hat{\theta_0}(x);\utilde{x}) / L(\hat{\theta}(x);\utilde{x})$. El test de la razón de verosimilitud nos dice que rechazaremos la hipótesis nula cuando $\hat{\theta}(x)$  tenga una credibilidad considerablemente mayor que la de $\hat{\theta_0}(x)$, esto es, $\hat{\theta}(x)$ es mucho mejor estimador. Como caso particular, si a partir de una muestra $x$ hemos realizado una estimación de $\theta_0$ mediante un estimador máximo verosímil $\hat{\theta}$, entonces todo test de la razón de verosimilitud acepta la hipóteiss $H_0: \theta_0 = \hat{\theta}$ para la muestra $x$. Esto es, la filosofía de los tests de la razón de verosimilitud es coherente con la filosofía de los estimadores máximo verosímiles.
+
+        \begin{ex}[Distribución normal con $\mu$ y $\sigma^2$ desconocidos]
+            Consideramos una variable $X \sim N(\mu, \sigma^2)$ con $\mu$ y $\sigma^2$ desconocidos y buscamos contrastar las hipótesis $H_0: \mu = \mu_0$ y $H_1: \mu \ne \mu_0$.  
+
+
+        \end{ex}
