@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: A. Herrera Poyatos
+% Tittle: Introducción
+% Capítulo introductorio de los apuntes de
+% inferencia estadística.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%!TEX root = ../inference.tex
+%!TEX language = es
+
+\section{Introducción}
+
+En esta sección introductora se motivan los problemas de la inferencia estadística. Para ello recordamos aquellos algunos conceptos de la teoría de probabilidad que pueden no haberse estudiado en un curso básico de probabilidad.
+
+\subsection{Variables aleatorias. Vectores aleatorios}
+
+Fijemos un espacio de probabilidad $(\Omega, \mathcal{A}, P)$. En relación con este espacio de probabilidad se puede realizar un experimento aleatorio, cuyos resultados se codifican como números reales para facilitar su tratamiento. Esta codificación recibe el nombren de variable aleatoria, concepto que es estudiado en cualquier curso de probabilidad.
+
+\begin{definition}
+    Una variable aleatoria es una función medible $X: (\Omega, \mathcal{A}) \to (\mathbb{R}, \mathcal{B})$.
+\end{definition}
+
+Por ejemplo, imaginemos que $\Omega$ es el conjunto de todas las personas, $\mathcal{A}$ es el conjunto de las partes de $\Omega$ y $P$ es uniforme, esto es, todas las personas tienen la misma probabilidad de ser escogidas. El experimento aleatorio consiste en seleccionar una persona aletoria y medir su altura. Formalmente se puede codificar como la variable aleatoria $X$ que asigna acada persona su altura. Puede ser interesante calcular la probabilidad de que al tomar una persona su altura sea $2$ metros, esto es $P(X = 2)$. En definitiva, las variables aleatorias nos permiten modelar los resultados del experimento matemáticamente. Nótese que podemos calcular la probabilidad $P(X = 2)$ gracias a que el conjunto $\{w \in \Omega: X(w) = 2\} = X^{-1}(2)$ es medible, de ahí que se exija que $X$ lo sea en la definición.
+
+Habitualmente para representar un experimento se necesitan múltiples valores reales. En este caso se utilizan los denominados \emph{vectores aleatorios} o \emph{variables aleatorias multidimensionales}, que son funciones medibles $\utilde{X} = (X_1, \ldots, X_n): (\Omega, \mathcal{A}) \to (\mathbb{R}^n, \mathcal{B}^n)$.
+
+A un vector aleatorio se le asocia una distribución de probabilidad en $\mathbb{R}^n$, que puede venir dada por una función de densidad o por una función de distribución. Nos referimos a un libro de texto clásico para recordar estos conceptos \cite{loeve}.
+
+\subsection{Distribución conjunta}
+
+Como se ha mencionado, un vector aleatorio $\utilde{X} = (X_1, \ldots, X_n)$ tiene asociada una distribución de probabilidad. Si en esta distribución interviene más de una variable ($n \ge 2$), entoces diremos que es una distribución conjunta. Cada una de las componentes del vector $\utilde{X}$ es una variable aleatoria y, por tanto, tiene asociada una distribución. Es más, la misma observación es válida para cualquier subtupla de $\utilde{X}$. La distribución de una subtupla se denomina distribución marginal. Cabe preguntarse cómo calcular una distribución marginal a partir de la distribución conjunta. Es fácil razonar que si $\utilde{X} = (Y_1, Y_2)$, donde $Y_1$ e $Y_2$ son vectores aleatorios, entonces la distribución marginal de $Y_1$ tiene función de densidad
+\[f(y_1) = \int f(y_1, y_2) \, dy_2,\]
+donde $f(y_1, y_2)$ es la función de densidad de $\utilde{X}$. Para los detalles nos referimos de nuevo a un libro de texto básico de teoría de probabilidad \cite{loeve}.
+
+\subsection{Muestra aleatoria simple}
+
+Sea $X$ una variable aleatoria que se desea observar. Una muestra aleatoria simple de $X$ es un vector aleatorio $\utilde{X} = (X_1, \ldots, X_n)$ donde las variables $X_i$ son independientes y tienen la misma distribución que la variable $X$. Esta definición se corresponde con realizar $n$ veces consecutivas el experimento definido por la variable $X$. Los $n$ experimentos son independientes y siguen la misma distribución de probabilidad. En la práctica tras realizar los experimentos obtenemos un vector  $\utilde{x} = (x_1, \ldots, x_n)$ con los valores observados. Este vector se denomina realización de la muestra.
+
+Podemos calcular la distribución de la muestra $\utilde{X}$ gracias a la hipótesis de independencia. En efecto, la función de densidad en un punto $\utilde{x}$ viene dada por
+\[f(\utilde{x})=\prod_{i=1}^{n}{f(x_i)}.\]
+
+
+%Esta muestra puede ser sin reemplazamiento o con reemplazamiento, lo que puede afectar al resultado del experimento. No obstante, cuando la población sobre la que se saca la muestra es lo suficientemente grande, no hay diferencia práctica entre realizar un muestreo con o sin reemplazamiento.
+
+\subsection{Familias de distribuciones paramétricas}
+
+Habitualmente observamos variables aleatorias de las que desconocemos su distribución. No obstante, intuimos que la distribución tiene una determinada forma que depende de un número finito de parámetros. Esto es, la densidad de la distribución pertenece a una familia paramétrica $\{f(x | \theta): \theta \in \Theta\}$, donde $\Theta \subset \mathbb{R}^k$. Denotamos por $\theta_0 \in \Theta$ al verdadero valor del parámetro de la distribución de la variable aleatoria que estamos observando. La inferencia estadística se encarga de inferir propiedades de $\theta_0$ a partir de la realización de una muestra de $X$.

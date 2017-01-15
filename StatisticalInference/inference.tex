@@ -196,7 +196,7 @@ $\hfil\widetilde{}\hfil$\crcr\noalign{\kern-5pt\nointerlineskip}}}}}
 %-----------------------------------------------------------------------------------------------------
 
 % Profundidad del Índice:
-%\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 
 \newpage
 \tableofcontents
@@ -207,6 +207,9 @@ $\hfil\widetilde{}\hfil$\crcr\noalign{\kern-5pt\nointerlineskip}}}}}
 %-----------------------------------------------------------------------------------------------------
 %	SECCIÓN 1
 %-----------------------------------------------------------------------------------------------------
+
+\importsection{Intro.tex}
+\pagebreak
 
 \section{Familias de distribuciones}
 
@@ -982,14 +985,14 @@ En lo que sigue definiremos formalmente la distribución a posteriori, recordand
 
 	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
 
-	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y un vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley condicional de $\theta$ dadas las observaciones $\utilde{x}$ de $\utilde{X}$. Su función de densidad se puede escribir en función de la distribución a priori y $f(\utilde{x}|\theta)$ mediante el Teorema de Bayes, obteniendo
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$, y una realización de la muestra $\utilde{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley de $\theta$ condicional a la realización $\utilde{x}$ de $\utilde{X}$. Su función de densidad se puede escribir en función de la distribución a priori y $f(\utilde{x}|\theta)$ mediante el Teorema de Bayes, obteniendo
 
     \begin{equation*}
 		\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)\,d\theta}}.
 	\end{equation*}
 \end{definition}
 
-La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
+La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
 
 \begin{definition}
 	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$, a la ley conjunta de $X_1,\dots,X_n$ se denomina distribución muestral o verosimilitud de la muestra, dado el valor del parámetro $\theta$, a:
@@ -1384,6 +1387,7 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x}) * \frac{
 
 \pagebreak
 \begin{thebibliography}{99}
+\bibitem{loeve} Probability theory, M. Loève, 1977, Springer-Verlag.
 \bibitem{casella} Statistical Inference, G. Casella, R. L. Berger, segunda edicón (2002), Duxbury Advanced Series.
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
 \bibitem{cauchy} Wikipedia, Residue theorem, \url{https://en.wikipedia.org/wiki/Residue_theorem#Example}.
