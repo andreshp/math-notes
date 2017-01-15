@@ -1206,13 +1206,8 @@ obteniendo finalmente una distribución a posteriori también normal, luego la f
 
 Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. Veámoslo con el siguiente ejemplo:
 
-<<<<<<< HEAD
-\begin{ex}
-
-=======
 \begin{ex} \label{ex:jeff:poisson}
 
->>>>>>> 9c2ca50dcd40c7a96f132ac7c2b4bdde02189bc5
 	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación (según el procedimiento de clase ¿?) normalizamos la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
 
 	Pasemos a calcular la distribución a priori. Consideramos una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}$. La distribución conjunta es
@@ -1380,7 +1375,7 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x}) * \frac{
 	Como acabamos de ver, la selección de una muestra de entrenamiento minimal nos permite poder continuar con distribuciones a priori impropias al inicio, que pasarán a ser propias tras entrenarlas con dicha muestra. El principal inconveniente de este método es determinar qué datos son los más convenientes para entrenar la distribución a priori, es decir, qué subconjunto $\utilde{x_1}$ minimal escoger.
 
 	\begin{ex}
-		Vimos (ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\dots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato.
+		Vimos (Ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\dots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato.
 	\end{ex}
 
 	\begin{ex}
@@ -1396,4 +1391,5 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x}) * \frac{
 \bibitem{leibniz} Wikipedia, Leibniz integral rule, \url{https://en.wikipedia.org/wiki/Leibniz_integral_rule}.
 \bibitem{char} Davide Giraudo, No first moment and differentiable characteristic function, \url{http://math.stackexchange.com/questions/793788/continuous-probability-distribution-with-no-first-moment-but-the-characteristic}
 \end{thebibliography}
+
 \end{document}
