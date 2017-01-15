@@ -1006,12 +1006,9 @@ En consecuencia, podemos expresar la distribución a posteriori de esta forma
 A veces es conveniente omitir el uso de la distribución marginal $m(\utilde{x})$, en cuyo caso escribimos
 \[\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)\,d\theta}}.\]
 
-
-
-La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
+%La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
 
 Para finalizar esta sección, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
-
 
 \subsection{Estadística clásica vs bayesiana}
 
@@ -1023,6 +1020,7 @@ Veamos ahora las diferencias entre la inferencia clásica y la bayesiana. En la 
 	\item Se usa el concepto de intervalo de confianza.% (AÑADIR SI ESO)
 	\item El método de muestreo es muy importante.
 	\item Se pueden usar estimadores de máxima verosimilitud o estimadores insesgados.
+    \item Los tests de hipótesis se construyen fijando un tamaño $\alpha$ y minimizando los errores de tipo 2.
 \end{itemize}
 
 Por su parte, en la inferencia bayesiana destacan:
@@ -1033,11 +1031,12 @@ Por su parte, en la inferencia bayesiana destacan:
 	\item Se usa el concepto de intervalo de credibilidad para $\theta$.% (AÑADIR SI ESO)
 	\item El método de muestreo no importa; solo importan los datos.
 	\item Se utilizan estimadores diferentes según la utilidad; la estimación es un problema de decisión.
+    \item En tests de hipótesis se puede hablar de probabilidad de que una hipótesis sea cierta.
 \end{itemize}
 
 Uno de los aspectos más criticados de la estadística bayesiana es el grado de subjetividad a la que se expone la inferencia por el hecho de que es el experimentador quien define la distribución a priori. En cualquier caso, en lo que hay coincidencia es en que si hay información sobre $\theta$ esta tiene que ser utilizada en la inferencia.
 
-$ $ \newline
+\ \newline
 Como acabamos de decir, una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
 
 \subsection{Familias conjugadas}
