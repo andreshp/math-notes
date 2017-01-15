@@ -982,38 +982,33 @@ En lo que sigue definiremos formalmente la distribución a posteriori, recordand
 \begin{definition}
 	Sea $X$ una variable aleatoria que sigue una distribución $f(x|\theta)$, con $\theta \in \Theta$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
 	%Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
-
-	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
-
-	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$, y una realización de la muestra $\utilde{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley de $\theta$ condicional a la realización $\utilde{x}$ de $\utilde{X}$. Su función de densidad se puede escribir en función de la distribución a priori y $f(\utilde{x}|\theta)$ mediante el Teorema de Bayes, obteniendo
-
-    \begin{equation*}
-		\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)\,d\theta}}.
-	\end{equation*}
 \end{definition}
 
-La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
+
+\begin{remark}
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$ y una distribución a priori $\pi(\theta)$, podemos calcular la distribución conjunta de $\utilde{X}$ y $\theta$ utilizando la definición de condicionamiento \cite{loeve}, que es el análogo a \eqref{eq:condicionada} para variables aleatorias. En efecto, en este caso obtenemos que la ditribución conjunta tiene la función de densidad
+    \[f(\utilde{x},\theta)=f(\utilde{x}|\theta)\pi(\theta).\]
+
+    A partir de la distribución conjunta podemos calcular la distribución marginal de $\utilde{X}$, que denotamos $m(\utilde{X})$. Esta distribución tiene función de densidad
+	\[m(\utilde{x}) = \int_{\Theta}{f(\utilde{x},\theta)d\theta} = \int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)d\theta}.\]
+\end{remark}
 
 \begin{definition}
-	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$, a la ley conjunta de $X_1,\dots,X_n$ se denomina distribución muestral o verosimilitud de la muestra, dado el valor del parámetro $\theta$, a:
+	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
 
-	\[f(\utilde{x}|\theta)=\prod_{i=1}^{n}{f(x_i|\theta)}\]
-
-	La densidad conjunta de $\utilde{X}$ y $\theta$ es:
-
-	\[f(\utilde{x},\theta)=f(\utilde{x}|\theta)\pi(\theta)\]
-
-	La densidad marginal de $\utilde{X}$ es:
-
-	\[m(\utilde{x}) = \int_{\Theta}{f(\utilde{x},\theta)d\theta} = \int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)d\theta}\]
-
-	En consecuencia, podemos expresar la distribución a posteriori de esta forma:
-
-	\[\pi(\theta|\utilde{x}) = \frac{f(\utilde{x},\theta)}{m(\utilde{x})}\]
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$, una realización de la muestra $\utilde{x}=(x_1,\dots,x_n)$ y una distribución a priori $\pi(\theta)$, se define la distribución a posteriori de $\theta$ como la ley de $\theta$ condicionada a $\utilde{X} = \utilde{x}$. La denotamos $\pi(\theta | \utilde{x})$.
 \end{definition}
 
-Para finalizar esta sección, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
+La función de densidad de la distribución a posteriori se puede calcular a partir de la distribución a priori y $f(\utilde{x}|\theta)$ utilizando de nuevo la definición de condicionamiento. En efecto, tenemos que
+\[\pi(\theta|\utilde{x}) m(\utilde{x}) = f(\utilde{x}, \theta) = f(\utilde{x}|\theta)\pi(\theta).\]
+En consecuencia, podemos expresar la distribución a posteriori de esta forma
+\[\pi(\theta|\utilde{x}) = \frac{f(\utilde{x},\theta)}{m(\utilde{x})}.\]
+A veces es conveniente omitir el uso de la distribución marginal $m(\utilde{x})$, en cuyo caso escribimos
+\[\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)\,d\theta}}.\]
 
+%La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
+
+Para finalizar esta sección, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
 
 \subsection{Estadística clásica vs bayesiana}
 
@@ -1025,6 +1020,7 @@ Veamos ahora las diferencias entre la inferencia clásica y la bayesiana. En la 
 	\item Se usa el concepto de intervalo de confianza.% (AÑADIR SI ESO)
 	\item El método de muestreo es muy importante.
 	\item Se pueden usar estimadores de máxima verosimilitud o estimadores insesgados.
+    \item Los tests de hipótesis se construyen fijando un tamaño $\alpha$ y minimizando los errores de tipo 2.
 \end{itemize}
 
 Por su parte, en la inferencia bayesiana destacan:
@@ -1035,11 +1031,12 @@ Por su parte, en la inferencia bayesiana destacan:
 	\item Se usa el concepto de intervalo de credibilidad para $\theta$.% (AÑADIR SI ESO)
 	\item El método de muestreo no importa; solo importan los datos.
 	\item Se utilizan estimadores diferentes según la utilidad; la estimación es un problema de decisión.
+    \item En tests de hipótesis se puede hablar de probabilidad de que una hipótesis sea cierta.
 \end{itemize}
 
 Uno de los aspectos más criticados de la estadística bayesiana es el grado de subjetividad a la que se expone la inferencia por el hecho de que es el experimentador quien define la distribución a priori. En cualquier caso, en lo que hay coincidencia es en que si hay información sobre $\theta$ esta tiene que ser utilizada en la inferencia.
 
-$ $ \newline
+\ \newline
 Como acabamos de decir, una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
 
 \subsection{Familias conjugadas}
