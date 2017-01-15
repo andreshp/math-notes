@@ -127,7 +127,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
             Tenemos que $f(x|\theta) = h(\overline{x}|\theta) g(x_1, x_2, \ldots, x_n)$ y, por tanto, $T(x) = \overline{x}$ es suficiente.
         \end{ex}
 
-        \begin{ex}[Distribución normal, ambos parámetros son desconocidos]
+        \begin{ex}[Distribución normal, ambos parámetros son desconocidos]\label{ex:sufi:normal:2}
             Sea $X = (X_1, \ldots, X_n)$ una muestra de $N(x |\mu, \sigma^2)$ donde $\mu$ y $\sigma^2$ son desconocidos ($\theta = (\mu, \sigma^2)$).
             Tenemos que
             \[f(x|\theta) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-\sum_{i = 1}^n (x_i - \mu)^2 / (2\sigma^2)) = \frac{1}{(2\pi\sigma^2)^{n/2}} \exp(-(\sum_{i = 1}^n x_i^2 - 2\mu \sum_{i = 1}^n x_i + n \mu^2) / (2\sigma^2)). \]
