@@ -954,29 +954,27 @@ Nótese que la función característica de la distribución de Cauchy no es dife
 
 \section{Estadística bayesiana} \label{sec:bayes}
 
-En esta sección estudiaremos el modelo de inferencia estadística desde el punto de vista bayesiano. La estadística bayesiana proporciona resultados similares a la estadística clásica en el problema de estimación. Las ventajas de los modelos bayesianos serán remarcables al realizar tests de hipótesis gracias a poder hablar de probabilidad de que una hipótesis sea cierta o no, hecho que es imposible en la inferencia clásica.
+En esta sección estudiaremos el modelo de inferencia estadística desde el punto de vista bayesiano. La estadística bayesiana proporciona resultados similares a la estadística clásica en el problema de estimación. Las ventajas de los modelos bayesianos serán remarcables al realizar tests de hipótesis, donde nos permitirán hablar de la probabilidad de que una hipótesis sea cierta o no. Recordemos que esta afirmación es imposible en la inferencia clásica ya que los parámetros de un modelo no son variables aleatorias.
 
 \subsection{Introducción}
 
-Empecemos recordando uno de los teoremas clásicos de la probabilidad, el teorema de Bayes, que va a ser la base del modelo que queremos establecer. Supongamos que en el espacio de probabilidad $(\Omega,\mathcal{A},P)$ tenemos la partición de $\Omega$ dada por los sucesos $A_1,\dots,A_n$, todos ellos con probabilidad no nula. Y sea $B$ un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso $A_i$. Entonces, podemos obtener la probabilidad de cada $A_i$ condicionada al suceso $B$ de la siguiente forma:
+En primer lugar recordamos uno de los teoremas clásicos de la probabilidad, el Teorema de Bayes, que es la base de la inferencia Bayesiana. Supongamos que en el espacio de probabilidad $(\Omega,\mathcal{A},P)$ tenemos una partición de $\Omega$ dada por los sucesos $A_1,\dots,A_n$, todos ellos con probabilidad no nula. Sea $B$ un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso $A_i$. Entonces, utilizando la definición de probabilidad condicionada obtenemos la probabilidad de cada $A_i$ condicionada al suceso $B$ como sigue
 
-\begin{equation*}
-	P(A_i|B)=\frac{P(A_i\cap B)}{P(B)}=\frac{P(B|A_i)P(A_i)}{P(B)}
-\end{equation*}
+\begin{equation} \label{eq:condicionada}
+	P(A_i|B)=\frac{P(A_i\cap B)}{P(B)}=\frac{P(B|A_i)P(A_i)}{P(B)}.
+\end{equation}
 
-A su vez, la ley de la probabilidad total establece que $P(B)=\sum_{i=1}^n{P(B|A_i)P(A_i)}$, luego:
+A su vez, la ley de la probabilidad total establece que $P(B)=\sum_{i=1}^n{P(B|A_i)P(A_i)}$ y, por tanto, aplicando esta a igualdad a \eqref{eq:condicionada} deducimos
+\begin{equation} \label{eq:bayes}
+	P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_{i=1}^n{P(B|A_i)P(A_i)}},
+\end{equation}
+donde los valores $P(B|A_i)$ eran conocidos. La ecuación \eqref{eq:bayes} se conoce como Teorema de Bayes. A los valores $P(A_i)$ los llamamos \emph{probabilidades a priori}, mientras que a los valores $P(A_i|B)$ los denominamos las \emph{probabilidades a posteriori}. El Teorema de Bayes se puede deducir de igual forma para distribuciones de probabilidad.
 
-\begin{equation*}
-	P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_{i=1}^n{P(B|A_i)P(A_i)}}
-\end{equation*}
+La estadística bayesiana se basa en la interpretación subjetiva de la probabilidad. Utiliza la percepción existente por parte del investigador para otorgar una credibilidad a cada parámetro del modelo en forma de una distribución de probabilidad (distribución a priori). Posteriormente aplica el Teorema de Bayes para obtener una distribución de los parámetros condicionada a la muestra (distribución a posteriori), con la que formular inferencias con respecto al parámetro de interés.
 
-Donde los valores $P(B|A_i)$ son conocidos. Los valores $P(A_i)$ son lo que llamaremos probabilidades a priori, mientras que los $P(A_i|B)$ serán las probabilidades a posteriori.
+Consideremos un problema de inferencia estadística en el que las observaciones se toman de una variable aleatoria $X$ que sigue una distribución $f(x|\theta)$, con $\theta\in\Theta$. Disponemos de información previa sobre $\theta$, que podemos recoger definiendo una distribución de probabilidad sobre el espacio $\Theta$, la distribución a priori, dando así a $\theta$ el carácter de variable aleatoria, con la peculiaridad de que no es observable. Sin embargo, sí observamos la variable aleatoria $X$ condicionada al verdadero valor que toma $\theta$, que llamaremos $\theta_0$. Así, el estudio de las observaciones de $X$ aporta información sobre el valor de $\theta$, información que debemos combinar con la distribución a priori para modificarla. El resultado de esta modificación es de nuevo una distribución sobre $\Theta$, que llamaremos la distribución a posteriori de $\theta$, una vez observada la variable aleatoria $X$. Estos son los planteamientos básicos que conforman el enfoque bayesiano de la estadística.
 
-La estadística bayesiana sigue esta idea, basándose en la interpretación subjetiva de la probabilidad. Para ello, utiliza la percepción existente, por parte del investigador, como una variable modificadora (distribución a priori) de los datos muestrales, que dan lugar a una distribución (distribución a posteriori), con la que formular inferencias con respecto al parámetro de interés.
-
-Consideremos un problema de inferencia estadística en el que las observaciones se toman de una variable aleatoria $X$ que sigue una distribución $f(x|\theta)$, con $\theta\in\Theta$. Disponemos de información previa sobre $\theta$, que podemos recoger definiendo una distribución de probabilidad sobre el espacio $\Theta$, la distribución a priori, dando así a $\theta$ el carácter de variable aleatoria, con la peculiaridad de que no es observable. Lo que sí observamos es la variable aleatoria $X$ condicionada al verdadero valor que toma $\theta$, que llamaremos $\theta_0$. Así, el estudio de las observaciones de $X$ aporta información sobre el valor de $\theta$, información que debemos combinar con la distribución a priori para modificarla. El resultado de esta modificación es de nuevo una distribución sobre $\Theta$, que llamaremos la distribución a posteriori de $\theta$, una vez observada la variable aleatoria $X$. Estos son los planteamientos básicos que conforman el enfoque bayesiano de la estadística.
-
-Pasemos a definir formalmente estas distribuciones:
+En lo que sigue definiremos formalmente la distribución a posteriori, recordando los conceptos que sean necesarios.
 
 \begin{definition}
 	Sea $X$ una variable aleatoria que sigue una distribución $f(x|\theta)$, con $\theta \in \Theta$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
@@ -984,9 +982,10 @@ Pasemos a definir formalmente estas distribuciones:
 
 	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
 
-	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley condicional de $\theta$ dadas las observaciones $\utilde{x}$ de $\utilde{X}$.
-	\begin{equation*}
-		\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)d\theta}}
+	Dada una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y un vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$, se define la distribución a posteriori de $\theta$ como la ley condicional de $\theta$ dadas las observaciones $\utilde{x}$ de $\utilde{X}$. Su función de densidad se puede escribir en función de la distribución a priori y $f(\utilde{x}|\theta)$ mediante el Teorema de Bayes, obteniendo
+
+    \begin{equation*}
+		\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)\,d\theta}}.
 	\end{equation*}
 \end{definition}
 
