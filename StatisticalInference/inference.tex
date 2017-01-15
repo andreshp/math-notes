@@ -1206,7 +1206,7 @@ obteniendo finalmente una distribución a posteriori también normal, luego la f
 
 Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. Veámoslo con el siguiente ejemplo:
 
-\begin{ex}
+\begin{ex} \label{ex:jeff:poisson}
 	
 	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación (según el procedimiento de clase ¿?) normalizamos la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
 	
@@ -1330,6 +1330,59 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 \begin{remark}
 	Observemos que en la convergencia de la distribución a posteriori no ha influido la distribución a priori escogida. Esto nos indica que cuando el tamaño de la muestra es grande, la distribución que hayamos elegido a priori no va a tener mucha influencia sobre la distribución que utilizaremos para realizar inferencia.
 \end{remark}
+
+\pagebreak
+
+\section{Test de Hipótesis Bayesianos}
+
+En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Para ello, recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades y de una distribución a priori, como se sigue : ¿$\mathcal{M} = \{\pi_i(\theta)|i\in I\, \pi(\theta)\}$?.
+
+Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos $ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
+
+Ahora bien, sabiendo que $\pi(\theta_i, M_i) =  \pi(M_i) \pi(\theta_i|M_i)$  para $i = 1,2.$, lo aplicamos a nuestros dos modelos y obtenemos que $ M_1 : \{f(x | \theta_1, M_1), \pi(M_1) \pi(\theta_1|M_1)$ y $M_2 : \{f(x | \theta_2, M_2), \pi(M_2) * \pi(\theta_2|M_2)$.
+
+Supongamos que tenemos una muestra (independiente e idénticamente distribuida) de tamaño n que proviene de alguno de los modelos, esto es $\utilde{x} = (x_1,...,x_n)$. Con ella ,se quiere calcular la probabilidad a posteriori del modelo $M_1$. Para ello, necesitamos tomar la verosimilitud de la muestra respecto de $\theta_i$ y $M_i (i = 1,2)$, es decir, $\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}$ y $\prod_{i=1}^{n}{f(x_i|\theta_2,M_2)}$.
+
+Con ello, la probabilidad a posteriori del modelo $M_1$ se obtiene de la siguiente forma: 
+
+\[P(\theta_1,M_1| \utilde{x}) = \frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}\pi(\theta_1,M_1)}{\pi(M_1)m(\utilde{x}|M_1)+\pi(M_2)m(\utilde{x}|M_2)} \]	
+
+\begin{comment}
+$ P(\theta_1, M_1 | \utilde{x}) =  \[\frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}}\ * \pi(\theta_1,M_1)}{m(\utilde{x} | M_1) * \pi(M_1) + m(\utilde{x} | M_2) * \pi(M_2)}\], donde $m(\utilde{x} | M_i) = \int_{\Theta_i}{f(\utilde{x} | \theta_i, M_i) * \pi(\theta_i | M_i)  d\theta_i}, para i = 1,2 $.
+\end{comment}
+
+Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
+
+Esta expresión se pude reescribir usando el factor de Bayes $B_{21}(\utilde{x}) = \frac{m(\utilde{x}| M_2)}{m(\utilde{x}| M_1)}$, por lo que la expresión anterior quedaría, dividiendo todo entre el numerador como: $P(M_1 | \utilde{x}) = \frac{1}{1 + B_21(\utilde{x}) * \frac{\pi(M_2)}{\pi(M_1)}}$.
+
+Por tanto, el cociente entre las probabilidades de que se da cada modelo condicionado a la muestra es:
+$  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x}) * \frac{\pi(M_2)}{\pi(M_1)}$.
+	
+\subsection{Método de Leamer}
+
+	
+
+	En la sección de estadística bayesiana vimos que podíamos escoger distribuciones a priori no integrables (impropias) que aun así nos permitían obtener buenas distribuciones a posteriori sobre las que realizar inferencia. ¿Qué ocurre si cogemos como distribución a priori una distribución impropia? La respuesta se basa en que al calcular el factor de Bayes de una muestra, dicho factor está indeterminado por una constante multiplicativa que proviene de las dos distribuciones a priori impropias, esto es, si $\pi(\theta_i|M_i) = c_ih_i(\theta_i)$, con $h_i$ no integrable y $c_i > 0$ arbitrario, entonces $\pi(\theta_1 | M_1) = c_1 h_1(\theta_1) $ y lo mismo para la el segundo modelo, obtenemos que  $B_{21}(\utilde{x}) = \frac{c_2 \int{f(\utilde{x} | \theta_2 , M_2)h_2(\theta_2) d\theta_2}}{c_1 \int{f(\utilde{x} | \theta_1 , M_1) h_1(\theta_1) d\theta_1}}$. Por ello, debemos coger distribuciones propias.
+	
+	El método de Leamer consiste en obtener una submuestra de una muestra, que llamaremos muestra de entrenamiento, de forma que al calcular la distribución a posteriori esté bien definida. Para ello, tomamos $\utilde{x_1}$ submuestra de $\utilde{x}$. Para que $\pi(\theta_1 | \utilde{x_1}, M_1)$ esté bien definida, se tiene que verificar que $ 0 < m(\utilde{x_1} | M_1) < \infty$ (análogo para el modelo $M_2$).
+	
+	\begin{definition}
+		Dado un modelo $M$ y una muestra $\utilde{x}$, una muestra de entrenamiento es un subconjunto de la muestra $\utilde{x_1} \subset \utilde{x}$. Se dice que es propio si $0 < m(\utilde{x_1}|M) < \infty$.
+		
+		Una muestra de entrenamiento $\utilde{x_1}$ se dice que es minimal si es propia y ningún subconjunto suyo distinto de $\utilde{x_1}$ lo es.
+	\end{definition}
+
+	Como acabamos de ver, la selección de una muestra de entrenamiento minimal nos permite poder continuar con distribuciones a priori impropias al inicio, que pasarán a ser propias tras entrenarlas con dicha muestra. El principal inconveniente de este método es determinar qué datos son los más convenientes para entrenar la distribución a priori, es decir, qué subconjunto $\utilde{x_1}$ minimal escoger.
+	
+	\begin{example}
+		Vimos (ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\dots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato. 
+	\end{example}
+
+	\begin{example}
+		En una distribución normal $\mathcal{N}(\mu,\sigma^2)$ la distribución de Jeffreys es $\pi^{\mathcal{J}}(\mu,\sigma^2) = \frac{c}{\sigma^2}\chi_{\mathbb{R}\times{\mathbb{R}^{+}}}(\mu,\sigma^2)$, no integrable. Para un solo dato la distribución a posteriori sigue sin ser integrable, pero con dos ya sí lo es. Por tanto, la muestra de entrenamiento minimal es de tamaño 2.
+	\end{example}
+
+
 
 
 \pagebreak
