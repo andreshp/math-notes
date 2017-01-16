@@ -1034,38 +1034,47 @@ Por su parte, en la inferencia bayesiana destacan:
     \item En tests de hipótesis se puede hablar de probabilidad de que una hipótesis sea cierta.
 \end{itemize}
 
-Uno de los aspectos más criticados de la estadística bayesiana es el grado de subjetividad a la que se expone la inferencia por el hecho de que es el experimentador quien define la distribución a priori. En cualquier caso, en lo que hay coincidencia es en que si hay información sobre $\theta$ esta tiene que ser utilizada en la inferencia.
+Uno de los aspectos más criticados de la estadística bayesiana es el grado de subjetividad a la que se expone la inferencia por el hecho de que es el experimentador quien define la distribución a priori. En cualquier caso, en lo que hay coincidencia es en que si hay información sobre $\theta$, entonces ésta tiene que ser utilizada en la inferencia.
 
 \ \newline
 Como acabamos de decir, una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
 
 \subsection{Familias conjugadas}
 
-La principal dificultad que surge en los problemas de inferencia bajo la perspectiva bayesiana es tanto la confianza que se pueda esperar de la distribución a priori como el cálculo de la distribución a posteriori. La primera cuestión es importante ya que la inferencia que se realice posteriormente puede depender de la elección hecha de la distribución inicial, razón por la cual en muchos casos se recurre a distribuciones no informativas, que no imponen unas condiciones muy fuertes sobre el parámetro, o bien se puede aprovechar parte de la información muestral para mejorar la distribución inicial.% dando origen a las denominadas distribuciones intrínsecas a priori, de gran auge en la actualidad.
+La principal dificultad que surge en los problemas de inferencia bajo la perspectiva bayesiana es tanto la confianza que se pueda esperar de la distribución a priori como el cálculo de la distribución a posteriori. La primera cuestión es importante ya que la inferencia que se realice puede depender de la elección de la distribución inicial, razón por la cual en muchos casos se recurre a distribuciones no informativas, que no imponen unas condiciones muy fuertes sobre el parámetro. Otra tendencia en la elección de las distribuciones a priori es aprovechar la información que proporciona la muestra para mejorar la distribución inicial.% dando origen a las denominadas distribuciones intrínsecas a priori, de gran auge en la actualidad.
 
-En cuanto a la segunda opción, el cálculo de la distribución a posteriori no tiene por qué conducir a una distribución tratable y, en ocasiones, hay que recurrir a métodos numéricos para poder trabajar con ellas. Centrándonos en esta última parte, interesa considerar familias de distribuciones a priori cuyas distribuciones a posteriori asociadas sean de fácil cálculo. En este sentido surge el concepto de familias a priori conjugadas.
+En cuanto al cálculo de la distribución a posteriori, no todas las distribuciones a priori conducen a cómputos asequibles ni a una distribución tratable y, en ocasiones, hay que recurrir a métodos numéricos para poder trabajar con ellas. Por tanto, es deseable obtener distribuciones a priori que nos faciliten este proceso.
+
+En esta sección nos centramos en este último problema. Buscamos familias de distribuciones a priori cuyas distribuciones a posteriori asociadas sean de fácil cálculo. En este sentido surge el concepto de familias a priori conjugadas.
 
 \begin{definition}
-	Sea $\mathcal{F} = \{\pi_i(\theta)|i\in I\}$ una familia de distribuciones a priori. $\mathcal{F}$ se dice que es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta)|\theta\in\Theta\}$, si para cualquier $\pi(\theta)\in\mathcal{F}$ y $f(x|\theta)\in \mathcal{P}$ se verifica que $f(x|\theta)\pi(\theta)\propto\Pi(\theta)\in\mathcal{F}$.
-
-	Es decir, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
+	Sea $\mathcal{F} = \{\pi_i(\theta): i\in I\}$ una familia de distribuciones a priori. Se dice que $\mathcal{F}$ es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta): \theta\in\Theta\}$ si para cualquier $\pi(\theta)\in\mathcal{F}$ y $f(x|\theta)\in \mathcal{P}$ se verifica que $\pi(\theta|x) \in \mathcal{F}$. Es decir, una familia $\mathcal{F}$ de distribuciones a priori es conjugada respecto a la familia dada si y solo si las distribuciones a posteriori pertenecen de nuevo a $\mathcal{F}$.
 \end{definition}
 
-Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori, pues para el cálculo de la distribución marginal de $x$ (la integral) en el denominador del cociente tenemos, salvo constantes, una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia, como se explica en la siguiente observación.
+Recordemos que $\pi(\theta|x) = f(x|\theta)\pi(\theta) / m(x)$. El denominador $m(x)$ es una constante ya que $x$ está fijo. Como con secuencia, obtenemos la siguiente observación.
 
 \begin{remark}
-	Se tienen las siguientes condiciones equivalentes:
+	Sean $\pi(\theta), \Pi(\theta) \in \mathcal{F}$. Se tienen las siguientes condiciones equivalentes:
 	\begin{enumerate}%[label=\roman)*]
-		\item $f(x|\theta)\pi(\theta) \propto \Pi(\theta) \in \mathcal{F}$
-		\item $\pi(\theta|x)=\Pi(\theta)\in\mathcal{F}$
+		\item $f(x|\theta)\pi(\theta) \propto \Pi(\theta)$;
+		\item $\pi(\theta|x)=\Pi(\theta)$.
 	\end{enumerate}
-	Es decir, una familia $\mathcal{F}$ de distribuciones a priori es conjugada respecto a la familia dada si y solo si las distribuciones a posteriori pertenecen de nuevo a $\mathcal{F}$.
 \end{remark}
+
+ Por tanto, en la definición de familias conjugadas, la afirmación $\pi(\theta|x) \in \mathcal{F}$ equivale a decir que $f(x|\theta)\pi(\theta) \propto \Pi(\theta)$ para cierta distribución $\Pi(\theta) \in \mathcal{F}$. Este hecho se enuncia en la siguiente proposición.
+
+\begin{prop}
+    Una familia de distribuciones a priori $\mathcal{F} = \{\pi_i(\theta): i\in I\}$ es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta): \theta\in\Theta\}$ si, y solo si, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
+\end{prop}
+
+Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori. En efecto, solo tenemos que identificar la distribución de $\mathcal{F}$ que es proporcional a $f(x|\theta)\pi(\theta)$. Esa distribución coincidirá con $\pi(\theta | x)$. De esta forma evitamos tener que realizar el cálculo de la distribución marginal de $x$, que suele hacerse mediante una integral. Además, en caso de necesitar el valor $m(x)$ basta darse cuenta de que $m(x) = f(x|\theta)\pi(\theta) / \pi(\theta|x)$.
+
+%En el denominador del cociente tenemos, salvo constantes, una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia.
 
 Es posible calcular las distribuciones conjugadas para las familias de distribuciones clásicas, obteniendo de nuevo otras distribuciones clásicas.
 
-\begin{prop}
-	$ $ \newline
+\begin{prop} ~\\
+    \vspace*{-6mm}
 	\begin{itemize}
 		\item La familia de distribuciones Beta es una familia de distribuciones conjugada para las distribuciones de Bernouilli, binomiales y binomiales negativas.
 
@@ -1080,15 +1089,13 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 \begin{ex}
-	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$, y consideramos como distribución a priori una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $x_1,\dots,x_n$ se tiene:
-
-	\[f(\utilde{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}\]
-	\[\pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\]
-
+	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$ y, como distribución a priori, una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $\utilde{x} = (x_1,\dots,x_n)$ se tiene
+	\[f(\utilde{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}} \text{ y } \pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}.\]
+    Multiplicando ambas distribuciones obtenemos
 	\[f(\utilde{x}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
-	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right) \]
+	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right).\]
 
-	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$, y para los datos observados, obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum{x_i}$ y $\beta+n$.
+	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$ obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum_{i = 1}^n{x_i}$ y $\beta+n$, donde $n$ es el tamaño de la muestra.
 
 	Notemos que la conjugación nos ha permitido evitar el cálculo de la distribución marginal de $x$. Si optamos por calcularla, obtendríamos:
 
@@ -1098,48 +1105,32 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 \end{ex}
 
 \begin{ex}
-
 	Consideremos ahora una distribución multinomial dada por la función masa de probabilidad
-
 	\[f(x_1,\dots,x_{k}|\theta_1,\dots,\theta_{k}) = \frac{n!}{x_1!\dots x_k!}\theta_1^{x_1}\dots \theta_k^{x_k},\]
-
 	con $\sum_{i=1}^{k}{x_i} = n$, $0 < \theta_i < 1$ y $\sum_{i=1}^{k}{\theta_i}=1$.
 
-	Llamamos $\theta = (\theta_1,\dots,\theta_k)$. Elegimos como distribución a priori la distribución de Dirichlet de parámetros $\alpha_1,\dots,\alpha_k$, $\pi(\theta) \propto \frac{\Gamma(\alpha_1+\dots+\alpha_k)}{\Gamma(\alpha_1)\dots\Gamma(\alpha_k)}\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}$.
-
+	Llamamos $\theta = (\theta_1,\dots,\theta_k)$. Elegimos como distribución a priori la distribución de Dirichlet de parámetros $\alpha_1,\dots,\alpha_k$, cuya función de densidad viene dada por
+    \[\pi(\theta) \propto \frac{\Gamma(\alpha_1+\dots+\alpha_k)}{\Gamma(\alpha_1)\dots\Gamma(\alpha_k)}\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}.\]
 	Entonces, dada una muestra $\utilde{x}=(x_1,\dots,x_k)$, se tiene
-
-	\[f(\theta|\utilde{x}) \propto \pi(\theta)f(\utilde{x}|\theta)
+	\[\pi(\theta|\utilde{x}) \propto \pi(\theta)f(\utilde{x}|\theta)
 	\propto \left(\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}\right)\left(\prod_{i=1}^{k}{\theta_i^{x_i}}\right)\]
-
 	\[ = \prod_{i=1}^{k}{\theta_i^{x_i+\alpha_i-1}} \propto Dirichlet(\theta|\alpha_1+x_1,\dots,\alpha_k+x_k), \]
-
-	obteniendo de nuevo una nueva distribución de Dirichlet a posteriori.
-
+    obteniendo que la distribución a posteriori sigue una Dirichlet.
 \end{ex}
 
 \begin{ex}
 
-Consideremos $X \sim \mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocido. Tenemos la función de densidad (condicionada únicamente a $\mu$)
-
-\[f(x|\mu) = (2\pi\sigma^2)^{-1/2}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.\]
-
-Y dada una muestra $\utilde{x}=(x_1,\dots,x_n)$,
-
-\[f(\utilde{x}|\mu) = (2\pi\sigma^2)^{-n/2}e^{-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}}}\]
+Consideremos $X \sim \mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocido. Fijamos una muestra $\utilde{x}=(x_1,\dots,x_n)$. La función de densidad está condicionada únicamente a $\mu$. Tenemos que
+%\[f(x|\mu) = (2\pi\sigma^2)^{-1/2}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.\]
+\[f(\utilde{x}|\mu) = (2\pi\sigma^2)^{-n/2}\exp\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}}\right).\]
 
 Elegimos una distribución a priori $\mu \sim \mathcal{N}(\eta,\tau^2)$, es decir,
+\[\pi(\mu) = (2\pi\tau^2)^{-1/2} \exp\left(-\frac{(\mu-\eta)^2}{2\tau^2}\right).\]
 
-\[\pi(\mu) = (2\pi\tau^2)^{-1/2} e^{-\frac{(\mu-\eta)^2}{2\tau^2}}\]
+Calculamos la distribución conjunta, obteniendo
+\[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}-\frac{(\mu-\eta)^2}{2\tau^2}}\right)}.\]
 
-Calculamos la distribución conjunta.
-
-\[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}-\frac{(\mu-\eta)^2}{2\tau^2}}\right)}\]
-
-Llamamos $\overline{x}=\frac{1}{n}\sum{x_i}$ y $s^2 = \frac{1}{n}\sum{(x_i-\overline{x})^2}$. Notemos que ninguna de las dos expresiones depende de $\mu$.
-
-Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} = \sum{(x_i-\overline{x})^2}+2(\overline{x}-\mu)\sum{(x_i-\overline{x})} + \sum{(\overline{x}-\mu)^2} = ns^2 + 0 + n(\overline{x}-\mu)^2$, tenemos
-
+Llamamos $\overline{x}=\frac{1}{n}\sum{x_i}$ y $s^2 = \frac{1}{n}\sum{(xb_i-\overline{x})^2}$. Notemos que ninguna de las dos expresiones depende de $\mu$. Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} = \sum{(x_i-\overline{x})^2}+2(\overline{x}-\mu)\sum{(x_i-\overline{x})} + \sum{(\overline{x}-\mu)^2} = ns^2+ n(\overline{x}-\mu)^2$, tenemos
 \[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\frac{n}{2\sigma^2}[s^2+(\overline{x}-\mu)^2]-\frac{(\mu-\eta)^2}{2\tau^2}\right)}\]
 \[=
 \exp{\left(-\frac{ns^2}{2\sigma^2}\right)}\exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}
@@ -1147,16 +1138,14 @@ Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} =
  \exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}.\]
 
  Ahora, desarrollamos la expresión $n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2$. Podemos separarla según los sumandos que dependan o no de $\mu$. A continuación, dividimos la exponencial en dos partes, una con los sumandos independientes de $\mu$ y otra con los dependientes. La expresión resultante es
-
  \[f(\utilde{x}|\mu)\pi(\mu) \propto
  \exp{\left(-\frac{n\overline{x}^2\tau^2+\sigma^2\eta^2}{2\sigma^2\tau^2}\right)}
- \exp{\left(-\frac{\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)}{2\sigma^2\tau^2}\right)}\]
+ \exp{\left(-\frac{\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)}{2\sigma^2\tau^2}\right)}.\]
  \[\propto
- \exp{\left(-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]\right)}
+ \exp{\left(-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]\right)}.
  \]
 
- Ahora ajustamos cuadrados sobre el exponente. Procedemos como sigue:
-
+ Ahora ajustamos cuadrados sobre el exponente. Procedemos como sigue
  \[-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]
  =
  -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu^2-2\mu\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]
@@ -1165,11 +1154,9 @@ Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} =
  -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu^2-2\mu\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}+\left(\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right)^2\right] + \frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left(\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right)^2
  \]
  \[=
-  -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2 + \frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}.
- \]
+  -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2 + \frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}.\]
 
-Volviendo a la distribución conjunta,
-
+Volviendo a la distribución conjunta, hemos obtenido
 \[f(\utilde{x}|\mu)\pi(\mu) \propto
 \exp{\left(\frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}\right)}
 \exp{\left(-\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2\right)}
@@ -1177,14 +1164,13 @@ Volviendo a la distribución conjunta,
 \[ \propto
 \exp{\left(-\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2\right)}
 =
-\exp{\left(\frac{\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2}{2\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}}\right)}
+\exp{\left(-\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2 / \left[2\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}\right]\right)}
 \]
 \[
-\propto \mathcal{N}\left(\mu|\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2},\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}\right),
+\propto \mathcal{N}\left(\mu\left|\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2},\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}\right.\right),
 \]
 
-obteniendo finalmente una distribución a posteriori también normal, luego la familia normal es conjugada.
-
+obteniendo finalmente una distribución a posteriori también normal. Hemos demostrado que la familia normal es conjugada.
 \end{ex}
 
 
