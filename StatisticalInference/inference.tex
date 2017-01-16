@@ -1008,7 +1008,9 @@ A veces es conveniente omitir el uso de la distribución marginal $m(\utilde{x})
 
 %La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
 
-Para finalizar esta sección, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
+Una vez hemos calculado la distribución a posteriori los problemas de la inferencia clásica se vuelven muy sencillos. En la Sección \ref{sec:bayes:hipotesis} se estudian los tests de hipótesis desde una perspectiva bayesiana. En el caso de la estimación las complicaciones son incluso menores. Podemos estimar el parámetro $\theta$ como la moda de la distribución $\pi(\theta|\utilde{x})$, siguiendo la filosofía de los estimadores máximo verosímiles. Si $\theta$ fuese un valor real, entonces podemos realizar su estimación mediante una esperanza, esto es, proponemos como estimador $\hat{\theta}(\utilde{x}) = E_{\pi(\theta|\utilde{x})} \theta$. En la mayoría de las aplicaciones ambos estimadores presentan un comportamiento similar al de los estimadores máximo verosímiles. Estudiaremos esta similitud a lo largo de la multitud de ejemplos que se realizan en esta sección. Es más, en la Sección \ref{sec:bayes:convergencia} demostraremos que, bajo determinadas condiciones, la distribución a posteriori degenera en el verdadero valor del parámetro $\theta$ cuando el tamaño de la muestra diverge. Esta propiedad es análoga a la propiedad de convergencia del estimador máximo verosímil. No obstante, la principal ventaja de los estimadores bayesianos es su buen comportamiento para muestras pequeñas, sobre las que los estimadores máximo verosímiles podían no funcionar correctamente debido a la falta de información. Este buen comportamiento se debe a la información introducida por la distribución a priori, que permite decidir el valor del parámetro en el caso de que la muestra no sea relevante.
+
+Para finalizar la introducción, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
 
 \subsection{Estadística clásica vs bayesiana}
 
@@ -1176,20 +1178,24 @@ obteniendo finalmente una distribución a posteriori también normal. Hemos demo
 
 \subsection{Distribuciones objetivas. Distribución de Jeffreys}
 
+Aunque las distribuciones conjugadas permiten facilitarnos los cálculos, no siempre tienen un comportamiento adecuado de cara a la inferencia. En algunas aplicaciones el uso de las distribuciones a priori conjugadas puede estar introduciendo una forma a $\pi(\theta)$ que no se adecúe a la realidad. Además, como hemos visto en los ejemplos anteriores, las distribuciones conjugadas tienen parámetros que de todas formas deberían ser seleccionados utilizando el conocimiento experto del problema a resolver. En condiciones en las que no se conozca información alguna sobre el parámetro $\theta$ estas propiedades pueden ser perjudiciales.
+
+En esta sección estudiamos distribuciones a priori objetivas o no informativas, que no introducen ninguna información sobre el parámetro $\theta$. De estas distribuciones una de las más famosas es la distribución de Jeffreys.
+
 \begin{definition}
     Sea $\{f(x | \theta): \theta \in \Theta \}$ una familia de distribuciones con parámetro $\theta \in \Theta$. La distribución a priori de Jeffreys se define como $\pi^{J}(\theta) \propto \sqrt{\mathcal{I}_X(\theta)}$.
 \end{definition}
 
-\begin{ex}
-    Vamos a estudiar la distribución a priori de Jeffreys para la distribución binomial. En el ejemplo \ref{ex:fisher:binom} se calculó la función de información de Fisher para la distribución binomial. A partir de los resultados obtenidos tenemos que $\pi^J(\theta) \propto \theta^{-1/2} (1 - \theta)\theta^{-1/2}$. Por tanto, $\pi^J(\theta)$ sigue una distribución $beta(1/2,1/2)$. La distribución a posteriori para $x = (x_1, \ldots, x_k)$ viene dada por
+\begin{ex}[Distribución binomial]
+    Vamos a estudiar la distribución a priori de Jeffreys para la distribución binomial. En el Ejemplo \ref{ex:fisher:binom} se calculó la función de información de Fisher para la distribución binomial. A partir de los resultados obtenidos tenemos que $\pi^J(\theta) \propto \theta^{-1/2} (1 - \theta)\theta^{-1/2}$. Por tanto, $\pi^J(\theta)$ sigue una distribución $beta(1/2,1/2)$. La distribución a posteriori para $\utilde{x} = (x_1, \ldots, x_k)$ viene dada por
     \[\pi(\theta; x) \propto \pi(\theta) \prod_{i = 1}^k f(x_i; \theta) \propto \theta^{\sum x_i -1/2} (1 - \theta)^{\sum (n-x_i) -1/2},\]
-    esto es, $\pi(\theta;x)$ sigue una distribución $beta(k\overline{x} -1/2, k(n - \overline{x}) - 1/2)$. Recordando el Corolario \ref{cor:beta:esp} podemos calcular la esperanza y la varianza de la distribución a posteriori:
-    \[E[\pi(\theta; x)] = \frac{k\overline{x} -1/2}{kn - 1} = \frac{\overline{x} -1/(2k)}{n - 1/k};\]
-    \[Var(\pi(\theta; x)) = \frac{(k\overline{x} -1/2)(k(n - \overline{x}) - 1/2)}{(kn - 1)^2(kn)} = \frac{(\overline{x} -1/{2k})((n - \overline{x}) - 1/(2k))}{kn(n - 1/k)^2}.\]
+    esto es, $\pi(\theta;x)$ sigue una distribución $beta(k\overline{x} + 1/2, k(n - \overline{x}) + 1/2)$. Recordando el Corolario \ref{cor:beta:esp} podemos calcular la esperanza y la varianza de la distribución a posteriori, obteniendo
+    \[E[\pi(\theta; x)] = \frac{k\overline{x} + 1/2}{kn + 1} = \frac{\overline{x} +1/(2k)}{n + 1/k};\]
+    \[Var(\pi(\theta; x)) = \frac{(k\overline{x} + 1/2)(k(n - \overline{x}) + 1/2)}{(kn + 1)^2(kn+2)} = \frac{(\overline{x} +1/{2k})((n - \overline{x}) + 1/(2k))}{(kn+2)(n + 1/k)^2}.\]
     Para $k$ lo suficientemente grande $E[\pi(\theta; x)] \approx \overline{x} / n$, que es el estimador máximo verosímil. Por tanto, cuando $k \to \infty$ obtenemos que $Var(\pi(\theta; x)) \to 0$ y $E[\pi(\theta; x)] \to \theta_0$.
 \end{ex}
 
-Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. Veámoslo con el siguiente ejemplo:
+Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. En cualquier caso se puede utilizar para realizar estimación. Veámoslo con el siguiente ejemplo.
 
 \begin{ex} \label{ex:jeff:poisson}
 
@@ -1259,7 +1265,7 @@ x_n =  1 - x_1 - ... - x_{n-1}
 	Pendiente
 \end{proof}
 
-\subsection{Convergencia de distribuciones a posteriori}
+\subsection{Convergencia de distribuciones a posteriori} \label{sec:bayes:convergencia}
 
 Nos planteamos en este punto la convergencia de las distribuciones a posteriori cuando el tamaño de las muestras crece.
 
@@ -1318,7 +1324,7 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 
 \pagebreak
 
-\section{Test de Hipótesis Bayesianos}
+\section{Test de Hipótesis Bayesianos} \label{sec:bayes:hipotesis}
 
 En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Para ello, recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades y de una distribución a priori, como se sigue : ¿$\mathcal{M} = \{\pi_i(\theta)|i\in I\, \pi(\theta)\}$?.
 
