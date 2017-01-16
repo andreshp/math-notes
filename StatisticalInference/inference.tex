@@ -1199,30 +1199,23 @@ Notemos que la distribución de Jeffreys podría ser impropia, es decir, no inte
 
 \begin{ex} \label{ex:jeff:poisson}
 
-	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación (según el procedimiento de clase ¿?) normalizamos la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
+	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación ``normalizamos'' la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
 
-	Pasemos a calcular la distribución a priori. Consideramos una muestra aleatoria simple $X_1,\dots,X_n$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}}$. La distribución conjunta es
+	Pasemos a calcular la distribución a posteriori. Consideramos una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=e^{-n\lambda}\lambda^{\sum{x_i}} / \prod{x_i!}$. La distribución conjunta es proporcional a
+	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}.\]
+	Por otro lado la distribución marginal de $\utilde{X}$ viene dada por
+	\[m(\utilde{x}) = \frac{c}{\prod_{i^=1}^{n}{x_i!}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  =\]
+	\[ = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + 1/2).\]
 
-	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}.\]
+	Podemos comprobar que ambas funciones están indeterminadas por $c$. Obtenemos la distirbución a priori realizando el cociente $f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) / m(\utilde{x})$. En efecto, obtenemos
+	\[\pi(\lambda|\utilde{x}) = \left( \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}\right) / \left(\frac{c}{\prod{x_i!}} \frac{1}{n ^{\sum{x_i} + \frac{1}{2}}}\Gamma(\sum{x_i} + 1/2) \right) = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + 1/2)}. \]
 
-	Y la distribución marginal de $x$ es
-
-	\[f(\utilde{x}) = \frac{c}{\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  =\]
-
-	\[ = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}).\]
-
-	Podemos comprobar que ambas distribuciones están indeterminadas por $c$, y aun así podemos obtener la distirbución a priori,
-
-	\[\pi(\lambda|\utilde{x}) = \frac{ \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}} }{\frac{c}{\prod{x_i!}} \frac{1}{n ^{\sum{x_i} + \frac{1}{2}}}\Gamma(\sum{x_i} + \frac{1}{2}) } = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}. \]
-
-		Hemos visto por tanto que una distribución a priori impropia también nos permite realizar inferencias. Un último detalle que podemos observar es que $f(\utilde{x}) \ne \prod{f(x_i)}$. Esta es otra de las diferencias entre la estadística clásica y la bayesiana. En la bayesiana no se sigue la hipótesis de que los datos sean incondicionalmente independientes, si no que se supone que los datos son condicionalmente independientes respecto a $\lambda$ (o $\theta$ en general), que es lo que se asume al calcular las verosimilitudes.
-
+    Esto es, la distribución a posteriori es una $Gamma(\lambda, \sum x_i + 1/2, n)$.
 \end{ex}
 
+Hemos visto por tanto que una distribución a priori impropia también nos permite realizar inferencia. Un último detalle que podemos observar es que $m(\utilde{x}) \ne \prod{m(x_i)}$. Las variables $X_i$ son independientes cuando se condicionan a $\theta$, pero no mantienen la independencia cuando se consideran todos los posibles parámetros. Decimos que las muestras no son incondicionalmente independientes. Esta es otra de las diferencias entre la estadística clásica y la bayesiana. En la primera bajo cualquier concepto las muestras son independientes ya que el parámetro es un valor fijo, no una variable aleatoria.  %En la bayesiana no se sigue la hipótesis de que los datos sean incondicionalmente independientes, si no que se supone que los datos son condicionalmente independientes respecto a $\lambda$ (o $\theta$ en general), que es lo que se asume al calcular las verosimilitudes.
 
 \begin{comment}
-
-
 \begin{ex}
 	Cálculo de marginales en una distribución de Poisson con $ f(x_i|\lambda) = \frac{e^{-\lambda} \lambda ^{x_i}}{x_i!}, \lambda > 0 $ y $ x_i = 0,1,2, ... $
 	\\En primer lugar calculamos la distribución a priori de Jeffreys $\Pi^y (\theta) = I_X(\theta)^{\frac{1}{2}} $. Por tanto, para nuestra función de distribución  $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} $, pero para que sea una distribución de probabilidad tendremos que normalizarla, para ello hacemos $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} c $, ahora bien, esta función no se puede normalizar dado que $\int_{0}^{\infty} c \lambda^\frac{1}{2} d\lambda = \infty $
@@ -1237,33 +1230,6 @@ Notemos que la distribución de Jeffreys podría ser impropia, es decir, no inte
 	$f(\lambda, x) = \frac{ \frac{c e^{-n \lambda} \lambda{\sum{x_i} - \frac{1}{2}} }{x_1! x_2! ... x_n!} }{\frac{c}{x_1! ... x_n!} \frac{1}{n \sum{x_i} + \frac{1}{2} \Gamma(\sum{x_i} + \frac{1}{2})}} = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}$
 \end{ex}
 \end{comment}
-
-
-La distribución de Dirichlet es la generalización en multivariable de la distribución Beta. Comúnmente, se utilizan las funciones de Dirichlet como funciones a priori en estadística Bayesiana. Definimos la distribución de Dirichlet de orden $n \geq 2$ con parámetros $\alpha_1, ..., \alpha_n$ tiene una función de densidad de probabilidad
-
-\begin{equation*}
-f(x_1, .. x_n|\alpha_1, ...,\alpha_n) = \frac{\Gamma(\alpha_1 + ... + \alpha_n)}{\Gamma(\alpha_1) + ... + \Gamma(\alpha_n)} \prod_{i=1}^{n} {x_i ^ {\alpha_i - 1}}
-\end{equation*}
-
-definida en el simplex abierto de (n-1) dimensiones definido por:
-
-\begin{equation*}
-x_1, ... , x_n > 0
-\end{equation*}
-\begin{equation*}
-x_1 + ... + x_{n-1} < 1
-\end{equation*}
-\begin{equation*}
-x_n =  1 - x_1 - ... - x_{n-1}
-\end{equation*}
-
-\begin{thm}
-	Sea $X = (X_1, ... , X_k) \sim Dirichlet(X|\alpha_1, ... , \alpha_k, \alpha_{k+1}) $ se tiene que para cualquier $k_1 < k$  se verifica que $X' =  (X_1, ... , X_{k_1}) \sim D(X'|\alpha_1, ... , \alpha_{k_1}, \alpha_{k_1 + 1}^{*}) $ con  $\alpha_{k+1}^{*} =\sum_{j=1}^{k_1} {\alpha_{j}}$
-\end{thm}
-
-\begin{proof}
-	Pendiente
-\end{proof}
 
 \subsection{Convergencia de distribuciones a posteriori} \label{sec:bayes:convergencia}
 
