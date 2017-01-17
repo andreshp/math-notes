@@ -248,16 +248,18 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
             \item Si $g$ es convexa, entonces $E[g(X)] \ge g(E[X])$.
             \item Si $g$ es cóncava, entonces $E[g(X)] \le g(E[X])$
         \end{enumerate}
+        Además, si $X$ es no degenerada y $g$ es casi seguramente estrictamente convexa (resp. cóncava), entonces la desigualdad es estricta.
     \end{lem}
 
     \begin{prop} \label{prop:desigualdad}
         Sea $X = (X_1, \ldots, X_n)$ una muestra de $f(X;\theta_0)$. Entonces, para cada $\theta_1 \in \Theta$ se tiene
         \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_0} \log f(X|\theta_1).\]
+        Además, si los parámetros son distinguibles, esto es, determinan distribuciones distintas, entonces la desigualdad es estricta para todo $\theta_1 \ne \theta_0$.
     \end{prop}
     \begin{proof}
         Por la desigualdad de Jenssen obtenemos
         \[E_{X|\theta_0} \log \frac{f(X|\theta_1)}{f(X|\theta_0)} \le \log \int_X \frac{f(X|\theta_1)}{f(X|\theta_0)} f(X|\theta_0) \, dx = \log \int_X f(X|\theta_1) \, dx = 0,\]
-        de donde se deduce el resultado.
+        de donde se deduce el resultado. Además, si $\theta_1$ determina una distribución distinta a la de $\theta_0$, entonces $f(X|\theta_1) / f(X|\theta_0)$ es no degenerada y, por tanto, la desigualdad es estricta.
     \end{proof}
 
     Cabe mencionar que la información de Fisher puede definirse cuando $\Theta \subset \mathbb{R}^m$. Incluimos la definición por complitud, aunque no entraremos en ella a fondo.

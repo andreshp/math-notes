@@ -84,7 +84,7 @@
 }
 
 % Texto de la cabecera:
-\lhead{A. Herrera, N. Rodríguez, J.L. Suárez}                          % Parte izquierda.
+\lhead{A. Herrera, N. Rodríguez, J. Poyatos, J.L. Suárez}                          % Parte izquierda.
 \chead{}                                    % Centro.
 \rhead{\subject \ - \doctitle}              % Parte derecha.
 
@@ -171,7 +171,7 @@ $\hfil\widetilde{}\hfil$\crcr\noalign{\kern-5pt\nointerlineskip}}}}}
 % Asignatura.
 \newcommand{\subject}{Inferencia Estadística}
 % Autor.
-\newcommand{\docauthor}{Andrés Herrera Poyatos \\ Nuria Rodríguez Barroso \\ Juan Luis Suárez Díaz}
+\newcommand{\docauthor}{Andrés Herrera Poyatos \\ Nuria Rodríguez Barroso \\ Javier Poyatos Amador \\ Juan Luis Suárez Díaz}
 \newcommand{\docaddress}{Universidad de Granada}
 \newcommand{\docemail}{}%andreshp9@gmail.com}
 
@@ -961,7 +961,7 @@ En esta sección estudiaremos el modelo de inferencia estadística desde el punt
 
 \subsection{Introducción}
 
-En primer lugar recordamos uno de los teoremas clásicos de la probabilidad, el Teorema de Bayes, que es la base de la inferencia Bayesiana. Supongamos que en el espacio de probabilidad $(\Omega,\mathcal{A},P)$ tenemos una partición de $\Omega$ dada por los sucesos $A_1,\dots,A_n$, todos ellos con probabilidad no nula. Sea $B$ un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso $A_i$. Entonces, utilizando la definición de probabilidad condicionada obtenemos la probabilidad de cada $A_i$ condicionada al suceso $B$ como sigue
+En primer lugar recordamos uno de los teoremas clásicos de la probabilidad, el Teorema de Bayes, que es la base de la inferencia Bayesiana. Supongamos que en el espacio de probabilidad $(\Omega,\mathcal{A},P)$ tenemos una partición de $\Omega$ dada por los sucesos $A_1,\ldots,A_n$, todos ellos con probabilidad no nula. Sea $B$ un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso $A_i$. Entonces, utilizando la definición de probabilidad condicionada obtenemos la probabilidad de cada $A_i$ condicionada al suceso $B$ como sigue
 
 \begin{equation} \label{eq:condicionada}
 	P(A_i|B)=\frac{P(A_i\cap B)}{P(B)}=\frac{P(B|A_i)P(A_i)}{P(B)}.
@@ -981,12 +981,12 @@ En lo que sigue definiremos formalmente la distribución a posteriori, recordand
 
 \begin{definition}
 	Sea $X$ una variable aleatoria que sigue una distribución $f(x|\theta)$, con $\theta \in \Theta$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
-	%Sea $X_{\sim}=(X_1,\dots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\dots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
+	%Sea $X_{\sim}=(X_1,\ldots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\ldots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
 \end{definition}
 
 
 \begin{remark}
-	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$ y una distribución a priori $\pi(\theta)$, podemos calcular la distribución conjunta de $\utilde{X}$ y $\theta$ utilizando la definición de condicionamiento \cite{loeve}, que es el análogo a \eqref{eq:condicionada} para variables aleatorias. En efecto, en este caso obtenemos que la ditribución conjunta tiene la función de densidad
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\ldots,X_n)$ de $X$ y una distribución a priori $\pi(\theta)$, podemos calcular la distribución conjunta de $\utilde{X}$ y $\theta$ utilizando la definición de condicionamiento \cite{loeve}, que es el análogo a \eqref{eq:condicionada} para variables aleatorias. En efecto, en este caso obtenemos que la ditribución conjunta tiene la función de densidad
     \[f(\utilde{x},\theta)=f(\utilde{x}|\theta)\pi(\theta).\]
 
     A partir de la distribución conjunta podemos calcular la distribución marginal de $\utilde{X}$, que denotamos $m(\utilde{X})$. Esta distribución tiene función de densidad
@@ -994,9 +994,9 @@ En lo que sigue definiremos formalmente la distribución a posteriori, recordand
 \end{remark}
 
 \begin{definition}
-	%Dada una muestra $x_{\sim} = (x_1,\dots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
+	%Dada una muestra $x_{\sim} = (x_1,\ldots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
 
-	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$, una realización de la muestra $\utilde{x}=(x_1,\dots,x_n)$ y una distribución a priori $\pi(\theta)$, se define la distribución a posteriori de $\theta$ como la ley de $\theta$ condicionada a $\utilde{X} = \utilde{x}$. La denotamos $\pi(\theta | \utilde{x})$.
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\ldots,X_n)$ de $X$, una realización de la muestra $\utilde{x}=(x_1,\ldots,x_n)$ y una distribución a priori $\pi(\theta)$, se define la distribución a posteriori de $\theta$ como la ley de $\theta$ condicionada a $\utilde{X} = \utilde{x}$. La denotamos $\pi(\theta | \utilde{x})$.
 \end{definition}
 
 La función de densidad de la distribución a posteriori se puede calcular a partir de la distribución a priori y $f(\utilde{x}|\theta)$ utilizando de nuevo la definición de condicionamiento. En efecto, tenemos que
@@ -1091,7 +1091,7 @@ Es posible calcular las distribuciones conjugadas para las familias de distribuc
 Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 \begin{ex}
-	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$ y, como distribución a priori, una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $\utilde{x} = (x_1,\dots,x_n)$ se tiene
+	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$ y, como distribución a priori, una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $\utilde{x} = (x_1,\ldots,x_n)$ se tiene
 	\[f(\utilde{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}} \text{ y } \pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}.\]
     Multiplicando ambas distribuciones obtenemos
 	\[f(\utilde{x}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
@@ -1108,21 +1108,21 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 
 \begin{ex}
 	Consideremos ahora una distribución multinomial dada por la función masa de probabilidad
-	\[f(x_1,\dots,x_{k}|\theta_1,\dots,\theta_{k}) = \frac{n!}{x_1!\dots x_k!}\theta_1^{x_1}\dots \theta_k^{x_k},\]
+	\[f(x_1,\ldots,x_{k}|\theta_1,\ldots,\theta_{k}) = \frac{n!}{x_1!\ldots x_k!}\theta_1^{x_1}\ldots \theta_k^{x_k},\]
 	con $\sum_{i=1}^{k}{x_i} = n$, $0 < \theta_i < 1$ y $\sum_{i=1}^{k}{\theta_i}=1$.
 
-	Llamamos $\theta = (\theta_1,\dots,\theta_k)$. Elegimos como distribución a priori la distribución de Dirichlet de parámetros $\alpha_1,\dots,\alpha_k$, cuya función de densidad viene dada por
-    \[\pi(\theta) \propto \frac{\Gamma(\alpha_1+\dots+\alpha_k)}{\Gamma(\alpha_1)\dots\Gamma(\alpha_k)}\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}.\]
-	Entonces, dada una muestra $\utilde{x}=(x_1,\dots,x_k)$, se tiene
+	Llamamos $\theta = (\theta_1,\ldots,\theta_k)$. Elegimos como distribución a priori la distribución de Dirichlet de parámetros $\alpha_1,\ldots,\alpha_k$, cuya función de densidad viene dada por
+    \[\pi(\theta) \propto \frac{\Gamma(\alpha_1+\ldots+\alpha_k)}{\Gamma(\alpha_1)\ldots\Gamma(\alpha_k)}\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}.\]
+	Entonces, dada una muestra $\utilde{x}=(x_1,\ldots,x_k)$, se tiene
 	\[\pi(\theta|\utilde{x}) \propto \pi(\theta)f(\utilde{x}|\theta)
 	\propto \left(\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}\right)\left(\prod_{i=1}^{k}{\theta_i^{x_i}}\right)\]
-	\[ = \prod_{i=1}^{k}{\theta_i^{x_i+\alpha_i-1}} \propto Dirichlet(\theta|\alpha_1+x_1,\dots,\alpha_k+x_k), \]
+	\[ = \prod_{i=1}^{k}{\theta_i^{x_i+\alpha_i-1}} \propto Dirichlet(\theta|\alpha_1+x_1,\ldots,\alpha_k+x_k), \]
     obteniendo que la distribución a posteriori sigue una Dirichlet.
 \end{ex}
 
 \begin{ex}
 
-Consideremos $X \sim \mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocido. Fijamos una muestra $\utilde{x}=(x_1,\dots,x_n)$. La función de densidad está condicionada únicamente a $\mu$. Tenemos que
+Consideremos $X \sim \mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocido. Fijamos una muestra $\utilde{x}=(x_1,\ldots,x_n)$. La función de densidad está condicionada únicamente a $\mu$. Tenemos que
 %\[f(x|\mu) = (2\pi\sigma^2)^{-1/2}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.\]
 \[f(\utilde{x}|\mu) = (2\pi\sigma^2)^{-n/2}\exp\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}}\right).\]
 
@@ -1201,7 +1201,7 @@ Notemos que la distribución de Jeffreys podría ser impropia, es decir, no inte
 
 	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación ``normalizamos'' la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
 
-	Pasemos a calcular la distribución a posteriori. Consideramos una muestra aleatoria simple $\utilde{X} = (X_1,\dots,X_n)$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\dots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=e^{-n\lambda}\lambda^{\sum{x_i}} / \prod{x_i!}$. La distribución conjunta es proporcional a
+	Pasemos a calcular la distribución a posteriori. Consideramos una muestra aleatoria simple $\utilde{X} = (X_1,\ldots,X_n)$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\ldots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=e^{-n\lambda}\lambda^{\sum{x_i}} / \prod{x_i!}$. La distribución conjunta es proporcional a
 	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}.\]
 	Por otro lado la distribución marginal de $\utilde{X}$ viene dada por
 	\[m(\utilde{x}) = \frac{c}{\prod_{i^=1}^{n}{x_i!}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  =\]
@@ -1233,59 +1233,58 @@ Hemos visto por tanto que una distribución a priori impropia también nos permi
 
 \subsection{Convergencia de distribuciones a posteriori} \label{sec:bayes:convergencia}
 
-Nos planteamos en este punto la convergencia de las distribuciones a posteriori cuando el tamaño de las muestras crece.
+Nos planteamos en este punto el estudio asintótico de la sucesión de las distribuciones a posteriori cuando el tamaño de la muestra crece.
 
-Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, con una medida de probabilidad $P_{\theta_0}$. Conocemos la familia de distribuciones $\{f(x|\theta)|\theta\in\Theta\}$. Queremos ver, dada una distribución a priori $\pi(\theta)$, si converge la distribución a posteriori $\pi(\theta|X_1,\dots,X_n)$, para las variables i.i.d. $X_1,\dots,X_n \sim f(x|\theta_0)$,  cuando $n \to \infty$.
+Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, perteneciente a la familia de distribuciones $\{f(x|\theta) : \theta\in\Theta\}$. La medida de probabilidad asociada será $P_{\theta_0}$. Queremos estudiar, dada una distribución a priori $\pi(\theta)$, la convergencia de la distribución a posteriori $\pi(\theta|X_1,\ldots,X_n)$, para las variables i.i.d. $X_1,\ldots,X_n \sim f(x|\theta_0)$,  cuando $n \to \infty$.
 
-En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución marginal no es sencillo. Estudiaremos la convergencia de la distribución a posteriori cuando el espacio paramétrico es $\Theta = \{\theta_1,\dots,\theta_k\}$ discreto.
-
+En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución a posteriori no es sencillo. Estudiaremos la convergencia de la distribución a posteriori cuando el espacio paramétrico es discreto, esto es, $\Theta = \{\theta_1,\ldots,\theta_k\}$.
 
 \begin{thm}
 	En las condiciones anteriores, se tiene que
-
-	\[\pi(\theta|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0.\]
+	\[\pi(\theta|X_1,\ldots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0,\]
+    esto es, cuando el tamaño de la muestra diverge la distribución a posteriori degenera en $\theta_0$, el verdadero valor del parámetro $\theta$.
 \end{thm}
 
 \begin{proof}
+	Supongamos $\Theta = \{\theta_1,\ldots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades que asigna a cada $\theta_j$. Escribimos $\pi(\theta_j)=p_j$, donde $p_j\in[0,1]$ para $j=1,\ldots,k$, verificando además $\sum_{j=1}^{k}{p_j}=1$. Denotemos por $t\in\{1,\ldots,k\}$ al índice del parámetro que corresponde al verdadero valor $\theta_0$, es decir, $\theta_t = \theta_0$.
 
-	Supongamos $\Theta = \{\theta_1,\dots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades de cada $\theta_j$ y vendrá dada por $\pi(\theta_j)=p_j$, con $p_j\in[0,1]$ y $\sum_{i=1}^{k}{p_i}=1$, para $j=1,\dots,k$. Podemos suponer también que $t\in\{1,\dots,k\}$ es el índice del parámetro que corresponde al verdadero valor, es decir, $\theta_t = \theta_0$.
 
+	Consideramos las variables aleatorias i.i.d. $X_1,\ldots,X_n$ con distribución $f(x|\theta_t)$. Para cada $\theta_i$ el valor de la distribución a posteriori en $\theta_i$ puede verse como una variable aleatoria y viene dado por
+	\[\pi(\theta_i|X_1,\ldots,X_n) = \frac{p_i \prod_{j=1}^n{f(X_j|\theta_i)}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{f(X_j|\theta_r)}}}.\]
 
-	Consideramos las variables aleatorias i.i.d. $X_1,\dots,X_n$ con distribución $f(x|\theta_t)$ y una muestra $x_1,\dots,x_n$. La distribución a posteriori en este caso discreto vendrá dada, para cada $\theta_i$, por:
-
-	\[\pi(\theta_i|x_1,\dots,x_n) = \frac{p_i \prod_{j=1}^n{f(x_j|\theta_i)}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{f(x_j|\theta_r)}}}\]
-
-	Multiplicando numerador y denominador por $\left(\prod_{j=1}^n{f(x_j|\theta_t)}\right)^{-1}$ obtenemos:
-
+	Multiplicando numerador y denominador por $\left(\prod_{j=1}^n{f(X_j|\theta_t)}\right)^{-1}$ obtenemos
 	\begin{equation} \label{eq:tcfd1}
-		\pi(\theta_i|x_1,\dots,x_n) = \frac{p_i \prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{\frac{f(x_j|\theta_r)}{f(x_j|\theta_t)}}}}
+		\pi(\theta_i|X_1,\ldots,X_n) = \frac{p_i \prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{\frac{f(X_j|\theta_r)}{f(X_j|\theta_t)}}}}.
 	\end{equation}
 
 
-	Estudiemos la convergencia de $\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}$. Si $i=t$, claramente tenemos que el resultado es 1. En caso contrario, tomando logaritmos, obtenemos:
-
+	Estudiemos la convergencia de la variable aleatoria $\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}$ para todo $i \in \{1, \ldots, k\}$. Si $i=t$, esta variable aletoria es constantemente 1. En caso contrario, tomando logaritmos, obtenemos
 	\begin{equation} \label{eq:tcfd2}
-	\log{\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} = \sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} = n\left(\frac{1}{n}\sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}\right)
+	\log{\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}} = \sum_{j=1}^{n}{ \log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}} = n\left(\frac{1}{n}\sum_{j=1}^{n}{\log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}}\right).
 	\end{equation}
 
-	Ahora, las variables aleatorias $Z_i \sim \log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}$ son i.i.d, luego por las leyes de los grandes números el término $\frac{1}{n}\sum_{j=1}^{n}{log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}}$ converge en probabilidad $P_{\theta_t}$ a la esperanza de cualquiera de ellas, $E\left[\log{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}\right]$. Además, como consecuencia de la desigualdad de la información (proposición \ref{prop:desigualdad}), dicha esperanza es un valor estrictamente negativo. En consecuencia, a partir de la expresión obtenida en (\ref{eq:tcfd2}), podemos concluir que:
+	Las variables aleatorias $Z_j = \log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}$ son i.i.d, luego por la ley fuerte de los grandes números el término $\frac{1}{n}\sum_{j=1}^{n}{\log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}}$ converge casi seguramente con respecto a la probabilidad $P_{\theta_t}$ a la esperanza de cualquiera de ellas, $E\left[\log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}\right]$. Además, como consecuencia de la Proposición \ref{prop:desigualdad}, dicha esperanza es un valor estrictamente negativo. En consecuencia, a partir de la expresión obtenida en (\ref{eq:tcfd2}), podemos concluir que
+	\[\log{\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}} \xrightarrow[n\to\infty]{P_{\theta_t}} -\infty\]
 
-	\[\log{\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}}} \xrightarrow[n\to\infty]{P_{\theta_t}} -\infty\]
-
-	La continuidad del logaritmo nos asegura que $\prod_{j=1}^n{\frac{f(x_j|\theta_i)}{f(x_j|\theta_t)}} \xrightarrow[n\to\infty]{P_{\theta_t}} 0$.
+	La continuidad del logaritmo nos asegura que
+    \[\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}} \xrightarrow[n\to\infty]{P_{\theta_t}} 0.\]
 
 	Finalmente, aplicando lo que acabamos de obtener a (\ref{eq:tcfd1}), concluimos que:
 
 	\begin{itemize}
-		\item Si $i \ne t$, $\pi(\theta_i|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{0}{p_t+\sum{0}} = 0$
-		\item Si $i = t$, $\pi(\theta_i|X_1,\dots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{p_t}{p_t+\sum{0}} = 1$
+		\item si $i \ne t$, $\pi(\theta_i|X_1,\ldots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{0}{p_t+\sum{0}} = 0$;
+		\item si $i = t$, $\pi(\theta_i|X_1,\ldots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{p_t}{p_t+\sum{0}} = 1$.
 	\end{itemize}
 
-	Pero esto es equivalente a decir que la distribución a posteriori degenera a $\theta_t$ en probabilidad $P_{\theta_t}$.
+	Esto es equivalente a decir que la distribución a posteriori degenera a $\theta_t$ en probabilidad $P_{\theta_t}$.
 \end{proof}
 
 \begin{remark}
 	Observemos que en la convergencia de la distribución a posteriori no ha influido la distribución a priori escogida. Esto nos indica que cuando el tamaño de la muestra es grande, la distribución que hayamos elegido a priori no va a tener mucha influencia sobre la distribución que utilizaremos para realizar inferencia.
+\end{remark}
+
+\begin{remark}
+    Como consecuencia de este resultado, si el espacio paramétrico es discreto, entonceslos estimadores bayesianos son consistentes. Además, si estamos contrastando hipótesis simples, entonces los modelos bayesianos asignan probabilidad 1 a la hipótesis correcta cuando el tamaño de la muestra diverge.
 \end{remark}
 
 \pagebreak
@@ -1332,7 +1331,7 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x}) * \frac{
 	Como acabamos de ver, la selección de una muestra de entrenamiento minimal nos permite poder continuar con distribuciones a priori impropias al inicio, que pasarán a ser propias tras entrenarlas con dicha muestra. El principal inconveniente de este método es determinar qué datos son los más convenientes para entrenar la distribución a priori, es decir, qué subconjunto $\utilde{x_1}$ minimal escoger.
 
 	\begin{ex}
-		Vimos (Ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\dots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato.
+		Vimos (Ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\ldots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato.
 	\end{ex}
 
 	\begin{ex}
