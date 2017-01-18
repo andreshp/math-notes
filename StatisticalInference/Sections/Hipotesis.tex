@@ -203,10 +203,48 @@
             \left(1 + \frac{t^2}{n-1}\right)^{-n/2},
             \end{split}
             \end{equation}
-            donde $t = \sqrt{n}(\overline{x} - \mu_0) / S$. Recordemos en este punto que bajo $H_0$ la variable $T = \sqrt{n}(\overline{X} - \mu_0) / S$ sigue una distribución t de Student con $n-1$ grados de libertad. A partir de \eqref{eq:lrt:normal} nótese que $\lambda)$ es decreciente respecto de $|t|$. Por tanto, el test de la razón de verosimilitud tiene como región crítica
-            \[\frac{\sqrt{n}(\overline{X} - \mu_0)}{S} \ge b\]
-            para cierta constante $b \in [0,1]$. La región crítica no depende de $\sigma^2$. Por tanto, tenemos que $\eta(\theta) = P_{\mu_0}(T > b)$ para todo $\theta \in \Theta_0$. Consecuentemente el tamaño del test es $\sup\{\eta(\theta): \theta \in \Theta_0\} = P_{\mu_0}(T \ge b)$. En la práctica determinamos $b$ de manera que el tamaño del test sea igual a $\alpha$. Para ello utilizamos la función de distribución de la distribución t de Student con $n-1$ grados de libertad.
+            donde $t = \sqrt{n}(\overline{x} - \mu_0) / S$. Recordemos en este punto que bajo $H_0$ la variable $T = \sqrt{n}(\overline{X} - \mu_0) / S$ sigue una distribución t de Student con $n-1$ grados de libertad. A partir de \eqref{eq:lrt:normal} deducimos que $\lambda$ es decreciente respecto de $|t|$. Por tanto, el test de la razón de verosimilitud tiene como región crítica
+            \[\left[\frac{\sqrt{n}|\overline{X} - \mu_0|}{S} \ge b\right]\]
+            para cierta constante $b \in [0,1]$. La región crítica no depende de $\sigma^2$. Por tanto, tenemos que $\eta(\theta) = P_{\mu_0}(|T| \ge b) = 2 P_{\mu_0}(T \le -b)$ para todo $\theta \in \Theta_0$. Consecuentemente el tamaño del test es $\sup\{\eta(\theta): \theta \in \Theta_0\} = 2P_{\mu_0}(T \le -b)$. En la práctica determinamos $b$ de manera que el tamaño del test sea igual a $\alpha$. Para ello utilizamos la función de distribución de la distribución t de Student con $n-1$ grados de libertad.
             % Ejemplo de Ingeniería de Servidores
-            Por último, cabe hablar del p-valor del test t de Student. Utilzando el Teorema \ref{thm:p-valor:2} obtenmos que el p-valor viene dado por
-            \[p(\utilde{x}) = P_{\mu_0}\left(\frac{\sqrt{n}(\overline{X} - \mu_0)}{S} \ge t\right). \qedhere\]
+            Por último, cabe hablar del p-valor del test t de Student. Utilizando el Teorema \ref{thm:p-valor:2} obtenemos que el p-valor viene dado por
+            \[p(\utilde{x}) = 2P_{\mu_0}\left[\frac{\sqrt{n}(\overline{X} - \mu_0)}{S} \le -t\right]. \qedhere\]
         \end{ex}
+
+        La principal propiedad del test de la razón de verosimilitud y que justifica su extendido uso es el siguiente resultado, cuya demostración puede verse en \cite{garthwaite}, página 84.
+
+        \begin{thm}
+            Consideramos el contraste de hipótesis dado por $H_0: \theta = \theta_0$ y $H_1: \theta \ne \theta_0$. Si existe un test UMP para contrastar ambas hipótesis, entonces el test de la razón de verosimilitud coincide con el test UMP.
+        \end{thm}
+
+        El test de la razón de verosimilitud también consta de propiedades asintóticas.
+
+        \begin{thm}
+            Supongamos que se cumplen las hipótesis de regularidad de Cramer-Rao y que, además, la verosimilitud es de clase 2. Deseamos contrastar dos hipótesis $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$. Bajo la hipotesis nula se tiene que
+            \[-2 \log \lambda(\utilde{X}) \to \chi_d^2\]
+            cuando el tamaño de la muestra diverge, donde $d = dim(\Theta) - dim(\Theta_0)$.
+        \end{thm}
+
+        \begin{proof}
+            Realizamos la demostración para el caso $H_0: \theta = \theta_0$ y $H_1: \theta \ne \theta_0$. En otro caso puede consultarse Cristóbal (1992), Teorema 1.2, página 596. En este contexto $d = 1$. Tenemos que
+            \[\mathcal{Q}_n = -2 \log \lambda(\utilde{X}) = 2 (\log L(\hat{\theta}_n; \utilde{X}) - \log L(\theta_0)),\]
+            donde $\hat{\theta}_n = \hat{\theta}_n(\utilde{X})$ es el estimador máximo verosímil de $\theta$, que existe gracias al Teorema \ref{thm:emv:consistencia}. Desarrollamos el término $\log L(\theta_0; \utilde{X_n})$ al rededor de $\hat{\theta}_n$ mediante el teorema de Taylor, obteniendo
+            \[\log L(\theta_0; \utilde{X}) = \log L(\hat{\theta}_n; \utilde{X}) + \frac{\partial \log L(\hat{\theta}_n; \utilde{X})}{\partial \theta}(\theta_0 -  \hat{\theta}_n) + \frac{1}{2} \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}(\theta_0 -  \hat{\theta}_n)^2,\]
+            donde $\theta'$ se encuentra entre $\theta_0$ y $\hat{\theta}_n$. El estimador máximo verosímil del Teorema \ref{thm:emv:consistencia} maximiza localmente la verosimilitud. Por tanto,
+            \[0 = \frac{\partial \log L(\hat{\theta}_n; \utilde{X})}{\partial \theta}.\]
+            En consecuencia podemos escribir $\mathcal{Q}_n$ como sigue
+            \[\mathcal{Q}_n = - \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}(\theta_0 -  \hat{\theta}_n)^2 = - \frac{1}{n} \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}(\sqrt{n}(\theta_0 -  \hat{\theta}_n))^2.\]
+            El Teorema \ref{thm:emv:an} asegura que bajo las hipótesis de Cramer-Rao el estimador máximo verosímil es asintóticamente normal, esto es, $\sqrt{n}(\theta_0 -  \hat{\theta}_n)$ converge en ley a $N(0, 1/\mathcal{I}(\theta_0))$. Por otro lado, gracias a la ley fuerte de los grandes números tenemos que
+            \[- \frac{1}{n} \frac{\partial^2 \log L(\theta_0; \utilde{X})}{\partial \theta^2} = \frac{1}{n} \sum_{i = 1}^n - \frac{\partial^2 \log L(\theta_0; X_i)}{\partial \theta^2}\]
+            converge casi seguramente a la esperanza de una de estas variables, que es $\mathcal{I}(\theta_0)$ por Lema \ref{lem:fisher:2dev}. Este hecho junto con la consistencia del estimador máximo verosímil nos asegura que
+            \[- \frac{1}{n} \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2} = - \frac{1}{n} \frac{\partial^2 \log L(\theta_0; \utilde{X})}{\partial \theta^2} + \frac{1}{n}\left(\frac{\partial^2 \log L(\theta_0; \utilde{X})}{\partial \theta^2} -  \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}\right)\]
+            converge casiseguramente a $\mathcal{I}(\theta_0)$. Podemos pues completar el estudio asintótico de $\sqrt{\mathcal{Q}_n}$, que converge en ley a $N(0, 1)$. Por último, la Proposición \ref{prop:normal-square} concluye que $\mathcal{Q}_n$ converge en ley a $\chi_d^2$.
+        \end{proof}
+
+        \begin{definition}
+            Un test de hipótesis se dice consistente si verifica
+            \begin{enumerate}
+                \item $\lim_{n \to \infty} P_{\theta}(W_\alpha) = 0$ para todo $\theta \in \Theta_0$;
+                \item $\lim_{n \to \infty} P_{\theta}(W_\alpha) = 1$ para todo $\theta \in \Theta_1$.
+            \end{enumerate}
+        \end{definition}
