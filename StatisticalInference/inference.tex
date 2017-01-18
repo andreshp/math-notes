@@ -137,7 +137,7 @@ $\hfil\widetilde{}\hfil$\crcr\noalign{\kern-5pt\nointerlineskip}}}}}
 % Load the library (Descomentar para SOs distintos de Windows)
 %\usetikzlibrary{external}
 % Enable the library !!!>>> MUST be in the preamble <<<!!!!
-%\tikzexternalize
+\tikzexternalize
 \pgfplotsset{compat=newest}
 
 \usepackage{float}
@@ -1290,7 +1290,7 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 
 En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Para ello, recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades y de una distribución a priori, como se sigue : ¿$\mathcal{M} = \{\pi_i(\theta)|i\in I\, \pi(\theta)\}$?.
 
-Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos $ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
+Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos \\$ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
 
 Ahora bien, sabiendo que $\pi(\theta_i, M_i) =  \pi(M_i) \pi(\theta_i|M_i)$  para $i = 1,2.$, lo aplicamos a nuestros dos modelos y obtenemos que $ M_1 : \{f(x | \theta_1, M_1), \pi(M_1) \pi(\theta_1|M_1)$ y $M_2 : \{f(x | \theta_2, M_2), \pi(M_2)  \pi(\theta_2|M_2)$.
 
@@ -1304,7 +1304,7 @@ Con ello, la probabilidad a posteriori del modelo $M_1$ se obtiene de la siguien
 $ P(\theta_1, M_1 | \utilde{x}) =  \[\frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}}\ * \pi(\theta_1,M_1)}{m(\utilde{x} | M_1) * \pi(M_1) + m(\utilde{x} | M_2) * \pi(M_2)}\], donde $m(\utilde{x} | M_i) = \int_{\Theta_i}{f(\utilde{x} | \theta_i, M_i) * \pi(\theta_i | M_i)  d\theta_i}, para i = 1,2 $.
 \end{comment}
 
-Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
+Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es\\ $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
 
 Esta expresión se pude reescribir usando el factor de Bayes $B_{21}(\utilde{x}) = \frac{m(\utilde{x}| M_2)}{m(\utilde{x}| M_1)}$, por lo que la expresión anterior quedaría, dividiendo todo entre el numerador como: $P(M_1 | \utilde{x}) = \frac{1}{1 + B_{21}(\utilde{x})  \frac{\pi(M_2)}{\pi(M_1)}}$.
 
@@ -1355,13 +1355,118 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 	Si queremos ver qué ocurre en probabilidad $M_1$ cuando n diverge, nos fijamos en el exponente de la función exponencial lo primero y vemos que se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i - \mu)  + \sqrt{n}\mu)^2$, pero el primer término va a una normal mientras que el segundo, va a infinito, por lo tanto,
 
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_1} \infty$.
+<<<<<<< HEAD
 
 	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow[n\to\infty] 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow[n\to\infty] 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
 
 	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \xrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow 0$.
+=======
+
+	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
+
+	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
+>>>>>>> 6933e6fbd17cc33a99f5c7b9cf975d942913b958
 \end{example}
 
+\section{Probabilidades subjetivas}
+
+   Tras haber realizado un estudio de ambos enfoques, hemos llegado a la conclusión de que el enfoque bayesiano presenta un buen funcionamiento para muestras de tamaño pequeño. Sin embargo, en numerosas ocasiones no habrá apenas observaciones del experimento, o incluso no existirá ninguna. Un ejemplo de esto podría ser un asesor financiero que debe desarrollar un informe de riesgo de inversión en un nuevo producto. No podrá aplicar ninguno de los dos enfoques estudiados pues no cuenta con ninguna información previa del producto.
+
+    De la necesidad de asignar probabilidades a este tipo de sucesos surgen las probabilidades subjetivas. Para el desarrollo de de dichas probabilidades el experto hará uso de sus propias opiniones, creencias o similitud con problemas de la misma índole. Continuando con el ejemplo anterior, el asesor financiero desarrollará una probabilidad en base a información sobre la empresa que lanza el producto, la competencia actual en el mercado, tendencias actuales de la bolsa, o cualquier otro factor que estime influyente.
+
+    Para la formalización de dicho método necesitamos estar trabajando realmente con una probabilidad, por lo que se realiza una formalización a partir de axiomas para asegurar que trabajamos con una verdadera probabilidad.
+
+    \begin{definition}
+    Dado un espacio probabilístico $(\Theta , \mathcal{A})$, y $A,B \in A$, se define la relación binaria $\preceq $ como sigue:
+
+    $A \preceq B$ A es menor o igual de creíble que B\\
+    $A \prec B$ A es menos creíble que B\\
+    $A \sim B$ A es igual de creíble que B\\
+    \end{definition}
+
+
+\subsection{Axiomas de la probabilidad subjetiva}
+    Para trabajar con las probabilidades subjetivas se considera el espacio $(\Theta, \mathcal{A}, \preceq )$, sobre el que se desarrollan los siguientes axiomas:
+
+
+    \begin{axiom}
+        Exhaustividad de la relación binaria
+        $$A\preceq B \vee B\preceq A\ \ \forall A,B\in \mathcal{A} $$
+    \end{axiom}
+
+    \begin{axiom}
+        Sean $A_1,A_2,B_1,B_2 \in \mathcal{A}$ verificando $A_1A_2 = B_1B_2 = \emptyset$ y $A_i \preceq B_i, i = 1,2$. Entonces se verifica que
+        $$A_1+A_2 \preceq B_1+B_2$$
+    \end{axiom}
+
+
+    \begin{axiom}
+        Si $A\in \mathcal{A}$ entonces $\emptyset \preceq A$. Además $\emptyset \prec \Theta$
+    \end{axiom}
+
+    \begin{axiom}
+        Si $B\in \mathcal{A}$, $A_i \in \mathcal{A}\ \forall i \in \mathbb{N}$ con $B\preceq ... \subset A_2 \subset A_1$, entonces se verifica que
+        $$B\preceq \bigcap\limits_{i = 1}^{\infty}A_i$$
+    \end{axiom}
+
+    \begin{axiom}
+        Existe una variable aleatoria uniformemente distribuida, esto es, $X:\Theta \longrightarrow [0,1]$ variable aleatoria verificando que
+        $$X^{-1}({I_1}) \preceq X^{-1}({I_2}) \Longleftrightarrow \lambda(I_1)\preceq \lambda(I_2)$$
+        Donde se está considerando el espacio probabilístico $([0,1],\mathcal{B}_{[0,1]},\lambda)$, siendo $\lambda $ la medida de Lebesgue en [0,1] y $I_1,I_2\in [0,1]$
+    \end{axiom}
+
+
+    A partir de dichos axiomas se construye la probabilidad subjetiva como una $X^{-1}(a,b)=G(a,b)$, donde G es una función verificando
+    $$G(a,b) \sim G[a,b) \sim G(a,b] \sim G[a,b]$$
+    $$ G(a_1,b_1)\preceq G(a_2,b_2) \Longleftrightarrow b_1-a_1 \leq b_2 - a_2$$
+    Los siguientes resultados son inmediatos a partir de los axiomas anteriores.
+
+    \begin{lem}
+        Sean $A,B,D\in\mathcal{A}$ con $AD = BD = \emptyset$. Entonces
+        $$ A\cup D \preceq B\cup D  \Longleftrightarrow A \preceq B$$
+    \end{lem}
+
+    \begin{lem}
+        Sean $A,B,D\in\mathcal{A}$ con $A \preceq B, B \preceq D$. Entonces $A \preceq D$
+    \end{lem}
+
+    \begin{lem}
+        Sean $A_1,A_2,...,A_n \in \mathcal{A} $ todos ellos distintos, y $ B_1,B_2,..,B_n \in \mathcal{B}$ distintos y verificando $A_i \preceq B_i \forall i = 1,2,...,n$. Entonces
+        $$ \bigcup\limits_{i = 1}^{n}A_i \preceq \bigcup\limits_{i = 1}^{n}B_i$$
+    \end{lem}
+
+    \begin{lem}
+        Sean $A,B \in \mathcal{A}$. Entonces
+        $A \preceq B \Longleftrightarrow A^c \preceq B^c$
+    \end{lem}
+
+    \begin{lem}
+        Sean $A,B\in \mathcal{A}$ tal que $A\subset B$. Entonces $A \preceq B$
+    \end{lem}
+
+    \begin{lem}
+        Sean $B \in \mathcal{A}, \{A_i\}_{i \in \mathbb{N}}$ sucesión creciente de elementos de $\mathcal{A}$ tal que $A_i \preceq B\ \forall i \in \mathbb{N}$. Entonces
+        $$ \bigcup\limits_{i = 1}^{\infty}A_i \preceq B$$
+    \end{lem}
+
+    \begin{thm}
+        Sean $\{A_i\}_{i\in \mathbb{N}} $ disjuntos, $\{B_i\}_{i\in \mathbb{N}} $ disjuntos con $A_i,B_i \in \mathcal{A} \ \forall i \in \mathbb{N}$ y $A_i \preceq B_i \ \forall i \in \mathbb{N}$ Entonces
+
+        $$ \bigcup\limits_{i = 1}^{\infty}A_i \preceq \bigcup\limits_{i = 1}^{\infty}B_i $$
+    \end{thm}
+
+    El siguiente teorema garantiza que la probabilidad construida es una verdadera probabilidad.
+
+    \begin{thm}\textbf{Existencia de la probabilidad subjetiva}\\
+        Consideramos el espacio $(\Theta, \mathcal{A}, \preceq )$ bajo los axiomas anteriores. Entonces $\forall A \in \mathcal{A} \ \exists^1a^*\in[0,1]$ tal que $A \sim G[0,a^*]$.
+        A ese punto $a^*$ se le llama probabilidad subjetiva de A, y notaremos $P(A)=a^*$.
+    \end{thm}
+
+    \begin{lem}
+        Sean $A_i \in \mathcal{A} \ \forall i \in \mathbb{N}$ independientes. Entonces $P(\sum\limits_{i = 1}^{\infty}A_i) = \sum\limits_{i = 1}^{\infty}P(A_i)$. Además $P(\emptyset) = 0 $ y $P(\Theta) = 1$
+    \end{lem}
 
 \pagebreak
 \begin{thebibliography}{99}
