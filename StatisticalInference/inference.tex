@@ -1293,7 +1293,7 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 
 En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Para ello, recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades y de una distribución a priori, como se sigue : ¿$\mathcal{M} = \{\pi_i(\theta)|i\in I\, \pi(\theta)\}$?.
 
-Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos $ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
+Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos \\$ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
 
 Ahora bien, sabiendo que $\pi(\theta_i, M_i) =  \pi(M_i) \pi(\theta_i|M_i)$  para $i = 1,2.$, lo aplicamos a nuestros dos modelos y obtenemos que $ M_1 : \{f(x | \theta_1, M_1), \pi(M_1) \pi(\theta_1|M_1)$ y $M_2 : \{f(x | \theta_2, M_2), \pi(M_2)  \pi(\theta_2|M_2)$.
 
@@ -1307,7 +1307,7 @@ Con ello, la probabilidad a posteriori del modelo $M_1$ se obtiene de la siguien
 $ P(\theta_1, M_1 | \utilde{x}) =  \[\frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}}\ * \pi(\theta_1,M_1)}{m(\utilde{x} | M_1) * \pi(M_1) + m(\utilde{x} | M_2) * \pi(M_2)}\], donde $m(\utilde{x} | M_i) = \int_{\Theta_i}{f(\utilde{x} | \theta_i, M_i) * \pi(\theta_i | M_i)  d\theta_i}, para i = 1,2 $.
 \end{comment}
 
-Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
+Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es\\ $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
 
 Esta expresión se pude reescribir usando el factor de Bayes $B_{21}(\utilde{x}) = \frac{m(\utilde{x}| M_2)}{m(\utilde{x}| M_1)}$, por lo que la expresión anterior quedaría, dividiendo todo entre el numerador como: $P(M_1 | \utilde{x}) = \frac{1}{1 + B_{21}(\utilde{x})  \frac{\pi(M_2)}{\pi(M_1)}}$.
 
@@ -1343,7 +1343,7 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 	
 	Consideramos los dos modelos asociados $\mathcal{M}_0 : {\mathcal{N}(x | 0,1), \pi(M_0)}$ y $\mathcal{M}_1 : {\mathcal{N}(x| \mu,1), \mathcal{N}(\mu |0,2)\pi(M_1)}$, donde la distribución normal de media 0 y varianza 2 se ha obtenido haciendo la distribución intrínseca de $\mu$, pero se puede usar también una familia de distribuciones conjugada y el resultado será el mismo.
 	
-	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^-1)$.
+	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^{-1})$.
 	
 	Recordemos que $\prod_{i=1}^{n}\mathcal{N}(x_i |\mu,1) = \mathcal{N}(\overline{x} | \mu, 1/n)$.
 	
@@ -1359,10 +1359,10 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 	
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_1} \infty$.
 	
-	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow[n\to\infty] 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow[n\to\infty] 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
+	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
 	
 	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,  
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \xrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow 0$.  
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.  
 \end{example}
 
 \section{Probabilidades subjetivas}
