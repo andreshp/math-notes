@@ -1355,20 +1355,14 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 	Si queremos ver qué ocurre en probabilidad $M_1$ cuando n diverge, nos fijamos en el exponente de la función exponencial lo primero y vemos que se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i - \mu)  + \sqrt{n}\mu)^2$, pero el primer término va a una normal mientras que el segundo, va a infinito, por lo tanto,
 
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_1} \infty$.
-<<<<<<< HEAD
-
-	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow[n\to\infty] 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow[n\to\infty] 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
-
-	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \xrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow 0$.
-=======
 
 	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
 
 	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
->>>>>>> 6933e6fbd17cc33a99f5c7b9cf975d942913b958
 \end{example}
+
+\pagebreak
 
 \section{Probabilidades subjetivas}
 

@@ -217,12 +217,12 @@
             Consideramos el contraste de hipótesis dado por $H_0: \theta = \theta_0$ y $H_1: \theta \ne \theta_0$. Si existe un test UMP para contrastar ambas hipótesis, entonces el test de la razón de verosimilitud coincide con el test UMP.
         \end{thm}
 
-        El test de la razón de verosimilitud también consta de propiedades asintóticas.
+        En lo que sigue estudiamos las propiedades asintóticas del test de la razón de verosimilitud. Una de las propiedades más destacadas es la siguiente.
 
         \begin{thm}
             Supongamos que se cumplen las hipótesis de regularidad de Cramer-Rao y que, además, la verosimilitud es de clase 2. Deseamos contrastar dos hipótesis $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$. Bajo la hipotesis nula se tiene que
             \[-2 \log \lambda(\utilde{X}) \to \chi_d^2\]
-            cuando el tamaño de la muestra diverge, donde $d = dim(\Theta) - dim(\Theta_0)$.
+            cuando el tamaño de la muestra diverge, donde $d = dim(\Theta) - dim(\Theta_0)$ ($dim(\Omega)$ indica el número de variables no relacionadas entre sí de $\Omega \subset \mathbb{R}^n$).
         \end{thm}
 
         \begin{proof}
@@ -241,12 +241,29 @@
             converge casiseguramente a $\mathcal{I}(\theta_0)$. Podemos pues completar el estudio asintótico de $\sqrt{\mathcal{Q}_n}$, que converge en ley a $N(0, 1)$. Por último, la Proposición \ref{prop:normal-square} concluye que $\mathcal{Q}_n$ converge en ley a $\chi_1^2$.
         \end{proof}
 
+        En muchas ocasiones es difícil calcular la región crítica del test de la razón de verosimilitud. En tales caso, si el tamaño de la muestra es muy grande, entonces podemos suponer que bajo la hipótesis nula $-2 \log \lambda(\utilde{X})$ sigue una distribución $\chi_d^2$ y proceder con el test de hipótesis como es habitual.
+
+        La siguiente definicón extiende la definición de consistencia a los tests de hipótesis.
+
         \begin{definition}
             Un test de hipótesis se dice consistente si verifica
             \begin{enumerate}
                 \item $\lim_{n \to \infty} P_{\theta}(W_\alpha) = 0$ para todo $\theta \in \Theta_0$;
-
-
                 \item $\lim_{n \to \infty} P_{\theta}(W_\alpha) = 1$ para todo $\theta \in \Theta_1$.
             \end{enumerate}
         \end{definition}
+
+        El test de la razón de verosimilitud no es consistente ya que $P_{\theta}(W_\alpha) = \alpha$ para todo $n \in \mathbb{N}$. Este es el principal problema de los tests de hipótesis clásicos. El hecho de seleccionar un tamaño del test implica que el comportamiento asintótico no es el deseable. En un futuro veremos que en la mayoría de los casos la inferencia bayesiana resuelve este problema. No obstante, bajo determinadas hipótesis el test de la razón de verosimilitud sí verifica el apartado b) de la definición previa. El siguiente resultado es un ejemplo de este hecho.
+
+        \begin{prop}
+            Supongamos que se cumplen las hipótesis de regularidad de Cramer-Rao y que, además, la verosimilitud es de clase 2. Deseamos contrastar dos hipótesis $H_0: \theta = \theta_0$ y $H_1: \theta \ne \theta_0$ mediante un test de la razón de verosimilitud cuya región crítica para significación $\alpha$ es $W_\alpha$. Entonces, $\lim_{n \to \infty} P_{\theta}(W_\alpha) = 1$ para todo $\theta \in \Theta_1$.
+        \end{prop}
+
+        \begin{proof}
+            Supongamos que $\theta_1 \ne \theta_0$ es el verdadero valor del parámetro $\theta$. Denotemos por $\lambda(\utilde)$ al ratio de verosimilitud asociado a este test. Sea $\hat{\theta}_n$ el estimador máximo verosímil dado por el Teorema \ref{thm:emv:consistencia}.  Consideremos también el test $H'_0: \theta = \theta_1$ y $H'_1: \theta \ne \theta_1$ y denotemos por $\lambda'(\utilde{X})$ a su ratio de verosimilitud. Tenemos que
+            \[\lambda(\utilde{X}) = \frac{L(\theta_0; \utilde{X})}{L(\hat{\theta}_n); \utilde{X}} = \frac{L(\theta_1; \utilde{X})}{L(\hat{\theta}_n; \utilde{X})} \frac{L(\theta_0; \utilde{X})}{L(\theta_1; \utilde{X})} = \lambda'(\utilde{X}) \frac{L(\theta_0; \utilde{X})}{L(\theta_1; \utilde{X})}.\]
+            Por consiguiente podemos escribir $- 2 \log \lambda(\utilde{X}) = - 2 \log \lambda'(\utilde{X}) - 2 \log L(\theta_0; \utilde{X}) + 2 \log L(\theta_1; \utilde{X})$.  Además,  la ley fuerte de los grandes números nos asegura que la variable aletoria
+            \[\frac{1}{n} \left(- 2\log L(\theta_0; \utilde{X}) + 2 \log L(\theta_1; \utilde{X})\right) = - 2 \frac{1}{n} \sum_{i = 1}^n \log L(\theta_0; X_i) + 2 \frac{1}{n} \sum_{i = 1}^n \log L(\theta_1; X_i)\]
+            converge casi seguramente a $2(E_{\theta_1}(\log L(\theta_1; X_1)) - E_{\theta_1}(\log L(\theta_0; X_1)))$, que es un valor positivo gracias a la Proposicón \ref{prop:desigualdad}. Recordando que $-2 \log \lambda'(\utilde{X})$ converge en ley a $\chi_1^2$, obtenemos que $- 2 \log \lambda(\utilde{X}) \to +\infty$ casi seguramente. En particular, obtenemos que
+            \[P_{\theta_1}(W_\alpha) = P_{\theta_1}[- \log \lambda(\utilde{X}) \ge k_\alpha] \to 1. \qedhere\]
+        \end{proof}
