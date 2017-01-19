@@ -1,0 +1,418 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Juan Luis Suárez Díaz, Javier Poyatos Amador, A. Herrera Poyatos
+% Tittle: Estadística Bayesiana
+% Introducción a la estadística bayesiana. Estimación y tests de hipótesis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%!TEX root = ../inference.tex
+%!TEX language = es
+
+\section{Estadística bayesiana} \label{sec:bayes}
+
+En esta sección estudiaremos el modelo de inferencia estadística desde el punto de vista bayesiano. La estadística bayesiana proporciona resultados similares a la estadística clásica en el problema de estimación. Las ventajas de los modelos bayesianos serán remarcables al realizar tests de hipótesis, donde nos permitirán hablar de la probabilidad de que una hipótesis sea cierta o no. Recordemos que esta afirmación es imposible en la inferencia clásica ya que los parámetros de un modelo no son variables aleatorias.
+
+\subsection{Introducción}
+
+En primer lugar recordamos uno de los teoremas clásicos de la probabilidad, el Teorema de Bayes, que es la base de la inferencia Bayesiana. Supongamos que en el espacio de probabilidad $(\Omega,\mathcal{A},P)$ tenemos una partición de $\Omega$ dada por los sucesos $A_1,\ldots,A_n$, todos ellos con probabilidad no nula. Sea $B$ un suceso no nulo del que conocemos sus probabilidades condicionadas a cada suceso $A_i$. Entonces, utilizando la definición de probabilidad condicionada obtenemos la probabilidad de cada $A_i$ condicionada al suceso $B$ como sigue
+
+\begin{equation} \label{eq:condicionada}
+	P(A_i|B)=\frac{P(A_i\cap B)}{P(B)}=\frac{P(B|A_i)P(A_i)}{P(B)}.
+\end{equation}
+
+A su vez, la ley de la probabilidad total establece que $P(B)=\sum_{i=1}^n{P(B|A_i)P(A_i)}$ y, por tanto, aplicando esta a igualdad a \eqref{eq:condicionada} deducimos
+\begin{equation} \label{eq:bayes}
+	P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum_{i=1}^n{P(B|A_i)P(A_i)}},
+\end{equation}
+donde los valores $P(B|A_i)$ eran conocidos. La ecuación \eqref{eq:bayes} se conoce como Teorema de Bayes. A los valores $P(A_i)$ los llamamos \emph{probabilidades a priori}, mientras que a los valores $P(A_i|B)$ los denominamos las \emph{probabilidades a posteriori}. El Teorema de Bayes se puede deducir de igual forma para distribuciones de probabilidad.
+
+La estadística bayesiana se basa en la interpretación subjetiva de la probabilidad. Utiliza la percepción existente por parte del investigador para otorgar una credibilidad a cada parámetro del modelo en forma de una distribución de probabilidad (distribución a priori). Posteriormente aplica el Teorema de Bayes para obtener una distribución de los parámetros condicionada a la muestra (distribución a posteriori), con la que formular inferencias con respecto al parámetro de interés.
+
+Consideremos un problema de inferencia estadística en el que las observaciones se toman de una variable aleatoria $X$ que sigue una distribución $f(x|\theta)$, con $\theta\in\Theta$. Disponemos de información previa sobre $\theta$, que podemos recoger definiendo una distribución de probabilidad sobre el espacio $\Theta$, la distribución a priori, dando así a $\theta$ el carácter de variable aleatoria, con la peculiaridad de que no es observable. Sin embargo, sí observamos la variable aleatoria $X$ condicionada al verdadero valor que toma $\theta$, que llamaremos $\theta_0$. Así, el estudio de las observaciones de $X$ aporta información sobre el valor de $\theta$, información que debemos combinar con la distribución a priori para modificarla. El resultado de esta modificación es de nuevo una distribución sobre $\Theta$, que llamaremos la distribución a posteriori de $\theta$, una vez observada la variable aleatoria $X$. Estos son los planteamientos básicos que conforman el enfoque bayesiano de la estadística.
+
+En lo que sigue definiremos formalmente la distribución a posteriori, recordando los conceptos que sean necesarios.
+
+\begin{definition}
+	Sea $X$ una variable aleatoria que sigue una distribución $f(x|\theta)$, con $\theta \in \Theta$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
+	%Sea $X_{\sim}=(X_1,\ldots,X_n)$ un vector de variables aleatorias de la familia de densidades $\{f(x_{\sim}|\theta)|\theta = (\theta_1,\ldots,\theta_k) \in \Theta \subset \mathbb{R}^k \}$. A una distribución $\pi(\theta)$ sobre el espacio $\Theta $ establecida con información previa conocida sobre $\theta$ se le llama distribución a priori de la variable aleatoria $\theta$.
+\end{definition}
+
+
+\begin{remark}
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\ldots,X_n)$ de $X$ y una distribución a priori $\pi(\theta)$, podemos calcular la distribución conjunta de $\utilde{X}$ y $\theta$ utilizando la definición de condicionamiento \cite{loeve}, que es el análogo a \eqref{eq:condicionada} para variables aleatorias. En efecto, en este caso obtenemos que la ditribución conjunta tiene la función de densidad
+    \[f(\utilde{x},\theta)=f(\utilde{x}|\theta)\pi(\theta).\]
+
+    A partir de la distribución conjunta podemos calcular la distribución marginal de $\utilde{X}$, que denotamos $m(\utilde{X})$. Esta distribución tiene función de densidad
+	\[m(\utilde{x}) = \int_{\Theta}{f(\utilde{x},\theta)d\theta} = \int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)d\theta}.\]
+\end{remark}
+
+\begin{definition}
+	%Dada una muestra $x_{\sim} = (x_1,\ldots,x_n)$ de $X_{\sim}$, se define la probabilidad a posteriori de $\theta$ condicionada a la muestra como:
+
+	Dada una muestra aleatoria simple $\utilde{X} = (X_1,\ldots,X_n)$ de $X$, una realización de la muestra $\utilde{x}=(x_1,\ldots,x_n)$ y una distribución a priori $\pi(\theta)$, se define la distribución a posteriori de $\theta$ como la ley de $\theta$ condicionada a $\utilde{X} = \utilde{x}$. La denotamos $\pi(\theta | \utilde{x})$.
+\end{definition}
+
+La función de densidad de la distribución a posteriori se puede calcular a partir de la distribución a priori y $f(\utilde{x}|\theta)$ utilizando de nuevo la definición de condicionamiento. En efecto, tenemos que
+\[\pi(\theta|\utilde{x}) m(\utilde{x}) = f(\utilde{x}, \theta) = f(\utilde{x}|\theta)\pi(\theta).\]
+En consecuencia, podemos expresar la distribución a posteriori de esta forma
+\[\pi(\theta|\utilde{x}) = \frac{f(\utilde{x},\theta)}{m(\utilde{x})}.\]
+A veces es conveniente omitir el uso de la distribución marginal $m(\utilde{x})$, en cuyo caso escribimos
+\[\pi(\theta|\utilde{x})= \frac{f(\utilde{x}|\theta)\pi(\theta)}{\int_{\Theta}{f(\utilde{x}|\theta)\pi(\theta)\,d\theta}}.\]
+
+%La distribución a posteriori, como acabamos de indicar, es una distribución condicional a las observaciones dadas. Como tal, es el cociente entre una densidad conjunta y una marginal. %Además, se evalúa sobre la ley conjunta o verosimilitud de la muestra. Pasamos a recordar estos conceptos.
+
+Una vez hemos calculado la distribución a posteriori los problemas de la inferencia clásica se vuelven muy sencillos. En la Sección \ref{sec:bayes:hipotesis} se estudian los tests de hipótesis desde una perspectiva bayesiana. En el caso de la estimación las complicaciones son incluso menores. Podemos estimar el parámetro $\theta$ como la moda de la distribución $\pi(\theta|\utilde{x})$, siguiendo la filosofía de los estimadores máximo verosímiles. Si $\theta$ fuese un valor real, entonces podemos realizar su estimación mediante una esperanza, esto es, proponemos como estimador $\hat{\theta}(\utilde{x}) = E_{\pi(\theta|\utilde{x})} \theta$. En la mayoría de las aplicaciones ambos estimadores presentan un comportamiento similar al de los estimadores máximo verosímiles. Estudiaremos esta similitud a lo largo de la multitud de ejemplos que se realizan en esta sección. Es más, en la Sección \ref{sec:bayes:convergencia} demostraremos que, bajo determinadas condiciones, la distribución a posteriori degenera en el verdadero valor del parámetro $\theta$ cuando el tamaño de la muestra diverge. Esta propiedad es análoga a la propiedad de convergencia del estimador máximo verosímil. No obstante, la principal ventaja de los estimadores bayesianos es su buen comportamiento para muestras pequeñas, sobre las que los estimadores máximo verosímiles podían no funcionar correctamente debido a la falta de información. Este buen comportamiento se debe a la información introducida por la distribución a priori, que permite decidir el valor del parámetro en el caso de que la muestra no sea relevante.
+
+Para finalizar la introducción, cabe destacar es que es posible no exigirle a la distribución de probabilidad a priori que integre, es decir, podrían distribuir una probabilidad infinita sobre $\Theta$. En tal caso se dice que la distribución es \textit{impropia}. Pese a su carácter impropio estas distribuciones nos pueden permitir hacer inferencias correctas.
+
+\subsection{Estadística clásica vs bayesiana}
+
+Veamos ahora las diferencias entre la inferencia clásica y la bayesiana. En la inferencia clásica destacan las siguientes características:
+
+\begin{itemize}
+	\item El concepto de probabilidad está limitado a aquellos sucesos en los que se pueden definir frecuencias relativas.
+	\item $\theta$ es un valor fijo, pero desconocido.
+	\item Se usa el concepto de intervalo de confianza.% (AÑADIR SI ESO)
+	\item El método de muestreo es muy importante.
+	\item Se pueden usar estimadores de máxima verosimilitud o estimadores insesgados.
+    \item Los tests de hipótesis se construyen fijando un tamaño $\alpha$ y minimizando los errores de tipo 2.
+\end{itemize}
+
+Por su parte, en la inferencia bayesiana destacan:
+
+\begin{itemize}
+	\item Podemos establecer probabilidades previas para cualquier suceso.
+	\item $\theta$ es una variable que sigue una distribución de probabilidad.
+	\item Se usa el concepto de intervalo de credibilidad para $\theta$.% (AÑADIR SI ESO)
+	\item El método de muestreo no importa; solo importan los datos.
+	\item Se utilizan estimadores diferentes según la utilidad; la estimación es un problema de decisión.
+    \item En tests de hipótesis se puede hablar de probabilidad de que una hipótesis sea cierta.
+\end{itemize}
+
+Uno de los aspectos más criticados de la estadística bayesiana es el grado de subjetividad a la que se expone la inferencia por el hecho de que es el experimentador quien define la distribución a priori. En cualquier caso, en lo que hay coincidencia es en que si hay información sobre $\theta$, entonces ésta tiene que ser utilizada en la inferencia.
+
+\ \newline
+Como acabamos de decir, una parte muy importante en la inferencia bayesiana es la selección de la distribución a priori. En muchos casos, si no disponemos de una distribución clara para modelar $\theta$ es posible considerar distribuciones específicas que permitan simplificar los cálculos de la distribución a posteriori. A continuación estudiaremos distintos medios para seleccionar estas distribuciones.
+
+\subsection{Familias conjugadas}
+
+La principal dificultad que surge en los problemas de inferencia bajo la perspectiva bayesiana es tanto la confianza que se pueda esperar de la distribución a priori como el cálculo de la distribución a posteriori. La primera cuestión es importante ya que la inferencia que se realice puede depender de la elección de la distribución inicial, razón por la cual en muchos casos se recurre a distribuciones no informativas, que no imponen unas condiciones muy fuertes sobre el parámetro. Otra tendencia en la elección de las distribuciones a priori es aprovechar la información que proporciona la muestra para mejorar la distribución inicial.% dando origen a las denominadas distribuciones intrínsecas a priori, de gran auge en la actualidad.
+
+En cuanto al cálculo de la distribución a posteriori, no todas las distribuciones a priori conducen a cómputos asequibles ni a una distribución tratable y, en ocasiones, hay que recurrir a métodos numéricos para poder trabajar con ellas. Por tanto, es deseable obtener distribuciones a priori que nos faciliten este proceso.
+
+En esta sección nos centramos en este último problema. Buscamos familias de distribuciones a priori cuyas distribuciones a posteriori asociadas sean de fácil cálculo. En este sentido surge el concepto de familias a priori conjugadas.
+
+\begin{definition}
+	Sea $\mathcal{F} = \{\pi_i(\theta): i\in I\}$ una familia de distribuciones a priori. Se dice que $\mathcal{F}$ es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta): \theta\in\Theta\}$ si para cualquier $\pi(\theta)\in\mathcal{F}$ y $f(x|\theta)\in \mathcal{P}$ se verifica que $\pi(\theta|x) \in \mathcal{F}$. Es decir, una familia $\mathcal{F}$ de distribuciones a priori es conjugada respecto a la familia dada si y solo si las distribuciones a posteriori pertenecen de nuevo a $\mathcal{F}$.
+\end{definition}
+
+Recordemos que $\pi(\theta|x) = f(x|\theta)\pi(\theta) / m(x)$. El denominador $m(x)$ es una constante ya que $x$ está fijo. Como con secuencia, obtenemos la siguiente observación.
+
+\begin{remark}
+	Sean $\pi(\theta), \Pi(\theta) \in \mathcal{F}$. Se tienen las siguientes condiciones equivalentes:
+	\begin{enumerate}%[label=\roman)*]
+		\item $f(x|\theta)\pi(\theta) \propto \Pi(\theta)$;
+		\item $\pi(\theta|x)=\Pi(\theta)$.
+	\end{enumerate}
+\end{remark}
+
+ Por tanto, en la definición de familias conjugadas, la afirmación $\pi(\theta|x) \in \mathcal{F}$ equivale a decir que $f(x|\theta)\pi(\theta) \propto \Pi(\theta)$ para cierta distribución $\Pi(\theta) \in \mathcal{F}$. Este hecho se enuncia en la siguiente proposición.
+
+\begin{prop}
+    Una familia de distribuciones a priori $\mathcal{F} = \{\pi_i(\theta): i\in I\}$ es conjugada respecto de la familia de densidades $\mathcal{P} = \{f(x|\theta): \theta\in\Theta\}$ si, y solo si, el producto de cualesquiera dos distribuciones de ambas familias vuelve a ser, salvo constante, una distribución de la familia de distribuciones a priori.
+\end{prop}
+
+Tener una familia de distribuciones conjugadas a priori nos permite simplificar en gran medida el cálculo de la distribución a posteriori. En efecto, solo tenemos que identificar la distribución de $\mathcal{F}$ que es proporcional a $f(x|\theta)\pi(\theta)$. Esa distribución coincidirá con $\pi(\theta | x)$. De esta forma evitamos tener que realizar el cálculo de la distribución marginal de $x$, que suele hacerse mediante una integral. Además, en caso de necesitar el valor $m(x)$ basta darse cuenta de que $m(x) = f(x|\theta)\pi(\theta) / \pi(\theta|x)$.
+
+%En el denominador del cociente tenemos, salvo constantes, una integral de una función de la familia $\mathcal{F}$, que sabemos que integra 1. Las constantes son las mismas en numerador y denominador, dando lugar así a una distribución a posteriori de la misma familia.
+
+Es posible calcular las distribuciones conjugadas para las familias de distribuciones clásicas, obteniendo de nuevo otras distribuciones clásicas.
+
+\begin{prop} ~\\
+    \vspace*{-6mm}
+	\begin{itemize}
+		\item La familia de distribuciones Beta es una familia de distribuciones conjugada para las distribuciones de Bernouilli, binomiales y binomiales negativas.
+
+		\item La familia de distribuciones Gamma es una familia de distribuciones conjugada para las distribuciones de Poisson.% y (exponenciales (definir)).
+
+		\item La familia de distribuciones normales es una familia de distribuciones conjugada para la familia de distribuciones normales con varianza conocida.
+
+		\item La familia de distribuciones de Dirichlet es una familia de distribuciones conjugada para la familia de distribuciones multinomiales.
+	\end{itemize}
+\end{prop}
+
+Veamos algún ejemplo de los proporcionados por la proposición anterior.
+
+\begin{ex}
+	 Vamos a considerar una distribución de Poisson de parámetro $\lambda > 0$ y, como distribución a priori, una Gamma de parámetros $\alpha$ y $\beta$. Dada una muestra $\utilde{x} = (x_1,\ldots,x_n)$ se tiene
+	\[f(\utilde{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}} \text{ y } \pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}.\]
+    Multiplicando ambas distribuciones obtenemos
+	\[f(\utilde{x}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
+	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right).\]
+
+	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$ obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum_{i = 1}^n{x_i}$ y $\beta+n$, donde $n$ es el tamaño de la muestra.
+
+	Notemos que la conjugación nos ha permitido evitar el cálculo de la distribución marginal de $x$. Si optamos por calcularla, obtendríamos:
+
+	[PROXIMAMENTE]
+
+	Llegando de nuevo al mismo resultado.
+\end{ex}
+
+\begin{ex}
+	Consideremos ahora una distribución multinomial dada por la función masa de probabilidad
+	\[f(x_1,\ldots,x_{k}|\theta_1,\ldots,\theta_{k}) = \frac{n!}{x_1!\ldots x_k!}\theta_1^{x_1}\ldots \theta_k^{x_k},\]
+	con $\sum_{i=1}^{k}{x_i} = n$, $0 < \theta_i < 1$ y $\sum_{i=1}^{k}{\theta_i}=1$.
+
+	Llamamos $\theta = (\theta_1,\ldots,\theta_k)$. Elegimos como distribución a priori la distribución de Dirichlet de parámetros $\alpha_1,\ldots,\alpha_k$, cuya función de densidad viene dada por
+    \[\pi(\theta) \propto \frac{\Gamma(\alpha_1+\ldots+\alpha_k)}{\Gamma(\alpha_1)\ldots\Gamma(\alpha_k)}\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}.\]
+	Entonces, dada una muestra $\utilde{x}=(x_1,\ldots,x_k)$, se tiene
+	\[\pi(\theta|\utilde{x}) \propto \pi(\theta)f(\utilde{x}|\theta)
+	\propto \left(\prod_{i=1}^{k}{\theta_i^{\alpha_i-1}}\right)\left(\prod_{i=1}^{k}{\theta_i^{x_i}}\right)\]
+	\[ = \prod_{i=1}^{k}{\theta_i^{x_i+\alpha_i-1}} \propto Dirichlet(\theta|\alpha_1+x_1,\ldots,\alpha_k+x_k), \]
+    obteniendo que la distribución a posteriori sigue una Dirichlet.
+\end{ex}
+
+\begin{ex}
+
+Consideremos $X \sim \mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocido. Fijamos una muestra $\utilde{x}=(x_1,\ldots,x_n)$. La función de densidad está condicionada únicamente a $\mu$. Tenemos que
+%\[f(x|\mu) = (2\pi\sigma^2)^{-1/2}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.\]
+\[f(\utilde{x}|\mu) = (2\pi\sigma^2)^{-n/2}\exp\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}}\right).\]
+
+Elegimos una distribución a priori $\mu \sim \mathcal{N}(\eta,\tau^2)$, es decir,
+\[\pi(\mu) = (2\pi\tau^2)^{-1/2} \exp\left(-\frac{(\mu-\eta)^2}{2\tau^2}\right).\]
+
+Calculamos la distribución conjunta, obteniendo
+\[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}-\frac{(\mu-\eta)^2}{2\tau^2}}\right)}.\]
+
+Llamamos $\overline{x}=\frac{1}{n}\sum{x_i}$ y $s^2 = \frac{1}{n}\sum{(xb_i-\overline{x})^2}$. Notemos que ninguna de las dos expresiones depende de $\mu$. Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} = \sum{(x_i-\overline{x})^2}+2(\overline{x}-\mu)\sum{(x_i-\overline{x})} + \sum{(\overline{x}-\mu)^2} = ns^2+ n(\overline{x}-\mu)^2$, tenemos
+\[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\frac{n}{2\sigma^2}[s^2+(\overline{x}-\mu)^2]-\frac{(\mu-\eta)^2}{2\tau^2}\right)}\]
+\[=
+\exp{\left(-\frac{ns^2}{2\sigma^2}\right)}\exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}
+\propto
+ \exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}.\]
+
+ Ahora, desarrollamos la expresión $n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2$. Podemos separarla según los sumandos que dependan o no de $\mu$. A continuación, dividimos la exponencial en dos partes, una con los sumandos independientes de $\mu$ y otra con los dependientes. La expresión resultante es
+ \[f(\utilde{x}|\mu)\pi(\mu) \propto
+ \exp{\left(-\frac{n\overline{x}^2\tau^2+\sigma^2\eta^2}{2\sigma^2\tau^2}\right)}
+ \exp{\left(-\frac{\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)}{2\sigma^2\tau^2}\right)}.\]
+ \[\propto
+ \exp{\left(-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]\right)}.
+ \]
+
+ Ahora ajustamos cuadrados sobre el exponente. Procedemos como sigue
+ \[-\frac{1}{2\sigma^2\tau^2}\left[\mu^2(n\tau^2+\sigma^2)-2\mu(n\overline{x}\tau^2+\sigma^2\eta)\right]
+ =
+ -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu^2-2\mu\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]
+ \]
+ \[=
+ -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu^2-2\mu\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}+\left(\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right)^2\right] + \frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left(\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right)^2
+ \]
+ \[=
+  -\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2 + \frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}.\]
+
+Volviendo a la distribución conjunta, hemos obtenido
+\[f(\utilde{x}|\mu)\pi(\mu) \propto
+\exp{\left(\frac{\left(n\overline{x}\tau^2+\sigma^2\eta\right)^2}{2\sigma^2\tau^2\left(n\tau^2+\sigma^2\right)}\right)}
+\exp{\left(-\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2\right)}
+\]
+\[ \propto
+\exp{\left(-\frac{n\tau^2+\sigma^2}{2\sigma^2\tau^2}\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2\right)}
+=
+\exp{\left(-\left[\mu-\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2}\right]^2 / \left[2\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}\right]\right)}
+\]
+\[
+\propto \mathcal{N}\left(\mu\left|\frac{n\overline{x}\tau^2+\sigma^2\eta}{n\tau^2+\sigma^2},\frac{\sigma^2\tau^2}{n\tau^2+\sigma^2}\right.\right),
+\]
+
+obteniendo finalmente una distribución a posteriori también normal. Hemos demostrado que la familia normal es conjugada.
+\end{ex}
+
+
+\subsection{Distribuciones objetivas. Distribución de Jeffreys}
+
+Aunque las distribuciones conjugadas permiten facilitarnos los cálculos, no siempre tienen un comportamiento adecuado de cara a la inferencia. En algunas aplicaciones el uso de las distribuciones a priori conjugadas puede estar introduciendo una forma a $\pi(\theta)$ que no se adecúe a la realidad. Además, como hemos visto en los ejemplos anteriores, las distribuciones conjugadas tienen parámetros que de todas formas deberían ser seleccionados utilizando el conocimiento experto del problema a resolver. En condiciones en las que no se conozca información alguna sobre el parámetro $\theta$ estas propiedades pueden ser perjudiciales.
+
+En esta sección estudiamos distribuciones a priori objetivas o no informativas, que no introducen ninguna información sobre el parámetro $\theta$. De estas distribuciones una de las más famosas es la distribución de Jeffreys.
+
+\begin{definition}
+    Sea $\{f(x | \theta): \theta \in \Theta \}$ una familia de distribuciones con parámetro $\theta \in \Theta$. La distribución a priori de Jeffreys se define como $\pi^{J}(\theta) \propto \sqrt{\mathcal{I}_X(\theta)}$.
+\end{definition}
+
+\begin{ex}[Distribución binomial]
+    Vamos a estudiar la distribución a priori de Jeffreys para la distribución binomial. En el Ejemplo \ref{ex:fisher:binom} se calculó la función de información de Fisher para la distribución binomial. A partir de los resultados obtenidos tenemos que $\pi^J(\theta) \propto \theta^{-1/2} (1 - \theta)\theta^{-1/2}$. Por tanto, $\pi^J(\theta)$ sigue una distribución $beta(1/2,1/2)$. La distribución a posteriori para $\utilde{x} = (x_1, \ldots, x_k)$ viene dada por
+    \[\pi(\theta; x) \propto \pi(\theta) \prod_{i = 1}^k f(x_i; \theta) \propto \theta^{\sum x_i -1/2} (1 - \theta)^{\sum (n-x_i) -1/2},\]
+    esto es, $\pi(\theta;x)$ sigue una distribución $beta(k\overline{x} + 1/2, k(n - \overline{x}) + 1/2)$. Recordando el Corolario \ref{cor:beta:esp} podemos calcular la esperanza y la varianza de la distribución a posteriori, obteniendo
+    \[E[\pi(\theta; x)] = \frac{k\overline{x} + 1/2}{kn + 1} = \frac{\overline{x} +1/(2k)}{n + 1/k};\]
+    \[Var(\pi(\theta; x)) = \frac{(k\overline{x} + 1/2)(k(n - \overline{x}) + 1/2)}{(kn + 1)^2(kn+2)} = \frac{(\overline{x} +1/{2k})((n - \overline{x}) + 1/(2k))}{(kn+2)(n + 1/k)^2}.\]
+    Para $k$ lo suficientemente grande $E[\pi(\theta; x)] \approx \overline{x} / n$, que es el estimador máximo verosímil. Por tanto, cuando $k \to \infty$ obtenemos que $Var(\pi(\theta; x)) \to 0$ y $E[\pi(\theta; x)] \to \theta_0$.
+\end{ex}
+
+Notemos que la distribución de Jeffreys podría ser impropia, es decir, no integrable. En cualquier caso se puede utilizar para realizar estimación. Veámoslo con el siguiente ejemplo.
+
+\begin{ex} \label{ex:jeff:poisson}
+
+	Consideramos la familia de distribuciones de Poisson con parámetro $\lambda$, con funciones de densidad $f(x|\lambda) = \frac{e^{-\lambda} \lambda ^{x}}{x!}$, con $\lambda > 0$ y $x\in\mathbb{N}\cup\{0\}$. Recordemos que si $X \sim f(x|\lambda)$, entonces $I_X(\lambda) = \frac{1}{\lambda}$, y en consecuencia la distribución de Jeffreys sería $\pi^{\mathcal{J}}(\lambda) \propto \lambda^{-\frac{1}{2}}$. Sin embargo, esta función no integra en $\mathbb{R}^{+}$, el dominio de $\lambda$, pues $\int_{0}^{\infty}{\lambda^{-\frac{1}{2}}d\lambda} = [2\lambda^{\frac{1}{2}}]_{0}^{\infty} = \infty$. Estamos por tanto ante una distribución a priori impropia. En esta situación ``normalizamos'' la distribución, tomando $\pi^{\mathcal{J}}(\lambda) = c\lambda^{-\frac{1}{2}}$, con $c > 0$ arbitrario. Si conseguimos que la distribución a posteriori no dependa de $c$ podremos utilizarla para hacer inferencia.
+
+	Pasemos a calcular la distribución a posteriori. Consideramos una muestra aleatoria simple $\utilde{X} = (X_1,\ldots,X_n)$ de $X$, y el vector de observaciones de la muestra $\utilde{x}=(x_1,\ldots,x_n)$. Entonces $f(\utilde{x}|\lambda)=\prod_{i=1}^{n}{f(x_i|\lambda)}=e^{-n\lambda}\lambda^{\sum{x_i}} / \prod{x_i!}$. La distribución conjunta es proporcional a
+	\[f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) = \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}.\]
+	Por otro lado la distribución marginal de $\utilde{X}$ viene dada por
+	\[m(\utilde{x}) = \frac{c}{\prod_{i^=1}^{n}{x_i!}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left[\begin{array}{ll} y = n \lambda \\ dy = nd\lambda \end{array} \right]  =\]
+	\[ = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + 1/2).\]
+
+	Podemos comprobar que ambas funciones están indeterminadas por $c$. Obtenemos la distirbución a priori realizando el cociente $f(\utilde{x}|\lambda)\pi^{\mathcal{J}}(\lambda) / m(\utilde{x})$. En efecto, obtenemos
+	\[\pi(\lambda|\utilde{x}) = \left( \frac{c}{\prod{x_i!}}e^{-n\lambda}\lambda^{\sum{x_i}-\frac{1}{2}}\right) / \left(\frac{c}{\prod{x_i!}} \frac{1}{n ^{\sum{x_i} + \frac{1}{2}}}\Gamma(\sum{x_i} + 1/2) \right) = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + 1/2)}. \]
+
+    Esto es, la distribución a posteriori es una $Gamma(\lambda, \sum x_i + 1/2, n)$.
+\end{ex}
+
+Hemos visto por tanto que una distribución a priori impropia también nos permite realizar inferencia. Un último detalle que podemos observar es que $m(\utilde{x}) \ne \prod{m(x_i)}$. Las variables $X_i$ son independientes cuando se condicionan a $\theta$, pero no mantienen la independencia cuando se consideran todos los posibles parámetros. Decimos que las muestras no son incondicionalmente independientes. Esta es otra de las diferencias entre la estadística clásica y la bayesiana. En la primera bajo cualquier concepto las muestras son independientes ya que el parámetro es un valor fijo, no una variable aleatoria.  %En la bayesiana no se sigue la hipótesis de que los datos sean incondicionalmente independientes, si no que se supone que los datos son condicionalmente independientes respecto a $\lambda$ (o $\theta$ en general), que es lo que se asume al calcular las verosimilitudes.
+
+\begin{comment}
+\begin{ex}
+	Cálculo de marginales en una distribución de Poisson con $ f(x_i|\lambda) = \frac{e^{-\lambda} \lambda ^{x_i}}{x_i!}, \lambda > 0 $ y $ x_i = 0,1,2, ... $
+	\\En primer lugar calculamos la distribución a priori de Jeffreys $\Pi^y (\theta) = I_X(\theta)^{\frac{1}{2}} $. Por tanto, para nuestra función de distribución  $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} $, pero para que sea una distribución de probabilidad tendremos que normalizarla, para ello hacemos $\Pi^y (\theta) = - \lambda ^{-\frac{1}{2}} c $, ahora bien, esta función no se puede normalizar dado que $\int_{0}^{\infty} c \lambda^\frac{1}{2} d\lambda = \infty $
+
+	No estoy segura de por qué pero esto se puede hacer. De todas formas, podemos calcular la distribución a posteriori, para ello consideramos $f(x|  \lambda) =  \frac{e^{-\lambda} \lambda ^{\sum{x_i}}} {\prod{x_i!}}  , x = (x_1, x_2, ...) $.
+
+	Podemos calcular la distribución marginal de x, $f(x) = \frac{c}{\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} d\lambda} =  \left [ y = n \lambda , dy = nd\lambda \right ]  = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod_{i^=1}^{n}{x_i}} \int_{0}^{\infty} {e^{-y} y^{\sum{x_i}-\frac{1}{2} } dy } = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}}\Gamma(\sum{x_i} + \frac{1}{2}) $
+
+	Como, $f(x) != \prod f(x_i)$, concluimos que las variables no son incondicionalmente independientes si no condicionalmente independientes.
+
+	Podemos observar que la distribución marginal de x está indeterminada por $c$. A pesar de ello, podemos calcular la distribución a posteriori de la siguiente forma:
+	$f(\lambda, x) = \frac{ \frac{c e^{-n \lambda} \lambda{\sum{x_i} - \frac{1}{2}} }{x_1! x_2! ... x_n!} }{\frac{c}{x_1! ... x_n!} \frac{1}{n \sum{x_i} + \frac{1}{2} \Gamma(\sum{x_i} + \frac{1}{2})}} = \frac{e^{-n\lambda} \lambda^{\sum{x_i} - \frac{1}{2}} n^{\sum{x_i} + \frac{1}{2}}}{\Gamma(\sum{x_i} + \frac{1}{2})}$
+\end{ex}
+\end{comment}
+
+\subsection{Convergencia de distribuciones a posteriori} \label{sec:bayes:convergencia}
+
+Nos planteamos en este punto el estudio asintótico de la sucesión de las distribuciones a posteriori cuando el tamaño de la muestra crece.
+
+Supongamos que queremos hacer inferencia sobre un fenómeno que sigue una distribución $f(x|\theta_0)$, perteneciente a la familia de distribuciones $\{f(x|\theta) : \theta\in\Theta\}$. La medida de probabilidad asociada será $P_{\theta_0}$. Queremos estudiar, dada una distribución a priori $\pi(\theta)$, la convergencia de la distribución a posteriori $\pi(\theta|X_1,\ldots,X_n)$, para las variables i.i.d. $X_1,\ldots,X_n \sim f(x|\theta_0)$,  cuando $n \to \infty$.
+
+En general, si el espacio paramétrico no es discreto, el estudio de la convergencia de la distribución a posteriori no es sencillo. Estudiaremos la convergencia de la distribución a posteriori cuando el espacio paramétrico es discreto, esto es, $\Theta = \{\theta_1,\ldots,\theta_k\}$.
+
+\begin{thm}
+	En las condiciones anteriores, se tiene que
+	\[\pi(\theta|X_1,\ldots,X_n) \xrightarrow[n\to\infty]{P_{\theta_0}} \theta_0,\]
+    esto es, cuando el tamaño de la muestra diverge la distribución a posteriori degenera en $\theta_0$, el verdadero valor del parámetro $\theta$.
+\end{thm}
+
+\begin{proof}
+	Supongamos $\Theta = \{\theta_1,\ldots,\theta_k\}$. La distribución a priori viene determinada por las probabilidades que asigna a cada $\theta_j$. Escribimos $\pi(\theta_j)=p_j$, donde $p_j\in[0,1]$ para $j=1,\ldots,k$, verificando además $\sum_{j=1}^{k}{p_j}=1$. Denotemos por $t\in\{1,\ldots,k\}$ al índice del parámetro que corresponde al verdadero valor $\theta_0$, es decir, $\theta_t = \theta_0$.
+
+
+	Consideramos las variables aleatorias i.i.d. $X_1,\ldots,X_n$ con distribución $f(x|\theta_t)$. Para cada $\theta_i$ el valor de la distribución a posteriori en $\theta_i$ puede verse como una variable aleatoria y viene dado por
+	\[\pi(\theta_i|X_1,\ldots,X_n) = \frac{p_i \prod_{j=1}^n{f(X_j|\theta_i)}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{f(X_j|\theta_r)}}}.\]
+
+	Multiplicando numerador y denominador por $\left(\prod_{j=1}^n{f(X_j|\theta_t)}\right)^{-1}$ obtenemos
+	\begin{equation} \label{eq:tcfd1}
+		\pi(\theta_i|X_1,\ldots,X_n) = \frac{p_i \prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}}{\sum_{r=1}^k{p_r\prod_{j=1}^n{\frac{f(X_j|\theta_r)}{f(X_j|\theta_t)}}}}.
+	\end{equation}
+
+
+	Estudiemos la convergencia de la variable aleatoria $\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}$ para todo $i \in \{1, \ldots, k\}$. Si $i=t$, esta variable aletoria es constantemente 1. En caso contrario, tomando logaritmos, obtenemos
+	\begin{equation} \label{eq:tcfd2}
+	\log{\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}} = \sum_{j=1}^{n}{ \log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}} = n\left(\frac{1}{n}\sum_{j=1}^{n}{\log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}}\right).
+	\end{equation}
+
+	Las variables aleatorias $Z_j = \log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}$ son i.i.d, luego por la ley fuerte de los grandes números el término $\frac{1}{n}\sum_{j=1}^{n}{\log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}}$ converge casi seguramente con respecto a la probabilidad $P_{\theta_t}$ a la esperanza de cualquiera de ellas, $E\left[\log{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}\right]$. Además, como consecuencia de la Proposición \ref{prop:desigualdad}, dicha esperanza es un valor estrictamente negativo. En consecuencia, a partir de la expresión obtenida en (\ref{eq:tcfd2}), podemos concluir que
+	\[\log{\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}}} \xrightarrow[n\to\infty]{P_{\theta_t}} -\infty\]
+
+	La continuidad del logaritmo nos asegura que
+    \[\prod_{j=1}^n{\frac{f(X_j|\theta_i)}{f(X_j|\theta_t)}} \xrightarrow[n\to\infty]{P_{\theta_t}} 0.\]
+
+	Finalmente, aplicando lo que acabamos de obtener a (\ref{eq:tcfd1}), concluimos que:
+
+	\begin{itemize}
+		\item si $i \ne t$, $\pi(\theta_i|X_1,\ldots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{0}{p_t+\sum{0}} = 0$;
+		\item si $i = t$, $\pi(\theta_i|X_1,\ldots,X_n) \xrightarrow[n\to\infty]{P_{\theta_t}} \frac{p_t}{p_t+\sum{0}} = 1$.
+	\end{itemize}
+
+	Esto es equivalente a decir que la distribución a posteriori degenera a $\theta_t$ en probabilidad $P_{\theta_t}$.
+\end{proof}
+
+\begin{remark}
+	Observemos que en la convergencia de la distribución a posteriori no ha influido la distribución a priori escogida. Esto nos indica que cuando el tamaño de la muestra es grande, la distribución que hayamos elegido a priori no va a tener mucha influencia sobre la distribución que utilizaremos para realizar inferencia.
+\end{remark}
+
+\begin{remark}
+    Como consecuencia de este resultado, si el espacio paramétrico es discreto, entonceslos estimadores bayesianos son consistentes. Además, si estamos contrastando hipótesis simples, entonces los modelos bayesianos asignan probabilidad 1 a la hipótesis correcta cuando el tamaño de la muestra diverge.
+\end{remark}
+
+\pagebreak
+
+\section{Test de Hipótesis Bayesianos} \label{sec:bayes:hipotesis}
+
+En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Para ello, recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades y de una distribución a priori, como se sigue : ¿$\mathcal{M} = \{\pi_i(\theta)|i\in I\, \pi(\theta)\}$?.
+
+Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos \\$ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
+
+Ahora bien, sabiendo que $\pi(\theta_i, M_i) =  \pi(M_i) \pi(\theta_i|M_i)$  para $i = 1,2.$, lo aplicamos a nuestros dos modelos y obtenemos que $ M_1 : \{f(x | \theta_1, M_1), \pi(M_1) \pi(\theta_1|M_1)$ y $M_2 : \{f(x | \theta_2, M_2), \pi(M_2)  \pi(\theta_2|M_2)$.
+
+Supongamos que tenemos una muestra (independiente e idénticamente distribuida) de tamaño n que proviene de alguno de los modelos, esto es $\utilde{x} = (x_1,...,x_n)$. Con ella ,se quiere calcular la probabilidad a posteriori del modelo $M_1$. Para ello, necesitamos tomar la verosimilitud de la muestra respecto de $\theta_i$ y $M_i (i = 1,2)$, es decir, $\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}$ y $\prod_{i=1}^{n}{f(x_i|\theta_2,M_2)}$.
+
+Con ello, la probabilidad a posteriori del modelo $M_1$ se obtiene de la siguiente forma:
+
+\[P(\theta_1,M_1| \utilde{x}) = \frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}\pi(\theta_1,M_1)}{\pi(M_1)m(\utilde{x}|M_1)+\pi(M_2)m(\utilde{x}|M_2)} \]
+
+\begin{comment}
+$ P(\theta_1, M_1 | \utilde{x}) =  \[\frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}}\ * \pi(\theta_1,M_1)}{m(\utilde{x} | M_1) * \pi(M_1) + m(\utilde{x} | M_2) * \pi(M_2)}\], donde $m(\utilde{x} | M_i) = \int_{\Theta_i}{f(\utilde{x} | \theta_i, M_i) * \pi(\theta_i | M_i)  d\theta_i}, para i = 1,2 $.
+\end{comment}
+
+Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es\\ $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
+
+Esta expresión se pude reescribir usando el factor de Bayes $B_{21}(\utilde{x}) = \frac{m(\utilde{x}| M_2)}{m(\utilde{x}| M_1)}$, por lo que la expresión anterior quedaría, dividiendo todo entre el numerador como: $P(M_1 | \utilde{x}) = \frac{1}{1 + B_{21}(\utilde{x})  \frac{\pi(M_2)}{\pi(M_1)}}$.
+
+Por tanto, el cociente entre las probabilidades de que se da cada modelo condicionado a la muestra es:
+$  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\pi(M_2)}{\pi(M_1)}$.
+
+\subsection{Método de Leamer}
+
+
+
+	En la sección de estadística bayesiana vimos que podíamos escoger distribuciones a priori no integrables (impropias) que aun así nos permitían obtener buenas distribuciones a posteriori sobre las que realizar inferencia. ¿Qué ocurre si cogemos como distribución a priori una distribución impropia? La respuesta se basa en que al calcular el factor de Bayes de una muestra, dicho factor está indeterminado por una constante multiplicativa que proviene de las dos distribuciones a priori impropias, esto es, si $\pi(\theta_i|M_i) = c_ih_i(\theta_i)$, con $h_i$ no integrable y $c_i > 0$ arbitrario, entonces $\pi(\theta_1 | M_1) = c_1 h_1(\theta_1) $ y lo mismo para la el segundo modelo, obtenemos que  $B_{21}(\utilde{x}) = \frac{c_2 \int{f(\utilde{x} | \theta_2 , M_2)h_2(\theta_2) d\theta_2}}{c_1 \int{f(\utilde{x} | \theta_1 , M_1) h_1(\theta_1) d\theta_1}}$. Por ello, debemos coger distribuciones propias.
+
+	El método de Leamer consiste en obtener una submuestra de una muestra, que llamaremos muestra de entrenamiento, de forma que al calcular la distribución a posteriori esté bien definida. Para ello, tomamos $\utilde{x_1}$ submuestra de $\utilde{x}$. Para que $\pi(\theta_1 | \utilde{x_1}, M_1)$ esté bien definida, se tiene que verificar que $ 0 < m(\utilde{x_1} | M_1) < \infty$ (análogo para el modelo $M_2$).
+
+	\begin{definition}
+		Dado un modelo $M$ y una muestra $\utilde{x}$, una muestra de entrenamiento es un subconjunto de la muestra $\utilde{x_1} \subset \utilde{x}$. Se dice que la muestra es propia si $0 < m(\utilde{x_1}|M) < \infty$.
+
+		Una muestra de entrenamiento $\utilde{x_1}$ se dice que es minimal si es propia y ningún subconjunto suyo distinto de $\utilde{x_1}$ lo es.
+	\end{definition}
+
+	Como acabamos de ver, la selección de una muestra de entrenamiento minimal nos permite poder continuar con distribuciones a priori impropias al inicio, que pasarán a ser propias tras entrenarlas con dicha muestra. El principal inconveniente de este método es determinar qué datos son los más convenientes para entrenar la distribución a priori, es decir, qué subconjunto $\utilde{x_1}$ minimal escoger.
+
+	\begin{ex}
+		Vimos (Ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\ldots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato.
+	\end{ex}
+
+	\begin{ex}
+		En una distribución normal $\mathcal{N}(\mu,\sigma^2)$ la distribución de Jeffreys es $\pi^{\mathcal{J}}(\mu,\sigma^2) = \frac{c}{\sigma^2}\chi_{\mathbb{R}\times{\mathbb{R}^{+}}}(\mu,\sigma^2)$, no integrable. Para un solo dato la distribución a posteriori sigue sin ser integrable, pero con dos ya sí lo es. Por tanto, la muestra de entrenamiento minimal es de tamaño 2.
+	\end{ex}
+
+\begin{ex}
+	Supongamos que tenemos una distribución normal con varianza conocida, que podemos tomarla como 1, esto es, $\mathcal{N}(x | \mu,1)$ . Nuestro test va a consistir si $\mu$ es $0$. Para ello, tomamos $\mathcal{H}_0 : \mu = 0$ como la hipótesis nula y $\mathcal{H}_1 : \mu \in R$.
+
+	Consideramos los dos modelos asociados $\mathcal{M}_0 : {\mathcal{N}(x | 0,1), \pi(M_0)}$ y $\mathcal{M}_1 : {\mathcal{N}(x| \mu,1), \mathcal{N}(\mu |0,2)\pi(M_1)}$, donde la distribución normal de media 0 y varianza 2 se ha obtenido haciendo la distribución intrínseca de $\mu$, pero se puede usar también una familia de distribuciones conjugada y el resultado será el mismo.
+
+	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^-1)$.
+
+	Recordemos que $\prod_{i=1}^{n}\mathcal{N}(x_i |\mu,1) = \mathcal{N}(\overline{x} | \mu, 1/n)$.
+
+	Para ello, calculamos el factor de Bayes anterior: $B_{10}(\overline{x},n) = \frac{\int_{-\infty}^{\infty}{\mathcal{N}(\overline{x} | \mu, 1/n) \mathcal{N}(\mu | 0,2)}}{\mathcal{N}(\overline{x} | 0, 1/n)} = \frac{\mathcal{N}(\overline{x} | 0, 2 + 1/n)}{\mathcal{N}(\overline{x} | 0, 1/n)}$.
+
+	Entonces, reescribiendo esta última fracción nos queda que el factor de Bayes se expresa de la siguiente forma:
+
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{n^2  \overline{x}^2}{2n+1}$.
+
+	Estudiemos el comportamiento probabilístico en el límite.
+
+	Si queremos ver qué ocurre en probabilidad $M_1$ cuando n diverge, nos fijamos en el exponente de la función exponencial lo primero y vemos que se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i - \mu)  + \sqrt{n}\mu)^2$, pero el primer término va a una normal mientras que el segundo, va a infinito, por lo tanto,
+
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_1} \infty$.
+
+	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
+
+	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se de el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
+\end{ex}

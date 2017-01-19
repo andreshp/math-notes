@@ -1,0 +1,78 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Nuria Rodríguez Barroso, A. Herrera Poyatos
+% Tittle: Familia exponencial
+% Propiedades de la familia exponencial. Ejemplos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%!TEX root = ../inference.tex
+%!TEX language = es
+
+\section{La familia exponencial}
+
+    En esta sección estudiamos una amplia familia de distribuciones, denominada la familia exponencial. Veremos que gran parte de las distribuciones que hemos estudiado hasta el momento pertenecen a esta familia.
+
+    \begin{definition}
+        Una variable aleatoria se distribuye respecto de una \emph{familia exponencial} si su función de distribución es de la forma
+        \begin{equation} \label{eq:exponencial}
+            f(x | \theta) = h(x) \exp\left(\sum^k_{i=1} \theta_i T_i(x)  + \Psi (\theta)\right),
+        \end{equation}
+        donde $\theta = (\theta_1, \ldots, \theta_k)$ y $h(x) \ge 0$, $\Psi(\theta)$, $T_1(x), \ldots, T_k(x)$ son funciones reales.
+    \end{definition}
+
+    Las familias exponenciales presentan características matemáticas y estadísticas muy convenientes. De estas características cabe destacar el siguiente resultado, que utiliza estadísticos suficientes introducidos en la Sección \ref{sec:estimacion:tge:sufi}.
+
+    \begin{prop} \label{prop:exp:sufi}
+        Sea $\{f(X | \theta): \theta \in \Theta\}$ una familia exponencial y sea una muestra $\utilde{X} = (X_1, \ldots, X_n)$. Entonces, $T(X) = (\sum_{j = 1}^n T_i(X_j))_{i = 1, \ldots, k}$ es un estadístico suficiente de dimensión $k$.
+    \end{prop}
+    \begin{proof}
+        En efecto, utilizando \eqref{eq:exponencial} basta escribir $f(\utilde{x} | \theta)$ como sigue
+        \begin{equation*}
+            f(\utilde{x} | \theta) = \prod_{j=1}^n h(x_j) \exp\left(\sum^n_{j=1}\sum^k_{i=1} \theta_i T_i(x_j)  + n\Psi(\theta)\right) = \prod_{j=1}^{n}h(x_j) \exp\left(\sum_{i=1}^{k}\theta_i \sum^n_{j=1} T_i(x_j)  + n\Psi(\theta)\right). \qedhere
+        \end{equation*}
+    \end{proof}
+
+    Nótese que la dimensión del estadístico suficiente encontrado no depende de la muestra. A continuación mostramos algunos ejemplos de familiais exponenciales.
+
+    \begin{ex}[Distribución binomial] \label{ex:exp:binom}
+        La función masa de probabilidad de una distribución binomial con $n$ fijo puede escribirse como sigue
+        \[f(x|p) = \binom{n}{x} p^x (1-p)^{n-x} = \binom{n}{x} \exp(x\log(p) + (n-x) \log(1-p)) = \binom{n}{x} \exp(x\log(\frac{p}{1-p}) + n \log(1-p)). \]
+        La aplicación  $f(p) = \log(\frac{p}{1-p}) = \log(\frac{1}{1-p} - 1)$ es una biyección de $(0,1)$ a $\mathbb{R}$. En este punto hacemos el cambio de variable $\theta = f(p)$.
+        Hemos obtenido que la distribución binomial es una familia exponencial de parámetro $\theta$ con $h(x) = \binom{n}{x}$, $T_1(x) = x$ y $\Psi(\theta) = n \log(1 - f^{-1}(\theta))$. Según la Proposición \ref{prop:exp:sufi} un estadístico suficiente es $T(\utilde{X}) = \sum_{i = 1}^n X_i$ y, por tanto, la media muestral, $T(\utilde{X}) = \overline{X}$, es otro estadístico suficiente.
+    \end{ex}
+
+    En el ejemplo anterior hemos tenido que realizar un cambio de variable del espacio paramétrico para poder escribir la distribución de Bernoulli como una familia exponencial. El nuevo espacio paramétrico obtenido es el \emph{espacio paramétrico natural} de la familia. Para evitar trabajar con cambios de variables algunos autores definen las familias exponenciales como aquellas cuya función de desidad se puede escribir de la forma
+
+    \begin{equation} \label{eq:exponencial:2}
+        f(x | \theta) = h(x) \exp\left(\sum^k_{i=1} w_i(\theta) T_i(x)  + \Psi(\theta)\right),
+    \end{equation}
+    donde  $h(x) \ge 0$, $\Psi(\theta)$, $w_1(\theta), \ldots, w_k(\theta)$ y $T_1(x), \ldots, T_k(x)$ son funciones reales. En el Ejemplo \ref{ex:exp:binom} se tendría $w_1(p) = \log(\frac{p}{1-p})$ y $\Psi(p) = n \log(1-p)$.
+
+    \begin{ex}[Distribución normal] \label{ex:exp:normal}
+        La función de densidad de la distribución normal se puede escribir de la forma
+        \[f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{(x-\mu)^2}{2\sigma^2}\right) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{x^2}{2\sigma^2} + \frac{x\mu}{\sigma^2} - \frac{\mu^2}{2\sigma^2}\right)\]
+        y, por tanto, es una familia exponencial con $h(x) = 1$, $\Psi(\mu, \sigma^2) = -\mu^2/ (2\sigma^2) - \log(\sqrt{2\pi} \sigma)$, $T_1(x) = -x^2/2$ y $T_2(x) = x$.
+        El espacio paramétrico natural se corresponde con $(1/\sigma^2, \mu/\sigma^2)$. No obstante, utilizamos los parámetros $(\mu, \sigma^2)$ debido a la interpretación estadística de los mismos.
+
+        Como consecuencia de la Proposición \ref{prop:exp:sufi} obtenemos que cualquier variable aleatoria siguiendo una distribución $N(x|\mu, \sigma^2)$ verifica que $T(\utilde{X}) = (\sum_{i= 1}^n X_i, \sum_{i = 1}^n X_i^2)$ es un estadístico suficiente.
+    \end{ex}
+
+    La mayoría de las distribuciones estudiadas hasta el momento forman una familia exponencial. La Tabla \ref{table:exponencial} muestra una lista de ejemplos. No obstante, no toda familia de distribuciones es exponencial, como sucede con las distribuciones uniformes.
+
+    \begin{table}[H]
+    	\begin{center}
+    		\begin{tabular}{|l|l|l|}
+    			\hline
+    			DENSIDAD & NOTACIÓN & SOPORTE\\
+    			\hline \hline
+                $\frac{1}{\sqrt{2 \pi} \sigma} \exp\left(- \frac{(x-\mu)^2}{2\sigma^2}\right)$ & $N(x|\mu, \sigma^2)$ & $\mathbb{R}$ \\
+                \hline
+                $\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha - 1}e^{\frac{-x}{\beta}}$ & $ Gamma(x|\alpha,\beta)$ &   $(0,\infty)  $\\ \hline
+    			$\frac{1}{\Gamma(\frac{p}{2})2^{\frac{p}{2}}}x^{\frac{p}{2} - 1}e^{\frac{-x}{2}}$ & $\chi^2$ con p grados de libertad  & $(0,\infty)  $ \\ \hline
+    			$\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x ^{\alpha - 1}(1-x)^{\beta - 1}$ &  $Beta(x| \alpha, \beta)$   &   $(0,1)$   \\ \hline
+    			$\binom{n}{x} \theta ^x (1-\theta)^{n-x}$ &  $B(x|\theta, n)$ & ${0,1, \ldots , n}$   \\ \hline
+    			$\frac{e^{-\lambda} \lambda^x}{x!}$ & $P(x|\lambda)$ & ${0,1, \ldots , n}$   \\ \hline
+    		\end{tabular}
+    	\end{center}
+        \caption{Ejemplos de familias exponenciales.}
+        \label{table:exponencial}
+    \end{table}

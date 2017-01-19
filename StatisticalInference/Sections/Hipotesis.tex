@@ -42,7 +42,7 @@
             \[\eta(\theta) = P_\theta(\utilde{X} \in R) = \begin{cases} \text{Probabilidad de cometer un error de tipo 1} & \text{ si } \theta \in \Theta_0; \\ \text{1 - Probabilidad de cometer un error de tipo 2} & \text{ si } \theta \in \Theta_0^c. \\ \end{cases}\]
         \end{definition}
 
-        Nuestro objetivo es desarrollar tests de hipótesis tales que la probabilidad de cometer errores de tipo 1 y tipo 2 sea lo más pequeña posible para cualquier valor de $\theta$. Esto es, queremos minimizar $\eta$ en $\Theta_0$ y maximizar $\eta$ en $\Theta_0^c$. Por tanto, la función de potencia ideal es aquella que toma el valor $0$ en $\Theta_0$ y el valor $1$ en $\Theta_0^c$. Esta función solo se obtiene en situaciones triviales. Generalmente obtendremos funciones potencia mucho más complejas. Nótese que si reducimos la región crítica de un test entonces disminuye la probabilidad de cometer un error de tipo 1 pero aumenta la probabilidad de cometer un error de tipo 2. Consecuentemente, encontrar una región crítica apropiada no es una tarea sencilla.
+        Nuestro objetivo es desarrollar tests de hipótesis tales que la probabilidad de cometer errores de tipo 1 y tipo 2 sea lo más pequeña posible para cualquier valor de $\theta$. Esto es, queremos minimizar $\eta$ en $\Theta_0$ y maximizar $\eta$ en $\Theta_0^c$. Por tanto, la función de potencia ideal es aquella que toma el valor $0$ en $\Theta_0$ y el valor $1$ en $\Theta_0^c$. Esta función solo se obtiene en situaciones triviales. Generalmente obtendremos funciones potencia mucho más complejas. Nótese que si reducimos la región crítica de un test, entonces disminuye la probabilidad de cometer un error de tipo 1 pero aumenta la probabilidad de cometer un error de tipo 2. Consecuentemente, encontrar una región crítica apropiada no es una tarea sencilla.
 
         Recordemos que la hipótesis nula generalmente tiene preferencia frente a la hipótesis alternativa. Por tanto, el error de tipo 1 es más grave que el error de tipo 2. Para asegurarnos que se respeta esta preferencia podemos buscar tests de hipótesis que garanticen que la probabilidad de cometer un error de tipo 1 es menor que un valor $\alpha$ fijado de antemano.
 
@@ -54,7 +54,7 @@
             Un test de hipótesis tiene nivel de significación $\alpha \in [0,1]$ si $\eta(\theta) \le \alpha$ para todo $\theta \in \Theta_0$.
         \end{definition}
 
-        Si nos restringimos a estudiar los tests de tamaño $\alpha$, entonces nuestro objetivo se reduce a buscar entre todos éstos tests aquel que minimice la probabilidad de cometer un error de tipo 2. Este hecho queda formalizado en la siguiente definición.
+        Si nos restringimos a estudiar los tests de tamaño $\alpha$, entonces nuestro objetivo se reduce a buscar entre todos estos tests aquel que minimice la probabilidad de cometer un error de tipo 2. Este hecho queda formalizado en la siguiente definición.
 
         \begin{definition}
             Considérese un test con función potencia $\eta$. Decimos que es un test uniformemente más potente de tamaño $\alpha$ (resp. de nivel de significación $\alpha$)  si para cualquier otro test de tamaño $\alpha$ (resp. de nivel de significación $\alpha$) con función potencia $\eta'$ se verifica $\eta(\theta) \ge \eta'(\theta)$ para todo $\theta \in \Theta_0^c$. Habitualmente abreviaremos uniformemente más potente por UMP.
@@ -64,10 +64,10 @@
 
     \subsection{Tests de Neyman-Pearson}
 
-        En esta sección estudiamos cuáles son los tests UMP de tamaño y significación $\alpha$ para contrastar dos hipótesis simples. Esta cuestión es resuelta por el Lema de Neyman-Pearson. Además, utilizaremos estos resultados para obtener tests UMP que contrasten hipótesis compuestas.
+        En esta sección estudiamos cuáles son los tests UMP de tamaño y significación $\alpha$ para contrastar dos hipótesis simples. Esta cuestión es resuelta por el Lema de Neyman-Pearson. %Además, utilizaremos estos resultados para obtener tests UMP que contrasten hipótesis compuestas.
 
         \begin{thm}[Lema de Neyman-Pearson] \label{thm:np:1}
-            Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in [0,1]$ consideramos la región crítica
+            Supóngase que se desea contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Para $k \in \mathbb{R}^+_0$ consideramos la región crítica
             \[C_k = \left\{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k\right\}.\]
             Sea $\alpha = P_{\theta_0}(C_k)$. Entonces, el test de región crítica $C_k$ es un test UMP de significación $\alpha$. Además, cualquier test UMP de significación $\alpha$ es de tamaño $\alpha$ y su región crítica $C'$ verifica $\{\utilde{x}: L(\theta_1;\utilde{x}) > k L(\theta_0;\utilde{x})\} \subset C' \subset C_k$ salvo a lo sumo un subconjunto de probabilidad nula.
         \end{thm}
@@ -86,14 +86,14 @@
         En el Teorema \ref{thm:np:1} el valor de $\alpha$ se determina al seleccionar una región crítica $C_k$. La cuestión que uno se hace en este punto es si para cualquier $\alpha \in [0,1]$ existe $k_\alpha$ tal que  $\alpha = P_{\theta_0}(C_{k_\alpha})$. En tal caso podríamos encontrar tests más potentes para cualquier tamaño o significación $\alpha$, que es el valor que nosotros queremos fijar de antemano. La respuesta a esta pregunta es negativa. En efecto, basta con considerar distribuciones discretas ya que para estas distribuciones no podemos asegurar que el valor $\alpha$ sea suma de los valores de la función masa de probabilidad. Por ejemplo, en una distribución binomial $B(x|\theta,n)$ con $\theta$ racional no se puede alcanzar el tamaño $\alpha = 1 / \pi$, que es irracional. No obstante, este problema desaparece en el caso de las distribuciones continuas como muestra el siguiente corolario del Lema de Neyman-Pearson.
 
         \begin{cor}[Lema de Neyman-Pearson para distribuciones continuas] \label{cor:np:cont}
-            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desean contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Supongamos además que las funciones de densidad $f(x|\theta_0)$ y $f(x|\theta_1)$ coinciden a lo sumo en un subconjunto de medida nula. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in [0,1]$ tal que el test dado por la región crítica
+            Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones continuas para la cual se desean contrastar dos hipótesis simples, $H_0 : \theta = \theta_0$ y $H_1 : \theta = \theta_1$. Supongamos además que las funciones de densidad $f(x|\theta_0)$ y $f(x|\theta_1)$ coinciden a lo sumo en un subconjunto de medida nula y tienen el mismo soporte. Entonces, para cada $\alpha \in [0,1]$ existe $k_\alpha \in \mathbb{R}^+_0$ tal que el test dado por la región crítica
             \[C_{k_\alpha} = \left\{\utilde{x}: \frac{L(\theta_1;\utilde{x})}{L(\theta_0;\utilde{x})} \ge k_\alpha\right\}\]
             es UMP de tamaño $\alpha$.
         \end{cor}
         \begin{proof}
             Gracias al Lema de Neyman-Pearson la prueba se reduce a comprobar que existe $k_\alpha$ tal que $\alpha = P_{\theta_0}(C_k)$. En efecto, la continuidad de las funciones de densidad nos asegura que la función $f(x| \theta_1) / f(x| \theta_0)$ es continua. Definimos $\varphi: [0,1] \to [0,1]$ dada por
-            \[\varphi(k) = P_{\theta_0}(\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge k).\]
-            Esta función es continua y verifica $\varphi(0) = 1$ y $\varphi(1) = 0$. El resultado es consecuencia del teorema del valor intermedio aplicado a $\varphi$.
+            \[\varphi(k) = P_{\theta_0}\left[\frac{L(\theta_1;\utilde{X})}{L(\theta_0;\utilde{X})} \ge k\right].\]
+            Esta función es continua y verifica $\varphi(0) = 1$ y $\lim_{k \to \infty} \varphi(k) = 0$. El resultado es consecuencia del teorema del valor intermedio aplicado a $\varphi$.
         \end{proof}
 
         Los tests proporcionados por el lema de Neyman-Pearson se conocen como tests de Neyman-Pearson. Los estadísticos suficientes son de especial ayuda al aplicar este tipo de tests. En efecto, si $T$ es un estadístico suficiente y $h(t | \theta)$ es su función de densidad, entonces
@@ -109,7 +109,7 @@
             \[\frac{L(\mu_1;\utilde{x})}{L(\mu_0;\utilde{x})} = \exp\left(-\frac{(\overline{x} - \mu_1)^2 - (\overline{x} - \mu_0)^2}{2\sigma^2/n}\right) = \exp\left(-\frac{\mu_1^2 - \mu_0^2 + 2\overline{x}(\mu_0-\mu_1)}{2\sigma^2/n}\right).\]
             Como consecuencia, obtenemos que $L(\mu_1;\utilde{x}) / L(\mu_0;\utilde{x}) \ge k$ si, y solo si,
             \[\overline{x} \ge \frac{\mu_0+\mu_1}{2} + \frac{\sigma^2 \log k}{n(\mu_1 - \mu_0)} = A_k.\]
-            Dado $\alpha \in [0,1]$ buscamos $k_\alpha \in [0,1]$ tal que $P_{\mu_0}(\overline{X} \ge A_{k_\alpha}) = \alpha$. Esta ecuación podemos resolverla para valores concretos de $\alpha$. Bajo $H_0$ tenemos $\overline{X} \sim N(\mu_0, \sigma^2 / n)$ y, por tanto, sabemos que $A_{k_\alpha} = \mu_0 + z_\alpha \sigma / \sqrt{n}$, donde $z_\alpha$ verifica $F(z_\alpha) = 1 - \alpha$ para la función de distribución $F$ de $N(0,1)$. Los valores $z_\alpha$ que más se utilizan aparecen habitualmente en las tablas de la distribución normal. También se pueden calcular mediante un ordenador.
+            Dado $\alpha \in [0,1]$ buscamos $k_\alpha \in \mathbb{R}^+_0$ tal que $P_{\mu_0}(\overline{X} \ge A_{k_\alpha}) = \alpha$. Esta ecuación podemos resolverla para valores concretos de $\alpha$. Bajo $H_0$ tenemos $\overline{X} \sim N(\mu_0, \sigma^2 / n)$ y, por tanto, sabemos que $A_{k_\alpha} = \mu_0 + z_\alpha \sigma / \sqrt{n}$, donde $z_\alpha$ verifica $F(z_\alpha) = 1 - \alpha$ para la función de distribución $F$ de $N(0,1)$. Los valores $z_\alpha$ que más se utilizan aparecen habitualmente en las tablas de la distribución normal. También se pueden calcular mediante un ordenador.
 
             Por ejemplo, supongamos que $\mu_0 = 0$, $\mu_1 = 1$, $\sigma = 1$ y $\alpha = 0.05$. Además, consideremos que se toman muestras de tamaño $n = 100$. En este caso tenemos que $z_\alpha = 1.645$. Por tanto, $A_{k_\alpha} = z_\alpha / \sqrt{100} = 0.1645$. Esto es, rechazaremos la hipótesis $H_0$ si $\overline{x} \ge 0.1645$.
 
@@ -129,7 +129,11 @@
         A patir de un p-valor válido $p(\utilde{X})$ podemos construir un test con nivel de significación $\alpha$ para cualquier $\alpha \in [0,1]$. Este test rechaza $H_0$ si y solo si $p(\utilde{X}) \le \alpha$.
 
         \begin{definition}
+<<<<<<< HEAD
             Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$ si, y solo si, la región crítica del test con significación $\alpha$ es $p(\utilde{X}) \le \alpha$.
+=======
+            Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$ si , y solo si, la región crítica del test con significación $\alpha$ es $p(\utilde{X}) \le \alpha$.
+>>>>>>> 7878b17119ada347d265053651180242e56b8eae
         \end{definition}
 
         En un test descrito por un p-valor podemos elegir el valor de $\alpha$ que consideremos apropiado y simplemente compararlo con $p(\utilde{x})$ para saber cuál es el resultado del test. Nótese que valores pequeños de $p(\utilde{X})$ dan evidencia de que $H_1$ es cierta y, por tanto, el p-valor mide la evidencia a favor de la hipótesis nula. Por tanto, realizar un test descrito por un p-valor es más informativo que simplemente elegir entre ``aceptar $H_0$'' o ``rechazar $H_0$''.
@@ -227,8 +231,8 @@
 
         \begin{proof}
             Realizamos la demostración para el caso $H_0: \theta = \theta_0$ y $H_1: \theta \ne \theta_0$. En otro caso puede consultarse Cristóbal (1992), Teorema 1.2, página 596. En este contexto $d = 1$. Tenemos que
-            \[\mathcal{Q}_n = -2 \log \lambda(\utilde{X}) = 2 (\log L(\hat{\theta}_n; \utilde{X}) - \log L(\theta_0)),\]
-            donde $\hat{\theta}_n = \hat{\theta}_n(\utilde{X})$ es el estimador máximo verosímil de $\theta$, que existe gracias al Teorema \ref{thm:emv:consistencia}. Desarrollamos el término $\log L(\theta_0; \utilde{X_n})$ al rededor de $\hat{\theta}_n$ mediante el teorema de Taylor, obteniendo
+            \[\mathcal{Q}_n = -2 \log \lambda(\utilde{X}) = 2 (\log L(\hat{\theta}_n; \utilde{X}) - \log L(\theta_0; \utilde{X})),\]
+            donde $\hat{\theta}_n = \hat{\theta}_n(\utilde{X})$ es el estimador máximo verosímil de $\theta$, que existe gracias al Teorema \ref{thm:emv:consistencia}. Desarrollamos el término $\log L(\theta_0; \utilde{X})$ al rededor de $\hat{\theta}_n$ mediante el teorema de Taylor, obteniendo
             \[\log L(\theta_0; \utilde{X}) = \log L(\hat{\theta}_n; \utilde{X}) + \frac{\partial \log L(\hat{\theta}_n; \utilde{X})}{\partial \theta}(\theta_0 -  \hat{\theta}_n) + \frac{1}{2} \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}(\theta_0 -  \hat{\theta}_n)^2,\]
             donde $\theta'$ se encuentra entre $\theta_0$ y $\hat{\theta}_n$. El estimador máximo verosímil del Teorema \ref{thm:emv:consistencia} maximiza localmente la verosimilitud. Por tanto,
             \[0 = \frac{\partial \log L(\hat{\theta}_n; \utilde{X})}{\partial \theta}.\]
