@@ -129,7 +129,7 @@
         A patir de un p-valor válido $p(\utilde{X})$ podemos construir un test con nivel de significación $\alpha$ para cualquier $\alpha \in [0,1]$. Este test rechaza $H_0$ si y solo si $p(\utilde{X}) \le \alpha$.
 
         \begin{definition}
-            Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$ si , y solo si, la región crítica del test con significación $\alpha$ es $p(\utilde{X}) \le \alpha$.
+            Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$ si , y solo si, la región crítica del test con significación $\alpha$ es $\left[p(\utilde{X}) \le \alpha\right]$.
         \end{definition}
 
         En un test descrito por un p-valor podemos elegir el valor de $\alpha$ que consideremos apropiado y simplemente compararlo con $p(\utilde{x})$ para saber cuál es el resultado del test. Nótese que valores pequeños de $p(\utilde{X})$ dan evidencia de que $H_1$ es cierta y, por tanto, el p-valor mide la evidencia a favor de la hipótesis nula. Por tanto, realizar un test descrito por un p-valor es más informativo que simplemente elegir entre ``aceptar $H_0$'' o ``rechazar $H_0$''.
@@ -146,15 +146,15 @@
         %    \[\sup\{\alpha: W(\utilde{x}) \ge c_\alpha\} = \sup\{P_\theta(W(\utilde{X}) \ge W(\utilde{x})): \theta \in \Theta_0\}. \qedhere\]
         %\end{proof}
 
-        La pregunta que uno se hace en este punto es, dado un test que se puede formular para cualquier valor de $\alpha$, cómo obtener un p-valor que lo describa. Esto no va a ser siempre factible ya que habrá regiones críticas que no sepamos o no se puedan escribir de la forma $p(\utilde{X}) \le \alpha$. No obstante, en múltiples casos prácticos sí es posible como muestra el siguiente resultado. %El siguiente resultado proporciona el p-valor de los tests de Neyman-Pearson.
+        La pregunta que uno se hace en este punto es, dado un test que se puede formular para cualquier valor de $\alpha$, cómo obtener un p-valor que lo describa. Esto no va a ser siempre factible ya que habrá regiones críticas que no sepamos o no se puedan escribir de la forma $\left[p(\utilde{X}) \le \alpha\right]$. No obstante, en múltiples casos prácticos sí es posible como muestra el siguiente resultado. %El siguiente resultado proporciona el p-valor de los tests de Neyman-Pearson.
 
         \begin{thm} \label{thm:p-valor:2}
             Sea $W(\utilde{X})$ un estadístico. Supongamos que para cada $\alpha \in [0,1]$ disponemos de un test de hipótesis de tamaño $\alpha$ cuya región crítica es $W(\utilde{X}) \ge k_\alpha$ para cierta constante $k_\alpha$. Entonces, el test se puede describir a partir del p-valor
            \[p(\utilde{x}) = \sup\{P_{\theta}\left(W(\utilde{X}) \ge W(\utilde{x})\right): \theta \in \Theta_0\}.\]
        \end{thm}
         \begin{proof}
-            Nótese que $p(\utilde{x})$ es un p-valor gracias al Teorema \ref{thm:p-valor}. Sea $\alpha \in [0,1]$ y sea $k_\alpha$ como en el enunciado. Tenemos que $p(\utilde{x}) \le \alpha = \sup\{P_{\theta}\left(W(\utilde{X}) \ge k_\alpha)\right): \theta \in \Theta_0\}$ si, y solo si, para cada $\theta \in \Theta_0$ se tiene
-            \[P_{\theta}\left(W(\utilde{X}) \ge W(\utilde{x})\right) \le P_{\theta}\left(W(\utilde{X}) \ge k_\alpha)\right) ,\]
+            Nótese que $p(\utilde{x})$ es un p-valor gracias al Teorema \ref{thm:p-valor}. Sea $\alpha \in [0,1]$ y sea $k_\alpha$ como en el enunciado. Tenemos que $p(\utilde{x}) = \sup\{P_{\theta}\left(W(\utilde{X}) \ge k_\alpha)\right): \theta \in \Theta_0\} \le \alpha$ si, y solo si, para cada $\theta \in \Theta_0$ se tiene
+            \[P_{\theta}\left(W(\utilde{X}) \ge W(\utilde{x})\right) \le P_{\theta}\left(W(\utilde{X}) \ge k_\alpha\right) ,\]
             esto es, $W(\utilde{x}) \ge k_\alpha$.
         \end{proof}
 
@@ -217,7 +217,7 @@
             Consideramos el contraste de hipótesis dado por $H_0: \theta = \theta_0$ y $H_1: \theta \ne \theta_0$. Si existe un test UMP para contrastar ambas hipótesis, entonces el test de la razón de verosimilitud coincide con el test UMP.
         \end{thm}
 
-        En lo que sigue estudiamos las propiedades asintóticas del test de la razón de verosimilitud. Una de las propiedades más destacadas es la siguiente.
+        Como consecuencia, en el caso de hipótesis simples el test de la razón de verosimilitud y el test de Neyman-Pearson son equivalentes. En lo que sigue estudiamos las propiedades asintóticas del test de la razón de verosimilitud. Una de las propiedades más destacadas es la siguiente.
 
         \begin{thm}
             Supongamos que se cumplen las hipótesis de regularidad de Cramer-Rao y que, además, la verosimilitud es de clase 2. Deseamos contrastar dos hipótesis $H_0: \theta \in \Theta_0$ y $H_1: \theta \in \Theta_1$. Bajo la hipotesis nula se tiene que
@@ -236,14 +236,14 @@
             \[\mathcal{Q}_n = - \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}(\theta_0 -  \hat{\theta}_n)^2 = - \frac{1}{n} \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}(\sqrt{n}(\theta_0 -  \hat{\theta}_n))^2.\]
             El Teorema \ref{thm:emv:an} asegura que bajo las hipótesis de Cramer-Rao el estimador máximo verosímil es asintóticamente normal, esto es, $\sqrt{n}(\theta_0 -  \hat{\theta}_n)$ converge en ley a $N(0, 1/\mathcal{I}(\theta_0))$. Por otro lado, gracias a la ley fuerte de los grandes números tenemos que
             \[- \frac{1}{n} \frac{\partial^2 \log L(\theta_0; \utilde{X})}{\partial \theta^2} = \frac{1}{n} \sum_{i = 1}^n - \frac{\partial^2 \log L(\theta_0; X_i)}{\partial \theta^2}\]
-            converge casi seguramente a la esperanza de una de estas variables, que es $\mathcal{I}(\theta_0)$ por Lema \ref{lem:fisher:2dev}. Este hecho junto con la consistencia del estimador máximo verosímil nos asegura que
+            converge casi seguramente a la esperanza de una de estas variables, que es $\mathcal{I}(\theta_0)$ por el Lema \ref{lem:fisher:2dev}. Este hecho junto con la consistencia del estimador máximo verosímil nos asegura que
             \[- \frac{1}{n} \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2} = - \frac{1}{n} \frac{\partial^2 \log L(\theta_0; \utilde{X})}{\partial \theta^2} + \frac{1}{n}\left(\frac{\partial^2 \log L(\theta_0; \utilde{X})}{\partial \theta^2} -  \frac{\partial^2 \log L(\theta'; \utilde{X})}{\partial \theta^2}\right)\]
             converge casiseguramente a $\mathcal{I}(\theta_0)$. Podemos pues completar el estudio asintótico de $\sqrt{\mathcal{Q}_n}$, que converge en ley a $N(0, 1)$. Por último, la Proposición \ref{prop:normal-square} concluye que $\mathcal{Q}_n$ converge en ley a $\chi_1^2$.
         \end{proof}
 
         En muchas ocasiones es difícil calcular la región crítica del test de la razón de verosimilitud. En tales caso, si el tamaño de la muestra es muy grande, entonces podemos suponer que bajo la hipótesis nula $-2 \log \lambda(\utilde{X})$ sigue una distribución $\chi_d^2$ y proceder con el test de hipótesis como es habitual.
 
-        La siguiente definicón extiende la definición de consistencia a los tests de hipótesis.
+        La siguiente definición extiende la definición de consistencia a los tests de hipótesis.
 
         \begin{definition}
             Un test de hipótesis se dice consistente si verifica
@@ -260,10 +260,10 @@
         \end{prop}
 
         \begin{proof}
-            Supongamos que $\theta_1 \ne \theta_0$ es el verdadero valor del parámetro $\theta$. Denotemos por $\lambda(\utilde)$ al ratio de verosimilitud asociado a este test. Sea $\hat{\theta}_n$ el estimador máximo verosímil dado por el Teorema \ref{thm:emv:consistencia}.  Consideremos también el test $H'_0: \theta = \theta_1$ y $H'_1: \theta \ne \theta_1$ y denotemos por $\lambda'(\utilde{X})$ a su ratio de verosimilitud. Tenemos que
-            \[\lambda(\utilde{X}) = \frac{L(\theta_0; \utilde{X})}{L(\hat{\theta}_n); \utilde{X}} = \frac{L(\theta_1; \utilde{X})}{L(\hat{\theta}_n; \utilde{X})} \frac{L(\theta_0; \utilde{X})}{L(\theta_1; \utilde{X})} = \lambda'(\utilde{X}) \frac{L(\theta_0; \utilde{X})}{L(\theta_1; \utilde{X})}.\]
+            Supongamos que $\theta_1 \ne \theta_0$ es el verdadero valor del parámetro $\theta$. Denotemos por $\lambda(\utilde{x})$ al ratio de verosimilitud asociado a este test. Sea $\hat{\theta}_n$ el estimador máximo verosímil dado por el Teorema \ref{thm:emv:consistencia}.  Consideremos también el test $H'_0: \theta = \theta_1$ y $H'_1: \theta \ne \theta_1$ y denotemos por $\lambda'(\utilde{X})$ a su ratio de verosimilitud. Tenemos que
+            \[\lambda(\utilde{X}) = \frac{L(\theta_0; \utilde{X})}{L(\hat{\theta}_n; \utilde{X})} = \frac{L(\theta_1; \utilde{X})}{L(\hat{\theta}_n; \utilde{X})} \frac{L(\theta_0; \utilde{X})}{L(\theta_1; \utilde{X})} = \lambda'(\utilde{X}) \frac{L(\theta_0; \utilde{X})}{L(\theta_1; \utilde{X})}.\]
             Por consiguiente podemos escribir $- 2 \log \lambda(\utilde{X}) = - 2 \log \lambda'(\utilde{X}) - 2 \log L(\theta_0; \utilde{X}) + 2 \log L(\theta_1; \utilde{X})$.  Además,  la ley fuerte de los grandes números nos asegura que la variable aletoria
             \[\frac{1}{n} \left(- 2\log L(\theta_0; \utilde{X}) + 2 \log L(\theta_1; \utilde{X})\right) = - 2 \frac{1}{n} \sum_{i = 1}^n \log L(\theta_0; X_i) + 2 \frac{1}{n} \sum_{i = 1}^n \log L(\theta_1; X_i)\]
-            converge casi seguramente a $2(E_{\theta_1}(\log L(\theta_1; X_1)) - E_{\theta_1}(\log L(\theta_0; X_1)))$, que es un valor positivo gracias a la Proposicón \ref{prop:desigualdad}. Recordando que $-2 \log \lambda'(\utilde{X})$ converge en ley a $\chi_1^2$, obtenemos que $- 2 \log \lambda(\utilde{X}) \to +\infty$ casi seguramente. En particular, obtenemos que
+            converge casi seguramente a $2(E_{\theta_1}(\log L(\theta_1; X_1)) - E_{\theta_1}(\log L(\theta_0; X_1)))$, que es un valor positivo gracias a la Proposición \ref{prop:desigualdad}. Recordando que $-2 \log \lambda'(\utilde{X})$ converge en ley a $\chi_1^2$, obtenemos que $- 2 \log \lambda(\utilde{X}) \to +\infty$ casi seguramente. En particular, hemos deducido que
             \[P_{\theta_1}(W_\alpha) = P_{\theta_1}[- \log \lambda(\utilde{X}) \ge k_\alpha] \to 1. \qedhere\]
         \end{proof}
