@@ -137,7 +137,7 @@ $\hfil\widetilde{}\hfil$\crcr\noalign{\kern-5pt\nointerlineskip}}}}}
 % Load the library (Descomentar para SOs distintos de Windows)
 %\usetikzlibrary{external}
 % Enable the library !!!>>> MUST be in the preamble <<<!!!!
-%\tikzexternalize
+\tikzexternalize
 \pgfplotsset{compat=newest}
 
 \usepackage{float}
@@ -340,8 +340,6 @@ Podemos utilizar los dos corolarios anteriores para calcular los momentos de la 
     \[E[X^k] = \begin{cases} 0 & \text{ si } k \text{ es impar;} \\ (k-1)!! \sigma^{k} & \text{ si } k \text{ es par;} \end{cases}\]
     donde $n!!$ denota al doble factorial, definido como el producto de los números desde $1$ hasta $n$ con la misma paridad que $n$.
 \end{cor}
-
-\begin{comment}
 
 La Figura \ref{fig:normal} muestra la función de densidad de una distribución normal. Podemos ver que la densidad se concentra en torno a la media. De hecho, $P(|X - \mu| \ge 2\sigma) \approx 0.046$. Es más, $P(|X - \mu| \ge 3\sigma) \approx 0.03$.
 
@@ -842,7 +840,6 @@ Nótese que la función característica de la distribución de Cauchy no es dife
     \label{fig:laplace}
 \end{figure}
 
-\end{comment}
 
 \subsubsection{Distribución T de Student}
 
@@ -1339,37 +1336,44 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 	\end{ex}
 
 \begin{example}
+<<<<<<< HEAD
 
     Supongamos que tenemos una distribución normal con varianza conocida, que podemos tomarla como 1, esto es, $\mathcal{N}(x | \mu,1)$ . Nuestro test va a consistir si $\mu$ es $0$. Para ello, tomamos $\mathcal{H}_0 : \mu = 0$ como la hipótesis nula y $\mathcal{H}_1 : \mu \in R$.
 	
+=======
+	Supongamos que tenemos una distribución normal con varianza conocida, que podemos tomarla como 1, esto es, $\mathcal{N}(x | \mu,1)$ . Nuestro test va a consistir si $\mu$ es $0$. Para ello, tomamos $\mathcal{H}_0 : \mu = 0$ como la hipótesis nula y $\mathcal{H}_1 : \mu \in R$.
+
+>>>>>>> ef1f763449f47923f92cd2374a6c0456a4615d43
 	Consideramos los dos modelos asociados $\mathcal{M}_0 : {\mathcal{N}(x | 0,1), \pi(M_0)}$ y $\mathcal{M}_1 : {\mathcal{N}(x| \mu,1), \mathcal{N}(\mu |0,2)\pi(M_1)}$, donde la distribución normal de media 0 y varianza 2 se ha obtenido haciendo la distribución intrínseca de $\mu$, pero se puede usar también una familia de distribuciones conjugada y el resultado será el mismo.
-	
-	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^{-1})$.
-	
+
+	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^-1)$.
+
 	Recordemos que $\prod_{i=1}^{n}\mathcal{N}(x_i |\mu,1) = \mathcal{N}(\overline{x} | \mu, 1/n)$.
-	
+
 	Para ello, calculamos el factor de Bayes anterior: $B_{10}(\overline{x},n) = \frac{\int_{-\infty}^{\infty}{\mathcal{N}(\overline{x} | \mu, 1/n) \mathcal{N}(\mu | 0,2)}}{\mathcal{N}(\overline{x} | 0, 1/n)} = \frac{\mathcal{N}(\overline{x} | 0, 2 + 1/n)}{\mathcal{N}(\overline{x} | 0, 1/n)}$.
-	
+
 	Entonces, reescribiendo esta última fracción nos queda que el factor de Bayes se expresa de la siguiente forma:
-	
+
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{n^2  \overline{x}^2}{2n+1}$.
-	
+
 	Estudiemos el comportamiento probabilístico en el límite.
-	
+
 	Si queremos ver qué ocurre en probabilidad $M_1$ cuando n diverge, nos fijamos en el exponente de la función exponencial lo primero y vemos que se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i - \mu)  + \sqrt{n}\mu)^2$, pero el primer término va a una normal mientras que el segundo, va a infinito, por lo tanto,
-	
+
 	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_1} \infty$.
-	
+
 	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
-	
-	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,  
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.  
+
+	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
 \end{example}
+
+\pagebreak
 
 \section{Probabilidades subjetivas}
 
-   Tras haber realizado un estudio de ambos enfoques, hemos llegado a la conclusión de que el enfoque bayesiano presenta un buen funcionamiento para muestras de tamaño pequeño. Sin embargo, en numerosas ocasiones no habrá apenas observaciones del experimento, o incluso no existirá ninguna. Un ejemplo de esto podría ser un asesor financiero que debe desarrollar un informe de riesgo de inversión en un nuevo producto. No podrá aplicar ninguno de los dos enfoques estudiados pues no cuenta con ninguna información previa del producto. 
-    
+   Tras haber realizado un estudio de ambos enfoques, hemos llegado a la conclusión de que el enfoque bayesiano presenta un buen funcionamiento para muestras de tamaño pequeño. Sin embargo, en numerosas ocasiones no habrá apenas observaciones del experimento, o incluso no existirá ninguna. Un ejemplo de esto podría ser un asesor financiero que debe desarrollar un informe de riesgo de inversión en un nuevo producto. No podrá aplicar ninguno de los dos enfoques estudiados pues no cuenta con ninguna información previa del producto.
+
     De la necesidad de asignar probabilidades a este tipo de sucesos surgen las probabilidades subjetivas. Para el desarrollo de de dichas probabilidades el experto hará uso de sus propias opiniones, creencias o similitud con problemas de la misma índole. Continuando con el ejemplo anterior, el asesor financiero desarrollará una probabilidad en base a información sobre la empresa que lanza el producto, la competencia actual en el mercado, tendencias actuales de la bolsa, o cualquier otro factor que estime influyente.
 
     Para la formalización de dicho método necesitamos estar trabajando realmente con una probabilidad, por lo que se realiza una formalización a partir de axiomas para asegurar que trabajamos con una verdadera probabilidad.
@@ -1393,7 +1397,7 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
     \end{axiom}
 
     \begin{axiom}
-        Sean $A_1,A_2,B_1,B_2 \in \mathcal{A}$ verificando $A_1A_2 = B_1B_2 = \emptyset$ y $A_i \preceq B_i, i = 1,2$. Entonces se verifica que 
+        Sean $A_1,A_2,B_1,B_2 \in \mathcal{A}$ verificando $A_1A_2 = B_1B_2 = \emptyset$ y $A_i \preceq B_i, i = 1,2$. Entonces se verifica que
         $$A_1+A_2 \preceq B_1+B_2$$
     \end{axiom}
 
@@ -1403,16 +1407,16 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
     \end{axiom}
 
     \begin{axiom}
-        Si $B\in \mathcal{A}$, $A_i \in \mathcal{A}\ \forall i \in \mathbb{N}$ con $B\preceq ... \subset A_2 \subset A_1$, entonces se verifica que 
+        Si $B\in \mathcal{A}$, $A_i \in \mathcal{A}\ \forall i \in \mathbb{N}$ con $B\preceq ... \subset A_2 \subset A_1$, entonces se verifica que
         $$B\preceq \bigcap\limits_{i = 1}^{\infty}A_i$$
     \end{axiom}
 
     \begin{axiom}
-        Existe una variable aleatoria uniformemente distribuida, esto es, $X:\Theta \longrightarrow [0,1]$ variable aleatoria verificando que 
+        Existe una variable aleatoria uniformemente distribuida, esto es, $X:\Theta \longrightarrow [0,1]$ variable aleatoria verificando que
         $$X^{-1}({I_1}) \preceq X^{-1}({I_2}) \Longleftrightarrow \lambda(I_1)\preceq \lambda(I_2)$$
         Donde se está considerando el espacio probabilístico $([0,1],\mathcal{B}_{[0,1]},\lambda)$, siendo $\lambda $ la medida de Lebesgue en [0,1] y $I_1,I_2\in [0,1]$
     \end{axiom}
-   
+
 
     A partir de dichos axiomas se construye la probabilidad subjetiva como una $X^{-1}(a,b)=G(a,b)$, donde G es una función verificando
     $$G(a,b) \sim G[a,b) \sim G(a,b] \sim G[a,b]$$
@@ -1443,17 +1447,17 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
     \end{lem}
 
     \begin{lem}
-        Sean $B \in \mathcal{A}, \{A_i\}_{i \in \mathbb{N}}$ sucesión creciente de elementos de $\mathcal{A}$ tal que $A_i \preceq B\ \forall i \in \mathbb{N}$. Entonces 
+        Sean $B \in \mathcal{A}, \{A_i\}_{i \in \mathbb{N}}$ sucesión creciente de elementos de $\mathcal{A}$ tal que $A_i \preceq B\ \forall i \in \mathbb{N}$. Entonces
         $$ \bigcup\limits_{i = 1}^{\infty}A_i \preceq B$$
     \end{lem}
 
     \begin{thm}
-        Sean $\{A_i\}_{i\in \mathbb{N}} $ disjuntos, $\{B_i\}_{i\in \mathbb{N}} $ disjuntos con $A_i,B_i \in \mathcal{A} \ \forall i \in \mathbb{N}$ y $A_i \preceq B_i \ \forall i \in \mathbb{N}$ Entonces 
+        Sean $\{A_i\}_{i\in \mathbb{N}} $ disjuntos, $\{B_i\}_{i\in \mathbb{N}} $ disjuntos con $A_i,B_i \in \mathcal{A} \ \forall i \in \mathbb{N}$ y $A_i \preceq B_i \ \forall i \in \mathbb{N}$ Entonces
 
         $$ \bigcup\limits_{i = 1}^{\infty}A_i \preceq \bigcup\limits_{i = 1}^{\infty}B_i $$
     \end{thm}
 
-    El siguiente teorema garantiza que la probabilidad construida es una verdadera probabilidad. 
+    El siguiente teorema garantiza que la probabilidad construida es una verdadera probabilidad.
 
     \begin{thm}\textbf{Existencia de la probabilidad subjetiva}\\
         Consideramos el espacio $(\Theta, \mathcal{A}, \preceq )$ bajo los axiomas anteriores. Entonces $\forall A \in \mathcal{A} \ \exists^1a^*\in[0,1]$ tal que $A \sim G[0,a^*]$.
@@ -1468,6 +1472,7 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 \begin{thebibliography}{99}
 \bibitem{loeve} Probability theory, M. Loève, 1977, Springer-Verlag.
 \bibitem{casella} Statistical Inference, G. Casella, R. L. Berger, segunda edicón (2002), Duxbury Advanced Series.
+\bibitem{garthwaite} Statistical Inference, Garthwaite, Jollife y Jones, 1995, Oxford University Press on Demand.
 \bibitem{gamma} Proof Wiki, Euler's Reflection Formula, \url{https://proofwiki.org/wiki/Euler%27s_Reflection_Formula}.
 \bibitem{cauchy} Wikipedia, Residue theorem, \url{https://en.wikipedia.org/wiki/Residue_theorem#Example}.
 \bibitem{leibniz} Wikipedia, Leibniz integral rule, \url{https://en.wikipedia.org/wiki/Leibniz_integral_rule}.

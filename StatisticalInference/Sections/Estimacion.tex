@@ -184,8 +184,10 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 
     \begin{enumerate}[label=\roman*)]
         \item $\Theta$ es un abierto de $\mathbb{R}$.
+        \item El conjunto $\{x : f(x | \theta) > 0\}$ es el mismo para todo $\theta \in \Theta$.
         \item Para cualquier muestra $x = (x_1, \ldots, x_n)$, la verosimilitud $L(x | \theta)$ es dos veces derivable en $\Theta$.
-        \item $\frac{\partial^i}{\partial\theta^i} \int_X f(x | \theta) dx = \int_X \frac{\partial^i}{\partial\theta^i} f(x | \theta) dx$ para $i=1,2$.
+        \item La verosimilitud es 2 veces derivable. Además, para $i=1,2$ se verifica
+        \[\frac{\partial^i}{\partial\theta^i} \int_X f(x | \theta) dx = \int_X \frac{\partial^i}{\partial\theta^i} f(x | \theta) dx.\]
         \item Para cada $\theta \in \Theta$ se tiene $0 < \mathcal{I}(\theta) < +\infty$.
         %\item La función $\Psi(\theta) = \mathbb{E}_{\theta_0} \frac{\partial}{\partial \theta} f(x | \theta)$ es continua en $\theta_0$.
     \end{enumerate}
@@ -254,13 +256,15 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \begin{prop} \label{prop:desigualdad}
         Sea $X = (X_1, \ldots, X_n)$ una muestra de $f(X;\theta_0)$. Entonces, para cada $\theta_1 \in \Theta$ se tiene
         \[E_{X|\theta_0} \log f(X|\theta_0) \ge E_{X|\theta_0} \log f(X|\theta_1).\]
-        Además, si los parámetros son distinguibles, esto es, determinan distribuciones distintas, entonces la desigualdad es estricta para todo $\theta_1 \ne \theta_0$.
+        Además, si los parámetros son identificables, esto es, determinan distribuciones distintas, entonces la desigualdad es estricta para todo $\theta_1 \ne \theta_0$.
     \end{prop}
     \begin{proof}
         Por la desigualdad de Jenssen obtenemos
         \[E_{X|\theta_0} \log \frac{f(X|\theta_1)}{f(X|\theta_0)} \le \log \int_X \frac{f(X|\theta_1)}{f(X|\theta_0)} f(X|\theta_0) \, dx = \log \int_X f(X|\theta_1) \, dx = 0,\]
         de donde se deduce el resultado. Además, si $\theta_1$ determina una distribución distinta a la de $\theta_0$, entonces $f(X|\theta_1) / f(X|\theta_0)$ es no degenerada y, por tanto, la desigualdad es estricta.
     \end{proof}
+
+    Cabe mencionar que siempre supondremos que los parámetros son identificables ya que en caso contrario elimniaríamos aquellos parámetros que proporcionen distribuciones de probabilidad repetidas.
 
     Cabe mencionar que la información de Fisher puede definirse cuando $\Theta \subset \mathbb{R}^m$. Incluimos la definición por complitud, aunque no entraremos en ella a fondo.
 
@@ -364,7 +368,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     Nos interesa que los estimadores tiendan al parámetro de la distribución cuando el tamaño de la muestra diverge. En tal caso, podemos mejorar el resultado del estimador recurriendo a una mayor muestra de la población.
 
     \begin{definition}
-        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Theta\}$. Una sucesión de estimadores $\hat\theta_n$ de $g(\theta)$ es consistente para $\theta_0 \in \Theta$ si toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $\hat\theta_n(X_1, \ldots, X_n)$ converge en probabilidad ($P_{\theta_0}$) a $g(\theta_0)$. Si $\hat\theta_n$ es consitente para todo $\theta_0 \in \Theta$, entonces decimos que es consistente.
+        Consideremos una familia de densidades $\{f(x | \theta) : \theta \in \Theta\}$. Una sucesión de estimadores $\hat\theta_n$ de $g(\theta)$ es consistente para $\theta_0 \in \Theta$ si toda sucesión $X_n$ de variables aleatorias independientes e idénticamente distribuidas con función de distribución $f(x | \theta_0)$ la sucesión $\hat\theta_n(X_1, \ldots, X_n)$ converge en probabilidad ($P_{\theta_0}$) a $g(\theta_0)$. Si $\hat\theta_n$ es consistente para todo $\theta_0 \in \Theta$, entonces decimos que es consistente.
     \end{definition}
 
     \begin{thm}
@@ -405,33 +409,33 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     En este punto nos preguntamos cuándo está bien definido el estimador máximo verosímil. En tal caso nos interesa saber si el método de la máxima verosimilitud nos proporciona un estimador consistente. Para ello aplicamos los resultados teóricos vistos en la sección anterior.
 
     \begin{prop}
-        Si existe un estadístico suficiente $T$ par ala familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$ y $\hat\theta$ es un estimador máximo verosímil, entonces $\hat\theta$ depende solamente de $T(X)$.
+        Si existe un estadístico suficiente $T$ para la familia de distribuciones $\{f(X|\theta): \theta \in \Theta\}$ y $\hat\theta$ es un estimador máximo verosímil, entonces $\hat\theta$ depende solamente de $T(\utilde{X})$.
     \end{prop}
     \begin{proof}
-        Por el teorema de factorización de estimadores suficientes podemos escribir $f(X|\theta) = h(X) g(T(X), \theta)$. Maximizar $L(x; \theta) = h(x) g(T(x); \theta)$ equivale a maximizar $g(T(x); \theta)$. Por tanto, $\hat\theta$ depende solamente de $T(x)$.
+        Por el teorema de factorización de estimadores suficientes podemos escribir $f(\utilde{X}|\theta) = h(\utilde{X}) g(T(\utilde{X}), \theta)$. Maximizar $L(\theta; \utilde{x}) = h(\utilde{x}) g(T(\utilde{x}); \theta)$ equivale a maximizar $g(T(\utilde{x}); \theta)$. Por tanto, $\hat\theta$ depende solamente de $T(\utilde{x})$.
     \end{proof}
 
-    \begin{thm}
+    \begin{thm} \label{thm:emv:consistencia}
         Bajo las hipótesis de regularidad de Cramer-Rao se verifican las siguientes afirmaciones:
         \begin{enumerate}
-            \item Existe $n_0$ tal que para cada $n \ge n_0$ la ecuación en probabilidad $0 =\sum_{i=0}^n \frac{\partial}{\partial \theta} \log f(X_i | \theta)$ tiene solución única. A esta solución se le llama $\hat{\theta}_n(X_1, \ldots, X_n)$. En dicho punto se maximiza la verosimilitud.
-            \item $\hat{\theta}(X_1, \ldots, X_n)$ es consistente. De hecho, se puede probar que la convergencia a $\theta_0$ es casi segura.
+            \item Existe $n_0$ tal que para cada $n \ge n_0$ la ecuación en probabilidad $0 =\sum_{i=0}^n \frac{\partial}{\partial \theta} \log f(X_i | \theta)$ tiene solución (única en un entorno de $\theta_0$). A esta solución se le llama $\hat{\theta}_n(\utilde{X})$. En dicho punto se maximiza la verosimilitud.
+            \item $\hat{\theta}(\utilde{X})$ es consistente. De hecho, se puede probar que la convergencia a $\theta_0$ es casi segura.
         \end{enumerate}
     \end{thm}
     \begin{proof}
-        Para cualquier muestra $X$ de $f(X|\theta_0)$ tenemos que
-        \[0 > -\mathcal{I}(\theta_0)=E_{X|\theta_0}\left[ \frac{\partial^2}{\partial\theta^2} \log f(X;\theta_0)\right] = \frac{\partial}{\partial\theta} E_{X|\theta_0} \left[ \frac{\partial}{\partial\theta} \log f(X;\theta_0) \right].\]
-        Consecuentemente, $E_{X|\theta_0} \left[ S(X; \theta) \right]$ es decreciente en un entorno de $\theta_0$. Recordemos que $E_{X|\theta_0} \left[ S(X; \theta_0) \right] = 0$ por el Lema \ref{lem:score:esp}. Por tanto, existe $\varepsilon > 0$ tal que
+        Para cualquier muestra $\utilde{X}$ de $f(X|\theta_0)$ tenemos que
+        \[0 > -\mathcal{I}(\theta_0)=E_{\utilde{X}|\theta_0}\left[ \frac{\partial^2}{\partial\theta^2} \log f(\utilde{X};\theta_0)\right] = \frac{\partial}{\partial\theta} E_{\utilde{X}|\theta_0} \left[ \frac{\partial}{\partial\theta} \log f(\utilde{X};\theta_0) \right].\]
+        Consecuentemente, $E_{\utilde{X}|\theta_0} \left[ S(\utilde{X}; \theta) \right]$ es decreciente en un entorno de $\theta_0$. Recordemos que $E_{\utilde{X}|\theta_0} \left[ S(\utilde{X}; \theta_0) \right] = 0$ por el Lema \ref{lem:score:esp}. Por tanto, existe $\varepsilon > 0$ tal que
         \begin{itemize}
-            \item $E_{X|\theta_0} \left[ S(X; \theta) \right] > 0$ para todo $\theta \in (\theta_0 - \varepsilon, \theta_0)$;
-            \item $E_{X|\theta_0} \left[ S(X; \theta) \right] < 0$ para todo $\theta \in (\theta_0, \theta_0 + \varepsilon)$.
+            \item $E_{\utilde{X}|\theta_0} \left[ S(\utilde{X}; \theta) \right] > 0$ para todo $\theta \in (\theta_0 - \varepsilon, \theta_0)$;
+            \item $E_{\utilde{X}|\theta_0} \left[ S(\utilde{X}; \theta) \right] < 0$ para todo $\theta \in (\theta_0, \theta_0 + \varepsilon)$.
         \end{itemize}
-        Esto implica que $\theta_0$ es un máximo relativo de $E_{X|\theta_0}[\log f(X|\theta)]$.
+        Esto implica que $\theta_0$ es un máximo relativo de $E_{\utilde{X}|\theta_0}[\log f(\utilde{X}|\theta)]$.
         INCOMPLETO.
     \end{proof}
 
-    \begin{thm}
-        Bajo hipótesis de regularidad de Cramer-Rao, si $\hat{\theta}(X_1, \ldots, X_n)$ es un estimador máximo verosímil consistente, entonces es asintóticamente normal. Además, la varianza de la distribución normal asociada es $1/\mathcal{I}_{X_1}(\theta_0)$.
+    \begin{thm} \label{thm:emv:an}
+        Bajo hipótesis de regularidad de Cramer-Rao, si $\hat{\theta}(\utilde{X})$ es un estimador máximo verosímil consistente, entonces es asintóticamente normal. Además, la varianza de la distribución normal asociada es $1/\mathcal{I}_{X_1}(\theta_0)$.
     \end{thm}
     \begin{proof}
         Escribimos $L_n(\theta) = \frac{1}{n}\sum_{i = 1}^n \log f(X_i|\theta)$. Tenemos que $L_n'(\hat\theta_n) = 0$. El teorema del valor medio nos proporciona un $\theta_n$ entre $\theta_0$ y $\hat\theta_n$ tal que $0 = L_n'(\hat\theta) = L_n'(\theta_0) + L_n''(\theta_n)(\hat\theta_n - \theta_0)$. Por tanto,
