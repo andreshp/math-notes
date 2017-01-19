@@ -129,7 +129,7 @@
         A patir de un p-valor válido $p(\utilde{X})$ podemos construir un test con nivel de significación $\alpha$ para cualquier $\alpha \in [0,1]$. Este test rechaza $H_0$ si y solo si $p(\utilde{X}) \le \alpha$.
 
         \begin{definition}
-            Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$, y solo si, la región crítica del test con significación $\alpha$ es $p(\utilde{X}) \le \alpha$.
+            Supongamos que un test de hipótesis se puede formular para cualquier nivel de significación $\alpha$. Sea $p(\utilde{X})$ un p-valor válido. Decimos que el test es descrito por el p-valor $p(\utilde{X})$ si, y solo si, la región crítica del test con significación $\alpha$ es $p(\utilde{X}) \le \alpha$.
         \end{definition}
 
         En un test descrito por un p-valor podemos elegir el valor de $\alpha$ que consideremos apropiado y simplemente compararlo con $p(\utilde{x})$ para saber cuál es el resultado del test. Nótese que valores pequeños de $p(\utilde{X})$ dan evidencia de que $H_1$ es cierta y, por tanto, el p-valor mide la evidencia a favor de la hipótesis nula. Por tanto, realizar un test descrito por un p-valor es más informativo que simplemente elegir entre ``aceptar $H_0$'' o ``rechazar $H_0$''.
@@ -168,7 +168,7 @@
         \begin{ex}[Continuación del Ejemplo \ref{ex:np:1}]
             Recordemos que obtuvimos que la región crítica del test Z está determinada por $\overline{X} \ge A_{k_\alpha}$. Por tanto, el Teorema \ref{thm:p-valor:2} nos dice que el p-valor del test es $p(\utilde{x}) = P_{\mu_0}(\overline{X} \ge \overline{x})$. También probamos que podemos describir la región crítica en términos de la variable $Z$. De hecho, $P_{\mu_0}(\overline{X} \ge \overline{x}) = P_{\mu_0}(Z \ge \sqrt{n}(\overline{x} - \mu_0)/\sigma)$, lo que nos permite calcular los p-valores gracias a que $Z \sim N(0,1)$.
 
-            Veamos un ejemplo numérico. Los datos osn los mismos que los del Ejemplo \ref{ex:np:1}. Supongamos que tras observar una muestra con $n = 100$ hemos obtenido $\overline{x} = 0.2$. Entonces, $p(\utilde{x}) = P_{\mu_0}(Z \ge 2) = 1 - F(2) = 1 - 0.9772 = 0.0328$, donde $F$ es la función de distribución de N(0,1). Por tanto, rechazaremos la hipótesis nula para cualquier nivel de significación mayor que $0.0328$.
+            Veamos un ejemplo numérico. Los datos son los mismos que los del Ejemplo \ref{ex:np:1}. Supongamos que tras observar una muestra con $n = 100$ hemos obtenido $\overline{x} = 0.2$. Entonces, $p(\utilde{x}) = P_{\mu_0}(Z \ge 2) = 1 - F(2) = 1 - 0.9772 = 0.0328$, donde $F$ es la función de distribución de N(0,1). Por tanto, rechazaremos la hipótesis nula para cualquier nivel de significación mayor que $0.0328$.
         \end{ex}
 
     \subsection{Tests de la razón de verosimilitud}
@@ -241,7 +241,7 @@
             converge casiseguramente a $\mathcal{I}(\theta_0)$. Podemos pues completar el estudio asintótico de $\sqrt{\mathcal{Q}_n}$, que converge en ley a $N(0, 1)$. Por último, la Proposición \ref{prop:normal-square} concluye que $\mathcal{Q}_n$ converge en ley a $\chi_1^2$.
         \end{proof}
 
-        En muchas ocasiones es difícil calcular la región crítica del test de la razón de verosimilitud. En tales caso, si el tamaño de la muestra es muy grande, entonces podemos suponer que bajo la hipótesis nula $-2 \log \lambda(\utilde{X})$ sigue una distribución $\chi_d^2$ y proceder con el test de hipótesis como es habitual.
+        En muchas ocasiones es difícil calcular la región crítica del test de la razón de verosimilitud. En tales caso, si el tamaño de la muestra es muy grande, podemos suponer que bajo la hipótesis nula $-2 \log \lambda(\utilde{X})$ sigue una distribución $\chi_d^2$ y proceder con el test de hipótesis como es habitual.
 
         La siguiente definicón extiende la definición de consistencia a los tests de hipótesis.
 

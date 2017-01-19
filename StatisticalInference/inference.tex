@@ -1092,7 +1092,7 @@ Veamos algún ejemplo de los proporcionados por la proposición anterior.
 	\[f(\utilde{x}|\lambda) = \frac{e^{-n\lambda}\lambda^{\sum{x_i}}}{\prod{x_i!}} \text{ y } \pi(\lambda)=\frac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}.\]
     Multiplicando ambas distribuciones obtenemos
 	\[f(\utilde{x}|\lambda)\pi(\lambda)=\frac{e^{-n\lambda}\lambda^{\sum{x_i}}\lambda^{\alpha-1}e^{-\beta\lambda}\beta^\alpha}{\prod{x_i!}\Gamma(\alpha)}\]
-	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right).\]
+	\[=\frac{\beta^{\alpha}}{\prod{x_i!}\Gamma(\alpha)}\lambda^{\sum{x_i}+\alpha-1}e^{-(\beta+n)\lambda}\propto Gamma\left(\lambda|\alpha+\sum{x_i},\beta+n\right).\]
 
 	Es decir, para variables aleatorias de Poisson de parámetro $\lambda$, escogiendo una distribución a priori Gamma de parámetros $\alpha$ y $\beta$ obtenemos como distribución de $\lambda$ a posteriori una nueva Gamma, esta vez de parámetros $\alpha + \sum_{i = 1}^n{x_i}$ y $\beta+n$, donde $n$ es el tamaño de la muestra.
 
@@ -1129,7 +1129,7 @@ Elegimos una distribución a priori $\mu \sim \mathcal{N}(\eta,\tau^2)$, es deci
 Calculamos la distribución conjunta, obteniendo
 \[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\sum{\frac{(x_i-\mu)^2}{2\sigma^2}-\frac{(\mu-\eta)^2}{2\tau^2}}\right)}.\]
 
-Llamamos $\overline{x}=\frac{1}{n}\sum{x_i}$ y $s^2 = \frac{1}{n}\sum{(xb_i-\overline{x})^2}$. Notemos que ninguna de las dos expresiones depende de $\mu$. Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} = \sum{(x_i-\overline{x})^2}+2(\overline{x}-\mu)\sum{(x_i-\overline{x})} + \sum{(\overline{x}-\mu)^2} = ns^2+ n(\overline{x}-\mu)^2$, tenemos
+Llamamos $\overline{x}=\frac{1}{n}\sum{x_i}$ y $s^2 = \frac{1}{n}\sum{(x_i-\overline{x})^2}$. Notemos que ninguna de las dos expresiones depende de $\mu$. Usando que $\sum{(x_i-\mu)^2} = \sum{(x_i-\overline{x} + \overline{x} -\mu)^2} = \sum{(x_i-\overline{x})^2}+2(\overline{x}-\mu)\sum{(x_i-\overline{x})} + \sum{(\overline{x}-\mu)^2} = ns^2+ n(\overline{x}-\mu)^2$, tenemos
 \[f(\utilde{x}|\mu)\pi(\mu) \propto \exp{\left(-\frac{n}{2\sigma^2}[s^2+(\overline{x}-\mu)^2]-\frac{(\mu-\eta)^2}{2\tau^2}\right)}\]
 \[=
 \exp{\left(-\frac{ns^2}{2\sigma^2}\right)}\exp{\left(-\frac{1}{2\sigma^2\tau^2}[n\tau^2(\overline{x}-\mu)^2+\sigma^2(\mu-\eta)^2]\right)}
@@ -1281,7 +1281,7 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 \end{remark}
 
 \begin{remark}
-    Como consecuencia de este resultado, si el espacio paramétrico es discreto, entonceslos estimadores bayesianos son consistentes. Además, si estamos contrastando hipótesis simples, entonces los modelos bayesianos asignan probabilidad 1 a la hipótesis correcta cuando el tamaño de la muestra diverge.
+    Como consecuencia de este resultado, si el espacio paramétrico es discreto, entonces los estimadores bayesianos son consistentes. Además, si estamos contrastando hipótesis simples, entonces los modelos bayesianos asignan probabilidad 1 a la hipótesis correcta cuando el tamaño de la muestra diverge.
 \end{remark}
 
 \pagebreak
@@ -1335,15 +1335,10 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 		En una distribución normal $\mathcal{N}(\mu,\sigma^2)$ la distribución de Jeffreys es $\pi^{\mathcal{J}}(\mu,\sigma^2) = \frac{c}{\sigma^2}\chi_{\mathbb{R}\times{\mathbb{R}^{+}}}(\mu,\sigma^2)$, no es integrable. Para un solo dato la distribución a posteriori sigue sin ser integrable, pero con dos ya sí lo es. Por tanto, la muestra de entrenamiento minimal es de tamaño 2.
 	\end{ex}
 
-\begin{example}
-<<<<<<< HEAD
+\begin{ex}
 
-    Supongamos que tenemos una distribución normal con varianza conocida, que podemos tomarla como 1, esto es, $\mathcal{N}(x | \mu,1)$ . Nuestro test va a consistir si $\mu$ es $0$. Para ello, tomamos $\mathcal{H}_0 : \mu = 0$ como la hipótesis nula y $\mathcal{H}_1 : \mu \in R$.
-	
-=======
 	Supongamos que tenemos una distribución normal con varianza conocida, que podemos tomarla como 1, esto es, $\mathcal{N}(x | \mu,1)$ . Nuestro test va a consistir si $\mu$ es $0$. Para ello, tomamos $\mathcal{H}_0 : \mu = 0$ como la hipótesis nula y $\mathcal{H}_1 : \mu \in R$.
 
->>>>>>> ef1f763449f47923f92cd2374a6c0456a4615d43
 	Consideramos los dos modelos asociados $\mathcal{M}_0 : {\mathcal{N}(x | 0,1), \pi(M_0)}$ y $\mathcal{M}_1 : {\mathcal{N}(x| \mu,1), \mathcal{N}(\mu |0,2)\pi(M_1)}$, donde la distribución normal de media 0 y varianza 2 se ha obtenido haciendo la distribución intrínseca de $\mu$, pero se puede usar también una familia de distribuciones conjugada y el resultado será el mismo.
 
 	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^-1)$.
@@ -1365,8 +1360,8 @@ $  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\
 	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
 
 	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se me el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
-\end{example}
+	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se de el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
+\end{ex}
 
 \pagebreak
 
