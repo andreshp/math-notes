@@ -335,84 +335,72 @@ En general, si el espacio paramétrico no es discreto, el estudio de la converge
 \end{remark}
 
 \begin{remark}
-    Como consecuencia de este resultado, si el espacio paramétrico es discreto, entonces los estimadores bayesianos son consistentes. Además, si estamos contrastando hipótesis simples, entonces los modelos bayesianos asignan probabilidad 1 a la hipótesis correcta cuando el tamaño de la muestra diverge.
+    Como consecuencia de este resultado, si el espacio paramétrico es discreto, entonces los estimadores bayesianos son consistentes. Además, si estamos contrastando hipótesis simples, entonces los modelos bayesianos asignan probabilidad 1 a la hipótesis correcta cuando el tamaño de la muestra diverge, esto es, son consistentes.
 \end{remark}
 
-\pagebreak
+\subsection{Test de Hipótesis Bayesianos} \label{sec:bayes:hipotesis}
 
-\section{Test de Hipótesis Bayesianos} \label{sec:bayes:hipotesis}
+En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Estas herramientas nos permiten abordar el problema de forma más general como veremos a continuación. %, podiendo incluso considerar como hipótesis el hecho de que el suceso siga un modelo específico. Hacer test de hipótesis para distinguir entre un modelo y otro.  Consecuentemente, la inferencia Bayesiana nos permite abordar de igual forma problemas que para la inferencia clásica eran considerablemente difíciles, razón por la cual no los hemos estudiado en este curso.
 
-En este apartado vamos a realizar un estudio similar al que se hizo con los test de hipótesis clásicos, pero haciendo uso de las herramientas que nos proporciona la estadística bayesiana. Para ello, recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades y de una distribución a priori, como se sigue : ¿$\mathcal{M} = \{\pi_i(\theta)|i\in I\, \pi(\theta)\}$?.
+% Recordemos que si queremos considerar un modelo bayesiano, tenemos que dotarnos de una familia de densidades $\{f(x | \theta): \theta \in \Theta\}$ y de una distribución a priori $\pi(\theta)$.
 
-Entonces consideramos dos posibles situaciones, con las que obtenemos dos modelos \\$ M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1, M_1) \}$ y $ M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2,M _2) \}$
+Consideramos dos modelos $M_1 : \{f(x | \theta_1, M_1), \pi(\theta_1 | M_1), \pi(M_1) \}$ y $M_2 : \{f(x | \theta_2, M_2), \pi(\theta_2 |M _2), \pi(M_2)\}$, esto es, dos posibles familias de distribuciones con sus correspondientes distribuciones a priori. Queremos decidir qué modelo se amolda más al suceso que estamos observando. Los valores $\pi(M_1)$ y $\pi(M_2)$ son las probabilidades que se le asignan a cada uno de los modelos, por lo que suman 1. Habitualmente se utiliza el valor $1/2$. No obstante, en otras ocasiones disponemos de conocimiento experto que nos permite modificar estas probabilidades.
 
-Ahora bien, sabiendo que $\pi(\theta_i, M_i) =  \pi(M_i) \pi(\theta_i|M_i)$  para $i = 1,2.$, lo aplicamos a nuestros dos modelos y obtenemos que $ M_1 : \{f(x | \theta_1, M_1), \pi(M_1) \pi(\theta_1|M_1)$ y $M_2 : \{f(x | \theta_2, M_2), \pi(M_2)  \pi(\theta_2|M_2)$.
+Consideramos una muestra aleatoria simple $\utilde{X}$ de tamaño $n$ que proviene de alguno de los modelos. Con ella se quiere calcular la probabilidad a posteriori del modelo $M_1$, esto es $\pi(M_1 | \utilde{x})$. A partir de esta probabilidad pordremos decidir si aceptamos el modelo o no. En este punto utilizamos la formalización bayesiana para calcular todas las distribuciones que aparecen en el problema. En primer lugar, podemos calcular la marginal de $\utilde{X}$ condicionada a cada uno de los modelos, obteniendo para cada $i = 1,2$ la densidad
+\[m(\utilde{x} | M_i) = \int f(\utilde{x} | \theta_i, M_i) \pi(\theta_i | M_i) d \theta_i.\]
+A partir de estas marginales condicionadas obtenemos la marginal de $\utilde{x}$, que viene dada por
+\[m(\utilde{x}) = \pi(M_1) m(\utilde{x} | M_1) + \pi(M_2) m(\utilde{x} | M_2).\]
+Una vez hemos calculado estas marginales, los parámetros de cada uno de los modelos ya no intervienen en absoluto. Es más, nuestro problema se ha simplificado considerablemente. En efecto, la probabiliad del modelo $M_1$ condicionada a la muestra responde a
+\begin{equation} \label{eq:bayes:hipotesis}
+\pi(M_1 | \utilde{x}) = \frac{\pi(M_1) m(\utilde{x} | M_1)}{m(\utilde{x})} = \frac{\pi(M_1) m(\utilde{x} | M_1)}{\pi(M_1) m(\utilde{x} | M_1) + \pi(M_2) m(\utilde{x} | M_2)}.
+\end{equation}
 
-Supongamos que tenemos una muestra (independiente e idénticamente distribuida) de tamaño n que proviene de alguno de los modelos, esto es $\utilde{x} = (x_1,...,x_n)$. Con ella ,se quiere calcular la probabilidad a posteriori del modelo $M_1$. Para ello, necesitamos tomar la verosimilitud de la muestra respecto de $\theta_i$ y $M_i (i = 1,2)$, es decir, $\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}$ y $\prod_{i=1}^{n}{f(x_i|\theta_2,M_2)}$.
-
-Con ello, la probabilidad a posteriori del modelo $M_1$ se obtiene de la siguiente forma:
-
-\[P(\theta_1,M_1| \utilde{x}) = \frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}\pi(\theta_1,M_1)}{\pi(M_1)m(\utilde{x}|M_1)+\pi(M_2)m(\utilde{x}|M_2)} \]
-
-\begin{comment}
-$ P(\theta_1, M_1 | \utilde{x}) =  \[\frac{\prod_{i=1}^{n}{f(x_i|\theta_1,M_1)}}\ * \pi(\theta_1,M_1)}{m(\utilde{x} | M_1) * \pi(M_1) + m(\utilde{x} | M_2) * \pi(M_2)}\], donde $m(\utilde{x} | M_i) = \int_{\Theta_i}{f(\utilde{x} | \theta_i, M_i) * \pi(\theta_i | M_i)  d\theta_i}, para i = 1,2 $.
-\end{comment}
-
-Por tanto, la probabilidad del modelo $M_1$ condicionado a la muestra $\utilde{x}$ es\\ $P(M_1 | \utilde{x}) = \frac{m(\utilde{x}| M_1) \pi(M_1) }{m(\utilde{x}| M_1)\pi(M_1) + m(\utilde{x}| M_2)\pi(M_2) }$.
-
-Esta expresión se pude reescribir usando el factor de Bayes $B_{21}(\utilde{x}) = \frac{m(\utilde{x}| M_2)}{m(\utilde{x}| M_1)}$, por lo que la expresión anterior quedaría, dividiendo todo entre el numerador como: $P(M_1 | \utilde{x}) = \frac{1}{1 + B_{21}(\utilde{x})  \frac{\pi(M_2)}{\pi(M_1)}}$.
-
-Por tanto, el cociente entre las probabilidades de que se da cada modelo condicionado a la muestra es:
-$  \frac{P(M_2 | \utilde{x})}{P(M_1 | \utilde{x})} = B_{21}(\utilde{x})  \frac{\pi(M_2)}{\pi(M_1)}$.
-
-\subsection{Método de Leamer}
-
-
-
-	En la sección de estadística bayesiana vimos que podíamos escoger distribuciones a priori no integrables (impropias) que aun así nos permitían obtener buenas distribuciones a posteriori sobre las que realizar inferencia. ¿Qué ocurre si cogemos como distribución a priori una distribución impropia? La respuesta se basa en que al calcular el factor de Bayes de una muestra, dicho factor está indeterminado por una constante multiplicativa que proviene de las dos distribuciones a priori impropias, esto es, si $\pi(\theta_i|M_i) = c_ih_i(\theta_i)$, con $h_i$ no integrable y $c_i > 0$ arbitrario, entonces $\pi(\theta_1 | M_1) = c_1 h_1(\theta_1) $ y lo mismo para la el segundo modelo, obtenemos que  $B_{21}(\utilde{x}) = \frac{c_2 \int{f(\utilde{x} | \theta_2 , M_2)h_2(\theta_2) d\theta_2}}{c_1 \int{f(\utilde{x} | \theta_1 , M_1) h_1(\theta_1) d\theta_1}}$. Por ello, debemos coger distribuciones propias.
-
-	El método de Leamer consiste en obtener una submuestra de una muestra, que llamaremos muestra de entrenamiento, de forma que al calcular la distribución a posteriori esté bien definida. Para ello, tomamos $\utilde{x_1}$ submuestra de $\utilde{x}$. Para que $\pi(\theta_1 | \utilde{x_1}, M_1)$ esté bien definida, se tiene que verificar que $ 0 < m(\utilde{x_1} | M_1) < \infty$ (análogo para el modelo $M_2$).
-
-	\begin{definition}
-		Dado un modelo $M$ y una muestra $\utilde{x}$, una muestra de entrenamiento es un subconjunto de la muestra $\utilde{x_1} \subset \utilde{x}$. Se dice que la muestra es propia si $0 < m(\utilde{x_1}|M) < \infty$.
-
-		Una muestra de entrenamiento $\utilde{x_1}$ se dice que es minimal si es propia y ningún subconjunto suyo distinto de $\utilde{x_1}$ lo es.
-	\end{definition}
-
-	Como acabamos de ver, la selección de una muestra de entrenamiento minimal nos permite poder continuar con distribuciones a priori impropias al inicio, que pasarán a ser propias tras entrenarlas con dicha muestra. El principal inconveniente de este método es determinar qué datos son los más convenientes para entrenar la distribución a priori, es decir, qué subconjunto $\utilde{x_1}$ minimal escoger.
-
-	\begin{ex}
-		Vimos (Ejemplo \ref{ex:jeff:poisson}) que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$ impropia. Sin embargo, para cualquier muestra $\utilde{x}=(x_1,\ldots,x_n)$, teníamos que $m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty$. Por tanto, $\utilde{x}$ es una muestra de entrenamiento propia para cualquier tamaño, y en particular lo es para un solo dato. Por tanto, solo necesitamos un dato para hacer la distribución a priori propia, y la muestra de entrenamiento minimal consta de un solo dato.
-	\end{ex}
-
-	\begin{ex}
-		En una distribución normal $\mathcal{N}(\mu,\sigma^2)$ la distribución de Jeffreys es $\pi^{\mathcal{J}}(\mu,\sigma^2) = \frac{c}{\sigma^2}\chi_{\mathbb{R}\times{\mathbb{R}^{+}}}(\mu,\sigma^2)$, no es integrable. Para un solo dato la distribución a posteriori sigue sin ser integrable, pero con dos ya sí lo es. Por tanto, la muestra de entrenamiento minimal es de tamaño 2.
-	\end{ex}
+Recordemos que $\pi(M_2 | \utilde{x}) = 1 - \pi(M_1 | \utilde{x})$. En lo que sigue estudiamos cómo sintetizar la información dada en \eqref{eq:bayes:hipotesis}. Dividiendo el numerador y el denominador por $\pi(M_1) m(\utilde{x} | M_1)$ obtenemos
+\begin{equation} \label{eq:bayes:hipotesis:2}
+\pi(M_1 | \utilde{x}) =  \left(1 + \frac{\pi(M_2) m(\utilde{x} | M_2)}{\pi(M_1) m(\utilde{x} | M_1)}\right)^{-1} = \left(1 + B_{21}(\utilde{x})\frac{\pi(M_2) }{\pi(M_1)}\right)^{-1},
+\end{equation}
+donde $B_{21}(\utilde{x}) = m(\utilde{x}| M_2) / m(\utilde{x}| M_1)$ es el denominado factor de Bayes. El producto del factor de Bayes y $\pi(M_2) / \pi(M_1)$ resume toda la información relativa al test de hipótesis. Si este valor es elevado, entonces la probabilidad a posteriori del modelo $M_1$ es baja. Si por el contrario, este producto tiene un valor bajo, entonces la probabilidad a posteriori de $M_1$ será alta. Los tests de hipótesis bayesianos nos proporcionan una probabilidad y, por tanto, es nuestra decisión dedicir si aceptamos el modelo $M_1$ verdadero o no en función de este valor. En este sentido son más completos que los tests clásicos, donde simplemente recibíamos una respuesta afirmativa o negativa y no teníamos una medida real de la evidencia a favor o en contra de la hipótesis nula. Nótese que el factor de Bayes no depende de $\pi(M_1)$ ni de $\pi(M_2)$. Por tanto, podemos calcularlo antes de decidir las probabilidades a priori de cada uno de los modelos.
 
 \begin{ex}
+	Supongamos que tenemos una distribución normal con varianza conocida, que tomaoms por simplicidad como 1, esto es, $X \sim \mathcal{N}(x | \mu,1)$. Queremos constrastar las hipótesis $H_0 : \mu = 0$ y $H_1 : \mu \ne 0$.
 
-	Supongamos que tenemos una distribución normal con varianza conocida, que podemos tomarla como 1, esto es, $\mathcal{N}(x | \mu,1)$ . Nuestro test va a consistir si $\mu$ es $0$. Para ello, tomamos $\mathcal{H}_0 : \mu = 0$ como la hipótesis nula y $\mathcal{H}_1 : \mu \in R$.
+	Consideramos los dos modelos asociados $M_0 : \{N(x | 0,1), \pi(M_0)\}$ y $M_1 : \{N(x| \mu ,1), N(\mu |0,2)\pi(M_1)\}$, donde la distribución normal de media 0 y varianza 2 se ha obtenido haciendo la distribución intrínseca de $\mu$, que se puede estudiar en libros de texto más avanzados.
 
-	Consideramos los dos modelos asociados $\mathcal{M}_0 : {\mathcal{N}(x | 0,1), \pi(M_0)}$ y $\mathcal{M}_1 : {\mathcal{N}(x| \mu,1), \mathcal{N}(\mu |0,2)\pi(M_1)}$, donde la distribución normal de media 0 y varianza 2 se ha obtenido haciendo la distribución intrínseca de $\mu$, pero se puede usar también una familia de distribuciones conjugada y el resultado será el mismo.
+	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de $n$ datos. Para ello calculamos el factor de Bayes, que viene dado por
+    \[B_{10}(\overline{x},n) = \frac{\int_{-\infty}^\infty N(\overline{x} | \mu, 1/n) N(\mu | 0,2) d\mu}{N(\overline{x} | 0, 1/n)} = \frac{N(\overline{x} | 0, 2 + 1/n)}{N(\overline{x} | 0, 1/n)}.\]
 
-	Nuestro objetivo es calcular la probabilidad de que se de el primer modelo condicionado a una muestra de n datos. Entonces, $P(M_0 | \utilde{x} = (1 + B_{10}(\overline{x},n) \frac{\pi(M_1)}{\pi(M_0)})^-1)$.
+	Reescribiendo esta última fracción nos queda que el factor de Bayes viene dado por
+	\[B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp\left(\frac{n^2 \overline{x}^2}{2n+1}\right).\]
+	Estudiemos el comportamiento del factor de Bayes cuando el tamaño de la muestra diverge. Si suponemos cierto el modelo $M_0$, esto es, $\mu = 0$, entonces $\sqrt{n} \overline{X}$ sigue una normal y, por tanto, el factor asociado a la exponencial del factor de Bayes converge a una constante. Por tanto, el factor de Bayes converge a $0$ con orden de convergencia $\sqrt{n}$.
 
-	Recordemos que $\prod_{i=1}^{n}\mathcal{N}(x_i |\mu,1) = \mathcal{N}(\overline{x} | \mu, 1/n)$.
+    Si por el contrario, el modelo $M_1$ fuese el correcto, $\mu \ne 0$, entonces, el exponente de la función exponencial puede escribirse como  $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i - \mu)  + \sqrt{n}\mu)^2$. El primer sumando converge en ley a una normal mientras que el segundo diverge. Hemos obtenido que
+    \[B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp\left(\frac{(n  \overline{x})^2}{2n+1}\right) \xrightarrow[n\to\infty]{M_1} \infty.\]
 
-	Para ello, calculamos el factor de Bayes anterior: $B_{10}(\overline{x},n) = \frac{\int_{-\infty}^{\infty}{\mathcal{N}(\overline{x} | \mu, 1/n) \mathcal{N}(\mu | 0,2)}}{\mathcal{N}(\overline{x} | 0, 1/n)} = \frac{\mathcal{N}(\overline{x} | 0, 2 + 1/n)}{\mathcal{N}(\overline{x} | 0, 1/n)}$.
-
-	Entonces, reescribiendo esta última fracción nos queda que el factor de Bayes se expresa de la siguiente forma:
-
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{n^2  \overline{x}^2}{2n+1}$.
-
-	Estudiemos el comportamiento probabilístico en el límite.
-
-	Si queremos ver qué ocurre en probabilidad $M_1$ cuando n diverge, nos fijamos en el exponente de la función exponencial lo primero y vemos que se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i - \mu)  + \sqrt{n}\mu)^2$, pero el primer término va a una normal mientras que el segundo, va a infinito, por lo tanto,
-
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_1} \infty$.
-
-	Por tanto, $P(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$ y, en consecuencia, $P(M_1 | \utilde{x}) \xrightarrow{n\to\infty} 1$. Recordemos que estamos viendo que ocurre cuando suponemos que queremos ver qué pasa cuando tomamos el modelo $M_1$.
-
-	Ahora, realizamos el mismo proceso, pero tomando como referencia el modelo $M_0$. En este caso, el exponente del factor de Bayes se comporta como $(\frac{1}{\sqrt{n}} \sum_{i=1}^{n}(X_i))^2$, que bajo el modelo $M_0$ converge a algo finito. Con lo cual,
-	$B_{10}(\overline{x},n) = \frac{1}{\sqrt{2n+1}}  \exp^\frac{(n  \overline{X})^2}{2n+1} \xrightarrow[n\to\infty]{M_0} 0$, lo que nos indica que la probabilidad de que se de el modelo $M_0$ con esa muestra $\utilde{x}$ es 1, es decir, $P(M_0 | \utilde{x}) \longrightarrow 1$ (bajo el modelo $M_0$) y, en consecuencia, $P(M_1 | \utilde{x}) \longrightarrow 0$.
+	Hemos demostrado que si $M_0$ es cierto, entonces $\pi(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 1$ mientras que en caso contrario $\pi(M_0 | \utilde{x}) \xrightarrow{n\to\infty} 0$. Por tanto, el test de hipótesis es consistente.
 \end{ex}
+
+\subsubsection{Método de Leamer}
+
+	En el Ejemplo \ref{ex:jeff:poisson} calculamos una distribució a posteriori partiendo de una distribución a priori impropia. La distribución obtenida nos permite realizar estimación y nos proporciona una información completa del parámetro. No obstante, las distribuciones a priori impropias no son válidas para realizar tests de hipótesis. En efecto, supongamos que para cada $i = 1,2$ tenemos $\pi(\theta_i|M_i) = c_ih_i(\theta_i)$, con $h_i$ no integrable y $c_i > 0$ arbitrario. El problema reside que al calcular el factor de Bayes obtenemos
+    \[B_{21}(\utilde{x}) = \frac{c_2 \int{f(\utilde{x} | \theta_2 , M_2)h_2(\theta_2) d\theta_2}}{c_1 \int{f(\utilde{x} | \theta_1 , M_1) h_1(\theta_1) d\theta_1}}.\]
+    Por tanto, aunque las marginales existan el factor de Bayes depende del valor $c_2 / c_1$, que no está determinado. Es más, en múltiples casos las marginales pueden no existir. Por tanto, siempre debemos utilizar distribuciones propias en este contexto.
+
+	Una solución al problema presentado anteriormente es el método de Leamer. Este método se basa en utilizar una submuestra de una muestra, que llamaremos muestra de entrenamiento, para entrenar la distribución a priori, obteniendo una nueva distribución. El objetivo es que esta nueva distribución sea propia. %Para ello, tomamos $\utilde{x_1}$ submuestra de $\utilde{x}$. Para que $\pi(\theta_1 | \utilde{x_1}, M_1)$ esté bien definida, se tiene que verificar que $ 0 < m(\utilde{x_1} | M_1) < \infty$ (análogo para el modelo $M_2$).
+
+	\begin{definition}
+		Dado un modelo $M$ y una muestra $\utilde{x}$, una muestra de entrenamiento es una sublista de la muestra original $\utilde{x}_1 \subset \utilde{x}$. Se dice que la muestra es propia si $0 < m(\utilde{x}_1|M) < \infty$. Una muestra de entrenamiento $\utilde{x}_1$ se dice que es minimal si es propia y ninguna sublista suya distinta de $\utilde{x}_1$ lo es.
+	\end{definition}
+
+	Consideremos una muestra de entrenamientro propia para el modelo $M$. Puesto que $0 < m(\utilde{x}_1|M) < \infty$, tenemos que $\pi(\theta | M) f(\utilde{x} | \theta, M)$ integra. Por tanto, la distribución $\pi(\theta | \utilde{x}_1, M) \propto \pi(\theta | M) f(\utilde{x} | \theta, M)$ es propia. El método de Leamer propone utilizar $\pi(\theta | \utilde{x}_1, M)$ como distribución a priori para el modelo $M$. El test de hipótesis se realizará con la muestra $\utilde{x} \setminus \utilde{x}_1$. Nótese que se podría realizar el test utilizando la totalidad de $\utilde{x}$. No obstante, en tal caso la muestra $\utilde{x}_1$ está influyendo por partida doble en el resultado, lo que no es deseable.
+
+    El principal inconveniente del método de Leamer reside en determinar qué datos son los más convenientes para entrenar la distribución a priori, es decir, qué subconjunto $\utilde{x}_1$ escoger. Interesa que el subconjunto sea minimal con el fin de perder el menor número de elementos de la muestra para el test de hipótesis.
+
+	\begin{ex}
+		En el Ejemplo \ref{ex:jeff:poisson} vimos que la distribución de Jeffreys para una Poisson de parámetro $\lambda$ es $\pi^{\mathcal{J}}(\lambda)=c\lambda^{-1/2}$, que es impropia. Para cualquier muestra $\utilde{x}=(x_1,\ldots,x_n)$, teníamos que \[m(\utilde{x}) = \frac{c}{n ^{\sum{x_i} + \frac{1}{2}}\prod{x_i!}}\Gamma(\sum{x_i} + \frac{1}{2}) < \infty.\]
+
+        Por tanto, cualquier muestra es propia y puede considerarse como muestra de entrenamiento. Las muestras minimales son aquellas que constan de un solo dato. Nótese que $\pi(\lambda | \utilde{x})$ no depende de $c$, como ya se ha razonado en otras ocasiones. Por tanto, es válida como distribución a priori.
+	\end{ex}
+
+	\begin{ex}
+		En una distribución normal $\mathcal{N}(\mu,\sigma^2)$ la distribución de Jeffreys es $\pi^{\mathcal{J}}(\mu,\sigma^2) = \frac{c}{\sigma^2}$, que no es integrable. Para una muestra de tamaño $1$ no existe la marginal de $\utilde{x}$ y la distribución a posteriori son integrables. Sin embargo, para muestras de tamaño mayor o igual que $2$ ambos problemas se arreglan. Por tanto, cualquier muestra de tamaño $2$ es minimal.
+	\end{ex}
