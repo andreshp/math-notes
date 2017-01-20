@@ -14,26 +14,24 @@
     En esta sección se desarrollan varias de las distribuciones discretas más importantes de la estadística.
 
     \subsubsection{Distribución uniforme}
-La distribución uniforme es una distribución de probabilidad que asume un número finito de valores con la misma probabilidad. Es fácil comprobar que la función masa de probabilidad es $f(x|n) = \frac{1}{n}$. Claramente $\sum^n_{i=1} \frac{1}{n} = 1$.
+        La distribución uniforme es una distribución de probabilidad que asume un número finito de valores con la misma probabilidad. Esto es, su función masa de probabilidad viene dada por $f(x_i|n) = \frac{1}{n}$ para $i = 1, \ldots n$. Claramente $\sum^n_{i=1} f(x_i | n) = 1$. Habittualmente suponemos que $x_i = i$ para todo $i = 1, \ldots, n$.
 
-La función generatriz de momentos es fácil calcularla y viene definida por $\varphi_X(t) = \frac{e^t (1 - e^tN)}{N(1-e^t)}$. De ella podemos obtener su media y varianza las cuales quedan de la siguiente forma:
+        La función generatriz de momentos es fácil calcularla y viene definida por $\varphi_X(t) = \frac{e^t (1 - e^tN)}{N(1-e^t)}$. De ella podemos obtener la media y la varianza, las cuales vienen dadas por
+        \[E[X] = \frac{N+1}{2};\]
+        \[Var(X) =  E[X^2] - (E[X])^2 =  \frac{(N+1)(N-1)}{12}.\]
 
-\begin{center}
-	$E[X] = \frac{N+1}{2}$
-	\\$Var(X) =  E[X^2] - (E[X])^2 =  \frac{(N+1)(N-1)}{12}$
-\end{center}
-
-\subsubsection{Distribución de Poisson}
-Esta distribución expresa, a partir de una frecuencia de ocurrencia media, la probabilidad de que ocurra un determinado número de eventos durante cierto período de tiempo. La función de masa o probabilidad de la distribución de Poisson es $f(x| \lambda) = \frac{e^{-\lambda}{\lambda}^x}{x!}$. \\Claramente $\sum^n_{i=1}  \frac{e^{-\lambda}{\lambda}^x}{x!} = e^{-\lambda} \sum^n_{i=1}  \frac{{\lambda}^x}{x!}  = 1$.
+    \subsubsection{Distribución de Poisson}
+        Esta distribución expresa, a partir de una frecuencia de ocurrencia media, la probabilidad de que ocurra un determinado número de eventos durante cierto período de tiempo. La función de masa de probabilidad de la distribución de Poisson para cada $x \in \mathbb{N} \cup \{0\}$ es
+        \[f(x| \lambda) = \frac{e^{-\lambda}{\lambda}^x}{x!}.\]
+        Fácilemente vemos que esta función suma uno
+        \[\sum^n_{i=1}  \frac{e^{-\lambda}{\lambda}^x}{x!} = e^{-\lambda} \sum^n_{i=1}  \frac{{\lambda}^x}{x!}  = 1.\]
 
 
-La función generatriz de momentos de dicha distribución se calcula de la siguiente manera $\varphi_X(t) = \sum^n_{i=0} \frac{e^{tx}e^{-\lambda}{\lambda}^x}{x!} = e^{-\lambda} \sum^n_{i=0}   \frac{(e^{t}  \lambda)^x}{x!} =  e^{-\lambda}  e ^{e^{t} \lambda} = e ^{\lambda (e^t -1 )}$.
+        La función generatriz de momentos de dicha distribución se calcula de la siguiente manera \[\varphi_X(t) = \sum^n_{i=0} \frac{e^{tx}e^{-\lambda}{\lambda}^x}{x!} = e^{-\lambda} \sum^n_{i=0}   \frac{(e^{t}  \lambda)^x}{x!} =  e^{-\lambda}  e ^{e^{t} \lambda} = e ^{\lambda (e^t -1 )}.\]
 
-A partir de la función generatriz de momentos podemos fácilmente deducir la media y la varianza:
-\begin{center}
-	$E[X] = \lambda $
-	\\$Var(X) =  E[X^2] - (E[X])^2 =  \lambda$
-\end{center}
+        A partir de la función generatriz de momentos podemos fácilmente deducir la media y la varianza
+        \[E[X] = \lambda;\]
+        \[Var(X) =  E[X^2] - (E[X])^2 =  \lambda.\]
 
 \subsubsection{Distribución binomial}
 
@@ -46,7 +44,7 @@ Considérese un experimento de Bernoulli con probabilidad $\theta \in [0,1]$. Re
 \subsubsection{Distribución multinomial}
 
 \begin{definition}
-	La distribución multinomial se puede ver como una generalización de la distribución binomial para variables politómicas (variables discretas con más de dos categorías).
+	La distribución multinomial se puede ver como una generalización de la distribución binomial para variables polinómicas (variables discretas con más de dos categorías).
 	\\Supongamos que se realizan $n$ ensayos independientes que dan lugar a $k$ resultados distintos $X = (X_1, ... X_k)$  con probabilidades $\theta_1, ... , \theta_k$ respectivamente, donde $\theta_1+... + \theta_k = 1$. Entonces, la función de probabilidad para dicha variable multinomial sería:
 
 	\[
