@@ -43,11 +43,10 @@ Considérese un experimento de Bernoulli con probabilidad $\theta \in [0,1]$. Re
 
 \subsubsection{Distribución multinomial}
 
-	La distribución multinomial se puede ver como una generalización de la distribución binomial para variables polinómicas (variables discretas con más de dos categorías).
+	La distribución multinomial se puede ver como una generalización de la distribución binomial cuando el resultado del experimento que se repite toma $k$ salidas distintas. Recordemos que en el caso de la binomial tal experimento era un experimento de Bernoulli que fracasaba o tenía éxito.
     \begin{definition}
-        Supongamos que se realizan $n$ ensayos independientes que dan lugar a $k$ resultados distintos $X = (X_1, ... X_k)$  con probabilidades $\theta_1, ... , \theta_k$ respectivamente, donde $\theta_1+... + \theta_k = 1$. Entonces, la función de probabilidad para dicha variable multinomial sería:
-
-	    \[f(X|\theta_1, ... , \theta_k) = \frac{n!}{X_1! X_2! ... X_k!} \theta^{X_1} \theta^{X_2} ... \theta^{X_k}\]
+        Supongamos que se realizan $n$ ensayos independientes $X = (X_1, \ldots, X_n)$ que dan lugar a $k$ resultados distintos $X_i = (X_i^1, ... X_i^k)$  con probabilidades $\theta_1, ... , \theta_k$ respectivamente, donde $\theta_1+... + \theta_k = 1$. Entonces, la función masa de de probabilidad para dicha variable multinomial es
+	    \[f(X|\theta_1, ... , \theta_k) = \frac{n!}{X_1! X_2! ... X_k!} \theta^{X_1} \theta^{X_2} ... \theta^{X_k}.\]
     \end{definition}
 
 \subsection{Distribuciones continuas}
@@ -242,6 +241,8 @@ La famila de distribuciones gamma se encuentra definida sobre el intervalo $[0, 
     Sean $\alpha, \beta > 0$. Definimos la distribución $Gamma(x | \alpha, \beta)$ como la distribución que tiene función de densidad
     \[f(x | \alpha, \beta) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}, x > 0.\]
 \end{definition}
+
+La distribución $\chi^2_{d}$ es un caso particular de la distribución $Gamma$ que se produce cuando $\beta = 1/2$ y $\alpha = d/2$. Su relevancia proviene de la relación que tiene esta distribución con la distribución normal, hecho que destacaremos posteriormente en la Proposición \ref{prop:normal-square}.
 
 El parámetro $\alpha$ se conoce como parámetro de forma ya que influencia la forma de la distribución, como muestra el siguiente resultado.
 
