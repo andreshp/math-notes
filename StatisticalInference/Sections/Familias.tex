@@ -24,7 +24,7 @@
         Esta distribución expresa, a partir de una frecuencia de ocurrencia media, la probabilidad de que ocurra un determinado número de eventos durante cierto período de tiempo. La función de masa de probabilidad de la distribución de Poisson para cada $x \in \mathbb{N} \cup \{0\}$ es
         \[f(x| \lambda) = \frac{e^{-\lambda}{\lambda}^x}{x!}.\]
         Fácilemente vemos que esta función suma uno
-        \[\sum^n_{i=1}  \frac{e^{-\lambda}{\lambda}^x}{x!} = e^{-\lambda} \sum^n_{i=1}  \frac{{\lambda}^x}{x!}  = 1.\]
+        \[\sum^\infty_{n=1}  \frac{e^{-\lambda}{\lambda}^n}{n!} = e^{-\lambda} \sum^\infty_{n=1}  \frac{{\lambda}^n}{n!}  = 1.\]
 
 
         La función generatriz de momentos de dicha distribución se calcula de la siguiente manera \[\varphi_X(t) = \sum^n_{i=0} \frac{e^{tx}e^{-\lambda}{\lambda}^x}{x!} = e^{-\lambda} \sum^n_{i=0}   \frac{(e^{t}  \lambda)^x}{x!} =  e^{-\lambda}  e ^{e^{t} \lambda} = e ^{\lambda (e^t -1 )}.\]
