@@ -1,0 +1,423 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ejercicios de ecuaciones diferenciales en variables separadas.
+%
+% Autor: Andrés Herrera Poyatos (https://github.com/andreshp)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-----------------------------------------------------------------------------------------------------
+%	INCLUSIÓN DE PAQUETES BÁSICOS
+%-----------------------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+% Utiliza el paquete de español.
+\usepackage{spanish}
+% Utiliza la plantilla para reports.
+\usepackage{template}
+% Utiliza una portada (elija una de las portadas disponibles y comente el resto).
+\usepackage{title1}
+%\usepackage{title2}
+
+%-----------------------------------------------------------------------------------------------------
+%	OTROS PAQUETES
+%-----------------------------------------------------------------------------------------------------
+
+\usepackage{mathematics}
+
+%-----------------------------------------------------------------------------------------------------
+%	DATOS DEL DOCUMENTO
+%-----------------------------------------------------------------------------------------------------
+
+\newcommand{\doctitle}{Apuntes}
+\newcommand{\docsubtitle}{}
+\newcommand{\docdate}{\date}
+\newcommand{\subject}{Ecuaciones Diferenciales 2}
+\newcommand{\docauthor}{Andrés Herrera Poyatos}
+\newcommand{\docaddress}{Universidad de Granada}
+\newcommand{\docemail}{andreshp9@gmail.com}
+\newcommand{\docabstract}{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+
+\subsection{Notación y terminología}
+
+En esta sección haremos una pequeña introducción a los problemas que abordaremos
+en esta asignatura. Vamos a estudiar propiedades de las soluciones de una ecuación
+diferencial de la que no podemos calcular explícitamente las mismas. Estudiaremos
+ecuaciones diferenciales ordinarias (a partir de ahora EDO) de la forma:
+
+$$ x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D \text{ dominio} $$
+
+donde $f: D \subset \R*\R^d \to \R^d$
+\begin{itemize}
+    \item $D$: dominio de la ecuación. Es un conjunto abierto y arco-conexo.
+    \item $f$: campo
+    \item $t$: variable independiente
+    \item $x(t)$: función incógnita o variable dependiente. En lo que sigue, por
+    comodidad, la notaremos simplemente por $x$, sin especificar la variable de la
+    que depende.
+\end{itemize}
+
+\begin{ex} Veamos algunos ejemplos que abordaremos:\\
+    EDO escalar:
+    $$ x' = \frac{x}{t}, t > 0, D = (0, +\infty)* \R$$
+    Sistema de EDO:
+    \[
+    \left.
+    \begin{array}{r}
+        x_1' = x_1x_2 + t \\
+        x_2 = x_1 + x_2 + t^2
+    \end{array}
+    \right\}
+    \]
+    Donde $D = \R * \R^2$ y $f(t, x_1, x_2) = (x_1x_2 + t, x_1 + x_2 + t^2)$
+\end{ex}
+
+\begin{definition} Concepto de solución:\\
+    Una solución de una EDO es una función $\varphi: I \to \R^d$, $I$ intervalo
+    abierto no vacío, tal que:
+    \begin{enumerate}
+        \item $\varphi \in \mathcal{C}^1(I, \R^d)$
+        \item $(t, \varphi(t)) \in D$
+        \item $\varphi'(t) = f(t, \phi(t))$
+    \end{enumerate}
+
+\end{definition}
+
+\begin{definition} Problema de valores iniciales:\\
+    Un problema de valores iniciales o problema de Cauchy (de aquí en adelante PVI)
+    consiste en añadir a una EDO un dato inicial, que consiste en el par $(t_0, x_0) \in D$.
+    Normalmente se nota como:
+    \[
+    \left\{
+    \begin{array}{l}
+        x' = f(t,x) \\
+        x(t_0) = x_0
+    \end{array}
+    \right.
+    \]
+    Una solución del PVI es una solución de la EDO que cumple, además:
+    \begin{enumerate}
+        \item $t_0 \in I$
+        \item $\varphi(t_0) = x_0$
+    \end{enumerate}
+\end{definition}
+
+\subsection{Unicidad de solución y soluciones maximales}
+
+Dado un PVI:
+\[
+(P) = \left\{
+\begin{array}{l}
+    x' = f(t,x) \\
+    x(t_0) = x_0
+\end{array}
+\right.
+\]
+Denotamos como $\sum = \sum(P) = \{(I, \varphi), \varphi: I \to \R^d \text{ es solución
+de } (P)\}$. Diremos que $(\tilde{I}, \tilde{\varphi}) \in \sum$, es una prologación
+de $(I, \varphi) \in \sum$ si $I \subsetneq \tilde{I}$ y $\tilde{\varphi}_{|I} = \varphi$.
+Un elemento de $\sum$ es prolongable si admite una prolongación. Si $(\tilde{I},
+\tilde{\varphi})$ es una prolongación de $(I, \varphi)$, lo notaremos como $(I, \varphi)
+>> (\tilde{I}, \tilde{\varphi})$. Diremos que $(I, \varphi)$ es maximal si no es
+prolongable.
+
+\subsubsection{Conceptos de unicidad}
+
+Diremos que $(P)$ verifica la propiedad de unicidad local si dadas $(I_1, \varphi_1),
+(I_2, \varphi_2) \in \sum, \exists H$ intervalo abierto, tal que $\varphi_1(t) =
+\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$, $t_0 \in H$.\\
+
+Diremos que $(P)$ verifica la propiedad de unicidad en $H$, con $H$ intervalo abierto
+y $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
+$\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$.\\
+
+Finalmente, diremos que $(P)$ verifica la propiedad de unicidad global si dadas
+$(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que $\varphi_1(t) =
+\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.\\
+
+\begin{lemma}
+    Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones de un PVI
+    tales que $\exists \tau \in I_1 \cap I_2$ tal que $\varphi_1(\tau) = \varphi_2(\tau)$.
+    Entonces
+    \[
+    \psi(t) = \left\{
+    \begin{array}{l}
+        \varphi_1(t) \quad t \leq \tau \\
+        \varphi_2(t) \quad t > \tau
+    \end{array}
+    \right.
+    \]
+    es solución del PVI.
+\end{lemma}
+
+\begin{lemma}
+    Si $\forall (t_0, x_0) \in D$ el PVI
+    \[
+    \left\{
+    \begin{array}{l}
+        x' = f(t,x) \\
+        x(t_0) = x_0
+    \end{array}
+    \right.
+    \]
+    unicidad global
+\end{lemma}
+
+\begin{proof}
+    Sean $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum (P)$. Definimos $H = \{ t \in
+    I_1 \cap I_2; \varphi_1(t) = \varphi_2(t)\}$. Tenemos que:
+    \begin{itemize}
+        \item $H \neq \emptyset \quad (t_0 \in H)$
+        \item $H$ es un cerrado relativo por ser el conjunto donde coinciden dos
+        funciones continuas.
+        \item $H$ es abierto. Veamos la demostración:\\
+        Sea $\tau \in H$ y consideremos el PVI $(\tilde{P})=\{x'= f(t, x), x(\tau)
+        = \varphi_1(\tau)\}$. Por la propiedad de unicidad local $\exists \tilde{H}$
+        intervalo con $\tau \in \tilde{H} = \dot{\tilde{H}}$ tal que $\varphi_1(t) =
+        \varphi_2(t) \quad \forall t \in \tilde{H} \cap I_1 \cap I_2 \Rightarrow
+        \tilde{H} \cap I_1 \cap I_2 \subset H$
+    \end{itemize}
+    Esto implica que $H = I_1 \cap I_2$, y por tanto se verifica la propiedad de
+    unicidad local.
+\end{proof}
+
+\subsection{Ecuación integral de Volterra}
+
+Dada una solución del PVI
+\[
+  \left\{
+    \begin{array}{l}
+      x' = f(t,x) \\
+      x(t_0) = x_0
+    \end{array}
+  \right.
+\]
+$x'(s) = f(s,x(s))$ para todo $s$ en un intervalo. Si integramos la expresión, obtenemos:
+$$ \int_{t_0}^t x'(s)ds = \int_{t_0}^tf(s,x(s))ds \Rightarrow x(t) = x_0 + \int_{t_0}^t f(s, x(s))ds $$
+A esta ecuación se le conoce como ecuación integral de Volterra. Sea $\varphi: I \to \R^d$ con $I$
+intervalo abierto. Diremos que es solución de la ecuación integral de Volterra si:
+
+\begin{itemize}
+\item $\varphi \in \mathcal{C}(I, \R^d)$
+\item $(t, \varphi(t)) \in D \quad \forall t \in I$
+\item $t_0 \in I$
+\item $\forall t \in I \Rightarrow \varphi(t) = x_0 + \displaystyle\int_{t_0}^t f(s, \varphi(s))ds$
+\end{itemize}
+
+Veamos ahora una proposición que conecta el concepto de PVI con la ecuación integral de Volterra:
+
+\begin{prop}
+  Sea $\varphi: I \to \R^d$, $I$ intervalo abierto. Son equivalentes:
+  \begin{enumerate}
+  \item $\varphi$ es solución del PVI
+  \item $\varphi$ es solución de la ecuación integral de Volterra
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  La demostración se basa en deducir las propiedades de las soluciones del PVI a partir de las de
+  las soluciones de la EIV y viceversa. Las propiedades 2 y 3 son comunes para las soluciones del
+  PVI y de la EIV. Empezamos deduciendo las propiedades de la EIV a partir de las del PVI:
+  \begin{enumerate}
+  \item La derivabilidad de la solución del PVI nos implica la continuidad de la solución de la EIV
+  \item Para ver la propiedad cuatro, integramos entre $t_0$ y $t$ la igualdad
+    $\varphi'(t) = f(t, \varphi(t))$ y la obtenemos inmediatamente
+  \end{enumerate}
+  Vemos ahora las propiedades de las soluciones del PVI a partir de las de la EIV.  Usando el
+  teorema fundamental del cálculo, tenemos que $\varphi'(t) = 0 + f(t, \varphi(t))$.  Esto implica
+  que $\varphi$ es derivable en $I$, y que cumple la tercera propiedad de las soluciones del
+  PVI. Finalmente, tenemos que
+    $$ \varphi(t_0) = x_0 + \sum_{t_0}^{t_0} f(s, \varphi(s))ds = x_0 $$
+  \end{proof}
+
+  Vamos a ver un ejemplo de cómo se relacionan los dos conceptos que hemos estado tratando:
+
+\begin{ex}
+  \textbf{Enunciado:} Resolver la EIV: $x(t) = 8 + \displaystyle\int_0^t x(s)^2 ds$\\
+
+  \textbf{Solución:} Derivando la EIV respecto de $t$, obtenemos el PVI:
+  \[
+    \left\{
+      \begin{array}{l}
+        x'(t) = x(t)^2 \\
+        x(0) = 8
+      \end{array}
+    \right. \Rightarrow \frac{dx}{dt} = x^2 \Rightarrow \frac{dx}{x^2} = dt
+  \]
+  Discutimos el caso de las soluciones constantes primero. Para que la solución sea constante,
+  tenemos que $x' = x^2$, que sólo ocurre si $x(t) = 0 \quad \forall t$.  Esto no es posible ya que
+  tenemos que $x(0) = 8$. Por tanto, no tenemos soluciones constantes. Discutimos ahora el caso de
+  las soluciones no constantes. Integrando en ambos miembros de la igualdad de la derecha, obtenemos
+  lo siguiente:
+
+    $$ \int \frac{dx}{x^2} = \int dt \Rightarrow \frac{-1}{x} = t + c \Rightarrow
+    x = \frac{1}{-t-c} $$
+
+    Y usando el dato inicial tenemos que $ 8 = \frac{1}{-c} \Rightarrow c = \frac{-1}{8}$, por lo
+    que tenemos que el candidato a solución es $x = \frac{8}{1-8t}$. Definimos
+    $\varphi: (-\infty, \frac{1}{8}) \to \R$ con $\varphi(t) = \frac{8}{1-8t}$ y comprobamos que sea
+    solución:
+
+    $$ \varphi(0) = 8 \quad \quad \varphi'(t) = \frac{64}{(1-8t)^2} = \varphi^2(t) $$
+
+    Es solución del PVI, lo que implica que es solución de la EIV de partida por el teorema
+    anterior.
+  \end{ex}
+
+  \textbf{Operador integral}\\
+
+  Dada la EIV $ x(t) = x_0 + \displaystyle\int_{t_0}^t f(s, x(s)) ds $, queremos definir un operador
+  de la siguiente manera:
+  \[\arraycolsep=1pt\def\arraystretch{1}
+    \begin{array}{llll}
+      V: & E \to F     &           & \\
+         & y \to V(y): & I \to R^d & \\
+         &             & t \to V(y)(t) & := x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds
+    \end{array}
+  \]
+  Para definir después la siguiente sucesión recurrente:
+  \[
+    \left\{
+      \begin{array}{l}
+        y_0 \in E \\
+        y_{n+1} = V(y_n), \quad y_n \in E
+      \end{array}
+    \right.
+  \]
+
+  Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
+
+\subsection{Algunos teoremas de existencia y unicidad}
+
+\begin{thm}[Existencia y unicidad en variables separadas]
+  ...
+\end{thm}
+
+\begin{thm}[Teorema de unicidad de Peano]
+  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y $f \in \mathcal{C}(D)$.
+\end{thm}
+
+\section{Existencia y unicidad de solución} \label{sec:eu}
+
+\subsection{Herramientas previas}
+
+\subsubsection{Funciones lipschitzianas}
+
+\subsubsection{Operador integral de Volterra}
+
+Introducimos la siguiente notación. Dado $(t_0, x_0) \in \mathbb{R} \times \mathbb{R}^d$ y dados
+$a,b > 0$ denotamos $R_{a,b}(t_0, x_0) = [t_0+a, t_0-a] \times \overline{B}(x_0, b)$. Consideramos
+el conjunto $E = B(x_0, b) \subset \mathcal{C}([t_0-a, t_0+a]; \mathbb{R}^d)$ con la norma infinito.
+
+\begin{lem}
+  Si $aM \le b$, entonces $V(\varphi) \in E$
+\end{lem}
+
+\begin{lem}
+  Si la función $f$ es lipschitziana respecto de la segunda variable en $R_{a.b}(t_0, x_0)$,
+  entonces
+  \[||V(\varphi) - V(\Psi)||_{\infty} \le La||\varphi - \Psi||_\infty.\]
+\end{lem}
+
+\begin{proof}
+  Sea $t \in [t_0-a, t_0+a]$. Tenemos que
+  \[ (V(\varphi) - V(\Psi))(t) = \int_{t_{0}}^t \left[f(s, \varphi(s)) - f(s, \Psi(s))\right] \diff
+    s.\] Tomamos normas y acotamos la integral
+  \[|(V(\varphi) - V(\Psi))(t)| \le \left|\int_{t_{0}}^t \left|f(s, \varphi(s)) - f(s,
+        \Psi(s))\right| \diff s\right| \le \left|\int_{t_{0}}^t L |\varphi(s) - \Psi(s)| \diff s
+    \right| \le L a ||\varphi - \Psi||_{\infty}\] \qedhere
+\end{proof}
+
+\begin{rem}
+  Si $a M \le B$ y $\varphi: [t_0-a, t_0+a] \to \mathbb{R}^d$ es solución del PVI, entonces
+  $(t, \varphi(t)) \in R_{a,b}$ para todo $t \in (t_0-a, t_0+a)$.
+\end{rem}
+
+\subsection{Teorema de Picard-Lindelöf}
+
+En este apartado estudiamos el Teorema de Picard-Lindelöf, que también se conoce como Teorema de
+Picard, Teorema de Cauchy - Lipschitz o Teorema de Existencia y Unicidad. Es el principal resultado
+de existencia y unicidad de solución para PVIs. Existen numerosas versiones del resultado y, además,
+múltiples demostraciones.
+
+\begin{thm}
+  Sean $D \subset \mathbb{R} \times \mathbb{R}^d$, $f: D \to \mathbb{R}^d$ continua y localmente
+  lipschitziana respecto de la segunda variable. Dado $(t_0, x_0) \in D$, el PVI
+  \begin{equation}
+    \label{eq:pl:pvi}
+    \begin{cases}
+      x' = f(t,x); \\ x(t_0) x_0;
+    \end{cases}
+  \end{equation}
+  tiene solución y es única tanto en sentido local como global.
+\end{thm}
+\begin{proof}
+  Existe $U \subset D$ entorno de $(t_0, x_0)$ y $L \ge 0$ tal que $f$ es lipschitziana respecto de
+  la segunda variable en $U$ con constante de Lipschitz $L \ge 0$. Existen
+  $\overline{a}, b \in \mathbb{R}^+$ tal que $R_{\overline{a},b}(t_0, x_0) \subset U$. Por el
+  teorema de Weierstrass, existe $M = \max R_{\overline{a},b}(t_0, x_0)$. Tomamos
+  $0 < a < \overline{a}$ tal que $a M < b$ y $a L < 1$. En el nuevo recinto $R_{a,b}(t_0, x_0)$ se
+  cumplen todas las propiedades que se requieren para finalizar la demostración. Definimos
+  \[E = \{\varphi \in \mathcal{C}([t_0-a, t_0+a], \mathbb{R}^d): ||\varphi(t)-x_0|| \le b \ \forall
+    t \in [t_0-a, t_0+a]\}.\] Por los lemas anteriores tenemos que $V(E) \subset E$ y $V$ es
+  contractiva. La existencia de solución se deduce del Teorema del punto fijo de Banach. Estudiemos
+  ahora la unicidad del problema. Dadas dos soluciones de \eqref{eq:pl:pvi},
+  $\varphi_1: I_1 \to \mathbb{R}$ y $\varphi_2: I_2 \to \mathbb{R}$ ,existe que además nos
+  proporciona unicidad local en $(t_0, x_0)$.  De la arbitrariedad de $(t_0, x_0)$ deducimos que la
+  EDO verifica la propiedad de unicidad local en cualquier punto $(t_0, x_0) \in D$.
+\end{proof}
+
+Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice además que dado un elemento $\varphi_0 \in E$, la sucesión $\varphi_n = V^n(\varphi)$ converge en norma a la solución de \ref{eq:pl:pvi}. Puesto que estamos usando la norma infinito, esta convergencia equivale a la convergencia uniforme. A la sucesión $\varphi_n$ se le denomina iterantes de Picard.
+
+\begin{ex}[Iterantes de Picard]
+  Consideramos el PVI
+  \begin{equation}
+    \begin{cases}
+      x' = x^2; \\ x(0) = 1.
+    \end{cases}
+  \end{equation}
+  Para este PVI obtenemos $f(t,x) = x^2$. En el entorno $U = \mathbb{R} \times [0,2]$ de $(0,1)$ tenemos que $f$ es lipschitziana respecto de la segunda variable con constante de Lipschitz $L = 4$ y está acotada por $M = 4$. Tomamos pues $a = 1/8$. Podemos definir en $R_{a,b}(0,1)$ las iterantes de Picard.
+\end{ex}
+
+\subsection{Existencia y unicidad de soluciones maximales}
+
+\begin{thm} \label{thm:sol-maximal} Sea $D \subset \mathbb{R} \times \mathbb{R}^d$ un conjunto
+  abierto y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana. Entonces, para cualquier
+  $(t_0, x-0) \in D$ el PVI
+  \begin{equation}
+    \label{eq:sol-maximal:pvi}
+    \begin{cases}
+      x' = f(t,x); x(t_0) = x_0;
+    \end{cases}
+    tiene una única solución maximal.
+  \end{equation}
+\end{thm}
+
+\begin{rem}
+  Para deducir la tesis del Teorema \ref{thm:sol-maximal} es suficiente que exista unicidad
+  global.
+\end{rem}
+
+\begin{proof}
+  Consideramos la familia
+  $\Sigma(P) = \{(I, \varphi) : \varphi:I \to \mathbb{R} \text{ es solución de
+    \eqref{eq:sol-maximal:pvi}}\}$. Definimos $J = \cup_{(I, \varphi) \in \Sigma(P)}} I$, que es un
+intervalo ya que es unión de conexos de $\mathbb{R}$ que tienen un punto en común. Además, $J$ es abierto porque es unión de abiertos. Definimos la función $\Psi : J \to \mathbb{R}^d$ como $\Psi(t) = \varphi(t)$ para algún $(\varphi, I) \in \Sigma(P)$ con $t \in I$. Nótese que la función está bien definida gracias a la unicidad global. Además, $\Psi$ es solución de \eqref{eq:sol-maximal:pvi}. Es claro por construcción que $\Psi$ es solución maximal.
+\end{proof}
+
+Utilizaremos la siguiente notación para indicar el dominio de una solución maximal
+\[\varphi: (\alpha, \omega) \to \mathbb{R}^d \text{ con } -\infty \leq \alpha < t_0 < \omega \leq +\infty.\]
+Algunos autores escriben $(\omega_-, \omega_+)$ en lugar de $(\alpha, \omega)$. No obstante, la notación que hemos escogido nos facilita la escritura.
+
+\subsection{Solución general}
+
+Dado $D \subset \mathbb{R} \times \mathbb{R}^d$ y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana. Fijado $(t_0, x_0) \in D$ denotaremos $\alpha(t_0, x_0)$ y $\omega(t_0, x_0)$ al extremo inferior y superior,, respectivamente, de la solución maximal del PVI asociado a la condición inicial $x(t_0) = x_0$. Definimos el conjunto
+\[\Omega = \{(t, t_0, x_0) \in \mathbb{R}\times\mathbb{R}\times\mathbb{R}^d : (t_0, x_0) \in D, \alpha(t_0, x_0) < t < \omega(t_0, x_0)\}\]
+y la llamada \emph{solución general} $X: \Omega \to \mathbb{R}^d$ a partir del Teorema de Picard-Lindelöf como aquella función diferenciable en la primera variable que verifica $X_t(t, t_0, x_0) = f(t, X(t, t_0, x_0))$ y $X(t_0, t_0, x_0) = x_0$. Esto es, la función $\varphi(t) = X(t, t_0, x_0)$ es la solución del PVI asociado a $(t_0, x_0)$.
+
+\end{document}

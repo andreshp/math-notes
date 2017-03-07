@@ -1,0 +1,347 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ejercicios de ecuaciones diferenciales en variables separadas.
+%
+% Autor: Andrés Herrera Poyatos (https://github.com/andreshp)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+\usepackage{template}
+
+\newcommand{\doctitle}{Apuntes}
+\newcommand{\docsubtitle}{}
+\newcommand{\docdate}{\date}
+\newcommand{\subject}{Modelos matemáticos 2}
+\newcommand{\docauthor}{Andrés Herrera Poyatos}
+\newcommand{\docaddress}{Universidad de Granada}
+\newcommand{\docemail}{andreshp9@gmail.com}
+\newcommand{\docabstract}{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+
+En esta asignatura se resuelven problemas varacionales que aparecen tanto en la física como en la
+biología. El objetivo principal será desarrollar las herramientas que nos permitan abordar estos
+problemas. En este proceso aparecerán múltiples ecuaciones diferenciales ordinarias y problemas de
+contorno.
+
+En primer lugar vamos a ver un ejemplo de este tipo de problemas que motive el desarrollo de la
+teoría.
+
+\begin{ex}[Problema de la cuerda mínima] \label{ex:intro}
+  Sean $(x_0, y_0)$ y $(x_1, y_1)$ dos puntos del plano. Consideramos todas las cuerdas que van
+  desde $(x_0, y_0)$ a $(x_1, y_1)$ y nos preguntamos cuál es la cuerda de longitud mínima. La
+  respuesta a este problema debería ser el segmento que une ambos puntos. No obstante, la
+  demostración de este hecho no es tan evidente. Una cuerda es una curva continua que tiene su
+  origen en $(x_0, y_0)$ y termina en $(x_1, y_1)$. En este momento nos centramos en aquellas curvas
+  que son la gráfica de una función con el objetivo de simplificar el problema. Parece evidente que
+  el resto de curvas no van a tener longitud mínima aunque no disponemos una prueba de este hecho
+  todavía. Además, exigimos que las curvas sean de clase uno. En resumen, consideramos solamente el
+  siguiente conjunto de curvas
+  \[\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
+    y_0, y(x_1) = y_1\}.\] Recordemos que la longitud de una curva $y \in \mathcal{C}^1([x_0, x_1])$
+  viene dada por $\int_{x_0}^{x_1} |y'(x)| \diff x$. Por tanto, buscamos aquel elemento
+  $\overline{y} \in \mathcal{D}$ que minimice el funcional $\mathcal{F}: \mathcal{D} \to \mathbb{R}$
+  dado por
+  \[\mathcal{F}[y] = \int_{x_0}^{x_1} \sqrt{1 + y'(x)^2} \diff x.\]
+  Esta cuestión se denomina \emph{formulación variacional del problema}. Supongamos que existe
+  $\overline{y} \in \mathcal{D}$ mínimo de $\mathcal{F}$ y busquemos alguna condición necesaria que
+  debe verificar tal mínimo. Nótese que para cualquier
+  $\phi \in \mathcal{C}^1_0([x_0, x_1]) = \{\varphi \in \mathcal{C}^1([x_0, x_1]): \varphi(x_0) = 0
+  = \varphi(x_1)\}$ y $s \in \mathbb{R}$ se tiene que $\overline{y} + s \phi \in \mathcal{D}$ y, por
+  tanto, $\mathcal{F}[\overline{y}] \le \mathcal{F}[\overline{y} + s \phi]$. Esto es, $0$ es el
+  mínimo global de la función $f: \mathbb{R} \to \mathbb{R}$ dada por
+  $f(s) = \mathcal{F}[\overline{y} + s \phi]$. Esta función es derivable gracias a la regla de
+  Leibniz y su derivada viene dada por
+  \[f'(s) = \int_{x_0}^{x_1} \frac{\phi'(x)(\overline{y}'(x) + s \phi'(x))}{\sqrt{1 +
+        (\overline{y}'(x) + s \phi'(x))^2}} \diff x.\] Puesto que $f'(0) = 0$, hemos obtenido que
+  $\overline{y}$ verifica
+  \begin{equation} \label{eq:ex:fdp} 0 = \int_{x_0}^{x_1} \frac{\phi'(x) \overline{y}'(x)}{\sqrt{1 +
+        \overline{y}'(x)^2}} \diff x.
+  \end{equation}
+  Supongamos que $\overline{y} \in \mathcal{C}^2([x_0, x_1])$. En tal caso podemos integrar
+  \eqref{eq:ex:fdp} por partes con $u = \overline{y}'/\sqrt{1 + \overline{y}'(x)^2}$ y
+  $\diff v = \phi'(x)$ para obtener
+  \begin{equation} \label{eq:ex:fd} 0 = -\int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial
+      x}\frac{\overline{y}'(x)}{\sqrt{1 + \overline{y}'(x)^2}} \diff x.
+  \end{equation}
+  A la búsqueda de aquellas funciones $\overline{y} \in \mathcal{D}$ que verifican \eqref{eq:ex:fd}
+  para cualquier $\phi \in \mathcal{C}^1_0([x_0, x_1])$ se le llama \emph{formulación débil del
+    problema}. En la Sección \ref{sec:pv} veremos una versión básica del Lema fundamental del Cálculo de
+  Variaciones, que aplicamos a \eqref{eq:ex:fd} para obtener que $\overline{y}$ verifica la
+  siguiente ecuación diferencial ordinaria
+  \begin{equation} \label{eq:ex:edo} \frac{\partial}{\partial x}\frac{\overline{y}'(x)}{\sqrt{1 +
+        \overline{y}'(x)^2}} = 0.
+  \end{equation}
+  A esta ecuación diferencial se le denomina ecuación de Euler-Lagrange. Recordemos que además
+  tenemos que $\overline{y}(x_0) = 0 = \overline{y}(x_1)$ y, por tanto, la función $\overline{y}$ es
+  solución de un problema de contorno, que se denomina \emph{formulación clásica del problema}. En
+  este caso el problema de contorno tiene fácil solución. En efecto, desarrollando \eqref{eq:ex:edo}
+  obtenemos que
+  \[\frac{\overline{y}''(x)}{\sqrt{1 + \overline{y}'(x)^2}} = 0,\]
+  esto es, $\overline{y}'' = 0$ y, por tanto, $\overline{y}(x) = ax+b$ para ciertos
+  $a, b \in \mathbb{R}$. Las condiciones de contorno implican que $\overline{y}$ debe ser el
+  segmento que une $(x_0, y_0)$ con $(x_1, y_1)$. En resumen, si la solución fuese de clase 2,
+  entonces es el segmento que une ambos puntos.
+\end{ex}
+
+En lo que sigue demostraremos que bajo determinadas condiciones las soluciones de la ecuación de
+Euler-Lagrange siempre son soluciones de nuestro problema variacional e intentaremos rebajar cada
+una de las hipótesis que se han asumido a lo largo del ejemplo.
+  
+\section{Problemas varacionales} \label{sec:pv}
+
+\begin{definition} \label{def:pv} Sea $I = [x_0, x_1] \subset \mathbb{R}$ y sea
+  $\Omega \subset \mathbb{R}^2$ un dominio. Consideramos $F: I \times \Omega \to \mathbb{R}$
+  derivable y un conjunto no vacío
+  \[\mathcal{D} \subset \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega\}\]
+  que puede ser de una de las siguientes formas:
+  \begin{enumerate}
+  \item $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega\};$
+  \item
+    $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
+    y_0\}$ para cierto valor $y_0$;
+  \item
+    $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_1p) =
+    y_1\}$ para cierto valor $y_1$;
+  \item
+    $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
+    y_0, y(x_1) = y_1\}$ para ciertos valores $y_0$ e $y_1$.
+  \end{enumerate}
+
+  Definimos el funcional $\mathcal{F}: \mathcal{D} \to \mathbb{R}$ como
+  \[\mathcal{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) \diff x.\]
+  Un problema variacional consiste en encontrar el mínimo o máximo de $\mathcal{F}$ en caso de que
+  exista.
+\end{definition}
+
+En lo que sigue denotaremos $x,y$ y $p$ a las tres variables de $F$. También denotaremos $F_x$,
+$F_y$ y $F_p$ a sus primeras derivadas parciales respectivamente.
+
+Vamos a reproducir en este contexto general el argumento que se desarrolló en el Ejemplo
+\ref{ex:intro}. Como se avisó en este ejemplo necesitaremos utilizar el Lema fundamental del Cálculo
+de Variaciones.
+
+\begin{thm}[Versión básica del Lema fundamental del Cálculo de Variaciones]
+  Sea $f \in \mathcal{C}([x_0, x_1])$. Entonces, $f = 0$ si, y solo si, para cualquier
+  $\phi \in \mathcal{C}^1_0([x_0, x_1])$ se tiene
+  \[\int_{x_0}^{x_1} f(x) \phi(x) \diff x = 0.\]
+\end{thm}
+\begin{proof}
+  Es claro que si $f = 0$ entonces se verifica la segunda afirmación. Veamos que el recíproco
+  también es cierto. Razonamos por el contrarrecíproco. Supongamos que existe $x_2 \in [x_0, x_1]$
+  tal que $|f(x_2)| > 0$. Como $f$ es continua, existe un intervalo abierto
+  $J = ]a,b[ \subset ]x_0, x_1[$ tal que $f(x)f(x_2) > 0$ para todo $x \in J$. Definimos la función
+  $\phi \in \mathcal{C}^1_0([x_0, x_1])$
+  \[ \phi(x) = \begin{cases} \cos\left(\pi\frac{x-(a+b)/2}{b-a}\right) + 1 & \text{ si } x \in J; \\
+      0 & \text{ en caso contrario}.\end{cases}\] Nótese que $\phi(x) > 0$ para todo $x \in J$. Por
+  tanto, obtenemos que
+  \[\int_{x_0}^{x_1} f(x) \phi(x) \diff x \ne 0,\]
+  como se quería.
+\end{proof}
+
+\begin{thm} \label{thm:el} Consideremos un problema variacional. Si
+  $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2([x_0, x_1])$ es un mínimo de $\mathcal{F}$,
+  entonces $\overline{y}$ cumple la ecuación diferencial
+  \[F_y(x, y(x), y'(x)) - \frac{\partial}{\partial x} F_p(x, y(x), y'(x)) = 0.\] A esta ecuación se
+  le denomina ecuación de Euler-Lagrange y por comodidad la escribiremos como
+  \[F_y - \frac{\partial}{\partial x} F_p = 0.\]
+\end{thm}
+\begin{proof}
+  Supongamos que $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2([x_0, x_1])$ es un mínimo de
+  $\mathcal{F}$. Consideremos $\phi \in \mathcal{C}^1_0([x_0, x_1])$. Utilizando la compacidad de la
+  imagen de $\overline{y}$ y que $\Omega$ es abierto es sencillo ver que existe $\varepsilon > 0$
+  tal que $\overline{y} + s \phi \in \mathcal{D}$ para todo $s \in ]s-\varepsilon,
+  s+\varepsilon[$. Puesto que $\overline{y}$ es mínimo global de $\mathcal{F}$, obtenemos que
+  $\mathcal{F}[\overline{y}] \le \mathcal{F}[\overline{y} + s \phi]$ para todo
+  $s \in ]s-\varepsilon, s+\varepsilon[$. Esto es, $0$ es el mínimo global de la función
+  $f: ]s-\varepsilon, s+\varepsilon[ \to \mathbb{R}$ dada por
+  $f(s) = \mathcal{F}[\overline{y} + s \phi]$. Escribimos por comodidad
+  $\#(x, s) = (x, \overline{y}(x) + s \phi(x), \overline{y}'(x) + s \phi'(x))$. La función $f$ es
+  derivable gracias a la regla de Leibniz y su derivada se corresponde con
+  \[f'(s) = \int_{x_0}^{x_1} \frac{\partial}{\partial s} F(\#(x, s)) \diff x = \int_{x_0}^{x_1}
+    F_y(\#(x, s)) \phi(x) + F_p(\#(x, s)) \phi'(x) \diff x.\] Puesto que $f'(0) = 0$, hemos obtenido
+  que $\overline{y}$ verifica
+  \begin{equation} \label{eq:el:fdp} 0 = f'(0) = \int_{x_0}^{x_1} F_y(\#(x, 0)) \phi(x) +
+    \int_{x_0}^{x_1} F_p(\#(x, 0)) \phi'(x) \diff x.
+  \end{equation}
+  Por hipótesis $\overline{y} \in \mathcal{C}^2([x_0, x_1])$ y, por tanto, podemos integrar el
+  segundo sumando de \eqref{eq:el:fdp} por partes con $u = F_p(\#(x, 0))$ y $\diff v = \phi'(x)$
+  para obtener
+  \begin{equation} \label{eq:el:fdp:2} 0 = \left[F_p(\#(x, 0)) \phi(x)\right]_{x_0}^{x_1} -
+    \int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x = - \int_{x_0}^{x_1}
+    \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x.
+  \end{equation}
+  En vista de \eqref{eq:el:fdp:2} podemos escribir \eqref{eq:el:fdp} como sigue
+  \begin{equation} \label{eq:el:fd} 0 = \int_{x_0}^{x_1} \left(F_y(\#(x, 0)) -
+      \frac{\partial}{\partial x} F_p(\#(x, 0))\right) \phi(x) \diff x.
+  \end{equation}
+  
+  Aplicamos el Lema fundamental del Cálculo de Variaciones a \eqref{eq:el:fd} para obtener que
+  $\overline{y}$ verifica la siguiente ecuación diferencial ordinaria
+  \begin{equation} \label{eq:ex:edo} 0 = F_y(x, \overline{y}(x), \overline{y}'(x)) -
+    \frac{\partial}{\partial x} F_p(x, \overline{y}(x), \overline{y}'(x))
+  \end{equation}
+  como se quería.
+\end{proof}
+
+En este punto estudiamos cada una de las tres posibles definiciones del conjunto $\mathcal{D}$ por
+separado con el fin de comprobar que los mínimos de $\mathcal{F}$ también verifican dos condiciones
+de contorno. En efecto, tenemos los siguientes casos:
+
+\begin{enumerate}
+\item El conjunto $\mathcal{D}$ es de la forma
+  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) = y_0, y(x_1) =
+  y_1\}$ para ciertos valores $y_0$ e $y_1$. En tal caso las condiciones de contorno son
+  $y(x_0) = y_0$ e $y(x_1) = y_1$.
+\item $\mathcal{D}$ es de la forma
+  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega\}$. En tal caso podemos
+  repetir el razonamiento realizado en la demostración del Teorema \ref{thm:el} para
+  $\phi \in \mathcal{C}^{1}([x_0, x_1])$ obteniendo
+  \begin{equation} \label{eq:contorno:fdp} 0 = \int_{x_0}^{x_1} \left(F_y(\#(x, 0)) -
+      \frac{\partial}{\partial x} F_p(\#(x, 0))\right) \phi(x) \diff x + \left[F_p(\#(x, 0))
+      \phi(x)\right]_{x_0}^{x_1}.
+  \end{equation}
+  No obstante, ya sabemos que $\overline{y}$ verifica la ecuación de Euler-Lagrange y, por tanto,
+  \eqref{eq:contorno:fdp} se puede simplificar para obtener
+  \begin{equation} \label{eq:contorno:fdp:2} 0 = F_p(x_1, \overline{y}(x_1), \overline{y}'(x_1))
+    \phi(x_1) - F_p(x_0, \overline{y}(x_0), \overline{y}'(x_0)) \phi(x_0).
+  \end{equation}
+  Puesto que \eqref{eq:contorno:fdp:2} es válida para cualquier $\phi$ podemos escoger $\phi$
+  verificando $\phi(x_0) = 0$ y $\phi(x_1) = 1$, obteniendo que
+  $F_p(x_1, \overline{y}(x_1), \overline{y}'(x_1)) = 0$. Análogamente deducimos que
+  $F_p(x_0, \overline{y}(x_0), \overline{y}'(x_0)) = 0$.
+\item $\mathcal{D}$ es de la forma
+  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) = y_0\}$ para
+  cierto valor $y_0$. Razonamos de forma análoga a b) para obtener las condiciones de contorno
+  $y(x_0) = y_0$ y $F_p(x_1, \overline{y}(x_1), \overline{y}'(x_1)) = 0$.
+\item $\mathcal{D}$ es de la forma
+  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_1p) = y_1\}$ para
+  cierto valor $y_1$. Razonamos de forma análoga a b) para obtener las condiciones de contorno
+  $y(x_1) = y_1$ y $F_p(x_0, \overline{y}(x_0), \overline{y}'(x_0)) = 0$.
+\end{enumerate}
+
+\begin{definition}
+  En el contexto actual, el problema de contorno que hemos obtenido se denomina problema de contorno del problema variacional. A las soluciones del problema de contorno se les llaman extremales.
+\end{definition}
+
+Cuando pretendamos resolver un problema variacional el primer paso será calcular las extremales asociadas. La ecuación de Euler-Lagrange no siempre es sencilla de resolver. No obstante, en la práctica la función $F$ puede no depender de alguna de las variables $x$, $y$ o $p$. En tal caso la resolución de la ecuación de Euler-Lagrange se simplifica enormemente como mostramos a continuación.
+
+\begin{enumerate}
+\item La función $F$ no depende de de $x$. En tal caso tenemos que
+  \[\frac{\partial}{\partial x} \left(F(\overline{y}(x), \overline{y}'(x)) - \overline{y}(x) F_p(\overline{y}(x), \overline{y}'(x))\right) = \overline{y} \left(F_y(\overline{y}(x), \overline{y}'(x)) - \frac{\partial}{\partial x} F_p(\overline{y}(x), \overline{y}'(x))\right) = 0.\]
+  Consecuentemente, los extremales son aquellas soluciones de las ecuaciones
+  \begin{equation}
+    \label{eq:el:x}
+    F(\overline{y}(x), \overline{y}'(x)) = \overline{y}(x) F_p(\overline{y}(x), \overline{y}'(x)) + k
+  \end{equation}
+  para $k \in \mathbb{R}$ arbitrario que verifican las condiciones de contorno. Estas ecuaciones suelen ser más sencillas de resolver ya que solo intervienen $F$ y $F_p$.
+  \item La función $F$ no depende de de $x$. En tal caso, la ecuación de Euler-Lagrange se simplifica enormemente, obteniendo que los extremales son aquellas soluciones de las ecuaciones
+  \begin{equation}
+    \label{eq:el:y}
+    F_p(x, \overline{y}'(x)) = k
+  \end{equation}
+  para $k \in \mathbb{R}$ arbitrario que verifican las condiciones de contorno. Este es el caso del Ejemplo \ref{ex:intro}.
+\end{enumerate}
+
+\section{Problemas de contorno}
+
+\subsection{Forma autoadjunta}
+
+\begin{ex}
+  
+\end{ex}
+
+\begin{ex}
+  Resultado análogo para condiciones Newmann no homogéneas ($y'(x_0) = y_0$, $y'(x_1) = y_1$ ).
+\end{ex}
+
+\begin{ex}
+  
+\end{ex}
+
+\begin{equation}
+  \label{eq:sturm:ec}
+  (Py')' + Qy = R
+\end{equation}
+
+\begin{equation}
+  \label{eq:sturm:eh}
+  (Py')' + Qy = 0
+\end{equation}
+
+Consideramos las condiciones de contorno separadas
+\begin{equation}
+  \label{eq:sturm:sep}
+  \begin{cases}
+    a_0 y(x_0) + b_0 y'(x_0) = 0; \\ a_1 y(x_1) + b_1 y'(x_1) = 0;
+  \end{cases}
+\end{equation}
+donde $|a_0| + |b_0| > 0$, y las condiciones periódicas
+
+\begin{equation}
+  \label{eq:sturm:ped}
+  \begin{cases}
+    y(x_0) = y(x_1); \\ y'(x_0) = y'(x_1).
+  \end{cases}
+\end{equation}
+
+Ya sabemos resolver los problemas homogéneos. A partir de las soluciones de los problemas homogéneos
+nos planteamos resolver los problemas completos. Esta resolución se enuncia en el siguiente
+resultado.
+
+\begin{thm}[Alternativa de Fredholm]
+  Se cumple una de estas alternativas (para \eqref{eq:sturm:sep} o \eqref{eq:sturm:per}):
+  \begin{enumerate}
+  \item El problema homogéneo tiene como única solución a $y = 0$, en cuyo caso el problema completo
+    tiene una única solución.
+  \item El problema homogéneo tiene más de una solución (un espacio vectorial de dimensión $1$ o
+    $2$), en cuyo caso el problema completo tiene solución si, y solo si, para cualquier solución
+    $y$ del problema homogéneo
+    \[\int_{x_0}^{x_1}R(s) y(s) \diff s = 0,\]
+    en cuyo caso cada solución del problema homogéneo determina una única solución del problema
+    completo.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Vamos a escribir las soluciones de (EC). Sea $\{\phi_1, \phi_2\}$ un SFS de (EH). Entonces, una
+  solución $y$ de (EC) es de la forma
+  \[y(x) = y_p(x) + y_h(x) = y_p(x) + A \phi_1 + B\phi_2\] para ciertos $A, B \in \mathbb{R}$ e
+  $y_p$ es una solución particular de (EC), que se puede calcular mediante la fórmula de variación
+  de las constantes, esto es,
+  \[y_p(x) = \int_{x_0}^x \frac{R(s)}{W(x_0) P(x_0)} ((\phi_2(x) \phi_1(s) - \phi_2(s) - \phi_1(x))
+    \diff s)\] En este punto estudiamos el resultado para distintos problemas de contorno.
+  \begin{itemize}
+  \item Caso Dirichlet. Las condiciones son $y(x_0) = 0 = y(x_1)$. Puedo suponer que
+    $\phi_1(x_0) = 1$, $\phi_1'(x_0) = 0$, $\phi_2(x_0) = 0$ y $\phi_2'(x_0) = 1$. Evaluando $y$ en
+    las condiciones de contorno obtenemos el sistema
+    \[\left(
+        \begin{array}{cc}
+          1 & 0 \\ 0 & \phi_2(x_1) \\
+        \end{array}
+      \right) \left(
+        \begin{array}{c}
+          A \\ B
+        \end{array}
+      \right) = \left(
+        \begin{array}{c}
+          0 \\ \beta
+        \end{array}
+      \right),
+    \]
+    donde
+    $\beta = -\int_{x_0}^{x_1}\frac{R(s)}{W(x_0) P(x_0)}(\phi_2(x_1) \phi_1(s) - \phi_2(s) -
+    \phi_1(x_1)) \diff s$. Estudiando las soluciones del sistema anterior obtenemos fácilmente el
+    resultado. En efecto, el sistema homogéneo tiene única solución si, y solo si
+    $\phi_2(x_1) \ne 0$. En tal caso, el sistema completo tiene solución única. Si
+    $\phi_2(x_1) = 0$, entonces el sistema previo tendrá solución si, y solo si, $\beta = 0$.  Como
+    $\phi_2(x_1) = 0$ tenemos que $\phi_1(x_1) \ne 0$ gracias a $W(x_1) \ne 0$. Por tanto, la
+    existencia de solución equivale
+    \[\int_{x_0}^{x_1} R(s) \phi_2(s) \diff s = 0.\]
+  \end{itemize}
+\end{proof}
+
+\end{document}

@@ -10,10 +10,10 @@
 
 \section{Estimación de parámetros} \label{sec:estimacion}
 
-Supongamos que estamos estudiando un fenómeno aleatorio que sabemos que sigue una distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$ es un parámetro que no es conocido. Nuestro objetivo es estimar el parámetro $\theta_0$ a partir de una muestra $x_1, \ldots, x_n$. Para ello buscamos una función $T_n$ de manera que podamos decir $\theta_0 \approx T_n(x_1, \ldots, x_n)$.
+Supongamos que estamos estudiando un fenómeno aleatorio que sabemos que sigue una distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$ es un parámetro que no es conocido. Nuestro objetivo es estimar el parámetro $\theta_0$ a partir de una muestra $\utilde{X} = (X_1, \ldots, X_n)$. Para ello buscamos una función $T_n$ de manera que podamos decir $\theta_0 \approx T_n(X_1, \ldots, X_n)$.
 
 \begin{definition}
-    Un estimador puntual es una función medible $T_n(X_1, \ldots, X_n)$ que toma valores en $\Theta$, donde $\Theta$ es el dominio del parámetro a estimar. Una estimación es la evaluación obtenida por un estimador sobre una muestra $x_1, \ldots, x_n$, esto es, $T_n(x_1, \ldots, x_n)$.
+    Un estimador puntual es una función medible $T_n(X_1, \ldots, X_n)$ que toma valores en $\Theta$, donde $\Theta$ es el dominio del parámetro a estimar. Una estimación es la evaluación obtenida por un estimador sobre una realización de la muestra, $\utilde{x} = (x_1, \ldots, x_n)$, esto es, $T_n(x_1, \ldots, x_n)$.
 \end{definition}
 
 Nótese que la nomenclatura es ambigua. Para nosotros una muestra es una secuencia finita de variables aleatorias independientes e idénticamente distribuidas. Sin embargo, a los valores $x_1, \ldots, x_n$ obtenidos en la práctica también se le denomina muestra. Algunos autores evitan esta abigüedad denominando a $x_1, \ldots, x_n$ realización de la muestra. Nosotros distinguiremos entre ambos casos mediante el uso de mayúsculas para denotar variables aleatorias y el uso de minúsculas para denotar valores concretos.
@@ -24,7 +24,7 @@ En múltiples situaciones encontramos estimadores de calidad de forma natural. P
 
 El método de los momentos es, probablemente, el método más antiguo para estimar parámetros. Fue propuesto por Pearson al finales del siglo XIX. En muchos casos los resultados de este método son mejorables. Sin embargo, siempre es un último recurso en el caso de que no podamos aplicar otros métodos.
 
-Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución $f(X |\theta)$ con $\theta = (\theta_1, \ldots, \theta_m) \in \Theta \subset \mathbb{R}^m$. Definimos los momentos de la muestra como $m_j = \frac{1}{n} \sum_{i = 1}^n X_i^j$. En media se debería cumplir que $m_j = E_\theta X^j$ para todo $j$ tal que $E_\theta X^j$ existe. Nótese que $E_\theta X^j = \mu_j(\theta_1, \ldots, \theta_m)$ es una función que depende de $\theta_1, \theta_2, \ldots, \theta_k$. El método de los momentos propone como estimador a una solución del sistema de ecuaciones
+Sea $\utilde{X} = (X_1, \ldots, X_n)$ una muestra de un fenómeno con función de distribución $f(X |\theta)$ con $\theta = (\theta_1, \ldots, \theta_m) \in \Theta \subset \mathbb{R}^m$. Definimos los momentos de la muestra como $m_j = \frac{1}{n} \sum_{i = 1}^n X_i^j$. En media se debería cumplir que $m_j = E_\theta X^j$ para todo $j$ tal que $E_\theta X^j$ existe. Nótese que $E_\theta X^j = \mu_j(\theta_1, \ldots, \theta_m)$ es una función que depende de $\theta_1, \theta_2, \ldots, \theta_k$. El método de los momentos propone como estimador a una solución del sistema de ecuaciones
 \begin{equation} \label{eq:sistema-momentos}
     \begin{matrix}
         m_1 = \mu_1(\theta_1, \ldots, \theta_k), \\
@@ -35,7 +35,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
 \end{equation}
 
 \begin{ex}[Distribución normal]
-    Supongamos que $X_1, \ldots, X_n$ son muestras de una distribución normal $N(\theta, \sigma^2)$. En el contexto anterior, los parámetros a estimar son $\theta_1 = \theta, \theta_2 = \sigma^2$. En este caso el sistema \eqref{eq:sistema-momentos} viene dado por las ecuaciones $\overline{X} = \theta$ y $m_2 = \theta^2 + \sigma^2$. La solución claramente es $\theta = \overline{X}$ y
+    Supongamos que $\utilde{X} = (X_1, \ldots, X_n)$ es una muestra de una distribución normal $N(\theta, \sigma^2)$. En el contexto anterior, los parámetros a estimar son $\theta_1 = \theta, \theta_2 = \sigma^2$. En este caso el sistema \eqref{eq:sistema-momentos} viene dado por las ecuaciones $\overline{X} = \theta$ y $m_2 = \theta^2 + \sigma^2$. La solución claramente es $\theta = \overline{X}$ y
     \[\sigma^2 = \frac{1}{n} \sum_{i = 1}^n X_i^2 - \overline{X}^2 = \frac{1}{n} \sum_{i = 1}^n (X_i - \overline{X})^2.\]
     En este caso, los estimadores obtenidos coinciden con nuestra intuición. Este método es más útil cuando no disponemos de un estimador intuitivo.
 \end{ex}
@@ -45,13 +45,13 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     El método de la máxima verosimilitud es una de las técnicas más utilizada para obtener estimadores de calidad.
 
     \begin{definition}
-        Sea $x_1, \ldots, x_n$ una muestra de un fenómeno con función de distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$. Se define la función de verosimilitud para cada $\theta \in \Theta$ como $L(\theta ; x) = \prod_{i = 1}^n f(x_i| \theta)$.
+        Sea $\utilde{x} = (x_1, \ldots, x_n)$ una realización de una muestra de un fenómeno con función de distribución $f(X | \theta_0)$, donde $\theta_0 \in \Theta$. Se define la función de verosimilitud para cada $\theta \in \Theta$ como $L(\theta ; \utilde{x}) = \prod_{i = 1}^n f(x_i| \theta)$.
     \end{definition}
 
     Para cada posible valor $\theta$ del parámetro a estimar, la verosimilitud proporciona la credibilidad que se le da a $\theta$ para los datos $x_1, \ldots, x_n$. Buscamos una aproximación $\hat{\theta}$ de $\theta_0$ en base a la muestra obtenida. Parece lógico que si asumimos que los datos son correctos, entonces una buena aproximación será aquella en la que los datos sean coherentes, esto es, la probabilidad de que se den datos similares a la muestra observada debe ser lo más alta posible.
 
     \begin{definition}
-        Para cada elemento $x = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Theta$ como un máximo global de $L(\theta ; x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
+        Para cada elemento $\utilde{x} = (x_1, \ldots, x_n)$ del espacio muestral, definimos $\hat{\theta}(x) \in \Theta$ como un máximo global de $L(\theta ; x)$. El estimador máximo verosímil (EMV) de una muestra $X$ se define como $\hat{\theta}(X)$.
     \end{definition}
 
     El estimador máximo verosímil presenta principalmente dos problemas.
@@ -139,7 +139,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \subsubsection{Score, hipótesis de regularidad y función de información de Fisher}
 
     \begin{definition}
-        Sea $\Theta \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de funciones de densidad. Sea $X = (X_1, \ldots, X_n)$ una muestra que sigue una distribución con función de densidad $f(X|\theta_0)$. Si la función de verosimilitud para los valores $x = (x_1, \ldots, x_n)$ es diferenciable en $\theta \in \Theta$, entonces definimos el score de $\theta$ como el gradiente de la función $\log L(x; \theta)$ y lo denotamos $S(x; \theta)$.
+        Sea $\Theta \subset \mathbb{R}^m$ un abierto y sea $\{f(X|\theta): \theta \in \Theta\}$ una familia de funciones de densidad. Sea $X = (X_1, \ldots, X_n)$ una muestra que sigue una distribución con función de densidad $f(X|\theta_0)$. Si la función de verosimilitud para los valores $\utilde{x} = (x_1, \ldots, x_n)$ es diferenciable en $\theta \in \Theta$, entonces definimos el score de $\theta$ como el gradiente de la función $\log L(x; \theta)$ y lo denotamos $S(x; \theta)$.
     \end{definition}
 
     Intuitivamente el score indica la sensibilidad de la verosimilitud en un punto. Nos centraremos en el estudio del score cuando $\Theta$ es un abierto de $\mathbb{R}$. En tal caso
@@ -185,7 +185,7 @@ Sea $X_1, \ldots, X_n$ una muestra de un fenómeno con función de distribución
     \begin{enumerate}[label=\roman*)]
         \item $\Theta$ es un abierto de $\mathbb{R}$.
         \item El conjunto $\{x : f(x | \theta) > 0\}$ es el mismo para todo $\theta \in \Theta$.
-        \item Para cualquier muestra $x = (x_1, \ldots, x_n)$, la verosimilitud $L(x | \theta)$ es dos veces derivable en $\Theta$.
+        \item Para cualquier muestra $\utilde{x} = (x_1, \ldots, x_n)$, la verosimilitud $L(x | \theta)$ es dos veces derivable en $\Theta$.
         \item La verosimilitud es 2 veces derivable. Además, para $i=1,2$ se verifica
         \[\frac{\partial^i}{\partial\theta^i} \int_X f(x | \theta) dx = \int_X \frac{\partial^i}{\partial\theta^i} f(x | \theta) dx.\]
         \item Para cada $\theta \in \Theta$ se tiene $0 < \mathcal{I}(\theta) < +\infty$.
