@@ -22,6 +22,8 @@
     "sec:eu"
     "eq:pl:pvi"
     "thm:sol-maximal"
-    "eq:sol-maximal:pvi"))
+    "eq:sol-maximal:pvi")
+   (LaTeX-add-environments
+    '("ex" LaTeX-env-args ["argument"] 0)))
  :latex)
 

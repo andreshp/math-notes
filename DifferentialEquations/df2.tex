@@ -1,7 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ejercicios de ecuaciones diferenciales en variables separadas.
+% Apuntes de la asignatura ecuaciones diferenciales 2.
 %
-% Autor: Andrés Herrera Poyatos (https://github.com/andreshp)
+% Autores: Andrés Herrera Poyatos (https://github.com/andreshp)
+%          Paco Luque Sánchez (https://github.com/pacron)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %-----------------------------------------------------------------------------------------------------
@@ -32,7 +33,7 @@
 \newcommand{\docsubtitle}{}
 \newcommand{\docdate}{\date}
 \newcommand{\subject}{Ecuaciones Diferenciales 2}
-\newcommand{\docauthor}{Andrés Herrera Poyatos}
+\newcommand{\docauthor}{Andrés Herrera Poyatos \\ Paco Luque Sánchez}
 \newcommand{\docaddress}{Universidad de Granada}
 \newcommand{\docemail}{andreshp9@gmail.com}
 \newcommand{\docabstract}{}
@@ -48,11 +49,10 @@
 En esta sección haremos una pequeña introducción a los problemas que abordaremos
 en esta asignatura. Vamos a estudiar propiedades de las soluciones de una ecuación
 diferencial de la que no podemos calcular explícitamente las mismas. Estudiaremos
-ecuaciones diferenciales ordinarias (a partir de ahora EDO) de la forma:
-
-$$ x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D \text{ dominio} $$
-
+ecuaciones diferenciales ordinarias (a partir de ahora EDO) de la forma
+\[x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D \text{ dominio},\]
 donde $f: D \subset \R*\R^d \to \R^d$
+
 \begin{itemize}
     \item $D$: dominio de la ecuación. Es un conjunto abierto y arco-conexo.
     \item $f$: campo
@@ -140,7 +140,7 @@ Finalmente, diremos que $(P)$ verifica la propiedad de unicidad global si dadas
 $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que $\varphi_1(t) =
 \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.\\
 
-\begin{lemma}
+\begin{lem}
     Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones de un PVI
     tales que $\exists \tau \in I_1 \cap I_2$ tal que $\varphi_1(\tau) = \varphi_2(\tau)$.
     Entonces
@@ -153,9 +153,9 @@ $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que $\varphi_1(t) =
     \right.
     \]
     es solución del PVI.
-\end{lemma}
+\end{lem}
 
-\begin{lemma}
+\begin{lem}
     Si $\forall (t_0, x_0) \in D$ el PVI
     \[
     \left\{
@@ -166,7 +166,7 @@ $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que $\varphi_1(t) =
     \right.
     \]
     unicidad global
-\end{lemma}
+\end{lem}
 
 \begin{proof}
     Sean $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum (P)$. Definimos $H = \{ t \in
@@ -394,8 +394,8 @@ Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice adem�
     \begin{cases}
       x' = f(t,x); x(t_0) = x_0;
     \end{cases}
-    tiene una única solución maximal.
   \end{equation}
+    tiene una única solución maximal.
 \end{thm}
 
 \begin{rem}
@@ -406,7 +406,7 @@ Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice adem�
 \begin{proof}
   Consideramos la familia
   $\Sigma(P) = \{(I, \varphi) : \varphi:I \to \mathbb{R} \text{ es solución de
-    \eqref{eq:sol-maximal:pvi}}\}$. Definimos $J = \cup_{(I, \varphi) \in \Sigma(P)}} I$, que es un
+    \eqref{eq:sol-maximal:pvi}}\}$. Definimos $J = \cup_{(I, \varphi) \in \Sigma(P)} I$, que es un
 intervalo ya que es unión de conexos de $\mathbb{R}$ que tienen un punto en común. Además, $J$ es abierto porque es unión de abiertos. Definimos la función $\Psi : J \to \mathbb{R}^d$ como $\Psi(t) = \varphi(t)$ para algún $(\varphi, I) \in \Sigma(P)$ con $t \in I$. Nótese que la función está bien definida gracias a la unicidad global. Además, $\Psi$ es solución de \eqref{eq:sol-maximal:pvi}. Es claro por construcción que $\Psi$ es solución maximal.
 \end{proof}
 
