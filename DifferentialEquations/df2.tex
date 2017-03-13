@@ -111,79 +111,76 @@ donde $f: D \subset \R*\R^d \to \R^d$
 
 Dado un PVI:
 \[
-(P) = \left\{
-\begin{array}{l}
-    x' = f(t,x) \\
-    x(t_0) = x_0
-\end{array}
-\right.
+  (P) = \left\{
+    \begin{array}{l}
+      x' = f(t,x); \\
+      x(t_0) = x_0.
+    \end{array}
+  \right.
 \]
-Denotamos como $\sum = \sum(P) = \{(I, \varphi), \varphi: I \to \R^d \text{ es solución
-de } (P)\}$. Diremos que $(\tilde{I}, \tilde{\varphi}) \in \sum$, es una prologación
-de $(I, \varphi) \in \sum$ si $I \subsetneq \tilde{I}$ y $\tilde{\varphi}_{|I} = \varphi$.
-Un elemento de $\sum$ es prolongable si admite una prolongación. Si $(\tilde{I},
-\tilde{\varphi})$ es una prolongación de $(I, \varphi)$, lo notaremos como $(I, \varphi)
->> (\tilde{I}, \tilde{\varphi})$. Diremos que $(I, \varphi)$ es maximal si no es
-prolongable.
+
+Denotamos como $\sum = \sum(P) = \{(I, \varphi), \varphi: I \to \R^d \text{ es solución de }
+(P)\}$. Diremos que $(\tilde{I}, \tilde{\varphi}) \in \sum$, es una prolongación de
+$(I, \varphi) \in \sum$ si $I \subsetneq \tilde{I}$ y $\tilde{\varphi}_{|I} = \varphi$.  Un elemento
+de $\sum$ es prolongable si admite una prolongación. Si $(\tilde{I}, \tilde{\varphi})$ es una
+prolongación de $(I, \varphi)$, lo notaremos como $(I, \varphi) >> (\tilde{I},
+\tilde{\varphi})$. Diremos que $(I, \varphi)$ es maximal si no es prolongable.
 
 \subsubsection{Conceptos de unicidad}
 
-Diremos que $(P)$ verifica la propiedad de unicidad local si dadas $(I_1, \varphi_1),
-(I_2, \varphi_2) \in \sum, \exists H$ intervalo abierto, tal que $\varphi_1(t) =
-\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$, $t_0 \in H$.\\
+Diremos que $(P)$ verifica la propiedad de unicidad local si dadas
+$(I_1, \varphi_1), (I_2, \varphi_2) \in \sum, \exists H$ intervalo abierto, tal que $\varphi_1(t) =
+\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$, $t_0 \in H$.
 
-Diremos que $(P)$ verifica la propiedad de unicidad en $H$, con $H$ intervalo abierto
-y $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
-$\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$.\\
+Diremos que $(P)$ verifica la propiedad de unicidad en $H$, con $H$ intervalo abierto y $t_0 \in H$
+si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
+$\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$.
 
 Finalmente, diremos que $(P)$ verifica la propiedad de unicidad global si dadas
 $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que $\varphi_1(t) =
-\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.\\
+\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.
 
 \begin{lem}
-    Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones de un PVI
-    tales que $\exists \tau \in I_1 \cap I_2$ tal que $\varphi_1(\tau) = \varphi_2(\tau)$.
-    Entonces
-    \[
+  Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones de un PVI tales que
+  $\exists \tau \in I_1 \cap I_2$ tal que $\varphi_1(\tau) = \varphi_2(\tau)$.  Entonces
+  \[
     \psi(t) = \left\{
-    \begin{array}{l}
+      \begin{array}{l}
         \varphi_1(t) \quad t \leq \tau \\
         \varphi_2(t) \quad t > \tau
-    \end{array}
+      \end{array}
     \right.
-    \]
-    es solución del PVI.
+  \]
+  es solución del PVI.
 \end{lem}
 
 \begin{lem}
-    Si $\forall (t_0, x_0) \in D$ el PVI
-    \[
+  Si $\forall (t_0, x_0) \in D$ el PVI
+  \[
     \left\{
-    \begin{array}{l}
+      \begin{array}{l}
         x' = f(t,x) \\
         x(t_0) = x_0
-    \end{array}
+      \end{array}
     \right.
-    \]
-    unicidad global
+  \]
+  unicidad global
 \end{lem}
 
 \begin{proof}
-    Sean $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum (P)$. Definimos $H = \{ t \in
-    I_1 \cap I_2; \varphi_1(t) = \varphi_2(t)\}$. Tenemos que:
-    \begin{itemize}
-        \item $H \neq \emptyset \quad (t_0 \in H)$
-        \item $H$ es un cerrado relativo por ser el conjunto donde coinciden dos
-        funciones continuas.
-        \item $H$ es abierto. Veamos la demostración:\\
-        Sea $\tau \in H$ y consideremos el PVI $(\tilde{P})=\{x'= f(t, x), x(\tau)
-        = \varphi_1(\tau)\}$. Por la propiedad de unicidad local $\exists \tilde{H}$
-        intervalo con $\tau \in \tilde{H} = \dot{\tilde{H}}$ tal que $\varphi_1(t) =
-        \varphi_2(t) \quad \forall t \in \tilde{H} \cap I_1 \cap I_2 \Rightarrow
-        \tilde{H} \cap I_1 \cap I_2 \subset H$
-    \end{itemize}
-    Esto implica que $H = I_1 \cap I_2$, y por tanto se verifica la propiedad de
-    unicidad local.
+  Sean $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum (P)$. Definimos
+  $H = \{ t \in I_1 \cap I_2; \varphi_1(t) = \varphi_2(t)\}$. Tenemos que:
+  \begin{itemize}
+  \item $H \neq \emptyset \quad (t_0 \in H)$
+  \item $H$ es un cerrado relativo por ser el conjunto donde coinciden dos funciones continuas.
+  \item $H$ es abierto. Veamos la demostración:\\
+    Sea $\tau \in H$ y consideremos el PVI $(\tilde{P})=\{x'= f(t, x), x(\tau) =
+    \varphi_1(\tau)\}$. Por la propiedad de unicidad local $\exists \tilde{H}$ intervalo con
+    $\tau \in \tilde{H} = \dot{\tilde{H}}$ tal que
+    $\varphi_1(t) = \varphi_2(t) \quad \forall t \in \tilde{H} \cap I_1 \cap I_2 \Rightarrow
+    \tilde{H} \cap I_1 \cap I_2 \subset H$
+  \end{itemize}
+  Esto implica que $H = I_1 \cap I_2$, y por tanto se verifica la propiedad de unicidad local.
 \end{proof}
 
 \subsection{Ecuación integral de Volterra}
@@ -292,14 +289,30 @@ Veamos ahora una proposición que conecta el concepto de PVI con la ecuación in
 
   Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
 
-\subsection{Algunos teoremas de existencia y unicidad}
+  \subsection{Algunos teoremas de existencia y unicidad}
 
 \begin{thm}[Existencia y unicidad en variables separadas]
   ...
 \end{thm}
 
+\begin{definition}
+  \label{def:unicidad-futuro}
+  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y $f \in \mathcal{C}(D)$. Fijamos
+  $(t_0, x_0) \in D$ y consideramos el PVI asociado. Diremos que Diremos que el PVI verifica la
+  propiedad de unicidad en el futuro si tiene unicidad en el intervalo $[t_0, +\infty[$ y,
+  análogamente, diremos que el PVI verifica la propiedad e unicidad en el pasado si tiene unicidad
+  en el intervalo $]-\infty, t_0]$.
+\end{definition}
+
 \begin{thm}[Teorema de unicidad de Peano]
-  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y $f \in \mathcal{C}(D)$.
+  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y $f \in \mathcal{C}(D)$. Fijamos
+  $(t_0, x_0) \in D$ y consideramos el PVI (P) asociado.
+  \begin{enumerate}
+  \item\label{item:peano:a} Si para cada $t \ge t_0$ la función $g(x) = f(t,x)$ es decreciente,
+    entonces (P) verifica la unicidad en el futuro.
+  \item\label{item:peano:b} Si para cada $t \le t_0$ la función $g(x) = f(t,x)$ es creciente,
+    entonces (P) verifica la unicidad en el pasado.
+  \end{enumerate}
 \end{thm}
 
 \section{Existencia y unicidad de solución} \label{sec:eu}
@@ -372,7 +385,10 @@ múltiples demostraciones.
   EDO verifica la propiedad de unicidad local en cualquier punto $(t_0, x_0) \in D$.
 \end{proof}
 
-Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice además que dado un elemento $\varphi_0 \in E$, la sucesión $\varphi_n = V^n(\varphi)$ converge en norma a la solución de \ref{eq:pl:pvi}. Puesto que estamos usando la norma infinito, esta convergencia equivale a la convergencia uniforme. A la sucesión $\varphi_n$ se le denomina iterantes de Picard.
+Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice además que dado un
+elemento $\varphi_0 \in E$, la sucesión $\varphi_n = V^n(\varphi)$ converge en norma a la solución
+de \ref{eq:pl:pvi}. Puesto que estamos usando la norma infinito, esta convergencia equivale a la
+convergencia uniforme. A la sucesión $\varphi_n$ se le denomina iterantes de Picard.
 
 \begin{ex}[Iterantes de Picard]
   Consideramos el PVI
@@ -381,7 +397,10 @@ Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice adem�
       x' = x^2; \\ x(0) = 1.
     \end{cases}
   \end{equation}
-  Para este PVI obtenemos $f(t,x) = x^2$. En el entorno $U = \mathbb{R} \times [0,2]$ de $(0,1)$ tenemos que $f$ es lipschitziana respecto de la segunda variable con constante de Lipschitz $L = 4$ y está acotada por $M = 4$. Tomamos pues $a = 1/8$. Podemos definir en $R_{a,b}(0,1)$ las iterantes de Picard.
+  Para este PVI obtenemos $f(t,x) = x^2$. En el entorno $U = \mathbb{R} \times [0,2]$ de $(0,1)$
+  tenemos que $f$ es lipschitziana respecto de la segunda variable con constante de Lipschitz
+  $L = 4$ y está acotada por $M = 4$. Tomamos pues $a = 1/8$. Podemos definir en $R_{a,b}(0,1)$ las
+  iterantes de Picard.
 \end{ex}
 
 \subsection{Existencia y unicidad de soluciones maximales}
@@ -419,5 +438,96 @@ Algunos autores escriben $(\omega_-, \omega_+)$ en lugar de $(\alpha, \omega)$. 
 Dado $D \subset \mathbb{R} \times \mathbb{R}^d$ y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana. Fijado $(t_0, x_0) \in D$ denotaremos $\alpha(t_0, x_0)$ y $\omega(t_0, x_0)$ al extremo inferior y superior,, respectivamente, de la solución maximal del PVI asociado a la condición inicial $x(t_0) = x_0$. Definimos el conjunto
 \[\Omega = \{(t, t_0, x_0) \in \mathbb{R}\times\mathbb{R}\times\mathbb{R}^d : (t_0, x_0) \in D, \alpha(t_0, x_0) < t < \omega(t_0, x_0)\}\]
 y la llamada \emph{solución general} $X: \Omega \to \mathbb{R}^d$ a partir del Teorema de Picard-Lindelöf como aquella función diferenciable en la primera variable que verifica $X_t(t, t_0, x_0) = f(t, X(t, t_0, x_0))$ y $X(t_0, t_0, x_0) = x_0$. Esto es, la función $\varphi(t) = X(t, t_0, x_0)$ es la solución del PVI asociado a $(t_0, x_0)$.
+
+\section{EDOs autónomas escalares}
+
+Consideramos EDOs de la forma
+\begin{equation}
+  \label{eq:edo:ae}
+  x' = f(x), \ x \in I,
+\end{equation}
+donde $I \subset \R$ es un intervalo abierto y $f : I \to \R$ es una función localmente
+lipschitziana. Para cada $x_0 \in I$ denotamos por $X(t; x_0)$ a la única solución maximal de
+\eqref{eq:edo:ae} que verifica $x(0) = x_0$.
+
+\begin{definition}
+  Se define la órbita de \eqref{eq:edo:ae} asociada a $x_0$ como el conjunto imagen de $X(t; x_0)$ y
+  se denota $\Theta(x_0)$.
+\end{definition}
+
+Nótese que la órbita de \eqref{eq:edo:ae} asociada a $x_0$ es un intervalo, que solamente es trivial
+cuando la solución es constante, lo que sucede si, y solo si, $f(x_0) = 0$.
+
+Como consecuencia del Teorema de Picard-Lindelöf obtenemos fácilmente el siguiente resultado.
+
+\begin{prop}
+  Las órbitas de \eqref{eq:edo:ae} constituyen una partición de $I$. Como consecuencia, si $p$ es un
+  punto de equilibrio de \eqref{eq:edo:ae}, esto es, $f(p) = 0$, y $x_0 \ne p$, entonces
+  $X(t, x_0) \ne p$ para todo $t \in (\alpha(x_0), \omega(x_0))$. Por tanto,
+  $\Theta(x_0) \subset (-\infty, p)$ o $\Theta(x_0) \subset (p, \infty)$.
+\end{prop}
+\begin{proof}
+  Es claro que $\cup_{x_0 \in I} \Theta(x_0) = I$. Sean ahora $x_0, x_0' \in I$ tales que
+  $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$. Denotamos $\varphi_1(t) = X(t; x_0)$ y
+  $\varphi_2(t) = X(t; x_0')$. Existen $t_1$ y $t_2$ tales que $\varphi(t_1) =
+  \varphi_2(t_2)$. Definimos $\phi(t) = \varphi_2(t + (t_2 - t_1))$, que es solución de \eqref{eq:edo:ae} y verifica $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el Teorema de Picard-Lindelöf obtenemos que $\phi = \varphi_1$ y, por tanto, $\Theta(x_0) = \Theta(x_0')$.
+\end{proof}
+
+\begin{cor}
+  Las soluciones de \eqref{eq:edo:ae} o son constantes o son estrictamente monótonas. Por tanto, las
+  órbitas o son conjuntos unitarios o son intervalos abiertos.
+\end{cor}
+
+Una representación de algunas órbitas de \eqref{eq:edo:ae} recibe el nombre de \emph{diagrama de
+  fases}. Nótese el diagrama de fases viene determinado por el diagrama de signos de $f$. Un signo
+positivo indica que la solución asociada a esa órbita es estrictamente creciente mientras que un
+signo negativo indica que dicha solución es estrictamente decreciente.
+
+\begin{cor}
+  Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $(p_1, p_2)$. Entonces, el dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide. 
+\end{cor}
+
+\begin{definition}
+[DIAGRAMA DE FASES]
+\end{definition}
+
+\subsection{Región de atracción}
+
+\begin{definition}
+\label{def:ra}
+Sea $I \subset \R$ intervalo abierto, $f: I \to \R$ localmente lipschitziana y $p \in I$ tal que $f(p) = 0$. Se define la región de atracción de p como
+\[ \mathcal{R}(p) = \{x_0\in I: \omega(x_0) = +\infty \text{ y } \lim_{t \to +\infty} X(t;x_0) = p\}. \]
+\end{definition}
+
+Claramente tenemos que $p \in \mathcal{R}(x_0)$.
+
+\begin{definition}
+\label{def:atractor}
+En el contexto de la Definición \ref{def:ra}:
+\begin{itemize}
+\item Si $p \in \mathrm{int}(\mathcal{R}(p))$, entonces diremos que $p$ es un atractor.
+\item Si el diagrama de fases es de la forma $\rightarrow p \leftarrow$, entonces diremos que $p$ es un sumidero.
+\item Si $\mathcal{R}(p) = I$, entonces diremos que $p$ es un atractor global.
+\item Si el diagrama de fases es de la forma $\lefttarrow p \rightarrow$, entonces diremos que $p$ es una fuente.
+\item Si $\mathcal{R}(p) = \{p\}$ y $p$ es un cero aislado de $f$, entonces diremos que $p$ es un repulsor.
+Si $\mathrm{int}(\mathcal{R}(p)) \ne \emptyset$ y $p \in \partial \mathcal{R}(p)$, entonces diremos que $p$ es un semiatractor.
+\end{itemize}
+\end{definition}
+
+\begin{prop}[Test de la derivada primera]
+  Sean $I \subset \R$ intervalo abierto, $f \in \mathcal{C}^1(I)$ y $p\in I$ tal que $f(p) = 0$.
+  
+\begin{enumerate}
+\item Si $f'(p) < 0$, entonces $p$ es un atractor de $x' = f(x)$.
+\item Si $f'(p) > 0$, entonces $p$ es un repulsor de $x' = f(x)$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\begin{enumerate}
+\item En tal caso el diagrama de fases en $p$ es de la forma $\rightarrow p \leftarrow$, de donde se sigue el resultado.
+\item En tal caso el diagrama de fases en $p$ es de la forma $\leftarrow p \rightarrow$, de donde se sigue el resultado. \qedhere
+\end{enumerate}
+\end{proof}
+
 
 \end{document}

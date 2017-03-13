@@ -19,11 +19,15 @@
     "docabstract"
     "arraystretch")
    (LaTeX-add-labels
+    "def:unicidad-futuro"
+    "item:peano:a"
+    "item:peano:b"
     "sec:eu"
     "eq:pl:pvi"
     "thm:sol-maximal"
-    "eq:sol-maximal:pvi")
-   (LaTeX-add-environments
-    '("ex" LaTeX-env-args ["argument"] 0)))
+    "eq:sol-maximal:pvi"
+    "eq:edo:ae"
+    "def:ra"
+    "def:atractor"))
  :latex)
 
