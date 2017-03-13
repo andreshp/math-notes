@@ -181,3 +181,6 @@ TSWLatexianTemp*
 
 #pdf
 *.pdf
+
+# emacs auto-saved files
+\#*\#
