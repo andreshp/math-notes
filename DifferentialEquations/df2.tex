@@ -46,102 +46,110 @@
 
 \subsection{Notación y terminología}
 
-En esta sección haremos una pequeña introducción a los problemas que abordaremos
-en esta asignatura. Vamos a estudiar propiedades de las soluciones de una ecuación
-diferencial de la que no podemos calcular explícitamente las mismas. Estudiaremos
-ecuaciones diferenciales ordinarias (a partir de ahora EDO) de la forma
-\[x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D \text{ dominio},\]
-donde $f: D \subset \R*\R^d \to \R^d$
+En esta sección haremos una pequeña introducción a los problemas que abordaremos en esta
+asignatura. Vamos a estudiar propiedades de las soluciones de una ecuación diferencial de la que no
+podemos calcular explícitamente las mismas. Estudiaremos ecuaciones diferenciales ordinarias (que
+abreviaremos EDO). Una EDO es una ecuación de la forma
+\[x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D,\]
+
+donde $D \subset \R \times \R^d$ es un conjunto abierto y arcoconexo y $f: D \to \R^d$ es una
+función continua. Los elementos que intervienen en una EDO tienen una terminología específica que
+introducimos a continuación:
 
 \begin{itemize}
-    \item $D$: dominio de la ecuación. Es un conjunto abierto y arco-conexo.
-    \item $f$: campo
-    \item $t$: variable independiente
-    \item $x(t)$: función incógnita o variable dependiente. En lo que sigue, por
-    comodidad, la notaremos simplemente por $x$, sin especificar la variable de la
-    que depende.
+\item $D$: dominio de la ecuación.
+\item $f$: campo de la ecuación.
+\item $t$: variable independiente.
+\item $x(t)$: función incógnita o variable dependiente. En lo que sigue, por comodidad, la notaremos
+  simplemente por $x$, sin especificar la variable de la que depende.
 \end{itemize}
 
-\begin{ex} Veamos algunos ejemplos que abordaremos:\\
-    EDO escalar:
-    $$ x' = \frac{x}{t}, t > 0, D = (0, +\infty)* \R$$
-    Sistema de EDO:
+\begin{ex} Veamos algunos ejemplos de ecuaciones diferenciales ordinarias.
+  
+  \begin{itemize}
+  \item EDO escalar:
+    \[x' = \frac{x}{t} \text{ con } t > 0,\] donde $D = (0, +\infty)* \R$.
+  \item Sistema de EDOs:
     \[
-    \left.
-    \begin{array}{r}
-        x_1' = x_1x_2 + t \\
-        x_2 = x_1 + x_2 + t^2
-    \end{array}
-    \right\}
+      \left.
+        \begin{array}{r}
+          x_1' = x_1x_2 + t \\
+          x_2' = x_1 + x_2 + t^2
+        \end{array}
+      \right\}
     \]
-    Donde $D = \R * \R^2$ y $f(t, x_1, x_2) = (x_1x_2 + t, x_1 + x_2 + t^2)$
+    donde $D = \R \times \R^2$ y $f(t, x_1, x_2) = (x_1x_2 + t, x_1 + x_2 + t^2)$. \qedhere
+  \end{itemize}
 \end{ex}
 
-\begin{definition} Concepto de solución:\\
-    Una solución de una EDO es una función $\varphi: I \to \R^d$, $I$ intervalo
-    abierto no vacío, tal que:
+  \begin{definition}[Concepto de solución]
+    Una solución de una EDO es una función $\varphi: I \to \R^d$ donde $I$ es un intervalo abierto
+    no vacío, tal que:
     \begin{enumerate}
-        \item $\varphi \in \mathcal{C}^1(I, \R^d)$
-        \item $(t, \varphi(t)) \in D$
-        \item $\varphi'(t) = f(t, \phi(t))$
+    \item $\varphi \in \mathcal{C}^1(I, \R^d)$;
+    \item $(t, \varphi(t)) \in D$;
+    \item $\varphi'(t) = f(t, \phi(t))$ para todo $t \in I$.
     \end{enumerate}
 
-\end{definition}
+  \end{definition}
 
-\begin{definition} Problema de valores iniciales:\\
-    Un problema de valores iniciales o problema de Cauchy (de aquí en adelante PVI)
-    consiste en añadir a una EDO un dato inicial, que consiste en el par $(t_0, x_0) \in D$.
+  \begin{definition}[Problema de valores iniciales]
+    Un problema de valores iniciales o problema de Cauchy (de aquí en adelante lo abreviaremos PVI)
+    consiste en añadir a una EDO un dato o condición inicial, esto es, un par $(t_0, x_0) \in D$.
     Normalmente se nota como:
-    \[
-    \left\{
-    \begin{array}{l}
-        x' = f(t,x) \\
-        x(t_0) = x_0
-    \end{array}
-    \right.
-    \]
+    \begin{equation}
+      \label{eq:pvi}
+      \left\{
+        \begin{array}{l}
+          x' = f(t,x); \\
+          x(t_0) = x_0.
+        \end{array}
+      \right.
+      \tag{P}
+    \end{equation}
     Una solución del PVI es una solución de la EDO que cumple, además:
     \begin{enumerate}
-        \item $t_0 \in I$
-        \item $\varphi(t_0) = x_0$
+    \item $t_0 \in I$;
+    \item $\varphi(t_0) = x_0$.
     \end{enumerate}
-\end{definition}
+  \end{definition}
 
-\subsection{Unicidad de solución y soluciones maximales}
+  En lo que sigue nos referiremos a \eqref{eq:pvi} cuando trabajemos con un PVI genérico. 
+  
+  \subsection{Unicidad de solución y soluciones maximales}
 
-Dado un PVI:
+  Consideremos un PVI
+  \begin{equation}
+    \left\{
+      \begin{array}{l}
+        x' = f(t,x); \\
+        x(t_0) = x_0.
+      \end{array}
+    \right.
+    \tag{P}
+  \end{equation}
 
-\[
-  (P) = \left\{
-    \begin{array}{l}
-      x' = f(t,x); \\
-      x(t_0) = x_0.
-    \end{array}
-  \right.
-\]
+  Denotamos como
+  $\sum = \sum(P) = \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de \eqref{eq:pvi}}\}$. Diremos que
+  $(\widetilde{I}, \widetilde{\varphi}) \in \sum$, es una prologación de $(I, \varphi) \in \sum$ si
+  $I \subsetneq \widetilde{I}$ y $\widetilde{\varphi}_{|I} = \varphi$.  Un elemento de $\sum$ es prolongable
+  si admite una prolongación. Si $(\widetilde{I}, \widetilde{\varphi})$ es una prolongación de
+  $(I, \varphi)$, lo notaremos como $(I, \varphi) >> (\widetilde{I}, \tilde{\varphi})$. Diremos que
+  $(I, \varphi)$ es maximal si no es prolongable.
 
+  \subsubsection{Conceptos de unicidad}
 
-Denotamos como $\sum = \sum(P) = \{(I, \varphi), \varphi: I \to \R^d \text{ es solución
-de } (P)\}$. Diremos que $(\tilde{I}, \tilde{\varphi}) \in \sum$, es una prologación
-de $(I, \varphi) \in \sum$ si $I \subsetneq \tilde{I}$ y $\tilde{\varphi}_{|I} = \varphi$.
-Un elemento de $\sum$ es prolongable si admite una prolongación. Si $(\tilde{I},
-\tilde{\varphi})$ es una prolongación de $(I, \varphi)$, lo notaremos como $(I, \varphi)
->> (\tilde{I}, \tilde{\varphi})$. Diremos que $(I, \varphi)$ es maximal si no es
-prolongable.
+  Diremos que $(P)$ verifica la propiedad de unicidad local si dadas
+  $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum, \exists H$ intervalo abierto, tal que
+  $\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$, $t_0 \in H$.
 
-\subsubsection{Conceptos de unicidad}
+  Diremos que $(P)$ verifica la propiedad de unicidad en $H$, con $H$ intervalo abierto y
+  $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
+  $\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$.
 
-Diremos que $(P)$ verifica la propiedad de unicidad local si dadas
-$(I_1, \varphi_1), (I_2, \varphi_2) \in \sum, \exists H$ intervalo abierto, tal que $\varphi_1(t) =
-\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$, $t_0 \in H$.
-
-Diremos que $(P)$ verifica la propiedad de unicidad en $H$, con $H$ intervalo abierto y $t_0 \in H$
-si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
-$\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$.
-
-Finalmente, diremos que $(P)$ verifica la propiedad de unicidad global si dadas
-$(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que $\varphi_1(t) =
-\varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.
+  Finalmente, diremos que $(P)$ verifica la propiedad de unicidad global si dadas
+  $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
+  $\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.
 
 \begin{lem}
   Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones de un PVI tales que
