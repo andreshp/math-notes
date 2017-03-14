@@ -198,26 +198,31 @@ introducimos a continuación:
 
 Dada una solución del PVI
 \[
-  \left\{
-    \begin{array}{l}
-      x' = f(t,x) \\
-      x(t_0) = x_0
-    \end{array}
-  \right.
+\left\{
+  \begin{array}{l}
+    x' = f(t,x) \\
+    x(t_0) = x_0
+  \end{array}
+\right.
 \]
-$x'(s) = f(s,x(s))$ para todo $s$ en un intervalo. Si integramos la expresión, obtenemos:
+$x'(s) = f(s,x(s))$ para todo $s$ en un intervalo. Si integramos la
+expresión, obtenemos:
 $$ \int_{t_0}^t x'(s)ds = \int_{t_0}^tf(s,x(s))ds \Rightarrow x(t) = x_0 + \int_{t_0}^t f(s, x(s))ds $$
-A esta ecuación se le conoce como ecuación integral de Volterra. Sea $\varphi: I \to \R^d$ con $I$
-intervalo abierto. Diremos que es solución de la ecuación integral de Volterra si:
+A esta ecuación se le conoce como ecuación integral de Volterra. Sea
+$\varphi: I \to \R^d$ con $I$ intervalo abierto. Diremos que es
+solución de la ecuación integral de Volterra si:
 
 \begin{itemize}
 \item $\varphi \in \mathcal{C}(I, \R^d)$
 \item $(t, \varphi(t)) \in D \quad \forall t \in I$
 \item $t_0 \in I$
-\item $\forall t \in I \Rightarrow \varphi(t) = x_0 + \displaystyle\int_{t_0}^t f(s, \varphi(s))ds$
+\item
+  $\forall t \in I \Rightarrow \varphi(t) = x_0 +
+  \displaystyle\int_{t_0}^t f(s, \varphi(s))ds$
 \end{itemize}
 
-Veamos ahora una proposición que conecta el concepto de PVI con la ecuación integral de Volterra:
+Veamos ahora una proposición que conecta el concepto de PVI con la
+ecuación integral de Volterra:
 
 \begin{prop}
   Sea $\varphi: I \to \R^d$, $I$ intervalo abierto. Son equivalentes:
@@ -228,74 +233,86 @@ Veamos ahora una proposición que conecta el concepto de PVI con la ecuación in
 \end{prop}
 
 \begin{proof}
-  La demostración se basa en deducir las propiedades de las soluciones del PVI a partir de las de
-  las soluciones de la EIV y viceversa. Las propiedades 2 y 3 son comunes para las soluciones del
-  PVI y de la EIV. Empezamos deduciendo las propiedades de la EIV a partir de las del PVI:
+  La demostración se basa en deducir las propiedades de las soluciones
+  del PVI a partir de las de las soluciones de la EIV y viceversa. Las
+  propiedades 2 y 3 son comunes para las soluciones del PVI y de la
+  EIV. Empezamos deduciendo las propiedades de la EIV a partir de las
+  del PVI:
   \begin{enumerate}
-  \item La derivabilidad de la solución del PVI nos implica la continuidad de la solución de la EIV
-  \item Para ver la propiedad cuatro, integramos entre $t_0$ y $t$ la igualdad
-    $\varphi'(t) = f(t, \varphi(t))$ y la obtenemos inmediatamente
+  \item La derivabilidad de la solución del PVI nos implica la
+    continuidad de la solución de la EIV
+  \item Para ver la propiedad cuatro, integramos entre $t_0$ y $t$ la
+    igualdad $\varphi'(t) = f(t, \varphi(t))$ y la obtenemos
+    inmediatamente
   \end{enumerate}
-  Vemos ahora las propiedades de las soluciones del PVI a partir de las de la EIV.  Usando el
-  teorema fundamental del cálculo, tenemos que $\varphi'(t) = 0 + f(t, \varphi(t))$.  Esto implica
-  que $\varphi$ es derivable en $I$, y que cumple la tercera propiedad de las soluciones del
-  PVI. Finalmente, tenemos que
+  Vemos ahora las propiedades de las soluciones del PVI a partir de
+  las de la EIV.  Usando el teorema fundamental del cálculo, tenemos
+  que $\varphi'(t) = 0 + f(t, \varphi(t))$.  Esto implica que
+  $\varphi$ es derivable en $I$, y que cumple la tercera propiedad de
+  las soluciones del PVI. Finalmente, tenemos que
     $$ \varphi(t_0) = x_0 + \sum_{t_0}^{t_0} f(s, \varphi(s))ds = x_0 $$
   \end{proof}
 
-  Vamos a ver un ejemplo de cómo se relacionan los dos conceptos que hemos estado tratando:
+  Vamos a ver un ejemplo de cómo se relacionan los dos conceptos que
+  hemos estado tratando:
 
 \begin{ex}
   \textbf{Enunciado:} Resolver la EIV: $x(t) = 8 + \displaystyle\int_0^t x(s)^2 ds$\\
 
-  \textbf{Solución:} Derivando la EIV respecto de $t$, obtenemos el PVI:
+  \textbf{Solución:} Derivando la EIV respecto de $t$, obtenemos el
+  PVI:
   \[
-    \left\{
-      \begin{array}{l}
-        x'(t) = x(t)^2 \\
-        x(0) = 8
-      \end{array}
-    \right. \Rightarrow \frac{dx}{dt} = x^2 \Rightarrow \frac{dx}{x^2} = dt
+  \left\{
+    \begin{array}{l}
+      x'(t) = x(t)^2 \\
+      x(0) = 8
+    \end{array}
+  \right. \Rightarrow \frac{dx}{dt} = x^2 \Rightarrow \frac{dx}{x^2} =
+  dt
   \]
-  Discutimos el caso de las soluciones constantes primero. Para que la solución sea constante,
-  tenemos que $x' = x^2$, que sólo ocurre si $x(t) = 0 \quad \forall t$.  Esto no es posible ya que
-  tenemos que $x(0) = 8$. Por tanto, no tenemos soluciones constantes. Discutimos ahora el caso de
-  las soluciones no constantes. Integrando en ambos miembros de la igualdad de la derecha, obtenemos
-  lo siguiente:
+  Discutimos el caso de las soluciones constantes primero. Para que la
+  solución sea constante, tenemos que $x' = x^2$, que sólo ocurre si
+  $x(t) = 0 \quad \forall t$.  Esto no es posible ya que tenemos que
+  $x(0) = 8$. Por tanto, no tenemos soluciones constantes. Discutimos
+  ahora el caso de las soluciones no constantes. Integrando en ambos
+  miembros de la igualdad de la derecha, obtenemos lo siguiente:
 
     $$ \int \frac{dx}{x^2} = \int dt \Rightarrow \frac{-1}{x} = t + c \Rightarrow
     x = \frac{1}{-t-c} $$
 
-    Y usando el dato inicial tenemos que $ 8 = \frac{1}{-c} \Rightarrow c = \frac{-1}{8}$, por lo
-    que tenemos que el candidato a solución es $x = \frac{8}{1-8t}$. Definimos
-    $\varphi: (-\infty, \frac{1}{8}) \to \R$ con $\varphi(t) = \frac{8}{1-8t}$ y comprobamos que sea
-    solución:
+    Y usando el dato inicial tenemos que
+    $ 8 = \frac{1}{-c} \Rightarrow c = \frac{-1}{8}$, por lo que
+    tenemos que el candidato a solución es $x =
+    \frac{8}{1-8t}$.
+    Definimos $\varphi: (-\infty, \frac{1}{8}) \to \R$ con
+    $\varphi(t) = \frac{8}{1-8t}$ y comprobamos que sea solución:
 
     $$ \varphi(0) = 8 \quad \quad \varphi'(t) = \frac{64}{(1-8t)^2} = \varphi^2(t) $$
 
-    Es solución del PVI, lo que implica que es solución de la EIV de partida por el teorema
-    anterior.
+    Es solución del PVI, lo que implica que es solución de la EIV de
+    partida por el teorema anterior.
   \end{ex}
 
   \textbf{Operador integral}\\
 
-  Dada la EIV $ x(t) = x_0 + \displaystyle\int_{t_0}^t f(s, x(s)) ds $, queremos definir un operador
-  de la siguiente manera:
+  Dada la EIV
+  $ x(t) = x_0 + \displaystyle\int_{t_0}^t f(s, x(s)) ds $, queremos
+  definir un operador de la siguiente manera:
   \[\arraycolsep=1pt\def\arraystretch{1}
-    \begin{array}{llll}
-      V: & E \to F     &           & \\
-         & y \to V(y): & I \to R^d & \\
-         &             & t \to V(y)(t) & := x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds
-    \end{array}
+  \begin{array}{llll}
+    V: & E \to F     &           & \\
+       & y \to V(y): & I \to R^d & \\
+       &             & t \to V(y)(t) & := x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds
+  \end{array}
   \]
   Para definir después la siguiente sucesión recurrente:
   \[
-    \left\{
-      \begin{array}{l}
-        y_0 \in E \\
-        y_{n+1} = V(y_n), \quad y_n \in E
-      \end{array}
-    \right.
+  \left\{
+    \begin{array}{l}
+      y_0 \in E \\
+      y_{n+1} = V(y_n), \quad y_n \in E
+    \end{array}
+  \right.
   \]
 
   Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
@@ -303,26 +320,94 @@ Veamos ahora una proposición que conecta el concepto de PVI con la ecuación in
   \subsection{Algunos teoremas de existencia y unicidad}
 
 \begin{thm}[Existencia y unicidad en variables separadas]
-  ...
+  Sean $ a \in \mathcal{C}(J_1)$ y $g \in \mathcal{C}(J_2)$,
+  $J_1, J_2$ intervalos abiertos.  Sean $t_0 \in J_1, x_0 \in
+  J_2$. Consideramos:
+
+\begin{equation}
+  \left\{
+    \begin{array}{l}
+      x' = a(t)g(x), (t,x) \in J_1 \times J_2 \\
+      x(t_0) = x_0
+    \end{array}
+  \right.
+  \tag{P}
+\end{equation}
+
+Entonces, se verifican:
+\begin{description}
+\item[i)] El PVI $(P)$ tiene solución
+\item[ii)] Si $g(x_0) \neq 0$ el PVI $(P)$ verifica la propiedad de
+  unicidad local.
+\item[iii)] Si $g(x_0) = 0$ y existe $ G \in \mathcal{C} (J_2)$ tal
+  que $G(x_0) = 0$ y existe
+  $\delta > 0: G'(x) = \frac{1}{g(x)} \forall x \in J_2 \cap ]x_0, x_0
+  + \delta[$
+  y además $a(t_0) \neq 0$, entonces el PVI no verifica la propiedad
+  de unicidad local.
+\end{description}
 \end{thm}
+
+\begin{proof}
+  Comenzamos demostrando \textbf{i)}. Distinguimos dos casos:\\
+
+  \textbf{Caso 1:} $g(x_0) = 0$. Entonces, $\varphi: \R \to \R$ tal
+  que
+  $\varphi(t) = x_0$ es una solución de $(P)$.\\
+
+  \textbf{Caso 2:} $g(x_0) \neq 0$. Entonces, existe $I_1$ abierto tal
+  que $x_0 \in I_1, g(x) \neq 0 \quad \forall x \in I_1$. Tomamos
+  entonces la aplicación que asigna a $x$ el valor
+  $\frac{1}{g(x)} \in \mathcal{C}(I_1)$.  Sea ahora la aplicación
+  $ G: I_1 \to \R$ tal que $G(x_0) = 0, G'(x) = \frac{1}{g(x)}$.
+  Tenemos que $G$ es estrictamente monótona. Tomamos $I_2 = G(I_1)$
+  intervalo abierto. Entonces, $\exists G^{-1}: I_2 \to \R$ con
+  $G^{-1}(I_2) = I_1$. Además, tenemos que
+  $G^{-1} \in \mathcal{C}(I_2)$, con
+  $(G^{-1})' (x) = \frac{1}{G'(G^{-1}(x))} = g(G^{-1}(x)) \forall x
+  \in I_2$.
+  Sea ahora $A = A(t)$ una primitiva de $a(t)$ tal que
+  $A(t_0) = 0 \in I_2$.  Por continuidad, $\exists I_3 \subset J_1$
+  abierto tal que $t_0 \in I_3$, $A(I_3) \subset I_2$. Definimos:
+  \begin{align*}
+    \varphi : & I_3 \to \R \in \mathcal{C}^1(I_3) \\
+              & t \to G^{-1}(A(t))
+  \end{align*}
+
+  Tenemos que $t_0 \in I_3$,
+  $\varphi(t_0) = G^{-1}(a(t_0)) = G^{-1}(0) = x_0$. Tenemos que
+  $(t, \varphi(t)) \in J_1 \times J_2$ y
+  $\varphi'(t) = g(G^{-1}(A(t))a(t) = a(t)g(\varphi(t)) \quad \forall
+  t \in I_3$ \\
+
+  Pasamos ahora a demostrar \textbf{ii)}. Sean
+  $\varphi_1: H_1 \to \R$, $\varphi_2: H_2 \to \R$ dos soluciones de
+  $(P)$.
+  % TODO: Terminar demostración
+\end{proof}
 
 \begin{definition}
   \label{def:unicidad-futuro}
-  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y $f \in \mathcal{C}(D)$. Fijamos
-  $(t_0, x_0) \in D$ y consideramos el PVI asociado. Diremos que Diremos que el PVI verifica la
-  propiedad de unicidad en el futuro si tiene unicidad en el intervalo $[t_0, +\infty[$ y,
-  análogamente, diremos que el PVI verifica la propiedad e unicidad en el pasado si tiene unicidad
-  en el intervalo $]-\infty, t_0]$.
+  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y
+  $f \in \mathcal{C}(D)$. Fijamos $(t_0, x_0) \in D$ y consideramos el
+  PVI asociado. Diremos que Diremos que el PVI verifica la propiedad
+  de unicidad en el futuro si tiene unicidad en el intervalo
+  $[t_0, +\infty[$ y, análogamente, diremos que el PVI verifica la
+  propiedad e unicidad en el pasado si tiene unicidad en el intervalo
+  $]-\infty, t_0]$.
 \end{definition}
 
 \begin{thm}[Teorema de unicidad de Peano]
-  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y $f \in \mathcal{C}(D)$. Fijamos
-  $(t_0, x_0) \in D$ y consideramos el PVI (P) asociado.
+  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y
+  $f \in \mathcal{C}(D)$. Fijamos $(t_0, x_0) \in D$ y consideramos el
+  PVI (P) asociado.
   \begin{enumerate}
-  \item\label{item:peano:a} Si para cada $t \ge t_0$ la función $g(x) = f(t,x)$ es decreciente,
-    entonces (P) verifica la unicidad en el futuro.
-  \item\label{item:peano:b} Si para cada $t \le t_0$ la función $g(x) = f(t,x)$ es creciente,
-    entonces (P) verifica la unicidad en el pasado.
+  \item\label{item:peano:a} Si para cada $t \ge t_0$ la función
+    $g(x) = f(t,x)$ es decreciente, entonces (P) verifica la unicidad
+    en el futuro.
+  \item\label{item:peano:b} Si para cada $t \le t_0$ la función
+    $g(x) = f(t,x)$ es creciente, entonces (P) verifica la unicidad en
+    el pasado.
   \end{enumerate}
 \end{thm}
 
