@@ -453,42 +453,56 @@ y la llamada \emph{solución general} $X: \Omega \to \mathbb{R}^d$ a partir del 
 \section{EDOs autónomas escalares}
 
 \begin{definition}
-Una EDO autónoma escalar es una EDO de la forma
-\begin{equation}
-  \label{eq:edo:ae}
-  x' = f(x), \ x \in I,
-  \tag{AE}
-\end{equation}
-donde $I \subset \R$ es un intervalo abierto y $f : I \to \R$ es una función localmente
-lipschitziana. Para cada $x_0 \in I$ denotamos por $X(t; x_0)$ a la única solución maximal de
-\eqref{eq:edo:ae} que verifica $x(0) = x_0$. 
+  Una EDO autónoma escalar es una EDO de la forma
+  \begin{equation}
+    \label{eq:edo:ae}
+    x' = f(x), \ x \in I,
+    \tag{AE}
+  \end{equation}
+  donde $I \subset \R$ es un intervalo abierto y $f : I \to \R$ es una función localmente
+  lipschitziana. Para cada $x_0 \in I$ denotamos por $X(t; x_0)$ a la única solución maximal de
+  \eqref{eq:edo:ae} que verifica $x(0) = x_0$.
 \end{definition}
 
-Nótese que $X(t; x_0)$ está bien definida gracias al Teorema de Picard-Lindelöf. De aquí en adelante nos referiremos a \eqref{eq:edo:ae} cuando utilicemos EDOs autónomas escalares en un contexto general.
+Nótese que $X(t; x_0)$ está bien definida gracias al Teorema de Picard-Lindelöf. De aquí en adelante
+nos referiremos a \eqref{eq:edo:ae} cuando utilicemos EDOs autónomas escalares en un contexto
+general.
+
+\begin{lemma} \label{lem:ae:trans}
+  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de \eqref{eq:edo:ae} y sea $\tau >
+  0$. Entonces, la función $\Psi: ]\alpha-\tau, \omega-\tau[ \to \R$ dada por
+  $\Psi(t) = \varphi(t+\tau)$ es solución de \eqref{eq:edo:ae}.
+\end{lemma}
 
 \begin{definition}
   Se define la órbita de \eqref{eq:edo:ae} asociada a $x_0$ como el conjunto imagen de $X(t; x_0)$ y
   se denota $\Theta(x_0)$.
 \end{definition}
 
-Nótese que la órbita de \eqref{eq:edo:ae} asociada a $x_0$ es un intervalo, que solamente es trivial
-cuando la solución es constante, lo que sucede si, y solo si, $f(x_0) = 0$.
+Por el Lema \ref{lem:ae:trans} existen infinitas soluciones con la misma órbita.
+Nótese que la órbita asociada a $x_0$ es un intervalo, que solamente es trivial cuando la solución
+es constante, lo que sucede si, y solo si, $f(x_0) = 0$. Además, es claro que
+\[I = \bigcup_{x_0 \in I} \Theta(x_0).\]
 
 Como consecuencia del Teorema de Picard-Lindelöf obtenemos fácilmente el siguiente resultado.
 
 \begin{prop}
-  Las órbitas de \eqref{eq:edo:ae} constituyen una partición de $I$. Como consecuencia, si $p$ es un
-  punto de equilibrio de \eqref{eq:edo:ae}, esto es, $f(p) = 0$, y $x_0 \ne p$, entonces
-  $X(t, x_0) \ne p$ para todo $t \in (\alpha(x_0), \omega(x_0))$. Por tanto,
-  $\Theta(x_0) \subset (-\infty, p)$ o $\Theta(x_0) \subset (p, \infty)$.
+  Para cualesquiera $x_0, x_0' \in I$ o bien $\Theta(x_0) = \Theta(x_0')$ o bien
+  $\Theta(x_0) \cap \Theta(x_0') = \emptyset$. Por tanto, Las órbitas de \eqref{eq:edo:ae}
+  constituyen una partición de $I$.
 \end{prop}
 \begin{proof}
-  Es claro que $\cup_{x_0 \in I} \Theta(x_0) = I$. Sean ahora $x_0, x_0' \in I$ tales que
-  $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$. Denotamos $\varphi_1(t) = X(t; x_0)$ y
-  $\varphi_2(t) = X(t; x_0')$. Existen $t_1$ y $t_2$ tales que $\varphi(t_1) =
-  \varphi_2(t_2)$. Definimos $\phi(t) = \varphi_2(t + (t_2 - t_1))$, que es solución de \eqref{eq:edo:ae} y verifica $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el Teorema de Picard-Lindelöf obtenemos que $\phi = \varphi_1$ y, por tanto, $\Theta(x_0) = \Theta(x_0')$.
+  Sean $x_0, x_0' \in I$ tales que $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$. Veamos que $\Theta(x_0) = \Theta(x_0')$. Denotamos
+  $\varphi_1(t) = X(t; x_0)$ y $\varphi_2(t) = X(t; x_0')$. Existen $t_1$ y $t_2$ tales que
+  $\varphi(t_1) = \varphi_2(t_2)$. Definimos $\phi(t) = \varphi_2(t + (t_2 - t_1))$ en el intervalo que corresponda. Nótese que $\phi$ es solución
+  de \eqref{eq:edo:ae} y verifica $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el Teorema de
+  Picard-Lindelöf obtenemos que $\phi = \varphi_1$ y, por tanto, $\Theta(x_0) = \Theta(x_0')$.
 \end{proof}
 
+Como consecuencia, si $p$ es un punto de equilibrio de \eqref{eq:edo:ae}, esto es, $f(p) = 0$, y
+$x_0 \ne p$, entonces $X(t, x_0) \ne p$ para todo $t \in (\alpha(x_0), \omega(x_0))$. Por tanto,
+$\Theta(x_0) \subset (-\infty, p)$ o $\Theta(x_0) \subset (p, \infty)$.
+  
 \begin{cor}
   Las soluciones de \eqref{eq:edo:ae} o son constantes o son estrictamente monótonas. Por tanto, las
   órbitas o son conjuntos unitarios o son intervalos abiertos.
@@ -517,18 +531,13 @@ signo negativo indica que dicha solución es estrictamente decreciente.
   Es una consecuencia sencilla del Lema \ref{lem:barbalet}.
 \end{proof}
 
-\begin{lemma}
-  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de \eqref{eq:edo:ae} y sea $\tau >
-  0$. Entonces, la función $\Psi: ]\alpha-\tau, \omega-\tau[ \to \R$ dada por
-  $\Psi(t) = \varphi(t+\tau)$ es solución de \eqref{eq:edo:ae}.
-\end{lemma}
-
 \begin{cor}
-  Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $(p_1, p_2)$. Entonces, el dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide. 
+  Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea
+  $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $(p_1, p_2)$. Entonces, el
+  dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide.
 \end{cor}
 
-\begin{definition}
-[DIAGRAMA DE FASES]
+\begin{definition} [DIAGRAMA DE FASES]
 \end{definition}
 
 \subsection{Región de atracción}
@@ -578,29 +587,38 @@ Claramente tenemos que $p \in \mathcal{R}(x_0)$.
 
 \begin{ex}[Ecuación logística]
   Sean $\lambda, L > 0$. Consideramos la EDO autónoma escalar
-\begin{equation}
-\label{eq:log}
-x' = \lambda x(L-x)
-\end{equation}
-La función $f(x) = \lambda x (x -L)$ definida en $\R$ es de clase $1$ y, por tanto, localmente lipschitziana. Tenemos que $\mathrm{Z}_f = \{0, L\}$. El diagrama de fases de la ecuación es
-\[-\infty \leftarrow 0 \rightarrow  L \leftarrow +\infty.\]
-Por tanto, si $0 < x_0 < L$, entonces $\omega(x_0) = +\infty$ y $\lim_{t \to +\infty} X(t,x_0) = L$.
+  \begin{equation}
+    \label{eq:log}
+    x' = \lambda x(L-x)
+  \end{equation}
+  La función $f(x) = \lambda x (x -L)$ definida en $\R$ es de clase $1$ y, por tanto, localmente
+  lipschitziana. Tenemos que $\mathrm{Z}_f = \{0, L\}$. El diagrama de fases de la ecuación es
+  \[-\infty \leftarrow 0 \rightarrow L \leftarrow +\infty.\] Por tanto, si $0 < x_0 < L$, entonces
+  $\omega(x_0) = +\infty$ y $\lim_{t \to +\infty} X(t,x_0) = L$.
 \end{ex}
 
 
 \section{Prolongación y acotación de soluciones}
 
 \begin{lemma}
-  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que $\lim_{t \to \omega} \varphi(t) = \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces la solución es prolongable.
+  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que
+  $\lim_{t \to \omega} \varphi(t) = \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces la solución es
+  prolongable.
 \end{lemma}
 \begin{proof}
   Consideramos el PVI
   \[\begin{cases}x' = f(t, x); \\ x(\omega) = \xi. \end{cases}\]
-  Existe $a > 0$ tal que $\widetilde{\varphi}: ]\omega-a, \omega+a[ \to \R^d$ es solución del nuevo PVI.
+  Existe $a > 0$ tal que $\widetilde{\varphi}: ]\omega-a, \omega+a[ \to \R^d$ es solución del nuevo
+  PVI. La función $\Psi: ]\alpha, \omega+a[ \to \R^d$ dada por
+  \[\Psi(t) = \begin{cases} \varphi(t) & \text{si } t \le \omega; \widetilde{\varphi}(t) & \text{si } t > \omega;\\\end{cases}\]
+  es una solución de \eqref{eq:pvi} y, por tanto, es una prolongación de $\varphi$.
 \end{proof}
 
 \begin{lemma}
-  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que existe una sucesión $\{t_n\} \subset ]\alpha, \omega[$ con $\{t_n\} \to $
+  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que existe una
+  sucesión $\{t_n\} \subset ]\alpha, \omega[$ con $\{t_n\} \to \omega$ tal que
+  $\{\varphi(t_n)\} \to \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces
+  $\lim_{t \to \omega} \varphi(t) = \xi$ y, además, la solución es prolongable.
 \end{lemma}
 
 

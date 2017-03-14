@@ -28,6 +28,7 @@
     "thm:sol-maximal"
     "eq:sol-maximal:pvi"
     "eq:edo:ae"
+    "lem:ae:trans"
     "lem:barbalet"
     "def:ra"
     "def:atractor"
