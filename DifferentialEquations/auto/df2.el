@@ -19,6 +19,7 @@
     "docabstract"
     "arraystretch")
    (LaTeX-add-labels
+    "eq:pvi"
     "def:unicidad-futuro"
     "item:peano:a"
     "item:peano:b"
@@ -27,7 +28,9 @@
     "thm:sol-maximal"
     "eq:sol-maximal:pvi"
     "eq:edo:ae"
+    "lem:barbalet"
     "def:ra"
-    "def:atractor"))
+    "def:atractor"
+    "eq:log"))
  :latex)
 

@@ -452,14 +452,19 @@ y la llamada \emph{solución general} $X: \Omega \to \mathbb{R}^d$ a partir del 
 
 \section{EDOs autónomas escalares}
 
-Consideramos EDOs de la forma
+\begin{definition}
+Una EDO autónoma escalar es una EDO de la forma
 \begin{equation}
   \label{eq:edo:ae}
   x' = f(x), \ x \in I,
+  \tag{AE}
 \end{equation}
 donde $I \subset \R$ es un intervalo abierto y $f : I \to \R$ es una función localmente
 lipschitziana. Para cada $x_0 \in I$ denotamos por $X(t; x_0)$ a la única solución maximal de
-\eqref{eq:edo:ae} que verifica $x(0) = x_0$.
+\eqref{eq:edo:ae} que verifica $x(0) = x_0$. 
+\end{definition}
+
+Nótese que $X(t; x_0)$ está bien definida gracias al Teorema de Picard-Lindelöf. De aquí en adelante nos referiremos a \eqref{eq:edo:ae} cuando utilicemos EDOs autónomas escalares en un contexto general.
 
 \begin{definition}
   Se define la órbita de \eqref{eq:edo:ae} asociada a $x_0$ como el conjunto imagen de $X(t; x_0)$ y
@@ -494,6 +499,30 @@ Una representación de algunas órbitas de \eqref{eq:edo:ae} recibe el nombre de
 positivo indica que la solución asociada a esa órbita es estrictamente creciente mientras que un
 signo negativo indica que dicha solución es estrictamente decreciente.
 
+\begin{lemma}[Barbalet, versión débil]
+  \label{lem:barbalet}
+  Sea $\varphi \in D(]\alpha, +\infty[)$ tal que $\lim_{t \to +\infty} \varphi(t) = L \in
+  \R$. Entonces, existe $\{t_n\} \subset ]\alpha, +\infty[$ estrictamente creciente con
+  $\{t_n\} \to +\infty$ tal que $\{f'(t_n)\} \to 0$.
+\end{lemma}
+\begin{proof}
+  Es una consecuencia sencilla del teorema del valor medio.
+\end{proof}
+
+\begin{prop}
+  Sea $\varphi \in \mathcal{C}^1(]\alpha, +\infty[)$ solución de \eqref{eq:edo:ae} tal que
+  $\lim_{t \to +\infty} \varphi(t) = L \in \R$. Entonces, $p \in \mathrm{Z}_f$.
+\end{prop}
+\begin{proof}
+  Es una consecuencia sencilla del Lema \ref{lem:barbalet}.
+\end{proof}
+
+\begin{lemma}
+  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de \eqref{eq:edo:ae} y sea $\tau >
+  0$. Entonces, la función $\Psi: ]\alpha-\tau, \omega-\tau[ \to \R$ dada por
+  $\Psi(t) = \varphi(t+\tau)$ es solución de \eqref{eq:edo:ae}.
+\end{lemma}
+
 \begin{cor}
   Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $(p_1, p_2)$. Entonces, el dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide. 
 \end{cor}
@@ -505,40 +534,76 @@ signo negativo indica que dicha solución es estrictamente decreciente.
 \subsection{Región de atracción}
 
 \begin{definition}
-\label{def:ra}
-Sea $I \subset \R$ intervalo abierto, $f: I \to \R$ localmente lipschitziana y $p \in I$ tal que $f(p) = 0$. Se define la región de atracción de p como
-\[ \mathcal{R}(p) = \{x_0\in I: \omega(x_0) = +\infty \text{ y } \lim_{t \to +\infty} X(t;x_0) = p\}. \]
+  \label{def:ra}
+  Sea $I \subset \R$ intervalo abierto, $f: I \to \R$ localmente lipschitziana y $p \in I$ tal que
+  $f(p) = 0$. Se define la región de atracción de p como
+  \[ \mathcal{R}(p) = \{x_0\in I: \omega(x_0) = +\infty \text{ y } \lim_{t \to +\infty} X(t;x_0) =
+    p\}. \]
 \end{definition}
 
 Claramente tenemos que $p \in \mathcal{R}(x_0)$.
 
 \begin{definition}
-\label{def:atractor}
-En el contexto de la Definición \ref{def:ra}:
-\begin{itemize}
-\item Si $p \in \mathrm{int}(\mathcal{R}(p))$, entonces diremos que $p$ es un atractor.
-\item Si el diagrama de fases es de la forma $\rightarrow p \leftarrow$, entonces diremos que $p$ es un sumidero.
-\item Si $\mathcal{R}(p) = I$, entonces diremos que $p$ es un atractor global.
-\item Si el diagrama de fases es de la forma $\leftarrow p \rightarrow$, entonces diremos que $p$ es una fuente.
-\item Si $\mathcal{R}(p) = \{p\}$ y $p$ es un cero aislado de $f$, entonces diremos que $p$ es un repulsor.
-Si $\mathrm{int}(\mathcal{R}(p)) \ne \emptyset$ y $p \in \partial \mathcal{R}(p)$, entonces diremos que $p$ es un semiatractor.
-\end{itemize}
+  \label{def:atractor}
+  En el contexto de la Definición \ref{def:ra}:
+  \begin{itemize}
+  \item Si $p \in \mathrm{int}(\mathcal{R}(p))$, entonces diremos que $p$ es un atractor.
+  \item Si el diagrama de fases es de la forma $\rightarrow p \leftarrow$, entonces diremos que $p$
+    es un sumidero.
+  \item Si $\mathcal{R}(p) = I$, entonces diremos que $p$ es un atractor global.
+  \item Si el diagrama de fases es de la forma $\leftarrow p \rightarrow$, entonces diremos que $p$
+    es una fuente.
+  \item Si $\mathcal{R}(p) = \{p\}$ y $p$ es un cero aislado de $f$, entonces diremos que $p$ es un
+    repulsor.  Si $\mathrm{int}(\mathcal{R}(p)) \ne \emptyset$ y $p \in \partial \mathcal{R}(p)$,
+    entonces diremos que $p$ es un semiatractor.
+  \end{itemize}
 \end{definition}
 
 \begin{prop}[Test de la derivada primera]
   Sean $I \subset \R$ intervalo abierto, $f \in \mathcal{C}^1(I)$ y $p\in I$ tal que $f(p) = 0$.
   
-\begin{enumerate}
-\item Si $f'(p) < 0$, entonces $p$ es un atractor de $x' = f(x)$.
-\item Si $f'(p) > 0$, entonces $p$ es un repulsor de $x' = f(x)$.
-\end{enumerate}
+  \begin{enumerate}
+  \item Si $f'(p) < 0$, entonces $p$ es un atractor de $x' = f(x)$.
+  \item Si $f'(p) > 0$, entonces $p$ es un repulsor de $x' = f(x)$.
+  \end{enumerate}
 \end{prop}
 \begin{proof}
-\begin{enumerate}
-\item En tal caso el diagrama de fases en $p$ es de la forma $\rightarrow p \leftarrow$, de donde se sigue el resultado.
-\item En tal caso el diagrama de fases en $p$ es de la forma $\leftarrow p \rightarrow$, de donde se sigue el resultado. \qedhere
-\end{enumerate}
+  \begin{enumerate}
+  \item En tal caso el diagrama de fases en $p$ es de la forma $\rightarrow p \leftarrow$, de donde
+    se sigue el resultado.
+  \item En tal caso el diagrama de fases en $p$ es de la forma $\leftarrow p \rightarrow$, de donde
+    se sigue el resultado. \qedhere
+  \end{enumerate}
 \end{proof}
+
+\begin{ex}[Ecuación logística]
+  Sean $\lambda, L > 0$. Consideramos la EDO autónoma escalar
+\begin{equation}
+\label{eq:log}
+x' = \lambda x(L-x)
+\end{equation}
+La función $f(x) = \lambda x (x -L)$ definida en $\R$ es de clase $1$ y, por tanto, localmente lipschitziana. Tenemos que $\mathrm{Z}_f = \{0, L\}$. El diagrama de fases de la ecuación es
+\[-\infty \leftarrow 0 \rightarrow  L \leftarrow +\infty.\]
+Por tanto, si $0 < x_0 < L$, entonces $\omega(x_0) = +\infty$ y $\lim_{t \to +\infty} X(t,x_0) = L$.
+\end{ex}
+
+
+\section{Prolongación y acotación de soluciones}
+
+\begin{lemma}
+  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que $\lim_{t \to \omega} \varphi(t) = \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces la solución es prolongable.
+\end{lemma}
+\begin{proof}
+  Consideramos el PVI
+  \[\begin{cases}x' = f(t, x); \\ x(\omega) = \xi. \end{cases}\]
+  Existe $a > 0$ tal que $\widetilde{\varphi}: ]\omega-a, \omega+a[ \to \R^d$ es solución del nuevo PVI.
+\end{proof}
+
+\begin{lemma}
+  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que existe una sucesión $\{t_n\} \subset ]\alpha, \omega[$ con $\{t_n\} \to $
+\end{lemma}
+
+
 
 
 \end{document}
