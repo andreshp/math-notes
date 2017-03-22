@@ -1,33 +1,63 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Apuntes de la asignatura ecuaciones diferenciales 2.
-%
-% Autores: Andrés Herrera Poyatos (https://github.com/andreshp)
-%          Paco Luque Sánchez (https://github.com/pacron)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Created 2017-03-20 Mon 11:08
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Andrés Herrera Poyatos}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Andrés Herrera Poyatos},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.5)}, 
+ pdflang={English}}
+\begin{document}
 
-%-----------------------------------------------------------------------------------------------------
-%	INCLUSIÓN DE PAQUETES BÁSICOS
-%-----------------------------------------------------------------------------------------------------
+\tableofcontents
+
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+\% Apuntes de la asignatura ecuaciones diferenciales 2.
+\%
+\% Autores: Andrés Herrera Poyatos (\url{https://github.com/andreshp})
+\%          Paco Luque Sánchez (\url{https://github.com/pacron})
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+
+\%-----------------------------------------------------------------------------------------------------
+\%	INCLUSIÓN DE PAQUETES BÁSICOS
+\%-----------------------------------------------------------------------------------------------------
 
 \documentclass{article}
 
-% Utiliza el paquete de español.
+\% Utiliza el paquete de español.
 \usepackage{spanish}
-% Utiliza la plantilla para reports.
+\% Utiliza la plantilla para reports.
 \usepackage{template}
-% Utiliza una portada (elija una de las portadas disponibles y comente el resto).
+\% Utiliza una portada (elija una de las portadas disponibles y comente el resto).
 \usepackage{title1}
-%\usepackage{title2}
+\%\usepackage{title2}
 
-%-----------------------------------------------------------------------------------------------------
-%	OTROS PAQUETES
-%-----------------------------------------------------------------------------------------------------
+\%-----------------------------------------------------------------------------------------------------
+\%	OTROS PAQUETES
+\%-----------------------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
 
-%-----------------------------------------------------------------------------------------------------
-%	DATOS DEL DOCUMENTO
-%-----------------------------------------------------------------------------------------------------
+\%-----------------------------------------------------------------------------------------------------
+\%	DATOS DEL DOCUMENTO
+\%-----------------------------------------------------------------------------------------------------
 
 \newcommand{\doctitle}{Apuntes}
 \newcommand{\docsubtitle}{}
@@ -684,8 +714,6 @@ Claramente tenemos que $p \in \mathcal{R}(x_0)$.
 
 \section{Prolongación y acotación de soluciones}
 
-En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. Encontraremos prolongaciones bajo ciertas hipótesis sobre la solución y / o el problema. En consecuencia, para las soluciones maximales fallarán alguna de estas hipótesis, obteniendo información sobre estas soluciones.
-
 \begin{lemma}
   Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que
   $\lim_{t \to \omega} \varphi(t) = \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces la solución es
@@ -732,7 +760,7 @@ En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. En
 \end{proof}
 
 \begin{theorem}[Comportamiento de la soluciones maximales en el extremo superior]
-  \label{thm:prolongacion}
+  \label{THM:prolongacion}
   Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Si
   $\omega < +\infty$, entonces se ha de cumplir una de las siguientes alternativas:
   \begin{enumerate}
@@ -747,52 +775,8 @@ En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. En
   $\{t_n\}$ convergente a $\omega$ tal que $\{\varphi(t_n)\}$ está acotada. Por el teorema de
   Bolzano-Weierstrass encontramos una parcial $\{t_{\sigma(n)}\}$ convergente a $\xi \in
   \R^d$. Nótese que $(\omega, \xi) \not \in D$ por el Lema \ref{lem:prolongacion}. Puesto que
-  $\{(t_{\sigma(n)}, \varphi(t_{\sigma(n)}))\} \to (\omega, \xi)$ tenemos que
-  $(\omega, \xi) \in \partial D$.
+  $\{(t_{\sigma(n)}, \varphi(t_{\sigma(n)}))\} \to (\omega, \xi)$ tenemos que $(\omega, \xi) \in \partial D$.
 \end{proof}
 
-\begin{definition}
-  Sea $\varphi: ]\alpha, \omega[ \to \R^d$ continua. El conjunto $\omega$-límite de \eqref{eq:pvi}
-  se define como
-  \[L_{\omega}(\varphi) = \{q \in \R^d \mid \exists \{t_n\} \subset ]\alpha, \omega[, \{t_n\} \to
-    \omega, \{\varphi(t_n)\} \to q\}.\]
-\end{definition}
-
-\begin{remark}
-  Nótese que en el Teorema \ref{thm:prolongacion} la alternativa \ref{item:prolongacion:2} es
-  equivalente a que $\{\omega\} \times L_{\omega}(\varphi) \cap \partial D \ne \emptyset$.
-\end{remark}
-
-\begin{ex}
-  Consideremos el PVI
-  \[
-    \begin{cases}
-      x' = x^2 + t; \\
-      x(0) = 0.
-    \end{cases}
-  \]
-  Sea $\varphi: ]\alpha, \omega[ \to \R$ solución. Si $\omega < +\infty$, entoces verifica que
-  $\lim_{t \to \omega} \varphi(t) = + \infty$, luego $L_{\omega}(\varphi) = \emptyset$.
-\end{ex}
-
-\begin{corollary}
-  Sean $D = \R \times \R^d$ y sea $\varphi: ]\alpha, \omega[ \to \R^d$ solución maximal de
-  \eqref{eq:pvi}.  Si $\omega < +\infty$, entoces se verifica que
-  $\lim_{t \to \omega} ||\varphi(t)|| = + \infty$.
-\end{corollary}
-
-\begin{corollary}
-  Si el conjunto D es acotado y $\varphi: ]\alpha, \omega[ \to \R^d$ solución maximal de
-  \eqref{eq:pvi}, entonces $\omega < +\infty$ y además existe $\xi \in \R^d$ con
-  $(\omega, \xi) \in \partial D$ y $\{t_n\} \subset ]\alpha, \omega[$ estrictamente creciente tal
-  que $\{t_n\} \to \omega$ y $\{\varphi(t_n)\} \to \xi$.
-\end{corollary}
-
-
-\begin{corollary}
-  Sean $D = ]a,b[ \times \R^d$ con $-\infty \le a < b \le +\infty$ y
-  $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Si $\omega < b$,
-  entonces $\lim_{t \to \omega} \varphi(t) = +\infty$.
-\end{corollary}
-
+\end{document}
 \end{document}

@@ -32,6 +32,10 @@
     "lem:barbalet"
     "def:ra"
     "def:atractor"
-    "eq:log"))
+    "eq:log"
+    "lem:prolongacion"
+    "thm:prolongacion"
+    "item:prolongacion:1"
+    "item:prolongacion:2"))
  :latex)
 
