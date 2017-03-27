@@ -19,13 +19,13 @@
 \usepackage{title1}
 %\usepackage{title2}
 
-%-----------------------------------------------------------------------------------------------------
+%--------------------------------------------------------1---------------------------------------------
 %	OTROS PAQUETES
 %-----------------------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
 
-%-----------------------------------------------------------------------------------------------------
+%------------------------n-----------------------------------------------------------------------------
 %	DATOS DEL DOCUMENTO
 %-----------------------------------------------------------------------------------------------------
 
@@ -44,11 +44,12 @@
 
 \section{Introducción}
 
+En esta sección introducimos los conceptos básicos de la teoría de ecuaciones diferenciales ordinarias.
+
 \subsection{Notación y terminología}
 
 En esta sección haremos una pequeña introducción a los problemas que abordaremos en esta
-asignatura. Vamos a estudiar propiedades de las soluciones de una ecuación diferencial de la que no
-podemos calcular explícitamente las mismas. Estudiaremos ecuaciones diferenciales ordinarias (que
+asignatura. El objetivo es obtener propiedades de las soluciones de una ecuación diferencial  que no podemos resolver explícitamente. Concretamente, estudiaremos ecuaciones diferenciales ordinarias (que
 abreviaremos EDO). Una EDO es una ecuación de la forma
 \[x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D,\]
 
@@ -59,7 +60,7 @@ introducimos a continuación:
 \begin{itemize}
 \item $D$: dominio de la ecuación.
 \item $f$: campo de la ecuación.
-\item $t$: variable independiente.
+\item $t$: tiempo o variable independiente.
 \item $x(t)$: función incógnita o variable dependiente. En lo que sigue, por comodidad, la notaremos
   simplemente por $x$, sin especificar la variable de la que depende.
 \end{itemize}
@@ -68,7 +69,7 @@ introducimos a continuación:
   
   \begin{itemize}
   \item EDO escalar:
-    \[x' = \frac{x}{t} \text{ con } t > 0,\] donde $D = (0, +\infty)* \R$.
+    \[x' = \frac{x}{t} \text{ con } t > 0,\] donde $D = (0, +\infty) \times \R$.
   \item Sistema de EDOs:
     \[
       \left.
@@ -83,7 +84,7 @@ introducimos a continuación:
 \end{ex}
 
   \begin{definition}[Concepto de solución]
-    Una solución de una EDO es una función $\varphi: I \to \R^d$ donde $I$ es un intervalo abierto
+    Una \emph{solución} de una EDO es una función $\varphi: I \to \R^d$ donde $I$ es un intervalo abierto
     no vacío, tal que:
     \begin{enumerate}
     \item $\varphi \in \mathcal{C}^1(I, \R^d)$;
@@ -92,6 +93,8 @@ introducimos a continuación:
     \end{enumerate}
   \end{definition}
 
+
+  
   \begin{definition}[Problema de valores iniciales]
     Un problema de valores iniciales o problema de Cauchy (de aquí en adelante lo abreviaremos PVI)
     consiste en añadir a una EDO un dato o condición inicial, esto es, un par $(t_0, x_0) \in D$.
@@ -684,7 +687,10 @@ Claramente tenemos que $p \in \mathcal{R}(x_0)$.
 
 \section{Prolongación y acotación de soluciones}
 
-En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. Encontraremos prolongaciones bajo ciertas hipótesis sobre la solución y / o el problema. En consecuencia, para las soluciones maximales fallarán alguna de estas hipótesis, obteniendo información sobre estas soluciones.
+En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. Encontraremos
+prolongaciones bajo ciertas hipótesis sobre la solución y / o el problema. En consecuencia, para las
+soluciones maximales fallarán alguna de estas hipótesis, obteniendo información sobre estas
+soluciones.
 
 \begin{lemma}
   Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que
@@ -789,10 +795,146 @@ En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. En
 \end{corollary}
 
 
-\begin{corollary}
-  Sean $D = ]a,b[ \times \R^d$ con $-\infty \le a < b \le +\infty$ y
-  $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Si $\omega < b$,
-  entonces $\lim_{t \to \omega} \varphi(t) = +\infty$.
+\begin{corollary} \label{cor:ab:lim} Sean $D = ]a,b[ \times \R^d$ con
+  $-\infty \le a < b \le +\infty$ y $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de
+  \eqref{eq:pvi}. Si $\omega < b$, entonces $\lim_{t \to \omega} \varphi(t) = +\infty$.
 \end{corollary}
+
+\begin{ex}
+  Sea $]\alpha, \omega[$ el intervalo de definición de la solución maximal de
+  
+  \begin{equation}
+    \label{eq:ex:pi}
+    \begin{cases}
+      x' = \frac{2}{x} + \frac{\sin(t)}{x^2}, \quad x > 0; \\
+      x(0) = 2.
+    \end{cases}
+  \end{equation}
+  Demuestra que $\omega = +\infty$.
+
+  Denotemos $\varphi(t) = X(t; 0,2)$. Vamos a demostrar que $1 < \varphi(t) \le 2+3t$ para todo
+  $t \ge 0$. Razonemos por reducción al absurdo. Si $1 > \varphi(t')$ para cierto $t' > 0$, podemos
+  encontrar $\tau = \inf \{t > 0: \varphi(t) < 1\} > 0$. Nótese que como $\varphi(t)$ es contínua
+  debe tenerse $\varphi(\tau) = 1$ y $\varphi(t) > 1$ para todo $0 < t < \tau$. Como consecuencia,
+  debe tenerse $\varphi'(\tau) \le 0$. Sin embargo, usando que $\varphi$ es solución de
+  \eqref{eq:ex:pi} se tiene que $\varphi'(\tau) = 2 + \sin(\tau) > 0$, contradicción. Utilizando
+  esta información y \eqref{eq:ex:pi} deducimos que
+  \[\varphi'(t) \le \varphi'(t) \varphi(t) = 2 + \frac{\sin(t)}{\varphi(t)} \le 3.\]
+
+  Por tanto, deducimos que
+  \[ \varphi(t) = 2 + \int\limits_{0}^{t} \varphi'(s) \diff s \le 2 +3t.\]
+
+  Por último, la cota que hemos encontrado impide que se verifiquen las alternativas del Teorema
+  \ref{thm:prolongacion}, esto es, $\omega = +\infty$.
+\end{ex}
+
+\begin{lemma}[Lema de Gronwall]
+  Sea $y:[t_0, \omega[ \to \R$ continua tal que existen dos constantes $C, R \in \R$ con $R \ge 0$
+  tales que para cada $t \in [t_0, \omega[$ se verifica
+  \[ y(t) \le C + R \int\limits_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par
+  todo $t \in [t_0, \omega[$.
+\end{lemma}
+\begin{proof}
+  De la tesis deducimos en particular que $y'(t) \le R y(t)$ para todo $t \in [t_0, \omega[$. Si
+  $y = 0$, entonces la tesis es clara. En caso contrario, para cada $t' \in [t_0, \omega[$ existe un
+  intervalo $t' \in I = [t_1, t_2] \subset [t_0, \omega[$ tal que $y(t) \ne 0$ para todo $t \in
+  I$. En consecuencia, encontramos que para cada $t \in I$ se verifica
+  \[ \log(y(t)) - \log(y(t_1)) = \int\limits_{t_1}^{t} \frac{y'(s)}{y(s)} \diff s \le R(t-t_1).\]
+
+  De la monotonía de la función exponencial se deduce que...
+
+\end{proof}
+
+\begin{definition}
+  Sea $D = ]a,b[ \times R^2$ y $f: ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo crecimiento
+  lineal en la variable $x$ si existen dos funciones continuas $m, n : ]a,b[ \to \R^+_0$ tales que
+  para cada $(t,x) \in D$ se tiene
+  \[ ||f(t,x)|| \le m(t) ||x|| + n(t).\] En tal caso escribiremos que $f$ es CSL.
+\end{definition}
+
+\begin{remark}
+  Todas las funciones definidas en $D$ que sean globalmente lipschitzianas respecto de la variable
+  $x$ son CSL.
+\end{remark}
+
+\begin{remark}
+  Sea $f : \R \times \R$ continua tal que existen $\lim_{x \to +\infty} f(x)/x$ y
+  $\lim_{x \to -\infty} f(x)/x$. Entonces $f$ tiene crecimiento a lo sumo lineal.
+\end{remark}
+
+\begin{theorem}[Teorema de crecimiento a lo sumo lineal]
+  Si $f$ tiene crecimiento a lo sumo lineal, entonces todas las soluciones maximales de
+  \eqref{eq:pvi} verifican que $]\alpha, \omega[ = ]a,b[$.
+\end{theorem}
+\begin{proof}
+  Sean $m, n : ]a,b[ \to \R_0^+$ continuas de la deficinicón de crecimiento a lo umo lineal. Sea
+  $\varphi: ]\alpha, \omega[ \to \R^d$ solución de \eqref{eq:pvi}. Veamos que $\omega =
+  b$. Supongamos por reducción al absurdo que $\omega < b$. Tenemos que
+  $[t_0, \omega] \subset ]a,b[$. Por el teorema de Weierstrass existe
+  $M = \max \{m(t) \mid t \in [t_0,\omega]\}$ y $N = \max \{n(t) \mid t \in [t_0,\omega]\}$ Por
+  tanto, se cumple que
+  \[ ||\varphi(t)|| \le ||x_0|| + \int_{t_0}^{t} ||f(s, \varphi(s))|| \diff s \le ||x_0|| +
+    \int_{t_0}^{t} M||\varphi(s)|| + N \diff s ) \le ||x_0|| + N(\omega - t_0) + M \int_{t_0}^{t}
+    ||\varphi(s)|| \diff s. \]
+
+  Podemos aplicar pues el Lema de Gronwall, obteniendo que
+  \[||\varphi(t)|| \le (||x_0|| + N (\omega-t_0)) \exp(M(t - t_0)) \le (||x_0|| + N (\omega-t_0))
+    \exp(M(\omega - t_0)),\]
+
+  y, por tanto, $\varphi$ está acotada, lo que contradice el Corolario \ref{cor:ab:lim}. Para
+  demostrar que $\alpha = a$ basta aplicar el argumento anterior sobre el PVI dual, que también es
+  CSL.
+\end{proof}
+
+\begin{ex}
+  Sea $x_0 \in \R$. Consideremos el PVI
+  \[
+    \begin{cases}
+      x' = \frac{x^3}{x^2+1} & x \in \R; \\
+      x(0) = x_0.
+    \end{cases}
+  \]
+  Es autónoma escalar y su diagrama de fases se corresponde con $\leftarrow 0
+  \rightarrow$. Consecuentemente, $\alpha(0,x_0) = -\infty$. Por el Teorema previo obtenemos que
+  $\omega(0,x_0) = +\infty$.
+\end{ex}
+
+\begin{remark}
+  Las EDOs lineales son CSL. En efecto, éstas son de la forma
+  \[ x' = A(t) x + b(t), \] con $A \in \mathcal{C}(\R, \mathcal{M}_{d}(\R))$ y
+  $b \in \mathcal{C}(\R, \R^d)$. En efecto, tenemos que
+  \[ ||A(t)x +b(t)|| \le ||A(t)x||+||b(t)|| \le ||A(t)|| \,||x|| + b(t)||. \]
+\end{remark}
+
+\begin{remark}
+  Veremos en una relación de problemas que cuando $f(x)$ tiene un crecimiento mayor que una función
+  potencial $x^p$ con $p > 1$, entonces ciertas soluciones explotan en tiempo finito.
+\end{remark}
+
+Las hipótesis del Teorema CSL no son óptimas ya que hay funciones con crecimiento super lineal tales
+que las soluciones de las EDOs asociadas no explotan en tiempo finito. Esto queda reflejado en el
+siguiente ejemplo.
+
+\begin{ex}
+  Consideramos el PVI
+  \[
+    \begin{cases}
+      x' = x \log(x), \quad x > 0; \\
+      x(0) = 2.
+    \end{cases}
+  \]
+  Nótese que $\varphi(t) = X(t, 2) = \exp(\log(2) e^t)$ y $\alpha = -\infty$ y $\omega = +\infty$.
+\end{ex}
+
+\begin{remark}
+  La hipótesis del Teorema de CSL se puede cambiar por las siguientes:
+  
+\begin{enumerate}
+\item Existe $A \subset \R^d$ tal que $\varphi(t) \in A$ para todo $t \in ]\alpha, \omega[$.
+\item Existen $m, n: ]a,b[ \to \R_0^+$ continuas tales que $||f(t,x)|| \le m(t) ||x|| + n(t)$ para todo $t \in ]a,b[$ y $x \in A$.
+\end{enumerate}
+\end{remark}
+
+
 
 \end{document}
