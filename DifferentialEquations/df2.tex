@@ -49,9 +49,14 @@ En esta sección introducimos los conceptos básicos de la teoría de ecuaciones
 \subsection{Notación y terminología}
 
 En esta sección haremos una pequeña introducción a los problemas que abordaremos en esta
-asignatura. El objetivo es obtener propiedades de las soluciones de una ecuación diferencial  que no podemos resolver explícitamente. Concretamente, estudiaremos ecuaciones diferenciales ordinarias (que
-abreviaremos EDO). Una EDO es una ecuación de la forma
-\[x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D,\]
+asignatura. El objetivo es obtener propiedades de las soluciones de una ecuación diferencial que no
+podemos resolver explícitamente. Concretamente, estudiaremos ecuaciones diferenciales ordinarias
+(que abreviaremos EDO). Una EDO es una ecuación de la forma
+\begin{equation}
+  \label{eq:edo}
+  x'(t) = f(t,x(t)) \text{ con } (t,x(t)) \in D,
+  \tag{E}
+\end{equation}
 
 donde $D \subset \R \times \R^d$ es un conjunto abierto y arcoconexo y $f: D \to \R^d$ es una
 función continua. Los elementos que intervienen en una EDO tienen una terminología específica que
@@ -65,7 +70,7 @@ introducimos a continuación:
   simplemente por $x$, sin especificar la variable de la que depende.
 \end{itemize}
 
-\begin{ex} Veamos algunos ejemplos de ecuaciones diferenciales ordinarias.
+\begin{ex} \label{ex:ex} Veamos algunos ejemplos de ecuaciones diferenciales ordinarias.
   
   \begin{itemize}
   \item EDO escalar:
@@ -84,8 +89,8 @@ introducimos a continuación:
 \end{ex}
 
   \begin{definition}[Concepto de solución]
-    Una \emph{solución} de una EDO es una función $\varphi: I \to \R^d$ donde $I$ es un intervalo abierto
-    no vacío, tal que:
+    Una \emph{solución} de una EDO es una función $\varphi: I \to \R^d$ donde $I$ es un intervalo
+    abierto no vacío, tal que:
     \begin{enumerate}
     \item $\varphi \in \mathcal{C}^1(I, \R^d)$;
     \item $(t, \varphi(t)) \in D$;
@@ -93,12 +98,16 @@ introducimos a continuación:
     \end{enumerate}
   \end{definition}
 
+  \begin{ex} Sea $I \subset \R^+$ un intervalo y $a \in \R$. La función $\varphi: I \to \R$ dada por
+    $\varphi(t) = at$ es una soluciónn de la EDO escalar propuesta en el Ejemplo \ref{ex:ex}. Esto
+    prueba que una EDO puede tener infinitas soluciones.
+  \end{ex}
 
   
   \begin{definition}[Problema de valores iniciales]
-    Un problema de valores iniciales o problema de Cauchy (de aquí en adelante lo abreviaremos PVI)
-    consiste en añadir a una EDO un dato o condición inicial, esto es, un par $(t_0, x_0) \in D$.
-    Normalmente se nota como:
+    Un \emph{problema de valores iniciales} o \emph{problema de Cauchy} (de aquí en adelante lo
+    abreviaremos PVI) consiste en añadir a una EDO un dato o condición inicial, esto es, un par
+    $(t_0, x_0) \in D$. Un PVI se escribe
     \begin{equation}
       \label{eq:pvi}
       \left\{
@@ -109,15 +118,23 @@ introducimos a continuación:
       \right.
       \tag{P}
     \end{equation}
-    Una solución del PVI es una solución de la EDO que cumple, además:
+    Una solución del PVI es una solución de la EDO que cumple
     \begin{enumerate}
     \item $t_0 \in I$;
     \item $\varphi(t_0) = x_0$.
     \end{enumerate}
   \end{definition}
 
-  En lo que sigue nos referiremos a \eqref{eq:pvi} cuando trabajemos con un PVI genérico. 
-  
+  En lo que sigue referiremos a \eqref{eq:pvi} cuando trabajemos con un PVI genérico.
+
+  \begin{ex} Sea $t_0 = 1$ y $x_0 \in \R$.  La función $\varphi: \R^+ \to \R$ dada por
+    $\varphi(t) = x_0t$ es una soluciónn de la EDO escalar propuesta en el Ejemplo \ref{ex:ex} y
+    verifica $\varphi(t_0) = x_0$. Nótese que la restricción de $\varphi$ a cualquier intervalo que
+    contenga a $1$ es una solución del PVI dado por $(1, x_0)$. De todas las soluciones, nos
+    interesan aquellas con el mayor dominio posible. La única solución maximal resultará ser
+    $\varphi$. El concepto de maximalidad se estudia en la siguiente sección.
+  \end{ex}
+
   \subsection{Unicidad de solución y soluciones maximales}
 
   Consideremos un PVI
@@ -131,31 +148,82 @@ introducimos a continuación:
     \tag{P}
   \end{equation}
 
-  Denotamos como
-  $\sum = \sum(P) = \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de \eqref{eq:pvi}}\}$. Diremos que
-  $(\widetilde{I}, \widetilde{\varphi}) \in \sum$, es una prologación de $(I, \varphi) \in \sum$ si
-  $I \subsetneq \widetilde{I}$ y $\widetilde{\varphi}_{|I} = \varphi$.  Un elemento de $\sum$ es prolongable
-  si admite una prolongación. Si $(\widetilde{I}, \widetilde{\varphi})$ es una prolongación de
-  $(I, \varphi)$, lo notaremos como $(I, \varphi) >> (\widetilde{I}, \tilde{\varphi})$. Diremos que
-  $(I, \varphi)$ es maximal si no es prolongable.
+  En primer lugar introducimos el concepto de prolongaciones y soluciones maximales.
+  
+\begin{definition}
+  Sea
+  $\Sigma = \Sigma\eqref{eq:pvi} = \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de
+    \eqref{eq:pvi}}\}$. El par $(\widetilde{I}, \widetilde{\varphi}) \in \Sigma$ es una
+  \emph{prolongación} de $(I, \varphi) \in \Sigma$ si $I \subsetneq \widetilde{I}$ y
+  $\widetilde{\varphi}_{|I} = \varphi$ y lo denotaremos
+  $(I, \varphi) >> (\widetilde{I}, \tilde{\varphi})$. Un elemento de $\Sigma$ es \emph{prolongable}
+  si admite una prolongación.  El par $(I, \varphi) \in \Sigma$ es \emph{maximal} si no es
+  prolongable.
+\end{definition}
 
-  \subsubsection{Conceptos de unicidad}
+\begin{definition}[Conceptos de unicidad] \
+  \begin{itemize}
+  \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad local} si dadas
+    $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, existe $H$ intervalo abierto con $t_0 \in H$
+    tal que $\varphi_1(t) = \varphi_2(t)$ para todo $t \in I_1 \cap I_2 \cap H$.
 
-  Diremos que $(P)$ verifica la propiedad de unicidad local si dadas
-  $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum, \exists H$ intervalo abierto, tal que
-  $\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$, $t_0 \in H$.
+  \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad en $H$}, con $H$
+    intervalo abierto y $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, se
+    cumple que $\varphi_1(t) = \varphi_2(t)$ para todo $t \in I_1 \cap I_2 \cap H$.
 
-  Diremos que $(P)$ verifica la propiedad de unicidad en $H$, con $H$ intervalo abierto y
-  $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
-  $\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2 \cap H$.
+  \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad global} si dadas
+    $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, se cumple que $\varphi_1(t) = \varphi_2(t)$
+    para todo $t \in I_1 \cap I_2$.
+  \end{itemize}
+\end{definition}
 
-  Finalmente, diremos que $(P)$ verifica la propiedad de unicidad global si dadas
-  $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum$, se cumple que
-  $\varphi_1(t) = \varphi_2(t)\,\,\, \forall t \in I_1 \cap I_2$.
+El siguiente resultado se deduce fácilmente de las definiciones de unicidad.
 
-\begin{lem}
-  Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones de un PVI tales que
-  $\exists \tau \in I_1 \cap I_2$ tal que $\varphi_1(\tau) = \varphi_2(\tau)$.  Entonces
+\begin{proposition}
+  En el contexto actual se cumplen las siguientes afirmaciones.
+  
+  \begin{enumerate}
+  \item El PVI \eqref{eq:pvi} verifica la propiedad de unicidad global si, y solo si, verifica la
+    propiedad de unicidad en $\R$.
+  \item El PVI \eqref{eq:pvi} verifica la propiedad de unicidad local si, y solo si, existe un
+    intervalo abierto $H$ con $t_0$ tal que \eqref{eq:pvi} verifica la propiedad de unicidad en $H$.
+  \end{enumerate}
+\end{proposition}
+
+\begin{corollary} \label{cor:global-local} Si el PVI \eqref{eq:pvi} verifica la propiedad de
+  unicidad global, entonces verifica la propiedad de unicidad global.
+\end{corollary}
+
+El recíproco del Corolario \ref{cor:global-local} no es cierto como cabe esperar. No obstante, sí se
+puede demostrar el resultado bajo una condición más restrictiva.
+
+\begin{proposition} \label{prop:local-global} La EDO \eqref{eq:edo} verifica la propiedad de
+  unicidad local para cualquier condición inicial $(t_0, x_0) \in D$ si, y solo si, verirfica la
+  propiedad de unicidad global para cualquier condición inicial $(t_0, x_0) \in D$.
+\end{proposition}
+\begin{proof}
+  La implicación de derecha a izquierda es trivial. Veamos que se da el recíproco. Sean
+  $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma \eqref{eq:pvi}$, donde \eqref{eq:pvi} es el PVI
+  asociado a $(t_0, x_0) \in D$. Veamos que coinciden en $I_1 \cap I_2$. Definimos
+  $H = \{ t \in I_1 \cap I_2; \varphi_1(t) = \varphi_2(t)\}$. Por hipótesis tenemos que $t_0 \in H$
+  y, por tanto, $H \neq \emptyset$. Además, $H$ es un cerrado relativo de $I_1 \cap I_2$ por ser el
+  conjunto donde coinciden dos funciones continuas. Por último, razonamos que $H$ es abierto. En
+  efecto, fijado $\tau \in H$, consideremos el PVI (\~P) asociado a $(\tau,
+  \varphi_1(\tau))$. Nótese que $\varphi_1$ y $\varphi_2$ son soluciones de (\~P). Por la propiedad
+  de unicidad local existe un intervalo abierto $\tilde{H}$ con $\tau \in \tilde{H}$ tal que
+  $\varphi_1(t) = \varphi_2(t)$ para todo $t \in \tilde{H} \cap I_1 \cap I_2$.  Consecuentemente,
+  $\tau \in \tilde{H} \cap I_1 \cap I_2 \subset H$. La prueba finaliza al recordar que
+  $I_1 \cap I_2$ es conexo y, por tanto, el único abierto y cerrado no trivial de $I_1 \cap I_2$ es
+  el propio $I_1 \cap I_2$.
+\end{proof}
+
+El siguiente lema cuya demostración es trivial será utilizado a menudo para crear crear soluciones
+que muestren que no se verifica la unicidad global.
+
+\begin{lemma}
+  Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones del PVI \eqref{eq:pvi} y sea
+  $\tau \in I_1 \cap I_2$ con $\varphi_1(\tau) = \varphi_2(\tau)$.  Entonces la función
+  $\Psi: I_1 \cap I_2 \to \R^d$ dada por
   \[
     \psi(t) = \left\{
       \begin{array}{l}
@@ -165,36 +233,7 @@ introducimos a continuación:
     \right.
   \]
   es solución del PVI.
-\end{lem}
-
-\begin{lem}
-  Si $\forall (t_0, x_0) \in D$ el PVI
-  \[
-    \left\{
-      \begin{array}{l}
-        x' = f(t,x) \\
-        x(t_0) = x_0
-      \end{array}
-    \right.
-  \]
-  unicidad global
-\end{lem}
-
-\begin{proof}
-  Sean $(I_1, \varphi_1), (I_2, \varphi_2) \in \sum (P)$. Definimos
-  $H = \{ t \in I_1 \cap I_2; \varphi_1(t) = \varphi_2(t)\}$. Tenemos que:
-  \begin{itemize}
-  \item $H \neq \emptyset \quad (t_0 \in H)$
-  \item $H$ es un cerrado relativo por ser el conjunto donde coinciden dos funciones continuas.
-  \item $H$ es abierto. Veamos la demostración:\\
-    Sea $\tau \in H$ y consideremos el PVI $(\tilde{P})=\{x'= f(t, x), x(\tau) =
-    \varphi_1(\tau)\}$. Por la propiedad de unicidad local $\exists \tilde{H}$ intervalo con
-    $\tau \in \tilde{H} = \dot{\tilde{H}}$ tal que
-    $\varphi_1(t) = \varphi_2(t) \quad \forall t \in \tilde{H} \cap I_1 \cap I_2 \Rightarrow
-    \tilde{H} \cap I_1 \cap I_2 \subset H$
-  \end{itemize}
-  Esto implica que $H = I_1 \cap I_2$, y por tanto se verifica la propiedad de unicidad local.
-\end{proof}
+\end{lemma}
 
 \subsection{Ecuación integral de Volterra}
 
@@ -252,7 +291,7 @@ ecuación integral de Volterra:
   que $\varphi'(t) = 0 + f(t, \varphi(t))$.  Esto implica que
   $\varphi$ es derivable en $I$, y que cumple la tercera propiedad de
   las soluciones del PVI. Finalmente, tenemos que
-    $$ \varphi(t_0) = x_0 + \sum_{t_0}^{t_0} f(s, \varphi(s))ds = x_0 $$
+    $$ \varphi(t_0) = x_0Sigma\eqref{eq:pvi}t_0_{t_0}^{t(t_0, x_0) \in D f(s,  si, y solo si, verirfica la propiedad de unicidad global para\varphi(s))ds = x_0 $$
   \end{proof}
 
   Vamos a ver un ejemplo de cómo se relacionan los dos conceptos que
@@ -319,7 +358,9 @@ ecuación integral de Volterra:
 
   Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
 
-  \subsection{Algunos teoremas de existencia y unicidad}
+\section{Existencia y unicidad de solución} \label{sec:eu}
+
+\subsection{Variables separadas}
 
 \begin{thm}[Existencia y unicidad en variables separadas]
   Sean $ a \in \mathcal{C}(J_1)$ y $g \in \mathcal{C}(J_2)$,
@@ -338,8 +379,8 @@ ecuación integral de Volterra:
 
 Entonces, se verifican:
 \begin{description}
-\item[i)] El PVI $(P)$ tiene solución
-\item[ii)] Si $g(x_0) \neq 0$ el PVI $(P)$ verifica la propiedad de
+\item[i)] El PVI eqref{eq:pvi} tiene solución
+\item[ii)] Si $g(x_0) \neq 0$ el PVI eqref{eq:pvi} verifica la propiedad de
   unicidad local.
 \item[iii)] Si $g(x_0) = 0$ y existe $ G \in \mathcal{C} (J_2)$ tal
   que $G(x_0) = 0$ y existe
@@ -388,6 +429,8 @@ Entonces, se verifican:
   % TODO: Terminar demostración
 \end{proof}
 
+\subsection{Unicidad en el futuro y en el pasado}
+
 \begin{definition}
   \label{def:unicidad-futuro}
   Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y
@@ -413,7 +456,6 @@ Entonces, se verifican:
   \end{enumerate}
 \end{thm}
 
-\section{Existencia y unicidad de solución} \label{sec:eu}
 
 \subsection{Herramientas previas}
 
