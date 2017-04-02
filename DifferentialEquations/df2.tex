@@ -552,14 +552,8 @@ múltiples demostraciones. Enunciamos el teorema a continuación.
 
 \begin{thm}[Teorema de Picard-Lindelöf]
   Sean $D \subset \mathbb{R} \times \mathbb{R}^d$, $f: D \to \mathbb{R}^d$ continua y localmente
-  lipschitziana respecto de la segunda variable. Dado $(t_0, x_0) \in D$, el PVI
-  \begin{equation}
-    \label{eq:pl:pvi}
-    \begin{cases}
-      x' = f(t,x); \\ x(t_0) x_0;
-    \end{cases}
-  \end{equation}
-  tiene solución y es única tanto en sentido local como global.
+  lipschitziana respecto de la segunda variable. Dado $(t_0, x_0) \in D$, el PVI \eqref{eq:pvi}
+  tiene solución y verifica la propiedad de unicidad global.
 \end{thm}
 
 En primer lugar, tenemos que introducir el concepto de ser lipschitziana respecto de la segunda
@@ -590,60 +584,71 @@ el lector.
 \end{corollary}
 
 \begin{definition}
-  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$. La función $f$ es
-  \emph{lipschitziana respecto de la segunda variable} si existe $M \ge 0$ tal que para cada
+  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$. La función $f(x,y)$ es
+  \emph{lipschitziana respecto de la variable} $x \in \R^d$ si existe $M \ge 0$ tal que para cada
   $x,x' \in \R^d$, $y \in \R^m$ con $(x,y) \in D$ y $(x', y) \in D$ se tiene
   \[ ||f(x,y)-f(x',y)|| \le M ||x-x'||. \]
 \end{definition}
 
 \begin{definition}
-  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$. La función $f$ es \emph{localmente
-    lipschitziana respecto de la segunda variable} o \emph{LL respecto de la segunda variable} si
-  para cada $(p,q) \in D$ existe un entorno abierto $U \subset D$ de $(p,q)$ tal que $f$ es
-  lipschitziana respecto de la segunda variable en $U$.
+  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$. La función $f(x,y)$ es
+  \emph{localmente lipschitziana respecto de la variable} $x \in \R^d$ o \emph{LL respecto de la
+    variable} $x \in \R^d$ si para cada $(p,q) \in D$ existe un entorno abierto $U \subset D$ de
+  $(p,q)$ tal que $f$ es lipschitziana respecto de la variable $x$ en $U$.
 \end{definition}
 
 \begin{proposition}
   Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$ continua y derivable respecto de la
-  primera variable $x \in \R^{d}$. Si la función $\frac{\partial}{\partial x}f \colon D \to \mathcal{M}_{d,k}(\R)$ es
-  continua, entonces $f$ es LL respecto de la segunda variable.
+  variable $x \in \R^{d}$. Si la función
+  $\frac{\partial}{\partial x}f \colon D \to \mathcal{M}_{d,k}(\R)$ es continua, entonces $f$ es LL
+  respecto de la variable $x$.
 \end{proposition}
 
 \subsubsection{Operador integral de Volterra} \label{sec:eu:pl:volterra}
 
-Fijado una EIV \eqref{eq:volterra} queremos definir un operador $V \colon E \to F$ tal que a la función
-$y\colon I \to \R^d$ le asigne la función $V(y)\colon I \to \R^d$ dada por
+Fijado una EIV \eqref{eq:volterra} queremos definir un operador $V \colon E \to E$ tal que a la
+función $y\colon I \to \R^d$ le asigne la función $V(y)\colon I \to \R^d$ dada por
 \begin{equation}
   \label{eq:1}
   V(y)(t) = x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds.
 \end{equation}
 
+Nótese que $y$ es solución de \eqref{eq:volterra} si, y solo si, $V(y) = y$. Queremos aplicar el
+Teorema del punto fijo de Banach para asegurar la existencia y la unicidad de tal $y$. Para ello
+necesitamos encontrar un conjunto $E \subset \{f\colon I\to\R^d \mid f \text{ es continua}\}$
+apropiado que sea un espacio métrico completo. Además, $V$ debe ser una contracción en tal
+espacio. En tal caso, a $V$ se le denomina \emph{operador integral de Volterra}.
 
-Para definir después la siguiente sucesión recurrente:
-\[
-  \left\{
-    \begin{array}{l}
-      y_0 \in E \\
-      y_{n+1} = V(y_n), \quad y_n \in E
-    \end{array}
-  \right.
-\]
-  
-Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
+En este contexto introducimos la siguiente notación. Dados $a,b > 0$ denotamos
+\[R_{a,b}(t_0, x_0) = [t_0+a, t_0-a] \times \overline{B}(x_0, b).\]
 
-Introducimos la siguiente notación. Dado $(t_0, x_0) \in \mathbb{R} \times \mathbb{R}^d$ y dados
-$a,b > 0$ denotamos $R_{a,b}(t_0, x_0) = [t_0+a, t_0-a] \times \overline{B}(x_0, b)$. Consideramos
-el conjunto $E = B(x_0, b) \subset \mathcal{C}([t_0-a, t_0+a]; \mathbb{R}^d)$ con la norma infinito.
+Existen $a,b > 0$ tales que $R_{a,b}(t_0,x_0) \subset D$.  Consideramos el conjunto
+$E = \overline{B}(x_0, b) \subset \mathcal{C}([t_0-a, t_0+a]; \mathbb{R}^d)$, que es un espacio
+métrico completo con la norma infinito.
 
-\begin{lem}
-  Si $aM \le b$, entonces $V(\varphi) \in E$
-\end{lem}
+\begin{lemma} \label{lem:v:1} Sea $\varphi \in E$ y
+  $M = \max \{||f(t,x)|| \mid (t,x) \in R_{a,b}(t_0, x_0)\}$. Si $aM \le b$, entonces
+  $V(\varphi) \in E$.
+\end{lemma}
+\begin{proof}
+  La comprobación es sencilla. Sea $t \in [t_0-a, t_0+a]$, tenemos que
+  \[ ||V(\varphi)(t)-x_0|| \le \int_{t_0}^t ||f(s, \varphi(s))|| \diff s \le M(t-t_0) \le M a \le
+    b.  \]
 
-\begin{lem}
-  Si la función $f$ es lipschitziana respecto de la segunda variable en $R_{a.b}(t_0, x_0)$,
-  entonces
-  \[||V(\varphi) - V(\Psi)||_{\infty} \le La||\varphi - \Psi||_\infty.\]
-\end{lem}
+  De la arbitrariedad de $t$ se obtiene que $||V(\varphi)-x_0|| \le b$.
+\end{proof}
+
+\begin{remark}
+  Si se verifican las hipótesis del Lema \ref{lem:v:1} y $\varphi: [t_0-a, t_0+a] \to \mathbb{R}^d$
+  es solución de \eqref{eq:volterra}, entonces $(t, \varphi(t)) \in R_{a,b}$ para todo
+  $t \in [t_0-a, t_0+a]$.
+\end{remark}
+
+\begin{lemma}
+  Si la función $f$ es lipschitziana respecto de la segunda variable en $R_{a.b}(t_0, x_0)$ con
+  constante de Lipschitz $L \ge 0$, entonces
+  \[||V(\varphi) - V(\Psi)||_{\infty} \le La||\varphi - \Psi||_\infty,\]
+\end{lemma}
 
 \begin{proof}
   Sea $t \in [t_0-a, t_0+a]$. Tenemos que
@@ -651,31 +656,45 @@ el conjunto $E = B(x_0, b) \subset \mathcal{C}([t_0-a, t_0+a]; \mathbb{R}^d)$ co
     s.\] Tomamos normas y acotamos la integral
   \[|(V(\varphi) - V(\Psi))(t)| \le \left|\int_{t_{0}}^t \left|f(s, \varphi(s)) - f(s,
         \Psi(s))\right| \diff s\right| \le \left|\int_{t_{0}}^t L |\varphi(s) - \Psi(s)| \diff s
-    \right| \le L a ||\varphi - \Psi||_{\infty}\] \qedhere
+    \right| \le L a ||\varphi - \Psi||_{\infty}.\]
+
+  De la arbitrariedad de $t$ se obtiene el resultado.
 \end{proof}
 
-\begin{rem}
-  Si $a M \le B$ y $\varphi: [t_0-a, t_0+a] \to \mathbb{R}^d$ es solución del PVI, entonces
-  $(t, \varphi(t)) \in R_{a,b}$ para todo $t \in (t_0-a, t_0+a)$.
-\end{rem}
-
-
 \subsubsection{Demostración del Teorema de Picard-Lindelöf}
+
+Gracias al operador integral de Volterra podemos dar una demostración sencilla del Teorema de
+Picard-Lindelöf. Presentamos la demostración a continuación.
 
 \begin{proof}
   Existe $U \subset D$ entorno de $(t_0, x_0)$ y $L \ge 0$ tal que $f$ es lipschitziana respecto de
   la segunda variable en $U$ con constante de Lipschitz $L \ge 0$. Existen
   $\overline{a}, b \in \mathbb{R}^+$ tal que $R_{\overline{a},b}(t_0, x_0) \subset U$. Por el
-  teorema de Weierstrass, existe $M = \max R_{\overline{a},b}(t_0, x_0)$. Tomamos
-  $0 < a < \overline{a}$ tal que $a M < b$ y $a L < 1$. En el nuevo recinto $R_{a,b}(t_0, x_0)$ se
-  cumplen todas las propiedades que se requieren para finalizar la demostración. Definimos
+  teorema de Weierstrass, existe $M = \max \{||f(t,x)|| : (t,x) \in R_{\overline{a},b}(t_0,
+  x_0)\}$. Tomamos $0 < a < \overline{a}$ tal que $a M < b$ y $a L < 1$. En el nuevo recinto
+  $R_{a,b}(t_0, x_0)$ se cumplen todas las propiedades que se requieren para finalizar la
+  demostración. Consideramos el espacio métrico completo
   \[E = \{\varphi \in \mathcal{C}([t_0-a, t_0+a], \mathbb{R}^d): ||\varphi(t)-x_0|| \le b \ \forall
-    t \in [t_0-a, t_0+a]\}.\] Por los lemas anteriores tenemos que $V(E) \subset E$ y $V$ es
-  contractiva. La existencia de solución se deduce del Teorema del punto fijo de Banach. Estudiemos
-  ahora la unicidad del problema. Dadas dos soluciones de \eqref{eq:pl:pvi},
-  $\varphi_1: I_1 \to \mathbb{R}$ y $\varphi_2: I_2 \to \mathbb{R}$ ,existe que además nos
-  proporciona unicidad local en $(t_0, x_0)$.  De la arbitrariedad de $(t_0, x_0)$ deducimos que la
-  EDO verifica la propiedad de unicidad local en cualquier punto $(t_0, x_0) \in D$.
+    t \in [t_0-a, t_0+a]\}.\]
+
+  Por los lemas anteriores tenemos que $V(E) \subset E$ y $V$ es contractiva. La existencia de
+  solución se deduce del Teorema del punto fijo de Banach.
+
+  Estudiemos ahora la unicidad local de \eqref{eq:pvi}. Consideremos dos soluciones
+  $\varphi_1: I_1 \to \mathbb{R}$ y $\varphi_2: I_2 \to \mathbb{R}$. Podemos tomar $0 < a' < a$ tal
+  que $[t_0-a', t_0+a'] \subset I_1 \cap I_2$ y, además, $||\varphi_i(t)-x_0|| < b$ para todo
+  $t\in [t_0-a', t_0+a']$, $i \in \{1,2\}$. Nótese que se sigue verificando $a'M < b$ y $a'L <
+  1$. Tomamos el espacio métrico completo
+  \[E' = \{\varphi \in \mathcal{C}([t_0-a', t_0+a'], \mathbb{R}^d): ||\varphi(t)-x_0|| \le b \
+    \forall t \in [t_0-a', t_0+a']\}.\]
+
+  Tenemos que $\varphi_1, \varphi_2 \in E'$ son puntos fijos del operador integral de Volterra
+  definido sobre $E'$. Como consecuencia del Teorema del punto fijo de Banach, $\varphi_1$ y
+  $\varphi_2$ coinciden en $[t_0-a', t_0+a']$, lo que demuestra la unicidad local.
+
+  Por último, de la arbitrariedad de $(t_0, x_0)$ deducimos que la EDO verifica la propiedad de
+  unicidad local en cualquier punto $(t_0, x_0) \in D$. Podemos aplicar pues la Proposición
+  \ref{prop:local-global} para completar la demostración.
 \end{proof}
 
 Recuérdese en este punto que el Teorema del punto fijo de Banach nos dice además que dado un
@@ -693,42 +712,43 @@ convergencia uniforme. A la sucesión $\varphi_n$ se le denomina iterantes de Pi
   Para este PVI obtenemos $f(t,x) = x^2$. En el entorno $U = \mathbb{R} \times [0,2]$ de $(0,1)$
   tenemos que $f$ es lipschitziana respecto de la segunda variable con constante de Lipschitz
   $L = 4$ y está acotada por $M = 4$. Tomamos pues $a = 1/8$. Podemos definir en $R_{a,b}(0,1)$ las
-  iterantes de Picard.
+  iterantes de Picard, que nos permiten encontrar una aproximación numérica de la solución en caso
+  de no conocer ésta.
 \end{ex}
 
 \subsection{Solución general}
 
-Como consecuencia del Teorema de Picard-Lindelöf y los resultados de la Sección \ref{sec:unicidad-maximal} obtenemos el siguiente corolario.
+Como consecuencia del Teorema de Picard-Lindelöf y los resultados de la Sección
+\ref{sec:unicidad-maximal} obtenemos el siguiente corolario.
 
 \begin{cor} \label{cor:picard:maximal} Sea $D \subset \mathbb{R} \times \mathbb{R}^d$ un conjunto
-  abierto y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana. Entonces, para cualquier
-  $(t_0, x_0) \in D$ el PVI
-  \begin{equation}
-    \label{eq:sol-maximal:pvi}
-    \begin{cases}
-      x' = f(t,x); x(t_0) = x_0;
-    \end{cases}
-  \end{equation}
-  tiene una única solución maximal.
+  abierto y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana respecto de la segunda
+  variable. Entonces, para cualquier $(t_0, x_0) \in D$ el PVI \eqref{eq:pvi} tiene una única
+  solución maximal.
 \end{cor}
 
-Utilizaremos la siguiente notación para indicar el dominio de una solución maximal
-\[\varphi: (\alpha, \omega) \to \mathbb{R}^d \text{ con } -\infty \leq \alpha < t_0 < \omega \leq
-  +\infty.\] Algunos autores escriben $(\omega_-, \omega_+)$ en lugar de $(\alpha, \omega)$. No
-obstante, la notación que hemos escogido nos facilita la escritura.
+\begin{definition}
+  Sea $D \subset \mathbb{R} \times \mathbb{R}^d$ y $f \colon D \to \mathbb{R}^d$ continua y localmente
+  lipschitziana. Fijado $(t_0, x_0) \in D$ denotaremos $\alpha(t_0, x_0)$ y $\omega(t_0, x_0)$ al
+  extremo inferior y superior, respectivamente, de la solución maximal del PVI asociado a la
+  condición inicial $x(t_0) = x_0$. Definimos el conjunto
+  \[\Omega = \{(t, t_0, x_0) \in \mathbb{R}\times\mathbb{R}\times\mathbb{R}^d : (t_0, x_0) \in D,
+    \alpha(t_0, x_0) < t < \omega(t_0, x_0)\}\] y la llamada \emph{solución general}
+  $X: \Omega \to \mathbb{R}^d$ a partir del Teorema de Picard-Lindelöf como aquella función
+  diferenciable en la primera variable que verifica $X_t(t, t_0, x_0) = f(t, X(t, t_0, x_0))$ y
+  $X(t_0, t_0, x_0) = x_0$. Esto es, la función $\varphi(t) = X(t, t_0, x_0)$ es la solución maximal
+  del PVI asociado a $(t_0, x_0)$.
+\end{definition}
 
-Dado $D \subset \mathbb{R} \times \mathbb{R}^d$ y $f : D \to \mathbb{R}^d$ continua y localmente
-lipschitziana. Fijado $(t_0, x_0) \in D$ denotaremos $\alpha(t_0, x_0)$ y $\omega(t_0, x_0)$ al
-extremo inferior y superior,, respectivamente, de la solución maximal del PVI asociado a la
-condición inicial $x(t_0) = x_0$. Definimos el conjunto
-\[\Omega = \{(t, t_0, x_0) \in \mathbb{R}\times\mathbb{R}\times\mathbb{R}^d : (t_0, x_0) \in D,
-  \alpha(t_0, x_0) < t < \omega(t_0, x_0)\}\] y la llamada \emph{solución general}
-$X: \Omega \to \mathbb{R}^d$ a partir del Teorema de Picard-Lindelöf como aquella función
-diferenciable en la primera variable que verifica $X_t(t, t_0, x_0) = f(t, X(t, t_0, x_0))$ y
-$X(t_0, t_0, x_0) = x_0$. Esto es, la función $\varphi(t) = X(t, t_0, x_0)$ es la solución del PVI
-asociado a $(t_0, x_0)$.
+Cuando no haya ambigüedad en la solución maximal que estamos considerando utilizaremos
+$]\alpha, \omega[$ para indicar su dominio. Algunos autores escriben $]\omega_-, \omega_+[$ en lugar
+de $]\alpha, \omega[$. No obstante, la notación que hemos escogido nos facilita la escritura.
 
 \section{EDOs autónomas escalares}
+
+La solución general de una EDO se simplifica enormemente cuando la función $f$ no depende de la
+variable $t$. En tal caso, podemos obtener una gran cantidad de información acerca de las soluciones
+de la EDO solamente utilizando la unicidad del Teorema de Picard - Lindelöf.
 
 \begin{definition}
   Una EDO autónoma escalar es una EDO de la forma
@@ -737,7 +757,7 @@ asociado a $(t_0, x_0)$.
     x' = f(x), \ x \in I,
     \tag{AE}
   \end{equation}
-  donde $I \subset \R$ es un intervalo abierto y $f : I \to \R$ es una función localmente
+  donde $I \subset \R$ es un intervalo abierto y $f \colon I \to \R$ es una función localmente
   lipschitziana. Para cada $x_0 \in I$ denotamos por $X(t; x_0)$ a la única solución maximal de
   \eqref{eq:edo:ae} que verifica $x(0) = x_0$.
 \end{definition}
@@ -746,10 +766,9 @@ Nótese que $X(t; x_0)$ está bien definida gracias al Teorema de Picard-Lindel�
 nos referiremos a \eqref{eq:edo:ae} cuando utilicemos EDOs autónomas escalares en un contexto
 general.
 
-\begin{lemma} \label{lem:ae:trans}
-  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de \eqref{eq:edo:ae} y sea $\tau >
-  0$. Entonces, la función $\Psi: ]\alpha-\tau, \omega-\tau[ \to \R$ dada por
-  $\Psi(t) = \varphi(t+\tau)$ es solución de \eqref{eq:edo:ae}.
+\begin{lemma} \label{lem:ae:trans} Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de
+  \eqref{eq:edo:ae} y sea $\tau > 0$. Entonces, la función $\Psi \colon ]\alpha-\tau, \omega-\tau[ \to \R$
+  dada por $\Psi(t) = \varphi(t+\tau)$ es solución de \eqref{eq:edo:ae}.
 \end{lemma}
 
 \begin{definition}
@@ -757,9 +776,9 @@ general.
   se denota $\Theta(x_0)$.
 \end{definition}
 
-Por el Lema \ref{lem:ae:trans} existen infinitas soluciones con la misma órbita.
-Nótese que la órbita asociada a $x_0$ es un intervalo, que solamente es trivial cuando la solución
-es constante, lo que sucede si, y solo si, $f(x_0) = 0$. Además, es claro que
+Por el Lema \ref{lem:ae:trans} existen infinitas soluciones con la misma órbita.  Nótese que la
+órbita asociada a $x_0$ es un intervalo, que solamente es trivial cuando la solución es constante,
+lo que sucede si, y solo si, $f(x_0) = 0$. Además, es claro que
 \[I = \bigcup_{x_0 \in I} \Theta(x_0).\]
 
 Como consecuencia del Teorema de Picard-Lindelöf obtenemos fácilmente el siguiente resultado.
@@ -770,11 +789,13 @@ Como consecuencia del Teorema de Picard-Lindelöf obtenemos fácilmente el sigui
   constituyen una partición de $I$.
 \end{prop}
 \begin{proof}
-  Sean $x_0, x_0' \in I$ tales que $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$. Veamos que $\Theta(x_0) = \Theta(x_0')$. Denotamos
-  $\varphi_1(t) = X(t; x_0)$ y $\varphi_2(t) = X(t; x_0')$. Existen $t_1$ y $t_2$ tales que
-  $\varphi(t_1) = \varphi_2(t_2)$. Definimos $\phi(t) = \varphi_2(t + (t_2 - t_1))$ en el intervalo que corresponda. Nótese que $\phi$ es solución
-  de \eqref{eq:edo:ae} y verifica $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el Teorema de
-  Picard-Lindelöf obtenemos que $\phi = \varphi_1$ y, por tanto, $\Theta(x_0) = \Theta(x_0')$.
+  Sean $x_0, x_0' \in I$ tales que $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$. Veamos que
+  $\Theta(x_0) = \Theta(x_0')$. Denotamos $\varphi_1(t) = X(t; x_0)$ y $\varphi_2(t) = X(t;
+  x_0')$. Existen $t_1$ y $t_2$ tales que $\varphi(t_1) = \varphi_2(t_2)$. Definimos
+  $\phi(t) = \varphi_2(t + (t_2 - t_1))$ en el intervalo que corresponda. Nótese que $\phi$ es
+  solución de \eqref{eq:edo:ae} y verifica $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el
+  Teorema de Picard-Lindelöf obtenemos que $\phi = \varphi_1$ y, por tanto,
+  $\Theta(x_0) = \Theta(x_0')$.
 \end{proof}
 
 Como consecuencia, si $p$ es un punto de equilibrio de \eqref{eq:edo:ae}, esto es, $f(p) = 0$, y
