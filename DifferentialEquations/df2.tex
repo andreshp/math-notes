@@ -300,13 +300,13 @@ que muestren que no se verifica la unicidad global.
 
 \subsection{Ecuación integral de Volterra}
 
-Sea $x: I \to \R$ una solución del PVI \eqref{eq:pvi}.  Recordemos que $x$ verifica
+Sea $x: I \to \R$ una solución del PVI \eqref{eq:pvi}.  Reclordemos que $x$ verifica
 $x'(s) = f(s,x(s))$ para todo $s \in I$. Si integramos la expresión, obtenemos para cada $t \in I$
 la igualdad
 \begin{equation}
   \label{eq:volterra}
   x(t) = x_0 + \int_{t_0}^t x'(s) \diff s = x_0 + \int_{t_0}^tf(s,x(s)) \diff s
-  \tag{E}
+  \tag{EV}
 \end{equation}
 
 A esta ecuación se le conoce como ecuación integral de Volterra, que abreviaremos EIV.
@@ -527,7 +527,23 @@ sencilla y se deja para el lector muestra la relación existente entre un PVI y 
 Podemos utilizar la Proposición \ref{prop:dual} para demostrar el apartado \ref{item:peano:b} del
 Teorema \ref{thm:peano} a partir del apartado \ref{item:peano:a}.
 
-\subsection{Teorema de Picard-Lindelöf}
+\begin{ex}
+    Estudia la unicidad de solución del PVI
+    \begin{equation} \label{eq:6:pvi}
+      \begin{cases}
+        x' = -t \sqrt[3]{x}; \\
+        x(0) = 0.
+      \end{cases}
+    \end{equation}
+    Claramente la función $x = 0$ es una solución de \eqref{eq:6:pvi}. Tenemos que
+    $f(t,x) = - t \sqrt[3] x$. Para $t \ge 0$ fijo la función $\varphi(x) = f(t, x)$ es decreciente
+    mientras que para $t \le 0$ fijo la función $\varphi(x) = f(t, x)$ creciente. Por tanto, el
+    Teorema de unicidad de Peano nos dice que \eqref{eq:6:pvi} verifica la propiedad de unicidad en
+    el futuro y en el pasado, esto es, verifica la propiedad de unicidad global. Por tanto, la única
+    solución de \eqref{eq:6:pvi} es la trivial.
+\end{ex}
+
+\subsection{Teorema de Picard-Lindelöf} \label{sec:eu:pl}
 
 En esta sección estudiamos el Teorema de Picard-Lindelöf, que también se conoce como Teorema de
 Picard, Teorema de Cauchy - Lipschitz o Teorema de Existencia y Unicidad. Es el principal resultado
@@ -546,19 +562,63 @@ múltiples demostraciones. Enunciamos el teorema a continuación.
   tiene solución y es única tanto en sentido local como global.
 \end{thm}
 
-\subsubsection{Funciones lipschitzianas}
+En primer lugar, tenemos que introducir el concepto de ser lipschitziana respecto de la segunda
+variable (Sección \ref{sec:eu:pl:lips}). Posteriormente desarrollaremos el denominado operador
+integral de Volterra (\ref{sec:eu:pl:volterra}), que es la herramienta que se utiliza para demostrar
+el Teorema de Picard-Lindelöf.
 
-\subsubsection{Operador integral de Volterra}
+\subsubsection{Funciones lipschitzianas} \label{sec:eu:pl:lips}
 
-Dada la EIV $ x(t) = x_0 + \displaystyle\int_{t_0}^t f(s, x(s)) ds $, queremos definir un operador
-de la siguiente manera:
-\[\arraycolsep=1pt\def\arraystretch{1}
-  \begin{array}{llll}
-    V: & E \to F     &           & \\
-       & y \to V(y): & I \to R^d & \\
-       &             & t \to V(y)(t) & := x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds
-  \end{array}
-\]
+Se asume que el lector tiene una cierta familiaridad con el concepto de función lipschitizana. Por
+tanto, solo se enuncian los resultados que sean relevantes en lo que sigue, dejando las pruebas para
+el lector.
+
+\begin{definition}
+  Sea $D \subset \R^d$ y sea $f \colon D \to \R^k$. La función $f$ es \emph{localmente
+    lipschitziana}, que abreviaremos LL, si para cada $x \in D$ existe un entorno abierto
+  $U \subset D$ de $x$ tal que $f$ es lipschitziana en $U$.
+\end{definition}
+
+\begin{proposition}
+  Sea $f \in \mathcal{C}^1(A, \R^k)$, donde $A \subset \R^d$ es abierto convexo. Si
+  $\frac{\partial}{\partial x}f$ está acotada en $A$, entonces $f$ es lipschitziana.
+\end{proposition}
+
+\begin{corollary}
+  Sea $f \in \mathcal{C}^1(A, \R^k)$, donde $A \subset \R^d$ es abierto. Entonces $f$ es localmente
+  lipschitziana.
+\end{corollary}
+
+\begin{definition}
+  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$. La función $f$ es
+  \emph{lipschitziana respecto de la segunda variable} si existe $M \ge 0$ tal que para cada
+  $x,x' \in \R^d$, $y \in \R^m$ con $(x,y) \in D$ y $(x', y) \in D$ se tiene
+  \[ ||f(x,y)-f(x',y)|| \le M ||x-x'||. \]
+\end{definition}
+
+\begin{definition}
+  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$. La función $f$ es \emph{localmente
+    lipschitziana respecto de la segunda variable} o \emph{LL respecto de la segunda variable} si
+  para cada $(p,q) \in D$ existe un entorno abierto $U \subset D$ de $(p,q)$ tal que $f$ es
+  lipschitziana respecto de la segunda variable en $U$.
+\end{definition}
+
+\begin{proposition}
+  Sea $D \subset \R^d \times \R^m$ y sea $f \colon D \to \R^k$ continua y derivable respecto de la
+  primera variable $x \in \R^{d}$. Si la función $\frac{\partial}{\partial x}f \colon D \to \mathcal{M}_{d,k}(\R)$ es
+  continua, entonces $f$ es LL respecto de la segunda variable.
+\end{proposition}
+
+\subsubsection{Operador integral de Volterra} \label{sec:eu:pl:volterra}
+
+Fijado una EIV \eqref{eq:volterra} queremos definir un operador $V \colon E \to F$ tal que a la función
+$y\colon I \to \R^d$ le asigne la función $V(y)\colon I \to \R^d$ dada por
+\begin{equation}
+  \label{eq:1}
+  V(y)(t) = x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds.
+\end{equation}
+
+
 Para definir después la siguiente sucesión recurrente:
 \[
   \left\{
