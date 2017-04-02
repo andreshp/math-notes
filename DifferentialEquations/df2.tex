@@ -19,13 +19,13 @@
 \usepackage{title1}
 %\usepackage{title2}
 
-%--------------------------------------------------------1---------------------------------------------
+%-----------------------------------------------------------------------------------------------------
 %	OTROS PAQUETES
 %-----------------------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
 
-%------------------------n-----------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------------------------
 %	DATOS DEL DOCUMENTO
 %-----------------------------------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ introducimos a continuación:
     $\varphi$. El concepto de maximalidad se estudia en la siguiente sección.
   \end{ex}
 
-  \subsection{Unicidad de solución y soluciones maximales}
+  \subsection{Unicidad de solución y soluciones maximales} \label{sec:unicidad-maximal}
 
   Consideremos un PVI
   \begin{equation}
@@ -148,36 +148,26 @@ introducimos a continuación:
     \tag{P}
   \end{equation}
 
-  En primer lugar introducimos el concepto de prolongaciones y soluciones maximales.
+  En primer lugar introducimos los diferentes conceptos de unicidad de la teoría de ecuaciones
+  diferenciales.
   
-\begin{definition}
-  Sea
-  $\Sigma = \Sigma\eqref{eq:pvi} = \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de
-    \eqref{eq:pvi}}\}$. El par $(\widetilde{I}, \widetilde{\varphi}) \in \Sigma$ es una
-  \emph{prolongación} de $(I, \varphi) \in \Sigma$ si $I \subsetneq \widetilde{I}$ y
-  $\widetilde{\varphi}_{|I} = \varphi$ y lo denotaremos
-  $(I, \varphi) >> (\widetilde{I}, \tilde{\varphi})$. Un elemento de $\Sigma$ es \emph{prolongable}
-  si admite una prolongación.  El par $(I, \varphi) \in \Sigma$ es \emph{maximal} si no es
-  prolongable.
-\end{definition}
+  \begin{definition}[Conceptos de unicidad] \
+    \begin{itemize}
+    \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad local} si dadas
+      $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, existe $H$ intervalo abierto con $t_0 \in H$
+      tal que $\varphi_1(t) = \varphi_2(t)$ para todo $t \in I_1 \cap I_2 \cap H$.
 
-\begin{definition}[Conceptos de unicidad] \
-  \begin{itemize}
-  \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad local} si dadas
-    $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, existe $H$ intervalo abierto con $t_0 \in H$
-    tal que $\varphi_1(t) = \varphi_2(t)$ para todo $t \in I_1 \cap I_2 \cap H$.
+    \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad en $H$}, con $H$
+      intervalo abierto y $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, se
+      cumple que $\varphi_1(t) = \varphi_2(t)$ para todo $t \in I_1 \cap I_2 \cap H$.
 
-  \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad en $H$}, con $H$
-    intervalo abierto y $t_0 \in H$ si dadas $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, se
-    cumple que $\varphi_1(t) = \varphi_2(t)$ para todo $t \in I_1 \cap I_2 \cap H$.
+    \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad global} si dadas
+      $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, se cumple que $\varphi_1(t) = \varphi_2(t)$
+      para todo $t \in I_1 \cap I_2$.
+    \end{itemize}
+  \end{definition}
 
-  \item Diremos que \eqref{eq:pvi} verifica la \emph{propiedad de unicidad global} si dadas
-    $(I_1, \varphi_1), (I_2, \varphi_2) \in \Sigma$, se cumple que $\varphi_1(t) = \varphi_2(t)$
-    para todo $t \in I_1 \cap I_2$.
-  \end{itemize}
-\end{definition}
-
-El siguiente resultado se deduce fácilmente de las definiciones de unicidad.
+  El siguiente resultado se deduce fácilmente de las definiciones de unicidad.
 
 \begin{proposition}
   En el contexto actual se cumplen las siguientes afirmaciones.
@@ -198,7 +188,7 @@ El recíproco del Corolario \ref{cor:global-local} no es cierto como cabe espera
 puede demostrar el resultado bajo una condición más restrictiva.
 
 \begin{proposition} \label{prop:local-global} La EDO \eqref{eq:edo} verifica la propiedad de
-  unicidad local para cualquier condición inicial $(t_0, x_0) \in D$ si, y solo si, verirfica la
+  unicidad local para cualquier condición inicial $(t_0, x_0) \in D$ si, y solo si, verifica la
   propiedad de unicidad global para cualquier condición inicial $(t_0, x_0) \in D$.
 \end{proposition}
 \begin{proof}
@@ -216,6 +206,79 @@ puede demostrar el resultado bajo una condición más restrictiva.
   $I_1 \cap I_2$ es conexo y, por tanto, el único abierto y cerrado no trivial de $I_1 \cap I_2$ es
   el propio $I_1 \cap I_2$.
 \end{proof}
+
+Es claro que un PVI admite infinitas soluciones ya que dada una solución cualquier restricción suya
+a un intervalo que contenga a $t_0$ sigue siendo solución del PVI. En tal caso estamos tratando
+esencialmente con la misma solución. Por tanto, interesa considerar solamente aquellas soluciones
+con el mayor dominio posible. Para ello introducimos los conceptos de prolongación y solución
+maximal.
+
+\begin{definition}
+  Sea
+  $\Sigma = \Sigma\eqref{eq:pvi} = \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de
+    \eqref{eq:pvi}}\}$. El par $(\widetilde{I}, \widetilde{\varphi}) \in \Sigma$ es una
+  \emph{prolongación} de $(I, \varphi) \in \Sigma$ si $I \subsetneq \widetilde{I}$ y
+  $\widetilde{\varphi}_{|I} = \varphi$ y lo denotaremos
+  $(I, \varphi) >> (\widetilde{I}, \tilde{\varphi})$. Un elemento de $\Sigma$ es \emph{prolongable}
+  si admite una prolongación.  El par $(I, \varphi) \in \Sigma$ es \emph{maximal} si no es
+  prolongable.
+\end{definition}
+
+\begin{lemma} \label{lem:pro-max} Toda solución no maximal de \eqref{eq:pvi} puede prolongarse a una
+  solución maximal.
+\end{lemma}
+\begin{proof}
+  La demostración es consecuencia del Lemma de Zorn. Sea $\varphi_1: I_1 \to \R^d$ solución no
+  maximal de \eqref{eq:pvi}. Basta aplicar este resultado sobre el conjunto
+  \[ \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de \eqref{eq:pvi}} \text{ y } I_1
+    \subsetneq I\} \] con la relación de orden $<<$ definida previamente. Nótese que este conjunto
+  es no vació ya que $\varphi_1$ es prolongable. Encontramos pues una solución maximal que es
+  prolongación de $\varphi_1$ como se quería.
+\end{proof}
+
+Transladamos ahora el concepto de unicidad global al ámbito de las soluciones maximales.
+
+\begin{prop} \label{prop:unicidad-maximal} Consideremos el PVI \eqref{eq:pvi}. Éste verifica la
+  propiedad de unicidad global si, y solo si, tiene una única solución maximal.
+\end{prop}
+\begin{proof}
+  Supongamos que \eqref{eq:pvi} verifica la propiedad de unicidad global. Definimos
+  $J = \cup_{(I, \varphi) \in \Sigma} I$, que es un intervalo ya que es unión de conexos de
+  $\mathbb{R}$ que tienen un punto en común. Además, $J$ es abierto porque es unión de
+  abiertos. Definimos la función $\Psi : J \to \mathbb{R}^d$ como $\Psi(t) = \varphi(t)$ para algún
+  $(\varphi, I) \in \Sigma(P)$ con $t \in I$. Nótese que la función está bien definida gracias a la
+  unicidad global. Además, $\Psi$ es solución de \eqref{eq:sol-maximal:pvi}. Es claro por
+  construcción que $\Psi$ es la única solución maximal.
+
+  Veamos que se verifica el recíproco. Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$
+  dos soluciones de \eqref{eq:pvi}. Por el Lema \ref{lem:pro-max} podemos prolongarlas a dos
+  soluciones maximales, que deben ser iguales por hipótesis. Por tanto, $\varphi_1$ y $\varphi_2$
+  coinciden en $I_1 \cap I_2$ como se quería.
+\end{proof}
+
+
+\begin{ex} \label{ex:exp}
+  Consideramos la EDO $x' = x$. En un curso básico de cálculo se demuestra
+  que la derivada de la función exponencial es ella misma, esto es, la función exponencial verifica
+  la ecuación diferencial. Es claro que cualquier constante por la función exponencial también
+  verificará la ecuación diferencial. Vamos a demostrar que estas son las únicas soluciones
+  maximales de la ecuación diferencial. Para ello vamos a probar que se verifica la propiedad de
+  unicidad local para todo $(t_0, x_0) \in \R^2$. En primer lugar, $x_0 \ne 0$, tenemos que
+  $\varphi(t)=x_0\exp(t-t_0)$ es solución (maximal) del PVI. Sea $x: I \to \R$ es solución del
+  PVI. Como $x(t_0) = x_0 \ne 0$, encontramos un intervalo abierto $t_0 \subset J \subset I$ donde
+  $x$ no se anula. En ese intervalo se tiene la igualdad $x'/x = 1$. Podemos integrar esta expresión
+  para cada $t \in J$, obteniendo
+  \[t - t_0 = \int_{t_0}^{t} \diff s = \int_{t_0}^{t} \frac{x'(s)}{x(s)}\diff s = \log(x(t)) -
+    \log(x(t_0)).\] Aplicando la función exponencial en ambos lados de la igualdad deducimos que
+  $x(t) = x(t_0) \exp(t-t_0)$ para todo $t \in J$ como se quería. El método que hemos utilizado para
+  obtener la expresión de $x$ en un entorno de $t_0$ se denomina \emph{método de las variables
+    separadas}, que generalizaremos más adelante. Por último, sabemos que la función $x = 0$ es
+  solución de la ecuación diferencial. Tenemos que demostrar que si $x_0 = 0$, entonces cualquier
+  solución es constantemente $0$ es un entorno de $t_0$. Para ello, razonamos por reducción al
+  absurdo y utilizamos que $x$ se comporta como la exponencial cuando no se anula y, por tanto, no
+  puede tomar el valor $0$ y ser continua al mismo tiempo. Se dejan rellenar los detalles de este
+  último razonamiento al lector.
+\end{ex}
 
 El siguiente lema cuya demostración es trivial será utilizado a menudo para crear crear soluciones
 que muestren que no se verifica la unicidad global.
@@ -237,231 +300,276 @@ que muestren que no se verifica la unicidad global.
 
 \subsection{Ecuación integral de Volterra}
 
-Dada una solución del PVI
-\[
-\left\{
-  \begin{array}{l}
-    x' = f(t,x) \\
-    x(t_0) = x_0
-  \end{array}
-\right.
-\]
-$x'(s) = f(s,x(s))$ para todo $s$ en un intervalo. Si integramos la
-expresión, obtenemos:
-$$ \int_{t_0}^t x'(s)ds = \int_{t_0}^tf(s,x(s))ds \Rightarrow x(t) = x_0 + \int_{t_0}^t f(s, x(s))ds $$
-A esta ecuación se le conoce como ecuación integral de Volterra. Sea
-$\varphi: I \to \R^d$ con $I$ intervalo abierto. Diremos que es
-solución de la ecuación integral de Volterra si:
+Sea $x: I \to \R$ una solución del PVI \eqref{eq:pvi}.  Recordemos que $x$ verifica
+$x'(s) = f(s,x(s))$ para todo $s \in I$. Si integramos la expresión, obtenemos para cada $t \in I$
+la igualdad
+\begin{equation}
+  \label{eq:volterra}
+  x(t) = x_0 + \int_{t_0}^t x'(s) \diff s = x_0 + \int_{t_0}^tf(s,x(s)) \diff s
+  \tag{E}
+\end{equation}
 
-\begin{itemize}
-\item $\varphi \in \mathcal{C}(I, \R^d)$
-\item $(t, \varphi(t)) \in D \quad \forall t \in I$
-\item $t_0 \in I$
-\item
-  $\forall t \in I \Rightarrow \varphi(t) = x_0 +
-  \displaystyle\int_{t_0}^t f(s, \varphi(s))ds$
-\end{itemize}
+A esta ecuación se le conoce como ecuación integral de Volterra, que abreviaremos EIV.
 
-Veamos ahora una proposición que conecta el concepto de PVI con la
-ecuación integral de Volterra:
+\begin{definition}
+  Sea $\varphi: I \to \R^d$ con $I$ intervalo abierto. Diremos que $\varphi$ es solución de la
+  ecuación integral de Volterra si
 
-\begin{prop}
-  Sea $\varphi: I \to \R^d$, $I$ intervalo abierto. Son equivalentes:
   \begin{enumerate}
-  \item $\varphi$ es solución del PVI
-  \item $\varphi$ es solución de la ecuación integral de Volterra
+  \item $\varphi \in \mathcal{C}(I, \R^d)$;
+  \item $(t, \varphi(t)) \in D$ para todo $t \in I$;
+  \item $t_0 \in I$;
+  \item para cada $t \in I$ se verifica
+    \[\varphi(t) = x_0 + \displaystyle\int_{t_0}^t f(s, \varphi(s))ds.\]
   \end{enumerate}
-\end{prop}
+\end{definition}
 
+Hemos visto que toda solución de \eqref{eq:pvi} es solución de la ecuación integral de Volterra
+asociada. El recíproco también es cierto y se recoge en la siguiente proposición.
+
+\begin{proposition}
+  Sea $I$ un intervalo abierto y $\varphi: I \to \R^d$. Son equivalentes:
+  \begin{enumerate}
+  \item $\varphi$ es solución del PVI \eqref{eq:pvi};
+  \item $\varphi$ es solución de la ecuación integral de Volterra \eqref{eq:volterra}.
+  \end{enumerate}
+\end{proposition}
 \begin{proof}
-  La demostración se basa en deducir las propiedades de las soluciones
-  del PVI a partir de las de las soluciones de la EIV y viceversa. Las
-  propiedades 2 y 3 son comunes para las soluciones del PVI y de la
-  EIV. Empezamos deduciendo las propiedades de la EIV a partir de las
-  del PVI:
-  \begin{enumerate}
-  \item La derivabilidad de la solución del PVI nos implica la
-    continuidad de la solución de la EIV
-  \item Para ver la propiedad cuatro, integramos entre $t_0$ y $t$ la
-    igualdad $\varphi'(t) = f(t, \varphi(t))$ y la obtenemos
-    inmediatamente
-  \end{enumerate}
-  Vemos ahora las propiedades de las soluciones del PVI a partir de
-  las de la EIV.  Usando el teorema fundamental del cálculo, tenemos
-  que $\varphi'(t) = 0 + f(t, \varphi(t))$.  Esto implica que
-  $\varphi$ es derivable en $I$, y que cumple la tercera propiedad de
-  las soluciones del PVI. Finalmente, tenemos que
-    $$ \varphi(t_0) = x_0Sigma\eqref{eq:pvi}t_0_{t_0}^{t(t_0, x_0) \in D f(s,  si, y solo si, verirfica la propiedad de unicidad global para\varphi(s))ds = x_0 $$
-  \end{proof}
+  Ya sabemos que a) implica b). Veamos el recíproco. Sea $\varphi: I \to \R^d$ solución de
+  \eqref{eq:volterra}.  Por el Teorema fundamental del cálculo aplicado a \eqref{eq:volterra}
+  obtenemos que $\varphi$ es derivable y su derivada es $\varphi'(t) = f(t, \varphi(t))$. Puesto que
+  $f$ es continua, obtenemos que $\varphi \in \mathcal{C}^1(I, \R^d)$. Por último, es claro que
+  $\varphi(t_0) = x_0$.
+\end{proof}
 
-  Vamos a ver un ejemplo de cómo se relacionan los dos conceptos que
-  hemos estado tratando:
+Vamos a ver un ejemplo práctico de cómo se relacionan los dos conceptos que hemos estado tratando.
 
 \begin{ex}
-  \textbf{Enunciado:} Resolver la EIV: $x(t) = 8 + \displaystyle\int_0^t x(s)^2 ds$\\
+  Resolver la EIV
+  \[x(t) = 8 + \displaystyle\int_0^t x(s)^2 \diff s. \]
+  
 
-  \textbf{Solución:} Derivando la EIV respecto de $t$, obtenemos el
-  PVI:
+  \textbf{Solución:} El PVI asociado es
   \[
-  \left\{
-    \begin{array}{l}
-      x'(t) = x(t)^2 \\
-      x(0) = 8
-    \end{array}
-  \right. \Rightarrow \frac{dx}{dt} = x^2 \Rightarrow \frac{dx}{x^2} =
-  dt
-  \]
-  Discutimos el caso de las soluciones constantes primero. Para que la
-  solución sea constante, tenemos que $x' = x^2$, que sólo ocurre si
-  $x(t) = 0 \quad \forall t$.  Esto no es posible ya que tenemos que
-  $x(0) = 8$. Por tanto, no tenemos soluciones constantes. Discutimos
-  ahora el caso de las soluciones no constantes. Integrando en ambos
-  miembros de la igualdad de la derecha, obtenemos lo siguiente:
-
-    $$ \int \frac{dx}{x^2} = \int dt \Rightarrow \frac{-1}{x} = t + c \Rightarrow
-    x = \frac{1}{-t-c} $$
-
-    Y usando el dato inicial tenemos que
-    $ 8 = \frac{1}{-c} \Rightarrow c = \frac{-1}{8}$, por lo que
-    tenemos que el candidato a solución es $x =
-    \frac{8}{1-8t}$.
-    Definimos $\varphi: (-\infty, \frac{1}{8}) \to \R$ con
-    $\varphi(t) = \frac{8}{1-8t}$ y comprobamos que sea solución:
-
-    $$ \varphi(0) = 8 \quad \quad \varphi'(t) = \frac{64}{(1-8t)^2} = \varphi^2(t) $$
-
-    Es solución del PVI, lo que implica que es solución de la EIV de
-    partida por el teorema anterior.
-  \end{ex}
-
-  \textbf{Operador integral}\\
-
-  Dada la EIV
-  $ x(t) = x_0 + \displaystyle\int_{t_0}^t f(s, x(s)) ds $, queremos
-  definir un operador de la siguiente manera:
-  \[\arraycolsep=1pt\def\arraystretch{1}
-  \begin{array}{llll}
-    V: & E \to F     &           & \\
-       & y \to V(y): & I \to R^d & \\
-       &             & t \to V(y)(t) & := x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds
-  \end{array}
-  \]
-  Para definir después la siguiente sucesión recurrente:
-  \[
-  \left\{
-    \begin{array}{l}
-      y_0 \in E \\
-      y_{n+1} = V(y_n), \quad y_n \in E
-    \end{array}
-  \right.
+    \left\{
+      \begin{array}{l}
+        x'(t) = x(t)^2; \\
+        x(0) = 8.
+      \end{array}
+    \right.
   \]
 
-  Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
+  Discutimos el caso de las soluciones constantes primero. Si la solución es constante tenemos que
+  $0 = x^2$, que sólo ocurre si $x = 0$.  Esto no es posible ya que $x(0) = 8$. Por tanto, no hay
+  soluciones constantes. Discutimos ahora el caso de las soluciones no constantes, aplicando de
+  nuevo el método de variables separadas. Nótese que si $x: I \to \R$ es solución, donde $I$ es un
+  intervalo abierto y $t_0 = 0 \in I$, tal que $x$ no se anula, entonces para cada $t \in I$ se
+  tiene
+  \[ t = \int_0^t \diff s = \int_{t_0}^t \frac{x'(s)}{x^2(s)}\diff t = \frac{-1}{x(t)} -
+    \frac{-1}{x(t_0)} = \frac{-1}{x(t)} + \frac{1}{8}. \]
+
+  Deducimos que debe verificarse
+  \[x(t) = \frac{8}{1 - 8t}.\]
+    
+  Definimos $\varphi: (-\infty, \frac{1}{8}) \to \R$ con $\varphi(t) = \frac{8}{1-8t}$ y comprobamos
+  que sea solución, Efectivamente tenemos que
+  \[ \varphi(0) = 8 \quad \text{y} \quad \varphi'(t) = \frac{64}{(1-8t)^2} = \varphi^2(t). \]
+
+  Por tanto, $\varphi$ es solución del PVI, y toda solución es igual a esta última en el mayor
+  intervalo que contenga a $0$ donde no se anule. No es difícil ver que esto implica que $\varphi$
+  es la única solución del PVI y, por tanto, de la EIV. No obstante, veremos este hecho formalmente
+  en la siguiente sección.
+\end{ex}
 
 \section{Existencia y unicidad de solución} \label{sec:eu}
 
+En este apartado proporcionamos los primeros resultados de existencia y unicidad para PVIs. En
+primer lugar consideraremos EDOs en variables separadas, que ya han surgido en los ejemplos
+anteriores. Posteriormente estudiaremos dos teoremas clásicos de la teoría de ecuaciones
+diferenciales, el Teorema de unicidad Peano y el Teorema de Picard-Lindelöf.
+
 \subsection{Variables separadas}
 
+Hemos mencionado el método de variables separadas con anterioridad. La idea es obtener una igualdad
+donde en un lado solamente intervenga la variable independiente mientras que en el otro solamente
+intervenga la variable dependiente. De esta forma podemos integrar y aplicar el teorema del cambio
+de variables para obtener una igualdad donde no intervenga la variable independiente. Este método
+solo se puede aplicar a casos muy concretos. Introducimos estos casos en la siguiente definición.
+
+\begin{definition}
+  Una EDO \eqref{eq:edo} es de variables separadas si existen $J_1$, $J_2$ intervalos abiertos y
+  $a: J_1 \to \R$, $g: J_2 \to \R$ funciones continuas tales que $D = J_1 \times J_2$ y
+  $f(t,x) = a(t) g(x)$ para todo $(t,x) \in J_1 \times J_2$.  Un PVI es de variables separadas si la
+  EDO asociada lo es. En tal caso escribimos
+  \begin{equation}
+    \label{eq:vs}
+    \begin{cases}
+      x' = a(t)g(x), \quad (t,x) \in J_1 \times J_2; \\
+      x(t_0) = x_0.
+    \end{cases}
+    \tag{VS}
+  \end{equation}
+\end{definition}
+
 \begin{thm}[Existencia y unicidad en variables separadas]
-  Sean $ a \in \mathcal{C}(J_1)$ y $g \in \mathcal{C}(J_2)$,
-  $J_1, J_2$ intervalos abiertos.  Sean $t_0 \in J_1, x_0 \in
-  J_2$. Consideramos:
-
-\begin{equation}
-  \left\{
-    \begin{array}{l}
-      x' = a(t)g(x), (t,x) \in J_1 \times J_2 \\
-      x(t_0) = x_0
-    \end{array}
-  \right.
-  \tag{P}
-\end{equation}
-
-Entonces, se verifican:
-\begin{description}
-\item[i)] El PVI eqref{eq:pvi} tiene solución
-\item[ii)] Si $g(x_0) \neq 0$ el PVI eqref{eq:pvi} verifica la propiedad de
-  unicidad local.
-\item[iii)] Si $g(x_0) = 0$ y existe $ G \in \mathcal{C} (J_2)$ tal
-  que $G(x_0) = 0$ y existe
-  $\delta > 0: G'(x) = \frac{1}{g(x)} \forall x \in J_2 \cap ]x_0, x_0
-  + \delta[$
-  y además $a(t_0) \neq 0$, entonces el PVI no verifica la propiedad
-  de unicidad local.
-\end{description}
+  Consideremos un PVI de variables separadas \eqref{eq:vs}. Se verifican las siguientes
+  afirmaciones.
+  \begin{enumerate}
+  \item El PVI \eqref{eq:vs} tiene solución.
+  \item Si $g(x_0) \neq 0$, entonces \eqref{eq:vs} verifica la propiedad de unicidad local.
+  \item Si $g(x_0) = 0$ y existe $ G \in \mathcal{C} (J_2)$ tal que $G(x_0) = 0$ y existe
+    $\delta > 0: G'(x) = \frac{1}{g(x)} \forall x \in J_2 \cap ]x_0, x_0 + \delta[$ y además
+    $a(t_0) \neq 0$, entonces \eqref{eq:vs} no verifica la propiedad de unicidad local.
+  \end{enumerate}
 \end{thm}
 
 \begin{proof}
   Comenzamos demostrando \textbf{i)}. Distinguimos dos casos:\\
 
-  \textbf{Caso 1:} $g(x_0) = 0$. Entonces, $\varphi: \R \to \R$ tal
-  que
+  \textbf{Caso 1:} $g(x_0) = 0$. Entonces, $\varphi: \R \to \R$ tal que
   $\varphi(t) = x_0$ es una solución de $(P)$.\\
 
-  \textbf{Caso 2:} $g(x_0) \neq 0$. Entonces, existe $I_1$ abierto tal
-  que $x_0 \in I_1, g(x) \neq 0 \quad \forall x \in I_1$. Tomamos
-  entonces la aplicación que asigna a $x$ el valor
-  $\frac{1}{g(x)} \in \mathcal{C}(I_1)$.  Sea ahora la aplicación
-  $ G: I_1 \to \R$ tal que $G(x_0) = 0, G'(x) = \frac{1}{g(x)}$.
-  Tenemos que $G$ es estrictamente monótona. Tomamos $I_2 = G(I_1)$
-  intervalo abierto. Entonces, $\exists G^{-1}: I_2 \to \R$ con
-  $G^{-1}(I_2) = I_1$. Además, tenemos que
-  $G^{-1} \in \mathcal{C}(I_2)$, con
-  $(G^{-1})' (x) = \frac{1}{G'(G^{-1}(x))} = g(G^{-1}(x)) \forall x
-  \in I_2$.
-  Sea ahora $A = A(t)$ una primitiva de $a(t)$ tal que
-  $A(t_0) = 0 \in I_2$.  Por continuidad, $\exists I_3 \subset J_1$
+  \textbf{Caso 2:} $g(x_0) \neq 0$. Entonces, existe $I_1$ abierto tal que
+  $x_0 \in I_1, g(x) \neq 0 \quad \forall x \in I_1$. Tomamos entonces la aplicación que asigna a
+  $x$ el valor $\frac{1}{g(x)} \in \mathcal{C}(I_1)$.  Sea ahora la aplicación $ G: I_1 \to \R$ tal
+  que $G(x_0) = 0, G'(x) = \frac{1}{g(x)}$.  Tenemos que $G$ es estrictamente monótona. Tomamos
+  $I_2 = G(I_1)$ intervalo abierto. Entonces, $\exists G^{-1}: I_2 \to \R$ con $G^{-1}(I_2) =
+  I_1$. Además, tenemos que $G^{-1} \in \mathcal{C}(I_2)$, con
+  $(G^{-1})' (x) = \frac{1}{G'(G^{-1}(x))} = g(G^{-1}(x)) \forall x \in I_2$.  Sea ahora $A = A(t)$
+  una primitiva de $a(t)$ tal que $A(t_0) = 0 \in I_2$.  Por continuidad, $\exists I_3 \subset J_1$
   abierto tal que $t_0 \in I_3$, $A(I_3) \subset I_2$. Definimos:
   \begin{align*}
     \varphi : & I_3 \to \R \in \mathcal{C}^1(I_3) \\
               & t \to G^{-1}(A(t))
   \end{align*}
 
-  Tenemos que $t_0 \in I_3$,
-  $\varphi(t_0) = G^{-1}(a(t_0)) = G^{-1}(0) = x_0$. Tenemos que
+  Tenemos que $t_0 \in I_3$, $\varphi(t_0) = G^{-1}(a(t_0)) = G^{-1}(0) = x_0$. Tenemos que
   $(t, \varphi(t)) \in J_1 \times J_2$ y
   $\varphi'(t) = g(G^{-1}(A(t))a(t) = a(t)g(\varphi(t)) \quad \forall
   t \in I_3$ \\
 
-  Pasamos ahora a demostrar \textbf{ii)}. Sean
-  $\varphi_1: H_1 \to \R$, $\varphi_2: H_2 \to \R$ dos soluciones de
-  $(P)$.
+  Pasamos ahora a demostrar \textbf{ii)}. Sean $\varphi_1: H_1 \to \R$, $\varphi_2: H_2 \to \R$ dos
+  soluciones de $(P)$.
   % TODO: Terminar demostración
 \end{proof}
 
-\subsection{Unicidad en el futuro y en el pasado}
+\subsection{Unicidad en el futuro y en el pasado. Teorema de unicidad de Peano}
+
+Si $d = 1$, en algunos casos podemos obtener ``gratuitamente'' la propiedad de unicidad a la derecha
+o a la izquierda de $t_0$ mediante el Teorema de unicidad de Peano. Introducimos a continuación la
+nomenclatura pertinente.
 
 \begin{definition}
   \label{def:unicidad-futuro}
-  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y
-  $f \in \mathcal{C}(D)$. Fijamos $(t_0, x_0) \in D$ y consideramos el
-  PVI asociado. Diremos que Diremos que el PVI verifica la propiedad
-  de unicidad en el futuro si tiene unicidad en el intervalo
-  $[t_0, +\infty[$ y, análogamente, diremos que el PVI verifica la
-  propiedad e unicidad en el pasado si tiene unicidad en el intervalo
-  $]-\infty, t_0]$.
+  Diremos que el PVI \eqref{eq:pvi} verifica la propiedad de unicidad en el futuro si verifica la
+  propiedad de unicidad en el intervalo $[t_0, +\infty[$. Análogamente, diremos que el PVI
+  \eqref{eq:pvi} verifica la propiedad de unicidad en el pasado si verifica la propiedad de unicidad
+  en el intervalo $]-\infty, t_0]$.
 \end{definition}
 
-\begin{thm}[Teorema de unicidad de Peano]
-  Sea $D \subset \mathbb{R} \times \mathbb{R}$ abierto y
-  $f \in \mathcal{C}(D)$. Fijamos $(t_0, x_0) \in D$ y consideramos el
-  PVI (P) asociado.
+\begin{thm}[Teorema de unicidad de Peano] \label{thm:peano} Consideramos un PVI \eqref{eq:pvi} con
+  $d = 1$.
   \begin{enumerate}
-  \item\label{item:peano:a} Si para cada $t \ge t_0$ la función
-    $g(x) = f(t,x)$ es decreciente, entonces (P) verifica la unicidad
-    en el futuro.
-  \item\label{item:peano:b} Si para cada $t \le t_0$ la función
-    $g(x) = f(t,x)$ es creciente, entonces (P) verifica la unicidad en
-    el pasado.
+  \item\label{item:peano:a} Si para cada $t \ge t_0$ la función $g(x) = f(t,x)$ es decreciente,
+    entonces \eqref{eq:pvi} verifica la propiedad de unicidad en el futuro.
+  \item\label{item:peano:b} Si para cada $t \le t_0$ la función $g(x) = f(t,x)$ es creciente,
+    entonces \eqref{eq:pvi} verifica la propiedad de unicidad en el pasado.
   \end{enumerate}
 \end{thm}
+\begin{proof}
+  Vamos a demostrar el apartado \ref{item:peano:a} ya que el otro apartado se demuestra de forma
+  análoga. Sean $\varphi_1 \colon I_1 \to \R$ y $\varphi_1 \colon I_1 \to \R$. Definimos la función
+  $h \colon I_1 \cap I_2 \to \R$ dada por $h(t) = (\varphi_1(t) - \varphi_2(t))^2$. La función $h$
+  es derivable y su derivada viene dada por
+  \[ h'(t) = 2(\varphi_1(t) - \varphi_2(t))(\varphi_1'(t) - \varphi_2'(t)) = 2(\varphi_1(t) -
+    \varphi_2(t))(f(t, \varphi_1(t)) - f(t, \varphi_2(t))), \] que es menor o igual que $0$ para
+  todo $t \in I_1 \cap I_2 \cap [t_0, +\infty[$. Por tanto, $h$ es decreciente en
+  $I_1 \cap I_2 \cap [t_0, +\infty[$. Nótese que $h(t_0) = 0$ y $h \ge 0$. Por tanto, $h$ es
+  constantemente $0$ en $I_1 \cap I_2 \cap [t_0, +\infty[$, esto es, $\varphi_1$ y $\varphi_2$
+  coinciden en este intervalo como se quería.
+\end{proof}
 
+En este punto interesa introducir la ecuación dual en el tiempo, que nos servirá para trasladar los
+resultados que conciernan al intervalo $[t_0, +\infty[$ al intervalo $]-\infty, t_0]$. Dado el PVI
+\eqref{eq:pvi} y una solución $x : I \to \R^d$ de éste, nos preguntamos de qué PVI es solución la
+función $y(t) = x(-t)$, definida en el intervalo $-I$. Claramente tenemos que $y(-t_0) =
+x_0$. Además, para cada $t \in -I$ se verifica
+\[ y'(t) = - x'(-t) = - f(-t, x(-t)) = - f(-t, y(t)).\]
 
-\subsection{Herramientas previas}
+En resumen, $y$ es solución del PVI
+
+\begin{equation}
+  \label{eq:pvi:dual}
+  \begin{cases}
+    y' = f(-t, y); \\
+    y(-t_0) = x_0;
+  \end{cases}
+  \tag{D}
+\end{equation}
+
+que se conoce como \emph{problema dual} o \emph{ecuación dual en el tiempo}. Nótese que la
+aplicación $\Lambda \colon \Sigma\eqref{eq:pvi} \to \Sigma\eqref{eq:pvi:dual}$ dada por
+$\Lambda(\varphi(t)) = \varphi(-s)$ es biyectiva. La siguiente proposición, cuya demostración es
+sencilla y se deja para el lector muestra la relación existente entre un PVI y su dual.
+
+\begin{proposition} \label{prop:dual} El PVI \eqref{eq:pvi} verifica la propiedad de unicidad en el
+  intervalo $I$ si, y solo si, el PVI dual \eqref{eq:pvi:dual} verifica la propiedad de unicidad en
+  el intervalo $-I$. Como consecuencia se verifican las siguientes afirmaciones:
+  
+  \begin{enumerate}
+  \item El PVI \eqref{eq:pvi} verifica la propiedad de unicidad local si, y solo si, el PVI dual
+    \eqref{eq:pvi:dual} verifica la propiedad de unicidad local.
+  \item El PVI \eqref{eq:pvi} verifica la propiedad de unicidad global si, y solo si, el PVI dual
+    \eqref{eq:pvi:dual} verifica la propiedad de unicidad global.
+  \end{enumerate}
+\end{proposition}
+
+Podemos utilizar la Proposición \ref{prop:dual} para demostrar el apartado \ref{item:peano:b} del
+Teorema \ref{thm:peano} a partir del apartado \ref{item:peano:a}.
+
+\subsection{Teorema de Picard-Lindelöf}
+
+En esta sección estudiamos el Teorema de Picard-Lindelöf, que también se conoce como Teorema de
+Picard, Teorema de Cauchy - Lipschitz o Teorema de Existencia y Unicidad. Es el principal resultado
+de existencia y unicidad de solución para PVIs. Existen numerosas versiones del resultado y, además,
+múltiples demostraciones. Enunciamos el teorema a continuación.
+
+\begin{thm}[Teorema de Picard-Lindelöf]
+  Sean $D \subset \mathbb{R} \times \mathbb{R}^d$, $f: D \to \mathbb{R}^d$ continua y localmente
+  lipschitziana respecto de la segunda variable. Dado $(t_0, x_0) \in D$, el PVI
+  \begin{equation}
+    \label{eq:pl:pvi}
+    \begin{cases}
+      x' = f(t,x); \\ x(t_0) x_0;
+    \end{cases}
+  \end{equation}
+  tiene solución y es única tanto en sentido local como global.
+\end{thm}
 
 \subsubsection{Funciones lipschitzianas}
 
 \subsubsection{Operador integral de Volterra}
+
+Dada la EIV $ x(t) = x_0 + \displaystyle\int_{t_0}^t f(s, x(s)) ds $, queremos definir un operador
+de la siguiente manera:
+\[\arraycolsep=1pt\def\arraystretch{1}
+  \begin{array}{llll}
+    V: & E \to F     &           & \\
+       & y \to V(y): & I \to R^d & \\
+       &             & t \to V(y)(t) & := x_0 + \displaystyle\int_{t_0}^t f(s,y(s))ds
+  \end{array}
+\]
+Para definir después la siguiente sucesión recurrente:
+\[
+  \left\{
+    \begin{array}{l}
+      y_0 \in E \\
+      y_{n+1} = V(y_n), \quad y_n \in E
+    \end{array}
+  \right.
+\]
+  
+Tendremos una solución $\Leftrightarrow V(x) = x \quad (E=F)$.
 
 Introducimos la siguiente notación. Dado $(t_0, x_0) \in \mathbb{R} \times \mathbb{R}^d$ y dados
 $a,b > 0$ denotamos $R_{a,b}(t_0, x_0) = [t_0+a, t_0-a] \times \overline{B}(x_0, b)$. Consideramos
@@ -491,24 +599,9 @@ el conjunto $E = B(x_0, b) \subset \mathcal{C}([t_0-a, t_0+a]; \mathbb{R}^d)$ co
   $(t, \varphi(t)) \in R_{a,b}$ para todo $t \in (t_0-a, t_0+a)$.
 \end{rem}
 
-\subsection{Teorema de Picard-Lindelöf}
 
-En este apartado estudiamos el Teorema de Picard-Lindelöf, que también se conoce como Teorema de
-Picard, Teorema de Cauchy - Lipschitz o Teorema de Existencia y Unicidad. Es el principal resultado
-de existencia y unicidad de solución para PVIs. Existen numerosas versiones del resultado y, además,
-múltiples demostraciones.
+\subsubsection{Demostración del Teorema de Picard-Lindelöf}
 
-\begin{thm}
-  Sean $D \subset \mathbb{R} \times \mathbb{R}^d$, $f: D \to \mathbb{R}^d$ continua y localmente
-  lipschitziana respecto de la segunda variable. Dado $(t_0, x_0) \in D$, el PVI
-  \begin{equation}
-    \label{eq:pl:pvi}
-    \begin{cases}
-      x' = f(t,x); \\ x(t_0) x_0;
-    \end{cases}
-  \end{equation}
-  tiene solución y es única tanto en sentido local como global.
-\end{thm}
 \begin{proof}
   Existe $U \subset D$ entorno de $(t_0, x_0)$ y $L \ge 0$ tal que $f$ es lipschitziana respecto de
   la segunda variable en $U$ con constante de Lipschitz $L \ge 0$. Existen
@@ -543,41 +636,37 @@ convergencia uniforme. A la sucesión $\varphi_n$ se le denomina iterantes de Pi
   iterantes de Picard.
 \end{ex}
 
-\subsection{Existencia y unicidad de soluciones maximales}
+\subsection{Solución general}
 
-\begin{thm} \label{thm:sol-maximal} Sea $D \subset \mathbb{R} \times \mathbb{R}^d$ un conjunto
+Como consecuencia del Teorema de Picard-Lindelöf y los resultados de la Sección \ref{sec:unicidad-maximal} obtenemos el siguiente corolario.
+
+\begin{cor} \label{cor:picard:maximal} Sea $D \subset \mathbb{R} \times \mathbb{R}^d$ un conjunto
   abierto y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana. Entonces, para cualquier
-  $(t_0, x-0) \in D$ el PVI
+  $(t_0, x_0) \in D$ el PVI
   \begin{equation}
     \label{eq:sol-maximal:pvi}
     \begin{cases}
       x' = f(t,x); x(t_0) = x_0;
     \end{cases}
   \end{equation}
-    tiene una única solución maximal.
-\end{thm}
-
-\begin{rem}
-  Para deducir la tesis del Teorema \ref{thm:sol-maximal} es suficiente que exista unicidad
-  global.
-\end{rem}
-
-\begin{proof}
-  Consideramos la familia
-  $\Sigma(P) = \{(I, \varphi) : \varphi:I \to \mathbb{R} \text{ es solución de
-    \eqref{eq:sol-maximal:pvi}}\}$. Definimos $J = \cup_{(I, \varphi) \in \Sigma(P)} I$, que es un
-intervalo ya que es unión de conexos de $\mathbb{R}$ que tienen un punto en común. Además, $J$ es abierto porque es unión de abiertos. Definimos la función $\Psi : J \to \mathbb{R}^d$ como $\Psi(t) = \varphi(t)$ para algún $(\varphi, I) \in \Sigma(P)$ con $t \in I$. Nótese que la función está bien definida gracias a la unicidad global. Además, $\Psi$ es solución de \eqref{eq:sol-maximal:pvi}. Es claro por construcción que $\Psi$ es solución maximal.
-\end{proof}
+  tiene una única solución maximal.
+\end{cor}
 
 Utilizaremos la siguiente notación para indicar el dominio de una solución maximal
-\[\varphi: (\alpha, \omega) \to \mathbb{R}^d \text{ con } -\infty \leq \alpha < t_0 < \omega \leq +\infty.\]
-Algunos autores escriben $(\omega_-, \omega_+)$ en lugar de $(\alpha, \omega)$. No obstante, la notación que hemos escogido nos facilita la escritura.
+\[\varphi: (\alpha, \omega) \to \mathbb{R}^d \text{ con } -\infty \leq \alpha < t_0 < \omega \leq
+  +\infty.\] Algunos autores escriben $(\omega_-, \omega_+)$ en lugar de $(\alpha, \omega)$. No
+obstante, la notación que hemos escogido nos facilita la escritura.
 
-\subsection{Solución general}
-
-Dado $D \subset \mathbb{R} \times \mathbb{R}^d$ y $f : D \to \mathbb{R}^d$ continua y localmente lipschitziana. Fijado $(t_0, x_0) \in D$ denotaremos $\alpha(t_0, x_0)$ y $\omega(t_0, x_0)$ al extremo inferior y superior,, respectivamente, de la solución maximal del PVI asociado a la condición inicial $x(t_0) = x_0$. Definimos el conjunto
-\[\Omega = \{(t, t_0, x_0) \in \mathbb{R}\times\mathbb{R}\times\mathbb{R}^d : (t_0, x_0) \in D, \alpha(t_0, x_0) < t < \omega(t_0, x_0)\}\]
-y la llamada \emph{solución general} $X: \Omega \to \mathbb{R}^d$ a partir del Teorema de Picard-Lindelöf como aquella función diferenciable en la primera variable que verifica $X_t(t, t_0, x_0) = f(t, X(t, t_0, x_0))$ y $X(t_0, t_0, x_0) = x_0$. Esto es, la función $\varphi(t) = X(t, t_0, x_0)$ es la solución del PVI asociado a $(t_0, x_0)$.
+Dado $D \subset \mathbb{R} \times \mathbb{R}^d$ y $f : D \to \mathbb{R}^d$ continua y localmente
+lipschitziana. Fijado $(t_0, x_0) \in D$ denotaremos $\alpha(t_0, x_0)$ y $\omega(t_0, x_0)$ al
+extremo inferior y superior,, respectivamente, de la solución maximal del PVI asociado a la
+condición inicial $x(t_0) = x_0$. Definimos el conjunto
+\[\Omega = \{(t, t_0, x_0) \in \mathbb{R}\times\mathbb{R}\times\mathbb{R}^d : (t_0, x_0) \in D,
+  \alpha(t_0, x_0) < t < \omega(t_0, x_0)\}\] y la llamada \emph{solución general}
+$X: \Omega \to \mathbb{R}^d$ a partir del Teorema de Picard-Lindelöf como aquella función
+diferenciable en la primera variable que verifica $X_t(t, t_0, x_0) = f(t, X(t, t_0, x_0))$ y
+$X(t_0, t_0, x_0) = x_0$. Esto es, la función $\varphi(t) = X(t, t_0, x_0)$ es la solución del PVI
+asociado a $(t_0, x_0)$.
 
 \section{EDOs autónomas escalares}
 
@@ -764,14 +853,14 @@ soluciones.
   \varepsilon/2)$. Por tanto, $(t_N, \varphi(t_N)) \in R_{\delta, \varepsilon}(\omega, \xi)$. Vamos
   a demostrar que $(t, \varphi(t)) \in R_{\delta, \varepsilon}(\omega, \xi)$ para todo
   $t \in [t_N, \omega[$. En efecto, tenemos que para cada $t \in [t_N, \omega[$ se verifica
-  \[\varphi(t) = \varphi(t_N) + \int\limits_{t_N}^{t} \varphi'(s) \diff s = \int\limits_{t_N}^{t}
+  \[\varphi(t) = \varphi(t_N) + \int_{t_N}^{t} \varphi'(s) \diff s = \int_{t_N}^{t}
     f(s,\varphi(s)) \diff s.\] Consecuentemente, obtenemos que
-  \[||\varphi(t)-\xi|| \le ||\varphi(t_N) - \xi|| + ||\int\limits_{t_N}^{t} f(s,\varphi(s)) \diff
-    s|| \le \varepsilon / 2 + ||\int\limits_{t_N}^{t} f(s,\varphi(s)) \diff s||.\]
+  \[||\varphi(t)-\xi|| \le ||\varphi(t_N) - \xi|| + ||\int_{t_N}^{t} f(s,\varphi(s)) \diff
+    s|| \le \varepsilon / 2 + ||\int_{t_N}^{t} f(s,\varphi(s)) \diff s||.\]
 
   Supongamos que existe $\tau \in ]t_N, \omega[$ tal que $||\varphi(t) - \xi|| < \varepsilon$ para
   todo $t \in ]t_N, \tau[$ pero $||\varphi(\tau) - \xi|| = \varepsilon$. En tal caso, tenemos que
-  \[\varepsilon = ||\varphi(\tau) - \xi|| < \varepsilon / 2 + ||\int\limits_{t_N}^{\tau}
+  \[\varepsilon = ||\varphi(\tau) - \xi|| < \varepsilon / 2 + ||\int_{t_N}^{\tau}
     f(s,\varphi(s)) \diff s|| \le \varepsilon / 2 + |\tau - t_N| < \varepsilon/2 + \varepsilon/2 =
     \varepsilon,\]
 
@@ -864,7 +953,7 @@ soluciones.
   \[\varphi'(t) \le \varphi'(t) \varphi(t) = 2 + \frac{\sin(t)}{\varphi(t)} \le 3.\]
 
   Por tanto, deducimos que
-  \[ \varphi(t) = 2 + \int\limits_{0}^{t} \varphi'(s) \diff s \le 2 +3t.\]
+  \[ \varphi(t) = 2 + \int_{0}^{t} \varphi'(s) \diff s \le 2 +3t.\]
 
   Por último, la cota que hemos encontrado impide que se verifiquen las alternativas del Teorema
   \ref{thm:prolongacion}, esto es, $\omega = +\infty$.
@@ -873,7 +962,7 @@ soluciones.
 \begin{lemma}[Lema de Gronwall]
   Sea $y:[t_0, \omega[ \to \R$ continua tal que existen dos constantes $C, R \in \R$ con $R \ge 0$
   tales que para cada $t \in [t_0, \omega[$ se verifica
-  \[ y(t) \le C + R \int\limits_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par
+  \[ y(t) \le C + R \int_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par
   todo $t \in [t_0, \omega[$.
 \end{lemma}
 \begin{proof}
@@ -881,7 +970,7 @@ soluciones.
   $y = 0$, entonces la tesis es clara. En caso contrario, para cada $t' \in [t_0, \omega[$ existe un
   intervalo $t' \in I = [t_1, t_2] \subset [t_0, \omega[$ tal que $y(t) \ne 0$ para todo $t \in
   I$. En consecuencia, encontramos que para cada $t \in I$ se verifica
-  \[ \log(y(t)) - \log(y(t_1)) = \int\limits_{t_1}^{t} \frac{y'(s)}{y(s)} \diff s \le R(t-t_1).\]
+  \[ \log(y(t)) - \log(y(t_1)) = \int_{t_1}^{t} \frac{y'(s)}{y(s)} \diff s \le R(t-t_1).\]
 
   De la monotonía de la función exponencial se deduce que...
 
@@ -978,5 +1067,144 @@ siguiente ejemplo.
 \end{remark}
 
 
+\subsection{Acotación de soluciones. Funciones guía}
+
+Consideramos el conjunto abierto $D = ]a, +\infty[ \times \R^d$, con $-\infty \le a$. Sea
+$f: D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramos el PVI \eqref{eq:pvi}.
+
+\begin{definition}
+  Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que la
+  solución $\varphi$ está acotada en el futuro si $\omega = +\infty$ y
+  $\sup \{||\varphi(t)||: t \in [t_0, +\infty[\} < +\infty$. Análogamente, diremos que la solución
+  $\varphi$ está acotada en el pasado si $\alpha = -\infty$ y
+  $\sup \{||\varphi(t)||: t \in ]-\infty, t_0]\} < +\infty$.
+\end{definition}
+
+\begin{proposition}
+  Supongamos que $d = 1$. Sea $\varphi: ]\alpha, \omega[ \to \R$ una solución maximal de
+  \eqref{eq:pvi}. Si existen $p_1 < p_2$ tales que $x_0 \in ]p_1, p_2[$, $f(t, p_1) > 0$ y
+  $f(t, p_2) < 0$, entonces $\varphi(t) \in ]p_1, p_2[$ para todo $t \ge t_0$ y, por tanto, la
+  solución es acotada en el futuro.
+\end{proposition}
+\begin{proof}
+  Veamos que $\varphi(t) > p_1$ para todo $t \ge t_0$. En efecto, $\varphi(t_0) = x_0 >
+  p_1$. Supongamos que el resultado es falso. Existe $\tau > t_0$ tal que $\varphi(t) > p_1$ para
+  todo $t \in [t_0, \tau[$ y $\varphi(\tau) = p_1$. Por tanto, $\varphi'(\tau) \le 0$. Sin embargo,
+  $\varphi'(\tau) = f(\tau, p_1) > 0$, contradicción. Análogamente se prueba la segunda afirmación.
+\end{proof}
+
+\begin{definition}
+  Consideremos una EDO \eqref{eq:edo}.  Sea $V : \R^d \to \R$ tal que $V \in
+  \mathcal{C}^1(\R^d)$. Se define $\dot{V}: D \to \R$ como
+  $\dot{V}(t,x) = \langle \nabla V(x), f(t,x)\rangle$.  Se dice que $V$ es una función guía de la
+  EDO si $\dot{V}$ tiene signo constante (para valores $x$ suficientemente grandes).
+\end{definition}
+
+Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Nótese que la
+función $V(\varphi(t))$ es derivable y su derivada viene dada por
+\[ \frac{\partial}{\partial t} V(\varphi(t)) = \langle \nabla V(\varphi(t)), \varphi'(t)\rangle =
+  \dot{V}(t, \varphi(t)). \]
+
+
+\begin{definition}
+  Sea $V: \R^d \to \R$ continua y $r \in \R$, se definen el conjunto de nivel $r$
+  \[C_r = V^{-1}(r) = \{x \in \R^d: V(x) = r\}\]
+
+  y el conjunto de subnivel $r$
+  \[\Omega_r = \bigcup_{s \le r} C_r(s) = V^{-1}(]-\infty,r]).\]
+
+  Diremos que $V$ es una función coerciva si todos sus conjuntos de subnivel son compactos.
+\end{definition}
+
+
+\begin{prop}
+  En el contexto actual, se verifican las siguientes afirmaciones:
+  \begin{itemize}
+  \item Si $d = 1$, $V$ es coerciva si, y solo si, $\lim_{x \to \pm \infty}V(x) = +\infty$.
+  \item Si $V(x_1, \ldots, x_d) = V_1(x_1)+ \cdots + V_d(x_d)$, entonces es coerciva si, y solo si,
+    todos los sumandos $V_i$ son coercivas en $\R$.
+  \item Si $V(x) \ge W(x)$ para todo $x \in \R^d$ y $W$ es coerciva, entonces $V$ es coerciva.
+  \item Si $V$ es una función cuadrática (polinómica de grado $2$), entonces es coerciva si, y solo
+    si, $\mathrm{Hess} V$ es una matriz definida positiva.
+  \item Si $V \in \mathcal{C}^1(\R^d)$ es una función convexa y tiene un único punto crítico,
+    entonces $V$ es coerciva.
+  \end{itemize}
+\end{prop}
+
+\begin{theorem}
+  \label{thm:guia}
+  Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva tal que $\dot{V}(t,x) \le 0$ para todo
+  $(t,x) \in D$, entonces las soluciones maximales de \eqref{eq:pvi} están acotadas en el futuro.
+\end{theorem}
+\begin{proof}
+  Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Definimos
+  $y = V \circ \varphi$. Tenemos que $y'(t) = \dot{V}(t, \varphi(t)) \le 0$, luego $y$ es
+  decreciente. Por tanto, $V(\varphi(t)) \le V(\varphi(t)_0) = r_0$ para todo $t \ge t_0$. Por
+  tanto, $\varphi([t_0, \omega[) \subset \Omega_{r_0}$ por ser $V$ coerciva. Como $\Omega_{r_0}$ es
+  compacto, la función $\varphi$ está acotada en $[t_0, \omega[$. Consecuentemente, del Teorema de
+  prolongación de soluciones se deduce que $\omega = +\infty$.
+\end{proof}
+
+\begin{corollary}
+  Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva tal que $\dot{V}(t,x) = 0$ para todo $(t,x) \in D$,
+  entonces las soluciones maximales de \eqref{eq:pvi} están definidas en $]-\infty, +\infty[$ y
+  están acotadas. Además, $\varphi(t) \in C_{V(x_0)}$ para todo $t \in \R$.
+\end{corollary}
+
+\begin{remark}
+  Las hipótesis del Teorema \ref{thm:guia} se pueden debilitar. Concretamente, la afirmación
+  $\dot{V}(t,x) \le 0$ para todo $(t,x) \in D$ puede substituirse por $\dot{V}(t,x) \le 0$ para todo
+  $t \in ]t_0, +\infty[$, $x \in \R^d - B(p, r)$ para algunos $p \in \R^d$ y $ r > 0$. Además, en
+  lugar de suponer que $V$ es coerciva basta suponer que las componenetes conexax de los conjuntos
+  de subnivel son acotadas. El siguiente resultado es una versión más general del Teorema
+  \ref{thm:guia}.
+\end{remark}
+
+\begin{theorem}
+  \label{thm:guia:2}
+  Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva y existe $r \in \R$ tal que el conjunto
+  \[ \Omega_r = \{x \in \R^d \mid V(x) \le r\} \]
+
+  tiene componentes conexas acotadas y además $\dot{V}(t,x) \le 0$ para todo $t \ge
+  t_0$,$x \in \Omega_r$, entonces las soluciones maximales de \eqref{eq:pvi} están acotadas en el
+  futuro para $(t_0, x_0) \in ]a, +\infty[ \times \Omega_r$.
+\end{theorem}
+
+
+\begin{ex}[Relación de ejercicios 3, ejercicio 8] 
+  Busca funciones guía que nos permitan asegurar que las soluciones de las siguientes ecuaciones
+  diferenciales están acotadas en el futuro:
+  \begin{enumerate}
+  \item $x' = \sin(t) - x^{3}$. Es fácil ver que $V(x) = x^2$ es una función guía.
+  \item Estudiamos el sistema
+    \[
+      \begin{cases}
+        x_1' = x_2; \\
+        x_2' = -\sin(x_1)-x_1.
+      \end{cases}
+    \]
+
+    Buscamos una función guía de la forma $V(x_1, x_2) = V_1(x_1) + V_2(x_2)$. En tal caso se
+    tendría
+    $\dot{V}(x_1, x_2) = \left\langle (V_1'(x_1), V_2'(x_2)), (x_2, -\sin(x_1) - x_1) \right\rangle
+    = V_1'(x_1) x_2 - V_2'(x_2)(\sin(x_1) + x_1)$. Bastaría que $V_1'(x_1) = \sin(x_1) + x_1$ y que
+    $V_2'(x_2) = x_2$. Esto sucede para $V_1(x_1) = - \cos(x_1) + x_1^2/ 2$ y
+    $V_2(x_2) = x_2^2 / 2$. Nótese que estas funciones son coercivas. Por tanto, $V$ es una función
+    guía.
+  \item Estudiamos el sistema
+    \[
+      \begin{cases}
+        x_1' = -x_1 + x_2; \\
+        x_2' = -x_2.
+      \end{cases}
+    \]
+  \end{enumerate}
+  Vamos a comprobar que $V(x_1, x_2) = x_1^2 + x_2^2$ es una función guía. Tenemos que
+  $\dot{V}(x_1, x_2) = 2x_1(-x_1+x_2) 2x_2(-x_2) = - x_1^2 - x_2^2 - (x_1-x_2)^2 \le 0$, que es una forma
+  definida negativa.
+\end{ex}
+
 
 \end{document}
+
+
