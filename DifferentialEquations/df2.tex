@@ -58,7 +58,7 @@ podemos resolver explícitamente. Concretamente, estudiaremos ecuaciones diferen
   \tag{E}
 \end{equation}
 
-donde $D \subset \R \times \R^d$ es un conjunto abierto y arcoconexo y $f: D \to \R^d$ es una
+donde $D \subset \R \times \R^d$ es un conjunto abierto y arcoconexo y $f\colon D \to \R^d$ es una
 función continua. Los elementos que intervienen en una EDO tienen una terminología específica que
 introducimos a continuación:
 
@@ -551,7 +551,7 @@ de existencia y unicidad de solución para PVIs. Existen numerosas versiones del
 múltiples demostraciones. Enunciamos el teorema a continuación.
 
 \begin{thm}[Teorema de Picard-Lindelöf]
-  Sean $D \subset \mathbb{R} \times \mathbb{R}^d$, $f: D \to \mathbb{R}^d$ continua y localmente
+  Sean $D \subset \mathbb{R} \times \mathbb{R}^d$, $f\colon D \to \mathbb{R}^d$ continua y localmente
   lipschitziana respecto de la segunda variable. Dado $(t_0, x_0) \in D$, el PVI \eqref{eq:pvi}
   tiene solución y verifica la propiedad de unicidad global.
 \end{thm}
@@ -751,7 +751,7 @@ variable $t$. En tal caso, podemos obtener una gran cantidad de información ace
 de la EDO solamente utilizando la unicidad del Teorema de Picard - Lindelöf.
 
 \begin{definition}
-  Una EDO autónoma escalar es una EDO de la forma
+  Una \emph{EDO autónoma escalar} es una EDO de la forma
   \begin{equation}
     \label{eq:edo:ae}
     x' = f(x), \ x \in I,
@@ -766,51 +766,209 @@ Nótese que $X(t; x_0)$ está bien definida gracias al Teorema de Picard-Lindel�
 nos referiremos a \eqref{eq:edo:ae} cuando utilicemos EDOs autónomas escalares en un contexto
 general.
 
-\begin{lemma} \label{lem:ae:trans} Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de
-  \eqref{eq:edo:ae} y sea $\tau > 0$. Entonces, la función $\Psi \colon ]\alpha-\tau, \omega-\tau[ \to \R$
-  dada por $\Psi(t) = \varphi(t+\tau)$ es solución de \eqref{eq:edo:ae}.
-\end{lemma}
-
 \begin{definition}
-  Se define la órbita de \eqref{eq:edo:ae} asociada a $x_0$ como el conjunto imagen de $X(t; x_0)$ y
-  se denota $\Theta(x_0)$.
+  La \emph{órbita de \eqref{eq:edo:ae} asociada a $x_0$} es el conjunto imagen de $X(t; x_0)$ y se
+  denota $\Theta(x_0)$.
 \end{definition}
 
-Por el Lema \ref{lem:ae:trans} existen infinitas soluciones con la misma órbita.  Nótese que la
-órbita asociada a $x_0$ es un intervalo, que solamente es trivial cuando la solución es constante,
-lo que sucede si, y solo si, $f(x_0) = 0$. Además, es claro que
-\[I = \bigcup_{x_0 \in I} \Theta(x_0).\]
+El siguiente lema, cuya demotración es una simple comprobación, nos proporciona a partir de una
+solución maximal de \eqref{eq:edo:ae} infinitas (no numerables) soluciones maximales con el mismo
+conjunto imagen. Esto quiere decir que las órbitas de \eqref{eq:edo:ae} se repiten un número no
+numerable de veces.
 
-Como consecuencia del Teorema de Picard-Lindelöf obtenemos fácilmente el siguiente resultado.
+\begin{lemma} \label{lem:ae:trans} Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de
+  \eqref{eq:edo:ae} y sea $\tau \in \E$. Entonces, la función
+  $\Psi \colon ]\alpha-\tau, \omega-\tau[ \to \R$ dada por $\Psi(t) = \varphi(t+\tau)$ es solución
+  de \eqref{eq:edo:ae}.
+\end{lemma}
 
-\begin{prop}
-  Para cualesquiera $x_0, x_0' \in I$ o bien $\Theta(x_0) = \Theta(x_0')$ o bien
-  $\Theta(x_0) \cap \Theta(x_0') = \emptyset$. Por tanto, Las órbitas de \eqref{eq:edo:ae}
-  constituyen una partición de $I$.
-\end{prop}
+Cabe preguntarse si, dadas dos soluciones maximales de \eqref{eq:edo:ae} con la misma órbita, puede
+obtenerse una de otra mediante el Lema \ref{lem:ae:trans}. La respuesta es afirmativa y es
+consecuencia del Teorema de Picard-Lindelöf. A continuación la enunciamos de forma más general.
+
+\begin{lemma} \label{lem:ae:trans:2} Consideremos la EDO \eqref{eq:edo:ae}. Sean $x_1, x_2 \in I$
+  tales que $\Theta(x_1) \cap \Theta(x_2) \ne \emptyset$. Denotemos $\varphi_1(t) = X(t;x_1)$ y
+  $\varphi_2(t) = X(t;x_2)$. Entonces, existe $\tau > 0$ tal que $\alpha(x_2) = \alpha(x_1)+\tau$,
+  $\omega(x_2) = \omega(x_1)+\tau$ y $\varphi_1(t) = \varphi_2(t+\tau)$ para todo
+  $t \in ]\alpha(x_1), \omega(x_1)[$.
+\end{lemma}
 \begin{proof}
-  Sean $x_0, x_0' \in I$ tales que $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$. Veamos que
-  $\Theta(x_0) = \Theta(x_0')$. Denotamos $\varphi_1(t) = X(t; x_0)$ y $\varphi_2(t) = X(t;
-  x_0')$. Existen $t_1$ y $t_2$ tales que $\varphi(t_1) = \varphi_2(t_2)$. Definimos
-  $\phi(t) = \varphi_2(t + (t_2 - t_1))$ en el intervalo que corresponda. Nótese que $\phi$ es
-  solución de \eqref{eq:edo:ae} y verifica $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el
-  Teorema de Picard-Lindelöf obtenemos que $\phi = \varphi_1$ y, por tanto,
-  $\Theta(x_0) = \Theta(x_0')$.
+  Existen $t_1$ y $t_2$ tales que $\varphi(t_1) = \varphi_2(t_2)$. Definimos
+  $\phi(t) = \varphi_2(t + (t_2 - t_1))$ en el intervalo que corresponda. En virtud del Lema
+  \ref{lem:ae:trans} $\phi$ es solución de \eqref{eq:edo:ae} y verifica
+  $\phi(t_1) = \varphi_2(t_2) = \varphi_1(t_1)$. Por el Teorema de Picard-Lindelöf obtenemos que
+  $\phi = \varphi_1$.
 \end{proof}
 
-Como consecuencia, si $p$ es un punto de equilibrio de \eqref{eq:edo:ae}, esto es, $f(p) = 0$, y
-$x_0 \ne p$, entonces $X(t, x_0) \ne p$ para todo $t \in (\alpha(x_0), \omega(x_0))$. Por tanto,
-$\Theta(x_0) \subset (-\infty, p)$ o $\Theta(x_0) \subset (p, \infty)$.
-  
-\begin{cor}
-  Las soluciones de \eqref{eq:edo:ae} o son constantes o son estrictamente monótonas. Por tanto, las
-  órbitas o son conjuntos unitarios o son intervalos abiertos.
-\end{cor}
+Nótese que por el Teorema del valor intermedio la órbita asociada a $x_0$ es un intervalo. Además,
+es claro que
+\[I = \bigcup_{x_0 \in I} \Theta(x_0).\]
 
-Una representación de algunas órbitas de \eqref{eq:edo:ae} recibe el nombre de \emph{diagrama de
-  fases}. Nótese el diagrama de fases viene determinado por el diagrama de signos de $f$. Un signo
+\begin{cor} \label{cor:ae:particion} Consideremos la EDO \eqref{eq:edo:ae}. Para cualesquiera
+  $x_0, x_0' \in I$ o bien $\Theta(x_0) = \Theta(x_0')$ o bien
+  $\Theta(x_0) \cap \Theta(x_0') = \emptyset$. Por tanto, Las órbitas de \eqref{eq:edo:ae}
+  constituyen una partición de $I$.
+\end{cor}
+\begin{proof}
+  Sean $x_0, x_0' \in I$ tales que $\Theta(x_0) \cap \Theta(x_0') \ne \emptyset$.  Veamos que
+  $\Theta(x_0) = \Theta(x_0')$. Denotamos $\varphi_1(t) = X(t; x_0)$ y $\varphi_2(t) = X(t;
+  x_0')$. Aplicamos el Lema \ref{lem:ae:trans:2} sobre $\varphi_1$ y $\varphi_2$, obteniendo en
+  particular que $\Theta(x_0) = \Theta(x_0')$.
+\end{proof}
+
+Cabe preguntarse cuándo una órbita es trivial, esto es, tiene solamente un punto. El siguiente lema
+resuelve esta cuestión.
+
+\begin{lemma} \label{lem:ae:0} Consideremos la EDO \eqref{eq:edo:ae} y $x_0 \in I$. Equivalen:
+  \begin{enumerate}
+  \item La órbita $\Theta(x_0)$ es $[x_0, x_0] = \{x_0\}$.
+  \item La solución $X(t; x_0)$ es constante.
+  \item La función $f$ se anula en $x_0$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Nótese que $\Theta(x_0) = \mathrm{Im}(X(t;x_0)) = \{x_0\}$ si, y solo si, la solución $X(t;x_0)$
+  es constantemente $x_0$. Veamos que esto equivale a que $f$ se anula en $x_0$. En efecto, si
+  $X(t; x_0) = x_0$, entonces evaluando la derivada en $t = 0$ obtenemos $0 = f(x_0)$. Ahora, si
+  $f(x_0) = 0$, la función constantemente $x_0$ es una solución de \eqref{eq:edo:ae}. Por el Teorema
+  de Picard-Lindelöf, debe tenerse $X(t;x_0) = x_0$ como se quería.
+\end{proof}
+
+\begin{definition}
+  Diremos que la EDO \eqref{eq:edo:ae} tiene un punto de equilibrio en $x_0$ si $f(x_0) = 0$.
+  Denotaremos por $\mathrm{Z}(f)$ al conjunto de los ceros de $f$, que es compacto por ser $f$
+  continua.
+\end{definition}
+
+\begin{corollary} \label{cor:ae:p} Si $p$ es un punto de equilibrio de \eqref{eq:edo:ae} y
+  $x_0 \in I$ con $x_0 \ne p$, entonces $X(t, x_0) \ne p$ para todo
+  $t \in ]\alpha(x_0), \omega(x_0)[$. Por tanto, o bien $\Theta(x_0) \subset ]-\infty, p[$ o bien
+  $\Theta(x_0) \subset ]p, \infty[$.
+\end{corollary}
+\begin{proof}
+  Por la Proposición \ref{cor:ae:particion} $\Theta(x_0) \cap \Theta(p) = \emptyset$, lo que prueba
+  el resultado.
+\end{proof}
+
+\begin{lemma} \label{lem:ae:union} Sean $p_1, p_2$ dos puntos de equilibrio de \eqref{eq:edo:ae} con
+  $p_1 \le p_2$. Entonces
+  \begin{align*}
+    ]p_1, p_2[ = & \bigcup_{x_0 \in ]p_1, p_2[} \Theta(x_0); \\
+    ]p_1, +\infty[ = & \bigcup_{x_0 \in ]p_1, +\infty[} \Theta(x_0); \\
+    ]-\infty, p_1[ = & \bigcup_{x_0 \in ]-\infty, p_1[} \Theta(x_0).
+  \end{align*}
+\end{corollary}
+\begin{proof}
+  Demostramos solo la primera igualdad, pues las otras dos se deducen de forma análoga.  Basta ver
+  que para cada $x_0 \in ]p_1, p_2[$ se tiene $\Theta(x_0) \subset ]p_1, p_2[$. En efecto, por el
+  Corolario \ref{cor:ae:p} tenemos que
+  $\Theta(x_0) \subset ]-\infty,p_2[ \, \cap \, ]p_1, +\infty[$.
+\end{lemma}
+
+\begin{proposition} \label{prop:ae:monotonia} Consideremos la EDO \eqref{eq:edo:ae}. Si $f(x_0) > 0$
+  (resp. $f(x_0) < 0$), entonces la función $X(t; x_0)$ es estrictamente creciente
+  (resp. decreciente).
+\end{proposition}
+\begin{proof}
+  Lo demostramos para el caso $f(x_0) > 0$ pues el otro es análogo. Denotemos
+  $\varphi(t) = X(t;x_0)$. Supongamos que existe $t' \in ]\alpha,\omega[$ tal que
+  $0 = \varphi'(t') = f(\varphi(t'))$. Denotemos $x_0' = \varphi(t')$. Este hecho contradice que
+  $\Theta(x_0)$ sea disjunta con $\Theta(x_0') = \{x_0'\}$. Tenemos pues que $\varphi'(t) \ne 0$
+  para todo $t \in ]\alpha,\omega[$. Por tanto, $\varphi$ es estrictamente monótona y su monotonía
+  viene determinada por el signo de $\varphi'(t_0) = f(x_0)$.
+\end{proof}
+
+\begin{corollary}
+  Las órbitas de \eqref{eq:edo:ae} son conjuntos unitarios o intervalos abiertos.
+\end{corollary}
+\begin{proof}
+  Sea $x_0 \in I$. Si $X(t;x_0)$ no es constante, entonces es estrictamente monótona, luego su
+  imagen es un intervalo abierto.
+\end{proof}
+
+Ya disponemos de las herramientas para encontrar las órbitas de \eqref{eq:edo:ae} a partir de sus
+puntos de equilibrio.
+
+\begin{prop} \label{prop:ae:intervalos} Consideremos la EDO \eqref{eq:edo:ae} y $x_0 \in I$. Se
+  verifican las siguientes afirmaciones.
+  \begin{enumerate}
+  \item Si $f$ no se anula, entonces $\Theta(x_0) = I$.
+  \item Si $x_0 \in \mathrm{Z}(f)$, entonces $\Theta(x_0) = \{x_0\}$ y $X(t; x_0) = x_0$.
+  \item Si $p_1, p_2$ son dos ceros consecutivos de $f$ con $p_1 < x_0 < p_2$, entonces
+    $\Theta(x_0) = ]p_1, p_2[$.
+  \item Si $x_0 > p = \max \mathrm{Z}(f)$, entonces $\Theta(x_0) = ]p, \sup I[$.
+  \item Si $x_0 < p = \min \mathrm{Z}(f)$, entonces $\Theta(x_0) = ]p, \inf I[$.
+  \end{enumerate}
+\end{prop}
+\begin{proof}
+  Demostramos cada apartado por separado.
+  
+  \begin{enumerate}
+  \item Recordemos que $I$ es unión disjunta de sus órbitas, que como $f$ no se anulan son
+    intervalos abiertos. Nótese que una unión disjunta de más de un abierto no es conexa. Por tanto,
+    $f$ solo tiene una órbita distinta. Esto es, $\Theta(x_0) = I$.
+  \item Este apartado se demostró en el Lema \ref{lem:ae:0}.
+  \item Razonamos como en a) sobre $]p_1, p_2[$ utilizando el Lema \ref{lem:ae:union}.
+  \item Razonamos como en a) sobre $]p, +\infty[$ utilizando el Lema \ref{lem:ae:union}.
+  \item Razonamos como en a) sobre $]-\infty, p[$ utilizando el Lema \ref{lem:ae:union}. \qedhere
+  \end{enumerate}
+\end{proof}
+
+
+\begin{definition}
+  Una representación en la recta real de las órbitas de \eqref{eq:edo:ae} recibe el nombre de
+  \emph{diagrama de fases}. Habitualmente utilizamos flechas en lugar de segmentos para unir los
+  puntos equilibrio de \eqref{eq:edo:ae}. El sentido de la flecha indica la monotonía de las
+  soluciones que tienen ese segmento como órbita.
+\end{definition}
+
+En vista de la Proposición \ref{prop:ae:intervalos} el diagrama de fases viene determinado por el
+diagrama de signos de $f$. Además, utilizando la proposición \ref{prop:ae:monotonia}, un signo
 positivo indica que la solución asociada a esa órbita es estrictamente creciente mientras que un
 signo negativo indica que dicha solución es estrictamente decreciente.
+
+\begin{ex}[Ecuación logística] \label{ex:logistica} Sean $\lambda, L > 0$. Consideramos la EDO
+  autónoma escalar
+  \begin{equation}
+    \label{eq:log}
+    x' = \lambda x(L-x)
+  \end{equation}
+  La función $f(x) = \lambda x (x -L)$ definida en $\R$ es de clase $1$ y, por tanto, localmente
+  lipschitziana. Tenemos que $\mathrm{Z}_f = \{0, L\}$. El diagrama de fases de la ecuación es
+  \[-\infty \rightarrow 0 \leftarrow L \rightarrow +\infty.\]
+\end{ex}
+
+\begin{cor}
+  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución maximal de \eqref{eq:edo:ae} tal que
+  $\lim_{t \to \omega} \varphi(t) = L \in \R$. Entonces, $p \in \mathrm{Z}_f$.
+\end{cor}
+\begin{proof}
+  Es una consecuencia sencilla de la Proposición \ref{prop:ae:intervalos}.
+\end{proof}
+
+\begin{cor}
+  Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea
+  $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $]p_1, p_2[$. Entonces, el
+  dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide.
+\end{cor}
+\begin{proof}
+  TERMINAR...
+\end{proof}
+
+\begin{ex}[Ecuación logística] \label{ex:logistica:2} Recuperamos el Ejemplo \ref{ex:logistica},
+  donde se estudiaba la ecuación logística. Sea $x_0 \in \R$.
+  \begin{enumerate}
+  \item Si $x_0 \in \{0, L\}$, entonces $]\alpha(x_0), \omega(x_0)[ = \R$.
+  \item Si $x_0 < 0$, entonces $\omega(x_0) = +\infty$. Además, $\lim_{t \to +\infty} X(t,x_0) = 0$.
+  \item Si $0 < x_0 < L$, entonces $\alpha(x_0) = -\infty$ y $\omega(x_0) = +\infty$. Además,
+    $\lim_{t \to -\infty} X(t,x_0) = L$ y $\lim_{t \to +\infty} X(t,x_0) = 0$.
+  \item Si $x_0 > L$, entonces $\alpha(x_0) = -\infty$. Además, $\lim_{t \to -\infty} X(t,x_0) = L$. \qedhere
+  \end{enumerate}
+\end{ex}
+
+Hemos demostrado la Proposición \ref{prop:ae:intervalos} mediante un argumento de conexión,
+obteniendo varios corolarios en consecuencia. Parte de estos resultados también se podían haber
+deducido a partir del siguiente lema.
 
 \begin{lemma}[Barbalet, versión débil]
   \label{lem:barbalet}
@@ -822,29 +980,13 @@ signo negativo indica que dicha solución es estrictamente decreciente.
   Es una consecuencia sencilla del teorema del valor medio.
 \end{proof}
 
-\begin{prop}
-  Sea $\varphi \in \mathcal{C}^1(]\alpha, +\infty[)$ solución de \eqref{eq:edo:ae} tal que
-  $\lim_{t \to +\infty} \varphi(t) = L \in \R$. Entonces, $p \in \mathrm{Z}_f$.
-\end{prop}
-\begin{proof}
-  Es una consecuencia sencilla del Lema \ref{lem:barbalet}.
-\end{proof}
-
-\begin{cor}
-  Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea
-  $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $(p_1, p_2)$. Entonces, el
-  dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide.
-\end{cor}
-
-\begin{definition} [DIAGRAMA DE FASES]
-\end{definition}
 
 \subsection{Región de atracción}
 
 \begin{definition}
   \label{def:ra}
-  Sea $I \subset \R$ intervalo abierto, $f: I \to \R$ localmente lipschitziana y $p \in I$ tal que
-  $f(p) = 0$. Se define la región de atracción de p como
+  Sea $I \subset \R$ intervalo abierto, $f\colon I \to \R$ localmente lipschitziana y $p \in I$ tal
+  que $f(p) = 0$. Se define la región de atracción de $p$ como
   \[ \mathcal{R}(p) = \{x_0\in I: \omega(x_0) = +\infty \text{ y } \lim_{t \to +\infty} X(t;x_0) =
     p\}. \]
 \end{definition}
@@ -883,19 +1025,6 @@ Claramente tenemos que $p \in \mathcal{R}(x_0)$.
     se sigue el resultado. \qedhere
   \end{enumerate}
 \end{proof}
-
-\begin{ex}[Ecuación logística]
-  Sean $\lambda, L > 0$. Consideramos la EDO autónoma escalar
-  \begin{equation}
-    \label{eq:log}
-    x' = \lambda x(L-x)
-  \end{equation}
-  La función $f(x) = \lambda x (x -L)$ definida en $\R$ es de clase $1$ y, por tanto, localmente
-  lipschitziana. Tenemos que $\mathrm{Z}_f = \{0, L\}$. El diagrama de fases de la ecuación es
-  \[-\infty \leftarrow 0 \rightarrow L \leftarrow +\infty.\] Por tanto, si $0 < x_0 < L$, entonces
-  $\omega(x_0) = +\infty$ y $\lim_{t \to +\infty} X(t,x_0) = L$.
-\end{ex}
-
 
 \section{Prolongación y acotación de soluciones}
 
@@ -1058,7 +1187,7 @@ soluciones.
 \end{proof}
 
 \begin{definition}
-  Sea $D = ]a,b[ \times R^2$ y $f: ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo crecimiento
+  Sea $D = ]a,b[ \times R^2$ y $f\colon ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo crecimiento
   lineal en la variable $x$ si existen dos funciones continuas $m, n : ]a,b[ \to \R^+_0$ tales que
   para cada $(t,x) \in D$ se tiene
   \[ ||f(t,x)|| \le m(t) ||x|| + n(t).\] En tal caso escribiremos que $f$ es CSL.
@@ -1151,7 +1280,7 @@ siguiente ejemplo.
 \subsection{Acotación de soluciones. Funciones guía}
 
 Consideramos el conjunto abierto $D = ]a, +\infty[ \times \R^d$, con $-\infty \le a$. Sea
-$f: D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramos el PVI \eqref{eq:pvi}.
+$f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramos el PVI \eqref{eq:pvi}.
 
 \begin{definition}
   Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que la
