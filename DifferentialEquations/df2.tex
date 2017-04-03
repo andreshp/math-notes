@@ -283,7 +283,7 @@ Transladamos ahora el concepto de unicidad global al ámbito de las soluciones m
 El siguiente lema cuya demostración es trivial será utilizado a menudo para crear crear soluciones
 que muestren que no se verifica la unicidad global.
 
-\begin{lemma}
+\begin{lemma} \label{lem:concatenar-sols}
   Sean $\varphi_1: I_1 \to \R^d$ y $\varphi_2: I_2 \to \R^d$ soluciones del PVI \eqref{eq:pvi} y sea
   $\tau \in I_1 \cap I_2$ con $\varphi_1(\tau) = \varphi_2(\tau)$.  Entonces la función
   $\Psi: I_1 \cap I_2 \to \R^d$ dada por
@@ -300,7 +300,7 @@ que muestren que no se verifica la unicidad global.
 
 \subsection{Ecuación integral de Volterra}
 
-Sea $x: I \to \R$ una solución del PVI \eqref{eq:pvi}.  Reclordemos que $x$ verifica
+Sea $x: I \to \R$ una solución del PVI \eqref{eq:pvi}.  Recordemos que $x$ verifica
 $x'(s) = f(s,x(s))$ para todo $s \in I$. Si integramos la expresión, obtenemos para cada $t \in I$
 la igualdad
 \begin{equation}
@@ -380,6 +380,8 @@ Vamos a ver un ejemplo práctico de cómo se relacionan los dos conceptos que he
   es la única solución del PVI y, por tanto, de la EIV. No obstante, veremos este hecho formalmente
   en la siguiente sección.
 \end{ex}
+
+\newpage
 
 \section{Existencia y unicidad de solución} \label{sec:eu}
 
@@ -744,6 +746,8 @@ Cuando no haya ambigüedad en la solución maximal que estamos considerando util
 $]\alpha, \omega[$ para indicar su dominio. Algunos autores escriben $]\omega_-, \omega_+[$ en lugar
 de $]\alpha, \omega[$. No obstante, la notación que hemos escogido nos facilita la escritura.
 
+\newpage
+
 \section{EDOs autónomas escalares}
 
 La solución general de una EDO se simplifica enormemente cuando la función $f$ no depende de la
@@ -771,7 +775,7 @@ general.
   denota $\Theta(x_0)$.
 \end{definition}
 
-El siguiente lema, cuya demotración es una simple comprobación, nos proporciona a partir de una
+El siguiente lema, cuya demostración es una simple comprobación, nos proporciona a partir de una
 solución maximal de \eqref{eq:edo:ae} infinitas (no numerables) soluciones maximales con el mismo
 conjunto imagen. Esto quiere decir que las órbitas de \eqref{eq:edo:ae} se repiten un número no
 numerable de veces.
@@ -919,7 +923,7 @@ puntos de equilibrio.
   Una representación en la recta real de las órbitas de \eqref{eq:edo:ae} recibe el nombre de
   \emph{diagrama de fases}. Habitualmente utilizamos flechas en lugar de segmentos para unir los
   puntos equilibrio de \eqref{eq:edo:ae}. El sentido de la flecha indica la monotonía de las
-  soluciones que tienen ese segmento como órbita.
+  soluciones que tienen ese segmento como órbita (derecha = creciente, izquierda = decreciente).
 \end{definition}
 
 En vista de la Proposición \ref{prop:ae:intervalos} el diagrama de fases viene determinado por el
@@ -935,34 +939,43 @@ signo negativo indica que dicha solución es estrictamente decreciente.
   \end{equation}
   La función $f(x) = \lambda x (x -L)$ definida en $\R$ es de clase $1$ y, por tanto, localmente
   lipschitziana. Tenemos que $\mathrm{Z}_f = \{0, L\}$. El diagrama de fases de la ecuación es
-  \[-\infty \rightarrow 0 \leftarrow L \rightarrow +\infty.\]
+  \[-\infty \rightarrow 0 \leftarrow L \rightarrow +\infty. \qedhere\]
 \end{ex}
 
 \begin{cor}
-  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución maximal de \eqref{eq:edo:ae} tal que
-  $\lim_{t \to \omega} \varphi(t) = L \in \R$. Entonces, $p \in \mathrm{Z}_f$.
+  Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución maximal de \eqref{eq:edo:ae}.
+  \begin{enumerate}
+  \item Si $\lim_{t \to \omega} \varphi(t) = p \in I$, entonces $p \in \mathrm{Z}_f$ y
+    $\omega = +\infty$.
+  \item Si $\lim_{t \to \alpha} \varphi(t) = p \in I$, entonces $p \in \mathrm{Z}_f$ y
+    $\alpha = -\infty$.
+  \end{enumerate}
 \end{cor}
 \begin{proof}
-  Es una consecuencia sencilla de la Proposición \ref{prop:ae:intervalos}.
+  Demostramos a) pues b) es análogo. En virtud de la Proposición \ref{prop:ae:intervalos} y la
+  Proposición \ref{prop:ae:intervalos} obtenemos que $p \in \mathrm{Z}_f$. Además,
+  $\lim_{t \to \omega} \varphi'(t) = \lim_{t \to \omega} f(\varphi(t)) = 0$. Si se tuviese
+  $\omega < +\infty$, entonces podemos utilizar el Lema \ref{lem:concatenar-sols} para obtener una
+  nueva solución a partir de $\varphi$ y la solución constantemente $p$, lo que contradice la
+  maximalidad de $\varphi$.
 \end{proof}
 
 \begin{cor}
-  Sean $p_1$ y $p_2$ dos puntos de inflexión de \eqref{eq:edo:ae} consecutivos con $p_1 < p_2$. Sea
+  Sean $p_1$ y $p_2$ dos puntos de equilibrio consecutivos de \eqref{eq:edo:ae} con $p_1 < p_2$. Sea
   $\varphi$ solución maximal de \eqref{eq:edo:ae} tal que su imagen es $]p_1, p_2[$. Entonces, el
   dominio de $\varphi$ es $\R$. A la solución $\varphi$ se le llama sigmoide.
 \end{cor}
-\begin{proof}
-  TERMINAR...
-\end{proof}
 
-\begin{ex}[Ecuación logística] \label{ex:logistica:2} Recuperamos el Ejemplo \ref{ex:logistica},
+\begin{ex}[Ecuación logística - 2] \label{ex:logistica:2} Recuperamos el Ejemplo \ref{ex:logistica},
   donde se estudiaba la ecuación logística. Sea $x_0 \in \R$.
   \begin{enumerate}
   \item Si $x_0 \in \{0, L\}$, entonces $]\alpha(x_0), \omega(x_0)[ = \R$.
-  \item Si $x_0 < 0$, entonces $\omega(x_0) = +\infty$. Además, $\lim_{t \to +\infty} X(t,x_0) = 0$.
+  \item Si $x_0 < 0$, entonces $\lim_{t \to +\infty} X(t,x_0) = 0$ y, por tanto,
+    $\omega(x_0) = +\infty$.
   \item Si $0 < x_0 < L$, entonces $\alpha(x_0) = -\infty$ y $\omega(x_0) = +\infty$. Además,
     $\lim_{t \to -\infty} X(t,x_0) = L$ y $\lim_{t \to +\infty} X(t,x_0) = 0$.
-  \item Si $x_0 > L$, entonces $\alpha(x_0) = -\infty$. Además, $\lim_{t \to -\infty} X(t,x_0) = L$. \qedhere
+  \item Si $x_0 > L$, entonces $\lim_{t \to -\infty} X(t,x_0) = L$ y, por tanto,
+    $\alpha(x_0) = -\infty$. \qedhere
   \end{enumerate}
 \end{ex}
 
@@ -980,13 +993,10 @@ deducido a partir del siguiente lema.
   Es una consecuencia sencilla del teorema del valor medio.
 \end{proof}
 
-
-\subsection{Región de atracción}
-
 \begin{definition}
   \label{def:ra}
-  Sea $I \subset \R$ intervalo abierto, $f\colon I \to \R$ localmente lipschitziana y $p \in I$ tal
-  que $f(p) = 0$. Se define la región de atracción de $p$ como
+  Sea $p \in I$ un punto de equilibrio de la ecuación \eqref{eq:edo:ae}. Se define la \emph{región
+    de atracción de $p$} como
   \[ \mathcal{R}(p) = \{x_0\in I: \omega(x_0) = +\infty \text{ y } \lim_{t \to +\infty} X(t;x_0) =
     p\}. \]
 \end{definition}
@@ -997,34 +1007,36 @@ Claramente tenemos que $p \in \mathcal{R}(x_0)$.
   \label{def:atractor}
   En el contexto de la Definición \ref{def:ra}:
   \begin{itemize}
-  \item Si $p \in \mathrm{int}(\mathcal{R}(p))$, entonces diremos que $p$ es un atractor.
-  \item Si el diagrama de fases es de la forma $\rightarrow p \leftarrow$, entonces diremos que $p$
-    es un sumidero.
-  \item Si $\mathcal{R}(p) = I$, entonces diremos que $p$ es un atractor global.
-  \item Si el diagrama de fases es de la forma $\leftarrow p \rightarrow$, entonces diremos que $p$
-    es una fuente.
-  \item Si $\mathcal{R}(p) = \{p\}$ y $p$ es un cero aislado de $f$, entonces diremos que $p$ es un
-    repulsor.  Si $\mathrm{int}(\mathcal{R}(p)) \ne \emptyset$ y $p \in \partial \mathcal{R}(p)$,
-    entonces diremos que $p$ es un semiatractor.
+  \item Si $p \in \mathrm{int}(\mathcal{R}(p))$, entonces diremos que $p$ es un \emph{atractor} o
+    \emph{sumidero}. Esto equivale a que el diagrama de fases sea de la forma
+    $\rightarrow p \leftarrow$ en un entorno de $p$.
+  \item Si $\mathcal{R}(p) = I$, entonces diremos que $p$ es un \emph{atractor global}. Esto
+    equivale a que el diagrama de fases sea exactamente $\rightarrow p \leftarrow$.
+  \item Si $\mathcal{R}(p) = \{p\}$ y $p$ es un cero aislado de $f$, entonces diremos que $p$ es una
+    \emph{fuente} o un \emph{repulsor}. Esto equivale a que le diagrama de fases sea de la forma
+    $\leftarrow p \rightarrow$ en un entorno de $p$.
+  \item Si $\mathrm{int}(\mathcal{R}(p)) \ne \emptyset$ y $p \in \partial \mathcal{R}(p)$, entonces
+    diremos que $p$ es un \emph{semiatractor}. Esto equivale a que el diagrama de fases sea de la
+    forma $\rightarrow p \text{ algo}$ o bien $\text{algo } p \leftarrow$ en un entorno de $p$.
   \end{itemize}
 \end{definition}
 
+Utilizando herramientas de un curso básico de cálculo fácilmente obtenemos el siguiente resultado.
+
 \begin{prop}[Test de la derivada primera]
-  Sean $I \subset \R$ intervalo abierto, $f \in \mathcal{C}^1(I)$ y $p\in I$ tal que $f(p) = 0$.
-  
+  Sea $p \in I$ un punto de equilibrio de la ecuación \eqref{eq:edo:ae}. Se verifican las isguientes
+  afirmaciones.
   \begin{enumerate}
   \item Si $f'(p) < 0$, entonces $p$ es un atractor de $x' = f(x)$.
   \item Si $f'(p) > 0$, entonces $p$ es un repulsor de $x' = f(x)$.
   \end{enumerate}
 \end{prop}
-\begin{proof}
-  \begin{enumerate}
-  \item En tal caso el diagrama de fases en $p$ es de la forma $\rightarrow p \leftarrow$, de donde
-    se sigue el resultado.
-  \item En tal caso el diagrama de fases en $p$ es de la forma $\leftarrow p \rightarrow$, de donde
-    se sigue el resultado. \qedhere
-  \end{enumerate}
-\end{proof}
+
+\begin{ex}[Ecuación logística - 3]
+  Recuperamos el Ejemplo \ref{ex:logistica}. Tenemos que $f(x) = \lambda x(L-x)$ y sus puntos críticos son $\{0, L\}$. Deducimos que $0$ es un atractor mientras que $L$ es un repulsor.
+\end{ex}
+
+\newpage
 
 \section{Prolongación y acotación de soluciones}
 
@@ -1415,6 +1427,83 @@ función $V(\varphi(t))$ es derivable y su derivada viene dada por
 \end{ex}
 
 
+\subsection{Seminario: EDO de segundo orden}
+
+Cualquier ecuación diferencial explícita de orden superior se puede transformar en una ecuación
+diferencial de primer orden explícito. Existe un procedimiento estándar para hacerlo, aunque no es
+el único. Sea $D \subset \R \times \left(\R^d\right)^n$ abierto y $g \colon D \to \R^d$ continua. La
+ecuación
+\begin{equation}
+  \label{eq:ed:sup}
+  x^{n+1)} = g(t, x, x', \ldots, x^n)
+\end{equation}
+
+equivale al sistema
+
+\begin{equation}
+  \label{eq:ed:sup:sis}
+  \begin{cases}
+    x_1' & = x_2; \\
+    x_{n-1}' & = x_n; \\
+    & \vdots \\
+    x_n' & = g(t, x_1, x_2, \ldots, x_n).
+  \end{cases}
+\end{equation}
+
+\begin{lem} \label{lem:2-cota} Sea $f \in \mathcal{C}^2(\R)$ tal que $f$ y $f''$ están
+  acotadas. Entonces $f'$ está acotada.
+\end{lem}
+\begin{proof}
+  Podemos suponer sin pérdida de generalidad que $f$ y $f''$ están acotadas por $1$. Sea $x \in
+  R$. Por el Teorema del valor medio encontramos $\xi \in ]x-1,x[$ tal que
+  $|f'(\xi)| = |f(x) - f(x-1)| \le 2$. Volvemos a aplicar el teorema del valor medio para obtener
+  $\zeta \in ]x-1,x[$ tal que $f'(x)-f'(\xi) = f''(\zeta)(x-\xi)$. Consecuentemente,
+  $|f'(x)| \le |f'(\xi)| + 1 \le 3$.
+\end{proof}
+
+\begin{ex}
+  En la física Newtoniana es habitual encontrar ecuaciones del tipo
+  
+  \begin{equation}
+    \label{eq:newton}
+    m x'' + g(x) = 0,
+  \end{equation}
+
+  donde $m$ es una constante positiva y $g \in \mathcal{C}(\R^d)$ es localmente
+  lipschitziana. Supongamos que $d = 1$. Aplicando el procedimiento anterior obtenemos el sistema
+  \begin{equation}
+    \label{eq:newton:sis}
+    \begin{cases}
+      x_1' & = x_2; \\
+      x_2' & = - g(x_1) / m.
+    \end{cases}
+  \end{equation}
+  Por el Teorema de Picard-Lindelöf, el sistema \eqref{eq:newton:sis} tiene solución maximal única
+  para cada condición inicial. Este hecho se denomina \emph{determinismo físico}. Un caso particular
+  es el oscilador armónico, en cuyo caso se deducen las condiciones $g(-x) = -g(x)$ para todo
+  $x \in \R$ y $x g(x) > 0$ para todo $x \in \R^{*}$. Por ejemplo, podemos considerar $g(x) = ax$
+  (oscilador armónico) o $g(x) = ax + bx^3$ (modelo de Duffing) para $a,b > 0$.
+
+  Interesa saber si las soluciones de \eqref{eq:newton} están acotadas. Por ejemplo, podemos estar
+  modelando la oscilación de un puente. Si las soluciones no están acotadas en el futuro, entonces
+  el puente se terminará rompiendo. Para ello buscamos una función guía apropiada. Tomamos
+  $V(x_1, x_2) = V_1(x_1)+V_2(x_2)$. Podemos tomar $V_2(x_2) = x_2^2 / 2$ y $V_1(x_1) = G(x_1) / m$,
+  donde $G$ es una primitiva de $g(x_1)$. Obtenemos por ejemplo la función guía
+  \[ V(x_1, x_2) = G(x_1) + m x_2^2 / 2. \]
+
+  A la función $V(x_1, x_2)$ se le denomina energía del sistema, correspondiéndose el segundo
+  sumando $m x_2^2 / 2$ con la energía cinética y $G$ con la energía potencial. Sea
+  $\varphi\colon ]\alpha, \omega[ \to \R$ una solución de \eqref{eq:newton}. Tenemos que la función
+  $E(t) = V(\varphi(t), \varphi'(t)) = G(\varphi(t)) + m \varphi'(t)^2/2$ es constante. A este hecho
+  se le llama \emph{conservación de la energía}.
+
+  Si $G$ es coerciva, entonces por el Teorema \ref{thm:guia} las soluciones de \eqref{eq:newton:sis}
+  están acotadas. Nótese que si $x$ es solución de \eqref{eq:newton}, entonces $x'' = -g(x)/m$ está
+  acotada. Por el Lema \ref{lem:2-cota}, $x'$ está acotada. Por tanto, estudiar la acotación de las
+  soluciones de \eqref{eq:newton:sis} equivale a estudiar la acotación de las soluciones de
+  \eqref{eq:newton}.
+  
+  En el caso de las ecuaciones de tipo oscilador armónico o tipo Duffing, la función $G$ es
+  coerciva.
+\end{ex}
 \end{document}
-
-
