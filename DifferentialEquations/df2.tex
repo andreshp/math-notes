@@ -89,7 +89,7 @@ introducimos a continuación:
 \end{ex}
 
   \begin{definition}[Concepto de solución]
-    Una \emph{solución} de una EDO es una función $\varphi: I \to \R^d$ donde $I$ es un intervalo
+    Una \emph{solución} de una EDO es una función $\varphi \colon I \to \R^d$ donde $I$ es un intervalo
     abierto no vacío, tal que:
     \begin{enumerate}
     \item $\varphi \in \mathcal{C}^1(I, \R^d)$;
@@ -98,7 +98,7 @@ introducimos a continuación:
     \end{enumerate}
   \end{definition}
 
-  \begin{ex} Sea $I \subset \R^+$ un intervalo y $a \in \R$. La función $\varphi: I \to \R$ dada por
+  \begin{ex} Sea $I \subset \R^+$ un intervalo y $a \in \R$. La función $\varphi \colon I \to \R$ dada por
     $\varphi(t) = at$ es una soluciónn de la EDO escalar propuesta en el Ejemplo \ref{ex:ex}. Esto
     prueba que una EDO puede tener infinitas soluciones.
   \end{ex}
@@ -127,7 +127,7 @@ introducimos a continuación:
 
   En lo que sigue referiremos a \eqref{eq:pvi} cuando trabajemos con un PVI genérico.
 
-  \begin{ex} Sea $t_0 = 1$ y $x_0 \in \R$.  La función $\varphi: \R^+ \to \R$ dada por
+  \begin{ex} Sea $t_0 = 1$ y $x_0 \in \R$.  La función $\varphi \colon \R^+ \to \R$ dada por
     $\varphi(t) = x_0t$ es una soluciónn de la EDO escalar propuesta en el Ejemplo \ref{ex:ex} y
     verifica $\varphi(t_0) = x_0$. Nótese que la restricción de $\varphi$ a cualquier intervalo que
     contenga a $1$ es una solución del PVI dado por $(1, x_0)$. De todas las soluciones, nos
@@ -215,7 +215,7 @@ maximal.
 
 \begin{definition}
   Sea
-  $\Sigma = \Sigma\eqref{eq:pvi} = \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de
+  $\Sigma = \Sigma\eqref{eq:pvi} = \{(I, \varphi) \ | \ \varphi \colon I \to \R^d \text{ es solución de
     \eqref{eq:pvi}}\}$. El par $(\widetilde{I}, \widetilde{\varphi}) \in \Sigma$ es una
   \emph{prolongación} de $(I, \varphi) \in \Sigma$ si $I \subsetneq \widetilde{I}$ y
   $\widetilde{\varphi}_{|I} = \varphi$ y lo denotaremos
@@ -230,7 +230,7 @@ maximal.
 \begin{proof}
   La demostración es consecuencia del Lemma de Zorn. Sea $\varphi_1: I_1 \to \R^d$ solución no
   maximal de \eqref{eq:pvi}. Basta aplicar este resultado sobre el conjunto
-  \[ \{(I, \varphi) \ | \ \varphi: I \to \R^d \text{ es solución de \eqref{eq:pvi}} \text{ y } I_1
+  \[ \{(I, \varphi) \ | \ \varphi \colon I \to \R^d \text{ es solución de \eqref{eq:pvi}} \text{ y } I_1
     \subsetneq I\} \] con la relación de orden $<<$ definida previamente. Nótese que este conjunto
   es no vació ya que $\varphi_1$ es prolongable. Encontramos pues una solución maximal que es
   prolongación de $\varphi_1$ como se quería.
@@ -312,7 +312,7 @@ la igualdad
 A esta ecuación se le conoce como ecuación integral de Volterra, que abreviaremos EIV.
 
 \begin{definition}
-  Sea $\varphi: I \to \R^d$ con $I$ intervalo abierto. Diremos que $\varphi$ es solución de la
+  Sea $\varphi \colon I \to \R^d$ con $I$ intervalo abierto. Diremos que $\varphi$ es solución de la
   ecuación integral de Volterra si
 
   \begin{enumerate}
@@ -328,14 +328,14 @@ Hemos visto que toda solución de \eqref{eq:pvi} es solución de la ecuación in
 asociada. El recíproco también es cierto y se recoge en la siguiente proposición.
 
 \begin{proposition}
-  Sea $I$ un intervalo abierto y $\varphi: I \to \R^d$. Son equivalentes:
+  Sea $I$ un intervalo abierto y $\varphi \colon I \to \R^d$. Son equivalentes:
   \begin{enumerate}
   \item $\varphi$ es solución del PVI \eqref{eq:pvi};
   \item $\varphi$ es solución de la ecuación integral de Volterra \eqref{eq:volterra}.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  Ya sabemos que a) implica b). Veamos el recíproco. Sea $\varphi: I \to \R^d$ solución de
+  Ya sabemos que a) implica b). Veamos el recíproco. Sea $\varphi \colon I \to \R^d$ solución de
   \eqref{eq:volterra}.  Por el Teorema fundamental del cálculo aplicado a \eqref{eq:volterra}
   obtenemos que $\varphi$ es derivable y su derivada es $\varphi'(t) = f(t, \varphi(t))$. Puesto que
   $f$ es continua, obtenemos que $\varphi \in \mathcal{C}^1(I, \R^d)$. Por último, es claro que
@@ -371,7 +371,7 @@ Vamos a ver un ejemplo práctico de cómo se relacionan los dos conceptos que he
   Deducimos que debe verificarse
   \[x(t) = \frac{8}{1 - 8t}.\]
     
-  Definimos $\varphi: (-\infty, \frac{1}{8}) \to \R$ con $\varphi(t) = \frac{8}{1-8t}$ y comprobamos
+  Definimos $\varphi \colon ]-\infty, \frac{1}{8}[ \to \R$ con $\varphi(t) = \frac{8}{1-8t}$ y comprobamos
   que sea solución, Efectivamente tenemos que
   \[ \varphi(0) = 8 \quad \text{y} \quad \varphi'(t) = \frac{64}{(1-8t)^2} = \varphi^2(t). \]
 
@@ -428,7 +428,7 @@ solo se puede aplicar a casos muy concretos. Introducimos estos casos en la sigu
 \begin{proof}
   Comenzamos demostrando \textbf{i)}. Distinguimos dos casos:\\
 
-  \textbf{Caso 1:} $g(x_0) = 0$. Entonces, $\varphi: \R \to \R$ tal que
+  \textbf{Caso 1:} $g(x_0) = 0$. Entonces, $\varphi \colon \R \to \R$ tal que
   $\varphi(t) = x_0$ es una solución de $(P)$.\\
 
   \textbf{Caso 2:} $g(x_0) \neq 0$. Entonces, existe $I_1$ abierto tal que
@@ -441,7 +441,7 @@ solo se puede aplicar a casos muy concretos. Introducimos estos casos en la sigu
   una primitiva de $a(t)$ tal que $A(t_0) = 0 \in I_2$.  Por continuidad, $\exists I_3 \subset J_1$
   abierto tal que $t_0 \in I_3$, $A(I_3) \subset I_2$. Definimos:
   \begin{align*}
-    \varphi : & I_3 \to \R \in \mathcal{C}^1(I_3) \\
+    \varphi \colon & I_3 \to \R \in \mathcal{C}^1(I_3) \\
               & t \to G^{-1}(A(t))
   \end{align*}
 
@@ -641,7 +641,7 @@ métrico completo con la norma infinito.
 \end{proof}
 
 \begin{remark}
-  Si se verifican las hipótesis del Lema \ref{lem:v:1} y $\varphi: [t_0-a, t_0+a] \to \mathbb{R}^d$
+  Si se verifican las hipótesis del Lema \ref{lem:v:1} y $\varphi \colon [t_0-a, t_0+a] \to \mathbb{R}^d$
   es solución de \eqref{eq:volterra}, entonces $(t, \varphi(t)) \in R_{a,b}$ para todo
   $t \in [t_0-a, t_0+a]$.
 \end{remark}
@@ -745,6 +745,20 @@ Como consecuencia del Teorema de Picard-Lindelöf y los resultados de la Secció
 Cuando no haya ambigüedad en la solución maximal que estamos considerando utilizaremos
 $]\alpha, \omega[$ para indicar su dominio. Algunos autores escriben $]\omega_-, \omega_+[$ en lugar
 de $]\alpha, \omega[$. No obstante, la notación que hemos escogido nos facilita la escritura.
+
+\subsection{Teorema de Cauchy - Peano}
+
+Nos preguntamos en este punto si todo PVI tiene solución. De momento no nos hemos encontrado un PVI
+que no tenga solución. Sí hemos encontrado ejemplos donde las soluciones maximales no eran únicas y,
+por tanto, no podemos aspirar a demostrar un resultado como el Teorema de Picard-Lindelöf en un
+contexto general. El Teorema de Cauchy - Peano responde afirmativamente a nuestra pregunta.
+
+\begin{theorem}[Teorema de Cauchy - Peano]
+  El PVI \eqref{eq:pvi} tiene solución.
+\end{theorem}
+\begin{proof}
+NO LA HEMOS DADO TODAVÍA... SE AÑADIRÁ EN UN FUTURO.
+\end{proof}
 
 \newpage
 
@@ -1024,8 +1038,8 @@ Claramente tenemos que $p \in \mathcal{R}(x_0)$.
 Utilizando herramientas de un curso básico de cálculo fácilmente obtenemos el siguiente resultado.
 
 \begin{prop}[Test de la derivada primera]
-  Sea $p \in I$ un punto de equilibrio de la ecuación \eqref{eq:edo:ae}. Se verifican las isguientes
-  afirmaciones.
+  Sea $p \in I$ un punto de equilibrio de la ecuación \eqref{eq:edo:ae} tal que $f$ es de clase $1$
+  en un entorno de $p$. Se verifican las siguientes afirmaciones.
   \begin{enumerate}
   \item Si $f'(p) < 0$, entonces $p$ es un atractor de $x' = f(x)$.
   \item Si $f'(p) > 0$, entonces $p$ es un repulsor de $x' = f(x)$.
@@ -1033,94 +1047,130 @@ Utilizando herramientas de un curso básico de cálculo fácilmente obtenemos el
 \end{prop}
 
 \begin{ex}[Ecuación logística - 3]
-  Recuperamos el Ejemplo \ref{ex:logistica}. Tenemos que $f(x) = \lambda x(L-x)$ y sus puntos críticos son $\{0, L\}$. Deducimos que $0$ es un atractor mientras que $L$ es un repulsor.
+  Recuperamos el Ejemplo \ref{ex:logistica}. Tenemos que $f(x) = \lambda x(L-x)$ y sus puntos
+  críticos son $\{0, L\}$. Deducimos que $0$ es un atractor mientras que $L$ es un repulsor.
 \end{ex}
+
+
 
 \newpage
 
 \section{Prolongación y acotación de soluciones}
 
+Todos los resultados se enuncian y se prueban para el extremo superior del dominio de una
+solución. No obstante, también se pueden establecer de forma análoga para el extremo inferior, hecho
+que se deja al lector como ejercicio.
+
+\subsection{Prolongación de soluciones}
+
 En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. Encontraremos
 prolongaciones bajo ciertas hipótesis sobre la solución y / o el problema. En consecuencia, para las
-soluciones maximales fallarán alguna de estas hipótesis, obteniendo información sobre estas
-soluciones.
+soluciones maximales fallará alguna de estas hipótesis, obteniendo información sobre el dominio u
+acotación éstas.
 
-\begin{lemma}
-  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que
-  $\lim_{t \to \omega} \varphi(t) = \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces la solución es
-  prolongable.
+\begin{lemma} \label{lem:prolongacion:1} Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución
+  de \eqref{eq:pvi} tal que $\lim_{t \to \omega} \varphi(t) = \xi \in \R^d$. Si
+  $(\omega, \xi) \in D$, entonces la solución es prolongable.
 \end{lemma}
 \begin{proof}
   Consideramos el PVI
   \[\begin{cases}x' = f(t, x); \\ x(\omega) = \xi. \end{cases}\]
-  Existe $a > 0$ tal que $\widetilde{\varphi}: ]\omega-a, \omega+a[ \to \R^d$ es solución del nuevo
-  PVI. La función $\Psi: ]\alpha, \omega+a[ \to \R^d$ dada por
-  \[\Psi(t) = \begin{cases} \varphi(t) & \text{si } t \le \omega; \widetilde{\varphi}(t) & \text{si
-      } t > \omega;\\\end{cases}\] es una solución de \eqref{eq:pvi} y, por tanto, es una
-  prolongación de $\varphi$.
+  Existe $a > 0$ tal que $\widetilde{\varphi} \colon ]\omega-a, \omega+a[ \to \R^d$ es solución del
+  nuevo PVI. La función $\Psi \colon ]\alpha, \omega+a[ \to \R^d$ dada por
+  \[\Psi(t) = \begin{cases} \varphi(t) & \text{si } t \le \omega; \\ \widetilde{\varphi}(t) &
+      \text{si } t > \omega;\end{cases}\] es una solución de \eqref{eq:pvi} (Lemma
+  \ref{lem:concatenar-sols}) y, por tanto, es una prolongación de $\varphi$.
 \end{proof}
 
-\begin{lemma}\label{lem:prolongacion}
-  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que existe una
-  sucesión $\{t_n\} \subset ]\alpha, \omega[$ con $\{t_n\} \to \omega$ tal que
+El Lemma \ref{lem:prolongacion:1} se puede ampliar, obteniendo el siguiente resultado.
+
+\begin{lemma}\label{lem:prolongacion:2}
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución de \eqref{eq:pvi} tal que existe una
+  sucesión $\{t_n\} \subset ]\alpha, \omega[$ con $\{t_n\} \to \omega$ y
   $\{\varphi(t_n)\} \to \xi \in \R^d$. Si $(\omega, \xi) \in D$, entonces
   $\lim_{t \to \omega} \varphi(t) = \xi$ y, además, la solución es prolongable.
 \end{lemma}
 \begin{proof}
   Sean $a, b \in \R^+$ tales que $R_{a,b}(\omega, \xi) \subset D$. Existe
-  $M = \max \{||f(t,x)||: (t,x) \in R_{a,b}(\omega, \xi)\}$. Dado $0 < \varepsilon < b$, tomamos
-  $\delta > 0$ tal que $\delta < \omega - \alpha$, $\delta M < \varepsilon / 2$. Consideramos la
-  región $R_{\delta, \varepsilon}(\omega, \xi)$. Existe $N \in \N$ tal que
-  $t_N \in ]\omega-\delta, \omega[$ y $\varphi(t_N) \in \overline{\mathrm{B}}(\xi,
-  \varepsilon/2)$. Por tanto, $(t_N, \varphi(t_N)) \in R_{\delta, \varepsilon}(\omega, \xi)$. Vamos
-  a demostrar que $(t, \varphi(t)) \in R_{\delta, \varepsilon}(\omega, \xi)$ para todo
-  $t \in [t_N, \omega[$. En efecto, tenemos que para cada $t \in [t_N, \omega[$ se verifica
-  \[\varphi(t) = \varphi(t_N) + \int_{t_N}^{t} \varphi'(s) \diff s = \int_{t_N}^{t}
-    f(s,\varphi(s)) \diff s.\] Consecuentemente, obtenemos que
-  \[||\varphi(t)-\xi|| \le ||\varphi(t_N) - \xi|| + ||\int_{t_N}^{t} f(s,\varphi(s)) \diff
-    s|| \le \varepsilon / 2 + ||\int_{t_N}^{t} f(s,\varphi(s)) \diff s||.\]
+  \[M = \max \{||f(t,x)||: (t,x) \in R_{a,b}(\omega, \xi)\}.\]
 
-  Supongamos que existe $\tau \in ]t_N, \omega[$ tal que $||\varphi(t) - \xi|| < \varepsilon$ para
-  todo $t \in ]t_N, \tau[$ pero $||\varphi(\tau) - \xi|| = \varepsilon$. En tal caso, tenemos que
-  \[\varepsilon = ||\varphi(\tau) - \xi|| < \varepsilon / 2 + ||\int_{t_N}^{\tau}
-    f(s,\varphi(s)) \diff s|| \le \varepsilon / 2 + |\tau - t_N| < \varepsilon/2 + \varepsilon/2 =
-    \varepsilon,\]
+  Fijado $0 < \varepsilon < b$, tomamos $\delta > 0$ tal que $\delta < a$ y
+  $\delta M < \varepsilon / 2$. Consideramos la región $R_{\delta, \varepsilon}(\omega, \xi)$. Por
+  la convergencia de $\{t_n\}$ y $\{\varphi(t_n)\}$ encontramos $m \in \N$ tal que
+  $t_m \in ]\omega-\delta, \omega[$ y $\varphi(t_m) \in \overline{\mathrm{B}}(\xi,
+  \varepsilon/2)$. Por tanto, tenemos que
+  $(t_m, \varphi(t_m)) \in R_{\delta, \varepsilon}(\omega, \xi)$. Vamos a demostrar que
+  $(t, \varphi(t)) \in R_{\delta, \varepsilon}(\omega, \xi)$ para todo $t \in [t_m, \omega[$.
+  Razonamos por reducción al absurdo. En tal caso mediante un argumento del primer instante existe
+  Nótese que para cada $t \in ]t_m, \omega[$ se verifca
+  \[\varphi(t) = \varphi(t_m) + \int_{t_m}^{t} \varphi'(s) \diff s = \varphi(t_m) +
+    \int_{t_m}^{t} f(s,\varphi(s)) \diff s.\]
 
-  contradicción. Por tanto, se tiene $\varphi(t) \in \overline{\mathrm{B}}(\xi, \varepsilon)$ para
-  todo $t \in ]t_N, \omega[$ como se quería.
+  Por tanto, deducimos que
+  \[ ||\varphi(t)-\varphi(t_m)|| = ||\int_{t_m}^{t} f(s,\varphi(s)) \diff s|| \le \int_{t_m}^{t}
+    ||f(s,\varphi(s))|| \diff s \le M |t-t_m| \le M \delta < \varepsilon/2.\]
+  
+  Por último, hemos demostrado que
+  $||\varphi(t) - \xi|| \le ||\varphi(t_m) - \xi|| + ||\varphi(t)-\varphi(t_m)|| \le \varepsilon / 2
+  + \varepsilon/2$. Esto es, $\varphi(t) \in \overline{\mathrm{B}}(\xi, \varepsilon)$ para todo
+  $t \in ]t_m, \omega[$. De la arbitrariedad de $\varepsilon$ se deduce que
+  $\lim_{t \to \omega} \varphi(t) = \xi$. En vista del Lema \ref{lem:prolongacion:1} la solución es
+  prolongable.
 \end{proof}
+
+Aplicando el Lema \ref{lem:prolongacion:2} a soluciones maximales obtenemos el siguiente teorema,
+que es uno de los principales resultados de la sección.
 
 \begin{theorem}[Comportamiento de la soluciones maximales en el extremo superior]
   \label{thm:prolongacion}
-  Sea $\varphi : ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Si
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Si
   $\omega < +\infty$, entonces se ha de cumplir una de las siguientes alternativas:
   \begin{enumerate}
   \item\label{item:prolongacion:1} $\lim_{t \to \omega} ||\varphi(t)|| = +\infty$;
   \item\label{item:prolongacion:2} Existe $\xi \in \R^d$ con $(\omega, \xi) \in \partial D$ y existe
-    $\{t_n\} \subset ]\alpha, \omega[$ estrictamente creciente tal que $\{t_n\} \to \omega$ y
-    $\{\varphi(t_n)\} \to \xi$.
+    $\{t_n\} \subset ]\alpha, \omega[$ tal que $\{t_n\} \to \omega$ y $\{\varphi(t_n)\} \to \xi$.
   \end{enumerate}
 \end{theorem}
 \begin{proof}
   Supongamos que no se cumple \ref{item:prolongacion:1}. En tal caso encontramos una sucesión
   $\{t_n\}$ convergente a $\omega$ tal que $\{\varphi(t_n)\}$ está acotada. Por el teorema de
-  Bolzano-Weierstrass encontramos una parcial $\{t_{\sigma(n)}\}$ convergente a $\xi \in
-  \R^d$. Nótese que $(\omega, \xi) \not \in D$ por el Lema \ref{lem:prolongacion}. Puesto que
+  Bolzano-Weierstrass obtenemos una parcial $\{\varphi(t_{\sigma(n))}\}$ convergente a
+  $\xi \in \R^d$. Nótese que $(\omega, \xi) \not \in D$ ya que en caso contrario la solución sería
+  prolongable por el Lema \ref{lem:prolongacion:2}. Puesto que
   $\{(t_{\sigma(n)}, \varphi(t_{\sigma(n)}))\} \to (\omega, \xi)$ tenemos que
-  $(\omega, \xi) \in \partial D$.
+  $(\omega, \xi) \in \mathrm{Fr}(D) \setminus D = \partial D$.
 \end{proof}
 
 \begin{definition}
-  Sea $\varphi: ]\alpha, \omega[ \to \R^d$ continua. El conjunto $\omega$-límite de \eqref{eq:pvi}
-  se define como
-  \[L_{\omega}(\varphi) = \{q \in \R^d \mid \exists \{t_n\} \subset ]\alpha, \omega[, \{t_n\} \to
-    \omega, \{\varphi(t_n)\} \to q\}.\]
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ continua. El conjunto $\omega$-límite de
+  \eqref{eq:pvi} se define como
+  \[\mathrm{L}_{\omega}(\varphi) = \{q \in \R^d \mid \exists \{t_n\} \subset ]\alpha, \omega[,
+    \{t_n\} \to \omega, \{\varphi(t_n)\} \to q\}.\]
 \end{definition}
 
 \begin{remark}
-  Nótese que en el Teorema \ref{thm:prolongacion} la alternativa \ref{item:prolongacion:2} es
-  equivalente a que $\{\omega\} \times L_{\omega}(\varphi) \cap \partial D \ne \emptyset$.
+  Nótese que en el Teorema \ref{thm:prolongacion} la alternativa \ref{item:prolongacion:1} equivale
+  a $\mathrm{L}_{\omega}(\varphi) = \emptyset$ mientras que la alternativa \ref{item:prolongacion:1}
+  equivale a $\{\omega\} \times \mathrm{L}_{\omega}(\varphi) \cap \partial D \ne \emptyset$.
 \end{remark}
+
+\begin{corollary}
+  Si el conjunto D es acotado y $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución maximal de
+  \eqref{eq:pvi}, entonces $\omega < +\infty$ y además existe $\xi \in \R^d$ con
+  $(\omega, \xi) \in \partial D$ y $\{t_n\} \subset ]\alpha, \omega[$ creciente tal que
+  $\{t_n\} \to \omega$ y $\{\varphi(t_n)\} \to \xi$.
+\end{corollary}
+
+\begin{definition}
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. La solución
+  $\varphi$ \emph{explota en tiempo finito} si $\omega < +\infty$ y
+  $\lim_{t \to \omega} ||\varphi(t)|| = + \infty$.
+\end{definition}
+
+\begin{corollary} \label{cor:explotar} Sean $D = ]a,b[ \times \R^d$ con
+  $-\infty \le a < b \le +\infty$ y sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución maximal
+  de \eqref{eq:pvi}. Si $\omega < b$, entonces la solución explota en tiempo finito.
+\end{corollary}
 
 \begin{ex}
   Consideremos el PVI
@@ -1130,28 +1180,45 @@ soluciones.
       x(0) = 0.
     \end{cases}
   \]
-  Sea $\varphi: ]\alpha, \omega[ \to \R$ solución. Si $\omega < +\infty$, entoces verifica que
-  $\lim_{t \to \omega} \varphi(t) = + \infty$, luego $L_{\omega}(\varphi) = \emptyset$.
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R$ solución maximal. Puesto que $f$ está definida en
+  $\R^2$ deducimos que si $\omega < +\infty$, entoces la solución explota en tiempo finito.
 \end{ex}
 
-\begin{corollary}
-  Sean $D = \R \times \R^d$ y sea $\varphi: ]\alpha, \omega[ \to \R^d$ solución maximal de
-  \eqref{eq:pvi}.  Si $\omega < +\infty$, entoces se verifica que
-  $\lim_{t \to \omega} ||\varphi(t)|| = + \infty$.
+\begin{corollary} \label{cor:dominio} Sean $D = ]a,b[ \times \R^d$ con
+  $-\infty \le a < b \le +\infty$ y sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución maximal
+  de \eqref{eq:pvi} tal que $||\varphi'(t)|| \le g(t)$ para todo $t \in ]\alpha, \omega[$, donde $g$
+  es una función continua. Entonces, $\alpha =a$ y $\omega = b$. En particular, si existe una
+  función $g \in \mathcal{C}(R)$ tal que $f(t,x) \le g(t)$ para todo $(t,x) \in \R \times \R^d$,
+  entonces $\alpha = a$ y $\omega = b$.
 \end{corollary}
+\begin{proof}
+  Realizamos la prueba para $\omega$. Supongamos por reducción al absurdo que $\omega < b$. Sea
+  $M = \max g([t_0, \omega])$. Para cada $t \in [t_0, \omega[$ tenemos que
+  \[ ||\varphi(t)|| = ||\varphi(t_0) + \int_{t_0}^t \varphi'(s) \diff s|| \le ||\varphi(t_0)|| +
+    \int_{t_0}^t ||\varphi'(s)|| \diff s = ||\varphi(t_0)|| + M(t - t_0) \le ||\varphi(t_0)|| +
+    M(\omega - t_0), \]
 
-\begin{corollary}
-  Si el conjunto D es acotado y $\varphi: ]\alpha, \omega[ \to \R^d$ solución maximal de
-  \eqref{eq:pvi}, entonces $\omega < +\infty$ y además existe $\xi \in \R^d$ con
-  $(\omega, \xi) \in \partial D$ y $\{t_n\} \subset ]\alpha, \omega[$ estrictamente creciente tal
-  que $\{t_n\} \to \omega$ y $\{\varphi(t_n)\} \to \xi$.
-\end{corollary}
+  lo que contradice la tesis del Corolario \ref{cor:explotar}.
+\end{proof}
 
+\begin{ex} \label{ex:acotar-f} Consideremos el PVI
+  \[
+    \begin{cases}
+      x' = g(x) + h(t), \quad x \in ]a,b[; \\
+      x(0) = 0;
+    \end{cases}
+  \]
+  donde $a,b \in \R$ con $a < b$, $h \in \mathcal{C}(\R)$ y $g \mathcal{C}(]a,b[)$ acotada por
+  $M > 0$. Sea $\varphi \colon ]\alpha, \omega[ \to \R$ solución maximal. Tenemos que
+  $D = ]a,b[ \times \R$. Puesto que $f(t,x)$ está acotada por $|h(t)| + M$, deducimos que
+  $\omega = b$ y $\alpha = a$ por el Corolario \ref{cor:dominio}. En particular, podemos aplicar
+  este resultado a $g(x) = \sin(x)$ y $h(t) = t^2$.
+\end{ex}
 
-\begin{corollary} \label{cor:ab:lim} Sean $D = ]a,b[ \times \R^d$ con
-  $-\infty \le a < b \le +\infty$ y $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de
-  \eqref{eq:pvi}. Si $\omega < b$, entonces $\lim_{t \to \omega} \varphi(t) = +\infty$.
-\end{corollary}
+\subsection{Crecimiento a lo sumo lineal}
+
+En esta sección intentamos generalizar el Corolario \ref{cor:dominio}. Como motivación considerese
+el siguiente ejemplo.
 
 \begin{ex}
   Sea $]\alpha, \omega[$ el intervalo de definición de la solución maximal de
@@ -1181,27 +1248,10 @@ soluciones.
   \ref{thm:prolongacion}, esto es, $\omega = +\infty$.
 \end{ex}
 
-\begin{lemma}[Lema de Gronwall]
-  Sea $y:[t_0, \omega[ \to \R$ continua tal que existen dos constantes $C, R \in \R$ con $R \ge 0$
-  tales que para cada $t \in [t_0, \omega[$ se verifica
-  \[ y(t) \le C + R \int_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par
-  todo $t \in [t_0, \omega[$.
-\end{lemma}
-\begin{proof}
-  De la tesis deducimos en particular que $y'(t) \le R y(t)$ para todo $t \in [t_0, \omega[$. Si
-  $y = 0$, entonces la tesis es clara. En caso contrario, para cada $t' \in [t_0, \omega[$ existe un
-  intervalo $t' \in I = [t_1, t_2] \subset [t_0, \omega[$ tal que $y(t) \ne 0$ para todo $t \in
-  I$. En consecuencia, encontramos que para cada $t \in I$ se verifica
-  \[ \log(y(t)) - \log(y(t_1)) = \int_{t_1}^{t} \frac{y'(s)}{y(s)} \diff s \le R(t-t_1).\]
-
-  De la monotonía de la función exponencial se deduce que...
-
-\end{proof}
-
 \begin{definition}
-  Sea $D = ]a,b[ \times R^2$ y $f\colon ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo crecimiento
-  lineal en la variable $x$ si existen dos funciones continuas $m, n : ]a,b[ \to \R^+_0$ tales que
-  para cada $(t,x) \in D$ se tiene
+  Sea $D = ]a,b[ \times R^2$ y $f\colon ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo
+  crecimiento lineal en la variable $x$ si existen dos funciones continuas $m, n : ]a,b[ \to \R^+_0$
+  tales que para cada $(t,x) \in D$ se tiene
   \[ ||f(t,x)|| \le m(t) ||x|| + n(t).\] En tal caso escribiremos que $f$ es CSL.
 \end{definition}
 
@@ -1215,14 +1265,31 @@ soluciones.
   $\lim_{x \to -\infty} f(x)/x$. Entonces $f$ tiene crecimiento a lo sumo lineal.
 \end{remark}
 
+\begin{lemma}[Lema de Gronwall]
+  Sea $y:[t_0, \omega[ \to \R$ continua tal que existen dos constantes $C, R \in \R$ con $R \ge 0$
+  tales que para cada $t \in [t_0, \omega[$ se verifica
+  \[ y(t) \le C + R \int_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par todo
+  $t \in [t_0, \omega[$.
+\end{lemma}
+\begin{proof}
+  De la tesis deducimos en particular que $y'(t) \le R y(t)$ para todo $t \in [t_0, \omega[$. Si
+  $y = 0$, entonces la tesis es clara. En caso contrario, para cada $t' \in [t_0, \omega[$ existe un
+  intervalo $t' \in I = [t_1, t_2] \subset [t_0, \omega[$ tal que $y(t) \ne 0$ para todo $t \in
+  I$. En consecuencia, encontramos que para cada $t \in I$ se verifica
+  \[ \log(y(t)) - \log(y(t_1)) = \int_{t_1}^{t} \frac{y'(s)}{y(s)} \diff s \le R(t-t_1).\]
+
+  De la monotonía de la función exponencial se deduce que...
+
+\end{proof}
+
 \begin{theorem}[Teorema de crecimiento a lo sumo lineal]
   Si $f$ tiene crecimiento a lo sumo lineal, entonces todas las soluciones maximales de
   \eqref{eq:pvi} verifican que $]\alpha, \omega[ = ]a,b[$.
 \end{theorem}
 \begin{proof}
-  Sean $m, n : ]a,b[ \to \R_0^+$ continuas de la deficinicón de crecimiento a lo umo lineal. Sea
-  $\varphi: ]\alpha, \omega[ \to \R^d$ solución de \eqref{eq:pvi}. Veamos que $\omega =
-  b$. Supongamos por reducción al absurdo que $\omega < b$. Tenemos que
+  Sean $m, n \colon ]a,b[ \to \R_0^+$ continuas de la definición de crecimiento a lo sumo
+  lineal. Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución de \eqref{eq:pvi}. Veamos que
+  $\omega = b$. Supongamos por reducción al absurdo que $\omega < b$. Tenemos que
   $[t_0, \omega] \subset ]a,b[$. Por el teorema de Weierstrass existe
   $M = \max \{m(t) \mid t \in [t_0,\omega]\}$ y $N = \max \{n(t) \mid t \in [t_0,\omega]\}$ Por
   tanto, se cumple que
@@ -1282,20 +1349,22 @@ siguiente ejemplo.
 \begin{remark}
   La hipótesis del Teorema de CSL se puede cambiar por las siguientes:
   
-\begin{enumerate}
-\item Existe $A \subset \R^d$ tal que $\varphi(t) \in A$ para todo $t \in ]\alpha, \omega[$.
-\item Existen $m, n: ]a,b[ \to \R_0^+$ continuas tales que $||f(t,x)|| \le m(t) ||x|| + n(t)$ para todo $t \in ]a,b[$ y $x \in A$.
-\end{enumerate}
+  \begin{enumerate}
+  \item Existe $A \subset \R^d$ tal que $\varphi(t) \in A$ para todo $t \in ]\alpha, \omega[$.
+  \item Existen $m, n: ]a,b[ \to \R_0^+$ continuas tales que $||f(t,x)|| \le m(t) ||x|| + n(t)$ para
+    todo $t \in ]a,b[$ y $x \in A$.
+  \end{enumerate}
 \end{remark}
 
 
 \subsection{Acotación de soluciones. Funciones guía}
 
 Consideramos el conjunto abierto $D = ]a, +\infty[ \times \R^d$, con $-\infty \le a$. Sea
-$f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramos el PVI \eqref{eq:pvi}.
+$f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramos el PVI
+\eqref{eq:pvi}.
 
 \begin{definition}
-  Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que la
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que la
   solución $\varphi$ está acotada en el futuro si $\omega = +\infty$ y
   $\sup \{||\varphi(t)||: t \in [t_0, +\infty[\} < +\infty$. Análogamente, diremos que la solución
   $\varphi$ está acotada en el pasado si $\alpha = -\infty$ y
@@ -1303,7 +1372,7 @@ $f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramo
 \end{definition}
 
 \begin{proposition}
-  Supongamos que $d = 1$. Sea $\varphi: ]\alpha, \omega[ \to \R$ una solución maximal de
+  Supongamos que $d = 1$. Sea $\varphi \colon ]\alpha, \omega[ \to \R$ una solución maximal de
   \eqref{eq:pvi}. Si existen $p_1 < p_2$ tales que $x_0 \in ]p_1, p_2[$, $f(t, p_1) > 0$ y
   $f(t, p_2) < 0$, entonces $\varphi(t) \in ]p_1, p_2[$ para todo $t \ge t_0$ y, por tanto, la
   solución es acotada en el futuro.
@@ -1322,7 +1391,7 @@ $f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramo
   EDO si $\dot{V}$ tiene signo constante (para valores $x$ suficientemente grandes).
 \end{definition}
 
-Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Nótese que la
+Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Nótese que la
 función $V(\varphi(t))$ es derivable y su derivada viene dada por
 \[ \frac{\partial}{\partial t} V(\varphi(t)) = \langle \nabla V(\varphi(t)), \varphi'(t)\rangle =
   \dot{V}(t, \varphi(t)). \]
@@ -1359,13 +1428,15 @@ función $V(\varphi(t))$ es derivable y su derivada viene dada por
   $(t,x) \in D$, entonces las soluciones maximales de \eqref{eq:pvi} están acotadas en el futuro.
 \end{theorem}
 \begin{proof}
-  Sea $\varphi: ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Definimos
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Definimos
   $y = V \circ \varphi$. Tenemos que $y'(t) = \dot{V}(t, \varphi(t)) \le 0$, luego $y$ es
   decreciente. Por tanto, $V(\varphi(t)) \le V(\varphi(t)_0) = r_0$ para todo $t \ge t_0$. Por
   tanto, $\varphi([t_0, \omega[) \subset \Omega_{r_0}$ por ser $V$ coerciva. Como $\Omega_{r_0}$ es
   compacto, la función $\varphi$ está acotada en $[t_0, \omega[$. Consecuentemente, del Teorema de
   prolongación de soluciones se deduce que $\omega = +\infty$.
 \end{proof}
+
+GENERALIZAR EL TEOREMA.
 
 \begin{corollary}
   Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva tal que $\dot{V}(t,x) = 0$ para todo $(t,x) \in D$,
@@ -1422,12 +1493,12 @@ función $V(\varphi(t))$ es derivable y su derivada viene dada por
     \]
   \end{enumerate}
   Vamos a comprobar que $V(x_1, x_2) = x_1^2 + x_2^2$ es una función guía. Tenemos que
-  $\dot{V}(x_1, x_2) = 2x_1(-x_1+x_2) 2x_2(-x_2) = - x_1^2 - x_2^2 - (x_1-x_2)^2 \le 0$, que es una forma
-  definida negativa.
+  $\dot{V}(x_1, x_2) = 2x_1(-x_1+x_2) 2x_2(-x_2) = - x_1^2 - x_2^2 - (x_1-x_2)^2 \le 0$, que es una
+  forma definida negativa.
 \end{ex}
 
 
-\subsection{Seminario: EDO de segundo orden}
+\subsubsection{Aplicación a EDOs de segundo orden}
 
 Cualquier ecuación diferencial explícita de orden superior se puede transformar en una ecuación
 diferencial de primer orden explícito. Existe un procedimiento estándar para hacerlo, aunque no es
@@ -1493,7 +1564,7 @@ equivale al sistema
 
   A la función $V(x_1, x_2)$ se le denomina energía del sistema, correspondiéndose el segundo
   sumando $m x_2^2 / 2$ con la energía cinética y $G$ con la energía potencial. Sea
-  $\varphi\colon ]\alpha, \omega[ \to \R$ una solución de \eqref{eq:newton}. Tenemos que la función
+  $\varphi \colon ]\alpha, \omega[ \to \R$ una solución de \eqref{eq:newton}. Tenemos que la función
   $E(t) = V(\varphi(t), \varphi'(t)) = G(\varphi(t)) + m \varphi'(t)^2/2$ es constante. A este hecho
   se le llama \emph{conservación de la energía}.
 
@@ -1506,4 +1577,95 @@ equivale al sistema
   En el caso de las ecuaciones de tipo oscilador armónico o tipo Duffing, la función $G$ es
   coerciva.
 \end{ex}
+  
+\begin{ex}
+  Si introducimos una fuerza de rozamiento en los problemas que se reducen en ecuaciones de tipo
+  \eqref{eq:newton}, entonces obtenemos ecuaciones de la forma
+
+  \begin{equation}
+    \label{eq:newton:rozamiento}
+    m x'' + cx' + g(x) = 0,
+  \end{equation}
+
+  donde $x(t) \in \R$, $m$ y $c$ son constantes positivas y $g \in \mathcal{C}(\R^d)$ es localmente
+  lipschitziana. Aplicando el procedimiento anterior obtenemos el sistema
+  \begin{equation}
+    \label{eq:newton:rozamiento:sis}
+    \begin{cases}
+      x_1' & = x_2; \\
+      x_2' & = -c x_2 /m - g(x_1) / m.
+    \end{cases}
+  \end{equation}
+
+  Una función guía vuelve a ser $V \colon \R^2 \to \R$, dada por $V(x_1,x_2) = G(x_1) + m x_2^2/2$,
+  donde $G$ es una primitiva de $g$. Es fácil verificar que $\dot{V}(x_1,x_2) = - c x_2^2$. Sea
+  $\varphi\colon ]\alpha, \omega[ \to \R$ una solución de \eqref{eq:newton:rozamiento}. Tenemos que
+  la función energía $E(t) = V(\varphi(t), \varphi'(t)) = G(\varphi(t)) + m \varphi'(t)^2/2$ es
+  decreciente. A este hecho se le llama \emph{disipación de la energía}; el rozamiento provoca que
+  la energía se reduzca.
+\end{ex}
+
+\begin{ex}[Ecuaciones forzadas]
+  En la física Newtoniana también aparecen ecuaciones de la forma
+  \begin{equation}
+    \label{eq:newton:forzada}
+    m x'' + cx' + g(x) = p(t),
+  \end{equation}
+
+  donde $x(t) \in \R$, $m$ y $c$ son constantes ($m > 0$ y $c \ge 0$), $g \in \mathcal{C}(\R^d)$ es
+  localmente lipschitziana y $p \in \mathcal{C}(\R)$. Estas ecuaciones surgen cuantdo se introduce
+  en el modelo una fuerza externa que varía en el tiempo (función $p$). Aplicando el procedimiento
+  anterior obtenemos el sistema
+  \begin{equation}
+    \label{eq:newton:forzada:sis}
+    \begin{cases}
+      x_1' & = x_2; \\
+      x_2' & = p(t)/m -c x_2 /m - g(x_1) / m.
+    \end{cases}
+  \end{equation}
+
+  La energía ya no sirve como función guía. Vamos a suponer que $m = c = 1$, $g(x) = x^3$ y
+  $p(t) = \sin(t)$. Buscamos una función guía de la forma
+  $V(x_1, x_2) = x_1^4/4 + x_2^2/2 + \gamma x_1 x_2$. Nótese que
+  \[ \frac{1}{2} x_1^4 - \frac{\gamma}{2}x_1^2 + \frac{1 - \gamma}{2}x_2^2 \le V(x_1,x_2). \]
+
+  Por tanto, para $\gamma \in ]0,1[$ la función $V$ es mayor o igual que una función coerciva, luego
+  también es coerciva. Tenemos que
+  \[ \dot{V}(x_1, x_2) = - \gamma x_1^4 - (1 - \gamma) x_2^2 - \gamma x_1x_2 + \sin(t)x_2 + \gamma
+    \sin(t)x_1. \]
+
+  Vamos a ver que $\dot{V}$ es anticoerciva, esto es, $-\dot{v}$ es coerciva. Esto prueba que
+  $\dot{V}(x_1, x_2) \le 0$ para $(x_1, x_2)$ lo suficientemente alejado del origen. En efecto,
+
+  \[ \dot{V}(x_1, x_2) \le - \gamma x_1^4 - (1 - \gamma) x_2^2 + \frac{1}{2}(x_1^2 + x_2^2) + |x_2|
+    + \gamma |x_1|. \]
+
+  Nótese que para $\gamma < 2/3$ la función de la derecha es anticoerciva. En tal caso $\dot{V}$ es
+  mejor o igual que una función anticoerciva, luego también es anticoerciva. Obtenemos pues que para
+  $\gamma \in ]0,2/3[$ la función $V$ es guía y coerciva. Por el Teorema \ref{thm:guia} obtenemos
+  que las soluciones de \eqref{eq:newton:forzada:sis} para las constantes y funciones escogidas
+  están acotadas en el futuro.
+\end{ex}
+
+\begin{ex}[Ecuación de Liénard]
+  Otra ecuación de segundo orden bien conocida es
+  \begin{equation}
+    \label{eq:lienard}
+    x'' + f(x)x' + g(x) = 0,
+  \end{equation}
+
+  donde $x(t) \in \R$ y $g,f \in \mathcal{C}(\R)$ son localmente lipschitzianas. La ecuación es
+  equivalente al sistema plano de ecuaciones diferenciales
+  \begin{equation}
+    \label{eq:lienard:sis}
+    \begin{cases}
+      x_1' & = x_2 - F(x_1); \\
+      x_2' & = - g(x_1);
+    \end{cases}
+  \end{equation}
+
+  donde $F$ es una primitiva de $f$ con $F(0) = 0$.
+\end{ex}
+
 \end{document}
+
