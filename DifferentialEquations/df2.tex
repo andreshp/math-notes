@@ -65,7 +65,7 @@ introducimos a continuación:
 \begin{itemize}
 \item $D$: dominio de la ecuación.
 \item $f$: campo de la ecuación.
-\item $t$: tiempo o variable independiente.
+\item $t$: tiempo o variable independiente.nn
 \item $x(t)$: función incógnita o variable dependiente. En lo que sigue, por comodidad, la notaremos
   simplemente por $x$, sin especificar la variable de la que depende.
 \end{itemize}
@@ -1055,16 +1055,31 @@ Utilizando herramientas de un curso básico de cálculo fácilmente obtenemos el
 
 \section{Prolongación y acotación de soluciones}
 
-En la Sección \ref{sec:ae} hemos conseguido calcular las imágenes de las soluciones maximales de
-EDOs autónomas escalares. Este hecho se ha conseguido gracias al Teorema de Picard-Lindelöf. En este
-punto intentamos generalizar algunos de estos argumentos para EDOs arbitrarias.
+En la Sección \ref{sec:ae} hemos calculado los conjuntos imagen de las soluciones maximales de EDOs
+autónomas escalares. Este hecho se ha conseguido gracias al Teorema de Picard-Lindelöf. En esta
+sección intentamos generalizar algunos de estos argumentos para EDOs arbitrarias.
 
-\begin{proposition} \label{prop:encerrar}
-  Supongamos que $f$  Sea $\varphi$ solución maximal de \eqref{eq:pvi}.
+Si $x_0$ se encuentra entre dos puntos críticos de una EDO autónoma escalar, entonces la solución
+maximal del PVI determinado por $(t_0, x_0)$ está acotada. En el siguiente resultado generalizamos
+este hecho para ecuaciones en varias variables.
+
+\begin{proposition} \label{prop:encerrar} Consieremos una EDO de la forma $x' = f(x)$, donde $f$
+  está definida en $D$ y es localmente lipschitziana. Sea $\Omega \subset D$ abierto acotado tal que
+  $f$ se anula en $\mathrm{Fr}(\Omega)$. Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución
+  maximal del PVI asociado a $(t_0, x_0)$. Si $x_0 \in \Omega$, entonces $\varphi(t) \in \Omega$
+  para todo $t \in ]\alpha, \omega[$.
 \end{proposition}
+\begin{proof}
+  Tenemos que $\varphi(t) \not\in \mathrm{Fr}(\Omega)$ para todo $t \in ]\alpha, \omega[$. En
+  efecto, si $\varphi(t_1) \in \mathrm{Fr}(\Omega)$, entonces $\varphi$ es solución del PVI cuya
+  condición inicial es $(t_1, \varphi(t_1))$. No obstante, la única solución de este PVI es la
+  constantemente $\varphi(t_1)$ por el Teorema de Picard-Lindelöf, contradicción. La prueba finaliza
+  al darse cuenta de que si $\varphi$ no está acotada, entonces debe existir $t_1$ con
+  $\varphi(t_1) \in \mathrm{Fr}(\Omega)$.
+\end{proof}
 
 \begin{ex}
-  Demuestra que la solución maximal del siguiente PVI está acotada en el futuro y en el pasado.
+  Demuestra que la solución maximal del siguiente PVI está acotada.
   
   \begin{equation}
     \label{eq:encerrar:ex}
@@ -1081,13 +1096,14 @@ punto intentamos generalizar algunos de estos argumentos para EDOs arbitrarias.
   queda en $B(0,1)\setminus \{(0,0)\}$.
 \end{ex}
 
-Todos los resultados se enuncian y se prueban para el extremo superior del dominio de una
-solución. No obstante, también se pueden establecer de forma análoga para el extremo inferior, hecho
-que se deja al lector como ejercicio.
+
+En lo que sigue todos los resultados se enuncian y se prueban para el extremo superior del dominio
+de una solución. No obstante, también se pueden establecer de forma análoga para el extremo
+inferior, hecho que se deja al lector como ejercicio.
 
 \subsection{Prolongación de soluciones}
 
-En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrarios. Encontraremos
+En este apartado estudiamos cómo prolongar soluciones de un PVI arbitrario. Encontraremos
 prolongaciones bajo ciertas hipótesis sobre la solución y / o el problema. En consecuencia, para las
 soluciones maximales fallará alguna de estas hipótesis, obteniendo información sobre el dominio u
 acotación éstas.
