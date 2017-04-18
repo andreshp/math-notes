@@ -762,7 +762,7 @@ NO LA HEMOS DADO TODAVÍA... SE AÑADIRÁ EN UN FUTURO.
 
 \newpage
 
-\section{EDOs autónomas escalares}
+\section{EDOs autónomas escalares} \label{sec:ae}
 
 La solución general de una EDO se simplifica enormemente cuando la función $f$ no depende de la
 variable $t$. En tal caso, podemos obtener una gran cantidad de información acerca de las soluciones
@@ -1051,11 +1051,35 @@ Utilizando herramientas de un curso básico de cálculo fácilmente obtenemos el
   críticos son $\{0, L\}$. Deducimos que $0$ es un atractor mientras que $L$ es un repulsor.
 \end{ex}
 
-
-
 \newpage
 
 \section{Prolongación y acotación de soluciones}
+
+En la Sección \ref{sec:ae} hemos conseguido calcular las imágenes de las soluciones maximales de
+EDOs autónomas escalares. Este hecho se ha conseguido gracias al Teorema de Picard-Lindelöf. En este
+punto intentamos generalizar algunos de estos argumentos para EDOs arbitrarias.
+
+\begin{proposition} \label{prop:encerrar}
+  Supongamos que $f$  Sea $\varphi$ solución maximal de \eqref{eq:pvi}.
+\end{proposition}
+
+\begin{ex}
+  Demuestra que la solución maximal del siguiente PVI está acotada en el futuro y en el pasado.
+  
+  \begin{equation}
+    \label{eq:encerrar:ex}
+    \begin{cases}
+      x' = (1 - x^2 - y^2) (x+y); \\
+      y' = (1 - x^2 - y^2) (x-y); \\
+      x(0) = 1/3, y(0) = -2/3.
+    \end{cases}
+  \end{equation}
+
+  En este caso $f(x,y) = ((1 - x^2 - y^2) (x+y), (1 - x^2 - y^2) (x-y))$. Nótese que
+  $\mathrm{Z}(f) = \mathrm{S}(0,1) \cup \{(0,0)\}$. Puesto que $x_0 \in B(0,1)\setminus \{(0,0)\}$
+  por la Proposición \ref{prop:encerrar} obtenemos que la solución de \eqref{eq:encerrar:ex} se
+  queda en $B(0,1)\setminus \{(0,0)\}$.
+\end{ex}
 
 Todos los resultados se enuncian y se prueban para el extremo superior del dominio de una
 solución. No obstante, también se pueden establecer de forma análoga para el extremo inferior, hecho
@@ -1215,9 +1239,26 @@ que es uno de los principales resultados de la sección.
   este resultado a $g(x) = \sin(x)$ y $h(t) = t^2$.
 \end{ex}
 
+\begin{lemma} \label{lem:potencia:explota} Sea $f\colon \R \times \R \to \R$ continua tal que
+  existen $m,p, r \in \R^+$ con $p > 1$ verificando $f(t,x) \ge m x^p$ para todo $t \ge t_0, x > r$.
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R$ una solución maximal de \eqref{eq:pvi}. Si $x_0$
+  entonces, $\omega < +\infty$ y $\lim_{t \to \omega} \varphi(t) + \infty$.
+\end{lemma}
+\begin{proof}
+  Vamos a encontrar una función que es cota inferior de $\varphi$ y tiene una asíntota
+  vertical. Tenemos que ... COMPLETAR.
+\end{proof}
+
+\begin{remark}
+  Si la cota del Lema \ref{lem:potencia:explota} se cambia por $f(t,x) \le -m |x|^p$ para todo
+  $t \ge t_0$, $x < -r$ y $x_0 < -r$, entonces se cumple que $\omega < +\infty$ y
+  $\lim_{t \to \omega} \varphi(t) = - \infty$.
+\end{remark}
+
+
 \subsection{Crecimiento a lo sumo lineal}
 
-En esta sección intentamos generalizar el Corolario \ref{cor:dominio}. Como motivación considerese
+En esta sección intentamos generalizar el Corolario \ref{cor:dominio}. Como motivación considérese
 el siguiente ejemplo.
 
 \begin{ex}
@@ -1364,8 +1405,8 @@ $f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramo
 \eqref{eq:pvi}.
 
 \begin{definition}
-  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que la
-  solución $\varphi$ está acotada en el futuro si $\omega = +\infty$ y
+  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que
+  la solución $\varphi$ está acotada en el futuro si $\omega = +\infty$ y
   $\sup \{||\varphi(t)||: t \in [t_0, +\infty[\} < +\infty$. Análogamente, diremos que la solución
   $\varphi$ está acotada en el pasado si $\alpha = -\infty$ y
   $\sup \{||\varphi(t)||: t \in ]-\infty, t_0]\} < +\infty$.
@@ -1667,5 +1708,97 @@ equivale al sistema
   donde $F$ es una primitiva de $f$ con $F(0) = 0$.
 \end{ex}
 
+\newpage
+\section{Continuidad y diferenciabilidad de la solución respecto de condiciones iniciales y  parámetros}
+
+\subsection{Preliminares}
+
+\subsubsection{Entornos tubulares}
+
+\begin{definition}
+  Sea $J \subset \R$ un intervalo, $\varphi \colon J \to \R^d$ una función continua y $\rho > 0$. El
+  conjunto
+  \[ T_{\rho} = T_{\rho}(J, \varphi) = \{(t,x) \in \R \times \R^d \mid t \in J, ||x-\varphi(t)|| \le
+    \rho\} \]
+
+  es un \emph{entorno tubular} de $\varphi$.
+\end{definition}
+
+Nótese que si $\varphi \colon ]t_0-a, t_0[ +a\to \R^d$ es constantemente $x_0$, entonces
+$T_{\rho} = R_{a, \rho}(t_0, x_0)$
+
+\begin{lemma}
+  El conjunto $T_\rho(J,\varphi)$ es homeomorfo a $J \times \overline{B}(0,\rho)$.
+\end{lemma}
+\begin{proof}
+  La función $H \colon T_{\rho} \rho \R \times \R^d$ dada por $H(t,x) = (t, x-\varphi(t))$ es un
+  homeomorfismo.
+\end{proof}
+
+\begin{lemma}
+  Sea $D \subset \R \times \R^d$ abierto tal que $(t, \varphi(t)) \in D$ para todo $t \in J$. Si $J$
+  es compacto, entonces existe $\rho > 0$ tal que $T_{\rho}(J,\varphi) \subset D$.
+\end{lemma}
+\begin{proof}
+  Razonamos por reducción al absurdo. Para cada $\rho > 0$ tenemos que
+  $T_{\rho}(J, \varphi) \not \subset D$. En particular, para cada $n \in \N$ existe
+  $(t_n, x_n) \in T_{1/n}(J,\varphi) \setminus D$. Nótese que la sucesión $\{(t_n,x_n)\}$ está en el
+  compacto $T_1(J,\varphi)$, luego admite una parcial convergente a un elemento de
+  $T_1(J,\varphi)$. Nótese que el límite de esta parcial debe ser de la forma $(t_0,
+  \varphi(t_0))$. Pero esto implica que una cola de la sucesión está contenida en $D$,
+  contradicción.
+\end{proof}
+
+\begin{lemma}
+  Sea $A \subset \R^d$ compacto y sea $f \colon A \to \R^d$ continua y localmente
+  lipschitziana. ENtonces $f$ es globalmente lipschitziana.
+\end{lemma}
+\begin{proof}
+  Razonemos de nuevo por reducción al absurdo. Encontramos dos sucesiones
+  $\{x_n\}, \{y_n\} \subset A$ tales que $||f(x_n) - f(y_n)|| / || x_n - y_n|| \to +\infty$.  Como
+  $A$ es compacto, podemos obtener parciales $x_{\sigma(n)}$ y $y_{\sigma(n)}$ convergentes. Nótese
+  que el límite de ambas sucesiones debe ser el mismo ya que
+  $||f(x_{\sigma(n)}) - f(y_{\sigma(n)})|| / || x_{\sigma(n)} - y_{\sigma(n)}|| \to +\infty$, pero
+  esto contradice que $f$ sea localmente lipschitziana en $\lim_{n \to \infty} x_{\sigma(n)}$.
+\end{proof}
+
+\begin{proposition}
+  Sea $D \subset \R \times \R^d$ abierto, $\varphi \colon J \to \R^d$ con $(t,\varphi(t)) \in D$
+  para todo $t \in J$ y $f \colon D \to \R^d$ continua y localmente lipschitziana respecto de la
+  variable $x \in \R^d$. Si $J$ es compacto y $T_{\rho}(J,\varphi) \subset D$, entonces $f$ es
+  lipschitziana en $T_{\rho}(J,\varphi)$.
+\end{proposition}
+
+\subsubsection{Convergencia uniforme en compactos}
+
+\begin{definition}
+  Una sucesión de funciones $f_n \colon I_{n} \to \R^d$ converge uniformemente en compactos hacia
+  una función $f \colon I \to \R^d$ si para todo $K \subset I$ compacto existe una cola de $f_n$
+  definida en $K$ que converge uniformemente en $K$ a $f$.
+\end{definition}
+
+Es claro que la convergencia uniforme implica la convergencia uniforme en compactos, que denotaremos
+c.u.c. El recíproco no es cierto como muestra el siguiente ejemplo.
+
+\begin{ex}
+  Consideramos la sucesión $f_n \colon \R \to \R$ dada por $f_n(t) = t / n$. Tenemos que $f_n$
+  converge uniformemente a $0$ en compactos pero no converge uniformemente.
+\end{ex}
+
+La convergencia en compactos implica la convergencia puntual. El recíproco tampoco es cierto.
+
+\begin{ex}
+  Consideramos la sucesión $f_n \colon [0,1] \to \R$ dada por $f_n(t) = t^n$. Tenemos que $f_n$
+  converge puntualmente a la función $f \colon [0,1] \to \R$ definida como $f(t) = 0$ para $t \ne 1$
+  y $f(1) = 1$. Sin embargo, es fácil ver que la convergencia no es uniforme en $[0,1]$.
+\end{ex}
+
+
+
+
+
+
+
 \end{document}
+
 
