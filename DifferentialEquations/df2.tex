@@ -1065,17 +1065,17 @@ este hecho para ecuaciones en varias variables.
 
 \begin{proposition} \label{prop:encerrar} Consieremos una EDO de la forma $x' = f(x)$, donde $f$
   está definida en $D$ y es localmente lipschitziana. Sea $\Omega \subset D$ abierto acotado tal que
-  $f$ se anula en $\mathrm{Fr}(\Omega)$. Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución
+  $f$ se anula en $\partial\Omega$. Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución
   maximal del PVI asociado a $(t_0, x_0)$. Si $x_0 \in \Omega$, entonces $\varphi(t) \in \Omega$
   para todo $t \in ]\alpha, \omega[$.
 \end{proposition}
 \begin{proof}
-  Tenemos que $\varphi(t) \not\in \mathrm{Fr}(\Omega)$ para todo $t \in ]\alpha, \omega[$. En
-  efecto, si $\varphi(t_1) \in \mathrm{Fr}(\Omega)$, entonces $\varphi$ es solución del PVI cuya
+  Tenemos que $\varphi(t) \not\in \partial\Omega$ para todo $t \in ]\alpha, \omega[$. En
+  efecto, si $\varphi(t_1) \in \partial\Omega$, entonces $\varphi$ es solución del PVI cuya
   condición inicial es $(t_1, \varphi(t_1))$. No obstante, la única solución de este PVI es la
   constantemente $\varphi(t_1)$ por el Teorema de Picard-Lindelöf, contradicción. La prueba finaliza
   al darse cuenta de que si $\varphi$ no está acotada, entonces debe existir $t_1$ con
-  $\varphi(t_1) \in \mathrm{Fr}(\Omega)$.
+  $\varphi(t_1) \in \partial\Omega$.
 \end{proof}
 
 \begin{ex}
@@ -1096,7 +1096,6 @@ este hecho para ecuaciones en varias variables.
   queda en $B(0,1)\setminus \{(0,0)\}$.
 \end{ex}
 
-
 En lo que sigue todos los resultados se enuncian y se prueban para el extremo superior del dominio
 de una solución. No obstante, también se pueden establecer de forma análoga para el extremo
 inferior, hecho que se deja al lector como ejercicio.
@@ -1115,11 +1114,15 @@ acotación éstas.
 \begin{proof}
   Consideramos el PVI
   \[\begin{cases}x' = f(t, x); \\ x(\omega) = \xi. \end{cases}\]
-  Existe $a > 0$ tal que $\widetilde{\varphi} \colon ]\omega-a, \omega+a[ \to \R^d$ es solución del
-  nuevo PVI. La función $\Psi \colon ]\alpha, \omega+a[ \to \R^d$ dada por
+  Por el Teorema de Cauchy existe $a > 0$ tal que
+  $\widetilde{\varphi} \colon ]\omega-a, \omega+a[ \to \R^d$ es solución del nuevo PVI.  La función
+  $\Psi \colon ]\alpha, \omega+a[ \to \R^d$ dada por
+  
   \[\Psi(t) = \begin{cases} \varphi(t) & \text{si } t \le \omega; \\ \widetilde{\varphi}(t) &
-      \text{si } t > \omega;\end{cases}\] es una solución de \eqref{eq:pvi} (Lemma
-  \ref{lem:concatenar-sols}) y, por tanto, es una prolongación de $\varphi$.
+      \text{si } t > \omega;\end{cases}\]
+
+  es una solución de \eqref{eq:pvi} gracias al Lemma \ref{lem:concatenar-sols} y, por tanto, es una
+  prolongación de $\varphi$.
 \end{proof}
 
 El Lemma \ref{lem:prolongacion:1} se puede ampliar, obteniendo el siguiente resultado.
@@ -1131,29 +1134,22 @@ El Lemma \ref{lem:prolongacion:1} se puede ampliar, obteniendo el siguiente resu
   $\lim_{t \to \omega} \varphi(t) = \xi$ y, además, la solución es prolongable.
 \end{lemma}
 \begin{proof}
-  Sean $a, b \in \R^+$ tales que $R_{a,b}(\omega, \xi) \subset D$. Existe
-  \[M = \max \{||f(t,x)||: (t,x) \in R_{a,b}(\omega, \xi)\}.\]
-
-  Fijado $0 < \varepsilon < b$, tomamos $\delta > 0$ tal que $\delta < a$ y
-  $\delta M < \varepsilon / 2$. Consideramos la región $R_{\delta, \varepsilon}(\omega, \xi)$. Por
-  la convergencia de $\{t_n\}$ y $\{\varphi(t_n)\}$ encontramos $m \in \N$ tal que
-  $t_m \in ]\omega-\delta, \omega[$ y $\varphi(t_m) \in \overline{\mathrm{B}}(\xi,
-  \varepsilon/2)$. Por tanto, tenemos que
-  $(t_m, \varphi(t_m)) \in R_{\delta, \varepsilon}(\omega, \xi)$. Vamos a demostrar que
-  $(t, \varphi(t)) \in R_{\delta, \varepsilon}(\omega, \xi)$ para todo $t \in [t_m, \omega[$.
-  Razonamos por reducción al absurdo. En tal caso mediante un argumento del primer instante existe
-  Nótese que para cada $t \in ]t_m, \omega[$ se verifca
+  Podemos usponer sin pérdida de generalizad que $\{t_n\}$ es creciente. Sea $U \subset D$ entorno
+  compacto de $(\omega, \xi)$. Existe $M > \max \{||f(t,x)||: (t,x) \in U\}$. Sea $\varepsilon >
+  0$. Encontramos $m \in \N$ tal que $(t_n,\varphi(t_n)) \in U$,
+  $||\varphi(t_n) - \xi|| < \varepsilon /2$ y $\omega -t_n < \varepsilon / (2M)$ para todo
+  $n \ge m$.  Vamos a demostrar que para todo $t \in [t_m, \omega[$ se tiene
+  $||\varphi(t) - \xi|| < \varepsilon$.  Nótese que para cada $t \in [t_m, \omega[$ se verifica
   \[\varphi(t) = \varphi(t_m) + \int_{t_m}^{t} \varphi'(s) \diff s = \varphi(t_m) +
     \int_{t_m}^{t} f(s,\varphi(s)) \diff s.\]
 
   Por tanto, deducimos que
   \[ ||\varphi(t)-\varphi(t_m)|| = ||\int_{t_m}^{t} f(s,\varphi(s)) \diff s|| \le \int_{t_m}^{t}
-    ||f(s,\varphi(s))|| \diff s \le M |t-t_m| \le M \delta < \varepsilon/2.\]
+    ||f(s,\varphi(s))|| \diff s \le M |t-t_m| < M |\omega-t_m| < \varepsilon/2.\]
   
   Por último, hemos demostrado que
   $||\varphi(t) - \xi|| \le ||\varphi(t_m) - \xi|| + ||\varphi(t)-\varphi(t_m)|| \le \varepsilon / 2
-  + \varepsilon/2$. Esto es, $\varphi(t) \in \overline{\mathrm{B}}(\xi, \varepsilon)$ para todo
-  $t \in ]t_m, \omega[$. De la arbitrariedad de $\varepsilon$ se deduce que
+  + \varepsilon/2$ como se queria. De la arbitrariedad de $\varepsilon$ se deduce que
   $\lim_{t \to \omega} \varphi(t) = \xi$. En vista del Lema \ref{lem:prolongacion:1} la solución es
   prolongable.
 \end{proof}
@@ -1178,7 +1174,7 @@ que es uno de los principales resultados de la sección.
   $\xi \in \R^d$. Nótese que $(\omega, \xi) \not \in D$ ya que en caso contrario la solución sería
   prolongable por el Lema \ref{lem:prolongacion:2}. Puesto que
   $\{(t_{\sigma(n)}, \varphi(t_{\sigma(n)}))\} \to (\omega, \xi)$ tenemos que
-  $(\omega, \xi) \in \mathrm{Fr}(D) \setminus D = \partial D$.
+  $(\omega, \xi) \in \partial D$.
 \end{proof}
 
 \begin{definition}
@@ -1190,15 +1186,15 @@ que es uno de los principales resultados de la sección.
 
 \begin{remark}
   Nótese que en el Teorema \ref{thm:prolongacion} la alternativa \ref{item:prolongacion:1} equivale
-  a $\mathrm{L}_{\omega}(\varphi) = \emptyset$ mientras que la alternativa \ref{item:prolongacion:1}
+  a $\mathrm{L}_{\omega}(\varphi) = \emptyset$ mientras que la alternativa \ref{item:prolongacion:2}
   equivale a $\{\omega\} \times \mathrm{L}_{\omega}(\varphi) \cap \partial D \ne \emptyset$.
 \end{remark}
 
 \begin{corollary}
   Si el conjunto D es acotado y $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución maximal de
   \eqref{eq:pvi}, entonces $\omega < +\infty$ y además existe $\xi \in \R^d$ con
-  $(\omega, \xi) \in \partial D$ y $\{t_n\} \subset ]\alpha, \omega[$ creciente tal que
-  $\{t_n\} \to \omega$ y $\{\varphi(t_n)\} \to \xi$.
+  $(\omega, \xi) \in \partial D$ y $\{t_n\} \subset ]\alpha, \omega[$ tal que $\{t_n\} \to \omega$ y
+  $\{\varphi(t_n)\} \to \xi$.
 \end{corollary}
 
 \begin{definition}
@@ -1221,8 +1217,46 @@ que es uno de los principales resultados de la sección.
     \end{cases}
   \]
   Sea $\varphi \colon ]\alpha, \omega[ \to \R$ solución maximal. Puesto que $f$ está definida en
-  $\R^2$ deducimos que si $\omega < +\infty$, entoces la solución explota en tiempo finito.
+  $\R^2$ deducimos que si $\omega < +\infty$, entonces la solución explota en tiempo finito.
 \end{ex}
+
+
+\begin{ex}
+  Sea $]\alpha, \omega[$ el intervalo de definición de la solución maximal de
+  
+  \begin{equation}
+    \label{eq:ex:pi}
+    \begin{cases}
+      x' = \frac{2}{x} + \frac{\sin(t)}{x^2}, \quad x > 0; \\
+      x(0) = 2.
+    \end{cases}
+  \end{equation}
+  Demuestra que $\omega = +\infty$.
+
+  Denotemos $\varphi(t) = X(t; 0,2)$. Vamos a demostrar que $1 < \varphi(t) \le 2+3t$ para todo
+  $t \ge 0$. Razonemos por reducción al absurdo. Si $1 > \varphi(t')$ para cierto $t' > 0$, podemos
+  encontrar $\tau = \inf \{t > 0: \varphi(t) < 1\} > 0$. Nótese que como $\varphi(t)$ es continua
+  debe tenerse $\varphi(\tau) = 1$ y $\varphi(t) > 1$ para todo $0 < t < \tau$. Como consecuencia,
+  deducimos que $\varphi'(\tau) \le 0$. Sin embargo, usando que $\varphi$ es solución de
+  \eqref{eq:ex:pi} se tiene que $\varphi'(\tau) = 2 + \sin(\tau) > 0$, contradicción. Análogamente
+  demostramos que $\varphi(t) \ge 1$ para todo $t \le t_0$. Utilizando esta información y
+  \eqref{eq:ex:pi} deducimos que
+  \[\varphi'(t) \le \varphi'(t) \varphi(t) = 2 + \frac{\sin(t)}{\varphi(t)} \le 3.\]
+
+  Por tanto, obtenemos
+  \[ \varphi(t) = 2 + \int_{0}^{t} \varphi'(s) \diff s \le 2 +3t.\]
+
+  Por último, las cotas que hemos encontrado impiden que la solución explote en tiempo finito y, por
+  tanto, no se cumple la alternativa a) del Teorema \ref{thm:prolongacion}. La segunda alternativa
+  tampoco es factible. En efecto tenemos que $D = \R \times \R^+$ y, por tanto,
+  $\partial D = \R \times \{0\}$. Si $\omega < +\infty$ y $\{t_n\} \to \omega$ con
+  $\varphi(t_n) \to \xi$ y $(\omega, \xi) \in \partial D$, entonces $\xi = 0$. Sin embargo, hemos
+  demostrado que $\varphi(t) \ge 1$ par todo $t \in ]\alpha, \omega[$, contradicción. Los mismos
+  razonamientos se pueden aplicar al extremo inferior $\alpha$. Por tanto, debe tenerse
+  $\alpha = -\infty$ y $\omega = +\infty$.
+\end{ex}
+
+El ejemplo anterior motiva la obtención del siguiente corolario.
 
 \begin{corollary} \label{cor:dominio} Sean $D = ]a,b[ \times \R^d$ con
   $-\infty \le a < b \le +\infty$ y sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución maximal
@@ -1248,7 +1282,7 @@ que es uno de los principales resultados de la sección.
       x(0) = 0;
     \end{cases}
   \]
-  donde $a,b \in \R$ con $a < b$, $h \in \mathcal{C}(\R)$ y $g \mathcal{C}(]a,b[)$ acotada por
+  donde $a,b \in \R$ con $a < b$, $h \in \mathcal{C}(\R)$ y $g \in \mathcal{C}(]a,b[)$ acotada por
   $M > 0$. Sea $\varphi \colon ]\alpha, \omega[ \to \R$ solución maximal. Tenemos que
   $D = ]a,b[ \times \R$. Puesto que $f(t,x)$ está acotada por $|h(t)| + M$, deducimos que
   $\omega = b$ y $\alpha = a$ por el Corolario \ref{cor:dominio}. En particular, podemos aplicar
@@ -1256,13 +1290,28 @@ que es uno de los principales resultados de la sección.
 \end{ex}
 
 \begin{lemma} \label{lem:potencia:explota} Sea $f\colon \R \times \R \to \R$ continua tal que
-  existen $m,p, r \in \R^+$ con $p > 1$ verificando $f(t,x) \ge m x^p$ para todo $t \ge t_0, x > r$.
-  Sea $\varphi \colon ]\alpha, \omega[ \to \R$ una solución maximal de \eqref{eq:pvi}. Si $x_0$
-  entonces, $\omega < +\infty$ y $\lim_{t \to \omega} \varphi(t) + \infty$.
+  existen $m,p, r \in \R^+$ con $p > 1$ verificando que $f(t,x) \ge m x^p$ para todo
+  $t \ge t_0, x > r$.  Sea $\varphi \colon ]\alpha, \omega[ \to \R$ una solución maximal de
+  \eqref{eq:pvi}. Si $x_0 > r$ entonces, $\omega < +\infty$ y
+  $\lim_{t \to \omega} \varphi(t) + \infty$.
 \end{lemma}
 \begin{proof}
   Vamos a encontrar una función que es cota inferior de $\varphi$ y tiene una asíntota
-  vertical. Tenemos que ... COMPLETAR.
+  vertical. Supongamos que existe $t_1 \in [t_0, \omega[$ con $\varphi(t_1) = r$ y $\varphi(t) > r$
+  para todo $t \in [t_0,t_1[$. Para $t \in ]t_0, t_1[$ se tiene
+  \[ \frac{\varphi(t_0)^{-p-1}}{p+1} - \frac{\varphi(t)^{-p-1}}{p+1} = \int_{t_0}^t
+    \frac{\varphi'(s)}{\varphi(s)^p} \diff s \ge m(t-t_0).\]
+
+  Como consecuencia obtenemos que
+  \[ \varphi(t) \ge \left( \frac{1/((p+1)m)}{\varphi(t_0)^{-p-1}/((p+1)m) + t_0 -
+        t}\right)^{1/(p+1)} = h(t), \]
+
+  que es una función estrictamente creciente, con una asíntota vertical en
+  $t_1 + \varphi(t_1)^{-p-1}/((p+1)m)$ y $h(t_1) = \varphi(t_0)$. Deducimos que
+  $\varphi(t) > \varphi(t_0)$. Obtenemos que
+  $\varphi(t_1) = \lim_{t \to t_1^-} \varphi(t) \ge \varphi(t_0) > r$, contradicción. Por tanto,
+  $\varphi(t) > r$ para todo $t \ge t_0$.  Mediante el mismo argumento obtenemos que
+  $\varphi(t) \ge h(t)$ para todo $t \ge t_0$, lo que termina la demostración.
 \end{proof}
 
 \begin{remark}
@@ -1274,39 +1323,10 @@ que es uno de los principales resultados de la sección.
 
 \subsection{Crecimiento a lo sumo lineal}
 
-En esta sección intentamos generalizar el Corolario \ref{cor:dominio}. Como motivación considérese
-el siguiente ejemplo.
-
-\begin{ex}
-  Sea $]\alpha, \omega[$ el intervalo de definición de la solución maximal de
-  
-  \begin{equation}
-    \label{eq:ex:pi}
-    \begin{cases}
-      x' = \frac{2}{x} + \frac{\sin(t)}{x^2}, \quad x > 0; \\
-      x(0) = 2.
-    \end{cases}
-  \end{equation}
-  Demuestra que $\omega = +\infty$.
-
-  Denotemos $\varphi(t) = X(t; 0,2)$. Vamos a demostrar que $1 < \varphi(t) \le 2+3t$ para todo
-  $t \ge 0$. Razonemos por reducción al absurdo. Si $1 > \varphi(t')$ para cierto $t' > 0$, podemos
-  encontrar $\tau = \inf \{t > 0: \varphi(t) < 1\} > 0$. Nótese que como $\varphi(t)$ es contínua
-  debe tenerse $\varphi(\tau) = 1$ y $\varphi(t) > 1$ para todo $0 < t < \tau$. Como consecuencia,
-  debe tenerse $\varphi'(\tau) \le 0$. Sin embargo, usando que $\varphi$ es solución de
-  \eqref{eq:ex:pi} se tiene que $\varphi'(\tau) = 2 + \sin(\tau) > 0$, contradicción. Utilizando
-  esta información y \eqref{eq:ex:pi} deducimos que
-  \[\varphi'(t) \le \varphi'(t) \varphi(t) = 2 + \frac{\sin(t)}{\varphi(t)} \le 3.\]
-
-  Por tanto, deducimos que
-  \[ \varphi(t) = 2 + \int_{0}^{t} \varphi'(s) \diff s \le 2 +3t.\]
-
-  Por último, la cota que hemos encontrado impide que se verifiquen las alternativas del Teorema
-  \ref{thm:prolongacion}, esto es, $\omega = +\infty$.
-\end{ex}
+En esta sección intentamos generalizar el Corolario \ref{cor:dominio}.
 
 \begin{definition}
-  Sea $D = ]a,b[ \times R^2$ y $f\colon ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo
+  Sea $D = ]a,b[ \times \R^d$ y $f \colon ]a,b[\times\R^d$. Diremos que $f$ tiene a lo sumo
   crecimiento lineal en la variable $x$ si existen dos funciones continuas $m, n : ]a,b[ \to \R^+_0$
   tales que para cada $(t,x) \in D$ se tiene
   \[ ||f(t,x)|| \le m(t) ||x|| + n(t).\] En tal caso escribiremos que $f$ es CSL.
@@ -1318,47 +1338,72 @@ el siguiente ejemplo.
 \end{remark}
 
 \begin{remark}
-  Sea $f : \R \times \R$ continua tal que existen $\lim_{x \to +\infty} f(x)/x$ y
+  Sea $f \colon \R \times \R$ continua tal que existen $\lim_{x \to +\infty} f(x)/x$ y
   $\lim_{x \to -\infty} f(x)/x$. Entonces $f$ tiene crecimiento a lo sumo lineal.
 \end{remark}
 
+Necesitaremos el siguiente lema que tiene interés en sí mismo y será aplicado más veces a lo largo
+del curso.
+
+
 \begin{lemma}[Lema de Gronwall]
-  Sea $y:[t_0, \omega[ \to \R$ continua tal que existen dos constantes $C, R \in \R$ con $R \ge 0$
-  tales que para cada $t \in [t_0, \omega[$ se verifica
-  \[ y(t) \le C + R \int_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par todo
-  $t \in [t_0, \omega[$.
+  Sea $y \colon [t_0, \omega[ \to \R$ continua tal que existe una función continua
+  $u \colon [t_0, \omega[ \to \R$ con $u \ge 0$ y una constante $C \in \R$ tales que para cada
+  $t \in [t_0, \omega[$ se verifica
+  \[ y(t) \le C + \int_{t_0}^{t} u(s)y(s) \diff s. \]
+
+  Entonces para todo $t \in [t_0, \omega[$ se tiene
+  \[y(t) \le C \exp\left(\int_{t_0}^t u(s) \diff s\right).\]
 \end{lemma}
 \begin{proof}
-  De la tesis deducimos en particular que $y'(t) \le R y(t)$ para todo $t \in [t_0, \omega[$. Si
-  $y = 0$, entonces la tesis es clara. En caso contrario, para cada $t' \in [t_0, \omega[$ existe un
-  intervalo $t' \in I = [t_1, t_2] \subset [t_0, \omega[$ tal que $y(t) \ne 0$ para todo $t \in
-  I$. En consecuencia, encontramos que para cada $t \in I$ se verifica
-  \[ \log(y(t)) - \log(y(t_1)) = \int_{t_1}^{t} \frac{y'(s)}{y(s)} \diff s \le R(t-t_1).\]
+  Definimos las funciones $f, h \colon [t_0, \omega[ \to \R$ dadas por
+  \[ f(t) = C + \int_{t_0}^t u(s) y(s) \diff s, \quad h(t) = \exp \left( \int_{t_0}^t u(s) \diff
+      s\right). \]
 
-  De la monotonía de la función exponencial se deduce que...
+  Supongamos que $C \ne 0$. En tal caso $h(t) \ne 0$ para todo $t \in [t_0,\omega[$ y podemos
+  definir la función $\gamma\colon [t_0, \omega[ \to \R$ dada por $\gamma(t) = f(t) / h(t)$. Nótese
+  que la función $\gamma$ es derivable y su derivada viene dada por
+  \[ \gamma'(t) = \frac{u(t)(y(t)- f(t))}{h(t)} \le 0.\]
 
+  Consecuentemente, $\gamma$ es decreciente y $\gamma(t_0) = C$. Por tanto, $\gamma(t) \le C$ para
+  todo $t \in [t_0, \omega[$ como se quería.
+
+  Por último, si C = 0, podemos aplicar lo anterior para $C' > 0$, pues $y(t) \le C' + f(t)$ para
+  todo $t \in [t_0, \omega[$. Fijado $t \in [t_0, \omega[$, obtenemos que $y(t) \le C'h(t)$ y
+  tomando límite cuando $C' \to 0$ deducimos que $y(t) \le 0$, lo que finaliza la prueba.
+\end{proof}
+
+\begin{cor}[Lema de Gronwall, versión básica]
+  Sea $y \colon [t_0, \omega[ \to \R$ continua tal que existen dos constantes $C, R \in \R$ con
+  $R \ge 0$ tales que para cada $t \in [t_0, \omega[$ se verifica
+  \[ y(t) \le C + R \int_{t_0}^{t} y(s) \diff s. \] Entonces $y(t) \le C e^{R(t-t_0)}$ par todo
+  $t \in [t_0, \omega[$.
+\end{cor}
+\begin{proof}
+  Se obtiene al aplicar el Lema de Gronwall para la función $u(t) = R(t-t_0)$.
 \end{proof}
 
 \begin{theorem}[Teorema de crecimiento a lo sumo lineal]
-  Si $f$ tiene crecimiento a lo sumo lineal, entonces todas las soluciones maximales de
-  \eqref{eq:pvi} verifican que $]\alpha, \omega[ = ]a,b[$.
+  Sea $D = ]a,b[\times\R^d$ con $-\infty \le a < b \le +\infty$. Si $f$ tiene crecimiento a lo sumo
+  lineal, entonces todas las soluciones maximales de \eqref{eq:pvi} verifican que
+  $]\alpha, \omega[ = ]a,b[$.
 \end{theorem}
 \begin{proof}
   Sean $m, n \colon ]a,b[ \to \R_0^+$ continuas de la definición de crecimiento a lo sumo
-  lineal. Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución de \eqref{eq:pvi}. Veamos que
-  $\omega = b$. Supongamos por reducción al absurdo que $\omega < b$. Tenemos que
+  lineal. Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ solución maximal de \eqref{eq:pvi}. Veamos
+  que $\omega = b$. Supongamos por reducción al absurdo que $\omega < b$. Tenemos que
   $[t_0, \omega] \subset ]a,b[$. Por el teorema de Weierstrass existe
   $M = \max \{m(t) \mid t \in [t_0,\omega]\}$ y $N = \max \{n(t) \mid t \in [t_0,\omega]\}$ Por
   tanto, se cumple que
   \[ ||\varphi(t)|| \le ||x_0|| + \int_{t_0}^{t} ||f(s, \varphi(s))|| \diff s \le ||x_0|| +
-    \int_{t_0}^{t} M||\varphi(s)|| + N \diff s ) \le ||x_0|| + N(\omega - t_0) + M \int_{t_0}^{t}
+    \int_{t_0}^{t} M||\varphi(s)|| + N \diff s \le ||x_0|| + N(\omega - t_0) + M \int_{t_0}^{t}
     ||\varphi(s)|| \diff s. \]
 
   Podemos aplicar pues el Lema de Gronwall, obteniendo que
   \[||\varphi(t)|| \le (||x_0|| + N (\omega-t_0)) \exp(M(t - t_0)) \le (||x_0|| + N (\omega-t_0))
     \exp(M(\omega - t_0)),\]
 
-  y, por tanto, $\varphi$ está acotada, lo que contradice el Corolario \ref{cor:ab:lim}. Para
+  y, por tanto, $\varphi$ está acotada, lo que contradice el Corolario \ref{cor:explotar}. Para
   demostrar que $\alpha = a$ basta aplicar el argumento anterior sobre el PVI dual, que también es
   CSL.
 \end{proof}
@@ -1383,14 +1428,12 @@ el siguiente ejemplo.
   \[ ||A(t)x +b(t)|| \le ||A(t)x||+||b(t)|| \le ||A(t)|| \,||x|| + b(t)||. \]
 \end{remark}
 
-\begin{remark}
-  Veremos en una relación de problemas que cuando $f(x)$ tiene un crecimiento mayor que una función
-  potencial $x^p$ con $p > 1$, entonces ciertas soluciones explotan en tiempo finito.
-\end{remark}
-
-Las hipótesis del Teorema CSL no son óptimas ya que hay funciones con crecimiento super lineal tales
-que las soluciones de las EDOs asociadas no explotan en tiempo finito. Esto queda reflejado en el
-siguiente ejemplo.
+Si $d = 1$, el Lemma \ref{lem:potencia:explota} demuestra bajo ciertas hipótesis que algunas de las
+soluciones maximales de \eqref{eq:pvi} explotan en tiempo finito cuando $f(t,x)$ está acotada
+inferiormente por $mx^p$ para $x$ lo suficientemente grande. No obstante, existen PVIs que se
+escapan de ambos resultados. En efecto, hay funciones con crecimiento super lineal tales que las
+soluciones de las EDOs asociadas no explotan en tiempo finito. Esto queda reflejado en el siguiente
+ejemplo.
 
 \begin{ex}
   Consideramos el PVI
@@ -1404,7 +1447,8 @@ siguiente ejemplo.
 \end{ex}
 
 \begin{remark}
-  La hipótesis del Teorema de CSL se puede cambiar por las siguientes:
+  La hipótesis del Teorema de CSL se pueden debilitar. En lugar de exigir que $f$ sea CSL en todo su
+  dominio podemos exigir las siguientes hipótesis:
   
   \begin{enumerate}
   \item Existe $A \subset \R^d$ tal que $\varphi(t) \in A$ para todo $t \in ]\alpha, \omega[$.
@@ -1413,12 +1457,7 @@ siguiente ejemplo.
   \end{enumerate}
 \end{remark}
 
-
 \subsection{Acotación de soluciones. Funciones guía}
-
-Consideramos el conjunto abierto $D = ]a, +\infty[ \times \R^d$, con $-\infty \le a$. Sea
-$f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramos el PVI
-\eqref{eq:pvi}.
 
 \begin{definition}
   Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Diremos que
@@ -1428,11 +1467,16 @@ $f\colon D \to \R^d$ una función continua y sea $(t_0, x_0) \in D$. Consideramo
   $\sup \{||\varphi(t)||: t \in ]-\infty, t_0]\} < +\infty$.
 \end{definition}
 
+Sean $D = ]a, +\infty[ \times \R^d$, con $-\infty \le a$, $f\colon D \to \R^d$ una función continua
+y $(t_0, x_0) \in D$. Buscamos condiciones suficientes que nos permitan asegurar que el PVI
+\eqref{eq:pvi} está acotado.
+
 \begin{proposition}
-  Supongamos que $d = 1$. Sea $\varphi \colon ]\alpha, \omega[ \to \R$ una solución maximal de
-  \eqref{eq:pvi}. Si existen $p_1 < p_2$ tales que $x_0 \in ]p_1, p_2[$, $f(t, p_1) > 0$ y
-  $f(t, p_2) < 0$, entonces $\varphi(t) \in ]p_1, p_2[$ para todo $t \ge t_0$ y, por tanto, la
-  solución es acotada en el futuro.
+  Sea $D = ]a, +\infty[ \times \R$, con $-\infty \le a$. Sea
+  $\varphi \colon ]\alpha, \omega[ \to \R$ una solución maximal de \eqref{eq:pvi}. Si existen
+  $p_1 < p_2$ tales que $x_0 \in\ ]p_1, p_2[$ y para todo $t \in \ ]a, +\infty[$ se tiene
+  $f(t, p_1) > 0$ y $f(t, p_2) < 0$, entonces $\varphi(t) \in \ ]p_1, p_2[$ para todo $t \ge t_0$ y,
+  por tanto, la solución está acotada en el futuro.
 \end{proposition}
 \begin{proof}
   Veamos que $\varphi(t) > p_1$ para todo $t \ge t_0$. En efecto, $\varphi(t_0) = x_0 >
@@ -1505,8 +1549,8 @@ GENERALIZAR EL TEOREMA.
   Las hipótesis del Teorema \ref{thm:guia} se pueden debilitar. Concretamente, la afirmación
   $\dot{V}(t,x) \le 0$ para todo $(t,x) \in D$ puede substituirse por $\dot{V}(t,x) \le 0$ para todo
   $t \in ]t_0, +\infty[$, $x \in \R^d - B(p, r)$ para algunos $p \in \R^d$ y $ r > 0$. Además, en
-  lugar de suponer que $V$ es coerciva basta suponer que las componenetes conexax de los conjuntos
-  de subnivel son acotadas. El siguiente resultado es una versión más general del Teorema
+  lugar de suponer que $V$ es coerciva basta suponer que las componentes conexas de los conjuntos de
+  subnivel son acotadas. El siguiente resultado es una versión más general del Teorema
   \ref{thm:guia}.
 \end{remark}
 
@@ -1809,8 +1853,46 @@ La convergencia en compactos implica la convergencia puntual. El recíproco tamp
   y $f(1) = 1$. Sin embargo, es fácil ver que la convergencia no es uniforme en $[0,1]$.
 \end{ex}
 
+Recuérdese que el límite uniforme de funciones continuas es una función continua. Utilizando y el
+carácter local de la continuidad demostramos fácilmente el siguiente resultado.
+
+\begin{prop}
+  Sea $\{f_n\}$ convergente uniformemente en compactos a una función $f \colon I \to \R^d$. Si las
+  funciones $f_n$ son continuas, entonces $f$ es continua.
+\end{prop}
+
+\begin{lemma}
+  Sea $f_n \colon I_n \to \R^d$ para cada $n \in \N$ y $f \colon I \to \R^d$ continua continua en
+  $t_0 \in I$. Si la sucesión $\{f_n\}$ converge uniformemente en compactos a $f$, entonces para
+  cada sucesión $\{t_n\}$ con $t_n \in I_n$ convergente a $t_0$ se verifica que $\{f_n(t_n)\}$
+  converge a $f(t_0)$.
+\end{lemma}
+\begin{proof}
+  Nótese que $||f_n(t_n) - f(t_0) || \le ||f_n(t_n) - f(t_n) || + ||f(t_n) - f(t_0) ||$, que
+  convergen a $0$ por las hipótesis.
+\end{proof}
 
 
+\begin{proposition}
+  Sea $f_n \colon I \to \R^d$ para cada $n \in \N$ y $f \colon I \to \R^d$ continua. La sucesión
+  $\{f_n\}$ converge uniformemente en compactos a $f$ si, y solo si, para cada sucesión $\{t_n\}$
+  con $t_n \in I$ convergente hacia $t_0 \in I$ se verifica que $\{f_n(t_n)\}$ converge a $f(t_0)$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}[Desigualdad fundamental]
+  Sean $\varphi_i \colon I_i \to \R^d$ para $i \in \{1,2\}$ dos soluciones de \eqref{eq:edo} tales
+  que existe $L > 0$ con
+  \[ ||f(t, \varphi_1(t))-f(t, \varphi_2(t))|| \le L ||\varphi_1(t)-\varphi_2(t)|| \] para todo
+  $t\in I_1\cap I_2$. Entonces, fijado $t_0 \in I_1\cap I_2$ se tiene
+  \[ ||\varphi_1(t)-\varphi_2(t)|| \le ||\varphi_1(t_0)-\varphi_2(t_0)|| e^{L|t-t_0|} \] para todo
+  $t\in I_1\cap I_2$.
+\end{lemma}
+\begin{proof}
+  Es una consecuencia del Lemma de Gronwall y la ecuación integral de Volterra.
+  NOTA: Aplicar a sí misma cambiando la posición del t y el t0. Obtenemos IGUALDAD!!! Está mal?
+\end{proof}
 
 
 
