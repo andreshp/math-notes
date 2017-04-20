@@ -1001,7 +1001,7 @@ deducido a partir del siguiente lema.
   \label{lem:barbalet}
   Sea $\varphi \in D(]\alpha, +\infty[)$ tal que $\lim_{t \to +\infty} \varphi(t) = L \in
   \R$. Entonces, existe $\{t_n\} \subset ]\alpha, +\infty[$ estrictamente creciente con
-  $\{t_n\} \to +\infty$ tal que $\{f'(t_n)\} \to 0$.
+  $\{t_n\} \to +\infty$ tal que $\{\varphi'(t_n)\} \to 0$.
 \end{lemma}
 \begin{proof}
   Es una consecuencia sencilla del teorema del valor medio.
@@ -1485,21 +1485,19 @@ y $(t_0, x_0) \in D$. Buscamos condiciones suficientes que nos permitan asegurar
   $\varphi'(\tau) = f(\tau, p_1) > 0$, contradicción. Análogamente se prueba la segunda afirmación.
 \end{proof}
 
-\begin{definition}
-  Consideremos una EDO \eqref{eq:edo}.  Sea $V : \R^d \to \R$ tal que $V \in
-  \mathcal{C}^1(\R^d)$. Se define $\dot{V}: D \to \R$ como
-  $\dot{V}(t,x) = \langle \nabla V(x), f(t,x)\rangle$.  Se dice que $V$ es una función guía de la
-  EDO si $\dot{V}$ tiene signo constante (para valores $x$ suficientemente grandes).
-\end{definition}
 
-Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Nótese que la
-función $V(\varphi(t))$ es derivable y su derivada viene dada por
+Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}.  Sea
+$V : \R^d \to \R$ tal que $V \in \mathcal{C}^1(\R^d)$. Nótese que la función $V(\varphi(t))$ es
+derivable y su derivada viene dada por
 \[ \frac{\partial}{\partial t} V(\varphi(t)) = \langle \nabla V(\varphi(t)), \varphi'(t)\rangle =
   \dot{V}(t, \varphi(t)). \]
 
+Queremos estudiar la acotación de $\varphi$ mediante $V \circ \varphi$. Para ello interes que cuando
+$\varphi$ diverja, entonces $V$ diverja positivamente. Esta propiedad se formaliza en la siguiente
+definición.
 
 \begin{definition}
-  Sea $V: \R^d \to \R$ continua y $r \in \R$, se definen el conjunto de nivel $r$
+  Sea $V \colon \R^d \to \R$ continua y $r \in \R$, se definen el conjunto de nivel $r$
   \[C_r = V^{-1}(r) = \{x \in \R^d: V(x) = r\}\]
 
   y el conjunto de subnivel $r$
@@ -1508,13 +1506,38 @@ función $V(\varphi(t))$ es derivable y su derivada viene dada por
   Diremos que $V$ es una función coerciva si todos sus conjuntos de subnivel son compactos.
 \end{definition}
 
+\begin{proposition}
+  Sea $V \colon \R^d \to \R$ continua. Equivalen:
+  \begin{enumerate}
+  \item La función $V$ es coerciva.
+  \item\label{item:carac-coer} Para cualquier sucesión $\{x_n\} \subset \R^d$ con
+    $\{||x_n||\} \to + \infty$ se tiene $\{V(x_n)\} \to +\infty$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Supongamos que $V$ es coerciva y consideremos $\{x_n\} \subset \R^d$ con
+  $\{||x_n||\} \to + \infty$. Sea $K > 0$. Tenemos que $V^{-1}(]-\infty, K])$ es compacto, luego
+  está acotado y existe $m \in \N$ tal que $x_n \not \in V^{-1}(]-\infty, K])$ para todo $n \ge m$.
+  Esto es, $V(x_n) > K$ para todo $n \ge m$ como se quería.
+
+  Supongamos ahora que se da \ref{item:carac-coer}. Sea $r \in \R$. Veamos que
+  $V^{-1}(]-\infty, r])$ es compacto. Nótese que es cerrado por la continuidad de $V$. Por tanto,
+  basta ver que es acotado. Esto equivale a que no existe una sucesión de elementos de
+  $V^{-1}(]-\infty, r])$ divergente. En efecto, si $\{x_n\} \subset V^{-1}(]-\infty, r])$ con
+  $\{||x_n||\} \to + \infty$, entonces $\{V(x_n)\} \to +\infty$ por hipótesis. Pero
+  $\{V(x_n)\} \subset\ ]-\infty, r]$, contradicción.
+\end{proof}
+
+La siguiente proposición permite comprobar si una función es coerciva. La demostración es sencilla y
+se deja como ejercicio.
 
 \begin{prop}
-  En el contexto actual, se verifican las siguientes afirmaciones:
+  Sean $V, W \colon \R^d \to \R$ y $V_1, \ldots, V_d \colon \R \to \R$ continuas. Se verifican las
+  siguientes afirmaciones:
   \begin{itemize}
-  \item Si $d = 1$, $V$ es coerciva si, y solo si, $\lim_{x \to \pm \infty}V(x) = +\infty$.
-  \item Si $V(x_1, \ldots, x_d) = V_1(x_1)+ \cdots + V_d(x_d)$, entonces es coerciva si, y solo si,
-    todos los sumandos $V_i$ son coercivas en $\R$.
+  \item Si $d = 1$, entonces $V$ es coerciva si, y solo si, $\lim_{x \to \pm \infty}V(x) = +\infty$.
+  \item Si $V(x_1, \ldots, x_d) = V_1(x_1)+ \cdots + V_d(x_d)$, entonces $V$ es coerciva si, y solo
+    si, las funciones $V_1, \ldots, V_d$ son coercivas.
   \item Si $V(x) \ge W(x)$ para todo $x \in \R^d$ y $W$ es coerciva, entonces $V$ es coerciva.
   \item Si $V$ es una función cuadrática (polinómica de grado $2$), entonces es coerciva si, y solo
     si, $\mathrm{Hess} V$ es una matriz definida positiva.
@@ -1522,6 +1545,13 @@ función $V(\varphi(t))$ es derivable y su derivada viene dada por
     entonces $V$ es coerciva.
   \end{itemize}
 \end{prop}
+
+\begin{definition}
+  Consideremos una EDO \eqref{eq:edo}.  Sea $V : \R^d \to \R$ tal que $V \in
+  \mathcal{C}^1(\R^d)$. Se define $\dot{V}: D \to \R$ como
+  $\dot{V}(t,x) = \langle \nabla V(x), f(t,x)\rangle$.  Se dice que $V$ es una función guía de la
+  EDO si $\dot{V}$ tiene signo constante (para valores $x$ suficientemente grandes).
+\end{definition}
 
 \begin{theorem}
   \label{thm:guia}
