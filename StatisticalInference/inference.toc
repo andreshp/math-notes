@@ -1,0 +1,47 @@
+\select@language {spanish}
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Variables aleatorias. Vectores aleatorios}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Distribuci\IeC {\'o}n conjunta}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Muestra aleatoria simple}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Familias de distribuciones param\IeC {\'e}tricas}{3}{subsection.1.4}
+\contentsline {section}{\numberline {2}Familias de distribuciones}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Distribuciones discretas}{4}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Distribuci\IeC {\'o}n uniforme}{4}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Distribuci\IeC {\'o}n de Poisson}{4}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Distribuci\IeC {\'o}n binomial}{5}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}Distribuci\IeC {\'o}n multinomial}{5}{subsubsection.2.1.4}
+\contentsline {subsection}{\numberline {2.2}Distribuciones continuas}{5}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Distribuci\IeC {\'o}n uniforme}{5}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Distribuci\IeC {\'o}n normal}{6}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Distribuci\IeC {\'o}n gamma}{8}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.4}Distribuci\IeC {\'o}n beta}{11}{subsubsection.2.2.4}
+\contentsline {subsubsection}{\numberline {2.2.5}Distribuci\IeC {\'o}n de Cauchy}{13}{subsubsection.2.2.5}
+\contentsline {subsubsection}{\numberline {2.2.6}Distribuci\IeC {\'o}n de Laplace}{14}{subsubsection.2.2.6}
+\contentsline {subsubsection}{\numberline {2.2.7}Distribuci\IeC {\'o}n T de Student}{15}{subsubsection.2.2.7}
+\contentsline {subsubsection}{\numberline {2.2.8}Distribuci\IeC {\'o}n de Dirichlet}{15}{subsubsection.2.2.8}
+\contentsline {section}{\numberline {3}Estimaci\IeC {\'o}n de par\IeC {\'a}metros}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}M\IeC {\'e}todo de los momentos}{16}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}M\IeC {\'e}todo de la m\IeC {\'a}xima verosimilitud de Fisher}{17}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Teor\IeC {\'\i }a general de estimadores}{18}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Estad\IeC {\'\i }sticos suficientes}{18}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Score, hip\IeC {\'o}tesis de regularidad y funci\IeC {\'o}n de informaci\IeC {\'o}n de Fisher}{19}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Estimadores insesgados}{23}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}Consistencia de sucesiones de estimadores}{25}{subsubsection.3.3.4}
+\contentsline {subsection}{\numberline {3.4}Estudio te\IeC {\'o}rico del estimador m\IeC {\'a}ximo veros\IeC {\'\i }mil}{26}{subsection.3.4}
+\contentsline {section}{\numberline {4}La familia exponencial}{28}{section.4}
+\contentsline {section}{\numberline {5}Tests de hip\IeC {\'o}tesis}{30}{section.5}
+\contentsline {subsection}{\numberline {5.1}Errores de los tests de hip\IeC {\'o}tesis}{31}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Tests de Neyman-Pearson}{31}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Descripci\IeC {\'o}n de un test mediante p-valores}{34}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Tests de la raz\IeC {\'o}n de verosimilitud}{35}{subsection.5.4}
+\contentsline {section}{\numberline {6}Estad\IeC {\'\i }stica bayesiana}{39}{section.6}
+\contentsline {subsection}{\numberline {6.1}Introducci\IeC {\'o}n}{39}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Estad\IeC {\'\i }stica cl\IeC {\'a}sica vs bayesiana}{41}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Familias conjugadas}{41}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Distribuciones objetivas. Distribuci\IeC {\'o}n de Jeffreys}{45}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Convergencia de distribuciones a posteriori}{46}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.6}Test de Hip\IeC {\'o}tesis Bayesianos}{47}{subsection.6.6}
+\contentsline {subsubsection}{\numberline {6.6.1}M\IeC {\'e}todo de Leamer}{49}{subsubsection.6.6.1}
+\contentsline {section}{\numberline {7}Probabilidades subjetivas}{51}{section.7}
+\contentsline {subsection}{\numberline {7.1}Axiomas de la probabilidad subjetiva}{51}{subsection.7.1}

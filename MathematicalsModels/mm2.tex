@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+s%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ejercicios de ecuaciones diferenciales en variables separadas.
 %
 % Autor: Andrés Herrera Poyatos (https://github.com/andreshp)
@@ -6,7 +6,10 @@
 
 \documentclass{article}
 
+\usepackage{spanish}
 \usepackage{template}
+\usepackage{title1}
+\usepackage{mathematics}
 
 \newcommand{\doctitle}{Apuntes}
 \newcommand{\docsubtitle}{}
@@ -249,14 +252,70 @@ Cuando pretendamos resolver un problema variacional el primer paso será calcula
 
 \section{Problemas de contorno}
 
+\subsection{Tipos de problemas de contorno}
+
+\begin{ex}[Problema de la viga]
+  
+\end{ex}
+
+\begin{ex}[Formulación variacional del problema de la viga]
+  
+\end{ex}
+
 \subsection{Forma autoadjunta}
+
+Aunque el problema de la viga admita una formulación variacional, no todo problema de contorno puede
+verse como la ecuación de Euler-Lagrange de un PV. En esta sección nos centramos en EDOs de segundo
+orden, que sí provienen de un PV. Consideramos tres funciones continuas
+$a, b, c : [x_0, x_1] \to \R$ y la EDO
+\begin{equation} \label{eq:edo:2} y''(x) + a(x) y'(x) + b(x)y(x) = c(x).
+\end{equation}
+
+Las EDOs de segundo orden permiten una formulación más simple como mostramos a continuación. Fijamos
+$x_0 \in [x_0, x_1]$. Definimos $P(X) = \exp\left(\int^x_{x_0} a(s) \diff s\right)$ para todo
+$x \in [x_0, x_1]$. Nótese que $P > 0$. Por tanto, multiplicando \eqref{eq:edo:2} por $P(x)$
+obtenemos una ecuación equivalente que responde a
+\[c(x) P(x) = P(x)y''(x) + P'(x)y'(x) + P(x) b(x) y(x) = \left(P(x)y'(x)\right)' + P(x) b(x) y(x).\]
+Denotando $R(x) = c(x) P(x)$ y $Q(x) = P(x) b(x)$, hemos obtenido que \eqref{eq:edo:2} es equivalente a la ecuación
+\begin{equation}
+  \label{eq:edo:2}
+  \left(P(x)y'(x)\right)' + Q(x) y(x) = R(x),
+\end{equation}
+que se denomina \emph{forma autoadjunta} o \emph{forma de Sturm} de la EDO de segundo orden. La forma autoadjunta nos permite trabajar de forma más cómoda con la ecuación diferencial, por lo que será habitualmente utilizada de aquí en adelante.
+
+\begin{prop}
+  PV
+\end{prop}
+
+\begin{thm}
+  Sean $P, Q$ y $R$ son funciones continuas en $[x_0, x_1]$ con $P \in \mathcal{C}^1([x_0, x_1])$ y
+  $P > 0$. Si $Q < 0$, entonces la función $F(x,y,p) = P p^2/2 - Q y^2/2 + R$ (está bien?) es
+  convexa. Además, bajo estas hipótesis, el problema de contorno con condiciones
+  \begin{equation}
+    \begin{cases}
+      a_0 y(x) + b_0 y'(x) = c_0; \\
+      a_1 y(x) + b_1 y'(x) = c_1;
+    \end{cases}
+  \end{equation}
+  Entonces existe una extremal, que es el único mínimo de $\mathcal{F}$.
+\end{thm}
+\begin{proof}
+  Es fácil ver que la función $F$ es convexa. Utilizamos el Teorema 10 para reducir el problema de
+  contorno a uno de tipo Dirichlet. En este contexto, por la alternativa de Fredholm, basta
+  corroborar que el sistema homogéneo tiene solamente como solución a la trivial. Por reducción al
+  absurdo, supongamos que el problema tiene una solución $y$ distinta de la trivial. Nótese que
+  $y'(x_0) \ne 0$. Suponemos que $y'(x_0) > 0$. La función tendrá un máximo en un punto $x_2$, con
+  $y(x_2) > 0$. Este punto debe ser interior y, por tanto, $y'(x_2) = 0$ e $y''(x_2) < 0$. No
+  obstante, en la ecuación obtenemos que $P(x_2)y''(x_2) + P'(x_2)y'(x_2) + Q(x_2) y(x_2) =
+  0$. Consecuentemente, $y''(x_2) = - Q(x_2) y(x_2) / P(x_2) > 0$, contracción.
+\end{proof}
 
 \begin{ex}
   
 \end{ex}
 
 \begin{ex}
-  Resultado análogo para condiciones Newmann no homogéneas ($y'(x_0) = y_0$, $y'(x_1) = y_1$ ).
+  Resultado análogo para condiciones Newmann no homogéneas ($y'(x_0) = y_0$, $y'(x_1) = y_1$).
 \end{ex}
 
 \begin{ex}
@@ -313,35 +372,1046 @@ resultado.
   $y_p$ es una solución particular de (EC), que se puede calcular mediante la fórmula de variación
   de las constantes, esto es,
   \[y_p(x) = \int_{x_0}^x \frac{R(s)}{W(x_0) P(x_0)} ((\phi_2(x) \phi_1(s) - \phi_2(s) - \phi_1(x))
-    \diff s)\] En este punto estudiamos el resultado para distintos problemas de contorno.
-  \begin{itemize}
-  \item Caso Dirichlet. Las condiciones son $y(x_0) = 0 = y(x_1)$. Puedo suponer que
-    $\phi_1(x_0) = 1$, $\phi_1'(x_0) = 0$, $\phi_2(x_0) = 0$ y $\phi_2'(x_0) = 1$. Evaluando $y$ en
-    las condiciones de contorno obtenemos el sistema
-    \[\left(
-        \begin{array}{cc}
-          1 & 0 \\ 0 & \phi_2(x_1) \\
-        \end{array}
-      \right) \left(
-        \begin{array}{c}
-          A \\ B
-        \end{array}
-      \right) = \left(
-        \begin{array}{c}
-          0 \\ \beta
-        \end{array}
-      \right),
-    \]
-    donde
-    $\beta = -\int_{x_0}^{x_1}\frac{R(s)}{W(x_0) P(x_0)}(\phi_2(x_1) \phi_1(s) - \phi_2(s) -
-    \phi_1(x_1)) \diff s$. Estudiando las soluciones del sistema anterior obtenemos fácilmente el
-    resultado. En efecto, el sistema homogéneo tiene única solución si, y solo si
-    $\phi_2(x_1) \ne 0$. En tal caso, el sistema completo tiene solución única. Si
-    $\phi_2(x_1) = 0$, entonces el sistema previo tendrá solución si, y solo si, $\beta = 0$.  Como
-    $\phi_2(x_1) = 0$ tenemos que $\phi_1(x_1) \ne 0$ gracias a $W(x_1) \ne 0$. Por tanto, la
-    existencia de solución equivale
-    \[\int_{x_0}^{x_1} R(s) \phi_2(s) \diff s = 0.\]
-  \end{itemize}
+    \diff s)\] En este punto estudiamos el resultado para distintos problemas de contorno. Nosotros
+  vamos a ver la demostración para condiciones tipo Dirichlet, esto es, las condiciones son
+  $y(x_0) = 0 = y(x_1)$. Puedo suponer que $\phi_1(x_0) = 1$, $\phi_1'(x_0) = 0$, $\phi_2(x_0) = 0$
+  y $\phi_2'(x_0) = 1$. Evaluando $y$ en las condiciones de contorno obtenemos el sistema
+  \[\left(
+      \begin{array}{cc}
+        1 & 0 \\ 0 & \phi_2(x_1) \\
+      \end{array}
+    \right) \left(
+      \begin{array}{c}
+        A \\ B
+      \end{array}
+    \right) = \left(
+      \begin{array}{c}
+        0 \\ \beta
+      \end{array}
+    \right),
+  \]
+  donde
+  $\beta = -\int_{x_0}^{x_1}\frac{R(s)}{W(x_0) P(x_0)}(\phi_2(x_1) \phi_1(s) - \phi_2(s) -
+  \phi_1(x_1)) \diff s$. Estudiando las soluciones del sistema anterior obtenemos fácilmente el
+  resultado. En efecto, el sistema homogéneo tiene única solución si, y solo si $\phi_2(x_1) \ne
+  0$. En tal caso, el sistema completo tiene solución única. Si $\phi_2(x_1) = 0$, entonces el
+  sistema previo tendrá solución si, y solo si, $\beta = 0$.  Como $\phi_2(x_1) = 0$ tenemos que
+  $\phi_1(x_1) \ne 0$ gracias a $W(x_1) \ne 0$. Por tanto, la existencia de solución equivale
+  \[\int_{x_0}^{x_1} R(s) \phi_2(s) \diff s = 0.\]
+  Nótese que las soluciones de la homogénea son de la forma $B \phi_2$.
 \end{proof}
+
+Podemos demostrar en este punto el Teorema 9
+
+\section{Problemas variacionales generalizados}
+
+\subsubsection{Motivación: Existencia de geodésicas}
+
+El problema de las geodésicas consiste en, dada una superficie y dos puntos suyos, buscar una curva
+que conecte los dos puntos y que tenga la mínima longitud posible. Nosotros hemos resuelto
+parcialmente este problema en el plano, obteniendo que la solución era el segmento que une los dos
+puntos. Las geodésicas se plantean mediante un PV que dependen de varias funciones con
+restricciones. Por ejemplo, podemos considerar la esfera, en cuyo caso la solución es un segmento de
+círculo. La superficie se escribirá de la forma $S = \{x \in \R: \phi(x_1, x_2, x_3) = 0\}$ y el
+funcional a minimizar se corresponde con
+\[L[y] = \int_{x_0}^{x_1} \sqrt{y_1'(x)^2 + y_2'(x)^2 +y_3'(x)^2} \diff x\] para cualquier
+$y \in \mathcal{C}^1([x_0, x_1], \R^3)$ tal que $\phi(y) = 0$.
+
+Como vemos el funcional a minimizar depende de varias funciones. Esto lo formalizamos considerando
+$n \in \N$ y $F : [x_0, x_1] \times \Omega \to \R$ de manera que el funcional a minimizar viene dado
+por
+\[\mathcal{F}[y] = \int_{x_0}^{x_1} F(x, y_1(x), \ldots, y_n(x), y_1'(x), \ldots, y_n'(x)) \diff
+  x.\]
+
+\subsection{Ecuaciones de Euler-Lagrange}
+
+En este punto extendemos las ecuaciones de Euler-Lagrange al problema de Lagrange.
+
+\begin{thm}
+  En el contexto actual, si $\overline{y} \in \mathcal{C}^2([x_0, x_1])$ es un mínimo de
+  $\mathcal{F}$, entonces verifica el siguiente sistema de ecuaciones en derivadas parciales
+  \[
+    \begin{cases}
+      F_{y_1} - \frac{\partial}{\partial x} F_{p_1} & = 0;\\
+      & \vdots \\
+      F_{y_n} - \frac{\partial}{\partial x} F_{p_n} & =  0;
+    \end{cases}
+  \]
+  que se denomina ecuación de Euler-Lagrange.
+\end{thm}
+
+\subsection{Restricciones de tipo algebraico}
+
+En este punto añadiremos ligaduras de tipo algebraico $\varphi_j(y_1, \ldots, y_n) = 0$, donde
+$j \in \{1, \ldots, m\}$ y $m < n$. Definimos
+\[\mathcal{D}_\varphi = \{y_i \in \mathcal{C}^1([x_0, x_1]): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
+  \mathrm{Im}(y, y') \subset \Omega, \varphi_j(y_1, \ldots, y_n) = 0\}.\]
+
+El problema variacional a resolver consiste en hallar el mínimo de $\mathcal{F}(y)$ en
+$\mathcal{D}_\varphi$. Amén de una posible sustitución (despejar alguna $y_i(x)$ en función de las
+otras), vamos a generalizar el método de los multiplicadores de Lagrange.
+
+ Definimos la función
+\[F^* = F + \sum_{j = 1}^m \lambda_j(x) \varphi_j(y_1, \ldots, y_n)\] y el funcional
+$\mathcal{F}^* = \int F$.
+
+El siguiente resultado nos proporciona una propiedad e los mínimos de $\mathcal{F}$.
+
+\begin{thm}
+  Si $\overline{y}$ es un mínimo de $\mathcal{F}$ en $\mathcal{D}_\varphi$, entonces existen $m$
+  funciones $\lambda_1(x), \ldots, \lambda_m(x)$, denominadas multiplicadores de Lagrange, tales que
+  en $\overline{y}$ se cumplen
+  \[
+    \begin{cases}
+      \mathcal{F}_{y_1}^* - \frac{\partial}{\partial x} \mathcal{F}_{p_1}^* = 0; \\
+      \vdots \\
+      \mathcal{F}_{y_n}^* - \frac{\partial}{\partial x} \mathcal{F}_{p_n}^* = 0; \\
+      \varphi_1(y_1, \dots, y_n) = 0; \\
+      \vdots \\
+      \varphi_1(y_1, \dots, y_n) = 0.
+    \end{cases}
+  \]
+  A las soluciones de estas ecuaciones se les llaman extremales de $\mathcal{F}^*$.
+\end{thm}
+\begin{proof}
+  Véase [Elsgoltz].
+\end{proof}
+
+\subsection{Restricciones de tipo algebraico-diferencial}
+
+Abordamos el problema generalizado incluyendo restricciones sobre las derivadas
+$\varphi_j(y_1, \ldots, y_n) = 0$, para $j \in \{1, \ldots, m\}$ y $m < n$. Esto es, consideramos
+\[\mathcal{D}_\varphi' = \{y \in \mathcal{C}^1([x_0, x_1]): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
+  \mathrm{Im}(y, y') \subset \Omega, \varphi_j(y_1, \ldots, y_n, y_1', \ldots, y_n') = 0 \}.\]
+
+\begin{prop} \label{prop:ml:ad}
+  Sea $\overline{y} \in \mathcal{C}^2 \cap \mathcal{D}_\varphi'$ mínimo de $\mathcal{F}$ en
+  $\mathcal{D}_\varphi'$. Existen $m$ funciones $\lambda_1(x), \ldots, \lambda_m(x)$, denominadas
+  multiplicadores de Lagrange, tales que en $\overline{y}$ se cumplen
+  \[
+    \begin{cases}
+      \mathcal{F}_{y_1}^* - \frac{\partial}{\partial x} \mathcal{F}_{p_1}^* = 0; \\
+      \vdots \\
+      \mathcal{F}_{y_n}^* - \frac{\partial}{\partial x} \mathcal{F}_{p_n}^* = 0; \\
+      \varphi_1(y_1, \dots, y_n, y_1', \ldots, y_n') = 0; \\
+      \vdots \\
+      \varphi_1(y_1, \dots, y_n, y_1', \ldots, y_n') = 0.
+    \end{cases}
+  \]
+  A las soluciones de estas ecuaciones se les llaman extremales de $\mathcal{F}^*$.
+\end{prop}
+
+\subsection{Restricciones de tipo integral}
+
+En este apartado consideramos restricciones de tipo integral.
+\[\mathcal{D}_G = \{y \in \mathcal{C}^1([x_0, x_1]): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
+  \mathrm{Im}(y, y') \subset \Omega, \int_{x_0}^{x_1}G_j(y_1, \ldots, y_n, y_1', \ldots, y_n') = L_j
+  \ \forall j \in \{1, \ldots, m\},\] donde $m \in \N$.
+
+\begin{thm}[Ligaduras integrales] \label{thm:el:ri} Sea
+  $\overline{y} \in \mathcal{C}^2 \cap \mathcal{D}_G$ mínimo de $\mathcal{F}$ en
+  $\mathcal{D}_G$. Existen $m$ constantes $\lambda_1, \ldots, \lambda_m$, denominadas
+  multiplicadores de Lagrange, tales que, para
+  $F^* = F + \sum_{j = 1}^m \lambda_j G_j(x, y_1, \ldots, y_n, y_1', \ldots, y_n')$, en
+  $\overline{y}$ se cumplen las ecuaciones
+  \[
+    \begin{cases}
+      \mathcal{F}_{y_1}^* - \frac{\partial}{\partial x} \mathcal{F}_{p_1}^* = 0; \\
+      \vdots \\
+      \mathcal{F}_{y_n}^* - \frac{\partial}{\partial x} \mathcal{F}_{p_n}^* = 0; \\
+      \int_{x_0}^{x_1} G_1(y_1, \dots, y_n, y_1', \ldots, y_n') = L_1; \\
+      \vdots \\
+      \int_{x_0}^{x_1} G_1(y_1, \dots, y_n, y_1', \ldots, y_n') = L_m.
+    \end{cases}
+  \]
+  A las soluciones de estas ecuaciones se les llaman extremales de $\mathcal{F}^*$.
+\end{thm}
+\begin{proof}
+  Defino el funcional $\widetilde{F}[y, z_1, \ldots, z_m] = \mathcal{F}[y]$, que depende de $n+m$
+  funciones, y lo considero sobre el conjunto
+  \[\mathcal{D}_\varphi' = \{y \in \mathcal{D}, z_j \in \mathcal{C}^1([x_0,x_1]), z_j(x_0) = 0,
+    z_j(x_1) = L_j, \varphi_j = G_j(x, y_1, \ldots, y_n, y_1', \ldots, y_n') - z_j'= 0\}.\] Nótese
+  que estas restricciones sobre $z_j$ equivalen a
+  \[L_j = z_j(x_1) = \int_{x_0}^{x_1} G_1(y_1, \dots, y_n, y_1', \ldots, y_n').\] Aplicamos la
+  Proposición \ref{prop:ml:ad}, obteniendo para
+  $\widetilde{\mathcal{F}}^* = F + \sum_{j = 1}^m \lambda_j(x)(G_j - z_j')$ las ecuaciones
+  \[\widetilde{\mathcal{F}}_{y_1}^* - \frac{\partial}{\partial x} \widetilde{\mathcal{F}}_{p_1}^*\]
+  para $i = 1, \ldots, n$ y las ecuaciones
+  \[0 - \frac{\partial}{\partial x} \widetilde{\mathcal{F}}_{z_j}^* = 0\] para $j = 1, \ldots,
+  m$. Estas últimas ecuaciones equivalen a $\lambda_j'(x) = 0$, esto es, las funciones $\lambda_j$
+  son constantes. La demostración finaliza al comprobar que las ecuaciones obtenidas son las mismas
+  que las del enunciado.
+\end{proof}
+
+\begin{ex}[Problemas isoperimétricos]
+  Se trata de maximizar el área que pueda encerrar una cuerda de longitud prefijada. Modelizamos la
+  cuerda como una curva $\alpha: [t_0, t_1] \to \R^2$ de clase $1$, que escribimos
+  $\alpha(t) = (x(t), y(t))$, verificando $\alpha(t_0) = \alpha(t_1)$. La longitud de la curva viene
+  dada por $\ell(\alpha) = \int_{t_0}^{t_0} \sqrt{x'(t)^2 + y'(t)^2} \diff t$. Por el teorema de
+  Stokes obtenemos que
+  \[\mathrm{Area}(\alpha) = \int_\Omega 1 \diff x = \frac{1}{2} \int_{t_0}^{t_1}(x(t) y'(t) -
+    y(t)x'(t))\diff t.\] Buscamos maximizar el funcional
+  \[\mathcal{F}[x, y] = \int_{t_0}^{t_1} \frac{x(t) y'(t) - y(t)x'(t)}{2} \diff t\]
+  sobre
+  \[\mathcal{D}_G = \{x, y \in \mathcal{C}^1([0,1]): x(0) = x(1), y(0) = y(1), \int_0^1
+    \sqrt{x'(t)^2 + y'(t) ^2 = L}\}.\] Definimos $F(x,y,p,q) = (xq-yp)/2$ y
+  $G(x,y,p,q) = \sqrt{p^2 + q^2}$. Aplicamos el Teorema \ref{thm:el:ri}, obteniendo las ecuaciones
+  \begin{equation*}
+    \label{eq:1}
+    \begin{cases}
+      -\frac{x'}{2} - \frac{\partial}{\partial t} \left(\frac{x}{2} + \lambda \frac{y'}{\sqrt{x'^2 + y'^2}}\right) = 0; \\
+      -\frac{y'}{2} - \frac{\partial}{\partial t} \left(\frac{y}{2} + \lambda \frac{x'}{\sqrt{x'^2 +
+            y'^2}}\right) = 0;
+    \end{cases}
+  \end{equation*}
+  que se simplifican en
+  \begin{equation*}
+    \label{eq:1}
+    \begin{cases}
+      x - \lambda \frac{y'}{\sqrt{x'^2 + y'^2}} = x_0; \\
+      y - \lambda \frac{x'}{\sqrt{x'^2 + y'^2}} = y_0. \\
+    \end{cases}
+  \end{equation*}
+  Veamos que la solución es una circunferencia de centro $(x_0, y_0)$. En efecto,
+  \[(y-y_0)^2 + (x-x_0)^2 = \left(\lambda \frac{y'}{\sqrt{x'^2 + y'^2}}\right)^2 + \left(\lambda
+      \frac{x'}{\sqrt{x'^2 + y'^2}}\right)^2 = \lambda^2\] y el radio es el multiplicador de
+  Lagrange $\lambda$. Por tanto, de tener solución el problema y ser ésta de clase 2, entonces es la
+  circunferencia. En el futuro probaremos que efectivamente se verifican estos hechos con el Teorema
+  de Lax-Milgram.
+\end{ex}
+
+\begin{ex}[Problema de la Catenaria]
+  Fijada una longitud $L > 1$ de ante mano, buscamos la curva $y$ de longitud $L$ que encontramos al
+  fijar los extremos de una cuerda en los puntos $(0,h)$ y $(1, h)$ y someterla a la acción de la
+  gravedad.  Tras plantear el problema mediante razonamientos físicos obtenemos que hay que
+  minimizar el funcional
+  \[\mathcal{F}[y] = \int_0^1 y(x) \sqrt{1 + y'(x)^2},\]
+  que mide la energía potencial de la cuerda, y está definido sobre el conjunto
+  \[\mathcal{D}_G = \{y \in \mathcal{C}^1([0,1]): y(0) = y(1) = h, \int_0^1 \sqrt{1 + y'(t)^2}
+    = L > 1\}.\]
+
+  Aplicamos los multiplicadores de Lagrange para restricciones de tipo integral. Tenemos
+  $F^{*} = y \sqrt{1+p^2} + \lambda \sqrt{1+p^2}$. La ecuación de Euler-Lagrange equivale a las
+  ecuaciones
+  \[C = F^{*} - y' F_p^{*} = (y+\lambda)\sqrt{1+p^2} - p(y+\lambda) \frac{p}{\sqrt{1+p^2}}\] para
+  $C > 0$. Esta ecuación se simplifica en
+  \[y = C \sqrt{1+(y')^2} - \lambda.\] Para resolver esta ecuación, en primer lugar, buscamos las
+  posibles soluciones constantes. Nótese que la única solución constante es $y = C-\lambda$. No
+  obstante, estas soluciones están en $\mathcal{D}_G$. Para encontrar las soluciones no constantes
+  realizamos el cambio de variable $y' = \sinh(t)$. Obtenemos la ecuación
+  \[y = C \cosh(t) - \lambda.\] Sea $x = x(y)$ una función que depende de $y$. Tenemos que $x$
+  verifica la ecuación
+  \[x = \int\limits^{y} \frac{1}{y'(x(y))} \diff y = \int \frac{C\sinh(t)}{\sinh(t)} \diff t =
+    Ct+K.\] Tenemos que $t = (x-k) / t$ y, por tanto, $y = C \cosh((x-k)/C) - \lambda$.  NO ENTIENDO
+  NADA DE ESTOS CAMBIOS...
+
+  Ahora, fijada $y = C \cosh((x-k)/C) - \lambda$, imponemos las condiciones de Dirichlet y la
+  restricción integral. De las primeras condiciones obtenemos que $\cosh(-k/C) =
+  \cosh((1-k)/C)$. Esto se produce si, y solo si, $|k/C| = |(1-k)/C|$, de donde deducimos que
+  $k = 1/2$. Además,
+  \[L = \int\limits_0^1 \sqrt{1+\sinh(\frac{2x-1}{2C})^2} \diff x = \int\limits_0^1
+    \cosh(\frac{2x-1}{2C}) \diff x = 2C\sinh(\frac{1}{2C}).\] Esta ecuación en función de $C$ tiene
+  una única solución. Por tanto, solo hay una extremal válida para el problema que viene dada por
+  $y = C \cosh((x-0.5)/C) - \lambda$. De la condición $y(0) = h$ obtenemos el valor de $\lambda$.
+\end{ex}
+
+\section{Problemas de Sturm-Liouville}
+
+En esta sección relacionamos los problemas de Sturm-Liouville con los PV con restricciones
+integrales. En primer lugar vemos un ejemplo que motiva el estudio de los problemas de
+Sturm-Lioville.
+
+\begin{ex}
+  Sea $L > 0$. Busca los valores de $\lambda \in \R$ para los cuales el problema de contorno
+  
+  \begin{equation}
+    \label{eq:ex:sl}
+    \begin{cases}
+      y'' + \lambda y = 0; \\
+      y(0) = 0; \\
+      y(L) = 0;
+    \end{cases}
+  \end{equation}
+  tiene soluciones no nulas y di cuáles son esas soluciones.
+
+  Procedemos como es habitual. El polinomio de la EDO es $P(\mu) = \mu^2 + \lambda$.  Distinguimos
+  tres casos.
+  \begin{enumerate}
+  \item El número $\lambda$ es negativo. Entonces las raíces de $P$ son $\mu_+ = \sqrt{-\lambda}$ y
+    $\mu_- = -\sqrt{-\lambda}$, que son reales. Por tanto, las soluciones de la EDO vienen dadas por
+    \[y(x) = A e^{\mu_+ x} + B e^{\mu_- x},\] donde $A,B \in \R$. Imponemos las condiciones de
+    contorno a la solución general. Obtenemos el sistema
+    \begin{equation}
+      \begin{cases}
+        A + B  = 0; \\
+        A e^{\mu_+ L} + B e^{\mu_- L} = 0;
+      \end{cases}
+    \end{equation}
+    que tiene solución única.
+  \item El número $\lambda$ es $0$. En tal caso, las soluciones son las rectas. Al imponer las
+    condiciones iniciales obtenemos que la única solución es $y = 0$.
+  \item El número $\lambda$ es positivo. En tal caso las raíces de $P$ son $\mu_+ = i\sqrt{\lambda}$
+    y $\mu_- = -i\sqrt{\lambda}$. Por tanto, la solución general de la ecuación es
+    \[y(x) = A \cos(\sqrt{\lambda}x) + B \sin(\sqrt{\lambda} x),\] donde $A,B \in \R$. Imponemos las
+    condiciones de contorno a la solución general. Obtenemos el sistema
+    \begin{equation}
+      \begin{cases}
+        A  = 0; \\
+        A \cos(\sqrt{\lambda}L) + B \sin(\sqrt{\lambda}L) = 0;
+      \end{cases}
+    \end{equation}
+    que tiene solución única si, y solo si, $\sin(\sqrt{\lambda}L) \ne 0$, lo que sucede si, y solo
+    si, $\lambda \ne (n \pi / L)^2$ para cualquier $n \in \N$. En tal caso, la solución es $A = 0$ y
+    $B = 0$. Si por el contrario, $\lambda = (n \pi / L)^2$ para cierto $n \in \N$, entonces
+    obtenemos una recta de soluciones, que son los múltiplos de
+    \[y_n(x) = \sin(\frac{n \pi x}{L}). \qedhere\]
+  \end{enumerate}
+\end{ex}
+
+
+\begin{definition}
+  Un problema de Sturm-Liouville consiste en encontrar los valores $\lambda \in \R$ para los cuales
+  el problema de contorno
+  \begin{equation}
+    \label{eq:sl:pc}
+    \begin{cases}
+      (Py')' + (Q + \lambda S) y = 0; \\
+      a_0 y(x_0) + b_0 y'(x_0) = 0; \\
+      a_1 y(x_1) + b_1 y'(x_1) = 0;
+    \end{cases}
+    \tag{SL}
+  \end{equation}
+  donde $P, Q, S$ son continuas, $P$ es de clase $1$ y $P, S > 0$.  A los valores $\lambda$ los
+  llamamos valores propios asociados al problema de Sturm-Liouville y a las soluciones no nulas de
+  \eqref{eq:sl:pc} funciones propias.
+\end{definition}
+
+Vamos a utilizar el Teorema de Sturm-Lioville, que no demostraremos por la dificultad de la
+demostración.
+
+Las soluciones del problema de Sturm-Liouville son elementos del espacio de Hilbert
+\[L^{2}_S(x_0, x_1) = \left\{y \in L(x_0, x_1): \int\limits_{x_0}^{x_1} y^2(x) S(x) \diff x <
+    +\infty\right\},\]
+cuyo producto escalar es
+\[\left\langle y, z \right\rangle = \int\limits_{x_0}^{x_1} y(x) z(x) S(x) \diff x.\]
+
+\begin{theorem}[Sturm-Liouville]
+  \label{thm:sl}
+  Los valores propios del problema de Sturm-Liouville forman una sucesión $\{\lambda_n\}$ creciente
+  que diverge positivamente. Las funciones propias normalizadas quedan determinadas de forma única
+  salvo el signo y verifican:
+  \begin{enumerate}
+  \item\label{item:sl:a} Tienen exactamente $n-1$ ceros en $[x_0, x_1]$.
+  \item\label{item:sl:b} Son ortogonales dos a dos.
+  \item\label{item:sl:c} Cualquier otra función en $L^{2}_S(x_0, x_1)$ admite un desarrollo en
+    funciones propias, eso es,
+    \[y(x) = \sum\limits_{n \ge 0|} \left\langle y, y_n \right\rangle y_n(x).\]
+  \end{enumerate}
+\end{theorem}
+
+Sea $\mathcal{D} = \{y \in L^2: y \in \mathcal{C}^{2}\}$ y $L: \mathcal{D} \to L_S^2$ dado por $L[y] = ((Py')' + Q y) / S$. Tenemos que
+\[ \left\langle y, L(z) \right\rangle  = \int_{x_0}^{x_1} y((P z')' + Q z) \diff x = -\int_{x_0}^{x_1} Py'z' + \int_{x_0}^{x_1} y Q z \diff x = \left\langle L y, z \right\rangle.\]
+Consecuentemente, $L$ es un funcional autoadjunto. No sabemos de momento si es continuo.
+
+
+\subsection{Relación con PVs}
+
+Consideramos el funcional
+\[\mathcal{F}[y] = \int\limits_{x_0}^{x_1} (P(x) y'(x)^2 + Q(x) y(x)^2) \diff x.\]
+Buscamos su mínimo en $y \in \mathcal{C}^{2}$ con $y(x_0) = 0 = y(x_1)$ con restricción de tipo
+$\int\limits_{x_0}^{x_1}y(x)^2 S(x) \diff x = 1$. Tenemos que $F(x,y,p) = P p^2 - Q y^2$. Utilizando
+el Teorema \ref{thm:el:ri} encontramos $\lambda \in \R$ y
+$F^{*}(x,y,p) = P p^2 - Q y^2 + \lambda y^2 S$ tal que las soluciones del problema verifican las
+ecuaciones
+
+\[
+  0 =\mathcal{F}_{y}^* - \frac{\partial}{\partial x} \mathcal{F}_{p}^* = -2 \left[ (P y')' + (Q+\lambda S) y \right], \\
+\]
+y, por tanto, las extremales del problema son soluciones de un problema de Sturm-Liouville. El
+objetivo es buscar los valores propios y las funciones propias del problema.
+
+  \begin{theorem}
+    En el contexto actual, sean $(\lambda_n, y_n)$ los valores y funciones propios del problema de
+    Sturm-Liouville asociado al funcional
+    \[\mathcal{F}[y] = \int\limits_{x_0}^{x_1} P(x)(y'(x))^{2} - Q(x)y(x)^{2} \diff x.\]
+    Fijado $n \in \N$, el mínimo del funcional $\mathcal{F}$ en el conjunto
+    \[\mathcal{D}_{n-1} = \{y \in \mathcal{C}^{2}(x_0, x_1) \text{ con c.c. separadas y
+        restricciones de tipo integral }\]
+    \[\int\limits_{x_0}^{x_1}y(x)^2 S(x) \diff x = 1, \int\limits_{x_0}^{x_1}y_1(x) y(x) S(x) \diff
+      x = 0, \ldots, \int\limits_{x_0}^{x_1}y_{n-1}(x) y(x) S(x) \diff x = 0 \}\]
+
+    es $y_n$ y verifica $\mathcal{F}[y_n] = \lambda_n$.
+  \end{theorem}
+
+  \begin{ex}
+    Calcula el mínimo de
+    \[\mathcal{F}[y] = \int\limits_{1}^{e} x(y'(x))^2 \diff x\]
+    en
+    \[\mathcal{D} = \left\{y \in \mathcal{C}^{1}(1, e): y(1) = 0 = y(e), \int\limits_{x_0}^{x_1}y(x)^2
+    / x \diff x = 1, \int\limits_{x_0}^{x_1} \sin(\pi \log(x)) y(x) S(x) \diff x = 0 \right\}.\]
+  \end{ex}
+
+  \section{Funcionales de funciones que dependen de varias variables}
+
+  Sea $\Omega \subset \R$ abierto conexto y $\gamma : \overline{\Omega} \to \R$ continua. Sea además
+  $F : D \to \R$ con $D = \Omega \times W \subset \R^5$, $F(x,u,p,q)$. Consideramos el funcional
+  \[\mathcal{F}[u] = \int_{\Omega} F(x, u(x), u_{x_1}(x), u_{x_2}(x)) \diff x\]
+
+  definido en
+  $\mathcal{D} = \{u \in \mathcal{C}^{2}(\Omega): u(x) = \gamma(x) \ \forall x\in\partial\Omega
+  [restriciones del conjundo D]\}$. Podemos adaptar el Teorema \ref{thm:el} en este contexto para
+  obtener una nueva ecuación de Euler-Lagrange
+  \begin{equation}
+    \label{eq:el:general}
+    F_u - \frac{\partial}{\partial x_1} F_p - \frac{\partial}{\partial x_2} F_q = 0.
+  \end{equation}
+
+\begin{ex}[La membrana vibrante] \label{ex:membrana}
+  Se trata de modelar la posición de una membrana (película elástica homogénea) sometida a fuerzas
+  verticales. EN equilibrio, suponemos que $(x,\varphi(x))$ describe su posición, donde
+  $\varphi: \overline{\Omega} \subset \R^2 \to \R$ con $\varphi \in \mathcal{C}^2$. Supongamos que
+  solo hay desplazamientos verticales y llamo $(x, u(t,x))$ a la posición en tiempo $t$, con
+  $u(t,x) = \varphi(x)$. Por el \emph{principio de Halminton} los físicos obtienen que la solución
+  al problema minimiza la energía el sistema, esto es, minimiza el siguiente funcional
+  \[ \mathcal{F}[u] = \int_{0}^{+\infty}\left(\int\limits_{\Omega} (E_k[u] - E_p[u]) \diff x
+    \right)\diff t, \] donde $E_k[u] = \frac{\partial}{\partial t} u(t,x)^2/ 2$ es la energía
+  cinética mientras que $E_p[u]$ es la energía potencial en el punto $x$. Tras desarrollar las
+  expresiones físicas que aparecen en el funcional obtenemos un modelo muy complejo que no merece la
+  pena estudiar a mi criterio. Tras varias simplificaciones de este funcional obtenemos
+  \[ \mathcal{F}[u] = \frac{1}{2} \int\limits_{\Omega} \left(\sigma (\nabla u)^2 + \alpha u^2 -
+    2f(x) u \right) \diff x \]
+
+  en $\mathcal{D} = \{u \in \mathcal{C}^1(\overline{\Omega}) \mid u = 0 \text{ en } \Omega\} =
+  \mathcal{C}_0^1(\Omega)$, donde $\sigma$ y $\alpha$ son constantesy $f$ es una función en
+  $x$. Escribiendo la ecuación de Euler - Lagrange asociada a este PV obtenemos la denominada ecuación
+  de la membrana
+  \[ -\mathrm{div}(\sigma(x)\nabla u) = - \alpha(x)u + f, \]
+
+  donde $\mathrm{div}(G) = \frac{\partial}{\partial x_{1}} G_1 + \cdots + \frac{\partial}{\partial x_{n}} G_n$.
+
+  [AÑADIR DEL PAPEL DEL AMIGO JUANJO].
+\end{ex}
+l
+\subsection{Resolución de la ecuación de ondas}
+
+En el Ejemplo \ref{ex:membrana} hemos obtenido la ecuación de Ondas como ecuación de Euler-Lagrange de un PV. En esta sección vamos a resolver la ecuación de ondas en casos particulares.
+
+\subsubsection{Caso 1}
+
+\begin{equation}
+\label{eq:ondas:1}
+  \begin{cases}
+    u_{tt} = c^2 u_{xx}, \quad t \ge 0, x \in \R; \\
+    u(0,x) = u_0(x); \\
+    u_t(0,x) = v_0(x).
+  \end{cases}
+\end{equation}
+
+Hacemos el cambio de variable $\xi = x + ct$, $\eta = x -ct$. Consideramos la función $U(\xi, \eta) = u(t,x) = u( (\xi-\eta)/(2c), (\xi+\eta)/2)$. Por la regla de la cadena obtenemos que
+\[ u_{tt} = c^{2} U_{\xi \xi} + c^2 U_{\eta \eta} - 2c^2 U_{\xi \eta}; \]
+\[ u_{xx} = U_{\xi \xi} +  U_{\eta \eta} +2 U_{\xi \eta}; \]
+Por tanto, de \eqref{eq:ondas:1} deducimos que $U_{\xi \eta} = 0$. Esto equivale a que $U(\xi, \eta) = g(\xi) + h(\eta)$ para ciertas funciones $g$ y $h$ de clase $2$. Por tanto, obtenemos que $u(t,x) = g(x+ct) + h(x-ct)$. Imponiendo las condiciones iniciales obtenmemos $g(x)+h(x) = u_0(x)$ y $cg'(x)-ch'(x) = v_0(x)$. En particular, $g'(x) + h'(x) = u_0'(x)$, de donde deducimos que
+\[
+  \begin{cases}
+    g'(x) = (v_0(x) + c u_0'(x)) / (2c); \\
+    h'(x) = (c u_0'(x) - v_0(x)) / (2c).    
+  \end{cases}
+\]
+Intengrando obtenemos una expresión para $g$ y $h$
+\[
+  \begin{cases}
+    g(x) = u_0(x) / 2 + \int\limits_{0}^{x} v_0(x) / (2c) \diff x + K_1; \\
+    h(x) = u_0(x) / 2 - \int\limits_{0}^{x} v_0(x) / (2c) \diff x + K_2;
+  \end{cases}
+\]
+
+Sumando y comprobando que las constantes se anulan obtenemos la fórmula de D'Alembert
+\begin{equation}
+\label{eq:onda:dalembert}
+u(t,x) = \frac{u_0(x+ct) + u_0(x-ct)}{2} + \frac{1}{2c} \int_{x-ct}^{x+ct} v_0(y) \diff y.
+\end{equation}
+
+\subsubsection{Caso 2}
+
+Sea $c > 0$ la velocidad de la onda.
+\begin{equation}
+  \label{eq:ondas:2}
+  \begin{cases}
+    u_{tt} = c^2 u_{xx}, \quad t \ge 0, x \in [0,L]; \\
+    u(0,x) = u_0(x); \\
+    u_t(0,x) = v_0(x); \\
+    u(t,L) = u(t,0) = 0 \quad \forall t \ge 0.
+  \end{cases}
+\end{equation}
+
+Añadimos además las siguientes condiciones de combatibilidad
+\[
+  \begin{cases}
+    u_0(0) = u_0(L) = 0; \\
+    u_0''(0) = u_0''(L) = 0; \\
+    v_0(0) = v_0(L) = 0. \\
+  \end{cases}
+\]
+
+Buscamos soluciones no nulas de la forma $u(t,x) = T(t) W(x)$. De existir una solución de esta forma
+se verificará
+\[ u_{tt} = T''(t) W(x) \text{ y } u_{xx} = T(t) W''(x). \] Puesto que $u_{tt} = c^2 u_{xx}$,
+suponiendo que $T$ y $W$ no se anulan ontenemos que
+\[ \frac{T''(t)}{T(t)} = c^2 \frac{W''(x)}{W(x)}. \] Por tanto, las funciones $T''/T$ y $W''/W$ son
+iguales a una constante $\lambda$. Esto es, se verifican las ecuaciones diferenciales
+\[
+  \begin{cases}
+    T''(t) + \lambda T(t) = 0; \\
+    W''(x) + \frac{\lambda}{c^2} W(t) = 0.
+  \end{cases}
+\]
+
+Empezamos resolviendo la ecuación de $W$. De las condiciones de contorno del problema deducimos que
+$T(t)W(0) = 0$ para todo $t \ge 0$. Puesto que hemos supuesto que $T$ no se anula tenemos que
+$W(0) = 0$. Análogamente deducimos que $W(L) = 0$. Distinguimos tres casos.
+\begin{enumerate}
+\item Se tiene $\lambda < 0$. En tal caso
+  $W(x) = A \exp(\sqrt{-\lambda} x / c) + B \exp(\sqrt{\lambda} x / c)$. No obstante, las
+  condiciones de contorno obligan a que $A = B = 0$, luego la única solucióne es la constantemente
+  cero, que hemos descartado previamente.
+\item Se tiene $\lambda = 0$. Análogamente la única solución del problema de contorno es la
+  constantemente $0$.
+\item Se tiene $\lambda > 0$. Las soluciones son de la forma
+  $W(x) = A \sin(\sqrt{\lambda} x / c) + B \cos(\sqrt{\lambda} x / c)$. De $W(0) = 0$ deducimos que
+  $A = 0$. De $W(L) = 0$ deducimos que o bien $B = 0$, solución que hemos descartado, o bien
+  $\sin(\sqrt{\lambda} L / c) = 0$, esto es, $\lambda = (n \pi c / L)^{2}$ para algún $n \in \N$, en
+  cuyo caso las soluciones son múltiplos de $\sin(n \pi x / L)$.
+\end{enumerate}
+
+Hemos deducido que la ecuación tiene solución no nula solamente para los valores
+$\lambda_n = (n \pi c / L)^{2}$. Resolvemos ahora la ecuación asociada a $T$ para estos valores de
+$\lambda$. Obtenemos que $T(t) = A \cos(n c \pi x / L) + B \sin(n c \pi x / L)$. Obtenemos pues que
+la solución de la ecuación diferencial debe ser de la forma
+\begin{equation}
+  \label{eq:2}
+  u(t,x) = \sin(n \pi x / L) \left(A \cos(n c \pi x / L) + B \sin(n c \pi x / L)\right).
+\end{equation}
+
+Es fácil comprobar que estas funciones son soluciones de la ecuación. Veamos si verifican las
+condiciones iniciales en el tiempo. Tenemos que $u(0, x) = A \sin(n \pi x / L)$ y
+$u_t(0,x) = B n c \pi \sin(n \pi x / L) / L$. Estas funciones pueden no ser iguales a las funciones
+$u_0$ y $v_0$. Lo solucionamos mediante el desarrollo wn serie de Fourier. Por las condiciones de
+compatibilidad obtenemos que $u_0(x) = \sum_{n \ge 1} A_n \sin(n \pi x / L)$. Análogamente
+$v_0(x) = \sum_{n \ge 1} C_n \sin(n \pi x / L)$.
+
+\begin{remark}[Principio de superposición]
+  Una suma, finita o infinita con convergencia uniforme, de soluciones de la ecuación
+  \eqref{eq:ondas:2} es solución de la ecuación \eqref{eq:ondas:2}.
+\end{remark}
+
+Si conseguimos esta convergencia uniforme de la serie de Fourier obtenemos que
+$u(t,x) = \sum_{n \ge 1} u_n(t,x)$ es solución de \eqref{eq:ondas:2} y verifica todas las
+condiciones del problema.
+
+\begin{ex}
+  Consideramos el problema de contorno
+  \begin{equation}
+    \label{eq:ondas:3}
+    \begin{cases}
+      u_{tt} - u_{xx} = x, \quad t \ge 0, x \in [0,1]; \\
+      u(t, 0) = 0 \text{ y }
+      u(t, 1) = 1; \\
+      u(0,x) = x; \\
+      u_t(0, x) = 0.
+    \end{cases}
+  \end{equation}
+  Utilizamos las soluciones del problema homogéneo, que es un caso particular de la ecuación de
+  Ondas \eqref{eq:ondas:2}. Sea $\omega$ una solución del problema homogéneo y
+  $u(t,x) = \omega(t,x) + v(x)$. Tenemos que $u$ es solución de \eqref{eq:ondas:3} si, y solo si,
+  $- v''(x) = x$, $v(0) = 0$, $v(1) = 1$ y se verifican las condiciones de contorno en
+  $x$. Deducimos que debe tenerse $v(x) = (7 x - x^3) / 6$, $\omega(0,x) = (x^3-x) / 6$,
+  $\omega_t(0,x) = 0$. Podemos encontrar tal $\omega$ mediante una serie de Fourier como se hizo
+  anteriormente.
+\end{ex}
+
+En los siguientes párrafos introducimos los conceptos de análisis funcional que necesitamos para
+completar el desarrollo
+anterior. %En primer lugar, recordemos que el siguiente conjunto de funciones es un sistema ortonormal de $\mathrm{L}^2(0,T)$,
+
+\begin{theorem}[Riesz-Fischer, 1907]
+  \label{thm:riesz}
+  El conjunto
+  \[ B = \left\{\frac{1}{\sqrt{T}}, \sqrt{\frac{2}{T}} \sin(\frac{nT}{2\pi}x), \sqrt{\frac{2}{T}}
+      \cos(\frac{nT}{2\pi}x): n \in \N\right\} \] es una base de Hilbert de $\mathrm{L}^2(0,T)$.
+\end{theorem}
+
+
+\begin{ex}
+  Consideramos el problema de contorno
+  
+  \begin{equation}
+    \label{eq:3}
+    \begin{cases}
+      y'' + \lambda y = 0 \quad \text{en }[0,T]; \\
+      y(0) = y(T); \\
+      y'(0) = y'(T).
+    \end{cases}
+  \end{equation}
+
+  Buscamos los valores propios del problema de Sturm-Liouville, esto es, los valores de $\lambda$
+  para los que el problema tiene solución no trivial. Es fácil comprobar que si $\lambda < 0$,
+  entonces la única solución es $y = 0$. En cambio, si $\lambda = 0$, las soluciones son las
+  funciones constantes, luego $0$ es un valor propio. Por último, si $\lambda > 0$, el problema
+  tiene solución si, y solo si, $\cos(T \sqrt{\lambda}) = 1$ o, equivalentemente,
+  $\lambda = (2 n \pi / T)^2$ para algún $n \in \N$. En tal caso, las funciones propias son $2$ para
+  cada $n \in \N$, $y_{2n} = \cos(2 n \pi x / T )$ y $y_{2n-1} = \sin(2 n \pi x / T )$.
+\end{ex}
+
+En $\mathrm{L}_2([0,T])$ la convergencia en norma no implica necesariamente la convergencia puntual
+y mucho menos la convergencia uniforme. Necesitaremos criterios de convergencia que nos aseguren que
+la serie de Fourier converge uniformemente. Uno de los criterios más sencillos es el criterio de
+Weierstrass. En lo que sigue enunciamos los teoremas de convergencia que utilizaremos en la
+asignatura.
+
+\begin{theorem}[Teoremas de convergencia]
+  \label{thm:fourier:convergencia}
+  Sea $y \in \mathrm{L}_2([0,T])$ con $y(0) = y(T)$. Se verifican las siguientes afirmaciones.
+  \begin{enumerate}
+  \item Por el Teorema de Riesz-Frisher, la serie de Fourier de $y$ admite una parcial que converge
+    c.p.d. a $y$.
+  \item Si $y$ es continua, entonces la serie de Fourier de $y$ converge puntualmente a $y$.
+  \item Si $y$ es continua a trozos en $[0,T]$, entonces la serie de Fourier de $y$ converge
+    puntualmente a $y$ fuera de los puntos de discontinuidad. En los puntos de discontinuidad la
+    serie de furier converge a la media de los límites laterales de $y$.
+  \item Si $y$ es continua y además $y'$ es continua a trozos, entonces la serie de Fourier de $y$
+    converge absoluta y uniformemente.
+  \item Si $y \in \mathcal{C}^{k}([0,T])$ y $y^{m)}(0) = y^{m)}(T)$ para todo $0 \le m \le k$ e
+    $y^{k+1}$ es continua a trozos, entonces la serie de las derivadas hasta orden $k$ converge
+    absoluta y uniformemente a la correspondiente derivada de $y$.
+  \end{enumerate}
+\end{theorem}
+
+En ocasiones necesitaremos desarrollos de Fourier en $\mathrm{L}_2([-L,L])$. Para ello podemos
+transladar la función a $[0,2L]$, calcular el desarrollo de Fourier en este intervalo y volverlo a
+transladar. Realizando los cálculos obtenemos que
+\[ y(x) = \frac{a_0}{2} + \sum\limits_{n = 1}^{\infty} \left(a_n \cos(\frac{n \pi}{L} x) + b_n
+    \sin(\frac{n \pi}{L} x)\right), \]
+
+donde
+\[ a_0 = \frac{1}{L} \int_{-L}^L y(x) \diff x; \]
+\[ a_n = \frac{1}{L} \int_{-L}^L y(x) \cos(\frac{n \pi}{L}x) \diff x; \]
+\[ b_n = \frac{1}{L} \int_{-L}^L y(x) \sin(\frac{n \pi}{L}x) \diff x. \]
+
+Nótese que si la función $y$ es par, entonces $b_n = 0$ para todo $n$. En cambio, si la función $y$
+es impar, entonces $a_n = 0$ para todo $n$.
+
+Consideremos $y \in \mathrm{L}_2([0,L])$. Podemos extender $y$ a $[-L, L]$ para que sea par o impar
+y aplicar los desarrollos obtenidos a la nueva función. Obtenemos pues dos nuevos desarrollos que
+solamente involucran cosenos y senos respectivamente:
+\begin{itemize}
+\item \textbf{Serie de cosenos.} Tenemos que
+  $y(x) = a_0 / 2 + \sum_{n = 1}^{\infty} a_n \cos(\frac{n \pi}{L} x)$, donde para cada $n$
+  \[ a_n = \frac{1}{L} \int_{-L}^L y_{par}(x) \cos(\frac{n \pi}{L}x) \diff x = \frac{2}{L}
+    \int_{0}^L y(x) \cos(\frac{n \pi}{L}x) \diff x.\]
+\item \textbf{Serie de senos.} Tenemos que
+  $y(x) = \sum_{n = 1}^{\infty} b_n \sin(\frac{n \pi}{L} x)$, donde para cada $n$
+  \[ b_n = \frac{1}{L} \int_{-L}^L y_{par}(x) \sin(\frac{n \pi}{L}x) \diff x = \frac{2}{L}
+    \int_{0}^L y(x) \sin(\frac{n \pi}{L}x) \diff x.\]
+\end{itemize}
+
+Ahora podemos aplicar los teoremas de convergencia a estas nuevas series, obteniendo el siguiente
+resultado.
+
+\begin{theorem}
+  \label{thm:fourier:convergencia:2}
+  Sea $y \in \mathcal{C}([0, T])$ con $y'$ continua a trozos. Entonces,
+  
+  \begin{enumerate}
+  \item su serie de cosenos converge uniformemente;
+  \item si $y(0) = y(T) = 0$, entoces la serie de senos converge.
+  \end{enumerate}
+\end{theorem}
+
+Ya podemos resolver la ecuación de ondas de partida. Recogemos todos los argumentos dados en el
+siguiente teorema.
+
+\begin{theorem}
+  \label{thm:ondas:2}
+  Dados $u_0 \in \mathcal{C}^2(]0,1[)$ con $u_0'''$ continua a trozos y
+  $v_0 \in \mathcal{C}^1(]0,L[)$ con $v_0''$ continua a trozos tales que
+  \[ u_0(0) = u_0(L) = u_0''(0) = u_0''(L) = v_0(0) = v_0(L). \] El sistema
+  \[
+    \begin{cases}
+      u_{tt} = c^2 u_{xx}, \quad t \ge 0, x \in [0,L]; \\
+      u(0,x) = u_0(x), \quad x \in [0,L]; \\
+      u_t(0,x) = v_0(x), \quad x \in [0,L]; \\
+      u(t,0) = u(t, L) = 0, \quad t \ge 0.
+    \end{cases}
+  \]
+  tiene una única solución dada por
+  \[ u(t,x) = \sum\limits_{n = 1}^{\infty} \left( a_n \cos(\frac{n c \pi t}{L}) + \frac{b_nL}{n c
+        \pi} \sin(\frac{n c \pi t}{L}) \right) \sin(\frac{n \pi x}{L}),\] donde $a_n$ y $b_n$
+  provienen de las series de Hilbert de $u_0$ y $v_0$, esto es,
+  \[u_0(x) = \sum\limits_{n = 1}^{\infty} a_n \sin(\frac{n \pi x}{L}) \text{ y } v_0 =
+    \sum\limits_{n = 1}^{\infty} b_n \sin(\frac{n \pi x}{L}).\]
+\end{theorem}
+\begin{proof}
+  La existencia viene dada por el procedimiento desarrollado durante la sección. Veamos qe se da la
+  unicidad. Utilizamos el denominado \emph{método de la energía}. Definimos el funcional $E$ que a
+  cada función $u \in \mathcal{C}^2([0,L])$ le asgina la función $E[u]$ dada por
+  \[ E[u](t) = \frac{1}{2} \int_0^L \left( u_t^2 + c^2 u_x^2 \right) \diff x, \quad t \ge 0. \]
+  Veamos que si $u$ es solución de la ecuación de ondas, entonces $E[u]$ es constante. En efecto,
+  tenemos que
+  \[ \frac{1}{2}\int_0^L \frac{\partial}{\partial t}(u_t)^2 \diff x = \int_0^L u_t u_{tt} \diff x =
+    c^2\int_0^L u_t u_{xx} \diff x = \left[ u_t u_{x} \right]_0^L - c^2\int_0^L u_{tx} u_{x} \diff
+    x. \]
+
+  Deducimos pues que
+  \[ \frac{\partial}{\partial t} \frac{1}{2} \int_0^L \left( u_t^2 + c^2 u_x^2 \right) \diff x =
+    \frac{1}{2}\int_0^L \frac{\partial}{\partial t}(u_t)^2 \diff x + c^2\int_0^L u_{tx} u_{x} \diff
+    x = \left[ u_t u_{x} \right]_0^L. \]
+  
+  
+  Sean $u_1$ y $u_2$ dos soluciones de la ecuación de ondas. Entonces, $u = u_1 - u_2$ es solución
+  del problema con todas las condiciones a cero. Utilizando la igualdad anterior tenemos que $E[u]$
+  tiene derivada nula, luego $E[u](t) = E[u](0) = 0$.  $u_1 = u_2$. Deducimos pues que $u = 0$ y,
+  por tanto, $u_1 = u_2$.
+\end{proof}
+
+
+\subsection{Solución de la ecuación de Dirichlet}
+
+NO EXAMEN.
+
+Vamos a resolver la ecuación de Dirichlet utilizando la técnica de separación de variables, que
+hemos utilizado para la ecuación de ondas. Recordemos que la ecuación de Dirichlet viene dada por
+
+\begin{equation}
+  \label{eq:dirichlet}
+  \begin{cases}
+    \Delta u = 0 \quad \text{en } \Omega; \\
+    u = \gamma \quad \text{en } \partial \Omega.
+  \end{cases}
+\end{equation}
+
+\subsubsection{Laplaciano en polares}
+
+Realizamos un cambio a polares, $u(x_1,x_2) = U(\rho, \theta)$. Obtenemos la expresión denominada
+\emph{Laplaciano en polares}
+
+\begin{equation}
+  \label{eq:laplaciano:polares}
+  U_{pp} + \frac{U_{\theta\theta}}{\rho^2} + \frac{U_{\rho}}{\rho} = \Delta_x u(\rho \cos(\theta), \rho \cos(\theta)).
+\end{equation}
+
+Si la función $u$ es racial, esto es, $u(x) = U(\rho)$ para todo $x \in \Omega$, entonces la
+expresión del Laplaciano en polares se simplifica, obteniendo
+
+\begin{equation}
+  \label{eq:laplaciano:radial}
+  \Delta_x u(x) = U_{pp} + \frac{U_{\rho}}{\rho} = \frac{1}{\rho^{N-1}} \frac{\partial}{\partial \rho}(\rho^{N-1} U_{\rho}),
+\end{equation}
+
+donde $N$ es el número de variables de $u$.
+
+\subsubsection{La ecuación de Dirichlet para funciones radiales}
+
+Aplicando lo anterior para $u$ radial obtenemos que la ecuación de Dichlet equivale a
+
+\begin{equation}
+  \label{eq:4}
+  \rho^{N-1} U_{\rho} = \mathrm{cte}.
+\end{equation}
+
+Obtenemos pues que todas las soluciones de la ecuación son de la forma
+
+\[ u(x) =
+  \begin{cases}
+    C_1 |x| & \text{si} N = 1; \\
+    C_2 \log |x| & \text{si} N = 2; \\
+    C_3 / |x|^{N-1} & \text{si} N \ge 3,
+  \end{cases}
+\]
+
+que es la llamada \emph{solución fundamental del laplaciano en $\R^N$}
+
+\subsubsection{La ecuación de Dirichlet en el disco}
+
+Nos proponemos resolver \eqref{eq:dirichlet} en el disco unidad.  Utilizando el Laplaciano en polares obtenemos el problema equivalente
+
+\begin{equation}
+\label{eq:dirichlet:disco}
+\begin{cases}
+  U_{pp} + \frac{U_{\theta\theta}}{\rho^2} + \frac{U_{\rho}}{\rho} = 0, & (\rho, \theta) \in ]0,1]\times[0,2\pi]; \\
+  U(1, \theta) = \overline{\gamma}(\theta), & \theta \in [0, 2\pi]; \\
+  U(\rho, 0) = U(\rho, 2\pi), & \rho \in ]0, 1].
+\end{cases}
+\end{equation}
+
+Separamos variables. Buscamos $U(\rho, \theta) = v(\rho) w(\theta)$.  En tal caso se verifica la ecuación
+
+\begin{equation}
+\label{eq:dirichlet:disco:sep}
+v''(\rho) w(\theta) + \frac{v(\rho)}{\rho^2} w''(\theta) + \frac{v'(\rho)}{\rho}w(\theta) = 0,
+\end{equation}
+
+de donde deducimos que
+
+\begin{equation}
+  \label{eq:dirichlet:disco:sep:2}
+  \frac{w''(\theta)}{w(\theta)} = -\frac{\rho^2 v''(\rho) + \rho v'(\rho)}{v(\rho)} = -\lambda \cong \mathrm{cte}.
+\end{equation}
+
+
+\section{Derivadas generalizadas}
+
+\begin{theorem}[Fórmula de Green]
+  \label{thm:green}
+  Sea $\Omega \subset \R^n$ dominio y sean $u, v \in \mathcal{C}^1(\overline{\Omega})$. Entonces
+  \[ \int_{\Omega} u(x) \frac{\partial}{\partial x_i} v(x) \diff x = - \int_{\Omega}
+    \frac{\partial}{\partial x_i} u(x) v(x) \diff x + \int_{\Omega} u(x)v(x) \diff s. \]
+\end{theorem}
+
+Sea $f \in \mathcal{C}^1(\overline{\Omega})$. Para cada
+$\phi \in \mathcal{C}_0^\infty(\Omega) = \{\gamma \in \mathcal{C}^{\infty}(\overline{\Omega}) \mid
+\mathrm{Sop}(\gamma) \subset \subset \Omega\}$, donde $A \subset \subset B$ significa que
+$A \subset \text{abierto} \subset \text{compacto} \subset B$ se verifica
+\begin{equation}
+  \label{eq:green:soporte}
+  \int_{\Omega} \phi(x) \frac{\partial}{\partial x_i} f(x) \diff x = - \int_{\Omega}
+  \frac{\partial}{\partial x_i} \phi(x) f(x) \diff x.
+\end{equation}
+
+A la función $\phi$ se le denomina \emph{función test}. Sea
+$f \in \mathcal{L}_{loc}^1 = \{g\colon \Omega \to \R \mid g \in \mathcal{L}(K) \ \forall K \subset
+\subset \Omega \}$. El funcional $L_f\colon \mathcal{C}_0^\infty(\Omega) \to \R$, dado por
+\[ L_f[\phi] = - \int_{\Omega} \frac{\partial}{\partial x_i} \phi(x) f(x) \diff x, \]
+
+es un operador lineal. Lo denotamos
+$L_f[\phi] = \left\langle \frac{\partial}{\partial x_i} f, \phi\right\rangle$. Nótese que si $f$
+fuese de clase $1$, entonces $\left\langle \frac{\partial}{\partial x_i} f, \phi\right\rangle$ es
+efectivamente el producto en $\mathrm{L}^2$ por \eqref{eq:green:soporte}.
+
+\begin{proposition}
+  Si $f$ es $\mathcal{C}^1$, entonces su derivada queda caracterizada por $L_f$, es decir, si
+  $g \in \mathcal{C}^1(\Omega)$ es otra función tal que para cada
+  $\phi \in \mathcal{C}_0^\infty(\Omega)$ se tiene
+  \[ \int_{\Omega} g(x)\phi(x) \diff x = - \int_{\Omega} f(x) \frac{\partial}{\partial x_i} \phi(x)
+    \diff x, \] entonces $g = \frac{\partial}{\partial x_i} f$.
+\end{proposition}
+\begin{proof}
+  Es una consecuencia del Lema fundamental del Cálculo de Variaciones.
+\end{proof}
+
+\begin{definition}
+  Dada $f \in \mathcal{L}_{loc}(\omega)$ definimos su \emph{derivada generalizada} o \emph{derivada
+    distribucional} respecto de la variable $x_i$ como el operador lineal sobre
+  $\mathcal{C}_0^{\infty}(\Omega)$ dado por
+  \[ \left\langle \frac{\partial}{\partial x_i} f, \phi\right\rangle = - \int_{\Omega}
+    \frac{\partial}{\partial x_i} \phi(x) f(x) \diff x. \]
+\end{definition}
+
+\begin{remark}
+  Se puede definir la \emph{derivada generalizada de orden $k$} como
+  \[ \left\langle \frac{\partial^{|k|}}{\partial x^k} f, \phi\right\rangle = - \int_{\Omega}
+    \frac{\partial^k}{\partial x^{|k|}} \phi(x) f(x) \diff x, \] donde $x = (x_1, \ldots, x_n)$ y
+  $k = (k_1, \ldots, k_n)$
+\end{remark}
+
+\begin{remark}
+  La derivada generalizada es un operador lineal continuo sobre el espacio
+  $\mathcal{D}(\Omega) = \mathcal{C}_0^{\infty}(\Omega)$ con una topología $\tau$ que no podemos
+  definir en este momento. Cabe decir que la convergencia de una sucesión $\{\phi_n\}$ a $\phi$ en
+  esta topología equivale a que $\{\frac{\partial^{|k|}}{\partial x^k} \phi_n\}$ converge
+  uniformemente a $\frac{\partial^{|k|}}{\partial x^k} \phi$ para todo $k$.
+\end{remark}
+
+\begin{definition}
+  Una función $f \in \mathcal{L}_{loc}(\Omega)$ tiene \emph{derivada débil} cuando su derivada
+  generalizada viene representada por una función, es decir, existe
+  $g \in \mathcal{L}_{loc}(\Omega)$ tal que para cada $\phi \in \mathcal{C}_0^{\infty}(\Omega)$
+  \[ \left\langle \frac{\partial}{\partial x_i} f, \phi\right\rangle = \left\langle g,
+      \phi\right\rangle = \int_{\Omega} g(x)\phi(x) \diff x.\]
+
+  A la clase funciones iguales a $g$ c.p.d. se le llama \emph{derivada débil de $f$ respecto de
+    $x_i$}.
+\end{definition}
+
+\begin{remark}
+  En caso de existir la derivada débil es única por el Lema fundamental del Cálculo de Variaciones
+  (versión generalizada a $\mathcal{L}_{loc}(\Omega)$).
+\end{remark}
+
+\begin{ex} \label{ex:der-debil:abs} Calculamos la derivada débil de $f(x) = |x|$ en $\Omega =
+  \R$. Tenemos que
+  \[ - \int_\R |x|\phi'(x) \diff x = \int_{-\infty}^{0} x\phi'(x) \diff x - \int_0^{\infty}
+    x\phi'(x) \diff x = \int_{-\infty}^{0} \phi(x) \diff x - \int_0^{\infty} \phi(x) \diff x =
+    \int_\R s_a(x) \phi(x) \diff x,\]
+
+  donde $s$ es la función signo, definida en $0$ como $s(0)=1$.
+\end{ex}
+
+\begin{ex}
+  La función $H \colon \R \to \R$ dada por
+  \[ H(x) =
+    \begin{cases}
+      1 & \text{si } x \ge 0; \\
+      0 & \text{si } x < 0;
+    \end{cases}
+  \]
+  no tiene derivada débil. En efecto, tenemos que
+  \[ - \int_{\R} H(x)\phi'(x) \diff x = - \int_0^{\infty} \phi'(x) \diff x = \phi(0),\] que es el
+  operador ``evaluar en $0$''. Los ingenieros utilizan la delta de Dirac (que no es una función)
+  para decir que este operador es igual a $\left\langle \delta_0, \phi \right\rangle$. De ello
+  deducen que $\delta_0$ es la derivada débil de $H$. Esto es formalmente erróneo, no existe la
+  derivada débil de esta función. En efecto, el operador ``evaluar en $0$'' no coincide con
+  $\left\langle g, \phi \right\rangle$ para ninguna $g$. En tal para cualquier
+  $\phi \in \mathcal{C}_0^{\infty}([0, +\infty[)$ tendríamos $\left\langle g, \phi
+  \right\rangle$. Por el Lema fundamental del Cálculo de Variaciones obtenemos que $g$ es $0$ en
+  $[0,+\infty[$. Razonamos de forma análoga en $]-\infty, 0]$, obteniendo que $g$ es constantemente
+  $0$, contradicción.
+\end{ex}
+
+\begin{proposition}
+  \begin{enumerate}
+  \item Si $u \in \mathcal{C}^1(\overline{\Omega})$, entonces $u'$ es la derivada débil de $u$.
+  \item Si $u \in \mathcal{C}^1(\Omega)$ y $u$ tiene derivada débil, entonces $u'$ es la derivada
+    débil de $u$.
+  \end{enumerate}
+\end{proposition}
+
+Puede ser que $u \in \mathcal{C}^1(\Omega)$ pero $u$ no tenga derivada débil. En tal caso, la
+derivada generalizada suele ser de la forma $u' + \delta$, donde $\delta$ es una delta de dirac en
+un subconjunto de la frontera de $\Omega$.
+
+\begin{definition}
+  Sean $m \in \N$ y $p \in [1,+\infty]$. Sea $\Omega$ dominio de $\R^N$. El \emph{espacio de
+    Sobolev} es
+  \[ W^{m,p} = \{\text{funciones de } L_p(\Omega) \text{ tales que sus derivadas hasta orden } m
+    \text{ son débiles y están en } L_p(\Omega) \}. \] Es un espacio de Banach con la norma
+  \[ ||u|| = \left( ||u||^p_{L_p(\Omega)} + \sum_{1 \le |\alpha| \le m}
+      ||\frac{\partial^{|\alpha|}}{\partial x^{\alpha}} u ||^p_{L_p(\Omega)} \right)^{1/p} \]
+
+  si $p \in [1, +\infty[$ y
+  \[ ||u|| = \max_{0 \le |\alpha| \le m} ||\frac{\partial^{|\alpha|}}{\partial x^{\alpha}} u
+    ||^p_{L_p(\Omega)} \]
+
+  si $p = +\infty$. Para $p = 2$ el espacio de Sobolev es un espacio de Hilbert, y se denota
+  $\mathrm{H}^m(\Omega)$, para el producto escalar
+  \[ \left\langle u, v \right\rangle = \int_{\Omega} uv \diff x + \sum_{1 \le |\alpha| \le m}
+    \int_{\Omega} \frac{\partial^{|\alpha|}}{\partial x^{\alpha}} u \cdot
+    \frac{\partial^{|\alpha|}}{\partial x^{\alpha}} v \diff x.\]
+\end{definition}
+
+\begin{ex} [Derivada débil de $|x|^{\alpha}$]
+  Nótese que el gradiente de $|x|^{\alpha}$ es $\alpha x |x|^{\alpha-2}$ para $x \ne 0$. Buscamos la
+  derivada débil de $|x|^{\alpha}$ en $B(0,1)$. Para ello procedemos com en el Ejemplo
+  \ref{ex:der-debil:abs}, obteniendo que efectivamente ésta es la derivada débil.
+\end{ex}
+
+\begin{ex}
+  Sea $B \subset \R^N$. Prueba que
+  \begin{itemize}
+  \item $1/|x|^{\alpha} \in L_p(B)$ si, y solo si, $\alpha p < N$;
+  \item $1/|x|^{\alpha} \in L_p(\R^N \setminus B)$ si, y solo si, $\alpha p > N$.
+  \end{itemize}
+  Ayuda: Cambio a radiales en \R$^N$.
+\end{ex}
+
+En $H^1(\Omega)$ hay un subespacio destacado,
+$H_0^1(\Omega) = \{u \in H^1(\Omega) \mid u = 0 \text{ en } \partial \Omega\}$. Aunque a priori no
+tiene sentido exigir que una función sea $0$ en la frontera de $\Omega$ (la medida de su frontera es
+$0$), esto sí se puede hacer mediante \emph{densidad}. Esto se estudia en otras asignaturas de la
+carrera. De hecho, $W_0^{1,p} (\Omega) = \overline{\mathcal{C}_0^\infty(\Omega)}$, donde el cierre
+es en $W^{1,p}$. Es más, se puede demostrar que
+$W^{1,p} (\Omega) = \overline{\mathcal{C}^\infty(\Omega)}$.
+
+\begin{theorem}[Teorema fundamental del cálculo integral]
+  \label{thm:fundamental-calculo}
+  Dado $I = ]a,b[$ y $f \in \mathrm{L}_{loc}^1(I)$ y $c \in I$, definimos
+  \[ F(x) = \int__c^x f(s) \diff s \]
+
+  para todo $x \in I$. Entonces, $F$ tiene derivada débil y ésta es $f$. A $F$ se le llama primitiva
+  de $f$. Además, $F$ es continua.
+\end{theorem}
+
+\begin{theorem}
+  \label{thm:cota-h1}
+  Sea $\Omega \subset \R^N$ acotado en al menos una dirección, esto es, existe $v \in \R^N$ ,
+  $a,b \in \R$ con $a < b$ tales que $a \le <x,v> \le b$ para todo $x \in \Omega$. Entonces, para
+  cada $u \in \mathrm{H}_0^1(\Omega)$ existe $c > 0$ con
+  \[ \int_{\Omega} u^2(s) \diff s \le C \int_{\Omega} |\nabla u(s)|^2 \diff s.\]
+\end{theorem}
+
+
+\begin{theorem}
+  \label{thm:h1-norma}
+  Sea $\Omega$ acotado en al menos una dirección. Entonces en el espacio $\mathrm{H}_0^1(\Omega)$ la
+  norma
+  \[ ||| u ||| = \left( \int_{\Omega} |\nabla u (s)|^2 \diff s \right)^{1/2}\]
+
+  es equivalente a la norma heredada de $\mathrm{H}^1(\Omega)$.
+\end{theorem}
+
+\begin{theorem}[Teoremas de representación de Riesz para Hilbert]
+  \label{thm:rep-riesz}
+  Dado $H$ espacio de Hilbert, entonces toda aplicación lineal y continua de $H$ en $\R$ es de la
+  forma $\left\langle v, \cdot \right\rangle$ para cierto $v \in H$.
+\end{theorem}
+
+\begin{theorem}
+  \label{thm:riesz-lp}
+  Sea $p \in [1, +\infty[$ y $p' > 0$ con $1 = 1/p + 1/p'$. Toda aplicación
+  $G \colon \mathrm{L}^p(\Omega) \to \R$ lineal y continua es de la forma
+  \[ G(f) = \int_{\Omega} g(x)f(x) \diff x, \]
+
+  donde $g \in \mathrm{L}^{p'}(\Omega)$.
+\end{theorem}
+
+\begin{lemma}
+  Sea $H$ espacio de Hilbert y $A \subset H$. Se verifican las siguientes afirmaciones:
+  \begin{enumerate}
+  \item $(A^T)^T = \overline{\left\langle A \right\rangle}$;
+  \item Si $A$ es denso, entonces $A^T = \{0\}$.
+  \end{enumerate}
+\end{lemma}
+
+Recordamos en este punto el problema de la membrana. Podemos definir el operador asociado a este
+problema en $\mathrm{H}_0^1$. Este operador viene dado por
+\[ E[U] = \int_{\Omega} \frac{\sigma}{2} |\nabla u|^2 + \frac{\alpha}{2} |u|^2 \diff x -
+  \int_{\Omega} f(x)u(x) \diff x.\]
+
+Recordemos que su ecuación de Euler - Lagrange era de la forma $-\sigma \Delta u = f - \alpha u$.
+Definimos las funciones
+\[ a(u,v) = \int_{\Omega} \sigma \nabla u \nabla v + \alpha uv \diff x, \]
+
+\[ \overline{f}(u) = \int_{\Omega} f(x)u(x) \diff x, \]
+
+y
+\[ J[u] = \frac{1}{2} a(u,u) - \overline{f}(u) \]
+
+
+\begin{theorem}[Toerema de Lax - Milgram]
+  \label{thm:lax-milgram}
+  Sea $H$ un espacio de Hilbert y $a \colon H \times H \to \R$ forma bilineal, continua y
+  coerciva. Entonces, para toda función $\overline{f} \colon H \to \R$ lineal y continua, existe una
+  única $\overline{u} \in H$ solución de
+  \begin{equation}
+    \label{eq:lax-milgram}
+    \begin{cases}
+      a(\overline{u}, v) = \overline{f}(v); \\
+      ||\overline{u}||_H \le || \overline{f} || / \alpha.
+    \end{cases}
+    \tag{PD}
+  \end{equation}
+
+  Además, si $a$ es simétrica, entonces $\overline{u}$ es también la única solución del problema
+  \begin{equation}
+    \label{eq:lax-milgram:pv}
+    J(\overline{u}) = \min_{u \in H} J(u),
+    \tag{PV}
+  \end{equation}
+  siendo $J(u) = a(u,u)/2 - \overline{f}(u)$.
+\end{theorem}
+
+
+\section{Bibliografía}
+
+- Elsgoltz....
 
 \end{document}

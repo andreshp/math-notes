@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{Introducci\363n}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Variables aleatorias. Vectores aleatorios}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Distribuci\363n conjunta}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Muestra aleatoria simple}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Familias de distribuciones param\351tricas}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Familias de distribuciones}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Distribuciones discretas}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{Distribuciones continuas}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Estimaci\363n de par\341metros}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{M\351todo de los momentos}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{M\351todo de la m\341xima verosimilitud de Fisher}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Teor\355a general de estimadores}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.4}{Estudio te\363rico del estimador m\341ximo veros\355mil}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{La familia exponencial}{}% 14
+\BOOKMARK [1][-]{section.5}{Tests de hip\363tesis}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Errores de los tests de hip\363tesis}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Tests de Neyman-Pearson}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.3}{Descripci\363n de un test mediante p-valores}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.4}{Tests de la raz\363n de verosimilitud}{section.5}% 19
+\BOOKMARK [1][-]{section.6}{Estad\355stica bayesiana}{}% 20
+\BOOKMARK [2][-]{subsection.6.1}{Introducci\363n}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.2}{Estad\355stica cl\341sica vs bayesiana}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.3}{Familias conjugadas}{section.6}% 23
+\BOOKMARK [2][-]{subsection.6.4}{Distribuciones objetivas. Distribuci\363n de Jeffreys}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.5}{Convergencia de distribuciones a posteriori}{section.6}% 25
+\BOOKMARK [2][-]{subsection.6.6}{Test de Hip\363tesis Bayesianos}{section.6}% 26
+\BOOKMARK [1][-]{section.7}{Probabilidades subjetivas}{}% 27
+\BOOKMARK [2][-]{subsection.7.1}{Axiomas de la probabilidad subjetiva}{section.7}% 28

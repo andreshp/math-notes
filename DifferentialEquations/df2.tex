@@ -181,7 +181,7 @@ introducimos a continuación:
 \end{proposition}
 
 \begin{corollary} \label{cor:global-local} Si el PVI \eqref{eq:pvi} verifica la propiedad de
-  unicidad global, entonces verifica la propiedad de unicidad global.
+  unicidad global, entonces verifica la propiedad de unicidad local.
 \end{corollary}
 
 El recíproco del Corolario \ref{cor:global-local} no es cierto como cabe esperar. No obstante, sí se
@@ -1528,8 +1528,8 @@ definición.
   $\{V(x_n)\} \subset\ ]-\infty, r]$, contradicción.
 \end{proof}
 
-La siguiente proposición permite comprobar si una función es coerciva. La demostración es sencilla y
-se deja como ejercicio.
+La siguiente proposición permite comprobar si una función es coerciva. La demostración es sencilla
+(salvo el último apartado) y se deja como ejercicio.
 
 \begin{prop}
   Sean $V, W \colon \R^d \to \R$ y $V_1, \ldots, V_d \colon \R \to \R$ continuas. Se verifican las
@@ -1540,58 +1540,58 @@ se deja como ejercicio.
     si, las funciones $V_1, \ldots, V_d$ son coercivas.
   \item Si $V(x) \ge W(x)$ para todo $x \in \R^d$ y $W$ es coerciva, entonces $V$ es coerciva.
   \item Si $V$ es una función cuadrática (polinómica de grado $2$), entonces es coerciva si, y solo
-    si, $\mathrm{Hess} V$ es una matriz definida positiva.
+    si, $\mathrm{Hess} V$ es una matriz definida o semidefinida positiva.
   \item Si $V \in \mathcal{C}^1(\R^d)$ es una función convexa y tiene un único punto crítico,
     entonces $V$ es coerciva.
   \end{itemize}
 \end{prop}
 
+Nótese que si $V \circ \varphi$ es decreciente y $V$ es coerciva, entonces $\varphi$ estará acotada
+en el futuro. Este hecho da lugar al Teorema \ref{thm:guia}. Antes introducimos la siguiente
+definición.
+
 \begin{definition}
-  Consideremos una EDO \eqref{eq:edo}.  Sea $V : \R^d \to \R$ tal que $V \in
-  \mathcal{C}^1(\R^d)$. Se define $\dot{V}: D \to \R$ como
-  $\dot{V}(t,x) = \langle \nabla V(x), f(t,x)\rangle$.  Se dice que $V$ es una función guía de la
-  EDO si $\dot{V}$ tiene signo constante (para valores $x$ suficientemente grandes).
+  Sea $V : \R^d \to \R$ con $V \in \mathcal{C}^1(\R^d)$. Se define $\dot{V}: D \to \R$ como
+  $\dot{V}(t,x) = \langle \nabla V(x), f(t,x)\rangle$. Decimos que $V$ es una función guía de
+  \eqref{eq:edo} si $\dot{V}$ tiene signo constante (para valores $x$ suficientemente grandes).
 \end{definition}
 
 \begin{theorem}
   \label{thm:guia}
-  Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva tal que $\dot{V}(t,x) \le 0$ para todo
-  $(t,x) \in D$, entonces las soluciones maximales de \eqref{eq:pvi} están acotadas en el futuro.
+  Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva tal que $\dot{V}(t,x) \le 0$ (resp.
+  $\dot{V}(t,x) \ge 0$) para todo $(t,x) \in D$, entonces las soluciones maximales de \eqref{eq:pvi}
+  están acotadas en el futuro (resp. pasado).
 \end{theorem}
 \begin{proof}
-  Sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Definimos
+  Demostramos el teorema para el caso $\dot{V}(t,x) \le 0$ pues el otro es análogo. Sea
+  $\varphi \colon ]\alpha, \omega[ \to \R^d$ una solución maximal de \eqref{eq:pvi}. Definimos
   $y = V \circ \varphi$. Tenemos que $y'(t) = \dot{V}(t, \varphi(t)) \le 0$, luego $y$ es
-  decreciente. Por tanto, $V(\varphi(t)) \le V(\varphi(t)_0) = r_0$ para todo $t \ge t_0$. Por
-  tanto, $\varphi([t_0, \omega[) \subset \Omega_{r_0}$ por ser $V$ coerciva. Como $\Omega_{r_0}$ es
-  compacto, la función $\varphi$ está acotada en $[t_0, \omega[$. Consecuentemente, del Teorema de
-  prolongación de soluciones se deduce que $\omega = +\infty$.
+  decreciente. Por tanto, $V(\varphi(t)) \le V(\varphi(t_0)) = r_0$ para todo $t \ge t_0$. Por
+  tanto, $\varphi([t_0, \omega[) \subset \Omega_{r_0}$, que es compacto por ser $V$
+  coerciva. Consecuentemente, la función $\varphi$ está acotada en $[t_0, \omega[$.
 \end{proof}
-
-GENERALIZAR EL TEOREMA.
 
 \begin{corollary}
   Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva tal que $\dot{V}(t,x) = 0$ para todo $(t,x) \in D$,
-  entonces las soluciones maximales de \eqref{eq:pvi} están definidas en $]-\infty, +\infty[$ y
-  están acotadas. Además, $\varphi(t) \in C_{V(x_0)}$ para todo $t \in \R$.
+  entonces las soluciones maximales de \eqref{eq:pvi} están acotadas. Además,
+  $\varphi(t) \in C_{V(x_0)}$ para todo $t \in \R$.
 \end{corollary}
 
 \begin{remark}
   Las hipótesis del Teorema \ref{thm:guia} se pueden debilitar. Concretamente, la afirmación
   $\dot{V}(t,x) \le 0$ para todo $(t,x) \in D$ puede substituirse por $\dot{V}(t,x) \le 0$ para todo
-  $t \in ]t_0, +\infty[$, $x \in \R^d - B(p, r)$ para algunos $p \in \R^d$ y $ r > 0$. Además, en
-  lugar de suponer que $V$ es coerciva basta suponer que las componentes conexas de los conjuntos de
-  subnivel son acotadas. El siguiente resultado es una versión más general del Teorema
-  \ref{thm:guia}.
+  $t \in ]t_0, +\infty[$, $x \in \R^d \setminus B(p, r)$ para ciertos $p \in \R^d$ y $ r >
+  0$. Además, en lugar de suponer que $V$ es coerciva basta suponer que las componentes conexas de
+  los conjuntos de subnivel son acotadas. El siguiente resultado generaliza al Teorema
+  \ref{thm:guia} de otra forma.
 \end{remark}
 
 \begin{theorem}
   \label{thm:guia:2}
-  Si existe $V\in \mathcal{C}^1(\R^d)$ coerciva y existe $r \in \R$ tal que el conjunto
-  \[ \Omega_r = \{x \in \R^d \mid V(x) \le r\} \]
-
-  tiene componentes conexas acotadas y además $\dot{V}(t,x) \le 0$ para todo $t \ge
-  t_0$,$x \in \Omega_r$, entonces las soluciones maximales de \eqref{eq:pvi} están acotadas en el
-  futuro para $(t_0, x_0) \in ]a, +\infty[ \times \Omega_r$.
+  Si existe $V\in \mathcal{C}^1(\R^d)$ continua y existe $r \in \R$ tal que el conjunto $\Omega_r$
+  tiene componentes conexas acotadas y $\dot{V}(t,x) \le 0$ para todo $t \ge t_0$, $x \in \Omega_r$,
+  entonces para cualquier $(t_0, x_0) \in \ ]a, +\infty[ \times \Omega_r$ las soluciones maximales
+  de \eqref{eq:pvi} están acotadas en el futuro.
 \end{theorem}
 
 
