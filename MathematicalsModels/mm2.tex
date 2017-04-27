@@ -19,6 +19,7 @@ s%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\docaddress}{Universidad de Granada}
 \newcommand{\docemail}{andreshp9@gmail.com}
 \newcommand{\docabstract}{}
+\newcommand{\docrhead}{}
 
 \begin{document}
 
@@ -34,29 +35,28 @@ contorno.
 En primer lugar vamos a ver un ejemplo de este tipo de problemas que motive el desarrollo de la
 teoría.
 
-\begin{ex}[Problema de la cuerda mínima] \label{ex:intro}
-  Sean $(x_0, y_0)$ y $(x_1, y_1)$ dos puntos del plano. Consideramos todas las cuerdas que van
-  desde $(x_0, y_0)$ a $(x_1, y_1)$ y nos preguntamos cuál es la cuerda de longitud mínima. La
-  respuesta a este problema debería ser el segmento que une ambos puntos. No obstante, la
-  demostración de este hecho no es tan evidente. Una cuerda es una curva continua que tiene su
-  origen en $(x_0, y_0)$ y termina en $(x_1, y_1)$. En este momento nos centramos en aquellas curvas
-  que son la gráfica de una función con el objetivo de simplificar el problema. Parece evidente que
-  el resto de curvas no van a tener longitud mínima aunque no disponemos una prueba de este hecho
-  todavía. Además, exigimos que las curvas sean de clase uno. En resumen, consideramos solamente el
-  siguiente conjunto de curvas
-  \[\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
-    y_0, y(x_1) = y_1\}.\] Recordemos que la longitud de una curva $y \in \mathcal{C}^1([x_0, x_1])$
+\begin{ex}[Problema de la cuerda mínima] \label{ex:intro} Sean $(x_0, y_0)$ y $(x_1, y_1)$ dos
+  puntos del plano. Consideramos todas las cuerdas que van desde $(x_0, y_0)$ a $(x_1, y_1)$ y nos
+  preguntamos cuál es la cuerda de longitud mínima. La respuesta a este problema debería ser el
+  segmento que une ambos puntos. No obstante, la demostración de este hecho no es tan evidente. Una
+  cuerda es una curva continua que tiene su origen en $(x_0, y_0)$ y termina en $(x_1, y_1)$. En
+  este momento nos centramos en aquellas curvas que son la gráfica de una función con el objetivo de
+  simplificar el problema. Parece evidente que el resto de curvas no van a tener longitud mínima
+  aunque no disponemos una prueba de este hecho todavía. Además, exigimos que las curvas sean de
+  clase uno. En resumen, consideramos solamente el siguiente conjunto de curvas
+  \[\mathcal{D} = \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
+    y_0, y(x_1) = y_1\}.\] Recordemos que la longitud de una curva $y \in \mathcal{C}^1(x_0, x_1)$
   viene dada por $\int_{x_0}^{x_1} |y'(x)| \diff x$. Por tanto, buscamos aquel elemento
-  $\overline{y} \in \mathcal{D}$ que minimice el funcional $\mathcal{F}: \mathcal{D} \to \mathbb{R}$
+  $\overline{y} \in \mathcal{D}$ que minimice el funcional $\mathcal{F}\colon \mathcal{D} \to \mathbb{R}$
   dado por
   \[\mathcal{F}[y] = \int_{x_0}^{x_1} \sqrt{1 + y'(x)^2} \diff x.\]
   Esta cuestión se denomina \emph{formulación variacional del problema}. Supongamos que existe
   $\overline{y} \in \mathcal{D}$ mínimo de $\mathcal{F}$ y busquemos alguna condición necesaria que
   debe verificar tal mínimo. Nótese que para cualquier
-  $\phi \in \mathcal{C}^1_0([x_0, x_1]) = \{\varphi \in \mathcal{C}^1([x_0, x_1]): \varphi(x_0) = 0
+  $\phi \in \mathcal{C}^1_0([x_0, x_1]) = \{\varphi \in \mathcal{C}^1(x_0, x_1)\mid \varphi(x_0) = 0
   = \varphi(x_1)\}$ y $s \in \mathbb{R}$ se tiene que $\overline{y} + s \phi \in \mathcal{D}$ y, por
   tanto, $\mathcal{F}[\overline{y}] \le \mathcal{F}[\overline{y} + s \phi]$. Esto es, $0$ es el
-  mínimo global de la función $f: \mathbb{R} \to \mathbb{R}$ dada por
+  mínimo global de la función $f\colon \mathbb{R} \to \mathbb{R}$ dada por
   $f(s) = \mathcal{F}[\overline{y} + s \phi]$. Esta función es derivable gracias a la regla de
   Leibniz y su derivada viene dada por
   \[f'(s) = \int_{x_0}^{x_1} \frac{\phi'(x)(\overline{y}'(x) + s \phi'(x))}{\sqrt{1 +
@@ -65,7 +65,7 @@ teoría.
   \begin{equation} \label{eq:ex:fdp} 0 = \int_{x_0}^{x_1} \frac{\phi'(x) \overline{y}'(x)}{\sqrt{1 +
         \overline{y}'(x)^2}} \diff x.
   \end{equation}
-  Supongamos que $\overline{y} \in \mathcal{C}^2([x_0, x_1])$. En tal caso podemos integrar
+  Supongamos que $\overline{y} \in \mathcal{C}^2(x_0, x_1)$. En tal caso podemos integrar
   \eqref{eq:ex:fdp} por partes con $u = \overline{y}'/\sqrt{1 + \overline{y}'(x)^2}$ y
   $\diff v = \phi'(x)$ para obtener
   \begin{equation} \label{eq:ex:fd} 0 = -\int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial
@@ -73,49 +73,71 @@ teoría.
   \end{equation}
   A la búsqueda de aquellas funciones $\overline{y} \in \mathcal{D}$ que verifican \eqref{eq:ex:fd}
   para cualquier $\phi \in \mathcal{C}^1_0([x_0, x_1])$ se le llama \emph{formulación débil del
-    problema}. En la Sección \ref{sec:pv} veremos una versión básica del Lema fundamental del Cálculo de
-  Variaciones, que aplicamos a \eqref{eq:ex:fd} para obtener que $\overline{y}$ verifica la
-  siguiente ecuación diferencial ordinaria
+    problema}. En la Sección \ref{sec:pv} veremos una versión básica del Lema fundamental del
+  Cálculo de Variaciones, que aplicamos a \eqref{eq:ex:fd} para obtener que $\overline{y}$ verifica
+  la siguiente ecuación diferencial ordinaria
   \begin{equation} \label{eq:ex:edo} \frac{\partial}{\partial x}\frac{\overline{y}'(x)}{\sqrt{1 +
         \overline{y}'(x)^2}} = 0.
   \end{equation}
-  A esta ecuación diferencial se le denomina ecuación de Euler-Lagrange. Recordemos que además
-  tenemos que $\overline{y}(x_0) = 0 = \overline{y}(x_1)$ y, por tanto, la función $\overline{y}$ es
-  solución de un problema de contorno, que se denomina \emph{formulación clásica del problema}. En
-  este caso el problema de contorno tiene fácil solución. En efecto, desarrollando \eqref{eq:ex:edo}
-  obtenemos que
-  \[\frac{\overline{y}''(x)}{\sqrt{1 + \overline{y}'(x)^2}} = 0,\]
+  A esta ecuación diferencial se le denomina \emph{ecuación de Euler-Lagrange}. Recordemos que
+  además tenemos que $\overline{y}(x_0) = 0 = \overline{y}(x_1)$ y, por tanto, la función
+  $\overline{y}$ es solución de un problema de contorno, que se denomina \emph{formulación clásica
+    del problema}. En este caso el problema de contorno tiene fácil solución. En efecto,
+  desarrollando \eqref{eq:ex:edo} obtenemos que
+  \[ \frac{\overline{y}''(x)}{\sqrt{1 + \overline{y}'(x)^2}} = 0,\]
   esto es, $\overline{y}'' = 0$ y, por tanto, $\overline{y}(x) = ax+b$ para ciertos
   $a, b \in \mathbb{R}$. Las condiciones de contorno implican que $\overline{y}$ debe ser el
   segmento que une $(x_0, y_0)$ con $(x_1, y_1)$. En resumen, si la solución fuese de clase 2,
   entonces es el segmento que une ambos puntos.
 \end{ex}
 
-En lo que sigue demostraremos que bajo determinadas condiciones las soluciones de la ecuación de
-Euler-Lagrange siempre son soluciones de nuestro problema variacional e intentaremos rebajar cada
-una de las hipótesis que se han asumido a lo largo del ejemplo.
+En el ejemplo anterior hemos seguido el siguiente proceso:
+\begin{enumerate}
+\item Suponemos que $\overline{y}$ es un mínimo del funcional $\mathcal{F}$ con la regularidad
+  requerida.
+\item Fijado $\phi \in \mathcal{C}_0^1(\Omega)$ definimos la función
+  $f(s) = \mathcal{F}[\overline{y} + s \phi]$. De $f'(0) = 0$ obtenemos una ecuación integral.
+\item Integramos por partes la ecuación obtenida, utilizando las condiciones de contorno de $\phi$.
+\item Por el Lema Fundamental del Cálculo de Variaciones obtenemos una ecuación diferencial que
+  verifica $\overline{y}$. Esta ecuación se denomina ecuación de Euler-Lagrange.
+\item\label{item:candidatos} Resolvemos la ecuación de Euler-Lagrange imponiendo las condiciones de
+  contorno, obteniendo los candidatos a mínimo de $\mathcal{F}$.
+\end{enumerate}
+
+Queda demostrar que una de las soluciones obtenidas en \ref{item:candidatos} es el mínimo de
+$\mathcal{F}$. Esta cuestión es compleja y en este curso solo podremos resolverla bajo condiciones
+bastante restrictivas.
+
+En lo que sigue desarrollaremos formalmente la ecuación de Euler-Lagrange y
+demostraremos que bajo determinadas condiciones las soluciones de la ecuación de Euler-Lagrange
+siempre son soluciones de nuestro problema variacional. Además, intentaremos rebajar cada una de las
+hipótesis que se han asumido a lo largo del ejemplo.
   
 \section{Problemas varacionales} \label{sec:pv}
 
+Introducimos a continuación una primera definición de problema variacional que incluye al Ejemplo
+\ref{ex:intro}. Esta definición se irá ampliando a lo largo del curso a medida que nuestras
+herramientas sean más potentes.
+
 \begin{definition} \label{def:pv} Sea $I = [x_0, x_1] \subset \mathbb{R}$ y sea
-  $\Omega \subset \mathbb{R}^2$ un dominio. Consideramos $F: I \times \Omega \to \mathbb{R}$
+  $\Omega \subset \mathbb{R}^2$ un dominio. Consideramos $F\colon I \times \Omega \to \mathbb{R}$
   derivable y un conjunto no vacío
-  \[\mathcal{D} \subset \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega\}\]
+  \[\mathcal{D} \subset \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega\}\]
   que puede ser de una de las siguientes formas:
   \begin{enumerate}
-  \item $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega\};$
+  \item $\mathcal{D} = \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega\};$
   \item
-    $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
+    $\mathcal{D} = \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
     y_0\}$ para cierto valor $y_0$;
   \item
-    $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_1p) =
+    $\mathcal{D} = \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega, y(x_1) =
     y_1\}$ para cierto valor $y_1$;
   \item
-    $\mathcal{D} = \{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
+    $\mathcal{D} = \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
     y_0, y(x_1) = y_1\}$ para ciertos valores $y_0$ e $y_1$.
   \end{enumerate}
 
-  Definimos el funcional $\mathcal{F}: \mathcal{D} \to \mathbb{R}$ como
+  Definimos el funcional $\mathcal{F}\colon \mathcal{D} \to \mathbb{R}$ como
   \[\mathcal{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) \diff x.\]
   Un problema variacional consiste en encontrar el mínimo o máximo de $\mathcal{F}$ en caso de que
   exista.
@@ -123,6 +145,8 @@ una de las hipótesis que se han asumido a lo largo del ejemplo.
 
 En lo que sigue denotaremos $x,y$ y $p$ a las tres variables de $F$. También denotaremos $F_x$,
 $F_y$ y $F_p$ a sus primeras derivadas parciales respectivamente.
+
+\subsection{Ecuación de Euler-Lagrange}
 
 Vamos a reproducir en este contexto general el argumento que se desarrolló en el Ejemplo
 \ref{ex:intro}. Como se avisó en este ejemplo necesitaremos utilizar el Lema fundamental del Cálculo
@@ -146,22 +170,40 @@ de Variaciones.
   como se quería.
 \end{proof}
 
-\begin{thm} \label{thm:el} Consideremos un problema variacional. Si
-  $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2([x_0, x_1])$ es un mínimo de $\mathcal{F}$,
+Aunque de momento podemos desarrollar la teoría usando la versión básica del Lema fundamental del
+Cálculo de Variaciones, en un futuro vamos a necesitar aplicar una versión más general del
+mismo. Esta versión se enuncia en el siguiente resultado pero no podemos demostrarla con las
+herramientas de este curso.
+
+\begin{theorem}[Lema fundamental del cálculo de variaciones]
+  \label{thm:fundamental-variaciones}
+  Sea $\Omega \subset \R^d$ un dominio y $f \in \mathrm{L}^2(\Omega)$. La función $f$ es igual a la
+  función constantemente cero c.p.d si, y solo si, para cualquier
+  $\phi \in \mathcal{C}^1_0(\Omega) = \{ \phi \in \mathcal{C}^1(\Omega) \mid \phi = 0 \text{ fuera
+    de un compacto de }\Omega\}$ se tiene
+  \[\int_{x_0}^{x_1} f(x) \phi(x) \diff x = 0.\]
+\end{theorem}
+
+Ya podemos deducir en un ámbito general la denominada ecuación de Euler-Lagrange.
+
+\begin{thm}[Condición necesaria - Ecuación de Euler-Lagrange] \label{thm:el} Consideremos un
+  problema variacional tal que $F$ es dos veces derivable respecto de $y$ y $p$. Si
+  $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2(x_0, x_1)$ es un mínimo de $\mathcal{F}$,
   entonces $\overline{y}$ cumple la ecuación diferencial
   \[F_y(x, y(x), y'(x)) - \frac{\partial}{\partial x} F_p(x, y(x), y'(x)) = 0.\] A esta ecuación se
-  le denomina ecuación de Euler-Lagrange y por comodidad la escribiremos como
+  le denomina ecuación de Euler-Lagrange asociada al problema variacional. Por comodidad la
+  escribiremos como
   \[F_y - \frac{\partial}{\partial x} F_p = 0.\]
 \end{thm}
 \begin{proof}
-  Supongamos que $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2([x_0, x_1])$ es un mínimo de
+  Supongamos que $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2(x_0, x_1)$ es un mínimo de
   $\mathcal{F}$. Consideremos $\phi \in \mathcal{C}^1_0([x_0, x_1])$. Utilizando la compacidad de la
   imagen de $\overline{y}$ y que $\Omega$ es abierto es sencillo ver que existe $\varepsilon > 0$
-  tal que $\overline{y} + s \phi \in \mathcal{D}$ para todo $s \in ]s-\varepsilon,
-  s+\varepsilon[$. Puesto que $\overline{y}$ es mínimo global de $\mathcal{F}$, obtenemos que
+  tal que $\overline{y} + s \phi \in \mathcal{D}$ para todo $s \in ]-\varepsilon,
+  \varepsilon[$. Puesto que $\overline{y}$ es mínimo global de $\mathcal{F}$, obtenemos que
   $\mathcal{F}[\overline{y}] \le \mathcal{F}[\overline{y} + s \phi]$ para todo
-  $s \in ]s-\varepsilon, s+\varepsilon[$. Esto es, $0$ es el mínimo global de la función
-  $f: ]s-\varepsilon, s+\varepsilon[ \to \mathbb{R}$ dada por
+  $s \in ]-\varepsilon, \varepsilon[$. Esto es, $0$ es el mínimo global de la función
+  $f\colon ]-\varepsilon, \varepsilon[ \to \mathbb{R}$ dada por
   $f(s) = \mathcal{F}[\overline{y} + s \phi]$. Escribimos por comodidad
   $\#(x, s) = (x, \overline{y}(x) + s \phi(x), \overline{y}'(x) + s \phi'(x))$. La función $f$ es
   derivable gracias a la regla de Leibniz y su derivada se corresponde con
@@ -171,14 +213,15 @@ de Variaciones.
   \begin{equation} \label{eq:el:fdp} 0 = f'(0) = \int_{x_0}^{x_1} F_y(\#(x, 0)) \phi(x) +
     \int_{x_0}^{x_1} F_p(\#(x, 0)) \phi'(x) \diff x.
   \end{equation}
-  Por hipótesis $\overline{y} \in \mathcal{C}^2([x_0, x_1])$ y, por tanto, podemos integrar el
-  segundo sumando de \eqref{eq:el:fdp} por partes con $u = F_p(\#(x, 0))$ y $\diff v = \phi'(x)$
-  para obtener
+  Por hipótesis $\overline{y} \in \mathcal{C}^2(x_0, x_1)$ y, por tanto, podemos integrar el segundo
+  sumando de \eqref{eq:el:fdp} por partes con $u = F_p(\#(x, 0))$ y $\diff v = \phi'(x)$ para
+  obtener
   \begin{equation} \label{eq:el:fdp:2} 0 = \left[F_p(\#(x, 0)) \phi(x)\right]_{x_0}^{x_1} -
     \int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x = - \int_{x_0}^{x_1}
     \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x.
   \end{equation}
-  En vista de \eqref{eq:el:fdp:2} podemos escribir \eqref{eq:el:fdp} como sigue
+  En vista de \eqref{eq:el:fdp:2} y que $\phi$ se anula en $x_0$ y $x_1$ podemos escribir
+  \eqref{eq:el:fdp} como sigue
   \begin{equation} \label{eq:el:fd} 0 = \int_{x_0}^{x_1} \left(F_y(\#(x, 0)) -
       \frac{\partial}{\partial x} F_p(\#(x, 0))\right) \phi(x) \diff x.
   \end{equation}
@@ -197,13 +240,13 @@ de contorno. En efecto, tenemos los siguientes casos:
 
 \begin{enumerate}
 \item El conjunto $\mathcal{D}$ es de la forma
-  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) = y_0, y(x_1) =
+  $\{y \in \mathcal{C}^1(x_0, x_1): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) = y_0, y(x_1) =
   y_1\}$ para ciertos valores $y_0$ e $y_1$. En tal caso las condiciones de contorno son
   $y(x_0) = y_0$ e $y(x_1) = y_1$.
 \item $\mathcal{D}$ es de la forma
-  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega\}$. En tal caso podemos
+  $\{y \in \mathcal{C}^1(x_0, x_1): (y, y')([x_0, x_1]) \subset \Omega\}$. En tal caso podemos
   repetir el razonamiento realizado en la demostración del Teorema \ref{thm:el} para
-  $\phi \in \mathcal{C}^{1}([x_0, x_1])$ obteniendo
+  $\phi \in \mathcal{C}^1(x_0, x_1)$ obteniendo
   \begin{equation} \label{eq:contorno:fdp} 0 = \int_{x_0}^{x_1} \left(F_y(\#(x, 0)) -
       \frac{\partial}{\partial x} F_p(\#(x, 0))\right) \phi(x) \diff x + \left[F_p(\#(x, 0))
       \phi(x)\right]_{x_0}^{x_1}.
@@ -218,41 +261,216 @@ de contorno. En efecto, tenemos los siguientes casos:
   $F_p(x_1, \overline{y}(x_1), \overline{y}'(x_1)) = 0$. Análogamente deducimos que
   $F_p(x_0, \overline{y}(x_0), \overline{y}'(x_0)) = 0$.
 \item $\mathcal{D}$ es de la forma
-  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) = y_0\}$ para
-  cierto valor $y_0$. Razonamos de forma análoga a b) para obtener las condiciones de contorno
-  $y(x_0) = y_0$ y $F_p(x_1, \overline{y}(x_1), \overline{y}'(x_1)) = 0$.
+  $\{y \in \mathcal{C}^1(x_0, x_1): (y, y')([x_0, x_1]) \subset \Omega, y(x_0) = y_0\}$ para cierto
+  valor $y_0$. Razonamos de forma análoga a b) para obtener las condiciones de contorno
+  $y(x_0) = y_0$ y $F_p(x_1, \overline{y}(x_1), \overline{y}'(x_1)) = 0$. Nótese que no podemos
+  obtener la condición $F_p(x_0, \overline{y}(x_0), \overline{y}'(x_0)) = 0$ ya que para que
+  $\phi \in \mathcal{C}^1(x_0,x_1)$ verifique \eqref{eq:contorno:fdp} debe cumplir $\phi(x_0) = 0$
+  (en caso contrario $\overline{y}+s\phi \not \in \mathcal{D}$ para cualquier $s \in \R$).
 \item $\mathcal{D}$ es de la forma
-  $\{y \in \mathcal{C}^1([x_0, x_1]): (y, y')([x_0, x_1]) \subset \Omega, y(x_1p) = y_1\}$ para
-  cierto valor $y_1$. Razonamos de forma análoga a b) para obtener las condiciones de contorno
+  $\{y \in \mathcal{C}^1(x_0, x_1): (y, y')([x_0, x_1]) \subset \Omega, y(x_1p) = y_1\}$ para cierto
+  valor $y_1$. Razonamos de forma análoga a c) para obtener las condiciones de contorno
   $y(x_1) = y_1$ y $F_p(x_0, \overline{y}(x_0), \overline{y}'(x_0)) = 0$.
 \end{enumerate}
 
 \begin{definition}
-  En el contexto actual, el problema de contorno que hemos obtenido se denomina problema de contorno del problema variacional. A las soluciones del problema de contorno se les llaman extremales.
+  En el contexto actual, el problema de contorno que hemos obtenido se denomina \emph{problema de
+    contorno del problema variacional}. A las soluciones del problema de contorno se les llaman
+  \emph{extremales}.
 \end{definition}
 
-Cuando pretendamos resolver un problema variacional el primer paso será calcular las extremales asociadas. La ecuación de Euler-Lagrange no siempre es sencilla de resolver. No obstante, en la práctica la función $F$ puede no depender de alguna de las variables $x$, $y$ o $p$. En tal caso la resolución de la ecuación de Euler-Lagrange se simplifica enormemente como mostramos a continuación.
+\begin{ex}[Curva de longitud mínima]
+  Retomamos el Ejemplo \ref{ex:intro} eliminando la condición de contorno $y(x_1) = y_1$. En tal
+  caso por los razonamientos anteriores las extremales verifican la ecuación de Euler-Lagrange,
+  $y'' = 0$, y las condiciones $y(x_0) = x_0$ y $0 = F_p(x_1, y(x_1), y'(x_1))$. Recuérdese que
+  $F_p = p / \sqrt{1+p^2}$ y, por tanto, la segunda condición de contorno es $y'(x_1) =
+  0$. Obtenemos que solo hay una única extremal, la función $y = x_0$ como cabría esperar.
+\end{ex}
+
+Cuando pretendamos resolver un problema variacional el primer paso será calcular las extremales
+asociadas. La ecuación de Euler-Lagrange no siempre es sencilla de resolver. No obstante, en la
+práctica la función $F$ puede no depender de alguna de las variables $x$, $y$ o $p$. En tal caso la
+resolución de la ecuación de Euler-Lagrange se simplifica enormemente como mostramos a continuación.
 
 \begin{enumerate}
 \item La función $F$ no depende de de $x$. En tal caso tenemos que
-  \[\frac{\partial}{\partial x} \left(F(\overline{y}(x), \overline{y}'(x)) - \overline{y}(x) F_p(\overline{y}(x), \overline{y}'(x))\right) = \overline{y} \left(F_y(\overline{y}(x), \overline{y}'(x)) - \frac{\partial}{\partial x} F_p(\overline{y}(x), \overline{y}'(x))\right) = 0.\]
-  Consecuentemente, los extremales son aquellas soluciones de las ecuaciones
+  \[\frac{\partial}{\partial x} \left(F(\overline{y}(x), \overline{y}'(x)) - \overline{y}'(x)
+      F_p(\overline{y}(x), \overline{y}'(x))\right) = \overline{y}'(x) \left(F_y(\overline{y}(x),
+      \overline{y}'(x)) - \frac{\partial}{\partial x} F_p(\overline{y}(x), \overline{y}'(x))\right)
+    = 0.\] Consecuentemente, los extremales son aquellas soluciones de las ecuaciones
   \begin{equation}
     \label{eq:el:x}
     F(\overline{y}(x), \overline{y}'(x)) = \overline{y}(x) F_p(\overline{y}(x), \overline{y}'(x)) + k
   \end{equation}
-  para $k \in \mathbb{R}$ arbitrario que verifican las condiciones de contorno. Estas ecuaciones suelen ser más sencillas de resolver ya que solo intervienen $F$ y $F_p$.
-  \item La función $F$ no depende de de $x$. En tal caso, la ecuación de Euler-Lagrange se simplifica enormemente, obteniendo que los extremales son aquellas soluciones de las ecuaciones
+  para $k \in \mathbb{R}$ arbitrario que verifican las condiciones de contorno. Estas ecuaciones
+  suelen ser más sencillas de resolver ya que solo intervienen $F$ y $F_p$.
+\item La función $F$ no depende de de $y$. En tal caso las extremales son aquellas soluciones de las
+  ecuaciones
   \begin{equation}
     \label{eq:el:y}
     F_p(x, \overline{y}'(x)) = k
   \end{equation}
-  para $k \in \mathbb{R}$ arbitrario que verifican las condiciones de contorno. Este es el caso del Ejemplo \ref{ex:intro}.
+  para $k \in \mathbb{R}$ arbitrario que verifican las condiciones de contorno. Este es el caso del
+  Ejemplo \ref{ex:intro}.
 \end{enumerate}
 
-\section{Problemas de contorno}
+\subsection{Convexidad: Condición suficiente de existencia}
 
-\subsection{Tipos de problemas de contorno}
+En este apartado damos una primera condición suficiente de existencia de solución para un problema
+variacional. Recordemos en este punto que cuando uno minimiza una función real de variable real
+derivable la convexidad local de la función nos permite discernir si un punto crítico es mínimo,
+máximo o punto de inflexión. Vamos a plicar el concepto de convexidad en el ámbito actual.
+
+\begin{definition}
+  Sea $\Omega \subset \R^d$ un conjunto convexo y $f \colon \Omega \to \R$. La función $f$ es
+  \emph{convexa} si para cualquier $x,y \in \Omega$ se tiene que
+  \[ f(tx + (1-t)y) \le tf(x) + (1-t)f(y) \] para todo $t \in [0,1]$. Si la desigualdad anterior
+  siempre es estricta entonces $f$ es \emph{estrictamente convexa}.
+\end{definition}
+
+Desarrollamos a continuación el principal teorema de esta sección.
+
+\begin{theorem}
+  \label{thm:convex:minimo}
+  Consideremos un problema variacional con las condiciones de regularidad el Teorema
+  \ref{thm:el}. Sea $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2(x_0,x_1)$ un extremal. Si el
+  conjunto $\mathcal{D}$ y el funcional $\mathcal{F}$ son convexos, entonces $\overline{y}$ es un
+  mínimo global de $\mathcal{F}$ en $\mathcal{D}$.
+\end{theorem}
+\begin{proof}
+  En primer lugar, observamos que invirtiendo la demostración del Teorema \ref{thm:el} obtenemos que
+  \[ \left.\frac{\partial}{\partial t}\left( \mathcal{F}[ \overline{y} + t \phi ] \right)\right|_{t
+      = 0} = 0 \] para cualquier $\phi \in \mathcal{C}_0^1(x_0,x_1)$. Sea $z \in
+  \mathcal{D}$. Veamos que $\mathcal{F}[ \overline{y} ] \le \mathcal{F}[z]$. Definimos la función
+  $\phi = z - \overline{y} \in \mathcal{C}_0^1(x_0,x_1)$. Por la convexidad de $\mathcal{F}$
+  deducimos que para $t$ lo suficientemente pequeño se verifica
+  $\mathcal{F}[\overline{y}+t\phi] = \mathcal{F}[(1-t)\overline{y}+ tz] \le
+  (1-t)\mathcal{F}[\overline{y}] + t \mathcal{F}[z]$. Consecuentemente obtenemos que
+  \[ \frac{\mathcal{F}[\overline{y}+t\phi] - \mathcal{F}[\overline{y}]}{t} \le \mathcal{F}[z] -
+    \mathcal{F}[\overline{y}]. \] Haciendo tender $t$ a $0$ deducimos el resultado.
+\end{proof}
+
+En ocasiones podemos encontrar mínimos locales de $\mathcal{F}$. En tal caso la convexidad también
+nos permite asegurar que son mínimos globales.
+
+\begin{prop}
+  Consideremos un problema variacional tal que el conjunto $\mathcal{D}$ y el funcional
+  $\mathcal{F}$ son convexos. Si $\overline{y} \in \mathcal{D}$ es mínimo local (resp. estricto) de
+  $\mathcal{F}$ bajo la norma $||\cdot||_{\infty}$, entonces $\mathcal{F}$ alcanza un mínimo global
+  en $\overline{y}$.
+\end{prop}
+\begin{proof}
+  Sea $U \subset D$ entorno convexo en el que $\overline{y}$ es mínimo global. Sea
+  $z \in \mathcal{D}$. Existe $t \in \R$ tal que $tz+(1-t)y \in U$. Tenemos que
+  $\mathcal{F}[ \overline{y} ] \le \mathcal{F}[tz+(1-t)y] \le (1-t)\mathcal{F}[\overline{y}] + t
+  \mathcal{F}[z]$. Consecuentemente $\mathcal{F}[ \overline{y} ] \le \mathcal{F}[z]$ como se quería.
+\end{proof}
+
+En este punto nos preguntamos cómo podemos comprobar que $\mathcal{D}$ y $\mathcal{F}$ son
+convexos. El siguiente resultado nos proporciona una condición suficiente fácil de verificar.
+
+\begin{prop}[Condición de convexidad] \label{prop:convex:cond} Consideremos un problema
+  variacional. Si el conjunto $\Omega$ y la función $F$ son convexos, entonces $\mathcal{D}$ es
+  convexo y $\mathcal{F}$ es convexo.
+\end{prop}
+\begin{proof}
+  Es una consecuencia de la linealidad y la monotonía de la integral.
+\end{proof}
+
+\begin{remark}
+  Recordemos en este punto que dado $\Omega \subset \R^d$ abierto y $f \in \mathcal{C}^2(\Omega)$,
+  la función $f$ es convexa si, y solo si, su matriz hessiana es semidefida positiva. Este resultado
+  nos permitirá comprobar las hipótesis de la Proposición \ref{prop:convex:cond}.
+\end{remark}
+
+\begin{remark}
+  La condición anterior no es necesaria. Por ejemplo, el funcional
+  \[ \mathcal{F}[y] = \int_0^1 y^2(x)(1 - y'(x)) \diff x \] es convexo sobre
+  $\mathcal{D} = \mathcal{C}_0^1(0,1)$ pero $F$ no es una función convexa.  En efecto, tenemos que
+  \[ \mathcal{F}[y] = \int_0^1 y^2(x) \diff x - \int_0^1 y^2(x)y'(x) \diff x = \int_0^1 y^2(x) \diff
+    x - \left[ \frac{y^3(x)}{3}\right]^1_0 = \int_0^1 y^2(x) \diff x, \] de donde deducimos por la
+  proposición previa que $\mathcal{F}$ es convexo. No obstante, la función $F$ verifica
+  \[ \mathrm{Hess}(F)(y,p) = \left(
+      \begin{matrix}
+        2(1-p) & -2y \\
+        -2y & 0
+      \end{matrix}
+    \right), \] que es semidefinida negativa para $p > 1$.
+\end{remark}
+
+\section{Cálculo de estremales: Problemas de contorno}
+
+En la sección anterior deducimos la ecuación de Euler-Lagrange así como las condiciones de contorno
+que debe verificar un mínimo del funcional que sea de clase $2$. Esto es un problema de contorno.
+
+\begin{definition}
+  Un \emph{problema de contorno} o \emph{PC} consiste en encontrar una solución de una ecuación
+  diferencial ordinaria en un intervalo $I = [x_0, x_1]$ obligando a que la solución verififique
+  ciertas condiciones en los extremos del intervalo.
+\end{definition}
+
+Las condiciones de contorno pueden ser muy variadas. A continuación introducimos los tipos de
+condiciones de contorno más habituales.
+
+\begin{enumerate}
+\item \textbf{Condiciones de tipo Dirichlet:} Se fija el valor de la función en los extremos del
+  intervalo.
+\item \textbf{Condiciones de tipo Newmann:} Se fija el valor de la derivada en los extremos del
+  intervalo.
+\item \textbf{Condiciones periódicas:} Los valores de la función o su derivada en el extremo deben
+  ser los mismos.
+\end{enumerate}
+
+Además, si los valores impuestos son nulos las condiciones se denominan \emph{homogéneas} mientras
+que se denominan \emph{no homogéneas} en caso contrario.
+
+Los problemas de contorno pueden tener solucion única, tener múltiples soluciones o no tener
+solución.  En lo que sigue vemos un ejemplo de cad auno de estos casos.
+
+\begin{ex}
+  Consideramos la EDO $x'' + x = 0$. Sabemos que las soluciones de esta EDO son de la forma
+  $A \cos(x) + B \sin(x)$ con $A,B \in \R$.
+  
+  \begin{enumerate}
+  \item Si fijamos condiciones de tipo Dirichlet en $I = [0,\pi]$ ($y(0) = y_0$, $y(\pi) = y_1$),
+    entonces el problema de contorno tiene solución si, y solo si, $y_0 = y_1$, en cuyo caso hay
+    tantas soluciones como posibles valores de $B$.
+  \item Si fijamos condiciones de tipo Dirichlet en $I = [0, \pi / 2]$, entonces existe una única
+    solución.
+  \end{enumerate}
+\end{ex}
+
+\begin{ex} \label{ex:no-sol} Consideramos el problema de contorno con condiciones de tipo Newmann
+  \[
+    \begin{cases}
+      y'' = 2; \\
+      y'(0) = 0; \\
+      y'(1) = 0.
+    \end{cases}
+  \]
+
+  El problema no tiene solución ya que esta debe ser de la forma $y(t) = t^2 + A t + B$ pero
+  $y'(0) = A \ne y'(1) = 1+A$.
+\end{ex}
+
+Nos preguntamos en este punto si todo problema de contorno puede verse como la ecuación de
+Euler-Lagrange de algún funcional. La respuesta es en general negativa aunque esto sea posible a
+veces como mostramos en el siguiente ejemplo.
+
+\begin{ex}
+  En el Ejemplo \ref{ex:no-sol} vimos un problema de contorno que no tiene solución. Nos preguntamos
+  si proviene de un problema variacional. En tal caso, debe tenerse
+  $F_y - \frac{\partial}{\partial x} F_p = y''-2$. Supongamos que $F_y = -2$. Entonces,
+  $\frac{\partial}{\partial x} F_p = -y''$ y, por tanto, $F_p = -y'$. Deducimos que debe tenerse
+  $F(x,y(x),y'(x)) = -2y(x) - y'(x)^2/2$. Por tanto, $F(x,y,p) = -2y -p^2/2$. Consideramos
+  $\Omega = \R^2$, $I = [0,1]$ y $\mathcal{D} = \mathcal{C}^1(0, 1)$. El problema variacional
+  asociado tiene a $y'' -2 = 0$ como ecuación de Euler-Lagrange. Además, las condiciones de contorno
+  son $y'(0) = 0 = y'(1)$ pues $\mathcal{F}_p(x,y(x),y'(x)) = -y'(x)$ . Por tanto, el funcional no
+  tiene ningún mínimo de clase $2$.
+\end{ex}
+
+
+\subsection{El problema de la viga}
 
 \begin{ex}[Problema de la viga]
   
@@ -276,19 +494,22 @@ $x_0 \in [x_0, x_1]$. Definimos $P(X) = \exp\left(\int^x_{x_0} a(s) \diff s\righ
 $x \in [x_0, x_1]$. Nótese que $P > 0$. Por tanto, multiplicando \eqref{eq:edo:2} por $P(x)$
 obtenemos una ecuación equivalente que responde a
 \[c(x) P(x) = P(x)y''(x) + P'(x)y'(x) + P(x) b(x) y(x) = \left(P(x)y'(x)\right)' + P(x) b(x) y(x).\]
-Denotando $R(x) = c(x) P(x)$ y $Q(x) = P(x) b(x)$, hemos obtenido que \eqref{eq:edo:2} es equivalente a la ecuación
+Denotando $R(x) = c(x) P(x)$ y $Q(x) = P(x) b(x)$, hemos obtenido que \eqref{eq:edo:2} es
+equivalente a la ecuación
 \begin{equation}
   \label{eq:edo:2}
   \left(P(x)y'(x)\right)' + Q(x) y(x) = R(x),
 \end{equation}
-que se denomina \emph{forma autoadjunta} o \emph{forma de Sturm} de la EDO de segundo orden. La forma autoadjunta nos permite trabajar de forma más cómoda con la ecuación diferencial, por lo que será habitualmente utilizada de aquí en adelante.
+que se denomina \emph{forma autoadjunta} o \emph{forma de Sturm} de la EDO de segundo orden. La
+forma autoadjunta nos permite trabajar de forma más cómoda con la ecuación diferencial, por lo que
+será habitualmente utilizada de aquí en adelante.
 
 \begin{prop}
   PV
 \end{prop}
 
 \begin{thm}
-  Sean $P, Q$ y $R$ son funciones continuas en $[x_0, x_1]$ con $P \in \mathcal{C}^1([x_0, x_1])$ y
+  Sean $P, Q$ y $R$ son funciones continuas en $[x_0, x_1]$ con $P \in \mathcal{C}^1(x_0, x_1)$ y
   $P > 0$. Si $Q < 0$, entonces la función $F(x,y,p) = P p^2/2 - Q y^2/2 + R$ (está bien?) es
   convexa. Además, bajo estas hipótesis, el problema de contorno con condiciones
   \begin{equation}
@@ -428,7 +649,7 @@ por
 En este punto extendemos las ecuaciones de Euler-Lagrange al problema de Lagrange.
 
 \begin{thm}
-  En el contexto actual, si $\overline{y} \in \mathcal{C}^2([x_0, x_1])$ es un mínimo de
+  En el contexto actual, si $\overline{y} \in \mathcal{C}^2(x_0, x_1)$ es un mínimo de
   $\mathcal{F}$, entonces verifica el siguiente sistema de ecuaciones en derivadas parciales
   \[
     \begin{cases}
@@ -444,7 +665,7 @@ En este punto extendemos las ecuaciones de Euler-Lagrange al problema de Lagrang
 
 En este punto añadiremos ligaduras de tipo algebraico $\varphi_j(y_1, \ldots, y_n) = 0$, donde
 $j \in \{1, \ldots, m\}$ y $m < n$. Definimos
-\[\mathcal{D}_\varphi = \{y_i \in \mathcal{C}^1([x_0, x_1]): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
+\[\mathcal{D}_\varphi = \{y_i \in \mathcal{C}^1(x_0, x_1): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
   \mathrm{Im}(y, y') \subset \Omega, \varphi_j(y_1, \ldots, y_n) = 0\}.\]
 
 El problema variacional a resolver consiste en hallar el mínimo de $\mathcal{F}(y)$ en
@@ -481,7 +702,7 @@ El siguiente resultado nos proporciona una propiedad e los mínimos de $\mathcal
 
 Abordamos el problema generalizado incluyendo restricciones sobre las derivadas
 $\varphi_j(y_1, \ldots, y_n) = 0$, para $j \in \{1, \ldots, m\}$ y $m < n$. Esto es, consideramos
-\[\mathcal{D}_\varphi' = \{y \in \mathcal{C}^1([x_0, x_1]): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
+\[\mathcal{D}_\varphi' = \{y \in \mathcal{C}^1(x_0, x_1): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
   \mathrm{Im}(y, y') \subset \Omega, \varphi_j(y_1, \ldots, y_n, y_1', \ldots, y_n') = 0 \}.\]
 
 \begin{prop} \label{prop:ml:ad}
@@ -504,7 +725,7 @@ $\varphi_j(y_1, \ldots, y_n) = 0$, para $j \in \{1, \ldots, m\}$ y $m < n$. Esto
 \subsection{Restricciones de tipo integral}
 
 En este apartado consideramos restricciones de tipo integral.
-\[\mathcal{D}_G = \{y \in \mathcal{C}^1([x_0, x_1]): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
+\[\mathcal{D}_G = \{y \in \mathcal{C}^1(x_0, x_1): y_i(x_0) = y_{i0}, y_i(x_1) = y_{i1},
   \mathrm{Im}(y, y') \subset \Omega, \int_{x_0}^{x_1}G_j(y_1, \ldots, y_n, y_1', \ldots, y_n') = L_j
   \ \forall j \in \{1, \ldots, m\},\] donde $m \in \N$.
 
@@ -1289,7 +1510,7 @@ un subconjunto de la frontera de $\Omega$.
 
   si $p \in [1, +\infty[$ y
   \[ ||u|| = \max_{0 \le |\alpha| \le m} ||\frac{\partial^{|\alpha|}}{\partial x^{\alpha}} u
-    ||^p_{L_p(\Omega)} \]
+    ||^p_{\mathrm{L}_p(\Omega)} \]
 
   si $p = +\infty$. Para $p = 2$ el espacio de Sobolev es un espacio de Hilbert, y se denota
   $\mathrm{H}^m(\Omega)$, para el producto escalar
@@ -1310,7 +1531,7 @@ un subconjunto de la frontera de $\Omega$.
   \item $1/|x|^{\alpha} \in L_p(B)$ si, y solo si, $\alpha p < N$;
   \item $1/|x|^{\alpha} \in L_p(\R^N \setminus B)$ si, y solo si, $\alpha p > N$.
   \end{itemize}
-  Ayuda: Cambio a radiales en \R$^N$.
+  Ayuda: Cambio a radiales en $\R^N$.
 \end{ex}
 
 En $H^1(\Omega)$ hay un subespacio destacado,
@@ -1324,20 +1545,41 @@ $W^{1,p} (\Omega) = \overline{\mathcal{C}^\infty(\Omega)}$.
 \begin{theorem}[Teorema fundamental del cálculo integral]
   \label{thm:fundamental-calculo}
   Dado $I = ]a,b[$ y $f \in \mathrm{L}_{loc}^1(I)$ y $c \in I$, definimos
-  \[ F(x) = \int__c^x f(s) \diff s \]
+  \[ F(x) = \int_c^x f(s) \diff s \]
 
   para todo $x \in I$. Entonces, $F$ tiene derivada débil y ésta es $f$. A $F$ se le llama primitiva
   de $f$. Además, $F$ es continua.
 \end{theorem}
+\begin{proof}
+  Tenemos que
+  \begin{align*}
+    - \int_a^b F(x) \phi'(x) \diff x & = - \int_a^b \int_{c}^{s} f(s) \phi'(x) \diff s \diff x \\
+                                     & =  \int_a^c \int_{s}^{c} f(s) \phi'(x) \diff s \diff x - \int_c^b \int_{c}^{s} f(s) \phi'(x) \diff s \diff x \\
+                                     & =  \int_a^c \int_{x}^{c} f(s) \phi'(x) \diff s \diff x - \int_c^b \int_{c}^{x} f(s) \phi'(x) \diff s \diff x \\
+                                     & =  \int_a^c f(s) (\phi(c)-\phi(s)) \diff s - \int_c^b  f(s) (\phi(s) - \phi(c)) \diff s  
+  \end{align*}
+\end{proof}
 
-\begin{theorem}
+\begin{theorem}[Poincaré]
   \label{thm:cota-h1}
   Sea $\Omega \subset \R^N$ acotado en al menos una dirección, esto es, existe $v \in \R^N$ ,
   $a,b \in \R$ con $a < b$ tales que $a \le <x,v> \le b$ para todo $x \in \Omega$. Entonces, para
   cada $u \in \mathrm{H}_0^1(\Omega)$ existe $c > 0$ con
   \[ \int_{\Omega} u^2(s) \diff s \le C \int_{\Omega} |\nabla u(s)|^2 \diff s.\]
 \end{theorem}
-
+\begin{proof}
+  Demostramos el resultado para el caso el caso uno dimensional.  Defino el funcional
+  $\mathcal{F}\colon \mathcal{D}_1 \to \R$ dado por
+  \[ \mathcal{F}[u] = \int_{x_0}^{x_1} (u')^2 \diff x, \] donde
+  $\mathcal{D}_1 = \{u \in \mathcal{C}_0^1(x_0,x_1) \mid \int_{x_0}^{x_1} u^2 \diff x =
+  1\}$. Podemos aplicar el Teorema \eqref{thm:sl}, obteniendo que el funcional $\mathcal{F}$ tiene
+  mínimo y vale $\lambda_1 = (\pi / (x_1-x_0))^2$. Por tanto, dado $u \in C_0^1(x_0, x_1)$ tenemos
+  que
+  \[\mathcal{F}[u / \int_{x_0}^{x_1} u^2 \diff x] \ge \lambda_1.\]
+  Hemos probado parcialmente el resultado para $C = 1 / \lambda_1$. Para pasar a
+  $\mathrm{H}_0^1(x_0, x_1)$ usamos que
+  $\mathrm{H}_0^1(x_0, x_1) = \overline{\mathcal{C}_0^1(x_0, x_1)}^{\mathrm{H}^1}$.
+\end{proof}
 
 \begin{theorem}
   \label{thm:h1-norma}
@@ -1386,28 +1628,181 @@ y
 \[ J[u] = \frac{1}{2} a(u,u) - \overline{f}(u) \]
 
 
-\begin{theorem}[Toerema de Lax - Milgram]
+\begin{theorem}[Teorema de Lax - Milgram]
   \label{thm:lax-milgram}
-  Sea $H$ un espacio de Hilbert y $a \colon H \times H \to \R$ forma bilineal, continua y
-  coerciva. Entonces, para toda función $\overline{f} \colon H \to \R$ lineal y continua, existe una
-  única $\overline{u} \in H$ solución de
+  Sea $H$ un espacio de Hilbert y $a \colon H \times H \to \R$ una forma bilineal, continua y
+  coerciva (existe $\alpha$ tal que $a(u,u) \ge \alpha ||u||$ para todo $u \in H$). Entonces, para
+  cada función $\overline{f} \colon H^{*}, existe un único elemento $\overline{u} \in
+  H$ que sea solución de
   \begin{equation}
     \label{eq:lax-milgram}
-    \begin{cases}
-      a(\overline{u}, v) = \overline{f}(v); \\
-      ||\overline{u}||_H \le || \overline{f} || / \alpha.
-    \end{cases}
+    a(\overline{u}, v) = \overline{f}(v) \quad \forall \,v \in H.
     \tag{PD}
   \end{equation}
+  Además, la aplicación $F$\colon H^* \to H$ que a cada $\overline{f}$ le hace corresponder la única
+  solución de \eqref{eq:lax-milgram} verifica $||F(\overline{f})|| \le ||\overline{f}|| / \alpha$
+  para todo $\overline{f} \in H^*$ y, por tanto, $F$ es continua.
 
-  Además, si $a$ es simétrica, entonces $\overline{u}$ es también la única solución del problema
+  Además, si $a$ es simétrica, entonces $F(\overline{f})$ es también la única solución del problema
   \begin{equation}
     \label{eq:lax-milgram:pv}
-    J(\overline{u}) = \min_{u \in H} J(u),
+    J(u) = \min_{u \in H} J(u),
     \tag{PV}
   \end{equation}
   siendo $J(u) = a(u,u)/2 - \overline{f}(u)$.
 \end{theorem}
+\begin{proof}
+  Definimos mediante el Teorema de Riesz-Fréchet la aplicación $A \colon H \to H$ tal que $A(u)$ es
+  el único vector que verifica $a_u(v) = a(u,v) = \langle A(u), v \rangle$ para todo $v \in H$. La
+  aplicación $A$ es claramente lineal. Además, por la continuidad de $a$ existe $C \ge 0$ tal que
+  $|a(u,v)| \le C ||u|| ||v ||$. Obtenemos que $||A(u)|| = ||a_u|| \le C ||u||$ por lo que $A$ es
+  continua.
+
+  Sea $\overline{f} \in H^*$. De nuevo por el Teorema de Riesz-Fréchet existe una única $f \in H$
+  tal que $\overline{f}(v) = \langle f, v\rangle$ para todo $v \in H$. Tenemos que el problema
+  \eqref{eq:lax-mmilgram} equivale a encontrar $u\in H$ tal que $A(u) = f$. La existencia de
+  solución equivale a la sobreyectividad de $A$ y la unicidad de solución equivale a la inyectividad
+  de $A$. Nótese que por la coercividad se cumple
+  $\alpha ||v||^2 \le |a(v, v)| = |\left\langle A(v), v \right\rangle| \le ||A(v)||||v||$. Esto es,
+
+  \begin{equation}
+    \label{eq:lax-milgram:cota}
+    ||v|| \le \frac{1}{\alpha}||A(v)|| \quad \forall\, v \in H,
+  \end{equation}
+  
+  de donde deducimos que $A$ es inyectiva. Veamos ahora que $A(H)$ es denso y cerrado. En efecto,
+  $A(H)^\perp = \{0\}$ ya que si $a(u,v) = 0$ para todo $u \in H$, entonces $a(v,v) = 0$, pero
+  $|a(v,v)| \ge \alpha ||v||^2$, luego $v = 0$. Por último, $A^{-1}$ es continua por tenerse
+  $||v|| \le ||A(v)|| / \alpha$ para todo $v \in H$. Luego $A$ es un isomorfismo y $A(H)$ es
+  completo. Consecuentemente, $A(H)$ es cerrado como se quería.
+
+  Supongamos ahora que $a$ es simétrica. Tenemos que
+  \[J(u+v) = a(u+v, u+v)/2 - \overline{f}(u+v) = J(u) + a(u,v) - \overline{f}(v) +
+    \frac{1}{2}a(v,v)\] para todo $u, v \in H$. Nótese que si $u$ es solución de
+  \eqref{eq:lax-milgram}, entonces $J(u+v) = J(u) + 1/2 a(v,v)$ para todo $v \in H$. Esto prueba que
+  $u$ es el único mínimo de $J$. Recíprocamente, ...
+\end{proof}
+
+\begin{ex}
+  Aplicamos a continuación este resultado al problema de la membrana. Recordemos que deducimos la
+  ecuación de Euler-Lagrange
+
+  
+  \begin{equation}
+    \label{eq:el:lax-milgram}
+    \begin{cases}
+      - \sigma \Delta u = f - \alpha u; \\
+      u \in \Omega; \\
+      u = 0 \text{ en } \partial \Omega.
+    \end{cases}
+  \end{equation}
+
+  Buscábamos el mínimo del funcional
+  \begin{equation}
+    \label{eq:pv:lax-milgram}
+    E[u] = \int_{\Omega} \frac{\sigma}{2}|\nabla v|^2 + \frac{\alpha}{2}v^2 \diff x + \int_{\Omega}
+    f(x) v(x) \diff x.
+  \end{equation}
+
+  Denotamos $a(v,v)/2$ a la primera integral y $\overline{f}(v)$ a la segunda. Generalizamos $a$
+  como sigue
+  \[ a(u,v) = \int_{\Omega} \sigma\nabla u \cdot \nabla v + \alpha u \cdot v \diff x.\] La función
+  $a$ es bilineal, continua y coerciva. Además, la función $\overline{f}$ es lineal y continua ya
+  que
+  \[ | \overline{f}(v) | \le ||f ||_{L^2} ||v||_{L^2} \le ||f ||_{L^2} ||v||. \]
+
+  Recordemos de la demostración de la ecuación de Euler - Lagrange que se verifica
+  
+  \begin{equation}
+    \label{eq:el:2:lax-milgram}
+    a(u,v) - f(v) = 0.
+  \end{equation}
+
+  Integrando por partes esta ecuación obtuvimos que
+
+  \begin{equation} \label{eq:el:3:lax-milgram} \int_{\Omega} u(-\sigma \Delta v + \alpha v) =
+    \int_{\Omega} v \cdot v \diff s
+  \end{equation}
+\end{ex}
+
+\begin{definition}
+  La ecuación \eqref{eq:el:lax-milgram} tiene solución
+  
+  \begin{enumerate}
+  \item \emph{clásica} si $u \in \mathcal{C}^2(\Omega)$ cumple \eqref{eq:el:lax-milgram}.
+  \item \emph{distribucional} si $u \in \mathrm{L}_{loc}^1(\Omega)$ es el mínimo de
+    \eqref{eq:el:3:lax-milgram}.
+  \item \emph{variacional} si $u \in \mathrm{H}_{0}^1(\Omega)$ cumple \eqref{eq:pv:lax-milgram} para
+    todo $v \in \mathrm{H}_0^1(\Omega)$.
+  \item \emph{débil} si $u \in \mathrm{H}_{0}^1(\Omega)$ cumple \eqref{eq:el:2:lax-milgram} para
+    todo $v \in \mathrm{H}_0^1(\Omega)$.
+  \end{enumerate}
+\end{definition}
+
+Como consecuencia del Teorema de Lax-Milgram obtenemos que la ecuación de la membrana tiene una
+única solución débil $u \in \mathrm{H}_0^1(\Omega)$. Además, es mínimo del funcional en cuanto
+$f \in \mathrm{L}^2$.
+
+\begin{ex}
+  Sea $\Omega$ un dominio acotado de $\R^n$. Prueba que la ecuación
+  \begin{equation}
+    \label{eq:ex:lax-milgram}
+    \begin{cases}
+      -\Delta u = f \text{ en } \Omega; \\
+      u = 0 \text{ en } \partial \Omega;
+    \end{cases}
+  \end{equation}
+  tiene una única solución débil y variacional en $\mathrm{H}_0^1(\Omega)$ para todo
+  $f \in \mathrm{L}^2(\Omega)$. Describe el PV asociado.
+
+  Multiplicamos la ecuación \eqref{eq:ex:lax-milgram} por $v \in \mathrm{H}_0^1(\Omega)$ e
+  integramos por partes el lado izquierdo mediante el Teorema de Green, obteniendo la formulación
+  débil del problema
+
+  \begin{equation}
+    \label{eq:ex:debil}
+    \int_{\Omega} \nabla u \nabla v \diff x = \int_{\Omega} f v \diff x \quad \forall \, v \in \mathrm{H}_0^1(\Omega).
+  \end{equation}
+
+  Definimos $a(u,v) = \int_{\Omega} \nabla u \nabla v \diff x$, que es claramente bilineal. Además,
+  verifica $|a(u,v)| \le ||\nabla u||_{L^2} ||\nabla v||_{L^2} \le ||\nabla u|| ||\nabla
+  v||$. Análogamente deducimos que $\overline{f}(v) = \int_{\Omega} f v \diff x$ es lineal y
+  continua. Además, a partir de la desigualdad de Poincaré deducimos que $a$ es coerciva. En efecto,
+  existe $C \ge 0$ tal que
+  $||u||^2_{H^1} \le (1+C) \int_{\Omega} ||\nabla u||^2 \diff s = (1+C) a(u,u)$. Por tanto, podmeos
+  aplicar el Teorema de Lax-Milgram, obteniendo que \eqref{eq:ex:debil} tiene una única solución en
+  $\mathrm{H}_0^1(\Omega)$. Además, la función bilineal $a$ es claramente simétrica. Por tanto,
+  resolver la ecuación \eqref{eq:ex:debil} equivale a encontrar el mínimo del funcional
+  
+  \begin{equation*}
+    E[u] = \int_{\Omega} \frac{1}{2}|\nabla v|^2 \diff x -\int_{\Omega}
+    f(x) v(x) \diff x,
+  \end{equation*}
+
+  que era el que aparecía en el problema de la membrana.
+  
+\end{ex}
+
+\begin{ex}
+  Consideramos la forma bilineal simétrica
+  $a \colon \mathrm{H}_0^2(-1,1) \times \mathrm{H}_0^2(-1,1) \to \R$ dada por
+  \[ a(u,v) = \int_{-1}^{1} u''(x) v''(x) \diff x. \]
+
+  Demostrar que $a$ es coerciva.
+
+  El ejercicio es una consecuencia de la desigualdad de Poincaré. En efecto, existe $C \ge 0$ tal
+  que
+  \[ \int_{-1}^1 u(x)^2 \diff x \le C \int_{-1}^1 u'(x)^2 \diff x\] para todo
+  $u \in \mathrm{H}_0^1(\Omega)$.  Por tanto, para cada $u \in \mathrm{H}_0^2(-1,1)$
+  \[ \int_{-1}^1 u(x)^2 \diff x \le C \int_{-1}^1 u'(x)^2 \diff x \le C^2 a(u,u).\]
+
+  Consecuentemente, tenemos que
+
+  \[ ||u||_{\mathrm{H}^2_0}^2 \le a(u,u) + C a(u,u) + C^2 a(u,u) = (1+C+C^2) a(u,u) \]
+
+  para todo $u \in \mathrm{H}_0^2(-1,1)$ como se quería.
+\end{ex}
+
 
 
 \section{Bibliografía}
