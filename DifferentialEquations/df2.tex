@@ -1911,6 +1911,8 @@ carácter local de la continuidad demostramos fácilmente el siguiente resultado
 \begin{proof}
 \end{proof}
 
+\subsection{Continuidad de la solución general}
+
 \begin{lemma}[Desigualdad fundamental]
   Sean $\varphi_i \colon I_i \to \R^d$ para $i \in \{1,2\}$ dos soluciones de \eqref{eq:edo} tales
   que existe $L > 0$ con
@@ -1920,11 +1922,246 @@ carácter local de la continuidad demostramos fácilmente el siguiente resultado
   $t\in I_1\cap I_2$.
 \end{lemma}
 \begin{proof}
-  Es una consecuencia del Lemma de Gronwall y la ecuación integral de Volterra.
-  NOTA: Aplicar a sí misma cambiando la posición del t y el t0. Obtenemos IGUALDAD!!! Está mal?
+  Es una consecuencia del Lemma de Gronwall y la ecuación integral de Volterra.  NOTA: Aplicar a sí
+  misma cambiando la posición del t y el t0. Obtenemos IGUALDAD!!! Está mal?
+\end{proof}
+
+\begin{lemma}
+  Sean $a, b > 0$ tales que $R_{a,b}(t_0, x_0) \subset D$ y sea
+  $M = \max \{||f(t,x)|| \mid (t,x) \in R_{a,b}(t_0, x_0)\}$. Existe $\mu > 0$ tal que para
+  cualquier $(t_1, x_1) \in R_{a,b}(t_0, x_0)$ y $\varphi$ solución del PVI asociado a $(t_1, x_1)$
+  se tiene que
+  \[ ||\varphi(t) - x_0|| \le \mu(1+M) \] para todo $t \in ]t_0- \mu, t_0+\mu[$.
+\end{lemma}
+\begin{proof}
+  Para $0 < \mu < \min \{a,b,\delta\}$ existe $\delta > 0$ tal que para todo $|t - t'| < \delta$,
+  $t, t' \in [t_0 - \mu, t_0 + \mu]$ se tiene $||\varphi(t) - \varphi(t')|| < \mu$. Fijamos
+  $\varepsilon = \min \{\mu, \delta\}$...
+\end{proof}
+
+\begin{proposition}
+  Dado $(t_0, x_0) \in D$ y dado un intervalo $[a,b]$ tal que $a < t_0 < b$ y
+  $[a,b] \subset ]\alpha(t_0,x_0), \omega(t_0,x_0)[$, existe $\delta > 0$ tal que
+  $[a,b] \subset ]\alpha(t_1,x_1), \omega(t_1,x_1)[$ para todo
+  $(t_1, x_1) \in R_{\delta,\delta}(t_0,x_0)$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+  \label{thm:cuc-ci}
+  Sea $f\colonD \to \R^d$ localmente lipschitziana respecto de la variable $x \in \R^d$. Dado
+  $(t_0, x_0) \in D$ y sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ la solución maximal de
+  \eqref{eq:pvi}. Sea $\{(t_n, x_n)\}$ una sucesión de condiciones iniciales tales que
+  $\{t_n\} \to t_0$ y $\{x_n\} \to x_0$. Denotemos por $\varphi_n\colon ]\alpha, \omega[ \to \R^d$
+  la solución maximal del PVI asociado a la condición inicial $(t_n, x_n)$. Entonces para todo
+  compacto $[a,b]\subset ]\alpha, \omega[$ tal que $a < t_0 < b$ existe $m \in \N$ tal que para cada
+  $n \ge m$ se tiene $[a,b] \subset ]\alpha_n,\omega_n[$ y además $\{\varphi_n\}$ converge
+  uniformemente a $\varphi$ en $[a,b]$.
+\end{theorem}
+\begin{proof}
+  Sea $\rho > 0$ tal que $T_{\rho} = T_{\rho}([a,b], \varphi) \subset D$. Sean $r, s > 0$ tañes que
+  $R_{r,s}(t_0, x_0) \subset T_{\rho}$. Por el Lema 11 encontramos $\mu > 0$ tal que si
+  $(\overline{t}, \overline{x}) \in R_{\mu, \mu}(t_0, x_0)$, entonces
+  $t_0 \in ]\alpha(\overline{t},\overline{x}), \omega(\overline{t},\overline{x})[$ y
+  $||X(t_0; \overline{t}, \overline{x}) - x_0|| \le (1+M)\mu$. Puesto que
+  $\{(t_n, x_n)\} \to (t_0, x_0)$ existe $m \in \N$ tal que para todo $n \ge m$ se tiene que
+  $(t_n, x_n) \in R_{\mu,\mu}(t_0, x_0)$. Por tanto,
+  $||\varphi_n(t_0) - \varphi(t_0)|| \le (1+M)\mu$.  Aplicamos la desigualdad fundamental en
+  $[t_0-\delta, t_0+\delta]$ con $0<\delta<\mu$ tal que $(1+M)\mu e^{L \delta} < \varepsilon$.
+\end{proof}
+
+\begin{ex}
+  Consideramos la EDO $x' = e^{x^2} -1$. Tiene una solución constante $x(t) = 0$. El diagrama de
+  fases es de la forma $\rightarrow 0 \rightarrow$. Por tanto, para $x_n > 0$ se tiene que
+  $\alpha(x_n) = -\infty$ y $\omega(x_n) < +\infty$. No obstante, si la sucesión $\{x_n\}$ converge
+  a $x_0$, entonces por el teorema anterior la sucesión $\{X(t;x_n)\}$ converge uniformemente a $0$
+  es un cualquier entorno compacto de $0$. En particular, si $\{a_n\} \to a$ tenemos que tenemos que
+  $\{X(a_n; x_n)\} \to 0$. Como consecuencia $\{\omega(x_n)\} \to +\infty$
+\end{ex}
+
+\begin{ex}
+  Sea $\varphi_n \colon ]\alpha_n, \omega_n[ \to \R$ la solución maximal del PVI
+  \[
+    \begin{cases}
+      x' = (x - t^2)^2 + 2t; \\
+      x(1/n) = \sin(1 / n^2).
+    \end{cases}
+  \]
+  Justifica que para $n$ suficientemente grande $1/n + 4 \in ]\alpha_n, \omega_n[$ y calcula
+  $\lim_{n\to +\infty} \varphi_n(4+1/n)$.
+
+  Nótese que $\varphi\colon \R \to \R$ dada por $\varphi(t) = t^2$...
+\end{ex}
+
+\begin{theorem}[Continuidad de la solución general]
+  \label{thm:cont-X}
+  El conjunto $\Omega$ es abierto y la función $X \colon \to \R^d$ es continua.
+\end{theorem}
+\begin{proof}
+  Es una consecuencia directa del Teorema \ref{thm:cuc-ci}.
 \end{proof}
 
 
+\subsection{Dependencia continua respecto de parámetros}
+
+Sean $D \subset \R \times \R^d$ y $P \subset \R^k$ dos abiertos y sea $f \colon D \times P \to \R^d$
+una función continua y localmente lipschitzian respecto de la variable $x$ y $\lambda$. Para cada
+$\lambda$ podemos considerar el PVI
+\begin{equation}
+  \label{eq:2}
+  \begin{cases}
+    x' = f(t,x, \lambda); \\
+    x(t_0) = x_0;
+  \end{cases}
+\end{equation}
+
+que tiene una única solución a la que denotamos $X(t; t_0, x_0, \lambda)$.  Podemos ver $X$ como una
+función de $\Omega$ en $\R$, donde $\Omega = \{\}$
+
+\begin{theorem}[Continuidad de la solución general con parámetros]
+  \label{thm:cuc-parametros}
+  En el contexto actual, el conjunto $\Omega$ es abierto y $X \colon \Omega \to \R^d$ es continua.
+
+  Sea $\{(t_n, x_n, \lambda_n)\} \subset D \times P$ una sucesión convergente a
+  $(t_0, x_0, \lambda)$ y sea $[a,b] \subset ]\alpha(t_0,x_0,\lambda), \omega(t_0, x_0, \lambda)[$
+  existe $m \in \N$ tal que para todo $n \ge m$ se tiene que
+  $[a,b] \subset ]\alpha(t_n,x_n,\lambda_n), \omega(t_n, x_n, \lambda_n)[$ y, además,
+  $\{X(t; t_n, x_n, \lambda_n)\}$ converge uniformemente a $X(t; t_0, x_0, \lambda)$ en $[a,b]$.
+\end{theorem}
+
+\begin{ex}
+  Consideramos el PVI
+
+  \[
+    \begin{cases}
+      x'' + \lambda \sin(x) = 0; \\
+      x(0) = \pi / 4; \\
+      x'(0) = 0.
+    \end{cases}
+  \]
+
+  Este PVI está asociado al movimiento de ún péndulo cuando se suelta con ángulo $s_0$ y longitud
+  $\lambda$. Estudiamos el caso $\lambda = 0$, que se corresponde con un péndulo de longitud
+  infinita. La única solución de la ecuación es $\varphi(t) = t^2 + \pi/4$. Dado $\varepsilon = 1$ y
+  $R = 100$, existe $\lambda_0 >0$ tal que par $|\lambda| < \lambda_0$ se tiene .
+\end{ex}
+
+\subsection{Dependencia diferenciable respecto de condiciones iniciales y parámetros}
+
+\begin{theorem}
+  Sea $D \subset \R \times \R^d$ abierto y $f \colon D \to \R^d$ de clase $1$. Consideramos la EDO
+  asociada, que denotamos \eqref{eq:edo}. Entonces la solución general $X \colon \Omega \to \R$ es
+  de clase $1$. Además, existen las derivadas de segundo orden
+  \[\frac{\partial^2}{\partial t \partial t_0} X, \frac{\partial^2}{\partial t \partial x_0} X\]
+  y son continuas.
+\end{theorem}
+
+Si conocemos la solución $X(t, t_0, x_0)$ entonces podemos calcular las parciales de $X$ respecto de
+$t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
+
+\begin{ex}
+  Consideramos la EDO $x' = (x - \sin(t))^2 + \cos(t)$. Nótese que $X(t, 0, 0) = \sin(t)$. Queremos
+  calcular $\frac{\partial}{\partial x_0} X$.  Sabemos que $X(t_0, t_0, x_0) = 0$ y que para cada
+  $(t, t_0, x_0) \in \Omega$ se cumple
+  \[ \frac{\partial}{\partial t} X(t, t_0, x_0) = (X(t, t_0, x_0) - \sin(t))^2 + \cos(t) \quad
+    \forall \, (t, t_0, x_0) \in \Omega. \]
+
+  Por tanto, tenemos que
+
+  \[ \frac{\partial^2}{\partial x_0\partial t} X(t, t_0, x_0) = 2(X(t, t_0, x_0) -
+    \sin(t))\frac{\partial}{\partial x_0} X(t, t_0, x_0) \quad \forall \, (t, t_0, x_0) \in
+    \Omega. \]
+
+  Aplicando el Lema de Schwartz y evaluando en $t_0 = 0$ y $x_0 = 0$ obtenemos que
+
+  \[ \frac{\partial^2}{\partial t\partial x_0} X(t, 0, 0) = 2(X(t, 0, 0) -
+    \sin(t))\frac{\partial}{\partial x_0} X(t, t_0, x_0) = 0. \]
+
+  Además, como $X(t_0,t_0, x_0) = x_0$, derivando respecto de $x_0$ obtenmos que
+  $\frac{\partial}{\partial x_0} X(t_0, t_0, x_0) = 1$. Por tanto,
+  $\frac{\partial}{\partial x_0}X(t, 0,0)$ es solución de la ecuación diferencial $y' = 0$ con
+  condición inicial que $y(0) = 1$. Esto es, $\frac{\partial}{\partial x_0}X(t, 0,0) = 1$ par todo
+  $t \in \R$.
+
+  Para calcular la parcial de $X$ respecto de $t_0$ se procede de forma análoga, obteniendo que
+  $\frac{\partial}{\partial t_0} X(t, 0,0) = -1$.
+\end{ex}
+
+\begin{definition}
+  Sea $D \subset \R \times \R^d$ abierto y $f \colon D \to \R^d$ de clase $1$. Consideramos la EDO
+  asociada, que denotamos \eqref{eq:edo}. Definimos la función matricial
+  $A(t;t_0, x_0) = \frac{\partial}{\partial x} (t, X(t;t_0,x_0))$. La ecuación
+  \begin{equation}
+    \label{eq:variacional}
+    y' = A(t; t_0, x_0) y
+  \end{equation}
+
+  recibe el nombre de \emph{ecuación variacional}.
+\end{definition}
+
+\begin{theorem}[Derivadad respecto de condiciones inicales y parámetros]
+  \label{thm:-dev-param}
+  Supongamos que las funciones matriciales
+  $\frac{\partial}{\partial x}f \colon D \times P \to \mathcal{M}_d$ y
+  $\frac{\partial}{\partial \lambda} f \colon D \times P \to \mathcal{M}_{d\timesk}$ están bien
+  definidas y son continuas. Entonces se verifican las siguientes afirmaciones:
+  
+  \begin{enumerate}
+  \item La función $X \colon \to \R^d$ es $\mathcal{C}^1(\Omega)$.
+  \item Existen las derivadas de segundo orden
+    \[ \frac{\partial^2}{\partial t \partial t_0}X, \ \frac{\partial^2}{\partial t \partial x_0}X, \
+      \frac{\partial^2}{\partial t \partial \lambda}X\] y son continuas.
+  \item Existen las derivadas de segundo orden
+    \[ \frac{\partial^2}{\partial t_0 \partial t}X, \ \frac{\partial^2}{\partial x_0 \partial t}X, \
+      \frac{\partial^2}{\partial \lambda \partial t}X\] y son continuas.
+  \end{enumerate}
+\end{theorem}
+
+\begin{ex}
+  Consideremos el PVI con parámetros
+  \[
+    \begin{cases}
+      x' = x^2 - e^{\lambda x}; \\
+      x(2) = 1.
+    \end{cases}
+  \]
+
+  Calcula $\frac{\partial}{\partial x_0}(t, 2, 1, 0)$, $\frac{\partial}{\partial t_0}(t, 2, 1, 0)$ y
+  $\frac{\partial}{\partial \lambda}(t, 2, 1, 0)$.
+
+  En primer lugar calculamos $X(t; 2,1,0)$.  Esta solución es la constantemente $1$. Posteriormente,
+  calculamos las parciales de $f$ que vienen dadas por
+  \[ \frac{\partial}{\partial x}f = 2x - \lambda e^{\lambda x} \quad \text{y} \quad
+    \frac{\partial}{\partial \lambda}f = - x e^{\lambda x}. \] Por consiguiente, tenmos que
+  $A(t) = A(t; 2, 1, 0) = 2$ y $b(t) = b(t; 2,1,0) = -1$.  Tenemos que
+  $\frac{\partial}{\partial x_0}(t; 2,1,0)$ es solución de
+  \[
+    \begin{cases}
+      y' = 2y; \\
+      y(2) = 1.
+    \end{cases}
+  \]
+  Obtenemos que $\frac{\partial}{\partial x_0}(t; 2,1,0) = \exp(2(t-2))$.  Por otro lado,
+  $\frac{\partial}{\partial t_0}X(t;2,1,0)$ es solución de
+  \[
+    \begin{cases}
+      y' = -2y; \\
+      y(2) = 0.
+    \end{cases}
+  \]
+  Deducimos que $\frac{\partial}{\partial t_0}X(t;2,1,0) = 0$. Por último, sabemos que
+  $\frac{\partial}{\partial \lambda}X(t; 2,1,0)$ es solución de
+  \[
+    \begin{cases}
+      y' = 2y -1;\\
+      y(2) = 0.
+    \end{cases}
+  \]
+  Por el método de los coeficientes indeterminados sabemos que
+  $\frac{\partial}{\partial \lambda}X(t; 2,1,0)$ es de la forma $K \exp(2(t-2)) + 1/2$. La condición
+  inicial implica que $K = -1/2$.
+\end{ex}
 
 
 \end{document}
