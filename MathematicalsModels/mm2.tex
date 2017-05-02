@@ -319,7 +319,7 @@ resolución de la ecuación de Euler-Lagrange se simplifica enormemente como mos
 En este apartado damos una primera condición suficiente de existencia de solución para un problema
 variacional. Recordemos en este punto que cuando uno minimiza una función real de variable real
 derivable la convexidad local de la función nos permite discernir si un punto crítico es mínimo,
-máximo o punto de inflexión. Vamos a plicar el concepto de convexidad en el ámbito actual.
+máximo o punto de inflexión. Vamos a aplicar el concepto de convexidad en el ámbito actual.
 
 \begin{definition}
   Sea $\Omega \subset \R^d$ un conjunto convexo y $f \colon \Omega \to \R$. La función $f$ es
@@ -370,7 +370,8 @@ En este punto nos preguntamos cómo podemos comprobar que $\mathcal{D}$ y $\math
 convexos. El siguiente resultado nos proporciona una condición suficiente fácil de verificar.
 
 \begin{prop}[Condición de convexidad] \label{prop:convex:cond} Consideremos un problema
-  variacional. Si el conjunto $\Omega$ y la función $F$ son convexos, entonces $\mathcal{D}$ es
+  variacional. Si el conjunto $\Omega$ es convexo y la función $F$ es convexa sobre $\Omega$, esto
+  es, para cualquier $x \in I$ fijo la función $F(x, y, p)$ es convexa, entonces $\mathcal{D}$ es
   convexo y $\mathcal{F}$ es convexo.
 \end{prop}
 \begin{proof}
@@ -417,6 +418,9 @@ condiciones de contorno más habituales.
   intervalo.
 \item \textbf{Condiciones de tipo Newmann:} Se fija el valor de la derivada en los extremos del
   intervalo.
+\item \textbf{Condiciones separadas:} En cada extremo del intervalo se fija el valor de una
+  combinación lineal de la función y su derivada. Generalizan a las condiciones de tipo Dirichlet y
+  Newmann.
 \item \textbf{Condiciones periódicas:} Los valores de la función o su derivada en el extremo deben
   ser los mismos.
 \end{enumerate}
@@ -427,9 +431,8 @@ que se denominan \emph{no homogéneas} en caso contrario.
 Los problemas de contorno pueden tener solucion única, tener múltiples soluciones o no tener
 solución.  En lo que sigue vemos un ejemplo de cad auno de estos casos.
 
-\begin{ex}
-  Consideramos la EDO $x'' + x = 0$. Sabemos que las soluciones de esta EDO son de la forma
-  $A \cos(x) + B \sin(x)$ con $A,B \in \R$.
+\begin{ex} \label{ex:contorno} Consideramos la EDO $x'' + x = 0$. Sabemos que las soluciones de esta
+  EDO son de la forma $A \cos(x) + B \sin(x)$ con $A,B \in \R$.
   
   \begin{enumerate}
   \item Si fijamos condiciones de tipo Dirichlet en $I = [0,\pi]$ ($y(0) = y_0$, $y(\pi) = y_1$),
@@ -457,16 +460,16 @@ Nos preguntamos en este punto si todo problema de contorno puede verse como la e
 Euler-Lagrange de algún funcional. La respuesta es en general negativa aunque esto sea posible a
 veces como mostramos en el siguiente ejemplo.
 
-\begin{ex}
-  En el Ejemplo \ref{ex:no-sol} vimos un problema de contorno que no tiene solución. Nos preguntamos
-  si proviene de un problema variacional. En tal caso, debe tenerse
+\begin{ex} \label{ex:no-sol:2} En el Ejemplo \ref{ex:no-sol} vimos un problema de contorno que no
+  tiene solución. Nos preguntamos si proviene de un problema variacional. En tal caso, debe tenerse
   $F_y - \frac{\partial}{\partial x} F_p = y''-2$. Supongamos que $F_y = -2$. Entonces,
   $\frac{\partial}{\partial x} F_p = -y''$ y, por tanto, $F_p = -y'$. Deducimos que debe tenerse
   $F(x,y(x),y'(x)) = -2y(x) - y'(x)^2/2$. Por tanto, $F(x,y,p) = -2y -p^2/2$. Consideramos
   $\Omega = \R^2$, $I = [0,1]$ y $\mathcal{D} = \mathcal{C}^1(0, 1)$. El problema variacional
   asociado tiene a $y'' -2 = 0$ como ecuación de Euler-Lagrange. Además, las condiciones de contorno
   son $y'(0) = 0 = y'(1)$ pues $\mathcal{F}_p(x,y(x),y'(x)) = -y'(x)$ . Por tanto, el funcional no
-  tiene ningún mínimo de clase $2$.
+  tiene ningún mínimo de clase $2$. De hecho, el funcional no va a tener ningún mínimo pues no está
+  acotado, basta considerar las funciones $Cx^2(x-1)^2$ para comprobarlo.
 \end{ex}
 
 
@@ -486,7 +489,9 @@ Aunque el problema de la viga admita una formulación variacional, no todo probl
 verse como la ecuación de Euler-Lagrange de un PV. En esta sección nos centramos en EDOs de segundo
 orden, que sí provienen de un PV. Consideramos tres funciones continuas
 $a, b, c : [x_0, x_1] \to \R$ y la EDO
-\begin{equation} \label{eq:edo:2} y''(x) + a(x) y'(x) + b(x)y(x) = c(x).
+\begin{equation} \label{eq:edo:2}
+
+  y''(x) + a(x) y'(x) + b(x)y(x) = c(x).  \tag{E2}
 \end{equation}
 
 Las EDOs de segundo orden permiten una formulación más simple como mostramos a continuación. Fijamos
@@ -497,109 +502,136 @@ obtenemos una ecuación equivalente que responde a
 Denotando $R(x) = c(x) P(x)$ y $Q(x) = P(x) b(x)$, hemos obtenido que \eqref{eq:edo:2} es
 equivalente a la ecuación
 \begin{equation}
-  \label{eq:edo:2}
+  \label{eq:edo:sturm}
   \left(P(x)y'(x)\right)' + Q(x) y(x) = R(x),
+  \tag{S}
 \end{equation}
 que se denomina \emph{forma autoadjunta} o \emph{forma de Sturm} de la EDO de segundo orden. La
 forma autoadjunta nos permite trabajar de forma más cómoda con la ecuación diferencial, por lo que
 será habitualmente utilizada de aquí en adelante.
 
-\begin{prop}
-  PV
-\end{prop}
+En este punto podemos intentar utilizar la estrategia del Ejemplo \ref{ex:no-sol:2} sobre
+\eqref{eq:edo:sturm}. Obligamos a que $\frac{\partial}{\partial x} F_p = - \left(P(x)y'(x)\right)'$,
+obteniendo que $F_p = -P(x)y'(x)$ y $F_y = Q(x)y-R(x)$. Deducimos que la única posibilidad es
+$F(x,y,p) = Q(x)y^2/2 - R(x)y - P(x) p^2/2$. Este hecho da lugar al siguiente teorema.
 
-\begin{thm}
-  Sean $P, Q$ y $R$ son funciones continuas en $[x_0, x_1]$ con $P \in \mathcal{C}^1(x_0, x_1)$ y
-  $P > 0$. Si $Q < 0$, entonces la función $F(x,y,p) = P p^2/2 - Q y^2/2 + R$ (está bien?) es
-  convexa. Además, bajo estas hipótesis, el problema de contorno con condiciones
-  \begin{equation}
-    \begin{cases}
-      a_0 y(x) + b_0 y'(x) = c_0; \\
-      a_1 y(x) + b_1 y'(x) = c_1;
-    \end{cases}
-  \end{equation}
-  Entonces existe una extremal, que es el único mínimo de $\mathcal{F}$.
+\begin{thm} \label{thm:pv:sturm} Consideramos una EDO de segundo orden \eqref{eq:edo:sturm} y
+  definimos $F(x,y,p) = P(x) p^2/2 - Q(x) y^2/2 + R(x)y$. Entonces \eqref{eq:edo:sturm} es la
+  ecuación de Euler-Lagrange del problema variacional asociado a $F$ para cualquier
+  $I = [x_0, x_1] \subset \R$.
 \end{thm}
 \begin{proof}
-  Es fácil ver que la función $F$ es convexa. Utilizamos el Teorema 10 para reducir el problema de
-  contorno a uno de tipo Dirichlet. En este contexto, por la alternativa de Fredholm, basta
-  corroborar que el sistema homogéneo tiene solamente como solución a la trivial. Por reducción al
-  absurdo, supongamos que el problema tiene una solución $y$ distinta de la trivial. Nótese que
-  $y'(x_0) \ne 0$. Suponemos que $y'(x_0) > 0$. La función tendrá un máximo en un punto $x_2$, con
-  $y(x_2) > 0$. Este punto debe ser interior y, por tanto, $y'(x_2) = 0$ e $y''(x_2) < 0$. No
-  obstante, en la ecuación obtenemos que $P(x_2)y''(x_2) + P'(x_2)y'(x_2) + Q(x_2) y(x_2) =
-  0$. Consecuentemente, $y''(x_2) = - Q(x_2) y(x_2) / P(x_2) > 0$, contracción.
+  La demostración de este hecho es una simple comprobación.
 \end{proof}
 
-\begin{ex}
-  
-\end{ex}
+Cabe resaltar que a priori el funcional $\mathcal{F}$ del Teorema \ref{thm:pv:sturm} puede tener un
+mínimo que no sea extremal. En este punto entra en juego el Teorema \ref{thm:sturm:pv}. Para poder
+demostrarlo necesitamos desarrollar antes varias herramientas.
 
-\begin{ex}
-  Resultado análogo para condiciones Newmann no homogéneas ($y'(x_0) = y_0$, $y'(x_1) = y_1$).
-\end{ex}
 
-\begin{ex}
-  
-\end{ex}
+En primer lugar, vamos a poner en equivalencia roblemas de contorno de tipo Dirichlet o Newmann no
+homogéneos con un problema del mismo tipo homogéneo. El siguiente lema consigue este hecho para
+problema de tipo Dirichlet y es fácilmente generalizable a problemas de tipo Newmann. En vista de
+este resultado de aquí en adelante consideraremos condiciones homogéneas.
 
-\begin{equation}
-  \label{eq:sturm:ec}
-  (Py')' + Qy = R
-\end{equation}
 
+\begin{lemma} \label{lem:pc:hom} Consideramos una EDO \eqref{eq:edo:sturm} con condiciones de
+  contorno tipo Dirichlet. Sea $y(x)$ una solución de este problema de contorno. Entonces la función
+  \[ z(x) = y(x) - \frac{y_1(x-x_0) - y_0(x-x_1)}{x_1- x_0} = y(x) - y_0 - \frac{y_1 - y_0}{x_1-
+      x_0}(x-x_0) \] es solución del problema de contorno
+  \[
+    \begin{cases}
+      (P(x)z'(x))' + Q(x)z(x) = R(x) + P'(x) \frac{y_1 - y_0}{x_1- x_0} + Q(x)  \frac{y_1(x-x_0) - y_0(x-x_1)}{x_1- x_0}; \\
+      z(x_0) = 0; z(x_1) = 0.
+    \end{cases}
+  \]
+\end{lemma}
+\begin{proof}
+  Es una comprobación directa.
+\end{proof}
+
+Consideraeos una EDO de segundo orden homogénea. Esta puede escribirse como sigue
 \begin{equation}
   \label{eq:sturm:eh}
-  (Py')' + Qy = 0
+  (P(x)y'(x))' + Q(x)y(x) = 0.
+  \tag{SH}
 \end{equation}
 
-Consideramos las condiciones de contorno separadas
-\begin{equation}
-  \label{eq:sturm:sep}
-  \begin{cases}
-    a_0 y(x_0) + b_0 y'(x_0) = 0; \\ a_1 y(x_1) + b_1 y'(x_1) = 0;
-  \end{cases}
-\end{equation}
-donde $|a_0| + |b_0| > 0$, y las condiciones periódicas
+Sabemos que las soluciones de esta ecuación forman un espacio vectorial de dimensión $2$ y, por
+tanto, son de la forma $A \phi_1(x) + B \phi_2(x)$, donde $\{\phi_1, \phi_2\}$ es un sistema
+fundamental de soluciones. Nótese que las condiciones de contorno del tipo
+$a_i y(x_i) + b_i y'(x_i) = 0$ y las condiciones periódicas dan lugar a ecuaciones lineales sobre
+$A$ y $B$. Juntando las dos ecuaciones que obtenemos de $x_0$ y $x_1$ tenemos un sistema de
+ecuaciones lineales con dos incógnitas, cuyas soluciones forman un espacio vectorial de dimensión
+$0$, $1$ o $2$. En el Ejemplo \ref{ex:contorno} hemos visto todos estos casos.
 
-\begin{equation}
-  \label{eq:sturm:ped}
-  \begin{cases}
-    y(x_0) = y(x_1); \\ y'(x_0) = y'(x_1).
-  \end{cases}
-\end{equation}
+\begin{ex}
+  Justificar por qué es imposible que todas las soluciones de una EDO lineal de orden 2 resuelvan el
+  mismo PC con condiciones de contorno separadas.
+
+  Realizamos el ejercicio para condiciones Dirichlet del tipo $y(x_0) = 0$ y $y(x_1) = 0$. Tras
+  resolver la EDO y aplicar las condiciones de contorno a la solución $A \phi_1(x)+B\phi_2(x)$
+  obtenemos el sistema
+  \[
+    \left(
+      \begin{matrix}
+        \phi_1(x_0) & \phi_2(x_0) \\
+        \phi_1(x_1) & \phi_2(x_1)
+      \end{matrix}
+    \right) \left(
+      \begin{matrix}
+        A \\
+        B
+      \end{matrix}
+    \right) = 0.
+  \]
+  Todas las soluciones de la EDO verifican el problema de contorno si, y solo si, cualquier par
+  $(A,B)$ es solución el sistema, esto es, la matriz de coeficientes es idénticamente $0$. Pero esto
+  implica que el wronsquiano de $\phi_1$ y $\phi_2$ en $x_0$ y $x_1$ es $0$, lo que contradice que
+  sean un sistema fundamental de soluciones.
+\end{ex}
 
 Ya sabemos resolver los problemas homogéneos. A partir de las soluciones de los problemas homogéneos
-nos planteamos resolver los problemas completos. Esta resolución se enuncia en el siguiente
-resultado.
+nos planteamos resolver los problemas completos. En primer lugar, nótese que dadas $y_1, y_2$
+soluciones de \eqref{eq:edo:sturm} se tiene que $y_1-y_2$ es solución de \eqref{eq:sturm:eh}.  Por
+tanto, para calcular todas las soluciones de \eqref{eq:edo:sturm} basta conocer una solución
+particular y resolver la ecuación homogénea. Para obtener una solución particular podemos utilizar
+el método de variación de las constantes.
+
+El siguiente resultado discute la existencia de solución del los problemas completos.
 
 \begin{thm}[Alternativa de Fredholm]
-  Se cumple una de estas alternativas (para \eqref{eq:sturm:sep} o \eqref{eq:sturm:per}):
+  Consideramos un problema de contorno cuya EDO es \eqref{eq:edo:sturm} con condiciones de contorno
+  separadas homogéneas o periódicas. Se cumple una de estas alternativas:
   \begin{enumerate}
   \item El problema homogéneo tiene como única solución a $y = 0$, en cuyo caso el problema completo
     tiene una única solución.
   \item El problema homogéneo tiene más de una solución (un espacio vectorial de dimensión $1$ o
     $2$), en cuyo caso el problema completo tiene solución si, y solo si, para cualquier solución
-    $y$ del problema homogéneo
+    $y$ del problema homogéneo se cumple
     \[\int_{x_0}^{x_1}R(s) y(s) \diff s = 0,\]
     en cuyo caso cada solución del problema homogéneo determina una única solución del problema
     completo.
   \end{enumerate}
 \end{thm}
 \begin{proof}
-  Vamos a escribir las soluciones de (EC). Sea $\{\phi_1, \phi_2\}$ un SFS de (EH). Entonces, una
-  solución $y$ de (EC) es de la forma
+  Vamos a escribir las soluciones de \eqref{eq:edo:sturm}. Sea $\{\phi_1, \phi_2\}$ un SFS de
+  \eqref{eq:sturm:eh}. Entonces, una solución $y$ de \eqref{eq:edo:sturm} es de la forma
   \[y(x) = y_p(x) + y_h(x) = y_p(x) + A \phi_1 + B\phi_2\] para ciertos $A, B \in \mathbb{R}$ e
   $y_p$ es una solución particular de (EC), que se puede calcular mediante la fórmula de variación
-  de las constantes, esto es,
-  \[y_p(x) = \int_{x_0}^x \frac{R(s)}{W(x_0) P(x_0)} ((\phi_2(x) \phi_1(s) - \phi_2(s) - \phi_1(x))
-    \diff s)\] En este punto estudiamos el resultado para distintos problemas de contorno. Nosotros
-  vamos a ver la demostración para condiciones tipo Dirichlet, esto es, las condiciones son
-  $y(x_0) = 0 = y(x_1)$. Puedo suponer que $\phi_1(x_0) = 1$, $\phi_1'(x_0) = 0$, $\phi_2(x_0) = 0$
-  y $\phi_2'(x_0) = 1$. Evaluando $y$ en las condiciones de contorno obtenemos el sistema
+  de las constantes, obteniendo
+  \[y_p(x) = \int_{x_0}^{x} \frac{R(s)}{W(x_0) P(x_0)} ((\phi_2(x) \phi_1(s) - \phi_2(s) \phi_1(x))
+    \diff s),\]
+
+  donde $W(x)$ es el wronskiano de $\phi_1$ y $\phi_2$. En este punto estudiamos el resultado para
+  distintos problemas de contorno. Nosotros vamos a ver la demostración para condiciones tipo
+  Dirichlet, esto es, las condiciones son $y(x_0) = 0 = y(x_1)$. Podemos suponer que
+  $\phi_1(x_0) = 1$, $\phi_1'(x_0) = 0$, $\phi_2(x_0) = 0$ y $\phi_2'(x_0) = 1$. Evaluando $y$ en
+  las condiciones de contorno obtenemos el sistema
   \[\left(
       \begin{array}{cc}
-        1 & 0 \\ 0 & \phi_2(x_1) \\
+        1 & 0 \\ 
+        \phi_1(x_1) & \phi_2(x_1) \\
       \end{array}
     \right) \left(
       \begin{array}{c}
@@ -611,18 +643,53 @@ resultado.
       \end{array}
     \right),
   \]
-  donde
-  $\beta = -\int_{x_0}^{x_1}\frac{R(s)}{W(x_0) P(x_0)}(\phi_2(x_1) \phi_1(s) - \phi_2(s) -
-  \phi_1(x_1)) \diff s$. Estudiando las soluciones del sistema anterior obtenemos fácilmente el
+  donde $\beta = -y_p(x_1)$. Estudiando las soluciones del sistema anterior obtenemos fácilmente el
   resultado. En efecto, el sistema homogéneo tiene única solución si, y solo si $\phi_2(x_1) \ne
   0$. En tal caso, el sistema completo tiene solución única. Si $\phi_2(x_1) = 0$, entonces el
   sistema previo tendrá solución si, y solo si, $\beta = 0$.  Como $\phi_2(x_1) = 0$ tenemos que
   $\phi_1(x_1) \ne 0$ gracias a $W(x_1) \ne 0$. Por tanto, la existencia de solución equivale
   \[\int_{x_0}^{x_1} R(s) \phi_2(s) \diff s = 0.\]
-  Nótese que las soluciones de la homogénea son de la forma $B \phi_2$.
+  Nótese que las soluciones de la ecuación homogénea son de la forma $B \phi_2$ y cada valor de $B$
+  determina una única solución de la ecuación completa.
 \end{proof}
 
-Podemos demostrar en este punto el Teorema 9
+
+Como consecuencia obtenemos el principal resultado de esta sección.
+
+
+\begin{thm} \label{thm:sturm:pv} Sean $P, Q$ y $R$ son funciones continuas en $[x_0, x_1]$ con
+  $P \in \mathcal{C}^1(x_0, x_1)$ y $P > 0$. Si $Q < 0$, entonces la función
+  $F(x,y,p) = P(x) p^2/2 - Q(x) y^2/2 + R(x)y$ es convexa. Además, bajo estas hipótesis, consideramos el problema
+  de contorno dado por \eqref{eq:edo:sturm} y las condiciones
+  \begin{equation}
+    \begin{cases}
+      a_0 y(x) + b_0 y'(x) = c_0; \\
+      a_1 y(x) + b_1 y'(x) = c_1;
+    \end{cases}
+  \end{equation}
+  cumpliendo $|a_0| + |a_1| > 0$, $a_0 b_0 \ge 0$ y $a_1b_1 \ge 0$. Entonces existe una única
+  solución del problema de contorno que es mínimo de $\mathcal{F}$.
+\end{thm}
+\begin{proof}
+  Es fácil ver que la función $F$ es convexa. En efecto, fijado $x$ obtenemos que
+  \[ \mathrm{Hess}(F)(x,y,p) = \left(
+      \begin{matrix}
+        -Q & 0 \\
+        0 & P
+      \end{matrix}
+    \right), \] que es definida positiva. Por tanto, $F$ es convexa y el funcional $\mathcal{F}$
+  también lo es. El Teorema \ref{thm:convex:minimo} garantiza que las soluciones de la ecuación de
+  Euler-Lagrange son mínimos de $\mathcal{F}$. Veamos que hay una única solución de este problema de
+  contorno. Utilizamos una variante del Lemma \ref{lem:pc:hom} para reducir el problema de contorno
+  a uno Dirichlet homogéneo. En este contexto, por la alternativa de Fredholm basta corroborar que
+  el sistema homogéneo tiene solamente como solución a la trivial. Por reducción al absurdo,
+  supongamos que el problema tiene una solución $y$ distinta de la trivial. Nótese que
+  $y'(x_0) \ne 0$ por unicidad de solución del PVI $y(x_0) = 0$, $y'(x_0) = 0$. Suponemos sin
+  pérdida de generalidad que $y'(x_0) > 0$. La función tendrá un máximo en un punto $x_2$, con
+  $y(x_2) > 0$. Este punto debe ser interior y, por tanto, $y'(x_2) = 0$ e $y''(x_2) < 0$. No
+  obstante, en la ecuación obtenemos que $P(x_2)y''(x_2) + P'(x_2)y'(x_2) + Q(x_2) y(x_2) =
+  0$. Consecuentemente, $y''(x_2) = - Q(x_2) y(x_2) / P(x_2) > 0$, contradicción.
+\end{proof}
 
 \section{Problemas variacionales generalizados}
 
@@ -1193,12 +1260,12 @@ asignatura.
   \label{thm:fourier:convergencia}
   Sea $y \in \mathrm{L}_2([0,T])$ con $y(0) = y(T)$. Se verifican las siguientes afirmaciones.
   \begin{enumerate}
-  \item Por el Teorema de Riesz-Frisher, la serie de Fourier de $y$ admite una parcial que converge
+  \item Por el Teorema de Riesz-Fisher, la serie de Fourier de $y$ admite una parcial que converge
     c.p.d. a $y$.
   \item Si $y$ es continua, entonces la serie de Fourier de $y$ converge puntualmente a $y$.
   \item Si $y$ es continua a trozos en $[0,T]$, entonces la serie de Fourier de $y$ converge
     puntualmente a $y$ fuera de los puntos de discontinuidad. En los puntos de discontinuidad la
-    serie de furier converge a la media de los límites laterales de $y$.
+    serie de Fourier converge a la media de los límites laterales de $y$.
   \item Si $y$ es continua y además $y'$ es continua a trozos, entonces la serie de Fourier de $y$
     converge absoluta y uniformemente.
   \item Si $y \in \mathcal{C}^{k}([0,T])$ y $y^{m)}(0) = y^{m)}(T)$ para todo $0 \le m \le k$ e
@@ -1632,7 +1699,7 @@ y
   \label{thm:lax-milgram}
   Sea $H$ un espacio de Hilbert y $a \colon H \times H \to \R$ una forma bilineal, continua y
   coerciva (existe $\alpha$ tal que $a(u,u) \ge \alpha ||u||$ para todo $u \in H$). Entonces, para
-  cada función $\overline{f} \colon H^{*}, existe un único elemento $\overline{u} \in
+  cada función $\overline{f} \in H^{*}$, existe un único elemento $\overline{u} \in
   H$ que sea solución de
   \begin{equation}
     \label{eq:lax-milgram}
@@ -1679,8 +1746,8 @@ y
   Supongamos ahora que $a$ es simétrica. Tenemos que
   \[J(u+v) = a(u+v, u+v)/2 - \overline{f}(u+v) = J(u) + a(u,v) - \overline{f}(v) +
     \frac{1}{2}a(v,v)\] para todo $u, v \in H$. Nótese que si $u$ es solución de
-  \eqref{eq:lax-milgram}, entonces $J(u+v) = J(u) + 1/2 a(v,v)$ para todo $v \in H$. Esto prueba que
-  $u$ es el único mínimo de $J$. Recíprocamente, ...
+  \eqref{eq:lax-milgram}, entonces $J(u+v) = J(u) + a(v,v)/2$ para todo $v \in H$. Esto prueba que
+  $u$ es el único mínimo de $J$.
 \end{proof}
 
 \begin{ex}
@@ -1804,6 +1871,37 @@ $f \in \mathrm{L}^2$.
 \end{ex}
 
 
+\newpage
+
+\section{Biología}
+
+En este apartado estudiamos problemas de la biología que se reducen en resolver problemas de contorno. Concretamente el temario se divide en
+
+\begin{enumerate}
+\item Química, leyes de acción de masas (LAM).
+\item Poblaciones, leyes de crecimiento.
+\item Poblaciones + movimiento difusivo. Difusión.
+\item Morfogénesis, varias poblaciones.
+\end{enumerate}
+
+\subsection{Leyes de acción de masas}
+
+Cosideramos una reacción química, esto es, un proceso por el cuál una determinada cantidad de
+sustancias se convierte en otras. La denotamos $A+B \rightarrow C$ en caso de que a partir de los
+productos $A$ y $B$ se obtenga $C$. Buscamos la velocidad con la que reaccionan $A$ y $B$. Denotamos
+por $\left[ A \right]$ a la concentración de $A$ (cantidad por unidad de volumen). Es una función
+del tiempo, por lo que también la denotaremos $a(t)$. La ley de acción de masas dice que la
+velocidad de la reacción, $\frac{\partial}{\partial t}\left[ C \right]$ es proporcional a
+$\left[ A \right]\left[ B \right]$.Si $k$ es la constante de proporcionalidad, se escribe
+$A+B \rightarrow^k C$. Obviamente tenemos que
+$\frac{\partial}{\partial t}[A] = \frac{\partial}{\partial t}[B] = - \frac{\partial}{\partial
+  t}[C]$.
+
+Puede suceder que la reacción sea reversible, de manera que al mismo tiempo también se produce
+$C \rightarrow_{k_{-1}} A+B$. En conjunto lo denotamos $A+B \leftrightarrow_{k_{-1}}^{k_1}
+C$. Tenemos que
+\[ \frac{\partial}{\partial t}[C] = k_1 [A][B] - k_{-1}[C]. \]
+El equilibrio tiene lugar cuando las concentraciones son constantes.
 
 \section{Bibliografía}
 
