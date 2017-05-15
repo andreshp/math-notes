@@ -37,6 +37,7 @@
 \newcommand{\docaddress}{Universidad de Granada}
 \newcommand{\docemail}{andreshp9@gmail.com}
 \newcommand{\docabstract}{}
+\newcommand{\docrhead}{}
 
 \begin{document}
 
@@ -2062,7 +2063,7 @@ $t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
 
 \begin{ex}
   Consideramos la EDO $x' = (x - \sin(t))^2 + \cos(t)$. Nótese que $X(t, 0, 0) = \sin(t)$. Queremos
-  calcular $\frac{\partial}{\partial x_0} X$.  Sabemos que $X(t_0, t_0, x_0) = 0$ y que para cada
+  calcular $\frac{\partial}{\partial x_0} X$.  Sabemos que $X(t_0, t_0, x_0) = x_0$ y que para cada
   $(t, t_0, x_0) \in \Omega$ se cumple
   \[ \frac{\partial}{\partial t} X(t, t_0, x_0) = (X(t, t_0, x_0) - \sin(t))^2 + \cos(t) \quad
     \forall \, (t, t_0, x_0) \in \Omega. \]
@@ -2161,6 +2162,391 @@ $t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
   Por el método de los coeficientes indeterminados sabemos que
   $\frac{\partial}{\partial \lambda}X(t; 2,1,0)$ es de la forma $K \exp(2(t-2)) + 1/2$. La condición
   inicial implica que $K = -1/2$.
+\end{ex}
+
+\newpage
+\section{Linealización de ecuaciones y aproximación de soluciones en entornos de puntos de
+  equilibrio}
+
+
+En una ecuación escalar autónoma podemos aproximar $f$ mediante sus polinomios de Taylor con la
+esperanza de que las soluciones de la nueva EDO se parezcan a las soluciones de la anterior. En
+particular, podemos utilizar el polinomio de Taylor de grado uno con centro $p \in D$, obteniendo
+una ecuación lineal. Si $p$ es un punto de equilibrio de la ecuación original, entonces la nueva
+ecuación es homogénea y, por tanto, sabemos calcular fácilmente sus soluciones.
+
+\begin{definition}
+  Sea $D \subset \R^d$ abierto, $f\colon D \to \R^d$ continua y $p \in A$ con $f(p) = 0$. La
+  \emph{ecuación linealizada} de \eqref{eq:edo:ae} en $p$ es la EDO
+  \begin{equation}
+    \label{eq:linealizada}
+    y' = \mathrm{J}_f(p)(y-p).
+    \tag{L}
+  \end{equation}
+\end{definition}
+
+En esta sección estudiamos las propiedades de \eqref{eq:edo:ae} a partir de su ecuación
+linealizada. A veces por conveniencia usaremos la notación $J_f(p) = f'(p)$.
+
+\begin{ex}
+  Consideramos el sistema
+  
+  \begin{equation}
+    \label{eq:linealizada:ex:1}
+    \begin{cases}
+      x_1' = x_2; \\
+      x_2' = -c x_2 - \sin(x_1).
+    \end{cases}
+  \end{equation}
+  Nótese que $p = (\pi, 0)$ es un punto de equilibrio. La ecuación linealizada de
+  \eqref{eq:linealizada:ex:1} es
+  \begin{equation*}
+    \label{eq:linealizada:ex:2}
+    \begin{cases}
+      y_1' = y_2; \\
+      y_2' = y_1 -c y_2 - \pi.
+    \end{cases}
+    \qedhere
+  \end{equation*}
+\end{ex}
+
+Sabemos resolver las ecuaciones linealizadas mediante la exponecial de la matriz $J_f$. En efecto,
+la solución de \eqref{eq:linealizada} que verifica $y(t_0) = x_0$ es
+$\exp(J_f(p)(t-t_0)) (x_0-p) + p$. Podemos escribir $f(x) = f(p) + f'(p)(x-p) + R(x)$. Usando el
+teorema de Taylor de orden 1 en la variable $x_0$ de la solución genreal deducimos que
+\[ X(t; t_0, x_0) = X(t; t_0, x_0) + \frac{\partial}{\partial x_0}(t; t_0, x_0) (x_0-p) + R(t; t_0,
+  x_0) = p + \exp(f'(p)(t-t_0)) (x_0- p) + R(t; t_0, x_0). \] Sabemos que $R(t; t_0, x_0)$ converge
+uniformemente a $0$ en compactos cuanto $x_0$ tiende a $p$. De ello deducimos que que
+$X(. ; t_0, x_0)$ converge uniformemente a $Y(.;t_0,x_0)$ cuando $x_0$ converge a $p$.
+
+\newpage
+
+\section{Estabilidad en el sentido de Lyapunov}
+
+Estudiamos el principal concepto de estabilidad en teoría de ecuaciones diferenciales, aunque
+existen otros conceptos.
+
+
+\begin{definition}
+  Sea $D \subset \R \times \R^d$ abierto y $f \colon D \to \R^d$ localmente lipschitziana respecto
+  de la segunda variable. Sea $\varphi\colon ]\alpha, +\infty[ \to \R^d$ una solución maximal de
+  $x' = f(t,x)$. Diremos que $\varphi$ es una solución estable de \eqref{eq:edo} en el sentido de
+  Liapunov si para todo $\varepsilon >0$ existe $\delta > 0$ tal que si $(t_0, x_0) \in D$ y
+  $||x_0-\varphi(t_0)|| \le \delta$, entonces $\omega(t_0, x_0) = +\infty$ y
+  $||X(t, t_0, x_0) - \varphi(t)|| < \varepsilon$ para todo $t \ge t_0$.
+\end{definition}
+
+\begin{remark}
+  Aunque parece que $t_0$ juega un papel esencial en la definición en la realidad no lo hace por el
+  Teorema de dependencia continua respecto de condiciones iniciales.
+\end{remark}
+
+\begin{ex}
+  Veamos ejemplos de soluciones estables y no estables.
+  \begin{enumerate}
+  \item $x' = 0$.
+  \item Consideramos la EDO $x' = -x$. Es estable...
+  \item Consideramos la EDO $x' = -x^2$. Es estable...
+  \item Consideramos la EDO $x' = x$. Su solución general es $X(t,0,x_0) = e^t x_0$. Tenemos que
+    $\omega(t_0, x_0) = +\infty$ pero no es estable.
+  \end{enumerate}
+\end{ex}
+
+\begin{definition}
+  Diremos que una solución $\varphi(t)$ es asintóticamente estable (AE) si es estable para
+  $x' = f(t,x)$ y, además, existe $\mu > 0$ tal que si $(t_0, x_0) \in D$ verifica
+  $||x_0 - \varphi(t_0) < \mu$, entonces $\omega(t_0, x_0) = +\infty$ y
+  $\lim_{t \to +\infty} ||X(t, t_0, x_0) - \varphi(t)|| = 0$.
+\end{definition}
+
+\subsection{Estabilidad de EDOs lineales}
+
+En esta sección estudiamos la estabilidad de EDOs lineales, en las que estas propiedades tendrán su
+contraparte en términos de matrices fundamentales. Recordemos en este punto el concepto de EDO
+lineal. Sean $I \subset \R$ abierto, $A \colon I \to \mathcal{M}_{d}(\R)$ y $b \colon I \to \R^d$
+continuas.  Una \emph{EDO lineal} es una ecuación diferencial ordinaria de la forma
+\begin{equation}
+  \label{eq:lineal}
+  x' = A(t)x + b(t).
+  \tag{EL}
+\end{equation}
+
+Toda EDO lineal tiene asociada su \emph{ecuación homogénea }
+\begin{equation}
+  \label{eq:lineal:hom}
+  x' = A(t)x.
+  \tag{ELH}
+\end{equation}
+
+\begin{proposition}
+  Sean $]\alpha, +\infty[ \subset \R$, $A \colon I \to \mathcal{M}_{d}(\R)$ y $b \colon I \to \R^d$
+  continuas. Son equivalentes las siguientes afirmaciones:
+  \begin{enumerate}
+  \item Todas las soluciones de \eqref{eq:lineal} son estables.
+  \item Existe una solución estable de \eqref{eq:lineal}.
+  \item Todas las soluciones de \eqref{eq:lineal:hom} son acotadas en el futuro.
+  \item Existe una matriz fundamental de \eqref{eq:lineal:hom} acotada en el futuro.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Veamos que b) implica c). Supongamos que $\varphi\colon ]\alpha, +\infty[ \to \R$ es una solución
+  estable de \eqref{eq:lineal}. Sea $\Psi \colon ]\alpha, +\infty[$ $\to \R$ solución de
+  \eqref{eq:lineal:hom}. Entonces para cada $\varepsilon > 0$ existe $\delta > 0$ ...
+
+  Veamos que d) implica a). Sea $\Psi \colon ]\alpha, +\infty[ \to \R$ una matriz fundamental de
+  \eqref{eq:lineal:hom} acotada. Sea $\varphi \colon ]\alpha, +\infty[$ una solución de
+  \eqref{eq:lineal}. Tenemos que
+  \[ X(t, x_0) = \varphi(t) + \Psi(t) \Psi(t_0)^{-1} (x_0 - \varphi(t_0)). \] Sea $M > 0$ cota de
+  $\Psi$. Para cada $\varepsilon > 0$ tomamos $0 < \delta < \varepsilon / (M ||\Psi(t_0)^{-1}||)$.
+\end{proof}
+
+\begin{proposition}
+  Sean $]\alpha, +\infty[ \subset \R$, $A \colon I \to \mathcal{M}_{d}(\R)$ y $b \colon I \to \R^d$
+  continuas. Son equivalentes las siguientes afirmaciones:
+  \begin{enumerate}
+  \item Todas las soluciones de \eqref{eq:lineal} son asintóticamente estables.
+  \item Existe una solución asintóticamente estable de \eqref{eq:lineal}.
+  \item Todas las soluciones de \eqref{eq:lineal:hom} tienden a $0$ cuando $t \to +\infty$.
+  \item Existe una matriz fundamental de \eqref{eq:lineal:hom} que tiende a $0$ cuando
+    $t \to +\infty$.
+  \end{enumerate}
+\end{proposition}
+
+
+Como consecuencia de estos resultados, el estudio de la estabilidad en ecuaciones lineales se reduce
+en estudiar una matriz fundamental en $[t_0, +\infty[$.
+
+\begin{ex}
+  Sean $a, b \in \mathcal{C}(]\alpha, +\infty[, \R)$. Consideramos una EDO lineal de una variable
+  \begin{equation}
+    \label{eq:lineal:1}
+    x' = a(t)x+b(t).
+  \end{equation}
+  Sea $A$ una primitiva de $a$. Una matriz fundamental de la ecuación homogénea es
+  $\Psi(t) = \exp(A(t))$. Nótese que la matriz fundamental está acotada si, y solo si, $A$ está
+  acotada superiormente, en cuyo caso existe $\{t_n\}$ tal que $\{a(t_n)\} \to 0$. Es más,
+  $\lim_{t \to +\infty} \Psi(t) = 0$ si, y solo si, $\lim_{t \to +\infty} A(t) = -\infty$ o,
+  equivalentemente, existe $M < 0$ y $K > 0$ tal que $a(t) < M$ para todo $t \ge K$.
+\end{ex}
+
+Nos ocupamos a continuación del caso más simple, las ecuaciones lineales con coeficientes
+constantes.  Sea $A \in \mathcal{M}_d(\R)$. Consideramos la ecuación
+\begin{equation}
+  \label{eq:lineal:cons}
+  x' = A x, \quad t_0 = 0.
+  \tag{LHC}
+\end{equation}
+La matriz fundamental principal en $t = 0$ es $\Phi(t) = \exp(At)$. Para su cálculo tenemos que
+recurrir a la forma canónica de Jordan. Sea $\sigma(A) = \{\lambda_1, \ldots, \lambda_k\}$ el
+conjunto de los valores propios de $A$. Denotamos por $\mathrm{m}(\lambda_j)$ a la multiplicidad
+geométrica del valor propio $\lambda_j \in \sigma(A)$ y denotamos por $\nu(\lambda_j)$ al mayor
+número de $1$ de una caja de Jordan asociada a $\lambda_j$. El teorema de Jordan dice que existen
+$P, J \in \mathcal{M}_d(\mathbb{C})$ con $P$ invertible y $J$ diagonal por bloques, esto es,
+\begin{equation}
+  \label{eq:jordan}
+  J = \left(
+    \begin{matrix}
+      J_1 & \cdots & 0 \\
+      \vdots  & \ddots  & \vdots \\
+      0 & \cdots & J_r
+    \end{matrix}
+  \right),
+\end{equation}
+donde $J_i \in \mathcal{M}_{\nu(\lambda_i)+1}(\mathbb{C})$ es de la forma
+\begin{equation}
+  \label{eq:jordan:bloque}
+  J_i = \left(
+    \begin{matrix}
+      \lambda_i & 1 & 0 & \cdots & 0 \\
+      0 & \lambda_i & 1 & \cdots & 0 \\
+      \vdots  & 0 & \ddots  & \ddots & \vdots \\
+      0 &  \cdots & 0 & \lambda_i & 1 \\
+      0 & 0 & \cdots & 0 & \lambda_i
+    \end{matrix}
+  \right),
+\end{equation}
+tales que $A = P J P^{-1}$. Este resultado nos permite calcular la exponencial de $A$ con facilidad
+pues $\exp(At) = P \exp(Jt) P^{-1}$ y sabemos calcular la exponencial de $J$. En efecto,
+$J_i = \lambda_i I + N$, donde $N$ tiene unos en la primera diagonal a la derecha de la diagonal
+principal. Tenemos que $I \cdot N = N \cdot I$, luego $\exp(J_i t) = \exp(t \lambda_i I ) \exp(t N)$
+y, fijado $k = \nu(\lambda_i)$, se cumple
+
+\begin{equation}
+  \label{eq:jordan:bloque}
+  \exp(J_i t) = e^{t \mathrm{Re}(\lambda_i)} \left(
+    \begin{matrix}
+      1 & t & t^2 / 2 & \cdots & \frac{t^k}{k!} \\
+      0 & 1 & t & \cdots & \frac{t^{k-1}}{(k-1)!} \\
+      \vdots  & 0 & \ddots  & \ddots & \vdots \\
+      0 &  \cdots & 0 & 1 & t \\
+      0 & 0 & \cdots & 0 & 1
+    \end{matrix}
+  \right),
+\end{equation}
+
+
+En lo que sigue usaremos la notación
+$\sigma_0(A) = \{\lambda \in \sigma(A) \mid \mathrm{Re}(\lambda) = 0\}$.
+
+\begin{theorem}\label{thm:estabilidad:lineal:cte}
+  Sean $A \in \mathcal{M}_d(\R)$ y $\mu = \max \{\mathrm{Re}(\lambda) \mid \lambda \in \sigma(A)\}$.
+  \begin{enumerate}
+  \item Si $\mu < 0$, entonces $x' = A x$ es asintóticamente estable.
+  \item Si $\mu = 0$ y $\nu(\lambda) = 0$ para todo $\lambda \in \sigma_0(A)$, entonces $x' = A x$
+    no es asintóticamente estable.
+  \item Si $\mu = 0$ y existe $\lambda \in \sigma_0(A)$ tal que $\nu(\lambda) \ge 1$, entonces
+    $x' = A x$ es inestable.
+  \item Si $\mu > 0$, entonces $x' = A x$ es asintóticamente inestable.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Sean $J, P \in \mathcal{M}_d(\R)$ con $P$ invertible y $J$ matriz de Jordan tales que
+  $A = P J P^{-1}$. Nótese que la acotación y la existencia de límite en $+\infty$ de $\exp(A t)$
+  equivalen a la acotación y la existencia de límite en $+\infty$ de $\exp(J t)$. La disyuntiva
+  expuesta en el teorema es una consecuencia directa de \eqref{eq:jordan:bloque}.
+\end{proof}
+
+
+El Teorema \ref{thm:estabilidad:lineal:cte} es particularmente fácil de aplicar en el caso $d =
+2$. En tal caso, la discursión se simplifica enormemente como muestra la Tabla \ref{table:estabilidad}. Como consecuencia obtenemos el siguiente corolario.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|ll|ll|l|}
+    \hline
+    \multicolumn{5}{|c|}{Valores propios reales} \\
+    \hline
+    $\lambda_1$ & $\lambda_2$ & Traza & Determinante & Clasificación \\
+    \hline
+    - & - & - & + & A.E. \\
+    + & + & + & + & Inestable \\
+    - & + & ? & - & Inestable \\
+    - & 0 & - & 0 & Estable, no A.E. \\
+    0 & + & + & 0 & Inestable \\
+    0 & 0 & 0 & 0 & Inestable \\
+    \hline
+    \multicolumn{5}{|c|}{Valores propios complejos} \\
+    \hline
+    \multicolumn{2}{|c}{$\mathrm{Re}(\lambda_1)$} & Traza & Determinante & Clasificación \\
+    \hline
+    \multicolumn{2}{|c}{-} & - & + & A.E. \\
+    \multicolumn{2}{|c}{+} & + & + & Inestable \\
+    \multicolumn{2}{|c}{0} & 0 & + & Estable, no A.E. \\
+    \hline
+  \end{tabular}
+  \caption{Estudio de la estabilidad el sistema $x' = Ax$ en términos de los valores propios de
+    $A \in \mathcal{M}_2(\R)$.}
+  \label{table:estabiliad}
+\end{table}
+
+
+\begin{corollary}
+  Sea $A \in \mathcal{M}_2(\R)$ con $A \ne 0$. Consideramos el sistema $x' = Ax$. 
+  
+  \begin{enumerate}
+  \item Si $\det(A) < 0$, entonces el sistema es inestable.
+  \item Si $\det(A) = 0$
+    \begin{enumerate}>
+    \item y $\mathrm{traza}(A) < 0$, entonces el sistema es estable pero no A.E.
+    \item y $\mathrm{traza}(A) \ge 0$, entonces el sistema es inestable.
+    \end{enumerate}
+  \item Si $\det(A) > 0$
+    \begin{enumerate}
+    \item y $\mathrm{traza}(A) < 0$, entonces el sistema es A.E.
+    \item y $\mathrm{traza}(A) = 0$, entonces el sistema es estable pero no A.E.
+    \item y $\mathrm{traza}(A) > 0$, entonces el sistema es inestable.
+    \end{enumerate}
+  \end{enumerate}
+\end{corollary}
+
+Para terminar la sección estudiamos los diagramas de fases de estos sistemas en algunos casos. Sea $A \in \mathcal{M}_2(\R)$ y sean $\lambda_1$ y $\lambda_2$ sus valores propios. Supongamos que éstos son reales. 
+
+Obtener dibujos de \link{http://comp.uark.edu/~aeb019/pplane.html}.
+
+\begin{enumerate}
+\item Si $\lambda_1 < 0 < \lambda_2$, entonces... La solución general es de la forma $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$. (foto de marta).
+\item Si $\lambda_1 < \lambda_2 < 0$, entonces La solución general es de la forma $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$. sumidero.
+\item Si $\lambda_1 > \lambda_2 > 0$, entonces La solución general es de la forma $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$. foco (se alejan).
+\item Si $\lambda_1 = \lambda_2$ y $\nu(\lambda_1) = 1$, entonces La solución general es de la forma $\exp(\lambda_1 t) v_1 + t\exp(\lambda_1 t) v_2$. polinomios chachis.
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{./images/fases-pols.png}
+  \end{figure}
+\end{enumerate}
+
+\subsection{El primer método de Lyapunov}
+
+Sea $D \subset \R^d$ abierto y $f \in \mathcal{C}^1(D, \R^d)$. Sea $p \in D$ tal que $f(p) = 0$. La
+ecuación \eqref{eq:edo:ae} puede escribirse de la forma
+\begin{equation}
+  \label{eq:3}
+  x' = f'(p)x - f'(p)p + R(x),
+\end{equation}
+con $||R(x)|| / ||x-p|| \to 0$ cuando $x\to p$.
+
+\begin{theorem}[Primer método de Liapunov]
+  \label{thm:lyapunov}
+  Sea $D \subset \R^d$ abierto y $f \in \mathcal{C}^1(D, \R^d)$. Consideramos la ecuación
+  \eqref{eq:edo:ae}.  Sea $p \in D$ con $f(p) = 0$. Sea
+  $\mu = \max \{\mathrm{Re}(\lambda) \mid \lambda \in \sigma(f'(p))\}$.
+  \begin{enumerate}
+  \item Si $\mu < 0$, entonces $p$ es asintóticamente estable.
+  \item Si $\mu > 0$, entonces $p$ es inestable.
+  \end{enumerate}
+\end{theorem}
+
+\begin{ex}
+  
+  \begin{enumerate}
+  \item Consideramos la EDO $x' = -x^3$. El único punto de equilibrio es $p = 0$, que es un atractor
+    global. Nótese que $\mu = 0$ y el sistema es asintóticamente estable.
+  \item Consideramos la EDO $x' = x^3$. El único punto de equilibrio es $p = 0$, que es un repulsor
+    global. Nótese que $\mu = 0$ y el sistema es inestable.
+  \item Consideramos la EDO \eqref{eq:edo:ae} asociada a $f(x) = x^3 \sin(1/x)$. Existe una sucesión
+    $\{p_n\}$ de puntos de equilibrios convergentes a $0$. Por tanto, $0$ es estable pero no
+    asíntóticamente estable.
+  \end{enumerate}
+\end{ex}
+
+\begin{corollary}
+  Si $d = 2$, en el contexto del Teorema \ref{thm:lyapunov} se verifican las siguientes
+  afirmaciones.
+  \begin{enumerate}
+  \item Si $\det(f'(p)) > 0$ y $\mathrm{traza}(f'(p)) < 0$, entonces $p$ es asintóticamente estable
+    para $x' = f(x)$.
+  \item Si $\det(f'(p)) < 0$ o $\mathrm{traza}(f'(p)) > 0$, entonces $p$ es inestable.
+  \end{enumerate}
+\end{corollary}
+
+\begin{ex}[Examen final, 2017]
+  Dado el sistema cooperativo
+  \begin{equation}
+    \label{eq:cooperativo}
+    \begin{cases}
+      x' = (100 − 20 x + 10 y)x;\\
+      y' = (300 + 10 x − 30 y)y.
+    \end{cases}
+  \end{equation}
+  \begin{enumerate}
+  \item \textbf{Calcula los puntos de equilibrio.} Tenemos que
+    $f(x,y) = ((100-20x+10y)x, (300+10x-30y)y)$. Es fácil ver que los únicos ceros de $f$ son
+    $\{(0,0), (0,10), (5,0), (12,14)\}$.
+  \item \textbf{Estudia las propiedades de estabilidad de los puntos de equilibrio.} Nótese que la
+    matriz jacobiana de $f$ viene dada por
+    \[ f'(x,y) = \left( \begin{matrix}
+          100 -40x +10y & 10x \\
+          10x & 300 +10x-60y
+        \end{matrix} \right).
+
+    \]
+    \begin{itemize}
+    \item En $(0,0)$ tenemos $\mathrm{traza}(f'(0,0)) > 0$, luego es inestable.
+    \item En $(0,10)$ se cumple $\det(f'(0,10)) > 0$, luego es inestable.
+    \item En $(5,0)$ obtenemos $\det(f'(5,0)) < 0$, luego es inestable.
+    \item En $(12,14)$ se tiene $\det(f'(12,14)) > 0$ y $\mathrm{traza}(f'(12,14)) < 0$, por lo que
+      el punto de equilibrio es asintóticamente estable. \qedhere
+    \end{itemize}
+  \end{enumerate}
 \end{ex}
 
 
