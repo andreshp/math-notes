@@ -92,24 +92,24 @@ Toda EDO lineal tiene asociada su \emph{ecuación homogénea }
   \[ X(t, x_0) = \varphi(t) + \Psi(t) \Psi(t_0)^{-1} (x_0 - \varphi(t_0)). \] Sea $M > 0$ cota de
   $\Psi$. Para cada $\varepsilon > 0$ tomamos $0 < \delta < \varepsilon / (M
   ||\Psi(t_0)^{-1}||)$. Nótese que $\omega(t_0, x_0) = +\infty$ por el teorema de crecimiento a lo
-  sumo lineal. Además, tenemos que $||X(t,x_{0) - \varphi(t)|| z \varepsilon$ para todo $t \ge t_0$.
-  \end{proof}
+  sumo lineal. Además, tenemos que $||X(t,x_0) - \varphi(t)|| z \varepsilon$ para todo $t \ge t_0$.
+\end{proof}
 
-  Análogamente podemos demostrar el siguiente resultado referente a la estabilidad asintótica.
-  \begin{proposition}
-    Sean $I = ]\alpha, +\infty[ \subset \R$, $A \colon I \to \mathcal{M}_{d}(\R)$ y
-    $b \colon I \to \R^d$ continuas. Son equivalentes las siguientes afirmaciones:
-    \begin{enumerate}
-    \item Todas las soluciones de \eqref{eq:lineal} son asintóticamente estables.
-    \item Existe una solución asintóticamente estable de \eqref{eq:lineal}.
-    \item Todas las soluciones de \eqref{eq:lineal:hom} tienden a $0$ cuando $t \to +\infty$.
-    \item Existe una matriz fundamental de \eqref{eq:lineal:hom} que tiende a $0$ cuando
-      $t \to +\infty$.
-    \end{enumerate}
-  \end{proposition}
+Análogamente podemos demostrar el siguiente resultado referente a la estabilidad asintótica.
+\begin{proposition}
+  Sean $I = ]\alpha, +\infty[ \subset \R$, $A \colon I \to \mathcal{M}_{d}(\R)$ y
+  $b \colon I \to \R^d$ continuas. Son equivalentes las siguientes afirmaciones:
+  \begin{enumerate}
+  \item Todas las soluciones de \eqref{eq:lineal} son asintóticamente estables.
+  \item Existe una solución asintóticamente estable de \eqref{eq:lineal}.
+  \item Todas las soluciones de \eqref{eq:lineal:hom} tienden a $0$ cuando $t \to +\infty$.
+  \item Existe una matriz fundamental de \eqref{eq:lineal:hom} que tiende a $0$ cuando
+    $t \to +\infty$.
+  \end{enumerate}
+\end{proposition}
 
-  Como consecuencia de estos resultados, el estudio de la estabilidad en ecuaciones lineales se
-  reduce en estudiar una matriz fundamental en $[t_0, +\infty[$.
+Como consecuencia de estos resultados, el estudio de la estabilidad en ecuaciones lineales se reduce
+en estudiar una matriz fundamental en $[t_0, +\infty[$.
 
 \begin{ex}
   Sean $a, b \in \mathcal{C}(]\alpha, +\infty[, \R)$. Consideramos una EDO lineal de una variable
@@ -155,7 +155,7 @@ donde $J_i \in \mathcal{M}_{\nu(\lambda_i)+1}(\mathbb{C})$ es de la forma
       0 & \lambda_i & 1 & \cdots & 0 \\
       \vdots  & \ddots & \ddots  & \ddots & \vdots \\
       0 &  \cdots & 0 & \lambda_i & 1 \\
-      0 & \cdots & 0  & 0 & \lambda_i
+      0 & \cdots & 0 & 0 & \lambda_i
     \end{matrix}
   \right),
 \end{equation}
@@ -175,9 +175,8 @@ y, fijado $k = \nu(\lambda_i)$, se cumple
       0 & \cdots & 0 & 1 & t \\
       0 & \cdots & 0 & 0 & 1
     \end{matrix}
-  \right),
+  \right).
 \end{equation}
-
 
 En lo que sigue usaremos la notación
 $\sigma_0(A) = \{\lambda \in \sigma(A) \mid \mathrm{Re}(\lambda) = 0\}$.
@@ -185,29 +184,31 @@ $\sigma_0(A) = \{\lambda \in \sigma(A) \mid \mathrm{Re}(\lambda) = 0\}$.
 \begin{theorem}\label{thm:estabilidad:lineal:cte}
   Sean $A \in \mathcal{M}_d(\R)$ y $\mu = \max \{\mathrm{Re}(\lambda) \mid \lambda \in \sigma(A)\}$.
   \begin{enumerate}
-  \item Si $\mu < 0$, entonces $x' = A x$ es asintóticamente estable.
-  \item Si $\mu = 0$ y $\nu(\lambda) = 0$ para todo $\lambda \in \sigma_0(A)$, entonces $x' = A x$
-    no es asintóticamente estable.
+  \item Si $\mu < 0$, entonces las soluciones de \eqref{eq:lineal:cons} son asintóticamente
+    estables.
+  \item Si $\mu = 0$ y $\nu(\lambda) = 0$ para todo $\lambda \in \sigma_0(A)$, entonces las
+    soluciones de \eqref{eq:lineal:cons} son estables pero no asintóticamente estables.
   \item Si $\mu = 0$ y existe $\lambda \in \sigma_0(A)$ tal que $\nu(\lambda) \ge 1$, entonces
-    $x' = A x$ es inestable.
-  \item Si $\mu > 0$, entonces $x' = A x$ es asintóticamente inestable.
+    \eqref{eq:lineal:cons} es inestable.
+  \item Si $\mu > 0$, entonces \eqref{eq:lineal:cons} es inestable.
   \end{enumerate}
 \end{theorem}
 \begin{proof}
   Sean $J, P \in \mathcal{M}_d(\R)$ con $P$ invertible y $J$ matriz de Jordan tales que
-  $A = P J P^{-1}$. Nótese que la acotación y la existencia de límite en $+\infty$ de $\exp(A t)$
-  equivalen a la acotación y la existencia de límite en $+\infty$ de $\exp(J t)$. La disyuntiva
-  expuesta en el teorema es una consecuencia directa de \eqref{eq:jordan:bloque}.
+  $A = P J P^{-1}$. Nótese que la acotación en el futuro y la existencia de límite en $+\infty$ de
+  $\exp(A t)$ equivalen a la acotación en el futuro y la existencia de límite en $+\infty$ de
+  $\exp(J t)$. La disyuntiva expuesta en el teorema es una consecuencia directa de
+  \eqref{eq:jordan:bloque}.
 \end{proof}
 
 
 El Teorema \ref{thm:estabilidad:lineal:cte} es particularmente fácil de aplicar en el caso $d =
-2$. En tal caso, la discursión se simplifica enormemente como muestra la Tabla
+2$. En tal caso, la discusión se simplifica enormemente como muestra la Tabla
 \ref{table:estabilidad}. Como consecuencia obtenemos el siguiente corolario.
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{|ll|ll|l|}
+  \begin{tabular}{|cc|cc|l|}
     \hline
     \multicolumn{5}{|c|}{Valores propios reales} \\
     \hline
@@ -226,54 +227,126 @@ El Teorema \ref{thm:estabilidad:lineal:cte} es particularmente fácil de aplicar
     \hline
     \multicolumn{2}{|c}{-} & - & + & A.E. \\
     \multicolumn{2}{|c}{+} & + & + & Inestable \\
-    \multicolumn{2}{|c}{0} & 0 & + & Estable, no A.E. \\
+    \multicolumn{2}{|c}{0} & 0 & + & Estable, no A.E.\\
     \hline
   \end{tabular}
-  \caption{Estudio de la estabilidad el sistema $x' = Ax$ en términos de los valores propios de
-    $A \in \mathcal{M}_2(\R)$.}
-  \label{table:estabiliad}
+  \caption{Estudio de la estabilidad el sistema \eqref{eq:lineal:cons} en términos de los valores
+    propios de $A \in \mathcal{M}_2(\R) \setminus \{0\}$.}
+  \label{table:estabilidad}
 \end{table}
 
-
 \begin{corollary}
-  Sea $A \in \mathcal{M}_2(\R)$ con $A \ne 0$. Consideramos el sistema $x' = Ax$.
-  
+  Sea $A \in \mathcal{M}_2(\R)$ con $A \ne 0$. Consideramos el sistema \eqref{eq:lineal:cons}.
   \begin{enumerate}
-  \item Si $\det(A) < 0$, entonces el sistema es inestable.
-  \item Si $\det(A) = 0$
-    \begin{enumerate}>
-    \item y $\mathrm{traza}(A) < 0$, entonces el sistema es estable pero no A.E.
-    \item y $\mathrm{traza}(A) \ge 0$, entonces el sistema es inestable.
+  \item Si $\det(A) < 0$, entonces las soluciones son inestables.
+  \item Si $\det(A) = 0$ y
+    \begin{enumerate}[label=\arabic*.]
+    \item $\mathrm{traza}(A) < 0$, entonces las soluciones son estables pero no asintóticamente
+      estables.
+    \item $\mathrm{traza}(A) \ge 0$, entonces las soluciones son inestables.
     \end{enumerate}
-  \item Si $\det(A) > 0$
-    \begin{enumerate}
-    \item y $\mathrm{traza}(A) < 0$, entonces el sistema es A.E.
-    \item y $\mathrm{traza}(A) = 0$, entonces el sistema es estable pero no A.E.
-    \item y $\mathrm{traza}(A) > 0$, entonces el sistema es inestable.
+  \item Si $\det(A) > 0$ y
+    \begin{enumerate}[label=\arabic*.]
+    \item $\mathrm{traza}(A) < 0$, entonces las soluciones son asintóticamente estables.
+    \item $\mathrm{traza}(A) = 0$, entonces las soluciones son estables pero no asintóticamente
+      estables.
+    \item $\mathrm{traza}(A) > 0$, entonces las soluciones son inestables.
     \end{enumerate}
   \end{enumerate}
 \end{corollary}
 
 Para terminar la sección estudiamos los diagramas de fases de estos sistemas en algunos casos. Sea
-$A \in \mathcal{M}_2(\R)$ y sean $\lambda_1$ y $\lambda_2$ sus valores propios. Supongamos que éstos
-son reales.
-
-Obtener dibujos de \link{http://comp.uark.edu/~aeb019/pplane.html}.
+$A \in \mathcal{M}_2(\R)$ y sean $\lambda_1$ y $\lambda_2$ sus valores propios. Vamos a visualizar
+el diagrama de fases del sistema \eqref{eq:lineal:cons} en los diferentes casos que han aparecido en
+el resultado previo. Las imágenes se han obtenido de
+\url{http://comp.uark.edu/~aeb019/pplane.html}. Distinguimos los siguientes casos.
 
 \begin{enumerate}
-\item Si $\lambda_1 < 0 < \lambda_2$, entonces... La solución general es de la forma
-  $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$. (foto de marta).
-\item Si $\lambda_1 < \lambda_2 < 0$, entonces La solución general es de la forma
-  $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$. sumidero.
-\item Si $\lambda_1 > \lambda_2 > 0$, entonces La solución general es de la forma
-  $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$. foco (se alejan).
-\item Si $\lambda_1 = \lambda_2$ y $\nu(\lambda_1) = 1$, entonces La solución general es de la forma
-  $\exp(\lambda_1 t) v_1 + t\exp(\lambda_1 t) v_2$. polinomios chachis.
+\item Los valores propios son reales. Si éstos son distintos, entonces la solución general es de la
+  forma $\exp(\lambda_1 t) v_1 + \exp(\lambda_2 t) v_2$.  Vamos a estudiar $4$ subcasos:
+  \begin{enumerate}[label=\arabic*.]
+  \item Si $\lambda_1 < 0 < \lambda_2$, entonces $0$ es un punto de equilibrio hiperbólico, nombre
+    que viene dado por el diagrama de fases correspondiente (Figura \ref{fig:fases:neg-pos}). Las
+    soluciones divergen tanto en $-\infty$ como en $+\infty$.
+  \item Si $\lambda_1 < \lambda_2 < 0$, entonces el punto de equilibrio $0$ se denomina sumidero. En
+    efecto, todas las soluciones divergen en $t=-\infty$ y tienden a $0$ en $t=+\infty$ (Figura
+    \ref{fig:fases:neg-neg}). Por tanto, se puede decir que $0$ atrae a las soluciones.
+  \item Si $\lambda_1 > \lambda_2 > 0$, entonces las soluciones tienen límite $0$ en $t = -\infty$ y
+    divergen en $t=+\infty$. El punto de equilibrio $0$ se denomina foco debido a que las soluciones
+    se alejan de éste.
+  \item Si $\lambda_1 = \lambda_2$ y $\nu(\lambda_1) = 1$, entonces la solución general es de la
+    forma $\exp(\lambda_1 t) v_1 + t\exp(\lambda_1 t) v_2$. Obtenemos que las soluciones divergen en
+    $t=-\infty$ y tienden a $0$ en $t=+\infty$ con un comportamiento ligeramente distinto al segundo
+    caso.
+  \end{enumerate}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=.7\textwidth]{./images/fases-pols.png}
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-neg-pos.png}
+      \caption{$(x', y') = (-2x +y, y)$.}
+      \label{fig:fases:neg-pos}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-neg-neg.png}
+      \caption{$(x', y') = (-2x +y, y)$.}
+      \label{fig:fases:neg-neg}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-pos-pos.png}
+      \caption{$(x', y') = (2x +y, y)$.}
+      \label{fig:fases:pos-pos}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-neg-eq.png}
+      \caption{$(x', y') = (-2x +y, -2y)$.}
+      \label{fig:fases:neg-eq}
+    \end{subfigure}
+    \caption{Diagramas de fases del sitema \eqref{eq:lineal:cons} cuando los valores propios son
+      reales.}
+  \end{figure}
+
+\item Los valores propios son complejos. En tal caso, estos son de la forma $\lambda_1 = a+ib$ y
+  $\lambda_2 = a-ib$ con $a,b \in \R$. Obtenemos que las soluciones se escriben como
+  $\exp(at)( \cos(bt) v_1 + \sin(bt) v_2$. En vista de este hecho, obtenemos los siguientes
+  comportamientos.
+  \begin{enumerate}[label=\arabic*.]
+  \item Si $a = 0$, entonces las componentes de las soluciones son combinaciones lineales de senos y
+    cosenos y, por tanto, las soluciones son periódicas y su imagen es una elipse (Figura
+    \ref{fig:fases:elip}).
+  \item Si $a > 0$, entonces las soluciones tienen a $0$ cuando $t = -\infty$ y divergen cuando
+    $t = +\infty$. La imagen de las soluciones forma una espiral en el plano (Figura \ref{fig:fases:espiral:+}).
+  \item Si $a z 0$, entonces las soluciones tienen a $0$ cuando $t = +\infty$ y divergen cuando
+    $t = -\infty$. La imagen de las soluciones forma una espiral en el plano (Figura \ref{fig:fases:espiral:-}).
+  \end{enumerate}
+  \begin{figure}[H]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-elip.png}
+      \caption{$(x', y') = (-2y, x)$.}
+      \label{fig:fases:elip}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-espiral+.png}
+      \caption{$(x', y') = (-2y+x, x)$.}
+      \label{fig:fases:espiral:+}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+      \centering
+      \includegraphics[width=.8\textwidth]{./images/fases-espiral-.png}
+      \caption{$(x', y') = (-2y-x, x)$.}
+      \label{fig:fases:espiral:-}
+    \end{subfigure}
+    \caption{Diagramas de fases del sitema \eqref{eq:lineal:cons} cuando los valores propios son
+      complejos.}
   \end{figure}
 \end{enumerate}
+
 
 \subsection{El primer método de Lyapunov}
 

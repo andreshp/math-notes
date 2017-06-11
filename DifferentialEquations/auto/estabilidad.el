@@ -9,7 +9,14 @@
     "eq:jordan"
     "eq:jordan:bloque"
     "thm:estabilidad:lineal:cte"
-    "table:estabiliad"
+    "table:estabilidad"
+    "fig:fases:neg-pos"
+    "fig:fases:neg-neg"
+    "fig:fases:pos-pos"
+    "fig:fases:neg-eq"
+    "fig:fases:elip"
+    "fig:fases:espiral:+"
+    "fig:fases:espiral:-"
     "eq:3"
     "thm:lyapunov"
     "eq:cooperativo"
@@ -27,6 +34,8 @@
     "eq:schwarz"
     "eq:gradiente:2"
     "eq:gradiente:2:s"
-    "thm:lagrange-dirichlet"))
+    "thm:lagrange-dirichlet")
+   (LaTeX-add-environments
+    '("ex" LaTeX-env-args ["argument"] 0)))
  :latex)
 

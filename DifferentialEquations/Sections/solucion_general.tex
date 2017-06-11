@@ -216,7 +216,7 @@ para probar que la solución general es continua. Para ello será esencial el si
   la solución maximal del PVI asociado a la condición inicial $(t_n, x_n)$. Entonces para todo
   compacto $[a,b]\subset ]\alpha, \omega[$ tal que $a < t_0 < b$ existe $m \in \N$ tal que para cada
   $n \ge m$ se tiene $[a,b] \subset ]\alpha_n,\omega_n[$ y además $\{\varphi_{n+m}\}$ converge
-  uniformemente a $\varphi$ en $[a,b]$.
+  uniformemente a $\varphi$ en $[a,b]$. Esto es, $\{\varphi_n\}$ converge a $\varphi$ en compactos.
 \end{theorem}
 \begin{proof}
   Sea $\rho > 0$ tal que $T_{\rho} = T_{\rho}([a,b], \varphi) \subset D$. Sean $r, s > 0$ tales que
@@ -228,7 +228,7 @@ para probar que la solución general es continua. Para ello será esencial el si
   que
   \[||\varphi_n(t) - \varphi(t)|| \le ||\varphi_n(t_0) - \varphi(t_0)|| e^{L|t-t_0|} || \le (1+M)\mu
     e^{L(b-a)} \] para todo $n \ge m$ y $t \in [a,b]$.
-
+  
   Por último, aplicando lo anterior deducimos que para cada $\varepsilon > 0$ existe $N \ge m$ tal
   que para cada $n \ge N$ se tiene
   $||\varphi_n(t) - \varphi(t)|| \le (1+M)\mu e^{L(b-a)} < \varepsilon$ en $[a,b]$, donde se ha
@@ -301,16 +301,15 @@ $\Omega = \{(t,t_0,x_0,\lambda) : \alpha(t_0,x_0, \lambda) < t < \omega(t_0,x_0,
   En el contexto actual, el conjunto $\Omega$ es abierto y $X \colon \Omega \to \R^d$ es continua.
 
   Además, si $\{(t_n, x_n, \lambda_n)\} \subset D \times P$ una sucesión convergente a
-  $(t_0, x_0, \lambda)$ y $[a,b] \subset ]\alpha(t_0,x_0,\lambda), \omega(t_0, x_0, \lambda)[$,
+  $(t_0, x_0, \lambda)$ y $K \subset ]\alpha(t_0,x_0,\lambda), \omega(t_0, x_0, \lambda)[$ es un conjunto compacto,
   entonces existe $m \in \N$ tal que para todo $n \ge m$ se tiene que
-  $[a,b] \subset ]\alpha(t_n,x_n,\lambda_n), \omega(t_n, x_n, \lambda_n)[$ y
+  $K \subset ]\alpha(t_n,x_n,\lambda_n), \omega(t_n, x_n, \lambda_n)[$ y
   $\{X(t; t_{n+m}, x_{n+m}, \lambda_{n+m})\}$ converge uniformemente a $X(t; t_0, x_0, \lambda)$ en
-  $[a,b]$.
+  $K$.
 \end{theorem}
 
 \begin{ex}
   Consideramos el PVI
-
   \[
     \begin{cases}
       x'' + \lambda \sin(x) = 0; \\
@@ -318,7 +317,6 @@ $\Omega = \{(t,t_0,x_0,\lambda) : \alpha(t_0,x_0, \lambda) < t < \omega(t_0,x_0,
       x'(0) = 0.
     \end{cases}
   \]
-
   Este PVI está asociado al movimiento de ún péndulo cuando se suelta con ángulo $s_0$ y longitud
   $\lambda$. Estudiamos el caso $\lambda = 0$, que se corresponde con un péndulo de longitud
   infinita. La única solución de la ecuación es $\varphi(t) = t^2 + \pi/4$. Dado $\varepsilon = 1$ y
@@ -345,18 +343,13 @@ $t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
   $(t, t_0, x_0) \in \Omega$ se cumple
   \[ \frac{\partial}{\partial t} X(t, t_0, x_0) = (X(t, t_0, x_0) - \sin(t))^2 + \cos(t) \quad
     \forall \, (t, t_0, x_0) \in \Omega. \]
-
   Por tanto, tenemos que
-
   \[ \frac{\partial^2}{\partial x_0\partial t} X(t, t_0, x_0) = 2(X(t, t_0, x_0) -
     \sin(t))\frac{\partial}{\partial x_0} X(t, t_0, x_0) \quad \forall \, (t, t_0, x_0) \in
     \Omega. \]
-
   Aplicando el Lema de Schwartz y evaluando en $t_0 = 0$ y $x_0 = 0$ obtenemos que
-
   \[ \frac{\partial^2}{\partial t\partial x_0} X(t, 0, 0) = 2(X(t, 0, 0) -
     \sin(t))\frac{\partial}{\partial x_0} X(t, t_0, x_0) = 0. \]
-
   Además, como $X(t_0,t_0, x_0) = x_0$, derivando respecto de $x_0$ obtenmos que
   $\frac{\partial}{\partial x_0} X(t_0, t_0, x_0) = 1$. Por tanto,
   $\frac{\partial}{\partial x_0}X(t, 0,0)$ es solución de la ecuación diferencial $y' = 0$ con
@@ -375,7 +368,6 @@ $t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
     \label{eq:variacional}
     y' = A(t; t_0, x_0) y
   \end{equation}
-
   recibe el nombre de \emph{ecuación variacional}.
 \end{definition}
 
@@ -383,7 +375,7 @@ $t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
   \label{thm:-dev-param}
   Supongamos que las funciones matriciales
   $\frac{\partial}{\partial x}f \colon D \times P \to \mathcal{M}_d$ y
-  $\frac{\partial}{\partial \lambda} f \colon D \times P \to \mathcal{M}_{d\timesk}$ están bien
+  $\frac{\partial}{\partial \lambda} f \colon D \times P \to \mathcal{M}_{d\times k}$ están bien
   definidas y son continuas. Entonces se verifican las siguientes afirmaciones:
   
   \begin{enumerate}

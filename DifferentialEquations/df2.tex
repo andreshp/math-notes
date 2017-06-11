@@ -19,12 +19,16 @@
 \usepackage{title1}
 %\usepackage{title2}
 
+
 %-----------------------------------------------------------------------------------------------------
 %	OTROS PAQUETES
 %-----------------------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
 
+\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 %-----------------------------------------------------------------------------------------------------
 %	Secciones
@@ -816,7 +820,7 @@ conjunto imagen. Esto quiere decir que las órbitas de \eqref{eq:edo:ae} se repi
 numerable de veces.
 
 \begin{lemma} \label{lem:ae:trans} Sea $\varphi \in \mathcal{C}^1(]\alpha, \omega[)$ solución de
-  \eqref{eq:edo:ae} y sea $\tau \in \E$. Entonces, la función
+  \eqref{eq:edo:ae} y sea $\tau \in \R$. Entonces, la función
   $\Psi \colon ]\alpha-\tau, \omega-\tau[ \to \R$ dada por $\Psi(t) = \varphi(t+\tau)$ es solución
   de \eqref{eq:edo:ae}.
 \end{lemma}

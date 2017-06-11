@@ -1,6 +1,8 @@
 (TeX-add-style-hook
  "df2"
  (lambda ()
+   (TeX-add-to-alist 'LaTeX-provided-package-options
+                     '(("graphicx" "demo")))
    (TeX-run-style-hooks
     "latex2e"
     "article"
@@ -8,7 +10,10 @@
     "spanish"
     "template"
     "title1"
-    "mathematics")
+    "mathematics"
+    "graphicx"
+    "caption"
+    "subcaption")
    (TeX-add-symbols
     '("importsection" 1)
     "doctitle"
@@ -90,6 +95,8 @@
     "eq:newton:forzada:sis"
     "eq:lienard"
     "eq:lienard:sis"
-    "thm:arzela-ascoli"))
+    "thm:arzela-ascoli")
+   (LaTeX-add-environments
+    '("ex" LaTeX-env-args ["argument"] 0)))
  :latex)
 
