@@ -1,0 +1,32 @@
+(TeX-add-style-hook
+ "estabilidad"
+ (lambda ()
+   (LaTeX-add-labels
+    "eq:lineal"
+    "eq:lineal:hom"
+    "eq:lineal:1"
+    "eq:lineal:cons"
+    "eq:jordan"
+    "eq:jordan:bloque"
+    "thm:estabilidad:lineal:cte"
+    "table:estabiliad"
+    "eq:3"
+    "thm:lyapunov"
+    "eq:cooperativo"
+    "eq:hilbert"
+    "eq:pendulo:estabilidad"
+    "eq:pendulo:estabilidad:2"
+    "thm:lyapunov:2"
+    "eq:pendulo:estabilidad:3"
+    "thm:lyapunov:3"
+    "thm:lyapunov:5"
+    "thm:chetaev"
+    "eq:lyapunov"
+    "eq:gradiente:1"
+    "prop:gradiente:1"
+    "eq:schwarz"
+    "eq:gradiente:2"
+    "eq:gradiente:2:s"
+    "thm:lagrange-dirichlet"))
+ :latex)
+

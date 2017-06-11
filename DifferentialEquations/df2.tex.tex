@@ -1,40 +1,70 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Apuntes de la asignatura ecuaciones diferenciales 2.
-%
-% Autores: Andrés Herrera Poyatos (https://github.com/andreshp)
-%          Paco Luque Sánchez (https://github.com/pacron)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Created 2017-06-11 Sun 11:27
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Andrés Herrera Poyatos}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Andrés Herrera Poyatos},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.2 (Org mode 9.0.5)}, 
+ pdflang={English}}
+\begin{document}
 
-%-----------------------------------------------------------------------------------------------------
-%	INCLUSIÓN DE PAQUETES BÁSICOS
-%-----------------------------------------------------------------------------------------------------
+\tableofcontents
+
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+\% Apuntes de la asignatura ecuaciones diferenciales 2.
+\%
+\% Autores: Andrés Herrera Poyatos (\url{https://github.com/andreshp})
+\%          Paco Luque Sánchez (\url{https://github.com/pacron})
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+
+\%-----------------------------------------------------------------------------------------------------
+\%	INCLUSIÓN DE PAQUETES BÁSICOS
+\%-----------------------------------------------------------------------------------------------------
 
 \documentclass{article}
 
-% Utiliza el paquete de español.
+\% Utiliza el paquete de español.
 \usepackage{spanish}
-% Utiliza la plantilla para reports.
+\% Utiliza la plantilla para reports.
 \usepackage{template}
-% Utiliza una portada (elija una de las portadas disponibles y comente el resto).
+\% Utiliza una portada (elija una de las portadas disponibles y comente el resto).
 \usepackage{title1}
-%\usepackage{title2}
+\%\usepackage{title2}
 
-%-----------------------------------------------------------------------------------------------------
-%	OTROS PAQUETES
-%-----------------------------------------------------------------------------------------------------
+\%-----------------------------------------------------------------------------------------------------
+\%	OTROS PAQUETES
+\%-----------------------------------------------------------------------------------------------------
 
 \usepackage{mathematics}
 
 
-%-----------------------------------------------------------------------------------------------------
-%	Secciones
-%-----------------------------------------------------------------------------------------------------
+\%-----------------------------------------------------------------------------------------------------
+\%	Secciones
+\%-----------------------------------------------------------------------------------------------------
 
-\newcommand{\importsection}[1]{\input{./Sections/#1}}           % Include sections from sections directory.
+\newcommand{\importsection}[1]\{\input{./Sections/#1}\}           \% Include sections from sections directory.
 
-%-----------------------------------------------------------------------------------------------------
-%	DATOS DEL DOCUMENTO
-%-----------------------------------------------------------------------------------------------------
+\%-----------------------------------------------------------------------------------------------------
+\%	DATOS DEL DOCUMENTO
+\%-----------------------------------------------------------------------------------------------------
 
 \newcommand{\doctitle}{Apuntes}
 \newcommand{\docsubtitle}{}
@@ -1858,7 +1888,8 @@ cierto.
 
 
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
+\%\%\% Local Variables:
+\%\%\% mode: latex
+\%\%\% \TeX{}-master: t
+\%\%\% End:
+\end{document}

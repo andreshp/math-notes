@@ -1,0 +1,503 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: A. Herrera Poyatos
+% Tittle: Continuidad y diferenciabilidad de la solución 
+% respecto de condiciones iniciales y  parámetros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Continuidad y diferenciabilidad de la solución respecto de condiciones iniciales y
+  parámetros}
+
+En esta sección estudiamos la función solución general de \eqref{eq:edo} bajo hipótesis de unicidad
+global.  Recordemos que el concepto de solución general se introdujo en la Sección
+\ref{sec:existencia-unicidad:general}. Concretamente, probaremos que la solución general
+$X \colon \Omega \to \R^d$ está definida sobre un abierto y es una función de clase
+$1$. Estudiaremos además sus derivadas parciales de segundo orden. Por último, introduciremos
+parámetros en la EDO, obteniendo una solución general que depende de éstos y también resulta ser de
+clase 1.
+
+\subsection{Preliminares} \label{sec:sol-general:preliminares}
+
+Antes de demostrar los resultados que ya se han avanzado necesitaremos nuevas herramientas que se
+proporcionan en este apartado.
+
+\subsubsection{Entornos tubulares}
+
+\begin{definition}
+  Sea $J \subset \R$ un intervalo, $\varphi \colon J \to \R^d$ una función continua y $\rho > 0$. El
+  conjunto
+  \[ T_{\rho} = T_{\rho}(J, \varphi) = \{(t,x) \in J \times \R^d : ||x-\varphi(t)|| \le \rho\} \] es
+  un \emph{entorno tubular} de $\varphi$.
+\end{definition}
+
+Nótese que si $\varphi \colon ]t_0-a, t_0+a[ \to \R^d$ es constantemente $x_0$, entonces
+$T_{\rho}(J, \varphi) = R_{a, \rho}(t_0, x_0)$
+
+\begin{lemma}
+  Sea $J \subset \R$ un intervalo, $\varphi \colon J \to \R^d$ una función continua y $\rho > 0$. El
+  conjunto $T_\rho(J,\varphi)$ es homeomorfo a $J \times \overline{\mathrm{B}}(0,\rho)$.
+\end{lemma}
+\begin{proof}
+  La función $H \colon T_{\rho}(J, \varphi)\to J \times \overline{\mathrm{B}}(0,\rho)$ dada por
+  $H(t,x) = (t, x-\varphi(t))$ es un homeomorfismo.
+\end{proof}
+
+\begin{lemma}
+  Sea $J \subset \R$ un intervalo y $\varphi \colon J \to \R^d$ una función continua. Sea
+  $D \subset \R \times \R^d$ abierto tal que $(t, \varphi(t)) \in D$ para todo $t \in J$. Si $J$ es
+  compacto, entonces existe $\rho > 0$ tal que $T_{\rho}(J,\varphi) \subset D$.
+\end{lemma}
+\begin{proof}
+  Razonamos por reducción al absurdo. Para cada $\rho > 0$ tenemos que
+  $T_{\rho}(J, \varphi) \not \subset D$. En particular, para cada $n \in \N$ existe
+  $(t_n, x_n) \in T_{1/n}(J,\varphi) \setminus D$. Nótese que la sucesión $\{(t_n,x_n)\}$ está en el
+  compacto $T_1(J,\varphi)$, luego admite una parcial convergente a un elemento de
+  $T_1(J,\varphi)$. Además, el límite de esta parcial debe ser de la forma $(t_0,
+  \varphi(t_0))$. Pero esto implica que una cola de la sucesión está contenida en $D$ puesto que es
+  un conjunto abierto, contradicción.
+\end{proof}
+
+\begin{proposition}
+  Sea $J \subset \R$ un intervalo y $\varphi \colon J \to \R^d$ una función continua. Sea
+  $D \subset \R \times \R^d$ abierto tal que $(t, \varphi(t)) \in D$ para todo $t \in J$ y
+  $f \colon D \to \R^d$ localmente lipschitziana respecto de la variable $x \in \R^d$. Si $J$ es
+  compacto y $T_{\rho}(J,\varphi) \subset D$, entonces $f$ es lipschitziana en
+  $T_{\rho}(J,\varphi)$.
+\end{proposition}
+\begin{proof}
+  El conjunto $T_{\rho}(J,\varphi)$ es compacto. En efecto, es homeoformo a
+  $J \times \overline{\mathrm{B}}(0,\rho)$, que es compacto por ser producto de compactos. La prueba
+  finaliza al aplicar el Lema \ref{lem:compacto-lipschitziana}.
+\end{proof}
+
+
+\subsubsection{Convergencia uniforme en compactos}
+
+\begin{definition}
+  Una sucesión de funciones $f_n \colon I_{n} \to \R^d$ converge uniformemente en compactos hacia
+  una función $f \colon I \to \R^d$ si para todo $K \subset I$ compacto existe una cola de $f_n$
+  definida en $K$ que converge uniformemente en $K$ a $f$.
+\end{definition}
+
+Es claro que la convergencia uniforme implica la convergencia uniforme en compactos, que denotaremos
+c.u.c. El recíproco no es cierto como muestra el siguiente ejemplo.
+
+\begin{ex}
+  Consideramos la sucesión $f_n \colon \R \to \R$ dada por $f_n(t) = t / n$. Tenemos que $f_n$
+  converge uniformemente a $0$ en compactos pero no converge uniformemente.
+\end{ex}
+
+Recuérdese que el límite uniforme de funciones continuas es una función continua. Utilizando este
+hecho probamos y el carácter local de la continuidad demostramos fácilmente el siguiente resultado
+más general.
+
+\begin{prop}
+  Sea $f_n \colon I_{n} \to \R^d$ una sucesión de funciones convergente uniformemente en compactos a
+  una función $f \colon I \to \R^d$. Si las funciones $f_n$ son continuas, entonces $f$ es continua.
+\end{prop}
+
+La convergencia en compactos implica la convergencia puntual. El recíproco tampoco es cierto.
+
+\begin{ex}
+  Consideramos la sucesión $f_n \colon [0,1] \to \R$ dada por $f_n(t) = t^n$. Tenemos que $f_n$
+  converge puntualmente a la función $f \colon [0,1] \to \R$ definida como $f(t) = 0$ para $t \ne 1$
+  y $f(1) = 1$. Sin embargo, la convergencia no es uniforme en $[0,1]$ pues $f$ no es continua. Por
+  tanto, la convergencia no puede ser uniforme en compactos.
+\end{ex}
+
+\begin{lemma}
+  Sea $f_n \colon I_n \to \R^d$ para cada $n \in \N$ y $f \colon I \to \R^d$ continua en
+  $t_0 \in I$. Si la sucesión $\{f_n\}$ converge uniformemente en compactos a $f$, entonces para
+  cada sucesión $\{t_n\}$ convergente a $t_0$ con $t_n \in I_n$ para cada $n \in \N$ se verifica que
+  $\{f_n(t_n)\}$ converge a $f(t_0)$.
+\end{lemma}
+\begin{proof}
+  Nótese que $||f_n(t_n) - f(t_0) || \le ||f_n(t_n) - f(t_n) || + ||f(t_n) - f(t_0)||$. La sucesión
+  $\{f(t_n) - f(t_0)\}$ converge a $0$ por la continuidad de $f$ en $t_0$. Por otro lado, existe
+  $m \in \N$ tal que $\{t_{n+m}\} \subset I$. La sucesión $\{f_{n+m}(t_{n+m}) - f(t_{n+m})\}$
+  converge a $0$ que pues $\{t_{n+m}\}$ es compacto.
+\end{proof}
+
+\begin{proposition}
+  Sea $f_n \colon I \to \R^d$ para cada $n \in \N$ y $f \colon I \to \R^d$ continua. La sucesión
+  $\{f_n\}$ converge uniformemente en compactos a $f$ si, y solo si, para cada sucesión $\{t_n\}$
+  con $t_n \in I$ convergente hacia $t_0 \in I$ se verifica que $\{f_n(t_n)\}$ converge a $f(t_0)$.
+\end{proposition}
+\begin{proof}
+  La primera implicación es consecuencia del lema previo. Veamos que el recíproco es
+  cierto. Consideramos la sucesión $\{||f_n-f||\}$ definida en $I$. Para cada compacto
+  $K \subset I$, existe $t_n \in K$ con $||f_n(t_n)-f(t_n)|| = \max \{||f_n(t)-f(t)|| : t \in
+  K\}$. Toda parcial de $\{||f_n(t_n)-f(t_n)|\}$ admite una subparcial convergente a $0$. En efecto,
+  basta tomar una parcial de $t_{\sigma(n)}$ convergente, que existe por el teorema de
+  Bolzano-Weierstrass, y aplicar la hipótesis. Como consecuencia, $\{||f_n(t_n)-f(t_n)|\}$ converge
+  a $0$, esto es, $f_n$ converge uniformemente a $f$ en $K$.
+\end{proof}
+
+\subsection{Continuidad de la solución general}
+
+En este apartado aplicamos los conceptos estudiados en la Sección \ref{sec:sol-general:preliminares}
+para probar que la solución general es continua. Para ello será esencial el siguiente resultado.
+
+\begin{lemma}[Desigualdad fundamental]
+  Sean $\varphi_i \colon I_i \to \R^d$ para $i \in \{1,2\}$ dos soluciones de \eqref{eq:edo} tales
+  que existe $L > 0$ con
+  \[ ||f(t, \varphi_1(t))-f(t, \varphi_2(t))|| \le L ||\varphi_1(t)-\varphi_2(t)|| \] para todo
+  $t\in I_1\cap I_2$. Entonces, fijado $t_0 \in I_1\cap I_2$ se tiene
+  \[ ||\varphi_1(t)-\varphi_2(t)|| \le ||\varphi_1(t_0)-\varphi_2(t_0)|| e^{L|t-t_0|} \] para todo
+  $t\in I_1\cap I_2$.
+\end{lemma}
+\begin{proof}
+  Por la ecuación integral de Volterra deducimos que para cada $t\in I_1\cap I_2$ se tiene
+  \begin{align*}
+    ||\varphi_1'(t) - \varphi_2'(t)|| & \le ||\varphi_1(t_0) - \varphi_2(t_0)|| + \int_{t_0}^{t}
+                                        ||f(s, \varphi_1(s)) - f(s, \varphi_2(s))|| \diff s \\
+                                      & \le ||\varphi_1(t_0) - \varphi_2(t_0)|| + L
+                                        \int_{t_0}^{t} ||\varphi_1(s)-\varphi_2(s)|| \diff s.
+  \end{align*}
+  Podemos aplicar pues el Lema de Gronwall, obteniendo el resultado.
+\end{proof}
+
+\begin{lemma}
+  Consideremos la EDO \eqref{eq:edo} y $(t_0, x_0) \in D$. Sean $a, b > 0$ tales que
+  $R_{a,b}(t_0, x_0) \subset D$ y sea $M = \max \{||f(t,x)|| : (t,x) \in R_{a,b}(t_0,
+  x_0)\}$. Existe $\mu_0 > 0$ tal que para cualquier $\mu \in ]0,\mu_0[$ se cumple que si
+  $(t_1, x_1) \in R_{\mu,\mu}(t_0, x_0)$ y $\varphi$ solución maximal del PVI asociado a
+  $(t_1, x_1)$ se tiene que para cada $t \in [t_0- \mu, t_0+\mu]$
+  \[ ||\varphi(t) - x_0|| \le ||x_1 - x_0 || + M |t - t_1| \le \mu(1+2M) < b \] y
+  $(t, \varphi(t)) \in R_{a,b}(t_0,x_0)$. En particular, se verifica
+  $||\varphi(t_0)-x_0|| < \mu(1+M)$.
+\end{lemma}
+\begin{proof}
+  Fijamos $0 < \mu_0 < \min \{a,b\}$ con $\mu_0(1+2M) < b$. Sea $\mu \in ]0,\mu_0[$. Consideramos
+  $(t_1, x_1) \in R_{\mu,\mu}(t_0, x_0)$. Sea $\varphi$ la solución maximal del PVI asociado a
+  $(t_1, x_1)$. Veamos que $[t_0- \mu, t_0+\mu] \subset ]\alpha(t_1,x_1), \omega(t_1,x_1)[ = I$ y
+  que $(t,\varphi(t)) \in R_{a,b}(t_0,x_0)$ para todo $t \in [t_0-\mu,t_0+\mu]$. En efecto, para
+  cada $t \in [t_0- \mu, t_0+\mu] \cap I \ne \emptyset$ se tiene que
+  \[ ||\varphi(t)-x_0|| \le ||\varphi(t_1)-x_0|| + \left|\int_{t_1}^{t} ||f(s,\varphi(s))|| \diff
+      s\right| \le ||x_1-x_0|| + M |t-t_1| \le \mu(1+2M) < b.\] Por tanto, si se tuviese
+  $t \in [t_0-\mu,t_0+\mu] \cap I$ con $||\varphi(t)-x_0|| \ge b$ se obtendría una
+  contradicción. Consecuentemente, $\varphi$ no explota en $\mathrm{R}_{\mu,b}(t_0, x_0)$ y, por el
+  Teorema de comportamiento en el extremo superior, se deduce que $[t_0-\mu, t_0+\mu] \subset I$ y
+  que $(t,\varphi(t)) \in R_{a,b}(t_0,x_0)$ para todo $t \in [t_0-\mu,t_0+\mu]$.
+\end{proof}
+
+\begin{proposition}
+  Consideremos la EDO \eqref{eq:edo} y supongamos que $f$ es localmente lipschitziana respecto de la
+  variable $x \in \R^d$. Sea $(t_0, x_0) \in D$ y $\varphi \colon I \to \R^d$ solución de
+  \eqref{eq:pvi}. Dado un intervalo $[a,b] \subset I$ tal que $a < t_0 < b$, tomamos $\rho > 0$ con
+  $\mathrm{T}_{\rho}([a,b],\varphi) \subset D$. Entonces existe $\delta > 0$ tal que para cualquier
+  $(t_1, x_1) \in R_{\delta,\delta}(t_0,x_0)$ y $\varphi_1 \colon I_1 \to \R^d$ solución maximal del
+  PVI asociado a $(t_1,x_1)$ se tiene $[a,b] \subset I_1$ y
+  $(t,\varphi_1(t)) \in \mathrm{T}_\rho([a,b],\varphi)$ para todo $t \in [a,b]$.
+\end{proposition}
+\begin{proof}
+  En primer lugar, nótese que $f$ es Lipschitziana en
+  $\mathrm{T}_{\rho} = \mathrm{T}_{\rho}([a,b],\varphi)$, pues éste es un conjunto compacto. Sea $L$
+  la constante de Lipschitz asociada. 0btenemos $\mu_0$ del lema anterior para
+  $R_{r,s}(t_0, x_0) \subset T_{\rho}$. Para todo $0 < \mu < \mu_0$ se tiene que, para cualquier
+  $(t_1, x_1) \in R_{\delta,\delta}(t_0,x_0)$ y $\varphi_1 \colon I_1 \to \R^d$ solución maximal del
+  PVI asociado a $(t_1,x_1)$,
+  \[ ||\varphi_1(t) - \varphi(t)|| \le ||\varphi_1(t_0) - \varphi(t_0)|| e^{L |t-t_0|} \le \mu(1+M)
+    e^{L |b-a|} \quad \forall t \in [a,b]\cap I_1, \] donde se ha aplicado la desigualdad
+  fundamental. Tomamos $0 < \delta < \mu_0$ tal que $\mu(1+M) e^{L |b-a|} < \rho$. Veamos que se
+  cumple el resultado para este $\delta$. Sea $(t_1, x_1) \in R_{\delta,\delta}(t_0,x_0)$ y
+  $\varphi_1 \colon I_1 \to \R^d$ solución maximal del PVI asociado a $(t_1,x_1)$. Tenemos que
+  \[ ||\varphi_1(t) - \varphi(t)|| \le ||\varphi_1(t_0) - \varphi(t_0)|| e^{L |t-t_0|} < \rho \quad
+    \forall t \in [a,b]\cap I_1, \] Por el teorema de comportamiento en el extremo superior aplicado
+  a el conjunto $\mathrm{T}_p$ deducimos que $[a,b] \subset I_1$ pues $||\varphi_1(t)-\varphi(t)||$
+  no alcanza a $\rho$ en $[a,b] \cap I_1$.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:cuc-ci}
+  Sea $f\colonD \to \R^d$ localmente lipschitziana respecto de la variable $x \in \R^d$. Dado
+  $(t_0, x_0) \in D$ y sea $\varphi \colon ]\alpha, \omega[ \to \R^d$ la solución maximal de
+  \eqref{eq:pvi}. Sea $\{(t_n, x_n)\}$ una sucesión de condiciones iniciales tales que
+  $\{t_n\} \to t_0$ y $\{x_n\} \to x_0$. Denotemos por $\varphi_n\colon ]\alpha, \omega[ \to \R^d$
+  la solución maximal del PVI asociado a la condición inicial $(t_n, x_n)$. Entonces para todo
+  compacto $[a,b]\subset ]\alpha, \omega[$ tal que $a < t_0 < b$ existe $m \in \N$ tal que para cada
+  $n \ge m$ se tiene $[a,b] \subset ]\alpha_n,\omega_n[$ y además $\{\varphi_{n+m}\}$ converge
+  uniformemente a $\varphi$ en $[a,b]$.
+\end{theorem}
+\begin{proof}
+  Sea $\rho > 0$ tal que $T_{\rho} = T_{\rho}([a,b], \varphi) \subset D$. Sean $r, s > 0$ tales que
+  $R_{r,s}(t_0, x_0) \subset T_{\rho}$. Aplicamos la proposición y el lema previo encontrando
+  $\delta$ y $\mu_0$ respectivamente. Sea $0 < \mu < \min\{\delta, \mu_0\}$ con . Puesto que
+  $\{(t_n, x_n)\} \to (t_0, x_0)$ existe $m \in \N$ tal que para todo $n \ge m$ se tiene que
+  $(t_n, x_n) \in R_{\mu,\mu}(t_0, x_0)$. Por tanto, $[a,b] \subset ]\alpha_n,\omega_n[$ y
+  $||\varphi_n(t_0) - \varphi(t_0)|| \le (1+M)\mu$. Aplicamos la desigualdad fundamental, obteniendo
+  que
+  \[||\varphi_n(t) - \varphi(t)|| \le ||\varphi_n(t_0) - \varphi(t_0)|| e^{L|t-t_0|} || \le (1+M)\mu
+    e^{L(b-a)} \] para todo $n \ge m$ y $t \in [a,b]$.
+
+  Por último, aplicando lo anterior deducimos que para cada $\varepsilon > 0$ existe $N \ge m$ tal
+  que para cada $n \ge N$ se tiene
+  $||\varphi_n(t) - \varphi(t)|| \le (1+M)\mu e^{L(b-a)} < \varepsilon$ en $[a,b]$, donde se ha
+  tomado $0 < \mu < \min\{\delta, \mu_0\}$ lo suficientemente pequeño.
+\end{proof}
+
+\begin{ex}
+  Consideramos la EDO $x' = e^{x^2} -1$. Tiene una solución constante $x(t) = 0$. El diagrama de
+  fases es de la forma $\rightarrow 0 \rightarrow$. Por tanto, para $x_n > 0$ se tiene que
+  $\alpha(x_n) = -\infty$ y $\omega(x_n) < +\infty$. No obstante, si la sucesión $\{x_n\}$ converge
+  a $x_0$, entonces por el teorema anterior la sucesión $\{X(t;x_n)\}$ converge uniformemente a $0$
+  es un cualquier entorno compacto de $0$. Como consecuencia $\{\omega(x_n)\} \to +\infty$.
+\end{ex}
+
+\begin{ex}
+  Sea $\varphi_n \colon ]\alpha_n, \omega_n[ \to \R$ la solución maximal del PVI
+  \[
+    \begin{cases}
+      x' = (x - t^2)^2 + 2t; \\
+      x(1/n) = \sin(1 / n^2).
+    \end{cases}
+  \]
+  Justifica que para $n$ suficientemente grande $1/n + 4 \in ]\alpha_n, \omega_n[$ y calcula
+  $\lim_{n\to +\infty} \varphi_n(4+1/n)$.
+
+  Nótese que $\varphi\colon \R \to \R$ dada por $\varphi(t) = t^2$ es solución de
+  $x' = (x - t^2)^2 + 2t$, que verifica la propiedad de unicidad global en cualquier par
+  $(t_0, x_0) \in \R^2$. Además, $\varphi(0) = 0$. Tenemos que $\{(1/n, \sin(1 / n^2))\}$ converge a
+  $(0,0)$. Por tanto, por el teorema anterior existe $m \in \N$ tal que
+  $[-10,10] \subset ]\alpha_n, \omega_n[ $ para todo $n \ge m$. Además, $\{\varphi_{n+m}\}$ converge
+  uniformemente a $\varphi$ en $[-10,10]$. Deducimos que
+  $\lim_{n\to +\infty} \varphi_n(4+1/n) = \varphi(4) = 16$.
+\end{ex}
+
+\begin{theorem}[Continuidad de la solución general]
+  \label{thm:cont-X}
+  El conjunto $\Omega$ es abierto y la función $X \colon \Omega \to \R^d$ es continua.
+\end{theorem}
+\begin{proof}
+  Es una consecuencia directa del Teorema \ref{thm:cuc-ci} y los resultados previos. En primer
+  lugar, sea $(t, t_0, x_0) \in \Omega$, tomamos $a < b$ con
+  $[a,b] \subset ]\alpha(t_0, x_0), \omega(t_0, x_0)[$. Encontramos $0 < \mu < \min \{a,b\}$ tal que
+  $[a,b] \subset ]\alpha(t_1, x_1), \omega(t_1, x_1)[$ para todo
+  $(t_1, x_1) \in \mathrm{R}_{\mu,\mu}(t_0, x_0)$. Esto es,
+  $[a,b] \times \mathrm{R}_{\mu,\mu}(t_0,x_0) \subset \Omega$. Ahora, tenemos que
+  $\lim_{(s,s_0,x) \to (t,t_0, x_0)} X(s,s_0,x) = X(t,t_0,x_0)$ por el Teorema
+  \ref{thm:cuc-ci}.\ref{thm:cuc-ci}
+\end{proof}
+
+
+\subsection{Dependencia continua respecto de parámetros}
+
+Sean $D \subset \R \times \R^d$ y $P \subset \R^k$ dos abiertos y sea $f \colon D \times P \to \R^d$
+una función continua y localmente lipschitziana respecto de la variable $x$ y $\lambda$. Para cada
+$\lambda$ podemos considerar el PVI
+\begin{equation}
+  \label{eq:pvi:parametors}
+  \begin{cases}
+    x' = f(t,x, \lambda); \\
+    x(t_0) = x_0;
+  \end{cases}
+  \tag{PP}
+\end{equation}
+que tiene una única solución a la que denotamos $X(t; t_0, x_0, \lambda)$.  Podemos ver $X$ como una
+función de $\Omega$ en $\R$, donde
+$\Omega = \{(t,t_0,x_0,\lambda) : \alpha(t_0,x_0, \lambda) < t < \omega(t_0,x_0, \lambda)\}$.
+
+\begin{theorem}[Continuidad de la solución general con parámetros]
+  \label{thm:cuc-parametros}
+  En el contexto actual, el conjunto $\Omega$ es abierto y $X \colon \Omega \to \R^d$ es continua.
+
+  Además, si $\{(t_n, x_n, \lambda_n)\} \subset D \times P$ una sucesión convergente a
+  $(t_0, x_0, \lambda)$ y $[a,b] \subset ]\alpha(t_0,x_0,\lambda), \omega(t_0, x_0, \lambda)[$,
+  entonces existe $m \in \N$ tal que para todo $n \ge m$ se tiene que
+  $[a,b] \subset ]\alpha(t_n,x_n,\lambda_n), \omega(t_n, x_n, \lambda_n)[$ y
+  $\{X(t; t_{n+m}, x_{n+m}, \lambda_{n+m})\}$ converge uniformemente a $X(t; t_0, x_0, \lambda)$ en
+  $[a,b]$.
+\end{theorem}
+
+\begin{ex}
+  Consideramos el PVI
+
+  \[
+    \begin{cases}
+      x'' + \lambda \sin(x) = 0; \\
+      x(0) = \pi / 4; \\
+      x'(0) = 0.
+    \end{cases}
+  \]
+
+  Este PVI está asociado al movimiento de ún péndulo cuando se suelta con ángulo $s_0$ y longitud
+  $\lambda$. Estudiamos el caso $\lambda = 0$, que se corresponde con un péndulo de longitud
+  infinita. La única solución de la ecuación es $\varphi(t) = t^2 + \pi/4$. Dado $\varepsilon = 1$ y
+  $R = 100$, existe $\lambda_0 >0$ tal que para $|\lambda| < \lambda_0$ se tiene
+  $[-R,R] \subset ]\alpha(t_0,x_0,\lambda), \omega(t_0, x_0, \lambda)[$.
+\end{ex}
+
+\subsection{Dependencia diferenciable respecto de condiciones iniciales y parámetros}
+
+\begin{theorem}
+  Sea $D \subset \R \times \R^d$ abierto y $f \colon D \to \R^d$ de clase $1$. Consideramos la EDO
+  asociada, que denotamos \eqref{eq:edo}. Entonces la solución general $X \colon \Omega \to \R$ es
+  de clase $1$. Además, existen las derivadas de segundo orden
+  \[\frac{\partial^2}{\partial t \partial t_0} X, \frac{\partial^2}{\partial t \partial x_0} X\]
+  y son continuas.
+\end{theorem}
+
+Si conocemos la solución $X(t, t_0, x_0)$ entonces podemos calcular las parciales de $X$ respecto de
+$t_0$ y $x_0$ en $(t,t_0, x_0)$ como muestra el siguiente ejemplo.
+
+\begin{ex}
+  Consideramos la EDO $x' = (x - \sin(t))^2 + \cos(t)$. Nótese que $X(t, 0, 0) = \sin(t)$. Queremos
+  calcular $\frac{\partial}{\partial x_0} X$.  Sabemos que $X(t_0, t_0, x_0) = x_0$ y que para cada
+  $(t, t_0, x_0) \in \Omega$ se cumple
+  \[ \frac{\partial}{\partial t} X(t, t_0, x_0) = (X(t, t_0, x_0) - \sin(t))^2 + \cos(t) \quad
+    \forall \, (t, t_0, x_0) \in \Omega. \]
+
+  Por tanto, tenemos que
+
+  \[ \frac{\partial^2}{\partial x_0\partial t} X(t, t_0, x_0) = 2(X(t, t_0, x_0) -
+    \sin(t))\frac{\partial}{\partial x_0} X(t, t_0, x_0) \quad \forall \, (t, t_0, x_0) \in
+    \Omega. \]
+
+  Aplicando el Lema de Schwartz y evaluando en $t_0 = 0$ y $x_0 = 0$ obtenemos que
+
+  \[ \frac{\partial^2}{\partial t\partial x_0} X(t, 0, 0) = 2(X(t, 0, 0) -
+    \sin(t))\frac{\partial}{\partial x_0} X(t, t_0, x_0) = 0. \]
+
+  Además, como $X(t_0,t_0, x_0) = x_0$, derivando respecto de $x_0$ obtenmos que
+  $\frac{\partial}{\partial x_0} X(t_0, t_0, x_0) = 1$. Por tanto,
+  $\frac{\partial}{\partial x_0}X(t, 0,0)$ es solución de la ecuación diferencial $y' = 0$ con
+  condición inicial que $y(0) = 1$. Esto es, $\frac{\partial}{\partial x_0}X(t, 0,0) = 1$ par todo
+  $t \in \R$.
+
+  Para calcular la parcial de $X$ respecto de $t_0$ se procede de forma análoga, obteniendo que
+  $\frac{\partial}{\partial t_0} X(t, 0,0) = -1$.
+\end{ex}
+
+\begin{definition}
+  Sea $D \subset \R \times \R^d$ abierto y $f \colon D \to \R^d$ de clase $1$. Consideramos la EDO
+  asociada, que denotamos \eqref{eq:edo}. Definimos la función matricial
+  $A(t;t_0, x_0) = \frac{\partial}{\partial x} (t, X(t;t_0,x_0))$. La ecuación
+  \begin{equation}
+    \label{eq:variacional}
+    y' = A(t; t_0, x_0) y
+  \end{equation}
+
+  recibe el nombre de \emph{ecuación variacional}.
+\end{definition}
+
+\begin{theorem}[Derivadad respecto de condiciones inicales y parámetros]
+  \label{thm:-dev-param}
+  Supongamos que las funciones matriciales
+  $\frac{\partial}{\partial x}f \colon D \times P \to \mathcal{M}_d$ y
+  $\frac{\partial}{\partial \lambda} f \colon D \times P \to \mathcal{M}_{d\timesk}$ están bien
+  definidas y son continuas. Entonces se verifican las siguientes afirmaciones:
+  
+  \begin{enumerate}
+  \item La función $X \colon \to \R^d$ es $\mathcal{C}^1(\Omega)$.
+  \item Existen las derivadas de segundo orden
+    \[ \frac{\partial^2}{\partial t \partial t_0}X, \ \frac{\partial^2}{\partial t \partial x_0}X, \
+      \frac{\partial^2}{\partial t \partial \lambda}X\] y son continuas.
+  \item Existen las derivadas de segundo orden
+    \[ \frac{\partial^2}{\partial t_0 \partial t}X, \ \frac{\partial^2}{\partial x_0 \partial t}X, \
+      \frac{\partial^2}{\partial \lambda \partial t}X\] y son continuas.
+  \end{enumerate}
+\end{theorem}
+
+\begin{ex}
+  Consideremos el PVI con parámetros
+  \[
+    \begin{cases}
+      x' = x^2 - e^{\lambda x}; \\
+      x(2) = 1.
+    \end{cases}
+  \]
+
+  Calcula $\frac{\partial}{\partial x_0}(t, 2, 1, 0)$, $\frac{\partial}{\partial t_0}(t, 2, 1, 0)$ y
+  $\frac{\partial}{\partial \lambda}(t, 2, 1, 0)$.
+
+  En primer lugar calculamos $X(t; 2,1,0)$.  Esta solución es la constantemente $1$. Posteriormente,
+  calculamos las parciales de $f$ que vienen dadas por
+  \[ \frac{\partial}{\partial x}f = 2x - \lambda e^{\lambda x} \quad \text{y} \quad
+    \frac{\partial}{\partial \lambda}f = - x e^{\lambda x}. \] Por consiguiente, tenmos que
+  $A(t) = A(t; 2, 1, 0) = 2$ y $b(t) = b(t; 2,1,0) = -1$.  Tenemos que
+  $\frac{\partial}{\partial x_0}(t; 2,1,0)$ es solución de
+  \[
+    \begin{cases}
+      y' = 2y; \\
+      y(2) = 1.
+    \end{cases}
+  \]
+  Obtenemos que $\frac{\partial}{\partial x_0}(t; 2,1,0) = \exp(2(t-2))$.  Por otro lado,
+  $\frac{\partial}{\partial t_0}X(t;2,1,0)$ es solución de
+  \[
+    \begin{cases}
+      y' = -2y; \\
+      y(2) = 0.
+    \end{cases}
+  \]
+  Deducimos que $\frac{\partial}{\partial t_0}X(t;2,1,0) = 0$. Por último, sabemos que
+  $\frac{\partial}{\partial \lambda}X(t; 2,1,0)$ es solución de
+  \[
+    \begin{cases}
+      y' = 2y -1;\\
+      y(2) = 0.
+    \end{cases}
+  \]
+  Por el método de los coeficientes indeterminados sabemos que
+  $\frac{\partial}{\partial \lambda}X(t; 2,1,0)$ es de la forma $K \exp(2(t-2)) + 1/2$. La condición
+  inicial implica que $K = -1/2$.
+\end{ex}
+
+
+\subsection{Linealización de ecuaciones y aproximación de soluciones en entornos de puntos de
+  equilibrio}
+
+
+En una ecuación escalar autónoma podemos aproximar $f$ mediante sus polinomios de Taylor con la
+esperanza de que las soluciones de la nueva EDO se parezcan a las soluciones de la anterior. En
+particular, podemos utilizar el polinomio de Taylor de grado uno con centro $p \in D$, obteniendo
+una ecuación lineal. Si $p$ es un punto de equilibrio de la ecuación original, entonces la nueva
+ecuación es homogénea y, por tanto, sabemos calcular fácilmente sus soluciones.
+
+\begin{definition}
+  Sea $D \subset \R^d$ abierto, $f\colon D \to \R^d$ continua y $p \in A$ con $f(p) = 0$. La
+  \emph{ecuación linealizada} de \eqref{eq:edo:ae} en $p$ es la EDO
+  \begin{equation}
+    \label{eq:linealizada}
+    y' = \mathrm{J}_f(p)(y-p).
+    \tag{L}
+  \end{equation}
+\end{definition}
+
+En esta sección estudiamos las propiedades de \eqref{eq:edo:ae} a partir de su ecuación
+linealizada. A veces por conveniencia usaremos la notación $J_f(p) = f'(p)$.
+
+\begin{ex}
+  Consideramos el sistema
+  
+  \begin{equation}
+    \label{eq:linealizada:ex:1}
+    \begin{cases}
+      x_1' = x_2; \\
+      x_2' = -c x_2 - \sin(x_1).
+    \end{cases}
+  \end{equation}
+  Nótese que $p = (\pi, 0)$ es un punto de equilibrio. La ecuación linealizada de
+  \eqref{eq:linealizada:ex:1} es
+  \begin{equation*}
+    \label{eq:linealizada:ex:2}
+    \begin{cases}
+      y_1' = y_2; \\
+      y_2' = y_1 -c y_2 - \pi.
+    \end{cases}
+    \qedhere
+  \end{equation*}
+\end{ex}
+
+Sabemos resolver las ecuaciones linealizadas mediante la exponecial de la matriz $J_f$. En efecto,
+la solución de \eqref{eq:linealizada} que verifica $y(t_0) = x_0$ es
+$\exp(J_f(p)(t-t_0)) (x_0-p) + p$. Podemos escribir $f(x) = f(p) + f'(p)(x-p) + R(x)$. Usando el
+teorema de Taylor de orden 1 en la variable $x_0$ de la solución general deducimos que
+\[ X(t; t_0, x_0) = X(t; t_0, x_0) + \frac{\partial}{\partial x_0}X(t; t_0, x_0) (x_0-p) + R(t; t_0,
+  x_0) = p + \exp(f'(p)(t-t_0)) (x_0- p) + R(t; t_0, x_0). \] Sabemos que $R(t; t_0, x_0)$ converge
+uniformemente a $0$ en compactos cuanto $x_0$ tiende a $p$. De ello deducimos que que
+$X(. ; t_0, x_0) - Y(.;t_0,x_0)$ converge uniformemente a $0$ cuando $x_0$ converge a $p$.
+
+%%% Local Variables: ***
+%%% mode:latex ***
+%%% TeX-master: "../df2.tex"  ***
+%%% End: ***
