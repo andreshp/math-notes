@@ -368,22 +368,27 @@ con $||R(x)|| / ||x-p|| \to 0$ cuando $x\to p$.
   \item Si $\mu > 0$, entonces $p$ es inestable.
   \end{enumerate}
 \end{theorem}
+\begin{proof}
+  Este resultado se puede demostrar a partir del segundo método de Lyapunov, que se estudiará más
+  adelante. No se incluye la demostración por falta de tiempo en el curso.
+\end{proof}
 
 \begin{ex}
-  
+  Veamos que, en el contexto del teorema anterior, si $\mu = 0$, entonces no tenemos ninguna
+  información acerca de la estabilidad del punto $p$.
   \begin{enumerate}
   \item Consideramos la EDO $x' = -x^3$. El único punto de equilibrio es $p = 0$, que es un atractor
-    global. Nótese que $\mu = 0$ y el sistema es asintóticamente estable.
+    global. Nótese que $\mu = 0$ pero $0$ es asintóticamente estable.
   \item Consideramos la EDO $x' = x^3$. El único punto de equilibrio es $p = 0$, que es un repulsor
-    global. Nótese que $\mu = 0$ y el sistema es inestable.
-  \item Consideramos la EDO \eqref{eq:edo:ae} asociada a $f(x) = x^3 \sin(1/x)$. Existe una sucesión
-    $\{p_n\}$ de puntos de equilibrios convergentes a $0$. Por tanto, $0$ es estable pero no
-    asíntóticamente estable.
+    global. Nótese que $\mu = 0$ pero $0$ es inestable.
+  \item Consideramos la EDO \eqref{eq:edo:ae} asociada a $f(x) = x^3 \sin(1/x)$.  Nótese que
+    $\mu = 0$. Existe una sucesión $\{p_n\}$ de puntos de equilibrios convergentes a $0$. Por tanto,
+    $0$ es estable pero no asíntóticamente estable. \qedhere
   \end{enumerate}
 \end{ex}
 
 \begin{corollary}
-  Si $d = 2$, en el contexto del Teorema \ref{thm:lyapunov} se verifican las siguientes
+  Supongamos que $d = 2$. En el contexto del Teorema \ref{thm:lyapunov} se verifican las siguientes
   afirmaciones.
   \begin{enumerate}
   \item Si $\det(f'(p)) > 0$ y $\mathrm{traza}(f'(p)) < 0$, entonces $p$ es asintóticamente estable
@@ -423,14 +428,17 @@ con $||R(x)|| / ||x-p|| \to 0$ cuando $x\to p$.
   \end{enumerate}
 \end{ex}
 
-En este punto introducimos algunos diagramas de fases en el plano. (Foto de Marta).
-
+El primer método de Lyapunov puede interpretarse como que el diagrama de fases cerca del punto de
+equilibrio es similiar para la ecuación de partida y la ecuación linealizada. En este punto
+introducimos nomenclatura para las órbitas o soluciones de diagramas de fase dos dimensionales.
 \begin{itemize}
-\item Heteroclina
-\item Homoclina
-\item Ciclo límite
+\item Una órbita es \emph{heteroclina} si tiene límite en $\pm\infty$ y estos límites son puntos de
+  equilibrio distintos.
+\item Una órbita es \emph{homoclina} si tiene límite en $\pm\infty$ y estos límites son el mismo
+  punto de equilibrio.
+\item Un \emph{ciclo límite} es una órbita cerrada tal que otras órbitas se enrollan en torno a
+  ella.
 \end{itemize}
-
 
 El problema $16$ de Hilbert se enmarca en este ámbito de las ecuaciones diferenciales. Todavía no
 está resuelto. Sean $p,q \in \mathbb{P}_n[x,y]$. Consideramos el sistema
@@ -453,15 +461,17 @@ consiste en encontrar una cota superior para $Z_n$.
   que equivale al sistema
   \begin{equation}
     \label{eq:pendulo:estabilidad:2}
-    x_1'' = x_2; \\
+    \begin{cases}      
+    x_1' = x_2; \\
     x_2' = - c x_2 - \sin(x_1).
+    \end{cases}
   \end{equation}
   Los puntos de equilibrio del sistema son $\{(k \pi , 0) \mid k \in \Z\}$. Calculamos la matriz
   jacobiana de $f$ , obteniendo
   \[ f'(k\pi, 0) = \left(
       \begin{matrix}
         0 & 1 \\
-        \cos(x_1) & -c
+        \cos(k \pi) & -c
       \end{matrix}
     \right). \] Distinguimos dos casos.
   
@@ -472,7 +482,7 @@ consiste en encontrar una cota superior para $Z_n$.
           0 & 1 \\
           -1 & -c
         \end{matrix}
-      \right) \] y, por tanto, $\det f'(k \pi, 0) = 1 > 0$ y $\mathrm{traza}(f'(k\pi,0)) = -c$. Si
+      \right) \] y, por tanto, $\det(f'(k \pi, 0)) = 1 > 0$ y $\mathrm{traza}(f'(k\pi,0)) = -c$. Si
     $c > 0$, entonces el sistema es asintóticamente estable. No obstante, si $c=0$, entonces no
     podemos aplicar el primer método de Lyapunov. Para estos casos existe el segundo método de
     Liapunov, que introduciremos en la siguiente sección.
@@ -482,7 +492,7 @@ consiste en encontrar una cota superior para $Z_n$.
           0 & 1 \\
           1 & -c
         \end{matrix}
-      \right) \] y, por tanto, $\det f'(k \pi, 0) = -1 < 0$ y $\mathrm{traza}(f'(k\pi,0)) = -c$. Por
+      \right) \] y, por tanto, $\det(f'(k \pi, 0)) = -1 < 0$ y $\mathrm{traza}(f'(k\pi,0)) = -c$. Por
     tanto, el sistema es inestable. \qedhere
   \end{enumerate}
 \end{ex}
@@ -490,16 +500,19 @@ consiste en encontrar una cota superior para $Z_n$.
 
 \subsection{El segundo método de Lyapunov}
 
-Sea $D \subset \R^d$ un abierto y $f \in \mathcal{C}(D, \R^d)$. Sea $p \in D$ un cero de
-$f$. Suponemos que $f$ es localmente lipschitziana Introducimos la siguiente terminología. Sea
-$U \subset \R^d$ un entorno de $p \in \R^d$, una función $V \colon U \to \R$ es \emph{definida
-  positiva en $U$} si $V(x) > 0$ para todo $x \in U \setminus \{p\}$ y $V(p) = 0$.
+En este apartado vamos a introducir el segundo método de Lyapunov, que nos permitirá estudiar la
+estabilidad de puntos de equilibrio de una ecuación autónoma cuando falle el primer método. Tiene la
+desventaja de que no es algorítmico pues se basa en la misma idea que la acotación por funciones
+guía.
 
 \begin{theorem}[Estabilidad de Lyapunov] \label{thm:lyapunov:2} Sea $D \subset \R^d$ un abierto y
-  $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea $p \in D$ un cero de $f$. Si existe una
-  función $V \in \mathcal{C}^1(D)$ tal que $V$ alcanza un mínimo local estricto en $p$ y existe un
-  entorno $U \subset D$ de $p$ tal que $\dot{V}(x) \le 0$ para todo $x \in U$. Entonces, $p$ es un
-  punto de equilibrio estable de \eqref{eq:edo:ae}.
+  $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea $p \in D$ un cero de $f$. Sea una
+  función $V \in \mathcal{C}^1(D)$ tal que
+  \begin{enumerate}
+  \item $V$ alcanza un mínimo local estricto en $p$;
+  \item $\dot{V}$ alcanza un máximo local en $p$.
+  \end{enumerate}
+  Entonces $p$ es un punto de equilibrio estable de \eqref{eq:edo:ae}.
 \end{theorem}
 \begin{proof}
   Por hipótesis existe $0 < R$ tal que $V(x) > V(p)$ y $\dot{V}(x) \le 0$ para todo
@@ -517,17 +530,27 @@ $U \subset \R^d$ un entorno de $p \in \R^d$, una función $V \colon U \to \R$ es
   $t \in [0,+\infty[$, $x_0 \in \mathrm{B}(p,\delta)$.
 \end{proof}
 
+\begin{remark}
+  Puesto que $\dot{V}(p) = \left\langle \nabla V(p), f(p) \right\rangle = 0$, la segunda hipótesis
+  del teorema previo puede remplazarse por que exista un entorno $U \subset D$ de $p$ tal que
+  $\dot{V}(x) \le 0$ para todo $x \in U$.
+\end{remark}
+
 \begin{corollary}
   Sea $D \subset \R^d$ un abierto y $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea
-  $p \in D$ un cero de $f$. Si existe una función $V \in \mathcal{C}^1(D)$ tal que $V$ alcanza un
-  mínimo local estricto en $p$ y existe un entorno $U \subset D$ de $p$ tal que $\dot{V}(x) = 0$
-  para todo $x \in U$. Entonces, $p$ es un punto de equilibrio estable pero no asintóticamente
-  estable de \eqref{eq:edo:ae}.
+  $p \in D$ un cero de $f$. Sea una función $V \in \mathcal{C}^1(D)$ tal que
+  \begin{enumerate}
+  \item $V$ alcanza un mínimo local estricto en $p$;
+  \item $\dot{V}$ se anula en un entorno de $p$.
+  \end{enumerate}
+  Entonces $p$ es un punto de equilibrio estable pero no asintóticamente estable de
+  \eqref{eq:edo:ae}.
 \end{corollary}
 \begin{proof}
-  Supongamos que para cierto $x_0 \in D$ se tiene que $\lim_{t \to \omega} X(t,x_0) = p$. En tal
-  caso, la función $y(t) = V(X(t,x_0))$ tiene derivada constantemente cero para $t$ lo
-  suficientemente grande. Sin embargo, $X(t,x_0) \ne p$ para todo $t\in ]\alpha,\omega[$, lo que
+  Supongamos que para cierto $x_0 \in D \setminus \{p\}$ se tiene que
+  $\lim_{t \to \omega} X(t,x_0) = p$. En tal caso, la función $y(t) = V(X(t,x_0))$ tiene derivada
+  constantemente cero para $t \ge t_1$ con $t_1 \in \R$ y, por tanto, es constantemente $V(p)$ a
+  partir de $t_1$. Sin embargo, $X(t,x_0) \ne p$ para todo $t\in ]\alpha(x_0),\omega(x_0)[$, lo que
   contradice que $V$ tenga un mínimo local estricto en $p$.
 \end{proof}
 
@@ -535,7 +558,7 @@ $U \subset \R^d$ un entorno de $p \in \R^d$, una función $V \colon U \to \R$ es
   Recuperamos la ecuación del péndulo \eqref{eq:pendulo:estabilidad} y su versión en sistema
   \eqref{eq:pendulo:estabilidad:2}. Recordemos que los puntos de equilibio son
   $\{(k \pi, 0) \mid k \in \Z\}$. Habíamos estudiado la estabilidad en todos los casos salvo cuando
-  $k$ es par y $c = 0$. En tal caso, la ecuación a estudiar es la siguiente
+  $k$ es par y $c = 0$. En el último caso la ecuación a estudiar es la siguiente
   \begin{equation}
     \label{eq:pendulo:estabilidad:3}
     \begin{cases}
@@ -545,24 +568,26 @@ $U \subset \R^d$ un entorno de $p \in \R^d$, una función $V \colon U \to \R$ es
   \end{equation}
   Definimos $V \colon \R^2 \to \R$ dada por $V(x,y) = y^2 /2 - \cos(x)$. Tenemos que
   $\dot{V}(x,y) = 0$. Además, $V$ alcanza un mínimo local estricto en $(0,0)$. Por tanto, el segundo
-  método de Lyapunov nos asegura que \eqref{eq:pendulo:estabilidad:3} es estable.
+  método de Lyapunov nos asegura que $(0,0)$ es un punto de equilibrio estable pero no
+  asintóticamente estable de \eqref{eq:pendulo:estabilidad:3}.
 \end{ex}
 
 El problema del Teorema de Estabilidad de Lyapunov es encontrar una función $V$ apropiada. En el
-caso de los sistemas del tipo lineal \eqref{eq:....} $x' = A x$. En tal caso podremos encontrar una
-forma cuadrática que verifique estas condiciones. Sea $B \in \mathcal{M}_d(\R)$ simétrica. La forma
-cuadrática asociada es $V(x) = \left\langle Bx, x \right\rangle$. La función $V$ tiene un mínimo
-estricto en $0$ si, y solo si, es definida positiva. Recordemos que $\nabla V(x) = 2 Bx$. Por tanto,
-tenemos que
+caso de los sistemas del tipo lineal \eqref{eq:lineal:cons} podemos encontrar una forma cuadrática
+que verifique estas condiciones. Sea $B \in \mathcal{M}_d(\R)$ simétrica. La forma cuadrática
+asociada es $V(x) = \left\langle Bx, x \right\rangle$. La función $V$ tiene un mínimo estricto en
+$0$ si, y solo si, es definida positiva. Recordemos que $\nabla V(x) = 2 Bx$. Por tanto, tenemos que
 \[\dot{V}(x) = \left\langle 2 B x, Ax \right\rangle = 2 \left\langle A^{t} Bx, x \right\rangle =
-  \left\langle \frac{A^{t}B + B A}{2} x, x\right\rangle.\] Por tanto, el hecho de que
-$\dot{V}(x) \le 0$ para todo $x$ equivale a que la matriz $A^{t}B + B A$ (parte simétrica de $BA$)
-sea semidefinida negativa. Definimos $F_A \colon \mathrm{S}^+_d \to \mathrm{S}_d(\R)$ dada por
-$F_A(B) = A^{t}B+BA$. Esta aplicación es lineal. Consecuentemente, interesa conocer las propiedades
-de $F_A$ de manera que dada una matriz definida negativa podamos calcular su imagen inversa por
-$F_A$.
+  \left\langle \frac{A^{t}B + B A}{2} x, x\right\rangle.\] El hecho de que $\dot{V}(x) \le 0$ para
+todo $x$ equivale a que la matriz $A^{t}B + B A$ (parte simétrica de $BA$) sea semidefinida
+negativa. Definimos $F_A \colon \mathrm{S}^+_d \to \mathrm{S}_d(\R)$ dada por $F_A(B) =
+A^{t}B+BA$. Esta aplicación es lineal. Interesa conocer las propiedades de $F_A$ de manera que dada
+una matriz definida negativa podamos calcular su imagen inversa por $F_A$. Esta cuestión se estudia
+en la literatura especializada, aunque no la podemos abordar en este momento por la longitud del
+curso.
 
-Es fácil demostrar el siguiente lema.
+El siguiente lema cuya demostración se deja como ejercicio nos permitirá demostrar el Teorema de
+estabilidad asintótica de Lyapunov.
 \begin{lemma}
   Sea $\varphi \colon ]\alpha, +\infty[ \to \R^d$ continua. Supongamos que se verifican las
   siguientes hipótesis.
@@ -576,27 +601,30 @@ Es fácil demostrar el siguiente lema.
   Entonces $\lim_{t \to +\infty} \varphi(t) = p$.
 \end{lemma}
 
-Como consecuencia podemos demostrar el segundo resultado de estabilidad asintoica de Liapunov
-\begin{theorem}[Estabilidad asintótica de Liapunov - 2]
+\begin{theorem}[Estabilidad asintótica de Liapunov]
   \label{thm:lyapunov:3}
   Sea $D \subset \R^d$ un abierto y $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea
-  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que $V$ alcanza en $p \in D$ un mínimo
-  local estricto. Si $\dot{V}$ alcanza un máximo local estricto en $p$, entonces $p$ es un punto de
-  equilibrio asintóticamente estable de \eqref{eq:edo:ae}.
+  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que
+  \begin{enumerate}
+  \item $V$ alcanza un mínimo local estricto en $p$;
+  \item $\dot{V}$ alcanza un máximo local estricto en $p$.
+  \end{enumerate}
+  Entonces $p$ es un punto de equilibrio asintóticamente estable de \eqref{eq:edo:ae}.
 \end{theorem}
 \begin{proof}
   Por el Teorema \ref{thm:lyapunov:2} tenemos que $p$ es un punto de equilibrio estable de
-  \eqref{eq:edo:ae}. Sea $R > 0$ tal que $V$ tiene un mínimo global y $\dot{V}$ tiene un máximo
-  global en $\mathrm{B}(p, R)$. Por la estabilidad existe un $\mu > 0$ tal que para todo
-  $x_0 \in \mathrm{B}(p,\mu)$ se tiene $\omega(x_0) = +\infty$ y $X(t, x_0) \in \mathrm{B}(p, R)$
-  para todo $t \ge 0$. Sea $\varphi(t) = X(t, x_0)$ e $y(t) = V(\varphi(t))$. Nótese que
-  $y'(t) = \dot{V}(\varphi(t)) \le 0$ para todo $t \ge 0$. Por tanto, $y$ es decreciente y está
-  acotada inferiormente por $V(p)$. Deducimos que existe $L = \lim_{t \to +\infty} y(t) \ge
-  V(p)$. Veamos que $L = V(p)$. Por el teorema del valor medio obtenemos una sucesión de números no
-  negativos $\{t_n\}\to+\infty$ tal que $\{\dot{V}(\varphi(t_n))\} = \{y'(t_n)\}\to 0$. Pero
-  $\dot{V}$ tiene un máximo estricto en $p$ y $\varphi(t_n) \in \mathrm{B}(p, R)$, luego
-  $\{\varphi(t_n)\} \to p$ y, por tanto, $\{V(\varphi(t_n))\} \to V(p)$. La unicidad del límite
-  prueba que $L = V(p)$. La demostración finaliza al aplicar el lema previo.
+  \eqref{eq:edo:ae}. Sea $R > 0$ tal que $V$ tiene un mínimo global estricto y $\dot{V}$ tiene un
+  máximo global estricto en $\mathrm{B}(p, R)$. Por la estabilidad existe un $\mu > 0$ tal que para
+  todo $x_0 \in \mathrm{B}(p,\mu)$ se tiene $\omega(x_0) = +\infty$ y
+  $X(t, x_0) \in \mathrm{B}(p, R)$ para todo $t \ge 0$. Sea $x_0 \in \mathrm{B}(p,\mu)$,
+  $\varphi(t) = X(t, x_0)$ e $y(t) = V(\varphi(t))$. Nótese que $y'(t) = \dot{V}(\varphi(t)) \le 0$
+  para todo $t \ge 0$. Por tanto, $y$ es decreciente y está acotada inferiormente por
+  $V(p)$. Deducimos que existe $L = \lim_{t \to +\infty} y(t) \ge V(p)$. Veamos que $L = V(p)$. Por
+  el teorema del valor medio obtenemos una sucesión de números no negativos $\{t_n\}\to+\infty$ tal
+  que $\{\dot{V}(\varphi(t_n))\} = \{y'(t_n)\}\to 0$. Pero $\dot{V}$ tiene un máximo estricto en $p$
+  y $\varphi(t_n) \in \mathrm{B}(p, R)$, luego $\{\varphi(t_n)\} \to p$ y, por tanto,
+  $\{V(\varphi(t_n))\} \to V(p)$. La unicidad del límite prueba que $L = V(p)$. La demostración
+  finaliza al aplicar el lema previo.
 \end{proof}
 
 El teorema previo se suele aplicar utilizando las conocidas condiciones suficientes de mínimo y
@@ -627,35 +655,39 @@ cubren todos los casos, como muestra el siguiente ejemplo.
 \begin{theorem} [Inestabilidad de Lyapunov]
   \label{thm:lyapunov:5}
   Sea $D \subset \R^d$ un abierto y $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea
-  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que existe una sucesión
-  $\{s_n\} \subset D$ convergente a $p$ tal que $V(x_n) > 0$ para todo $n \in \N$. Si $\dot{V}$
-  alcanza un mínimo local estricto en $p$, entonces $p$ es un punto de equilibrio inestable de
-  \eqref{eq:edo:ae}.
+  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que
+  \begin{enumerate}
+  \item existe una sucesión $\{x_n\} \subset D$ convergente a $p$ tal que $V(x_n) > V(p)$ para todo
+    $n \in \N$;
+  \item $\dot{V}$ alcanza un mínimo local estricto en $p$.
+  \end{enumerate}
+  Entonces $p$ es un punto de equilibrio inestable de \eqref{eq:edo:ae}.
 \end{theorem}
 \begin{proof}
   Sea $R > 0$ tal que $V$ y $\dot{V}$ tienen un máximo global estricto en $p$ en
   $\mathrm{B}(p,R)$. Supongamos que $p$ es estable y lleguemos a una contradicción. En tal caso
   existe $\mu > 0$ tal que para todo $x_0 \in \mathrm{B}(p,\mu)$ se tiene que
-  $\omega(x_0) = +\infty$ y $X(t;x_0) \in \overline{\mathrm{B}(p,R)}$ para todo $t \ge 0$. Sea
-  $x_0 \in \mathrm{B}(p,R) \setminus \{p\}$ y $\varphi(t) = X(t, x_0)$. Se tiene que
+  $\omega(x_0) = +\infty$ y $X(t;x_0) \in \overline{\mathrm{B}}(p,R)$ para todo $t \ge 0$. Sea
+  $x_m \in \mathrm{B}(p,\mu) \setminus \{p\}$ y $\varphi(t) = X(t, x_m)$. Se tiene que
   $\varphi(t) \ne p$ para todo $t \in ]\alpha(x_0),+\infty[$.  Definimos la función
   $y(t) = V(\varphi(t))$. Tenemos que $y'(t) = \dot{V}(\varphi(t)) > 0$ para todo $t \ge 0$, luego
   la función $y$ es estrictamente creciente. Consecuentemente, existe
-  $L = \lim_{t \to +\infty} V(\varphi(t)) > V(x_0)$, de donde encontramos una sucesión de números no
-  negativos $\{t_n\}$ tal que $\{\dot{V}(\varphi(t_n))\} = \{y'(t_n)\} \to 0$. Por continuidad de
-  $V$, existe $\delta >0$ tal que $V(x) < r$ para todo $\mathrm{B}(p,\delta)$. Deducimos que
-  $\varphi(t) \in \overline{\mathrm{B}}(p, R) \setminus \mathrm{B}(p, \delta)$. No obstante, tenemos
-  que $m = \min \{\dot{V}(x) : x \in \overline{\mathrm{B}}(p,R) \setminus \mathrm{B}(p,\delta)\}$ >
-  0, luego existe $N \in \N$ tal que $y'(t_N) < m$. Deducimos que
-  $\varphi(t_N) \in \mathrm{B}(p,\delta)$, contradicción.
+  $L = \lim_{t \to +\infty} V(\varphi(t)) > V(x_m) > V(p)$, de donde encontramos una sucesión de
+  números no negativos $\{t_n\}$ tal que $\{\dot{V}(\varphi(t_n))\} = \{y'(t_n)\} \to 0$. Como $p$
+  es un máximo global estricto de $\dot{V}$ en $\overline{\mathrm{B}}(p,R)$ deducimos que
+  $\varphi(t_n)$ converge a $p$, lo que contradice que
+  $L = \lim_{t \to +\infty} V(\varphi(t)) > V(p)$.
 \end{proof}
 
 \begin{corollary}
   Sea $D \subset \R^d$ un abierto y $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea
-  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que $V$ alcanza en $p \in D$ un mínimo
-  local estricto. Si $\dot{V}$ alcanza un mínimo local estricto en $p$, entonces $p$ es un punto de
-  equilibrio inestable de \eqref{eq:edo:ae}. Es más, si $D = \R^d$, entonces ninguna solución está
-  acotada.
+  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que
+  \begin{enumerate}
+  \item $V$ alcanza en $p \in D$ un mínimo local estricto.
+  \item $\dot{V}$ alcanza un mínimo local estricto en $p$.
+  \end{enumerate}
+
+  Entonces $p$ es un punto de equilibrio inestable de \eqref{eq:edo:ae}.
 \end{corollary}
 
 Un teorema complementario al Teorema \ref{thm:lyapunov:5} es el siguiente resultado.
@@ -663,11 +695,17 @@ Un teorema complementario al Teorema \ref{thm:lyapunov:5} es el siguiente result
 \begin{theorem} [Inestabilidad de Chetaev]
   \label{thm:chetaev}
   Sea $D \subset \R^d$ un abierto y $f \in \mathcal{C}(D, \R^d)$ localmente lipschitziana. Sea
-  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que existe una sucesión
-  $\{s_n\} \subset D$ convergente a $p$ tal que $V(x_n) > 0$ para todo $n \in \N$. Si
-  $\dot{V}(x) > 0$ para todo $x \in \mathcal{U}_+ = \{x \in D : V(x) > 0\}$.  alcanza un mínimo
-  local estricto en $p$, entonces $p$ es un punto de equilibrio inestable de \eqref{eq:edo:ae}.
+  $p \in D$ un cero de $f$.  Sea $V \in \mathcal{C}^1(D)$ tal que
+  \begin{enumerate}
+  \item existe una sucesión $\{x_n\} \subset D$ convergente a $p$ tal que $V(x_n) > V(p)$ para todo
+    $n \in \N$;
+  \item $\dot{V}(x) > 0$ para todo $x \in \mathcal{U}_+ = \{x \in D : V(x) > V(p)\}$.
+  \end{enumerate}
+  Entonces $p$ es un punto de equilibrio inestable de \eqref{eq:edo:ae}.
 \end{theorem}
+\begin{proof}
+  La demostración es análoga a la del teorema anterior.
+\end{proof}
 
 Las funciones $V$ de estos teoremas reciben el nombre de funciones de Lyapunov.
 
@@ -696,7 +734,7 @@ Sea $D \subset \R^d$ un abierto y $G \in \mathcal{C}^1(D)$. Sea $p \in D$ tal qu
 0$. Consideramos el sistema
 \begin{equation}
   \label{eq:gradiente:1}
-  x´ + \nabla G (x) = 0.
+  x' + \nabla G (x) = 0.
   \tag{G1}
 \end{equation}
 
@@ -737,7 +775,7 @@ es un sistema gradiente. Para ello utilizamos el lema de Schwarz como muestra el
   \end{equation}
   ¿Es un sistema gradiente? Sea $f_1(x,y) = 28x - 6x^2 + 4y$ y $f_2(x,y) = 4y +4x$. En caso de ser
   un sistema gradiente se tendrá $\frac{\partial}{\partial y} f_1 = \frac{\partial}{\partial x} f_2$
-  por el lema de Schwarz. Es fácil comprobar que sto se verifica en el sitema. Ahora podemos
+  por el lema de Schwarz. Es fácil comprobar que esto se verifica en el sitema. Ahora podemos
   proceder como sigue. Tomamos $-G(x,y) = 14x^2 - 2x^3 + 4xy + \varphi(y)$, primitiva de $f_1$
   fijando $y$. Calculamos ahora $\varphi(y)$. Para ello derivamos respecto de $y$ obteniendo que
   $4x + \varphi'(y) = 4x+4y = f_2(x,y)$. Deducimos que $\varphi(y) = 2y^2 + k$. Nótese que las $x$
@@ -771,8 +809,9 @@ Equivalentemente, podemos considerar el sistema
 \end{theorem}
 \begin{proof}
   Consideramos la función $V(x_1, x_2) = G(x_1) + ||x_2||_2^2 / 2$. Es fácil ver que es una función
-  de Lyapunov para el corolario del Teorema \ref{lyapunov:2}. En efecto, se tiene
-  $\dot{V}(x_1, x_2) = \left\langle \nabla G(x_1) + x_1+ + x_2, \right\rangle$ terminar....
+  de Lyapunov para el corolario del Teorema \ref{thm:lyapunov:2}. En efecto, se tiene
+  \[\dot{V}(x_1, x_2) = \left\langle(\nabla G(x_1), x_2), (x_2, -\nabla G(x_1)) \right\rangle = 0.\]
+  Además, $(p,0)$ es un mínimo local estricto de $V$.
 \end{proof}
 
 

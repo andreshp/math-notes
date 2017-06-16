@@ -1,4 +1,4 @@
-s%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ejercicios de ecuaciones diferenciales en variables separadas.
 %
 % Autor: Andrés Herrera Poyatos (https://github.com/andreshp)
@@ -342,8 +342,8 @@ Desarrollamos a continuación el principal teorema de esta sección.
   \[ \left.\frac{\partial}{\partial t}\left( \mathcal{F}[ \overline{y} + t \phi ] \right)\right|_{t
       = 0} = 0 \] para cualquier $\phi \in \mathcal{C}_0^1(x_0,x_1)$. Sea $z \in
   \mathcal{D}$. Veamos que $\mathcal{F}[ \overline{y} ] \le \mathcal{F}[z]$. Definimos la función
-  $\phi = z - \overline{y} \in \mathcal{C}_0^1(x_0,x_1)$. Por la convexidad de $\mathcal{F}$
-  deducimos que para $t$ lo suficientemente pequeño se verifica
+  $\phi = z - \overline{y} \in \mathcal{C}^1(x_0,x_1)$. Por la convexidad de $\mathcal{F}$
+  deducimos que para $t$ lo suficientemente pequeño se verifica $y+t\phi \in \mathcal{F}$ y
   $\mathcal{F}[\overline{y}+t\phi] = \mathcal{F}[(1-t)\overline{y}+ tz] \le
   (1-t)\mathcal{F}[\overline{y}] + t \mathcal{F}[z]$. Consecuentemente obtenemos que
   \[ \frac{\mathcal{F}[\overline{y}+t\phi] - \mathcal{F}[\overline{y}]}{t} \le \mathcal{F}[z] -
@@ -399,7 +399,7 @@ convexos. El siguiente resultado nos proporciona una condición suficiente fáci
     \right), \] que es semidefinida negativa para $p > 1$.
 \end{remark}
 
-\section{Cálculo de estremales: Problemas de contorno}
+\section{Cálculo de extremales: Problemas de contorno}
 
 En la sección anterior deducimos la ecuación de Euler-Lagrange así como las condiciones de contorno
 que debe verificar un mínimo del funcional que sea de clase $2$. Esto es un problema de contorno.
@@ -550,7 +550,7 @@ este resultado de aquí en adelante consideraremos condiciones homogéneas.
   Es una comprobación directa.
 \end{proof}
 
-Consideraeos una EDO de segundo orden homogénea. Esta puede escribirse como sigue
+Consideramos una EDO de segundo orden homogénea. Esta puede escribirse como sigue
 \begin{equation}
   \label{eq:sturm:eh}
   (P(x)y'(x))' + Q(x)y(x) = 0.
@@ -1886,7 +1886,7 @@ En este apartado estudiamos problemas de la biología que se reducen en resolver
 
 \subsection{Leyes de acción de masas}
 
-Cosideramos una reacción química, esto es, un proceso por el cuál una determinada cantidad de
+Consideramos una reacción química, esto es, un proceso por el cuál una determinada cantidad de
 sustancias se convierte en otras. La denotamos $A+B \rightarrow C$ en caso de que a partir de los
 productos $A$ y $B$ se obtenga $C$. Buscamos la velocidad con la que reaccionan $A$ y $B$. Denotamos
 por $\left[ A \right]$ a la concentración de $A$ (cantidad por unidad de volumen). Es una función
@@ -1900,8 +1900,593 @@ $\frac{\partial}{\partial t}[A] = \frac{\partial}{\partial t}[B] = - \frac{\part
 Puede suceder que la reacción sea reversible, de manera que al mismo tiempo también se produce
 $C \rightarrow_{k_{-1}} A+B$. En conjunto lo denotamos $A+B \leftrightarrow_{k_{-1}}^{k_1}
 C$. Tenemos que
-\[ \frac{\partial}{\partial t}[C] = k_1 [A][B] - k_{-1}[C]. \]
-El equilibrio tiene lugar cuando las concentraciones son constantes.
+\[ \frac{\partial}{\partial t}[C] = k_1 [A][B] - k_{-1}[C]. \] El equilibrio tiene lugar cuando las
+concentraciones son constantes.
+
+\begin{ex}
+  Estudiamos el modelo para el crecimiento de una bacteria basado en las tesis biológicas de
+  Michaelis y Mneten. Una bacteria tiene receptores enzimáticos que intentan obtener el substrato o
+  alimento del exterior, pasando a través de la membrana celular Los receptores enzimáticos pueden o
+  bien liberar el substrato que han "agarrado" o bien lo introduce en la bacteria en forma de
+  producto proceso mecánico de volteo. En ambos casos la encima queda libre de nuevo. El complejo
+  enzimático que se produce cuando el substrato se acopla a la encima lo llamamos $SE$. Por $E$ nos
+  referimos a las encimas y por $S$ al substrato. Por último, denotamos por $P$ a los productos que
+  se producen cuando la encima absorbe definitivamente el substrato. Tenemos las relaciones
+  \begin{equation}
+    \label{eq:5}
+    \begin{cases}
+      S + E \to ^{k_{1}} SE; \\
+      SE \to ^{k_{-1}} S+E; \\
+      SE \to^{k_2} E+P.
+    \end{cases}
+  \end{equation}
+  Llamamos $e(t) = [E]$, $s(t) = [S]$, $c(t) = [SE]$, $p(t) = [P]$. Añadimos las condiciones
+  iniciales $e(0) = e_0 > 0$, $c(0) = 0$, $s(0) = s_0 > 0$, $p(0) = 0$. Utilizando las leyes de
+  acción de masas deducimos que estas funciones verifican el sistema
+  \begin{equation}
+    \label{eq:bacteria}
+    \begin{cases}
+      p'(t) = k_2 c(t); \\
+      s'(t) = k_{-1}c(t) - k_1 s(t) e(t); \\
+      c'(t) = k_1 s(t) e(t) - k_2 c(t) - k_{-1}c(t); \\
+      e'(t) = -k_1 s(t) e(t) + k_1 c(t) + k_2 c(t).
+    \end{cases}
+  \end{equation}
+
+  Podemos simplificar esta ecuación como sigue.
+
+  \begin{itemize}
+  \item En primer lugar, de la ecuación $p' = k_2 c$, podemos despejar la función $p$ mediante el
+    Teorema Fundamental del Cálculo, esto es, $p(t) = \int_0^{t} k_2c(s) \diff s$.
+  \item Tenemos que $c'(t) + e'(t) = 0$ ya que $e(t)+c(t)$ es constante, esto es,
+    $e(t) = e_0 - c(t)$.
+  \end{itemize}
+  Tras estas simplificaciones el PVI resultante es
+  \begin{equation}
+    \label{eq:bacteria:simplificada}
+    \begin{cases}
+      s'(t) = k_{-1}c(t) - k_1 s(t) (e_0 - c(t)); \\
+      c'(t) = k_1 s(t) (e_0 - c(t)) - (k_2 + k_{-1})c(t). \\
+    \end{cases}
+  \end{equation}
+  Es claro que el sitema tiene solución única por el Teorema de Picard-Lindelöf. En lo que sigue
+  vamos a estudiar el PVI asociado a las condiciones iniciales $s(0) = s_0$ y $c(0) =
+  0$. Comprobaremos las iguientes características de éste:
+  \begin{enumerate}
+  \item Positividad.
+  \item Acotación.
+  \item Intervalo de definición (será $[0, +\infty[$).
+  \item Comportamiento cuando $t \to +\infty$.
+  \end{enumerate}
+  No podemos calcular una solución explíctamente, razón por la cual tendremos que utilizar los
+  resultados clásicos de acotación para ecuaciones diferenciales ordinarias. Previamente realizamos
+  un cambio de varaible con el fin de normalizar las soluciones y eliminar las unidades físicas. El
+  cambio de variable es $u(\tau) = s(\tau / (k_1 e_0)) / s_0$ y
+  $v(\tau) = c(\tau / (k_1 e_0)) / e_0$. Obtenemos el nuevo sistema
+  \begin{equation}
+    \label{eq:bacteria:norm}
+    \begin{cases}
+      u' = \left(\frac{k_{-1}}{k_1 s_0} + u \right) v -u; \\
+      v' = \frac{s_0}{e_0} u - \left( \frac{s_0}{e_0} u + \frac{k_{-1} + k_2}{e_0k_1} \right)v.
+    \end{cases}
+  \end{equation}
+  Definimos $\varepsilon = e_0 / s_0$, $\lambda = k_2 / (k_1 s_0)$ y
+  $k = (k_2 + k_{-1}) / (k_1 s_0)$. Nótese que estas constantes no tienen dimensiones. Escribimos
+  \eqref{eq:bacteria:norm} utilizando solamente estas constantes, obteniendo
+  \begin{equation}
+    \label{eq:bacteria:adi}
+    \begin{cases}
+      u' = \left(k-\lambda +u \right) v - u; \\
+      v' =  (u - (u+k)v) / \varepsilon; \\
+      u(0) = 1; \\
+      v(0) = 0.
+    \end{cases}
+  \end{equation}
+
+  Nótese que $k - \lambda > 0$. Veamos que las soluciones $u$ y $v$ son no negativas en
+  $[0, \omega[$. Razonamos por reducción al absurdo. Nótese que $u(0) = 1 > 0$ y
+  $v'(0) = 1/\varepsilon >0$, luego existe $T> 0$ tal que $v$ y $u$ son positivas en $]0, T[$ y una
+  de las dos comienza a ser negativa en $T$. Hay tres casos posibles:
+  \begin{enumerate}
+  \item Se cumple $u(T) = 0$ y $v(T) = 0$. En tal caso $u = 0$ y $v = 0$ por unicidad global de
+    solución, lo que contradice las condiciones iniciales.
+  \item Se cumple $u(T) = 0$ y $v(T) > 0$. Entonces, $u'(T) < 0$. No obstante,
+    $u'(T) = (k-\lambda)v(T) > 0$, contradicción.
+  \item Se cumple $u(T) > 0$ y $v(T) = 0$. Entonces, $v'(T) < 0$. No obstante,
+    $v'(T) = u(T) / \varepsilon > 0$, contradicción.
+  \end{enumerate}
+
+  A continuación demostramos que las soluciones están acotadas. Definimos
+  $h(\tau) = u(\tau) + \varepsilon v(\tau)$. Tenemos que $h'(\tau) = -\lambda v(\tau) \le
+  0$. Recordemos que $h(0) = 1$ y $h \ge 0$, luego $h$ es decreciente y $0 \le h(\tau) \le 1$ para
+  todo $\tau \in [0,\omega[$. Consecuentemente, $0 \le u \le 1$ y $0 \le v \le 1/\varepsilon$. Como
+  consecuencia, por el teorema de comportamiento en el extremo superior deducimos que
+  $\omega = +\infty$.
+
+  Veamos que $u(\tau)$ y $v(\tau)$ tienden a $0$ cuando $\tau \to +\infty$. Como $h$ decrece y está
+  acotada, deducimos que $h$ tiene límite en $+\infty$. Sea $c \in [0,1[$ ese límite. Existe
+  $\{\tau_n\} \to +\infty$ con $\{-\lambda v(\tau_n)\} = \{h'(\tau_n)\} \to 0$. Por tanto,
+  $\{u(\tau_n)\} \to c$. Podemos suponer que $\{v(\tau_n)\}$ es estrictamente decreciente. De la
+  ecuación \eqref{eq:bacteria:adi} deducimos que $\{v'(\tau_n)\} \to c / \varepsilon$. Supongamos
+  que $c > 0$ para llegar a una contradicción. En tal caso, una parcial de $\{v'(\tau_n)\}$ es
+  positiva, por lo que podemos asumir que es la propia sucesión. Para cada $n \in \N$ encontramos
+  $\omega_n \in ]\tau_n, \tau_{n+1}[$ tal que $v'(\omega_n) = 0$ con $v(\omega_n) <
+  v(\tau_{n+1})$. Obtenemos $\{v(\omega_n)\} \to 0$ y $\{v'(\omega_n)\} \to 0$. De las ecuaciones
+  deducimos $\{u(\omega_n)\} \to 0$, lo que contradice que $\{h(\omega_n)\} \to
+  c$. Consecuentemente, $c = 0$ y $u(\tau)$ y $v(\tau)$ tienden a $0$ cuando $\tau \to +\infty$.
+
+  Podemos ahora recuperar el valor de $p$. En efecto, tenemos que
+  \[ p(t) = \int_0^t k_2 c(s) \diff s = \frac{k_2}{k_1} \int_0^{k_1 e_0 t} v(\tau) \diff \tau =
+    -\frac{k_2}{k_1 \lambda} \int_0^{k_1 e_0 t} h'(\tau) \diff \tau = \frac{k_2}{k_1 \lambda} (1 -
+    h(k_1 e_0 t)). \] Por tanto, $p$ es creciente y verifica $p(0) = 0$ y
+  $\lim_{t \to +\infty} p(t) = k_2 (k_1 \lambda)$.
+\end{ex}
+
+
+\subsection{Modelos de crecimiento de poblaciones biológicas}
+
+Sea $P(t)$ el número o densidad de individuos de una cierta población en el instante de tiempo
+$t$. Se define la \emph{tasa instantánea de crecimiento} como 
+\[\alpha(t) = \frac{P'(t)}{P(t)} = \lim_{h \to 0} \frac{P(t+h) - P(t)}{h P(t)}.\] 
+En este contexto, modelar es proporcionar $\alpha$. 
+
+\subsubsection{Modelo de Malthus (1798)}
+
+Este modelo supone que $\alpha$ es una constante real. La función $P$ es solución del PVI
+\begin{equation}
+\label{eq:malthus}
+\begin{cases}
+  P' = \alpha P; \\
+  P(0) = P_0.
+\end{cases}
+\end{equation}
+Tenemos que $P(t) = P_0 e^{\alpha t}$. Este modelo solo es válido normalmente en las primeras fases de una población. Tras cierto periodo de tiempo las variables ambientales influirán de alguna manera a la tasa instanánea de crecimiento.
+
+\subsubsection{Modelo de P. Verhulst o modelo logístico (1838) }
+
+La tasa $\alpha$ cambia en el tiempo debido a que los nutrientes de los cuales se alimenta la
+población se consumen si ésta es demasiado grande. Esto es, se pretende que $\alpha$ sea
+proporcional a los nutrientes del entorno. Además, se supone que el crecimiento de la población es
+inversamente proporcional a la variación del número de nutrientes. Deducimos que
+$\alpha(t) = \alpha_0 (1 - P(t) / P_{\infty})$. Obtenemos el PVI
+\begin{equation}
+\label{eq:logistico}
+\begin{cases}
+  P' = \alpha_0 P (1 - \frac{P}{P_{\infty}}); \\
+  P(0) = P_0.
+\end{cases}
+\end{equation}
+A la constante $P_{\infty}$ se le llama carga máxima. El PVI \eqref{eq:logistico} se puede resolver, obteniendo
+\[ P(t) = P_{\infty} \frac{e^{\alpha_0 t}}{e^{\alpha_0 t} - 1 + P_0 / P_{\infty}}. \]
+Nótese que la solución verifica $\lim_{t \to +\infty} P(t) = +\infty$.
+
+\subsubsection{Reproducción sexual (S. XX)}
+
+Debido a la reproducción sexual de múltiples poblaciones se propone utilizar una tasa que requiera
+un mínimo de población para reproducirse. De esta forma se modifica el modelo logístico, obteniendo
+\[ \alpha(t) = \alpha_0 \left(1- \frac{P(t)}{P_{\infty}}\right)\left(\frac{P(t)}{P_{min}}
+    -1\right). \] El comportamiento de la solución es similar al logístico cuando $P_0 >
+P_{min}$. Si $P_0 \le P_{min}$, entonces la población se extingue, lo que se llama efecto Allée
+fuerte.
+
+Este modelo se puede extender al dado por la siguiente tasa
+\[ \alpha(t) = \alpha_0 (1- \frac{P}{P_{\infty8}}) (\frac{P}{P_{min}})^{k+1}. \]
+
+\subsection{Movimiento}
+
+Modelamos una población que no crece pero se dispersa. En este contexto surgen la Ley de Fick y la
+ecuación del calor o de difusión. Denotamos por $u(x,t)$ a la densidad de población en el instante
+$t$ en el lugar $x \in \Omega \subset \R^N$. Por tanto, dado $B \subset \Omega$, el tamaño de la
+población contenido en $B$ en el instante de tiempo $t$ viene dado por
+\[ \int_B u(x,t) \diff x. \] La población se mueve por el efecto de \emph{difusión}. El tamaño de la
+población permanece constante. Por tanto, la cantidad de ésta que hay en un recinto solamente varía
+por los individuos que entran y salen de éste. Deducimos que
+\[ \frac{\partial}{\partial t} \left( \int_B u(x,t) \diff x\right) = \text{num. de individuos que
+    entran por el borde} - \text{num. de individuos que salen}. \] Denotamos por $J(x,t)$ al vector
+que indica hacia dónde se mueven los individuos de $x$ y cuántos lo hacen. Tenemos que
+\begin{equation}
+  \label{eq:mov:1}
+  \frac{\partial}{\partial t} \left( \int_B u(x,t) \diff x\right) = - \int_{\partial B} J \cdot n \diff S,
+\end{equation}
+donde $n$ es la normal exterior de $\Omega$.
+
+Necesitaremos el siguiente resultado.
+
+\begin{theorem}[Teorema de la Divergencia de Gauss]
+  \label{thm:divergencia}
+  Sea $F \colon \overline{\Omega} \to \R^N$ de clase $1$. Se define
+  $\mathrm{div}(F) \colon \overline{\Omega} \to \R$ dada por
+  $\mathrm{div}(F)(x) = \sum_{j = 1}^N \frac{\partial}{\partial x_i} F_i(x)$.  Si $\partial\Omega$
+  es regular, entonces
+  \[ \int_{\Omega} \mathrm{div}(F)(x) \diff x = \int_{\delta \Omega} F \cdot n \diff S, \] donde $n$
+  es la normal exterior de $\Omega$.
+\end{theorem}
+
+Por este teorema deducimos
+\begin{equation}
+  \label{eq:mov:2}
+  \frac{\partial}{\partial t} \left( \int_B u(x,t) \diff x\right) = - \int_{B} \mathrm{div}(J)(x) \diff x.
+\end{equation}
+Asumiendo hipótesis de regularidad obtenemos
+\begin{equation}
+  \label{eq:mov:3}
+  \left( \int_B \frac{\partial}{\partial t} u(x,t) + \mathrm{div}(J)(x) \right) \diff x = 0.
+\end{equation}
+De la arbitrariedad de $B$ deducimos
+\begin{equation}
+  \label{eq:mov:4}
+  \frac{\partial}{\partial t} u(x,t) + \mathrm{div}(J)(x) = 0,
+\end{equation}
+que se denomina \emph{ley de movimiento}. En este punto necesitamos proponer una función $J$ de
+manera que podamos determinar $u$. Una de las principales propuestas es la denominada \emph{Ley de
+  Fick}. Recordemos que la dirección en la que un potencial más crece viene dada por el gradiente de
+éste mientras la dirección en la que menos crece se corresponde con el opuesto del gradiente. Debido
+a esta observación Fick propone que $J = - D \nabla u$, donde $D$ es una constante de difusión que
+depende de la población y del medio. En definitiva, esta ley dice que las partículas se mueven de
+donde hay mayor concentración a menos. Fourier en 1822 propuso la misma función $J$ cuando estudiaba
+el movimiento del calor. Utilizando esta $J$ obtenemos la denominada ecuación del calor o de
+difusión
+\begin{equation}
+  \label{eq:mov:calor}
+  0 = \frac{\partial}{\partial t}u + \mathrm{div}(-D \nabla u) = \frac{\partial}{\partial t}u - D \Delta u.
+\end{equation}
+
+\subsubsection{Desde el random walk a la ecuación del calor}
+
+En este apartado deducimos la ecuación del calor a partir del problema denominado \emph{random
+  walk}, que estudia el movimiento aleatorio de una partícula en una recta. Esta deducción fue
+realizada por Einstein y tiene su importancia física. Brown estudió antes que Einstein el mismo
+problema al observar que el movimiento aleatorio de particulas de polen suspendidas en el agua
+seguía un coportamiento similar a la dispersión del calor.
+
+Imaginamos una partícula que se mueve en una recta. Inicialmente se encuentra en la posición $0$ de
+ésta. La partícula se mueve en cada paso una distancia fija $\delta > 0$ a izquierda o a derecha. El
+sentido lo elige de forma aleatoria con probabilidad $1/2$ para ambas opciones. Realiza un paso
+periódicamente con periodo $\tau > 0$. Llamamos $P(m,n)$ a la probabilidad de que tras $n$ pasos
+(tiempo $n \tau$) esté en la posición $m \delta$, donde $n \in \N$, $m \in \Z$. Usando argumentos
+básicos de combinatoria deducimos que
+\[ P(m, n) =
+  \begin{cases}
+    0 & \text{si } n < |m| \text{ o } (m+n) \text{ es impar};\\
+    \frac{1}{2^n} \frac{n!}{((n+m) / 2)! ((n-m) / 2)!} & \text{si } |m| \le n \text{ y } m+n \text{
+      es par}.
+  \end{cases}
+\]
+Nótese que $P(m,n+1) = (P(m-1, n) + P(m+1,n))/2$. Supongamos que existe una función $u(x,t)$ tal que
+$P(m,n) = u(m\delta, n\tau)$. Tenemos que
+\[ P(m,n+1) - P(m,n) = \frac{1}{2}(P(m-1,n) - 2P(m,n) + P(m+1,n)). \] Sea $x = m\delta$ y
+$t = n\tau$. Deducimos que
+\[ \frac{u(x,t+\tau) - u(x,t)}{\tau} = \frac{\delta^2}{2\tau}\frac{u(x-\delta,t) - 2u(x,t) +
+    u(x+\delta,t)}{\delta^2}. \] Por las fórmulas de aproximación de derivadas deducidas a partir
+del teorema de Taylor obtenemos
+\[ \partial_t u + \theta(\tau) = \frac{\delta^2}{2\tau} \partial_{xx}^2u + \theta(\delta^4 /
+  \tau). \] Tomamos límite cuando $\delta \to 0$ y $\tau \to 0$. Asumimos que se cumple la
+\emph{hipótesis parabólica}, que dice que $\delta^2 / (2\tau) \to D \in \R$. En este caso
+\[ \partial_t u = D \partial_{xx}^2u, \] que es la ecuación del calor en una dimensión.  En este
+punto cabe mencionar que $\delta / \tau$ es la velocidad de la partícula. Según la hipótesis
+parabólica se tiene que $\delta / \tau = \frac{\delta^2}{2\tau} \frac{2}{\delta} \to +\infty$.
+
+\subsubsection{Resolución de la ecuación del calor}
+
+En este apartado resolvemos la ecuación del calor para $x \in \R$. Concretamente, pretendemos
+resolver el problema de contorno
+\begin{equation}
+  \label{eq:calor:1}
+  \partial_t v = D \partial_{xx}^2 v; \\
+  v(x,0) = v_0(x) \quad \forall x \in \R.
+\end{equation}
+Para resolver esta ecuación recurriremos a la transformada de Fourier y la convolución.
+
+\begin{definition}
+  La \emph{clase de funciones de Schwartz} es
+  \[ \mathcal{S} = \mathcal{S}(\R) = \left\{u \in \mathcal{C}^{\infty}(\R, \C) : \sup_{x\in\R} |x^k
+      \partial^{\alpha} u(x)| < +\infty \quad \forall k, \alpha \in \N\right\}. \]
+\end{definition}
+Nótese que $\mathcal{C}_0^\infty(\R) \subset \mathcal{S}(\R)$. Denotamos $G(x) = e^{-\pi
+  x^2}$. Nótese que si $f \in \mathcal{S}(\R)$, entonces $f'$ y $x^k f$ son elementos de
+$\mathcal{S}(\R)$.
+
+\begin{definition}
+  La \emph{transformada de Fourier} es la función $\mathcal{F} \colon \mathcal{S} \to \mathcal{S}$
+  dada por
+  \[ \mathcal{F}[f](y) = \int_{-\infty}^{+\infty} f(x) e^{-2\pi i xy} \diff x. \] La
+  \emph{transformada inversa de Fourier} es la función
+  $\mathcal{F}^{-1} \colon \mathcal{S} \to \mathcal{S}$ dada por
+  \[ \mathcal{F}^{-1}[g](x) = \int_{-\infty}^{+\infty} g(y) e^{2\pi i xy} \diff y. \]
+\end{definition}
+\begin{remark}
+  Sean $f,g \in \mathcal{S}$.  Tenemos que
+  \[ \int_{-\infty}^{+\infty} \mathcal{F}[f](y)g(y) \diff y = \int_{-\infty}^{+\infty}
+    f(x)\mathcal{F}[g](x) \diff x. \] Gracias a esta igualdad se puede definir un operador
+  transformada de Fourier de cualquier función de $f \in \mathrm{L}^2(\R, \C)$. Este operador
+  viene dado por
+  \[ \left\langle \mathcal{F}[f], g \right\rangle = \int_{-\infty}^{+\infty} f(x) \mathcal{F}[g](x)
+    \diff x\] para todo $g \in \mathcal{S}$.
+\end{remark}
+
+\begin{theorem}
+  \label{thm:transformada}
+  Se cumplen las siguientes propiedades.
+  \begin{enumerate}
+  \item\label{item:fourier:inversa} La función $\mathcal{F}$ es una biyección sobre $\mathcal{S}$ y
+    $\mathcal{F}^{-1}$ es su inversa.
+  \item Se cumple $\mathcal{F}[G] = G = \mathcal{F}^{-1}[G]$.
+  \item Para cada $f \in \mathcal{S}$ se tiene $\mathcal{F}[f'](y) = 2 \pi i y \mathcal{F}[f](y)$.
+  \item Relación con homotecias. Sea $h_a(x) = ax$. Denotamos $h_a f := f(ax)$. Se tiene que
+    \begin{itemize}
+    \item $\mathcal{F}[h_a f](y) = \mathcal{F}[f](y/a)/a$;
+    \item $\mathcal{F}^{-1}[h_a f](x) = \mathcal{F}[f](x/a)/a$.
+    \end{itemize}
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Demostramos algunas de estas propiedades.
+  \begin{enumerate}
+  \item No podemos demostrarla en este curso, necesitamos el teorema de los residuos.
+  \item Es fácil ver que $G$ y $\mathcal{F}[G]$ resuelven el siguiente PVI
+    \[
+      \begin{cases}
+        G'(x) = (-2\pi x)G(x);\\
+        G(0) = 1.
+      \end{cases}
+    \]
+    Puesto que este PVI tiene una única solución (es lineal) deducimos que $\mathcal{F}[G] = G$. El
+    mismo argumento de aplica a $\mathcal{F}^{-1}$.
+  \item Es una consecuencia de la integración por partes.
+  \item Basta realizar el cambio de variables $z = ax$. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}[Convolución de funciones]
+  Sean $f,g : \R \to \R$ medibles. Se define la convolución de $f$ y $g$ en caso de que exista como la
+  función
+  \[ (f * g)(x) = \int_{-\infty}^{+\infty} f(x-y)g(y) \diff y. \]
+\end{definition}
+
+\begin{proposition}[Propiedades de la convolución]~
+
+  \begin{enumerate}
+  \item $f * g = g*f$.
+  \item \emph{Desigualdad de Young}. Si $f \in \mathrm{L}^p(\R)$ y $g \in L^q(\R)$ con
+    $1+1/r = 1/p + 1/q$. Entonces, existe $f * g$ y $||f*g||_{L^r} \le ||f||_{L^p}||g||_{L^q}$.
+  \item $\mathcal{F}(f*g) = \mathcal{F}(f) \mathcal{F}(g)$.
+    $\mathcal{F}(fg) = \mathcal{F}(f) * \mathcal{F}(g)$
+  \item Si $f \in \mathrm{L}^2(\R)$ y
+    $G_{\varepsilon}(x) = G(x/ \sqrt{\varepsilon}) / \sqrt{\varepsilon}$, que se llama aproximación
+    de la unidad o sucesión regularizante, entonces
+    $f * G_{\varepsilon} \in \mathcal{C}^{+\infty}(\R)$ y $f * G_{\varepsilon} \to f$ cuando
+    $\varepsilon \to 0$ en $\mathrm{L}^2$.
+  \item Transformada de la delta. $\mathcal{F}(\delta_0) = 1$.
+  \item Si $f\in \mathrm{L}^1$ y $g \in \mathcal{C}^k$ es acotada, entonces $f*g \in \mathcal{C}^k$
+    y es acotada.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Las propiedades b) y d) no las podemos deostrar en este curso. El resto de las propiedades son
+  fáciles de demostrar y se dejan como ejercicio.
+\end{proof}
+
+Ya podemos resolver la ecuación del calor en $\R$. Tomamos el cambio de variable
+$u(t,x) = v(\sqrt{D}x, t)$. Tenemos que $\partial_t u = \partial_{xx}^2 u$. Por tanto, basta
+resolver la ecuación del calor para $D = 1$.
+
+\begin{theorem}
+  Dada $f \in \mathcal{S}$ (resp. $\mathrm{L}^2$). Entonces la función
+  \[ v(x,t) = \frac{1}{\sqrt{4 D \pi t}} \int_{\R} \exp\left(- \frac{(x-y)^2}{4 D t}\right) f(y)
+    \diff y \] resuelve la ecuación del calor con la condición inicial $v(x,0) = f(x)$ en el sentido
+  de la propiedad d) de la convolución.
+\end{theorem}
+\begin{proof}
+  Resolvemos el problema de contorno
+  \begin{equation}
+    \label{eq:calor:1}
+    \begin{cases}
+      u_t = u_{xx}, \quad x \in \R, t \ge 0;\\
+      u(x, 0) = \delta_0(x).
+    \end{cases}
+  \end{equation}
+  Consideramos el cambio de variable $\mathcal{F}[u]$ (aplicar la transformada de Fourier en la
+  variable $x$), mediante el cual obtenemos la ecuación equivalente
+  \begin{equation}
+    \label{eq:calor:fourier}
+    \begin{cases}
+      \partial_t \mathcal{F}[u] =- 4 \pi^2 x^2 \mathcal{F}[u], \quad x \in \R, t \ge 0;\\
+      \mathcal{F}[u](x, 0) = 1.
+    \end{cases}
+  \end{equation}
+  Deducimos que $\mathcal{F}[u](x,t) = \exp(-4 \pi^2 x^2 t) = (h_{\sqrt{4 \pi t}} G)(x)$.  Aplicando
+  la transformada inversa de Fourier deducimos que
+  \[u(x,t) = \mathcal{F}^{-1}[h_{\sqrt{4 \pi t}} G](x) = \frac{1}{\sqrt{4 \pi t}}
+    \mathcal{F}^{-1}[G(\frac{x}{\sqrt{4 \pi t}})] = \frac{1}{\sqrt{4 \pi t}} \exp(-x^2 7 t). \] En
+  este punto pretendemos resolver el problema de contorno
+  \begin{equation}
+    \label{eq:calor:4}
+    \begin{cases}
+      u_t = u_{xx}, \quad x \in \R, t \ge 0;\\
+      u(x, 0) = f_0(x).
+    \end{cases}
+  \end{equation}
+  Para ello definimos $w(x,t) = u(x,t) * f_0(x)$.  Por las propiedades de la convolución es fácil
+  comprobar que $w$ es solución de \eqref{eq:calor:4}. Por último, recordemos que a partir de una
+  solución de \eqref{eq:calor:4} podemos construir una solución de la ecuación del calor mediante el
+  cambio $w(t,x) = v(t, \sqrt{D}x)$. Deducimos que la función dada en el enunciado es solución de la
+  ecuación del calor.
+\end{proof}
+
+\begin{remark}
+  La ecuación del calor no tiene en genreal solución única. En efecto, la función
+  $u(x,t) = \sum_{k=0}^{+\infty} \frac{x^{2k}}{(2k)!} \frac{\partial^k}{\partial t^k}\left(
+    e^{-1/t^2} \right)$ cumple
+  \begin{equation}
+    \label{eq:calor:5}
+    \begin{cases}
+      u_t = u_{xx}, \quad x \in \R, t \ge 0;\\
+      u(x, 0) = 0.
+    \end{cases}
+  \end{equation}
+  No obstante, si buscamos soluciones acotadas en $|x| \to +\infty$, entonces la única solución de
+  la ecuación del calor es la dada en el teorema anterior.
+\end{remark}
+
+  
+\begin{proposition}[Propiedades de las soluciones de la ecuación del calor]
+  Las soluciones dadas en el teorema previo verifican las siguientes propiedades.
+  \begin{enumerate}
+  \item Conservación del digno. Si $f \ge 0$, entonces $u > 0$ para todo $t > 0$.
+  \item Conservación de la masa (temperatura).
+    \[ \int_{\R} v(x,t) \diff x = \int_{\R} f(x) \diff x \quad \forall t >0. \]
+  \item Decaimiento en $t \to +\infty$. $\sup \{|v(x,t)| : x \in \R\} \le C / \sqrt{t}$.
+  \item Velocidad infinita de propagación. Aunque inicialmente $\mathrm{sop}(f)$ esté acotado, para
+    todo $t > 0$ $\mathrm{sop}(v) = \R$.
+  \item Disipación de energía.
+    \[ \frac{\partial}{\partial t}\int_{\R} v^2(x,t) \diff x = - \int_{\R} \left|
+        \frac{\partial}{\partial x}v \right|^2 \diff x. \]
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  Son un mero ejercicio.
+\end{proof}
+
+\subsection{Ecuaciones de reacción difusión}
+
+Sea $u(x,t)$ la densidad de población que se mueve por difusión y que crece según la tasa
+\[\alpha(u) =
+  \begin{cases}
+    \alpha_0 \text{(constante)}; \\
+    \alpha_0 (1 - u / u_0); \\
+    \alpha_0 (1 - u / u_0) (u / u_{min} -1).
+  \end{cases}
+\]
+
+Estamos mezclando los conceptos estudiados en la secciones anteriores. Obtenemos la ecuación
+\begin{equation}
+  \label{eq:rea-dif}
+  \partial_t u = D \Delta_x u + f(u)
+\end{equation}
+
+Solo vamos a estudiar esta ecuación en dos casos particulares. El primero se denomina FKPP (Fischer,
+Kolmogorov, Petrovsky, Piskunov) y se corresponde con la ecuación
+\begin{equation}
+  \label{eq:rea-dif:1}
+  \partial_t u = D \Delta_x u + \alpha_0 u \left(1- \frac{u}{ u_{\infty}}\right).
+\end{equation}
+El segundo caso se denomina biestable y se corresponde con la ecuación
+\begin{equation}
+  \label{eq:rea-dif:2}
+  \partial_t u = D \Delta_x u + \alpha_0 u \left(1- \frac{u}{ u_{\infty}}\right)\left(\frac{u}{ u_{min}}-1\right).
+\end{equation}
+No tenemos herramientas para encontrar todas las solucines de estas ecuaciones o hacer teoremas de
+unicidad. Nuestro objetivo es estudiar la existencia de soluciones del tipo \emph{onda viajera}. Una
+onda viajera es una solución del tipo $u(x,t) = \phi(x-ct)$, donde $\phi \colon \R \to \R$ se
+denommina \emph{perfil de la onda} y $c \in \R$ es la \emph{velocidad de la onda}. Trabajaremos en
+dimensión 1, $x \in \R$.
+
+En primer lugar vamos a adimensionalizar las soluciones. Distinguimos dos casos en función de la
+ecuación con la eque trabajamos.
+\begin{enumerate}
+\item En FKPP, tomamos el cambio de variable
+  $v(y, \tau) = u(\sqrt{D / \alpha_0} y, \tau / \alpha_0) / u_{\infty}$. Recordemos que
+  $[[ \alpha_0 ]] = 1 / \text{tiempo}$ y $[[ \sqrt{D / \alpha_0} ]] = \text{espacio}^2$. Obtenemos que
+  \begin{equation}
+    \label{eq:rea-dif:1:ad}
+    \partial_{\tau} v = \partial^2_{yy} v + v(1-v).
+  \end{equation}
+  De aquí en adelante denotaremos por $u$ a las soluciones de la ecuación anterior. No se deben
+  confundir con las soluciones de la ecuación original.
+\item En el caso biestable realizamos el cambio
+  \[ v(y, \tau) = u \left( \sqrt{\frac{D u_{min}}{\alpha u_{\infty}}}, \frac{\tau u_{min}}{\alpha
+        u_{\infty}} \right) / u_{\infty}. \] Obtenemos la ecuación
+  \begin{equation}
+    \label{eq:rea-dif:2:ad}
+    \partial_{\tau} v = \partial_{yy}^2 v + v(1-v)(v-\beta),
+  \end{equation}
+  donde $0 < \beta < u_{min}/u_{\infty} < 1$.
+\end{enumerate}
+
+Veamos qué ha de cumplir una onda viajera $u(x,t) = \phi(x-ct)$ para ser solución de
+\begin{equation}
+  \label{eq:rea-dif:f:1}
+  \partial_t u = \partial_{xx}^2 u + f(u).
+\end{equation}
+Buscamos ondas viajeras tales que $\lim_{x \to -\infty} \phi(x) = 1$, $\lim_{x \to -\infty} \phi(x) = 0$
+y $\phi$ es decreciente. Deducimos que $\phi$ es solución de la ecuación
+\begin{equation}
+  \label{eq:rea-dif:f:phi}
+  -c \phi' = \phi'' + f(\phi).
+\end{equation}
+Es decir, $\phi$ cumple una ecuación diferencial ordinaria. 
+
+Multiplicando por $\phi'$ e integrando
+obtenemos que
+\[ c \int_{-\infty}^{+\infty} (\phi'(\xi))^2 \diff \xi = \int_0^1 f(z) \diff z.\]
+
+ya que
+\[ \int_{-\infty}^{+\infty} \phi'' \phi' \diff \xi = \frac{1}{2} \int_{-\infty}^{\infty}
+  \frac{\partial}{\partial \xi} (\phi'(\xi))^2 \diff \xi = \frac{\phi'(+\infty)^2 -
+    \phi'(-\infty)^2}{2} = 0\] y
+\[ \int_{-\infty}^{+\infty} f(\phi(\xi)) \phi'(\xi) \diff \xi = \int_1^0 f(z) \diff z.\]
+Si el problema es FKPP, entonces $\int_0^1 f(z) \diff z > 0$, obteniendo que $c >0$. Si el problema es biestable, entonces
+\[ \int_0^1 f(z) \diff z = \int_0^1 z(1-z)(z-\beta) \diff z = \frac{1}{6}(\frac{1}{2} - \beta).\]
+Por tanto, el signo de $c$ depende de $\beta$. 
+
+\subsubsection{Ondas viajeras en la biestable}
+
+En este caso particular la función $\phi$ verifica la ecuación
+\begin{equation}
+  \label{eq:rea-dif:2:phi}
+  \phi'' + c \phi' + \phi(1-\phi)(\phi - \beta) = 0.
+\end{equation}
+Buscamos $\phi$ cumpliendo $\phi'(\xi) = A\phi(\xi)(1-\phi(\xi))$ para cierto $A$. Obtenemos en tal caso que
+$\phi'' = A \phi'(1-\phi) - A \phi \phi'$. Podemos substituir en \eqref{eq:rea-dif:2:phi} obteniendo la ecuación equivalente 
+\[ \phi' \left[ A + c - \frac{\beta}{A} + \phi \left( -2A + \frac{1}{A} \right) \right] = 0.\]
+Puesto que queremos que $\phi$ sea estrictamente decreciente, debe cumplirse que $A + c - \frac{\beta}{A} = 0$ y $-2A + \frac{1}{A} = 0$. Por tanto, $A = 1 / \sqrt{2}$ y $c = \sqrt{2}(1/2 - \beta)$. Podemos resolver para este $A$ la ecuación $\phi'(\xi) = A\phi(\xi)(1-\phi(\xi))$ mediante el método de variables separadas. Obtenemos que $\phi(\xi) = 1 / (1 + k \exp(\xi / \sqrt{2}))$ para $k > 0$. Esta solución verifica las hipótesis que buscábamos, luego es solución por el razonamiento previo de \eqref{eq:rea-dif:2:phi} para $c = \sqrt{2} (1/2  \beta)$. Hemos encontrado ondas viajeras para $c$ específicos.
+
+\subsection{Ondas viajeras en FKPP}
+
+En este caso particular la función $\phi$ verifica la ecuación
+\begin{equation}
+  \label{eq:rea-dif:1:phi}
+  \phi'' + c \phi' + \phi(1-\phi) = 0.
+\end{equation}
+
+\begin{lemma}
+  Para cada $c \ge 2$ existe una única $\phi$ tal que $u(x,t) = \phi(x-ct)$ es solución de
+  \eqref{eq:rea-dif:1:ad}.
+\end{lemma}
+\begin{proof}
+  Sabemos que \eqref{eq:rea-dif:1:phi} es equivalente al sistema
+  \begin{equation}
+    \label{eq:rea-dif:1:phi:s}
+    \begin{cases}
+      u' = v; \\
+      v' = -c v + u (1-u).
+    \end{cases}
+  \end{equation}
+  Nótese que $(0,0)$ y $(1,0)$ son puntos de equilibrio de esta ecuación. Utilizamos el primer
+  método de Lyapunov para estudiar la estabilidad asintótica. Nótese que
+  \[\mathrm{J}f(0,0) =\left(
+      \begin{matrix}
+        0 & 1 \\ -1 & -c
+      \end{matrix}
+    \right). \] Deducimos que $\mu < 0$ si $c > 0$, donde $\mu$ es el máximo de la parte real de los
+  valores propios. En tal caso, $(0,0)$ es un atractor. Si $0 < c < 2$, entonces es un atractor en
+  espiral, luego todas las soluciones tomarán valores positivos en $u$ en algún momento, por lo que
+  $\phi$ no será creciente. Suponemos pues que $c \ge 2$, en cuyo caso los valores propios son
+  números negativos. Nótese que
+  \[\mathrm{J}f(0,0) =\left(
+      \begin{matrix}
+        0 & 1 \\ 1 & -c
+      \end{matrix}
+    \right). \] Los valores propios son $\lambda_+ = (-c + \sqrt{c^2 + 4})/ 2 > 0$ y
+  $\lambda_- = (-c - \sqrt{c^2 + 4})/ 2 < 0$. $(1,0)$ es un punto de silla. Vamos a demostrar que la
+  solución que sale de $(1,0)$ con $t_0 = -\infty$ tiene límite $(0,0)$ en $+\infty$ con $u$
+  decreciente. Por el estudio del punto de equilibrio $(1,0)$ sabemos que una de las soluciones que
+  salen de este se mantiene con $u < 0$ cerca de $(1,0)$. Esta es la solución que tomamos. Me he
+  perdido en la demostración, la mitad de las cosas no las hemos estudiado en ecuacines
+  diferenciales.
+\end{proof}
+
+
 
 \section{Bibliografía}
 
