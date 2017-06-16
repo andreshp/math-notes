@@ -27,10 +27,11 @@
 
 \section{Introducción}
 
-En esta asignatura se resuelven problemas varacionales que aparecen tanto en la física como en la
-biología. El objetivo principal será desarrollar las herramientas que nos permitan abordar estos
-problemas. En este proceso aparecerán múltiples ecuaciones diferenciales ordinarias y problemas de
-contorno.
+El principal objetivo de la asignatura es la resolución de problemas varacionales que aparecen en la
+física. A este propósito se dedicará la mayor parte de los esfuerzos. No obstante, en la última
+sección se introducen problemas clásicos de la química y la biología que se modelizan mediante
+ecuaciones diferenciales. El uso de las ecuaciones diferenciales será una constante durante todo el
+curso, apareciendo habitualmente en forma de problemas de contorno.
 
 En primer lugar vamos a ver un ejemplo de este tipo de problemas que motive el desarrollo de la
 teoría.
@@ -47,8 +48,8 @@ teoría.
   \[\mathcal{D} = \{y \in \mathcal{C}^1(x_0, x_1)\mid (y, y')([x_0, x_1]) \subset \Omega, y(x_0) =
     y_0, y(x_1) = y_1\}.\] Recordemos que la longitud de una curva $y \in \mathcal{C}^1(x_0, x_1)$
   viene dada por $\int_{x_0}^{x_1} |y'(x)| \diff x$. Por tanto, buscamos aquel elemento
-  $\overline{y} \in \mathcal{D}$ que minimice el funcional $\mathcal{F}\colon \mathcal{D} \to \mathbb{R}$
-  dado por
+  $\overline{y} \in \mathcal{D}$ que minimice el funcional
+  $\mathcal{F}\colon \mathcal{D} \to \mathbb{R}$ dado por
   \[\mathcal{F}[y] = \int_{x_0}^{x_1} \sqrt{1 + y'(x)^2} \diff x.\]
   Esta cuestión se denomina \emph{formulación variacional del problema}. Supongamos que existe
   $\overline{y} \in \mathcal{D}$ mínimo de $\mathcal{F}$ y busquemos alguna condición necesaria que
@@ -65,17 +66,17 @@ teoría.
   \begin{equation} \label{eq:ex:fdp} 0 = \int_{x_0}^{x_1} \frac{\phi'(x) \overline{y}'(x)}{\sqrt{1 +
         \overline{y}'(x)^2}} \diff x.
   \end{equation}
-  Supongamos que $\overline{y} \in \mathcal{C}^2(x_0, x_1)$. En tal caso podemos integrar
-  \eqref{eq:ex:fdp} por partes con $u = \overline{y}'/\sqrt{1 + \overline{y}'(x)^2}$ y
+  A la búsqueda de aquellas funciones $\overline{y} \in \mathcal{D}$ que verifican \eqref{eq:ex:fdp}
+  para cualquier $\phi \in \mathcal{C}^1_0([x_0, x_1])$ se le llama \emph{formulación débil del
+    problema}. Supongamos que $\overline{y} \in \mathcal{C}^2(x_0, x_1)$. En tal caso podemos
+  integrar \eqref{eq:ex:fdp} por partes con $u = \overline{y}'/\sqrt{1 + \overline{y}'(x)^2}$ y
   $\diff v = \phi'(x)$ para obtener
   \begin{equation} \label{eq:ex:fd} 0 = -\int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial
       x}\frac{\overline{y}'(x)}{\sqrt{1 + \overline{y}'(x)^2}} \diff x.
   \end{equation}
-  A la búsqueda de aquellas funciones $\overline{y} \in \mathcal{D}$ que verifican \eqref{eq:ex:fd}
-  para cualquier $\phi \in \mathcal{C}^1_0([x_0, x_1])$ se le llama \emph{formulación débil del
-    problema}. En la Sección \ref{sec:pv} veremos una versión básica del Lema fundamental del
-  Cálculo de Variaciones, que aplicamos a \eqref{eq:ex:fd} para obtener que $\overline{y}$ verifica
-  la siguiente ecuación diferencial ordinaria
+  En la Sección \ref{sec:pv} veremos una versión básica del Lema fundamental del Cálculo de
+  Variaciones, que aplicamos a \eqref{eq:ex:fd} para obtener que $\overline{y}$ verifica la
+  siguiente ecuación diferencial ordinaria
   \begin{equation} \label{eq:ex:edo} \frac{\partial}{\partial x}\frac{\overline{y}'(x)}{\sqrt{1 +
         \overline{y}'(x)^2}} = 0.
   \end{equation}
@@ -84,11 +85,10 @@ teoría.
   $\overline{y}$ es solución de un problema de contorno, que se denomina \emph{formulación clásica
     del problema}. En este caso el problema de contorno tiene fácil solución. En efecto,
   desarrollando \eqref{eq:ex:edo} obtenemos que
-  \[ \frac{\overline{y}''(x)}{\sqrt{1 + \overline{y}'(x)^2}} = 0,\]
-  esto es, $\overline{y}'' = 0$ y, por tanto, $\overline{y}(x) = ax+b$ para ciertos
-  $a, b \in \mathbb{R}$. Las condiciones de contorno implican que $\overline{y}$ debe ser el
-  segmento que une $(x_0, y_0)$ con $(x_1, y_1)$. En resumen, si la solución fuese de clase 2,
-  entonces es el segmento que une ambos puntos.
+  \[ \frac{\overline{y}''(x)}{\sqrt{1 + \overline{y}'(x)^2}} = 0,\] esto es, $\overline{y}'' = 0$ y,
+  por tanto, $\overline{y}(x) = ax+b$ para ciertos $a, b \in \mathbb{R}$. Las condiciones de
+  contorno implican que $\overline{y}$ debe ser el segmento que une $(x_0, y_0)$ con $(x_1,
+  y_1)$. En resumen, si la solución fuese de clase 2, entonces es el segmento que une ambos puntos.
 \end{ex}
 
 En el ejemplo anterior hemos seguido el siguiente proceso:
@@ -108,10 +108,10 @@ Queda demostrar que una de las soluciones obtenidas en \ref{item:candidatos} es 
 $\mathcal{F}$. Esta cuestión es compleja y en este curso solo podremos resolverla bajo condiciones
 bastante restrictivas.
 
-En lo que sigue desarrollaremos formalmente la ecuación de Euler-Lagrange y
-demostraremos que bajo determinadas condiciones las soluciones de la ecuación de Euler-Lagrange
-siempre son soluciones de nuestro problema variacional. Además, intentaremos rebajar cada una de las
-hipótesis que se han asumido a lo largo del ejemplo.
+En lo que sigue desarrollaremos formalmente la ecuación de Euler-Lagrange y demostraremos que bajo
+determinadas condiciones las soluciones de la ecuación de Euler-Lagrange siempre son soluciones de
+nuestro problema variacional. Además, intentaremos rebajar cada una de las hipótesis que se han
+asumido a lo largo del ejemplo.
   
 \section{Problemas varacionales} \label{sec:pv}
 
@@ -163,7 +163,7 @@ de Variaciones.
   tal que $|f(x_2)| > 0$. Como $f$ es continua, existe un intervalo abierto
   $J = ]a,b[ \subset ]x_0, x_1[$ tal que $f(x)f(x_2) > 0$ para todo $x \in J$. Definimos la función
   $\phi \in \mathcal{C}^1_0([x_0, x_1])$
-  \[ \phi(x) = \begin{cases} \cos\left(\pi\frac{x-(a+b)/2}{b-a}\right) + 1 & \text{ si } x \in J; \\
+  \[ \phi(x) = \begin{cases} \cos\left(\pi\frac{2x-(a+b)}{b-a}\right) + 1 & \text{ si } x \in J; \\
       0 & \text{ en caso contrario}.\end{cases}\] Nótese que $\phi(x) > 0$ para todo $x \in J$. Por
   tanto, obtenemos que
   \[\int_{x_0}^{x_1} f(x) \phi(x) \diff x \ne 0,\]
@@ -216,9 +216,8 @@ Ya podemos deducir en un ámbito general la denominada ecuación de Euler-Lagran
   Por hipótesis $\overline{y} \in \mathcal{C}^2(x_0, x_1)$ y, por tanto, podemos integrar el segundo
   sumando de \eqref{eq:el:fdp} por partes con $u = F_p(\#(x, 0))$ y $\diff v = \phi'(x)$ para
   obtener
-  \begin{equation} \label{eq:el:fdp:2} 0 = \left[F_p(\#(x, 0)) \phi(x)\right]_{x_0}^{x_1} -
-    \int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x = - \int_{x_0}^{x_1}
-    \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x.
+  \begin{equation} \label{eq:el:fdp:2} \int_{x_0}^{x_1} F_p(\#(x, 0)) \phi'(x) \diff x = \left[F_p(\#(x, 0)) \phi(x)\right]_{x_0}^{x_1} -
+    \int_{x_0}^{x_1} \phi(x) \frac{\partial}{\partial x} F_p(\#(x, 0)) \diff x.
   \end{equation}
   En vista de \eqref{eq:el:fdp:2} y que $\phi$ se anula en $x_0$ y $x_1$ podemos escribir
   \eqref{eq:el:fdp} como sigue
@@ -322,10 +321,12 @@ derivable la convexidad local de la función nos permite discernir si un punto c
 máximo o punto de inflexión. Vamos a aplicar el concepto de convexidad en el ámbito actual.
 
 \begin{definition}
-  Sea $\Omega \subset \R^d$ un conjunto convexo y $f \colon \Omega \to \R$. La función $f$ es
-  \emph{convexa} si para cualquier $x,y \in \Omega$ se tiene que
+  Sea $V$ un espacio vectorial. Un conjunto $\Omega \subset V$ es \emph{convexo} si para todo
+  $x,y \in \Omega$ se cumple que $[x,y] = \{tx+(1-t)y \colon t \in [0,1]\} \subset \Omega$. En tal
+  caso, una función $f \colon \Omega \to \R$ es \emph{convexa} si para cualquier $x,y \in \Omega$ se
+  tiene que
   \[ f(tx + (1-t)y) \le tf(x) + (1-t)f(y) \] para todo $t \in [0,1]$. Si la desigualdad anterior
-  siempre es estricta entonces $f$ es \emph{estrictamente convexa}.
+  siempre es estricta, entonces $f$ es \emph{estrictamente convexa}.
 \end{definition}
 
 Desarrollamos a continuación el principal teorema de esta sección.
@@ -333,7 +334,7 @@ Desarrollamos a continuación el principal teorema de esta sección.
 \begin{theorem}
   \label{thm:convex:minimo}
   Consideremos un problema variacional con las condiciones de regularidad el Teorema
-  \ref{thm:el}. Sea $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2(x_0,x_1)$ un extremal. Si el
+  \ref{thm:el}. Sea $\overline{y} \in \mathcal{D} \cap \mathcal{C}^2(x_0,x_1)$ una extremal. Si el
   conjunto $\mathcal{D}$ y el funcional $\mathcal{F}$ son convexos, entonces $\overline{y}$ es un
   mínimo global de $\mathcal{F}$ en $\mathcal{D}$.
 \end{theorem}
@@ -342,8 +343,8 @@ Desarrollamos a continuación el principal teorema de esta sección.
   \[ \left.\frac{\partial}{\partial t}\left( \mathcal{F}[ \overline{y} + t \phi ] \right)\right|_{t
       = 0} = 0 \] para cualquier $\phi \in \mathcal{C}_0^1(x_0,x_1)$. Sea $z \in
   \mathcal{D}$. Veamos que $\mathcal{F}[ \overline{y} ] \le \mathcal{F}[z]$. Definimos la función
-  $\phi = z - \overline{y} \in \mathcal{C}^1(x_0,x_1)$. Por la convexidad de $\mathcal{F}$
-  deducimos que para $t$ lo suficientemente pequeño se verifica $y+t\phi \in \mathcal{F}$ y
+  $\phi = z - \overline{y} \in \mathcal{C}^1(x_0,x_1)$. Por la convexidad de $\mathcal{F}$ deducimos
+  que para $t$ lo suficientemente pequeño se verifica $y+t\phi \in \mathcal{D}$ y
   $\mathcal{F}[\overline{y}+t\phi] = \mathcal{F}[(1-t)\overline{y}+ tz] \le
   (1-t)\mathcal{F}[\overline{y}] + t \mathcal{F}[z]$. Consecuentemente obtenemos que
   \[ \frac{\mathcal{F}[\overline{y}+t\phi] - \mathcal{F}[\overline{y}]}{t} \le \mathcal{F}[z] -
@@ -355,9 +356,9 @@ nos permite asegurar que son mínimos globales.
 
 \begin{prop}
   Consideremos un problema variacional tal que el conjunto $\mathcal{D}$ y el funcional
-  $\mathcal{F}$ son convexos. Si $\overline{y} \in \mathcal{D}$ es mínimo local (resp. estricto) de
-  $\mathcal{F}$ bajo la norma $||\cdot||_{\infty}$, entonces $\mathcal{F}$ alcanza un mínimo global
-  en $\overline{y}$.
+  $\mathcal{F}$ son convexos. Si $\overline{y} \in \mathcal{D}$ es mínimo local (resp. mínimo local
+  estricto) de $\mathcal{F}$ bajo la norma $||\cdot||_{\infty}$, entonces $\mathcal{F}$ alcanza un
+  mínimo global (resp. mínimo global estricto) en $\overline{y}$.
 \end{prop}
 \begin{proof}
   Sea $U \subset D$ entorno convexo en el que $\overline{y}$ es mínimo global. Sea
@@ -418,18 +419,17 @@ condiciones de contorno más habituales.
   intervalo.
 \item \textbf{Condiciones de tipo Newmann:} Se fija el valor de la derivada en los extremos del
   intervalo.
-\item \textbf{Condiciones separadas:} En cada extremo del intervalo se fija el valor de una
-  combinación lineal de la función y su derivada. Generalizan a las condiciones de tipo Dirichlet y
-  Newmann.
 \item \textbf{Condiciones periódicas:} Los valores de la función o su derivada en el extremo deben
   ser los mismos.
+\item \textbf{Condiciones separadas:} En cada extremo del intervalo se fija el valor de una
+  combinación lineal de la función y su derivada. Generalizan a las condiciones anteriores.
 \end{enumerate}
 
 Además, si los valores impuestos son nulos las condiciones se denominan \emph{homogéneas} mientras
 que se denominan \emph{no homogéneas} en caso contrario.
 
-Los problemas de contorno pueden tener solucion única, tener múltiples soluciones o no tener
-solución.  En lo que sigue vemos un ejemplo de cad auno de estos casos.
+Los problemas de contorno pueden tener solución única, tener múltiples soluciones o no tener
+solución. En lo que sigue vemos un ejemplo de cada uno de estos casos.
 
 \begin{ex} \label{ex:contorno} Consideramos la EDO $x'' + x = 0$. Sabemos que las soluciones de esta
   EDO son de la forma $A \cos(x) + B \sin(x)$ con $A,B \in \R$.
@@ -439,7 +439,7 @@ solución.  En lo que sigue vemos un ejemplo de cad auno de estos casos.
     entonces el problema de contorno tiene solución si, y solo si, $y_0 = y_1$, en cuyo caso hay
     tantas soluciones como posibles valores de $B$.
   \item Si fijamos condiciones de tipo Dirichlet en $I = [0, \pi / 2]$, entonces existe una única
-    solución.
+    solución. \qedhere
   \end{enumerate}
 \end{ex}
 
@@ -490,7 +490,6 @@ verse como la ecuación de Euler-Lagrange de un PV. En esta sección nos centram
 orden, que sí provienen de un PV. Consideramos tres funciones continuas
 $a, b, c : [x_0, x_1] \to \R$ y la EDO
 \begin{equation} \label{eq:edo:2}
-
   y''(x) + a(x) y'(x) + b(x)y(x) = c(x).  \tag{E2}
 \end{equation}
 
@@ -529,9 +528,9 @@ mínimo que no sea extremal. En este punto entra en juego el Teorema \ref{thm:st
 demostrarlo necesitamos desarrollar antes varias herramientas.
 
 
-En primer lugar, vamos a poner en equivalencia roblemas de contorno de tipo Dirichlet o Newmann no
+En primer lugar, vamos a poner en equivalencia problemas de contorno de tipo Dirichlet o Newmann no
 homogéneos con un problema del mismo tipo homogéneo. El siguiente lema consigue este hecho para
-problema de tipo Dirichlet y es fácilmente generalizable a problemas de tipo Newmann. En vista de
+problemas de tipo Dirichlet y es fácilmente generalizable a problemas de tipo Newmann. En vista de
 este resultado de aquí en adelante consideraremos condiciones homogéneas.
 
 
@@ -680,7 +679,7 @@ Como consecuencia obtenemos el principal resultado de esta sección.
     \right), \] que es definida positiva. Por tanto, $F$ es convexa y el funcional $\mathcal{F}$
   también lo es. El Teorema \ref{thm:convex:minimo} garantiza que las soluciones de la ecuación de
   Euler-Lagrange son mínimos de $\mathcal{F}$. Veamos que hay una única solución de este problema de
-  contorno. Utilizamos una variante del Lemma \ref{lem:pc:hom} para reducir el problema de contorno
+  contorno. Utilizamos una variante del Lema \ref{lem:pc:hom} para reducir el problema de contorno
   a uno Dirichlet homogéneo. En este contexto, por la alternativa de Fredholm basta corroborar que
   el sistema homogéneo tiene solamente como solución a la trivial. Por reducción al absurdo,
   supongamos que el problema tiene una solución $y$ distinta de la trivial. Nótese que
@@ -1070,7 +1069,7 @@ objetivo es buscar los valores propios y las funciones propias del problema.
     2f(x) u \right) \diff x \]
 
   en $\mathcal{D} = \{u \in \mathcal{C}^1(\overline{\Omega}) \mid u = 0 \text{ en } \Omega\} =
-  \mathcal{C}_0^1(\Omega)$, donde $\sigma$ y $\alpha$ son constantesy $f$ es una función en
+  \mathcal{C}_0^1(\Omega)$, donde $\sigma$ y $\alpha$ son constantes y $f$ es una función en
   $x$. Escribiendo la ecuación de Euler - Lagrange asociada a este PV obtenemos la denominada ecuación
   de la membrana
   \[ -\mathrm{div}(\sigma(x)\nabla u) = - \alpha(x)u + f, \]
@@ -1098,14 +1097,14 @@ En el Ejemplo \ref{ex:membrana} hemos obtenido la ecuación de Ondas como ecuaci
 Hacemos el cambio de variable $\xi = x + ct$, $\eta = x -ct$. Consideramos la función $U(\xi, \eta) = u(t,x) = u( (\xi-\eta)/(2c), (\xi+\eta)/2)$. Por la regla de la cadena obtenemos que
 \[ u_{tt} = c^{2} U_{\xi \xi} + c^2 U_{\eta \eta} - 2c^2 U_{\xi \eta}; \]
 \[ u_{xx} = U_{\xi \xi} +  U_{\eta \eta} +2 U_{\xi \eta}; \]
-Por tanto, de \eqref{eq:ondas:1} deducimos que $U_{\xi \eta} = 0$. Esto equivale a que $U(\xi, \eta) = g(\xi) + h(\eta)$ para ciertas funciones $g$ y $h$ de clase $2$. Por tanto, obtenemos que $u(t,x) = g(x+ct) + h(x-ct)$. Imponiendo las condiciones iniciales obtenmemos $g(x)+h(x) = u_0(x)$ y $cg'(x)-ch'(x) = v_0(x)$. En particular, $g'(x) + h'(x) = u_0'(x)$, de donde deducimos que
+Por tanto, de \eqref{eq:ondas:1} deducimos que $U_{\xi \eta} = 0$. Esto equivale a que $U(\xi, \eta) = g(\xi) + h(\eta)$ para ciertas funciones $g$ y $h$ de clase $2$. Por tanto, obtenemos que $u(t,x) = g(x+ct) + h(x-ct)$. Imponiendo las condiciones iniciales obtenemos $g(x)+h(x) = u_0(x)$ y $cg'(x)-ch'(x) = v_0(x)$. En particular, $g'(x) + h'(x) = u_0'(x)$, de donde deducimos que
 \[
   \begin{cases}
     g'(x) = (v_0(x) + c u_0'(x)) / (2c); \\
     h'(x) = (c u_0'(x) - v_0(x)) / (2c).    
   \end{cases}
 \]
-Intengrando obtenemos una expresión para $g$ y $h$
+Integrando obtenemos una expresión para $g$ y $h$
 \[
   \begin{cases}
     g(x) = u_0(x) / 2 + \int\limits_{0}^{x} v_0(x) / (2c) \diff x + K_1; \\
@@ -1144,7 +1143,7 @@ Añadimos además las siguientes condiciones de combatibilidad
 Buscamos soluciones no nulas de la forma $u(t,x) = T(t) W(x)$. De existir una solución de esta forma
 se verificará
 \[ u_{tt} = T''(t) W(x) \text{ y } u_{xx} = T(t) W''(x). \] Puesto que $u_{tt} = c^2 u_{xx}$,
-suponiendo que $T$ y $W$ no se anulan ontenemos que
+suponiendo que $T$ y $W$ no se anulan obtenemos que
 \[ \frac{T''(t)}{T(t)} = c^2 \frac{W''(x)}{W(x)}. \] Por tanto, las funciones $T''/T$ y $W''/W$ son
 iguales a una constante $\lambda$. Esto es, se verifican las ecuaciones diferenciales
 \[
@@ -1160,7 +1159,7 @@ $W(0) = 0$. Análogamente deducimos que $W(L) = 0$. Distinguimos tres casos.
 \begin{enumerate}
 \item Se tiene $\lambda < 0$. En tal caso
   $W(x) = A \exp(\sqrt{-\lambda} x / c) + B \exp(\sqrt{\lambda} x / c)$. No obstante, las
-  condiciones de contorno obligan a que $A = B = 0$, luego la única solucióne es la constantemente
+  condiciones de contorno obligan a que $A = B = 0$, luego la única solución es la constantemente
   cero, que hemos descartado previamente.
 \item Se tiene $\lambda = 0$. Análogamente la única solución del problema de contorno es la
   constantemente $0$.
@@ -1361,7 +1360,6 @@ siguiente teorema.
   por tanto, $u_1 = u_2$.
 \end{proof}
 
-
 \subsection{Solución de la ecuación de Dirichlet}
 
 NO EXAMEN.
@@ -1399,7 +1397,7 @@ donde $N$ es el número de variables de $u$.
 
 \subsubsection{La ecuación de Dirichlet para funciones radiales}
 
-Aplicando lo anterior para $u$ radial obtenemos que la ecuación de Dichlet equivale a
+Aplicando lo anterior para $u$ radial obtenemos que la ecuación de Dirichlet equivale a
 
 \begin{equation}
   \label{eq:4}
@@ -1836,7 +1834,7 @@ $f \in \mathrm{L}^2$.
   v||$. Análogamente deducimos que $\overline{f}(v) = \int_{\Omega} f v \diff x$ es lineal y
   continua. Además, a partir de la desigualdad de Poincaré deducimos que $a$ es coerciva. En efecto,
   existe $C \ge 0$ tal que
-  $||u||^2_{H^1} \le (1+C) \int_{\Omega} ||\nabla u||^2 \diff s = (1+C) a(u,u)$. Por tanto, podmeos
+  $||u||^2_{H^1} \le (1+C) \int_{\Omega} ||\nabla u||^2 \diff s = (1+C) a(u,u)$. Por tanto, podemos
   aplicar el Teorema de Lax-Milgram, obteniendo que \eqref{eq:ex:debil} tiene una única solución en
   $\mathrm{H}_0^1(\Omega)$. Además, la función bilineal $a$ es claramente simétrica. Por tanto,
   resolver la ecuación \eqref{eq:ex:debil} equivale a encontrar el mínimo del funcional
@@ -1949,18 +1947,18 @@ concentraciones son constantes.
       c'(t) = k_1 s(t) (e_0 - c(t)) - (k_2 + k_{-1})c(t). \\
     \end{cases}
   \end{equation}
-  Es claro que el sitema tiene solución única por el Teorema de Picard-Lindelöf. En lo que sigue
+  Es claro que el sistema tiene solución única por el Teorema de Picard-Lindelöf. En lo que sigue
   vamos a estudiar el PVI asociado a las condiciones iniciales $s(0) = s_0$ y $c(0) =
-  0$. Comprobaremos las iguientes características de éste:
+  0$. Comprobaremos las siguientes características de éste:
   \begin{enumerate}
   \item Positividad.
   \item Acotación.
   \item Intervalo de definición (será $[0, +\infty[$).
   \item Comportamiento cuando $t \to +\infty$.
   \end{enumerate}
-  No podemos calcular una solución explíctamente, razón por la cual tendremos que utilizar los
+  No podemos calcular una solución explícitamente, razón por la cual tendremos que utilizar los
   resultados clásicos de acotación para ecuaciones diferenciales ordinarias. Previamente realizamos
-  un cambio de varaible con el fin de normalizar las soluciones y eliminar las unidades físicas. El
+  un cambio de variable con el fin de normalizar las soluciones y eliminar las unidades físicas. El
   cambio de variable es $u(\tau) = s(\tau / (k_1 e_0)) / s_0$ y
   $v(\tau) = c(\tau / (k_1 e_0)) / e_0$. Obtenemos el nuevo sistema
   \begin{equation}
@@ -2040,7 +2038,7 @@ Este modelo supone que $\alpha$ es una constante real. La función $P$ es soluci
   P(0) = P_0.
 \end{cases}
 \end{equation}
-Tenemos que $P(t) = P_0 e^{\alpha t}$. Este modelo solo es válido normalmente en las primeras fases de una población. Tras cierto periodo de tiempo las variables ambientales influirán de alguna manera a la tasa instanánea de crecimiento.
+Tenemos que $P(t) = P_0 e^{\alpha t}$. Este modelo solo es válido normalmente en las primeras fases de una población. Tras cierto periodo de tiempo las variables ambientales influirán de alguna manera a la tasa instantánea de crecimiento.
 
 \subsubsection{Modelo de P. Verhulst o modelo logístico (1838) }
 
@@ -2136,8 +2134,8 @@ difusión
 En este apartado deducimos la ecuación del calor a partir del problema denominado \emph{random
   walk}, que estudia el movimiento aleatorio de una partícula en una recta. Esta deducción fue
 realizada por Einstein y tiene su importancia física. Brown estudió antes que Einstein el mismo
-problema al observar que el movimiento aleatorio de particulas de polen suspendidas en el agua
-seguía un coportamiento similar a la dispersión del calor.
+problema al observar que el movimiento aleatorio de partículas de polen suspendidas en el agua
+seguía un comportamiento similar a la dispersión del calor.
 
 Imaginamos una partícula que se mueve en una recta. Inicialmente se encuentra en la posición $0$ de
 ésta. La partícula se mueve en cada paso una distancia fija $\delta > 0$ a izquierda o a derecha. El
@@ -2262,7 +2260,7 @@ $\mathcal{S}(\R)$.
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  Las propiedades b) y d) no las podemos deostrar en este curso. El resto de las propiedades son
+  Las propiedades b) y d) no las podemos demostrar en este curso. El resto de las propiedades son
   fáciles de demostrar y se dejan como ejercicio.
 \end{proof}
 
@@ -2314,7 +2312,7 @@ resolver la ecuación del calor para $D = 1$.
 \end{proof}
 
 \begin{remark}
-  La ecuación del calor no tiene en genreal solución única. En efecto, la función
+  La ecuación del calor no tiene en general solución única. En efecto, la función
   $u(x,t) = \sum_{k=0}^{+\infty} \frac{x^{2k}}{(2k)!} \frac{\partial^k}{\partial t^k}\left(
     e^{-1/t^2} \right)$ cumple
   \begin{equation}
@@ -2375,14 +2373,14 @@ El segundo caso se denomina biestable y se corresponde con la ecuación
   \label{eq:rea-dif:2}
   \partial_t u = D \Delta_x u + \alpha_0 u \left(1- \frac{u}{ u_{\infty}}\right)\left(\frac{u}{ u_{min}}-1\right).
 \end{equation}
-No tenemos herramientas para encontrar todas las solucines de estas ecuaciones o hacer teoremas de
+No tenemos herramientas para encontrar todas las soluciones de estas ecuaciones o hacer teoremas de
 unicidad. Nuestro objetivo es estudiar la existencia de soluciones del tipo \emph{onda viajera}. Una
 onda viajera es una solución del tipo $u(x,t) = \phi(x-ct)$, donde $\phi \colon \R \to \R$ se
-denommina \emph{perfil de la onda} y $c \in \R$ es la \emph{velocidad de la onda}. Trabajaremos en
+denomina \emph{perfil de la onda} y $c \in \R$ es la \emph{velocidad de la onda}. Trabajaremos en
 dimensión 1, $x \in \R$.
 
 En primer lugar vamos a adimensionalizar las soluciones. Distinguimos dos casos en función de la
-ecuación con la eque trabajamos.
+ecuación con la que trabajamos.
 \begin{enumerate}
 \item En FKPP, tomamos el cambio de variable
   $v(y, \tau) = u(\sqrt{D / \alpha_0} y, \tau / \alpha_0) / u_{\infty}$. Recordemos que
@@ -2482,7 +2480,7 @@ En este caso particular la función $\phi$ verifica la ecuación
   solución que sale de $(1,0)$ con $t_0 = -\infty$ tiene límite $(0,0)$ en $+\infty$ con $u$
   decreciente. Por el estudio del punto de equilibrio $(1,0)$ sabemos que una de las soluciones que
   salen de este se mantiene con $u < 0$ cerca de $(1,0)$. Esta es la solución que tomamos. Me he
-  perdido en la demostración, la mitad de las cosas no las hemos estudiado en ecuacines
+  perdido en la demostración, la mitad de las cosas no las hemos estudiado en ecuaciones
   diferenciales.
 \end{proof}
 
@@ -2493,3 +2491,8 @@ En este caso particular la función $\phi$ verifica la ecuación
 - Elsgoltz....
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
