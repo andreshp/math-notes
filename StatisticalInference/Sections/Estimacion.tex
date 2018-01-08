@@ -105,7 +105,7 @@ Sea $\utilde{X} = (X_1, \ldots, X_n)$ una muestra de un fenómeno con función d
             Un estadístico $T(X_1, X_2, \ldots, X_n)$ es suficiente si para cada $\theta \in \Theta$ y $t$ la distribución condicional de $X_1, X_2, \ldots, X_n$ respecto de $\theta$ y $T(X) = t$ no depende de $\theta$.
         \end{definition}
 
-        El teorema de factorización de Neyman nos proporciona un criterio práctio para ver si un estadístico es suficiente.
+        El teorema de factorización de Neyman nos proporciona un criterio práctico para ver si un estadístico es suficiente.
 
         \begin{thm}
             Sea $\{f(x|\theta): \theta \in \Theta\}$ una familia de distribuciones. Sea $X = (X_1 , \ldots, X_n)$ una muestra de la distribución $f(x|\theta)$. Sea $T(X_1, X_2, \ldots, X_n)$ un estadístico. Entonces, $T$ es  suficiente si y solo si la función de verosimilitud puede factorizarse de la siguiente forma
@@ -357,7 +357,7 @@ Sea $\utilde{X} = (X_1, \ldots, X_n)$ una muestra de un fenómeno con función d
         \[Var_{X|\theta}(\hat{\theta}) \ge \frac{1}{\mathcal{I}_X(\theta)} = \frac{1}{n\mathcal{I}_{X_i}(\theta)}.\]
     \end{cor}
 
-    La cota de Cramer-Rao nos dice que si la información de Ficher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
+    La cota de Cramer-Rao nos dice que si la información de Fisher en $\theta$ es pequeña, entonces cualquier estimador insesgado tendrá una gran varianza y, por tanto, será inestable ante pequeños cambios en la muestra.
 
     \begin{definition}
         Un estimador se dice eficiente si alcanza la cota de Cramer-Rao para todo $\theta \in \Theta$.

@@ -26,7 +26,7 @@
 \contentsline {subsection}{\numberline {3.3}Teor\IeC {\'\i }a general de estimadores}{18}{subsection.3.3}
 \contentsline {subsubsection}{\numberline {3.3.1}Estad\IeC {\'\i }sticos suficientes}{18}{subsubsection.3.3.1}
 \contentsline {subsubsection}{\numberline {3.3.2}Score, hip\IeC {\'o}tesis de regularidad y funci\IeC {\'o}n de informaci\IeC {\'o}n de Fisher}{19}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Estimadores insesgados}{23}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.3}Estimadores insesgados}{24}{subsubsection.3.3.3}
 \contentsline {subsubsection}{\numberline {3.3.4}Consistencia de sucesiones de estimadores}{25}{subsubsection.3.3.4}
 \contentsline {subsection}{\numberline {3.4}Estudio te\IeC {\'o}rico del estimador m\IeC {\'a}ximo veros\IeC {\'\i }mil}{26}{subsection.3.4}
 \contentsline {section}{\numberline {4}La familia exponencial}{28}{section.4}
